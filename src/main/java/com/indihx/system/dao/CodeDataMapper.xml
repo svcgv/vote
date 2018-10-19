@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.system.dao.CodeDataMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  <resultMap id="BaseResultMap" type="com.indihx.system.entity.CodeData">
+    <id column="CODE_NO" jdbcType="VARCHAR" property="codeNo" />
+    <id column="CODE_KEY" jdbcType="VARCHAR" property="codeKey" />
+    <result column="FIELD_NAME" jdbcType="VARCHAR" property="fieldName" />
+    <result column="CODE_NAME" jdbcType="VARCHAR" property="codeName" />
+    <result column="CODE_VAL" jdbcType="VARCHAR" property="codeVal" />
+    <result column="TM_SMP" jdbcType="CHAR" property="tmSmp" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    CODE_NO, CODE_KEY, FIELD_NAME, CODE_NAME, CODE_VAL, TM_SMP
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.indihx.system.entity.CodeDataKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CODE_DATA
+    where CODE_NO = #{codeNo,jdbcType=DECIMAL}
+      and CODE_KEY = #{codeKey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.indihx.system.entity.CodeDataKey">
+    delete from CODE_DATA
+    where CODE_NO = #{codeNo,jdbcType=DECIMAL}
+      and CODE_KEY = #{codeKey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.indihx.system.entity.CodeData">
+    insert into CODE_DATA (CODE_NO, CODE_KEY, FIELD_NAME, 
+      CODE_NAME, CODE_VAL, TM_SMP
+      )
+    values (#{codeNo,jdbcType=DECIMAL}, #{codeKey,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, 
+      #{codeName,jdbcType=VARCHAR}, #{codeVal,jdbcType=VARCHAR}, #{tmSmp,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.indihx.system.entity.CodeData">
+    insert into CODE_DATA
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="codeNo != null">
+        CODE_NO,
+      </if>
+      <if test="codeKey != null">
+        CODE_KEY,
+      </if>
+      <if test="fieldName != null">
+        FIELD_NAME,
+      </if>
+      <if test="codeName != null">
+        CODE_NAME,
+      </if>
+      <if test="codeVal != null">
+        CODE_VAL,
+      </if>
+      <if test="tmSmp != null">
+        TM_SMP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="codeNo != null">
+        #{codeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="codeKey != null">
+        #{codeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null">
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="codeName != null">
+        #{codeName,jdbcType=VARCHAR},
+      </if>
+      <if test="codeVal != null">
+        #{codeVal,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null">
+        #{tmSmp,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.indihx.system.entity.CodeData">
+    update CODE_DATA
+    <set>
+      <if test="fieldName != null">
+        FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="codeName != null">
+        CODE_NAME = #{codeName,jdbcType=VARCHAR},
+      </if>
+      <if test="codeVal != null">
+        CODE_VAL = #{codeVal,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null">
+        TM_SMP = #{tmSmp,jdbcType=CHAR},
+      </if>
+    </set>
+    where CODE_NO = #{codeNo,jdbcType=VARCHAR}
+      and CODE_KEY = #{codeKey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.indihx.system.entity.CodeData">
+    update CODE_DATA
+    set FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
+      CODE_NAME = #{codeName,jdbcType=VARCHAR},
+      CODE_VAL = #{codeVal,jdbcType=VARCHAR},
+      TM_SMP = #{tmSmp,jdbcType=CHAR}
+    where CODE_NO = #{codeNo,jdbcType=VARCHAR}
+      and CODE_KEY = #{codeKey,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <select id="qryCodeDataAll" resultMap="BaseResultMap">
+  		select * from code_data where 1=1
+  		<if test="codeVal != null and codeVal !=''">
+  			and code_val like CONCAT(CONCAT('%',#{codeVal}),'%')
+  		</if>
+  		<if test="codeKey!=null and codeKey !=''">
+  			and code_key=#{codeKey,jdbcType=VARCHAR}
+  		</if>
+  		<if test="codeNo!=null and codeNo !=''">
+  			and code_no=#{codeNo}
+  		</if>
+  		<if test="codeName!=null and codeName !=''">
+  			AND code_name LIKE CONCAT(CONCAT('%',#{codeName}),'%')
+  		</if>
+  		order by CODE_NO,code_key
+  </select>
+  
+  <!-- 查询所有的字段类型 -->
+  <select id="qryCodeNo" resultType="java.lang.String">
+  	 select code_no from code_data group by code_no
+  </select>
+</mapper>

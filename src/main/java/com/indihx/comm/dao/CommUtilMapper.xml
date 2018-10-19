@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.comm.dao.CommUtilMapper">
+ 
+  <select id="getUserId" resultType="java.lang.String" useCache="false" flushCache="true">
+  		select usridsequence.nextval from dual
+  </select>
+  <select id="getMenuId" resultType="java.lang.String" useCache="false" flushCache="true">
+  		select menuidsequence.nextval from dual
+  </select>
+    <select id="getOrgNo" resultType="java.lang.String" useCache="false" flushCache="true">
+  		select orgnosequence.nextval from dual
+  </select>
+  <select id="getPrimaryKey" resultType="java.lang.String" useCache="false" flushCache="true">
+  		select primarykeysequence.nextval from dual
+  </select>
+  <select id="getPrimaryFileKey" resultType="java.lang.String" useCache="false" flushCache="true">
+  		select filekeysequence.nextval from dual
+  </select>
+  <select id="getTableTotole"  statementType="STATEMENT"  resultType="java.lang.String" >
+  	 select count(1) from ${value}
+  </select>
+  <select id="getInfoCodeSequenceVal" resultType="java.lang.String" useCache="false" flushCache="true">
+  		select INFOCODESEQUENCE.nextval from dual
+  </select>
+  <select id="getQuotaCodeSequenceVal" resultType="java.lang.String" useCache="false" flushCache="true">
+  		select QUOTACODESEQUENCE.nextval from dual
+  </select>
+  <select id="getCreditCodeSequenceVal" resultType="java.lang.String" useCache="false" flushCache="true">
+  		select CREDITCODESEQUENCE.nextval from dual
+  </select>
+  <select id="getKeyBySequenceName" resultType="java.lang.String" parameterType="java.lang.String" useCache="false" flushCache="true">
+  		select ${seqName}.nextval from dual
+  </select>	
+</mapper>

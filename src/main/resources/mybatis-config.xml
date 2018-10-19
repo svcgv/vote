@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<!-- 
+    plugins在配置文件中的位置必须符合要求，否则会报错，顺序如下:
+    properties?, settings?, 
+    typeAliases?, typeHandlers?, 
+    objectFactory?,objectWrapperFactory?, 
+    plugins?, 
+    environments?, databaseIdProvider?, mappers?
+-->
+<configuration>
+	<settings>
+    	<setting name="callSettersOnNulls" value="true"/> <!-- 为空的字段也返回 -->
+      	<!--  
+      	<setting name="logImpl" value="STDOUT_LOGGING"/>
+      	<setting name="logImpl" value="SLF4J"/>
+      
+      	<setting name="logImpl" value="STDOUT_LOGGING"/>
+      	-->
+      	<setting name="logImpl" value="STDOUT_LOGGING"/>
+     	<setting name="logPrefix" value="dao."/>
+     
+      	<!-- 是否开启全局缓存 -->
+      	<setting name="cacheEnabled" value="true"/>
+      	<!-- 查询时，关闭关联对象即时加载以提高性能 -->
+      	<setting name="lazyLoadingEnabled" value="false"/>
+      	<!-- 对于未知的SQL查询，允许返回不同的结果集以达到通用的效果 -->
+      	<setting name="multipleResultSetsEnabled" value="true"/>
+      	<!-- 设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指 定)，不会加载关联表的所有字段，以提高性能 -->
+      	<setting name="aggressiveLazyLoading" value="true"/>
+   </settings>
+   
+	<!-- 配置实体对应的别名 -->
+     <typeAliases>
+        <typeAlias type="com.indihx.system.entity.UsrInfo" alias="UsrInfo"/> 
+        <typeAlias type="com.indihx.system.entity.PagesInfo" alias="PagesInfo"/>
+        <typeAlias type="com.indihx.system.entity.CodeData" alias="CodeData"/>
+     </typeAliases>
+     
+     <!-- 分页参数的配置 -->
+     <plugins>
+	    <plugin interceptor="com.github.pagehelper.PageHelper">
+	        <property name="dialect" value="oracle"/>
+	        <!-- <property name="reasonable" value="false"/> -->
+	    </plugin>
+	</plugins>
+ </configuration>  

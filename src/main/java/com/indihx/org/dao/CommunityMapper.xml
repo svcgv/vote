@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.org.dao.CommunityMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+
+  <resultMap id="BaseResultMap" type="com.indihx.org.entity.WY_JWH">
+    <id column="JWHID" jdbcType="DECIMAL" property="jwhid" />
+    <result column="JWHBM" jdbcType="VARCHAR" property="jwhbm" />    
+    <result column="JWHMC" jdbcType="VARCHAR" property="jwhmc" />    
+    <result column="JWHDZ" jdbcType="VARCHAR" property="jwhdz" />   
+    <result column="HPBID" jdbcType="VARCHAR" property="hpbid" />   
+    <result column="JWZR" jdbcType="VARCHAR" property="jwzr" />  
+    <result column="JWZRDH" jdbcType="VARCHAR" property="jwzrdh" /> 
+    <result column="JWSJ" jdbcType="VARCHAR" property="jwsj" />     
+    <result column="JWSJDH" jdbcType="VARCHAR" property="jwsjdh" />    
+    <result column="BZ" jdbcType="VARCHAR" property="bz" />     
+  </resultMap>
+  
+ <!--  查询所有居委会信息 -->
+  <select id="communityListAll" resultMap="BaseResultMap" parameterType="com.indihx.org.entity.WY_JWH">
+    SELECT t1.JWHID,t1.JWHBM,t1.JWHMC,t1.JWHDZ,t1.HPBID,t1.JWZR ,t1.JWZRDH ,t1.JWSJ ,t1.JWSJDH 
+	FROM WY_JWH t1   
+	where 1=1
+	<if test="jwhbm !=  null and jwhbm !=''">
+	and T1.JWHBM like CONCAT(CONCAT('%',#{jwhbm}),'%')
+   </if>
+   <if test="jwhmc != null and jwhmc !=''">
+	and T1.JWHMC like CONCAT(CONCAT('%',#{jwhmc}),'%')
+   </if>
+  </select>
+ 
+ 
+   <!--  根据居委会名称和社会信用代码查询是否存在重复居委会 -->
+  <select id="validCommunityIsExists" resultMap="BaseResultMap" parameterType="com.indihx.org.entity.WY_JWH">
+  	select JWHBM,JWHMC  from WY_JWH
+    <where>
+    	<if test="jwhbm !=null and jwhbm != ''">
+    		((JWHBM = #{jwhbm})
+    	</if>
+    	<if test="jwhmc !=null and jwhmc != ''">
+    		OR (JWHMC = #{jwhmc}))
+    	</if>
+    	<if test="jwhid !=null and jwhid != ''">
+    		and JWHID != #{jwhid}
+    	</if>
+    </where>
+  </select>
+  
+  
+  
+  <!--  新增居委会信息 -->
+   <insert id="insertCommunity" parameterType="com.indihx.org.entity.WY_JWH">
+    insert into WY_JWH
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+    	<if test="jwhid != null">
+        JWHID,
+      </if>
+      <if test="jwhbm != null">
+        JWHBM,
+      </if>
+      <if test="jwhmc!= null">
+        JWHMC,
+      </if>
+      <if test="jwhdz != null">
+        JWHDZ,
+      </if>
+       <if test="hpbid != null">
+        HPBID,
+      </if>
+       <if test="jwzr != null">
+        JWZR,
+      </if>
+        <if test="jwzrdh != null">
+        JWZRDH,
+      </if>
+      <if test="jwsj != null">
+        JWSJ,
+      </if>
+      <if test="jwsjdh != null">
+        JWSJDH,
+      </if>
+       <if test="bz != null">
+        BZ
+      </if> 
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     <if test="jwhid != null">
+        #{jwhid,jdbcType=DECIMAL},
+      </if>
+      <if test="jwhbm != null">
+        #{jwhbm,jdbcType=VARCHAR},
+      </if>
+       <if test="jwhmc != null">
+        #{jwhmc,jdbcType=VARCHAR},
+      </if>
+       <if test="jwhdz != null">
+        #{jwhdz,jdbcType=VARCHAR},
+      </if>
+       <if test="hpbid != null">
+        #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="jwzr != null">
+        #{jwzr,jdbcType=VARCHAR},
+      </if>
+      <if test="jwzrdh != null">
+        #{jwzrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="jwsj != null">
+        #{jwsj,jdbcType=VARCHAR},
+      </if>
+       <if test="jwsjdh != null">
+        #{jwsjdh,jdbcType=VARCHAR},
+      </if>  
+       <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if> 
+    </trim>
+  </insert>
+  
+   <!--  新增机构信息 -->
+   <insert id="insertOrgInfo" parameterType="com.indihx.org.entity.ORG_INFO">
+    insert into ORG_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+    	<if test="parent_org_no != null">
+        PARENT_ORG_NO,
+      </if>
+      <if test="parent_org_name != null">
+        PARENT_ORG_NAME,
+      </if> 
+       <if test="org_no != null">
+        ORG_NO,
+      </if> 
+       <if test="org_name != null">
+        ORG_NAME,
+      </if> 
+       <if test="org_type != null">
+        ORG_TYPE,
+      </if> 
+       <if test="addres != null">
+        ADDRES,
+      </if> 
+      <if test="tel_no != null">
+        TEL_NO,
+      </if> 
+      <if test="oper_usr != null">
+        OPER_USR,
+      </if> 
+       <if test="tm_smp != null">
+        TM_SMP,
+      </if> 
+       <if test="org_status != null">
+        ORG_STATUS,
+      </if> 
+       <if test="link_man != null">
+        LINK_MAN,
+      </if> 
+       <if test="email != null">
+        EMAIL,
+      </if> 
+       <if test="post_code != null">
+        POST_CODE,
+      </if> 
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     <if test="parent_org_no != null">
+        #{parent_org_no,jdbcType=DECIMAL},
+      </if>
+      <if test="parent_org_name != null">
+        #{parent_org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_no != null">
+        #{org_no,jdbcType=VARCHAR},
+      </if>
+      <if test="org_name != null">
+        #{org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_type != null">
+        #{org_type,jdbcType=VARCHAR},
+      </if>
+       <if test="addres != null">
+        #{addres,jdbcType=VARCHAR},
+      </if>
+      <if test="tel_no != null">
+        #{tel_no,jdbcType=VARCHAR},
+      </if>
+      <if test="oper_usr != null">
+        #{oper_usr,jdbcType=VARCHAR},
+      </if>
+      <if test="tm_smp != null">
+        #{tm_smp,jdbcType=VARCHAR},
+      </if>
+      <if test="org_status != null">
+        #{org_status,jdbcType=VARCHAR},
+      </if>
+      <if test="link_man != null">
+        #{link_man,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="post_code != null">
+        #{post_code,jdbcType=VARCHAR},
+      </if> 
+    </trim>
+  </insert>  
+    
+  
+    <!--  根据ID删除居委会信息 -->
+   <delete id="deleteCommunity" parameterType="java.lang.Long">
+    delete from WY_JWH
+    where jwhid = #{jwhid,jdbcType=DECIMAL}
+  </delete>
+  
+      <!--  根据ID删除机构信息 -->
+    <delete id="deleteOrgInfo" parameterType="java.lang.String">
+    delete from ORG_INFO
+    where org_no = #{org_no,jdbcType=VARCHAR}
+    </delete>
+ 
+ 
+  <!--  根据ID查看居委会详情-->
+ <select id="qrCommunityInfoById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+   SELECT  t1.*
+	from WY_JWH t1
+	WHERE 1 = 1
+    and t1.jwhid = #{jwhid,jdbcType=DECIMAL}
+  </select>
+  
+ 
+ 
+  <!--  根据ID更新居委会详情-->
+ <update id="updateCommunity" parameterType="com.indihx.org.entity.WY_JWH">
+    update WY_JWH
+    <set>
+      <if test="jwhbm != null">
+        jwhbm = #{jwhbm,jdbcType=VARCHAR},
+      </if>
+       <if test="jwhmc != null">
+        jwhmc = #{jwhmc,jdbcType=VARCHAR},
+      </if>
+       <if test="jwhdz != null">
+        jwhdz = #{jwhdz,jdbcType=VARCHAR},
+      </if>
+       <if test="hpbid != null">
+        hpbid = #{hpbid,jdbcType=VARCHAR},
+      </if>
+        <if test="jwzr != null">
+        jwzr = #{jwzr,jdbcType=VARCHAR},
+      </if>
+      <if test="jwzrdh != null">
+        jwzrdh = #{jwzrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="jwsj != null">
+        jwsj = #{jwsj,jdbcType=VARCHAR},
+      </if>
+       <if test="jwsjdh != null">
+        jwsjdh = #{jwsjdh,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>  
+    </set>
+    where jwhid = #{jwhid,jdbcType=DECIMAL}
+  </update> 
+ 
+ 
+   <!--  根据ID更新企业详情-->
+	<update id="updateOrgInfo" parameterType="com.indihx.org.entity.ORG_INFO">
+    update ORG_INFO
+    <set>
+      <if test="org_name != null">
+        org_name = #{org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_type != null">
+        org_type = #{org_type,jdbcType=VARCHAR},
+      </if>
+      <if test="addres != null">
+        addres = #{addres,jdbcType=VARCHAR},
+      </if>
+       <if test="tel_no != null">
+        tel_no = #{tel_no,jdbcType=VARCHAR},
+      </if>
+       <if test="link_man != null">
+        link_man = #{link_man,jdbcType=VARCHAR},
+      </if>
+        <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+       <if test="post_code != null">
+        post_code = #{post_code,jdbcType=VARCHAR},
+      </if> 
+    </set>
+    where org_no = #{org_no,jdbcType=DECIMAL}
+  </update> 
+ 
+</mapper>

@@ -1,0 +1,47 @@
+/* custom css for  datagrid*/
+tr.redtr {background-color: red !important; }
+tr.yellowtr {background-color: yellow !important; }
+tr.yellow2 {	background: #F37A03 !important;}
+td.yellow2 {	background: #F37A03 !important;}
+td.greentd {background-color: green;	font-size: 14px; }
+td.redtd {background-color: red;	font-size: 14px; }
+body.menucss {background: url(../images/accord/menu_bg.gif) ; !important;}
+td.topmenu {background-color: #6886C1;	font-size: 14px;  color:#fff; }
+td.topmenu2 {background-color: #336666;	font-size: 14px;  color:#fff; }
+body {font-size: 12px;text-align: left;}
+a.sel_all:visited,a.sel_all:link{color:#ffffff}
+.focus_css{ border:1px solid #3C3CC4; background: #CCCCCC; }
+.datagrid_gridtb  .gridheadclass3
+	{
+	font-size:12px;font-weight:bold;font-family:tahoma;color:#000000;
+	background: #fafafa url(../images/grid/dgbg03.gif) ;
+	border: 1px solid #9BB3D3;
+	overflow: hidden;
+	height: 28px;
+	cursor: default;
+	text-align: center;	
+	}
+.datagrid_gridtb  .gridheadclass4
+	{
+	font-size:12px;font-weight:bold;font-family:tahoma;color:#000000;
+	background: #fafafa url(../images/grid/dgbg04.gif) ;
+	border: 1px solid #9BB3D3;
+	overflow: hidden;
+	height: 28px;
+	cursor: default;
+	text-align: center;	
+	}
+.datagrid_gridtb  .print_class {border:0px;border-collapse:collapse; font-size:12px; font-family: "ËÎÌו", "System"; clip:rect(   );!important; }
+.datagrid_gridtb  .gridheadclassprint {font-size:12px;font-weight: bold;font-family:tahoma;text-align:center;line-height:24px;padding-left:2px;padding-right:2px;}
+.datagrid_gridtb  tr.print_tr_class {	border: 1px solid !important; margin-top:0.19cm;margin-bottom:0.19cm;font-size: 12px;line-height:22px; }
+.datagrid_gridtb  tr td.print_td_class {	line-height:24px; border: 0px #000000 !important;}
+.switch_shrink {display:block;height: 50px; width:8px;background: url(../images/pop_shrink.gif) no-repeat center ;cursor: pointer;!important;}
+.switch_extend {display:block;height: 50px; width:8px;background: url(../images/pop_extend.gif) no-repeat center ;cursor: pointer;!important;}
+.icon_myicon {background-image:url("../images/icon/warning.gif") !important; width: 16px; height: 16px  }
+.input_right {text-align: right}
+
+/*print for datagrid*/
+.datagrid_print{border:0px;border-collapse:collapse; width: 960px;margin:0 auto;}
+.datagrid_print  tr { line-height:22px;}
+.datagrid_print tr td { font-size:14px; font-family:??; text-indent:40;}
+.datagrid_print tr td  .TextTitle {text-indent:32.0pt;mso-char-indent-count:2.0;line-height:29.0pt;mso-line-height-rule:exactly;font-size:16.0pt;font-family:??}

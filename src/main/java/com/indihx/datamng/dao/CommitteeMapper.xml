@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.datamng.dao.CommitteeMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  <resultMap id="BaseResultMap" type="com.indihx.datamng.entity.Wy_Sq">
+    <id column="SQID" jdbcType="DECIMAL" property="sqid" />
+    <result column="SQMC" jdbcType="VARCHAR" property="sqmc" /> 
+    <result column="SQBM" jdbcType="VARCHAR" property="sqbm" />
+    <result column="HPBID" jdbcType="VARCHAR" property="hpbid" />
+    <result column="HPBMC" jdbcType="VARCHAR" property="hpbmc" />
+    <result column="JDID" jdbcType="VARCHAR" property="jdid" />
+    <result column="JDMC" jdbcType="VARCHAR" property="jdmc" />
+    <result column="CJRQ" jdbcType="VARCHAR" property="cjrq" />
+    <result column="BZ" jdbcType="VARCHAR" property="bz" />
+  </resultMap>
+  <sql id="Base_Column_List">
+  	SQID,SQMC,SQBM,HPBID,HPBMC,JDID,JDMC,CJRQ,BZ
+  </sql>
+  <select id="qryAqCommitteeAll" resultMap="BaseResultMap">
+    SELECT T2.HPBMC,T3.JDMC,T3.JDBM,T1.SQMC,T1.SQBM,T1.SQID,T1.CJRQ
+	FROM WY_SQ t1
+    JOIN WY_JD t3 ON T1.JDID = T3.JDID
+	JOIN WY_HPB t2 ON T3.HPBID = T2.HPBID
+	WHERE 1 = 1
+    <if test="hpbmc != null and hpbmc !=''">
+		and T2.HPBMC like CONCAT(CONCAT('%',#{hpbmc}),'%')
+   </if>
+    <if test="jdmc != null and jdmc !=''">
+		and T3.JDMC like CONCAT(CONCAT('%',#{jdmc}),'%')
+   </if>
+   <if test="sqbm != null and sqbm !=''">
+		and T1.SQBM like CONCAT(CONCAT('%',#{sqbm}),'%')
+   </if>
+   <if test="sqmc != null and sqmc !=''">
+		and T1.SQMC like CONCAT(CONCAT('%',#{sqmc}),'%')
+   </if>
+   <if test="jdid != null and jdid !=''">
+		and T1.JDID =#{jdid}
+   </if>
+   <if test="hpbid != null and hpbid !=''">
+		and T1.HPBID =#{hpbid}
+   </if>
+  	ORDER BY T1.SQBM
+  </select>
+  <select id="qryStreetList" resultMap="BaseResultMap">
+    SELECT JDID,JDMC from WY_JD
+	WHERE 1 = 1
+  	ORDER BY JDBM
+  </select>
+  <select id="qryStreetInfo" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    SELECT JDID,JDMC,HPBID,HPBMC from WY_JD
+	WHERE JDID= #{jdid,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+	T2.HPBMC,T2.HPBID,T2.HPBBM,T1.JDID,T3.JDMC,T1.SQMC,T1.BZ,
+	T1.SQBM,T1.SQID
+	FROM WY_SQ t1
+    JOIN WY_JD t3 ON T1.JDID = T3.JDID
+	JOIN WY_HPB t2 ON T3.HPBID = T2.HPBID
+	WHERE 1 = 1
+    and T1.sqid = #{sqid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from WY_SQ
+    where SQID = #{sqid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insertSelective" parameterType="com.indihx.datamng.entity.Wy_Sq">
+    insert into WY_SQ
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sqid != null">
+        SQID,
+      </if>
+      <if test="sqmc != null">
+        SQMC,
+      </if>
+      <if test="sqbm != null">
+        SQBM,
+      </if>
+      <if test="jdid != null">
+        JDID,
+      </if>
+      <if test="jdmc != null">
+        JDMC,
+      </if>	
+      <if test="hpbid != null">
+        HPBID,
+      </if>
+      <if test="hpbmc != null">
+        HPBMC,
+      </if>
+       <if test="cjrq != null">
+        CJRQ,
+      </if>
+      <if test="bz != null">
+        BZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sqid != null">
+        #{sqid,jdbcType=DECIMAL},
+      </if>
+      <if test="sqmc != null">
+        #{sqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqbm != null">
+        #{sqbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jdid != null">
+        #{jdid,jdbcType=VARCHAR},
+      </if>
+      <if test="jdmc != null">
+        #{jdmc,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        #{hpbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="cjrq != null">
+        #{cjrq,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.indihx.datamng.entity.Wy_Sq">
+    update WY_SQ
+    <set>
+      <if test="sqid != null">
+        SQID=#{sqid,jdbcType=DECIMAL},
+      </if>
+      <if test="sqmc != null">
+        SQMC=#{sqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqbm != null">
+        SQBM=#{sqbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jdid != null">
+        JDID=#{jdid,jdbcType=VARCHAR},
+      </if>
+      <if test="jdmc != null">
+        JDMC=#{jdmc,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        HPBID=#{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        HPBMC=#{hpbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="cjrq != null">
+        CJRQ=#{cjrq,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        BZ=#{bz,jdbcType=CHAR},
+      </if>
+    </set>
+    where SQID = #{sqid,jdbcType=DECIMAL}
+  </update>
+  <!--  映射查询语句 getOrgRefSqId-->
+  <select id="getOrgRefSqId" parameterType="java.lang.Long"
+		resultType ="java.lang.Long">
+		SELECT PK_ID as sqid FROM BASE_ORG_REL WHERE org_no= #{org_no,jdbcType=DECIMAL}
+   </select> 
+</mapper>

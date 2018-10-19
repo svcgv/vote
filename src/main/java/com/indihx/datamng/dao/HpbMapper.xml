@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.datamng.dao.HpbMapper">
+  
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  
+  <!-- 用来描述如何从数据库结果集中来加载你的对象 -->
+  <resultMap id="BaseResultMap" type="com.indihx.datamng.entity.Wy_Hpb">
+    <id column="HPBID" jdbcType="VARCHAR" property="hpbid" /><!-- column：查询出来的列名  property：type指定的实体类型中的属性名 ，最终resultMap对column和property做一个映射关系（对应关系）  -->
+    <result column="HPBBM" jdbcType="DECIMAL" property="hpbbm" />
+    <result column="HPBMC" jdbcType="VARCHAR" property="hpbmc" />
+    <result column="HPBLX" jdbcType="VARCHAR" property="hpblx" />
+    <result column="SJID" jdbcType="VARCHAR" property="sjid" />
+    <result column="CJRQ" jdbcType="VARCHAR" property="cjrq" />
+    <result column="BZ" jdbcType="VARCHAR" property="bz" />
+  </resultMap>
+  <!-- 可以重用的 SQL 块,也可以被其他语句引用 -->
+  <sql id="Base_Column_List">
+    HPBID,HPBBM,HPBLX,HPBMC,SJID,CJRQ,BZ
+  </sql>
+  <!--  映射查询语句 getHpbList-->
+  <select id="getHpbList" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from WY_HPB
+    <where>
+    	<if test="hpbid !=null and hpbid != ''">
+    		HPBID = #{hpbid,jdbcType=VARCHAR}
+    	</if>
+    	<if test="hpbbm !=null and hpbbm != ''">
+    		and HPBBM = #{hpbbm}
+    	</if>
+    	<if test="hpbmc !=null and hpbmc != ''">
+    		and HPBMC like CONCAT(CONCAT('%',#{hpbmc}),'%')
+    	</if>
+    	<if test="hpblx !=null and hpblx != ''">
+    		and HPBLX = #{hpblx}
+    	</if>
+    </where>
+  </select>
+  <!--  映射查询语句 validHpbIsExists-->
+  <select id="validHpbIsExists" resultMap="BaseResultMap" parameterType="com.indihx.datamng.entity.Wy_Hpb">
+  	select <include refid="Base_Column_List" /> from WY_HPB
+    <where>
+    	<if test="hpbbm !=null and hpbbm != ''">
+    		HPBBM = #{hpbbm}
+    	</if>
+    	<if test="hpblx !=null and hpblx != ''">
+    		and HPBLX = #{hpblx}
+    	</if>
+    	<if test="hpbid !=null and hpbid != ''">
+    		and HPBID != #{hpbid}
+    	</if>
+    </where>
+  </select>
+  <!--  映射插入语句 insertHpbInfo-->
+  <insert id="insertHpbInfo" parameterType="com.indihx.datamng.entity.Wy_Hpb">
+    insert into WY_HPB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hpbid != null">
+        HPBID,
+      </if>
+      <if test="hpbbm != null">
+        HPBBM,
+      </if>
+      <if test="hpbmc != null">
+        HPBMC,
+      </if>
+      <if test="hpblx != null">
+        HPBLX,
+      </if>
+      <if test="sjid != null">
+        SJID,
+      </if>
+      <if test="cjrq != null">
+        CJRQ,
+      </if>
+       <if test="bz != null">
+        BZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hpbid != null">
+        #{hpbid,jdbcType=DECIMAL},
+      </if>
+      <if test="hpbbm != null">
+        #{hpbbm,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        #{hpbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="hpblx != null">
+        #{hpblx,jdbcType=VARCHAR},
+      </if>
+      <if test="sjid != null">
+        #{sjid,jdbcType=VARCHAR},
+      </if>
+      <if test="cjrq != null">
+        #{cjrq,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--  映射查询语句 getHpbInfo-->
+  <select id="getHpbInfo" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	select <include refid="Base_Column_List" /> from WY_HPB
+    where hpbid = #{hpbid,jdbcType=DECIMAL}
+  </select>
+  <!--  映射更新语句 updateHpbInfo-->
+  <update id="updateHpbInfo" parameterType="com.indihx.datamng.entity.Wy_Hpb">
+    update WY_HPB
+    <set>
+      <if test="hpbid != null">
+        HPBID=#{hpbid,jdbcType=DECIMAL},
+      </if>
+      <if test="hpbbm != null">
+        HPBBM=#{hpbbm,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        HPBMC=#{hpbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="hpblx != null">
+        HPBLX=#{hpblx,jdbcType=VARCHAR},
+      </if>
+      <if test="sjid != null">
+        CJID=#{sjid,jdbcType=VARCHAR},
+      </if>
+      <if test="cjrq != null">
+        CJRQ=#{cjrq,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        BZ=#{bz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where HPBID = #{hpbid,jdbcType=DECIMAL}
+  </update>
+  <!--  映射更新语句 updateHpbInfo-->
+  <delete id="deleteHpbInfo" parameterType="java.lang.Long">
+    delete from WY_HPB
+    where HPBID = #{hpbid,jdbcType=DECIMAL}
+  </delete>
+  <!--  映射查询语句 checkLinkIsExists-->
+  <select id="checkLinkIsExists" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	select JDID from WY_JD WHERE HPBID = #{hpbid,jdbcType=DECIMAL}
+  </select>
+  <!--  映射查询语句 getHpbListByType-->
+  <select id="getHpbListByType" parameterType="com.indihx.datamng.entity.Wy_Hpb"
+		resultMap="BaseResultMap">
+		SELECT HPBID,HPBBM,HPBLX,HPBMC,SJID FROM WY_HPB WHERE 1=1
+		<if test="hpblx != null and hpblx !=''">
+  			AND HPBLX=#{hpblx,jdbcType=VARCHAR}
+  		</if>
+  		ORDER BY HPBBM ASC
+   </select>
+  <!--  映射查询语句 getHpbRefOrgId-->
+  <select id="getHpbRefOrgId" parameterType="java.lang.Long"
+		resultType ="java.lang.Long">
+		SELECT ORG_NO FROM BASE_ORG_REL WHERE PK_ID= #{hpbid,jdbcType=DECIMAL}
+   </select> 
+  <!--  映射查询语句 getOrgRefHpbId-->
+  <select id="getOrgRefHpbId" parameterType="java.lang.Long"
+		resultType ="java.lang.Long">
+		SELECT PK_ID as hpbid FROM BASE_ORG_REL WHERE org_no= #{org_no,jdbcType=DECIMAL}
+   </select>  
+</mapper>

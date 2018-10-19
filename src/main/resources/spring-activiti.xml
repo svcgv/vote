@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+            http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+	
+
+
+    <!-- 创建一个流程引擎bean -->
+    <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration" />
+    </bean>
+   	
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <property name="dataSource" ref="dataSource" />
+        <property name="databaseType" value="oracle" />
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="databaseSchema" value="VOTE"></property>
+        <!-- 设置数据库schema的更新方式 --> 
+        <property name="databaseSchemaUpdate" value="true" />
+        <!-- 是否启动jobExecutor --> 
+        <property name="jobExecutorActivate" value="false" />
+        <!-- 解决流程插入报错的问题 ，谷歌说该属性在oracle上不好使,用oracle则设置成false，mysql没问题-->
+        <property name="bulkInsertEnabled" value="false"/>  
+    </bean>
+  
+    <!-- activiti的各种服务接口 -->
+    <!-- 工作流仓储服务 --> 
+    <bean id="repositoryService" factory-bean="processEngine"
+        factory-method="getRepositoryService" />
+    <!-- 工作流运行服务 -->     
+    <bean id="runtimeService" factory-bean="processEngine"
+        factory-method="getRuntimeService" />
+    <!--  工作流任务服务-->     
+    <bean id="taskService" factory-bean="processEngine"
+        factory-method="getTaskService" />
+    <!--  工作流历史数据服务-->      
+    <bean id="historyService" factory-bean="processEngine"
+        factory-method="getHistoryService" />
+    <!--  工作流管理服务-->      
+    <bean id="managementService" factory-bean="processEngine"
+        factory-method="getManagementService" />
+    <!-- 工作流唯一服务-组织机构管理 -->    
+    <bean id="IdentityService" factory-bean="processEngine"
+        factory-method="getIdentityService" />    
+</beans>  

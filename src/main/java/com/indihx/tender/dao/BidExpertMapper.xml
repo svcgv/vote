@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.tender.dao.BidExpertMapper">
+	<cache type="com.indihx.cache.RedisCache"/>
+	<resultMap id="BaseResultMap" type="com.indihx.tender.entity.ZTB_EXPERT">
+		<id column="EXPERT_ID" jdbcType="DECIMAL" property="expert_id"/>
+		<result column="CREATE_DATE" jdbcType="VARCHAR" property="create_date" />
+		<result column="CREATE_TIME" jdbcType="VARCHAR" property="create_time" />
+		<result column="EXPERT_NAME" jdbcType="VARCHAR" property="expert_name" />
+		<result column="EXPERT_SIX" jdbcType="VARCHAR" property="expert_six" />
+		<result column="CERT_TYPE" jdbcType="VARCHAR" property="cert_type" />
+		<result column="CERT_CODE" jdbcType="VARCHAR" property="cert_code" />
+		<result column="COMPANY_NAME" jdbcType="VARCHAR" property="company_name" />
+		<result column="COMPANY_ADDR" jdbcType="VARCHAR" property="company_addr" />
+		<result column="CONTACT_TEL" jdbcType="VARCHAR" property="contact_tel" />
+		<result column="CONTACT_ADDR" jdbcType="VARCHAR" property="contact_addr" />
+		<result column="HPBID" jdbcType="VARCHAR" property="hpbid" />
+		<result column="HPBMC" jdbcType="VARCHAR" property="hpbmc" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="EXPERT_TYPE" jdbcType="VARCHAR" property="expert_type" />
+		<result column="SEARCH_KEY" jdbcType="VARCHAR" property="search_key" />
+		<result column="EXPERT_REMARK" jdbcType="VARCHAR" property="expert_remark" />
+	</resultMap>
+	
+	<!--  映射查询语句 -->
+	<select id="getExList" parameterType="com.indihx.tender.entity.ZTB_EXPERT" resultMap="BaseResultMap">
+	  select e.expert_id,e.create_date,e.create_time,e.expert_name,e.expert_six,e.cert_type,e.cert_code,e.company_name,e.company_addr,
+	  e.contact_tel,e.contact_addr,e.hpbid,e.hpbmc,e.email,e.expert_type,e.search_key,e.expert_remark
+	  from ztb_expert e
+	  where 1=1
+	  	<if test="expert_name !=null and expert_name != ''">
+	  		and e.expert_name like concat(concat('%',#{expert_name}),'%')
+	  	</if>
+	  	<if test="create_date !=null and create_date != ''">
+	  		and e.create_date = #{create_date}
+	  	</if>
+	  order by e.create_date asc
+	</select>
+  
+	<!--  根据证件类型及号码查询是否存在重复 -->
+	<select id="validExIsExists" parameterType="com.indihx.tender.entity.ZTB_EXPERT" resultMap="BaseResultMap">
+	   select e.expert_id,e.create_date,e.create_time,e.expert_name,e.expert_six,e.cert_type,e.cert_code,e.company_name,e.company_addr,
+	   e.contact_tel,e.contact_addr,e.hpbid,e.hpbmc,e.email,e.expert_type,e.search_key,e.expert_remark
+	   from ztb_expert e
+	   where 1=1
+	   	<if test="expert_id !=null and expert_id != ''">
+	   		and e.expert_id != #{expert_id,jdbcType=DECIMAL} 
+	   	</if>
+	   	<if test="cert_type !=null and cert_type != ''">
+	   		and e.cert_type = #{cert_type,jdbcType=VARCHAR} 
+	   	</if>
+	   	<if test="cert_code !=null and cert_code != ''">
+	   		and e.cert_code = #{cert_code,jdbcType=VARCHAR} 
+	   	</if>
+	</select>
+	
+	<!--  新增专家信息 -->
+	<insert id="insertEx" parameterType="com.indihx.tender.entity.ZTB_EXPERT">
+	insert into ZTB_EXPERT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="expert_id != null and expert_id != ''">
+			  EXPERT_ID,
+			</if>
+			<if test="create_date != null and create_date != ''">
+			  CREATE_DATE,
+			</if>
+			<if test="create_time != null and create_time != ''">
+			  CREATE_TIME,
+			</if>
+			<if test="expert_name != null and expert_name != ''">
+			  EXPERT_NAME,
+			</if>
+			<if test="expert_six != null and expert_six != ''">
+			  EXPERT_SIX,
+			</if>
+			<if test="cert_type !=  null and cert_type != ''">
+			  CERT_TYPE,
+			</if>
+			<if test="cert_code != null and cert_code != ''">
+			  CERT_CODE,
+			</if>
+			<if test="company_name != null and company_name != ''">
+			  COMPANY_NAME,
+			</if>
+			<if test="company_addr != null and company_addr != ''">
+			  COMPANY_ADDR,
+			</if>
+			<if test="contact_tel != null and contact_tel != ''">
+			  CONTACT_TEL,
+			</if>
+			 <if test="contact_addr != null and contact_addr != ''">
+			  CONTACT_ADDR,
+			</if>
+			 <if test="hpbid != null and hpbid != ''">
+			  HPBID,
+			</if>
+			<if test="hpbmc != null and hpbmc != ''">
+			  HPBMC,
+			</if>
+			<if test="email != null and email != ''">
+			  EMAIL,
+			</if>
+			<if test="expert_type != null and expert_type != ''">
+			  EXPERT_TYPE,
+			</if>
+			<if test="search_key != null and search_key != ''">
+			  SEARCH_KEY,
+			</if>
+			<if test="expert_remark != null and expert_remark != ''">
+			  EXPERT_REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="expert_id != null and expert_id != ''">
+				#{expert_id,jdbcType=DECIMAL},
+			</if>
+			<if test="create_date != null and create_date != ''">
+				#{create_date,jdbcType=VARCHAR},
+			</if>
+			<if test="create_time != null and create_time != ''">
+				#{create_time,jdbcType=VARCHAR},
+			</if> 
+			<if test="expert_name != null and expert_name != ''">
+				#{expert_name,jdbcType=VARCHAR},
+			</if> 
+			<if test="expert_six != null and expert_six != ''">
+			  #{expert_six,jdbcType=VARCHAR},
+			</if>
+			<if test="cert_type != null and cert_type != ''">
+			  #{cert_type,jdbcType=VARCHAR},
+			</if>
+			<if test="cert_code != null and cert_code != ''">
+			  #{cert_code,jdbcType=VARCHAR},
+			</if>
+			<if test="company_name != null and company_name != ''">
+			  #{company_name,jdbcType=VARCHAR},
+			</if>
+			<if test="company_addr != null and company_addr != ''">
+			  #{company_addr,jdbcType=VARCHAR},
+			</if>
+			<if test="contact_tel != null and contact_tel != ''">
+			  #{contact_tel,jdbcType=VARCHAR},
+			</if>
+			 <if test="contact_addr != null and contact_addr != ''">
+			  #{contact_addr,jdbcType=VARCHAR},
+			</if>
+			 <if test="hpbid != null and hpbid != ''">
+			  #{hpbid,jdbcType=VARCHAR},
+			</if>
+			<if test="hpbmc != null and hpbmc != ''">
+			  #{hpbmc,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null and email != ''">
+			  #{email,jdbcType=VARCHAR},
+			</if>
+			 <if test="expert_type != null and expert_type != ''">
+			  #{expert_type,jdbcType=VARCHAR},
+			</if>
+			<if test="search_key != null and search_key != ''">
+			  #{search_key,jdbcType=VARCHAR},
+			</if>
+			 <if test="expert_remark != null and expert_remark != ''">
+			  #{expert_remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert> 
+	
+	<update id="updateEx" parameterType="com.indihx.tender.entity.ZTB_EXPERT">
+		update ZTB_EXPERT
+		<set>
+			<if test="create_date != null and create_date != ''">
+				CREATE_DATE = #{create_date,jdbcType=VARCHAR},
+			</if>
+			<if test="create_time != null and create_time != ''">
+				CREATE_TIME = #{create_time,jdbcType=VARCHAR},
+			</if> 
+			<if test="expert_name != null and expert_name != ''">
+				EXPERT_NAME = #{expert_name,jdbcType=VARCHAR},
+			</if> 
+			<if test="expert_six != null and expert_six != ''">
+			  	EXPERT_SIX = #{expert_six,jdbcType=VARCHAR},
+			</if>
+			<if test="cert_type != null and cert_type != ''">
+			  	CERT_TYPE = #{cert_type,jdbcType=VARCHAR},
+			</if>
+			<if test="cert_code != null and cert_code != ''">
+			  	CERT_CODE = #{cert_code,jdbcType=VARCHAR},
+			</if>
+			<if test="company_name != null and company_name != ''">
+			  	COMPANY_NAME = #{company_name,jdbcType=VARCHAR},
+			</if>
+			<if test="company_addr != null and company_addr != ''">
+			  	COMPANY_ADDR = #{company_addr,jdbcType=VARCHAR},
+			</if>
+			<if test="contact_tel != null and contact_tel != ''">
+			  	CONTACT_TEL = #{contact_tel,jdbcType=VARCHAR},
+			</if>
+			 <if test="contact_addr != null and contact_addr != ''">
+			  	CONTACT_ADDR = #{contact_addr,jdbcType=VARCHAR},
+			</if>
+			 <if test="hpbid != null and hpbid != ''">
+			  	HPBID = #{hpbid,jdbcType=VARCHAR},
+			</if>
+			<if test="hpbmc != null and hpbmc != ''">
+			  	HPBMC = #{hpbmc,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null and email != ''">
+			  	EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			 <if test="expert_type != null and expert_type != ''">
+			  	EXPERT_TYPE = #{expert_type,jdbcType=VARCHAR},
+			</if>
+			<if test="search_key != null and search_key != ''">
+			  	SEARCH_KEY = #{search_key,jdbcType=VARCHAR},
+			</if>
+			 <if test="expert_remark != null and expert_remark != ''">
+			  	EXPERT_REMARK = #{expert_remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where expert_id = #{expert_id,jdbcType=DECIMAL}
+	</update>
+	
+	<!-- 通过专家ID删除专家信息 -->
+	<delete id="deleteEx" parameterType="java.lang.Long">
+		delete ZTB_EXPERT 
+		where expert_id = #{expert_id,jdbcType=DECIMAL}
+	</delete>
+	
+	<!-- 通过专家ID查询专家信息 -->
+	<select id="getExInfo" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select e.expert_id,e.create_date,e.create_time,e.expert_name,e.expert_six,e.cert_type,e.cert_code,e.company_name,e.company_addr,
+	  	e.contact_tel,e.contact_addr,e.hpbid,e.hpbmc,e.email,e.expert_type,e.search_key,e.expert_remark
+	  	from ZTB_EXPERT e
+		where e.expert_id = #{expert_id,jdbcType=DECIMAL}
+	</select>
+  
+</mapper>

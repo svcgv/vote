@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="CREDITRECORDBL" name="不良信用建档流程" isExecutable="true">
+    <startEvent id="start" name="Start"></startEvent>
+    <userTask id="RecordBad" name="不良信用建档"></userTask>
+    <sequenceFlow id="flow1" name="区局发起" sourceRef="start" targetRef="RecordBad">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1001"}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="BadRecordNotify" name="不良信息告知"></userTask>
+    <endEvent id="finish" name="End"></endEvent>
+    <sequenceFlow id="flow10" sourceRef="RecordBad" targetRef="BadRecordNotify">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1001"}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="readNotify" name="查看不良信用告知单"></userTask>
+    <sequenceFlow id="flow11" sourceRef="BadRecordNotify" targetRef="readNotify">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1001"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow12" sourceRef="readNotify" targetRef="finish">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1004"}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_CREDITRECORDBL">
+    <bpmndi:BPMNPlane bpmnElement="CREDITRECORDBL" id="BPMNPlane_CREDITRECORDBL">
+      <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
+        <omgdc:Bounds height="35.0" width="35.0" x="30.0" y="190.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="RecordBad" id="BPMNShape_RecordBad">
+        <omgdc:Bounds height="55.0" width="105.0" x="157.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="BadRecordNotify" id="BPMNShape_BadRecordNotify">
+        <omgdc:Bounds height="55.0" width="105.0" x="360.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="finish" id="BPMNShape_finish">
+        <omgdc:Bounds height="45.0" width="35.0" x="790.0" y="185.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="readNotify" id="BPMNShape_readNotify">
+        <omgdc:Bounds height="75.0" width="108.0" x="560.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="65.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="157.0" y="207.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="48.0" x="75.0" y="207.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="262.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="360.0" y="207.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="465.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="560.0" y="207.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="668.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="790.0" y="207.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

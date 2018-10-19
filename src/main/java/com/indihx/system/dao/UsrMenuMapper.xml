@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.system.dao.UsrMenuMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />	
+  <resultMap id="BaseResultMap" type="com.indihx.system.entity.UsrMenu">
+    <id column="USR_ID" jdbcType="DECIMAL" property="usrId" />
+    <id column="MENU_ID" jdbcType="DECIMAL" property="menuId" />
+    <result column="TM_SMP" jdbcType="CHAR" property="tmSmp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USR_ID, MENU_ID, TM_SMP
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.indihx.system.entity.UsrMenuKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USR_MENU
+    where  1=1 
+     <if test="usrId != null and usrId !=''">
+      and USR_ID = #{usrId,jdbcType=DECIMAL}
+      </if>
+       <if test="menuId != null and menuId != ''">
+      and MENU_ID = #{menuId,jdbcType=DECIMAL}
+      </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.indihx.system.entity.UsrMenuKey">
+    delete from USR_MENU
+    where 1=1
+     <if test="usrId != null and usrId !=''">
+      and USR_ID = #{usrId,jdbcType=DECIMAL}
+      </if>
+       <if test="menuId != null and menuId != ''">
+      and MENU_ID = #{menuId,jdbcType=DECIMAL}
+      </if>
+  </delete>
+  
+  <insert id="insertSelective" parameterType="com.indihx.system.entity.UsrMenu">
+    insert into USR_MENU
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usrId != null">
+        USR_ID,
+      </if>
+      <if test="menuId != null">
+        MENU_ID,
+      </if>
+      <if test="tmSmp != null">
+        TM_SMP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usrId != null">
+        #{usrId,jdbcType=DECIMAL},
+      </if>
+      <if test="menuId != null">
+        #{menuId,jdbcType=DECIMAL},
+      </if>
+      <if test="tmSmp != null">
+        #{tmSmp,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+ 
+</mapper>

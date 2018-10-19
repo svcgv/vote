@@ -1,0 +1,6 @@
+.success_icon {
+	background: url(../../images/commons/symbol_success.gif) no-repeat center top;
+}
+.error_icon {
+	background: url(../../images/commons/symbol_error.gif) no-repeat center top;
+}

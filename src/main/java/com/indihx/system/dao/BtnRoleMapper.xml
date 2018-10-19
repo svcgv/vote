@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.system.dao.BtnRoleMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  <resultMap id="BaseResultMap" type="com.indihx.system.entity.BtnRole">
+    <id column="BTN_ID" jdbcType="VARCHAR" property="btnId" />
+    <id column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="TM_SMP" jdbcType="VARCHAR" property="tmSmp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BTN_ID, ROLE_ID, TM_SMP
+  </sql>
+  
+  <select id="qryBtnRoleAll"  resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from BTN_ROLE
+    where ROLE_ID = #{0}
+  </select>
+  
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BTN_ROLE
+    where BTN_ID = #{0}
+      and ROLE_ID = #{1}
+  </select>
+  <delete id="deleteAll" >
+    delete from BTN_ROLE WHERE ROLE_ID = #{0}
+  </delete>
+  
+  <insert id="insertSelective" parameterType="com.indihx.system.entity.BtnRole">
+    insert into BTN_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="btnId != null">
+        BTN_ID,
+      </if>
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="tmSmp != null">
+        TM_SMP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="btnId != null">
+        #{btnId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null">
+        #{tmSmp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  
+  
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="CREDITAPPEAL" name="不良信用异议申请流程" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="appealapplay" name="异议申请"></userTask>
+    <sequenceFlow id="flow1" name="物业公司发起" sourceRef="startevent1" targetRef="appealapplay">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1004"}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="appealaudit" name="异议申请审核"></userTask>
+    <sequenceFlow id="flow2" name="物业公司提交申请" sourceRef="appealapplay" targetRef="appealaudit">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1004"}]]></conditionExpression>
+    </sequenceFlow>
+    <endEvent id="FINISH" name="End"></endEvent>
+    <sequenceFlow id="flow3" name="归档" sourceRef="appealaudit" targetRef="FINISH">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1001"}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_CREDITAPPEAL">
+    <bpmndi:BPMNPlane bpmnElement="CREDITAPPEAL" id="BPMNPlane_CREDITAPPEAL">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="20.0" y="166.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="appealapplay" id="BPMNShape_appealapplay">
+        <omgdc:Bounds height="55.0" width="105.0" x="200.0" y="156.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="appealaudit" id="BPMNShape_appealaudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="460.0" y="156.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="FINISH" id="BPMNShape_FINISH">
+        <omgdc:Bounds height="35.0" width="35.0" x="660.0" y="166.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="55.0" y="183.0"></omgdi:waypoint>
+        <omgdi:waypoint x="200.0" y="183.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="72.0" x="65.0" y="183.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="305.0" y="183.0"></omgdi:waypoint>
+        <omgdi:waypoint x="460.0" y="183.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="96.0" x="319.0" y="169.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="565.0" y="183.0"></omgdi:waypoint>
+        <omgdi:waypoint x="660.0" y="183.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="24.0" x="594.0" y="183.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

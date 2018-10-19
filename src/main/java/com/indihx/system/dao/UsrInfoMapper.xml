@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.system.dao.UsrInfoMapper">
+  <resultMap id="BaseResultMap" type="com.indihx.system.entity.UsrInfo">
+    <id column="USR_ID" jdbcType="DECIMAL" property="usrId" />
+    <result column="USR_NO" jdbcType="VARCHAR" property="usrNo" />
+    <result column="USR_NAME" jdbcType="VARCHAR" property="usrName" />
+    <result column="SEX" jdbcType="CHAR" property="sex" />
+    <result column="PASS_WORD" jdbcType="VARCHAR" property="passWord" />
+    <result column="BIRTH_DATE" jdbcType="CHAR" property="birthDate" />
+    <result column="ORG_NO" jdbcType="DECIMAL" property="orgNo" />
+     <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+    <result column="MBL_NO" jdbcType="DECIMAL" property="mblNo" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="OPER_USR" jdbcType="DECIMAL" property="operUsr" />
+    <result column="USR_STA" jdbcType="CHAR" property="usrSta" />
+    <result column="ORG_TYPE" jdbcType="VARCHAR" property="orgType" />
+    <result column="TM_SMP" jdbcType="CHAR" property="tmSmp" />
+    <result column="LICENCE_CODE" jdbcType="VARCHAR" property="licenceCode" />
+    <result column="CERT_ID" jdbcType="VARCHAR" property="certId" />
+    <result column="STR_REMARK" jdbcType="VARCHAR" property="strRemark" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="SESSION_ID" jdbcType="VARCHAR" property="sessionId" />
+    <result column="LAST_ACTIVE_TIME" jdbcType="VARCHAR" property="last_active_time" />
+  </resultMap>
+  <resultMap type="com.indihx.system.entity.RoleInfo" id="BaseResultMap22">
+	<id column="ROLE_ID" jdbcType="DECIMAL" property="roleId"/>
+	<result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName"/>
+	<result column="ROLE_RMK" jdbcType="VARCHAR" property="roleRmk"/>
+	<result column="TM_SMP" jdbcType="VARCHAR" property="tmSmp"/>
+	</resultMap>
+	<resultMap id="OrgNameBaseResultMap" type="com.indihx.system.entity.OrgInfo">
+	<id column="ORG_NO" jdbcType="DECIMAL" property="orgNo"/>
+	<result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
+	</resultMap>
+  <sql id="Base_Column_List">
+    USR_ID, USR_NO, USR_NAME, SEX, PASS_WORD, BIRTH_DATE, ORG_NO, MBL_NO, EMAIL, OPER_USR,ORG_TYPE,
+    USR_STA, TM_SMP,LICENCE_CODE,CERT_ID,STR_REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from USR_INFO
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectOrgNameByPrimaryKey" parameterType="java.lang.Long" resultMap="OrgNameBaseResultMap">
+    select oi.ORG_NAME from ORG_INFO oi join USR_INFO ui on UI.ORG_NO=oi.org_no where UI.USR_ID=#{0}
+  </select>
+   <!-- <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select CPY_NAME,
+    <include refid="Base_Column_List" />
+    from USR_INFO inner join  PROP_MNG_COMPY on PROP_MNG_COMPY.cpy_id=USR_INFO.org_no
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </select> -->
+  <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update USR_INFO set USR_STA='2'
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </update>
+  
+  <insert id="insertSelective" parameterType="com.indihx.system.entity.UsrInfo">
+    insert into USR_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usrId != null">
+        USR_ID,
+      </if>
+      <if test="usrNo != null">
+        USR_NO,
+      </if>
+      <if test="usrName != null">
+        USR_NAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="passWord != null">
+        PASS_WORD,
+      </if>
+      <if test="birthDate != null">
+        BIRTH_DATE,
+      </if>
+      <if test="mblNo != null">
+        MBL_NO,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="operUsr != null">
+        OPER_USR,
+      </if>
+      <if test="usrSta != null">
+        USR_STA,
+      </if>
+      <if test="orgNo != null">
+        ORG_NO,
+      </if>
+      <if test="orgType != null">
+        ORG_TYPE,
+      </if>
+      <if test="tmSmp != null">
+        TM_SMP,
+      </if>
+        <if test="licenceCode != null">
+        LICENCE_CODE,
+      </if>
+        <if test="certId != null">
+        CERT_ID,
+      </if>
+        <if test="strRemark != null">
+        STR_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usrId != null">
+        #{usrId,jdbcType=DECIMAL},
+      </if>
+      <if test="usrNo != null">
+        #{usrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="usrName != null">
+        #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        #{birthDate,jdbcType=CHAR},
+      </if>
+      <if test="mblNo != null">
+        #{mblNo,jdbcType=DECIMAL},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="operUsr != null">
+        #{operUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="usrSta != null">
+        #{usrSta,jdbcType=CHAR},
+      </if>
+      <if test="orgNo != null">
+        #{orgNo,jdbcType=DECIMAL},
+      </if>
+      <if test="orgType != null">
+        #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null">
+        #{tmSmp,jdbcType=CHAR},
+      </if>
+      <if test="licenceCode != null">
+        #{licenceCode,jdbcType=VARCHAR},
+      </if>
+        <if test="certId != null">
+        #{certId,jdbcType=VARCHAR},
+      </if>
+        <if test="strRemark != null">
+        #{strRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertUserRole" parameterType="com.indihx.system.entity.UsrRole">
+    insert into USR_ROLE values(#{0},#{1},#{2})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.indihx.system.entity.UsrInfo">
+    update USR_INFO
+    <set>
+      <if test="usrNo != null">
+        USR_NO = #{usrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="usrName != null">
+        USR_NAME = #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="passWord != null">
+        PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null">
+        BIRTH_DATE = #{birthDate,jdbcType=CHAR},
+      </if>
+      <if test="mblNo != null">
+        MBL_NO = #{mblNo,jdbcType=DECIMAL},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="operUsr != null">
+        OPER_USR = #{operUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="usrSta != null">
+        USR_STA = #{usrSta,jdbcType=CHAR},
+      </if>
+      <if test="orgNo != null">
+        ORG_NO = #{orgNo,jdbcType=DECIMAL},
+      </if>
+      <if test="orgType != null">
+        ORG_TYPE = #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null">
+        TM_SMP = #{tmSmp,jdbcType=CHAR},
+      </if>
+       <if test="licenceCode != null">
+        LICENCE_CODE = #{licenceCode,jdbcType=VARCHAR},
+      </if>
+        <if test="certId != null">
+        CERT_ID = #{certId,jdbcType=VARCHAR},
+      </if>
+        <if test="strRemark != null">
+        STR_REMARK = #{strRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.indihx.system.entity.UsrInfo">
+    update USR_INFO
+    set USR_NO = #{usrNo,jdbcType=VARCHAR},
+      USR_NAME = #{usrName,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=CHAR},
+      PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      BIRTH_DATE = #{birthDate,jdbcType=CHAR},
+      ORG_NO = #{orgNo,jdbcType=DECIMAL},
+      ORG_TYPE = #{orgType,jdbcType=VARCHAR},
+      MBL_NO = #{mblNo,jdbcType=DECIMAL},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      OPER_USR = #{operUsr,jdbcType=DECIMAL},
+      USR_STA = #{usrSta,jdbcType=CHAR},
+      TM_SMP = #{tmSmp,jdbcType=CHAR}
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="qryUserInfoAll" resultMap="BaseResultMap">
+  	SELECT AA.USR_ID,AA.USR_NAME, AA.ORG_TYPE, AA.USR_STA,AA.USR_NO,AA.ORG_NO,AA.ORG_NAME, AA.PASS_WORD,AA.LICENCE_CODE,AA.CERT_ID,AA.TM_SMP,AA.MBL_NO,AA.EMAIL,AA.BIRTH_DATE,AA.SEX,AA.SESSION_ID, WM_CONCAT(AA.ROLE_NAME) AS ROLE_NAME
+  	,WM_CONCAT(AA.ROLE_ID) AS ROLE_ID
+	FROM ( SELECT DISTINCT U .*, ORG.ORG_NAME, R.ROLE_NAME,R.ROLE_ID
+	FROM  USR_INFO U
+	JOIN ORG_INFO ORG ON U .ORG_NO = ORG.ORG_NO
+    LEFT JOIN USR_ROLE UR ON U .USR_ID = UR.USR_ID
+    LEFT JOIN ROLE R ON R.ROLE_ID = UR.ROLE_ID
+    WHERE 1=1
+	<if test="usrSta != null and usrSta !=''">
+		and u.usr_sta=#{usrSta,jdbcType=VARCHAR}
+	</if>
+	<if test="usrNo != null and usrNo !=''">
+		and u.usr_no=#{usrNo,jdbcType=VARCHAR}
+	</if>
+	<if test="usrName!=null and usrName !=''">
+		and u.usr_name like CONCAT(CONCAT('%',#{usrName}),'%')
+	</if>
+	<if test="usrId != null and usrId !=''">
+    	 	and u.usr_id like CONCAT(CONCAT('%',#{usrId}),'%')
+   	</if>
+   	<if test="passWord != null and passWord !=''">
+    	 	and u.PASS_WORD = #{passWord,jdbcType=VARCHAR}
+   	</if>
+   	<if test="orgType!=null and orgType!=''">
+	    and u.ORG_TYPE IN ${orgType}
+	</if>
+	ORDER BY U .USR_ID DESC ) AA
+	GROUP BY AA.USR_ID, AA.USR_NAME, AA.ORG_TYPE, AA.USR_STA,AA.PASS_WORD,AA.LICENCE_CODE,AA.CERT_ID,AA.TM_SMP,AA.MBL_NO,AA.EMAIL,AA.BIRTH_DATE,AA.SEX,AA.SESSION_ID,AA.ORG_NO,AA.ORG_NAME,AA.USR_NO
+  	ORDER BY AA.ORG_TYPE,AA.USR_ID DESC
+  </select>
+  
+  <select id="qryUsrInfoByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select t2.* from usr_role t1,usr_info t2
+  	 where t1.usr_id=t2.usr_id and role_id=#{roleId}
+  </select>
+  <select id="openAqzeroUserListInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	SELECT T .usr_id, T .usr_name,T.USR_STA, T .TM_SMP, T .email, T .mbl_no, ur.role_id, r.role_name
+	FROM usr_info T
+	JOIN AQ_BASE_TELLERS_REL b ON T .usr_id = b.user_id
+	LEFT JOIN usr_role ur ON T .usr_id = ur.usr_id
+	LEFT JOIN role r ON r.role_id = ur.role_id
+	WHERE b.pk_id = #{0}
+	AND b.pk_table = #{1}
+	<if test="user.usrName != null and user.usrName !=''">
+  		and T.USR_NAME = #{user.usrName,jdbcType=VARCHAR}
+  	</if>
+	ORDER BY T .TM_SMP
+  </select>
+  <select id="qryRoleInfoAll" resultMap="BaseResultMap22">
+  	select r.* from role r where 1=1 
+  	<if test="roleId != null and roleId !=''">
+  		and role_id in (#{roleId,jdbcType=DECIMAL})
+  	</if>
+  	and role_id not in ('999','220')
+  </select>
+  <!-- 启用 -->
+  <update id="openStaOrgInfo" parameterType="com.indihx.system.entity.UsrInfo">
+    update USR_INFO
+    set USR_STA = '0'
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </update>
+  <!-- 禁用 -->
+  <update id="closeStaOrgInfo" parameterType="com.indihx.system.entity.UsrInfo">
+    update USR_INFO
+    set USR_STA = '2'
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateLoginUser" parameterType="com.indihx.system.entity.UsrInfo">
+    update USR_INFO
+    set session_id = #{sessionId,jdbcType=VARCHAR},
+    usr_sta='1'
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </update>
+  <update id="clearUserSession" parameterType="com.indihx.system.entity.UsrInfo">
+    update USR_INFO set usr_sta = #{usrSta,jdbcType=VARCHAR},session_id = '' where usr_sta = '1'
+  </update>
+  <update id="modifyActiveTime" parameterType="com.indihx.system.entity.UsrInfo">
+    update USR_INFO set last_active_time = #{last_active_time,jdbcType=VARCHAR} where usr_id=#{usrId}
+  </update>
+  <select id="checkUserInfo" parameterType="com.indihx.system.vo.UserInfoVo" resultMap="BaseResultMap">
+  	select * from usr_info where usr_id=#{usrId,jdbcType=DECIMAL} and pass_word=#{passWord,jdbcType=VARCHAR}
+  </select>
+   <select id="getUserSession" parameterType="java.lang.String" resultType="java.lang.String">
+  	select session_id from usr_info where usr_id=#{usrId}
+  </select>
+</mapper>

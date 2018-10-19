@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.credit.dao.CreditBadRecordMapper">
+
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  
+  <!-- 用来描述如何从数据库结果集中来加载你的对象 -->
+  <resultMap id="BaseResultMap" type="com.indihx.credit.entity.CreditBadRecordTemp">
+    <id column="credit_code" jdbcType="VARCHAR" property="credit_code" /><!-- column：查询出来的列名  property：type指定的实体类型中的属性名 ，最终resultMap对column和property做一个映射关系（对应关系）  -->
+    <result column="app_id" jdbcType="VARCHAR" property="app_id" />
+    <result column="credit_status" jdbcType="VARCHAR" property="credit_status"/>
+    <result column="info_from" jdbcType="VARCHAR" property="info_from"/>
+    <result column="bllx" jdbcType="VARCHAR" property="bllx"/>
+    <result column="jlrq" jdbcType="VARCHAR" property="jlrq"/>
+    <result column="jlsj" jdbcType="VARCHAR" property="jlsj"/>
+    <result column="jldwid" jdbcType="VARCHAR" property="jldwid"/>
+    <result column="jlczybh" jdbcType="VARCHAR" property="jlczybh"/>
+    <result column="slnr" jdbcType="VARCHAR" property="slnr"/>
+    <result column="ckf" jdbcType="VARCHAR" property="ckf"/>
+    <result column="jlf" jdbcType="VARCHAR" property="jlf"/>
+    <result column="bjlx" jdbcType="VARCHAR" property="bjlx"/>
+    <result column="gzrq" jdbcType="VARCHAR" property="gzrq"/>
+    <result column="gzsj" jdbcType="VARCHAR" property="gzsj"/>
+    <result column="gzdwid" jdbcType="VARCHAR" property="gzdwid"/>
+    <result column="gzczybh" jdbcType="VARCHAR" property="gzczybh"/>
+    <result column="zgqx" jdbcType="VARCHAR" property="zgqx"/>
+    <result column="zgjzrq" jdbcType="VARCHAR" property="zgjzrq"/>
+    <result column="ssqx" jdbcType="VARCHAR" property="ssqx"/>
+    <result column="ssjzrq" jdbcType="VARCHAR" property="ssjzrq"/>
+    <result column="ssbz" jdbcType="VARCHAR" property="ssbz"/>
+    <result column="gdrq" jdbcType="VARCHAR" property="gdrq"/>
+    <result column="gdsj" jdbcType="VARCHAR" property="gdsj"/>
+    <result column="gdczybh" jdbcType="VARCHAR" property="gdczybh"/>
+    <result column="score" jdbcType="VARCHAR" property="score"/>
+    <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    
+    <result column="xmid" jdbcType="VARCHAR" property="xmid"/>
+    <result column="xmmc" jdbcType="VARCHAR" property="xmmc"/>
+    <result column="wygsid" jdbcType="VARCHAR" property="wygsid"/>
+    <result column="wygsmc" jdbcType="VARCHAR" property="wygsmc"/>
+    <result column="zjbh" jdbcType="VARCHAR" property="zjbh"/>
+    <result column="gsryid" jdbcType="VARCHAR" property="gsryid"/>
+    <result column="ryxm" jdbcType="VARCHAR" property="ryxm"/>
+    <result column="sfzbh" jdbcType="VARCHAR" property="sfzbh"/>
+    <result column="hpbid" jdbcType="VARCHAR" property="hpbid"/>
+    <result column="hpbmc" jdbcType="VARCHAR" property="hpbmc"/>
+  </resultMap>
+  <resultMap id="QuotaResultMap" type="com.indihx.credit.entity.CreditBadQuotaTemp">
+  	<id column="credit_seq" jdbcType="VARCHAR" property="credit_seq" />
+  	 <result column="credit_code" jdbcType="VARCHAR" property="credit_code"/>
+  	 <result column="app_id" jdbcType="VARCHAR" property="app_id"/>
+  	 <result column="jfyj" jdbcType="VARCHAR" property="jfyj"/>
+  	 <result column="syzt" jdbcType="VARCHAR" property="syzt"/>
+  	 <result column="jfbz" jdbcType="VARCHAR" property="jfbz"/>
+  	 <result column="ckf" jdbcType="VARCHAR" property="ckf"/>
+  	 <result column="jlf" jdbcType="VARCHAR" property="jlf"/>
+  	 <result column="score" jdbcType="VARCHAR" property="score"/>
+  	 <result column="jfsm" jdbcType="VARCHAR" property="jfsm"/>
+  	 <result column="clyj" jdbcType="VARCHAR" property="clyj"/>
+  </resultMap>
+  <!-- 可以重用的 SQL 块,也可以被其他语句引用 -->
+  <sql id="Base_Column_List">
+    CREDIT_CODE,CREDIT_STATUS,INFO_FROM,BLLX,JLRQ,JLSJ,SLNR,BJLX,SCORE,XMID,XMMC,WYGSID,WYGSMC,GSRYID,RYXM,SFZBH,HPBID,HPBMC
+  </sql>
+  <!--  映射查询语句 getBadRecordList-->
+  <select id="getBadRecordList" resultMap="BaseResultMap"  parameterType="com.indihx.credit.vo.CreditBadVo">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  	FROM CREDIT_BAD_RECORD 
+    <where>
+    	<if test="credit_code !=null and credit_code != ''">
+    		credit_code = #{credit_code,jdbcType=VARCHAR}
+    	</if>
+    	<if test="credit_status !=null and credit_status != ''">
+    		AND credit_status = #{credit_status,jdbcType=VARCHAR}
+    	</if>
+    	<if test="bjlx !=null and bjlx != ''">
+    		AND bjlx = #{bjlx,jdbcType=VARCHAR}
+    	</if>
+    	<if test="xmmc !=null and xmmc != ''">
+    		AND xmmc = #{xmmc,jdbcType=VARCHAR}
+    	</if>
+    	<if test="wygsmc !=null and wygsmc != ''">
+    		AND wygsmc = #{wygsmc,jdbcType=VARCHAR}
+    	</if>
+    	<if test="ryxm !=null and ryxm != ''">
+    		AND ryxm = #{ryxm,jdbcType=VARCHAR}
+    	</if>
+    	<if test="hpbid !=null and hpbid != ''">
+    		AND hpbid = #{hpbid,jdbcType=VARCHAR}
+    	</if>
+    </where>
+    ORDER BY CREDIT_CODE DESC
+  </select>
+  <!--  映射查询语句 getBadRecordTemp-->
+  <select id="getBadRecordTemp" resultMap="BaseResultMap"  parameterType="com.indihx.credit.entity.CreditBadRecordTemp">
+  	SELECT * FROM CREDIT_BAD_RECORD_TEMP 
+  	<where>
+  		<if test="credit_code !=null and credit_code != ''">
+    		credit_code = #{credit_code,jdbcType=VARCHAR}
+    	</if>
+    	<if test="app_id !=null and app_id != ''">
+    		and app_id = #{app_id,jdbcType=VARCHAR}
+    	</if>
+    </where>	
+  </select>
+  <!--  映射插入语句 saveCreditBadInfoTemp-->
+  <insert id="saveCreditBadInfoTemp" parameterType="com.indihx.credit.vo.CreditBadVo">
+    insert into CREDIT_BAD_RECORD_TEMP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="credit_code != null">
+        credit_code,
+      </if>
+      <if test="app_id != null">
+        app_id,
+      </if>
+      <if test="credit_status != null">
+        credit_status,
+      </if>
+      <if test="info_from != null">
+        info_from,
+      </if>
+      <if test="bllx != null">
+        bllx,
+      </if>
+      <if test="jlrq != null">
+        jlrq,
+      </if>
+      <if test="jlsj != null">
+        jlsj,
+      </if>
+      <if test="jldwid != null">
+        jldwid,
+      </if>
+      <if test="jlczybh != null">
+        jlczybh,
+      </if>
+      <if test="slnr != null">
+        slnr,
+      </if>
+      <if test="ckf != null">
+        ckf,
+      </if>
+      <if test="jlf != null">
+        jlf,
+      </if>
+      <if test="bjlx != null">
+        bjlx,
+      </if>
+      <if test="gzrq != null">
+        gzrq,
+      </if>
+      <if test="gzsj != null">
+        gzsj,
+      </if>
+      <if test="gzdwid != null">
+        gzdwid,
+      </if>
+      <if test="gzczybh != null">
+        gzczybh,
+      </if>
+      <if test="zgqx != null">
+        zgqx,
+      </if>
+      <if test="zgjzrq != null">
+        zgjzrq,
+      </if>
+      <if test="ssqx != null">
+        ssqx,
+      </if>
+      <if test="ssjzrq != null">
+        ssjzrq,
+      </if>
+      <if test="ssbz != null">
+        ssbz,
+      </if>
+      <if test="gdrq != null">
+        gdrq,
+      </if>
+      <if test="gdsj != null">
+        gdsj,
+      </if>
+      <if test="gdczybh != null">
+        gdczybh,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="xmid != null">
+        xmid,
+      </if>
+      <if test="xmmc != null">
+        xmmc,
+      </if>
+      <if test="wygsid != null">
+        wygsid,
+      </if>
+      <if test="wygsmc != null">
+        wygsmc,
+      </if>
+      <if test="zjbh != null">
+        zjbh,
+      </if>
+      <if test="gsryid != null">
+        gsryid,
+      </if>
+      <if test="ryxm != null">
+        ryxm,
+      </if>
+      <if test="sfzbh != null">
+        sfzbh,
+      </if>
+      <if test="hpbid != null">
+        hpbid,
+      </if>
+      <if test="hpbmc != null">
+        hpbmc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="credit_code != null">
+        #{credit_code,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        #{app_id,jdbcType=VARCHAR},
+      </if>
+      <if test="credit_status != null">
+         #{credit_status,jdbcType=VARCHAR},
+      </if>
+      <if test="info_from != null">
+         #{info_from,jdbcType=VARCHAR},
+      </if>
+      <if test="bllx != null">
+         #{bllx,jdbcType=VARCHAR},
+      </if>
+      <if test="jlrq != null">
+        #{jlrq,jdbcType=VARCHAR},
+      </if>
+      <if test="jlsj != null">
+        #{jlsj,jdbcType=VARCHAR},
+      </if>
+      <if test="jldwid != null">
+         #{jldwid,jdbcType=VARCHAR},
+      </if>
+      <if test="jlczybh != null">
+        #{jlczybh,jdbcType=VARCHAR},
+      </if>
+      <if test="slnr != null">
+        #{slnr,jdbcType=VARCHAR},
+      </if>
+      <if test="ckf != null">
+        #{ckf,jdbcType=VARCHAR},
+      </if>
+      <if test="jlf != null">
+        #{jlf,jdbcType=VARCHAR},
+      </if>
+      <if test="bjlx != null">
+        #{bjlx,jdbcType=VARCHAR},
+      </if>
+      <if test="gzrq != null">
+        #{gzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="gzsj != null">
+         #{gzsj,jdbcType=VARCHAR},
+      </if>
+      <if test="gzdwid != null">
+        #{gzdwid,jdbcType=VARCHAR},
+      </if>
+      <if test="gzczybh != null">
+        #{gzczybh,jdbcType=VARCHAR},
+      </if>
+      <if test="zgqx != null">
+        #{zgqx,jdbcType=VARCHAR},
+      </if>
+      <if test="zgjzrq != null">
+        #{zgjzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ssqx != null">
+        #{ssqx,jdbcType=VARCHAR},
+      </if>
+      <if test="ssjzrq != null">
+        #{ssjzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ssbz != null">
+        #{ssbz,jdbcType=VARCHAR},
+      </if>
+      <if test="gdrq != null">
+        #{gdrq,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsj != null">
+        #{gdsj,jdbcType=VARCHAR},
+      </if>
+      <if test="gdczybh != null">
+        #{gdczybh,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="xmid != null">
+        #{xmid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmmc != null">
+        #{xmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsid != null">
+        #{wygsid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+         #{wygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zjbh != null">
+         #{zjbh,jdbcType=VARCHAR},
+      </if>
+      <if test="gsryid != null">
+        #{gsryid,jdbcType=VARCHAR},
+      </if>
+      <if test="ryxm != null">
+        #{ryxm,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzbh != null">
+        #{sfzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        #{hpbmc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--  映射更新语句 updateCreditInfoTemp-->
+  <update id="updateCreditInfoTemp" parameterType="com.indihx.credit.vo.CreditBadVo">
+    update CREDIT_BAD_RECORD_TEMP
+    <set>
+      <if test="credit_code != null">
+        credit_code=#{credit_code,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        app_id=#{app_id,jdbcType=VARCHAR},
+      </if>
+      <if test="credit_status != null">
+         credit_status=#{credit_status,jdbcType=VARCHAR},
+      </if>
+      <if test="info_from != null">
+         info_from=#{info_from,jdbcType=VARCHAR},
+      </if>
+      <if test="bllx != null">
+         bllx=#{bllx,jdbcType=VARCHAR},
+      </if>
+      <if test="jlrq != null">
+        jlrq=#{jlrq,jdbcType=VARCHAR},
+      </if>
+      <if test="jlsj != null">
+        jlsj=#{jlsj,jdbcType=VARCHAR},
+      </if>
+      <if test="jldwid != null">
+         jldwid=#{jldwid,jdbcType=VARCHAR},
+      </if>
+      <if test="jlczybh != null">
+        jlczybh=#{jlczybh,jdbcType=VARCHAR},
+      </if>
+      <if test="slnr != null">
+        slnr=#{slnr,jdbcType=VARCHAR},
+      </if>
+      <if test="ckf != null">
+        ckf=#{ckf,jdbcType=VARCHAR},
+      </if>
+      <if test="jlf != null">
+        jlf=#{jlf,jdbcType=VARCHAR},
+      </if>
+      <if test="bjlx != null">
+        bjlx=#{bjlx,jdbcType=VARCHAR},
+      </if>
+      <if test="gzrq != null">
+        gzrq=#{gzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="gzsj != null">
+        gzsj=#{gzsj,jdbcType=VARCHAR},
+      </if>
+      <if test="gzdwid != null">
+        gzdwid=#{gzdwid,jdbcType=VARCHAR},
+      </if>
+      <if test="gzczybh != null">
+        gzczybh=#{gzczybh,jdbcType=VARCHAR},
+      </if>
+      <if test="zgqx != null">
+        zgqx=#{zgqx,jdbcType=VARCHAR},
+      </if>
+      <if test="zgjzrq != null">
+        zgjzrq=#{zgjzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ssqx != null">
+        ssqx=#{ssqx,jdbcType=VARCHAR},
+      </if>
+      <if test="ssjzrq != null">
+        ssjzrq=#{ssjzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ssbz != null">
+        ssbz=#{ssbz,jdbcType=VARCHAR},
+      </if>
+      <if test="gdrq != null">
+        gdrq=#{gdrq,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsj != null">
+        gdsj=#{gdsj,jdbcType=VARCHAR},
+      </if>
+      <if test="gdczybh != null">
+        gdczybh=#{gdczybh,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score=#{score,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark=#{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="xmid != null">
+        xmid=#{xmid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmmc != null">
+        xmmc=#{xmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsid != null">
+        wygsid=#{wygsid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+         wygsmc=#{wygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zjbh != null">
+         zjbh=#{zjbh,jdbcType=VARCHAR},
+      </if>
+      <if test="gsryid != null">
+        gsryid=#{gsryid,jdbcType=VARCHAR},
+      </if>
+      <if test="ryxm != null">
+        ryxm=#{ryxm,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzbh != null">
+        sfzbh=#{sfzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        hpbid=#{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        hpbmc=#{hpbmc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where credit_code = #{credit_code,jdbcType=VARCHAR}
+  </update>
+  <!--  映射删除语句 deleteBadQuota-->
+  <delete id="deleteBadQuota" parameterType="java.lang.String">
+    delete from CREDIT_BLZB_TEMP
+    where credit_code = #{credit_code,jdbcType=VARCHAR}
+  </delete>
+  <!--  映射插入语句 saveCreditBadQuota-->
+  <insert id="saveCreditBadQuota" parameterType="com.indihx.credit.entity.CreditBadQuotaTemp">
+    insert into CREDIT_BLZB_TEMP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="credit_seq != null">
+        credit_seq,
+      </if>
+      <if test="credit_code != null">
+        credit_code,
+      </if>
+      <if test="app_id != null">
+        app_id,
+      </if>
+      <if test="jfyj != null">
+        jfyj,
+      </if>
+      <if test="syzt != null">
+        syzt,
+      </if>
+      <if test="jfbz != null">
+        jfbz,
+      </if>
+      <if test="ckf != null">
+        ckf,
+      </if>
+      <if test="jlf != null">
+        jlf,
+      </if>
+       <if test="score != null">
+        score,
+      </if>
+      <if test="jfsm != null">
+        jfsm,
+      </if>
+      <if test="clyj != null">
+        clyj,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="credit_seq != null">
+        #{credit_seq,jdbcType=VARCHAR},
+      </if>
+      <if test="credit_code != null">
+        #{credit_code,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        #{app_id,jdbcType=VARCHAR},
+      </if>
+      <if test="jfyj != null">
+        #{jfyj,jdbcType=VARCHAR},
+      </if>
+      <if test="syzt != null">
+        #{syzt,jdbcType=VARCHAR},
+      </if>
+      <if test="jfbz != null">
+        #{jfbz,jdbcType=VARCHAR},
+      </if>
+      <if test="ckf != null">
+        #{ckf,jdbcType=VARCHAR},
+      </if>
+      <if test="jlf != null">
+        #{jlf,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="jfsm != null">
+        #{jfsm,jdbcType=VARCHAR},
+      </if>
+      <if test="clyj != null">
+        #{clyj,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--  映射查询语句 getBadQuotaList-->
+  <select id="getBadQuotaList" resultMap="QuotaResultMap"  parameterType="com.indihx.credit.vo.BadQuotaVo">
+  	select zb.credit_seq,zb.jfyj,zb.syzt,zb.ckfz as ckf,zb.jfbz,bzb.credit_code,bzb.app_id,bzb.jlf,bzb.score,bzb.jfsm,bzb.clyj 
+  	from CREDIT_JFZB zb left join CREDIT_BLZB_TEMP bzb on zb.credit_seq=bzb.credit_seq 
+  	and bzb.credit_code= #{credit_code,jdbcType=VARCHAR}
+  	where zb.zblx='02' 
+  	order by zb.zbbm
+  </select>
+  <!--  映射查询语句 getBadQuotaTempList-->
+  <select id="getBadQuotaTempList" resultMap="QuotaResultMap"  parameterType="com.indihx.credit.vo.BadQuotaVo">
+  	select zb.credit_seq,zb.jfyj,zb.syzt,zb.ckfz as ckf,zb.jfbz,bzb.credit_code,bzb.app_id,bzb.jlf,bzb.score,bzb.jfsm,bzb.clyj 
+  	from CREDIT_JFZB zb join CREDIT_BLZB_TEMP bzb on zb.credit_seq=bzb.credit_seq 
+  	where zb.zblx='02' and bzb.credit_code= #{credit_code,jdbcType=VARCHAR}
+  	order by zb.zbbm
+  </select>
+  <!--  映射插入语句 updateCreditBadQuota-->
+  <update id="updateCreditBadQuota" parameterType="com.indihx.credit.entity.CreditBadQuotaTemp">
+    UPDATE CREDIT_BLZB_TEMP
+    <set>
+	     <if test="credit_seq != null">
+	       credit_seq= #{credit_seq,jdbcType=VARCHAR},
+	      </if>
+	      <if test="credit_code != null">
+	       credit_code= #{credit_code,jdbcType=VARCHAR},
+	      </if>
+	      <if test="jfyj != null">
+	        jfyj=#{jfyj,jdbcType=VARCHAR},
+	      </if>
+	      <if test="syzt != null">
+	        syzt=#{syzt,jdbcType=VARCHAR},
+	      </if>
+	      <if test="jfbz != null">
+	        jfbz=#{jfbz,jdbcType=VARCHAR},
+	      </if>
+	      <if test="ckf != null">
+	       ckf= #{ckf,jdbcType=VARCHAR},
+	      </if>
+	      <if test="jlf != null">
+	       jlf= #{jlf,jdbcType=VARCHAR},
+	      </if>
+	      <if test="score != null">
+	        score=#{score,jdbcType=VARCHAR},
+	      </if>
+	      <if test="jfsm != null">
+	       jfsm= #{jfsm,jdbcType=VARCHAR},
+	      </if>
+	      <if test="clyj != null">
+	       clyj= #{clyj,jdbcType=VARCHAR},
+	      </if>
+    </set>
+    where credit_code = #{credit_code,jdbcType=VARCHAR} and credit_seq= #{credit_seq,jdbcType=VARCHAR}
+  </update>  
+  <!--  映射插入语句 saveCreditBadInfo-->
+  <insert id="saveCreditBadInfo" parameterType="com.indihx.credit.entity.CreditBadRecord">
+    insert into CREDIT_BAD_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="credit_code != null">
+        credit_code,
+      </if>
+      <if test="credit_status != null">
+        credit_status,
+      </if>
+      <if test="info_from != null">
+        info_from,
+      </if>
+      <if test="bllx != null">
+        bllx,
+      </if>
+      <if test="jlrq != null">
+        jlrq,
+      </if>
+      <if test="jlsj != null">
+        jlsj,
+      </if>
+      <if test="jldwid != null">
+        jldwid,
+      </if>
+      <if test="jlczybh != null">
+        jlczybh,
+      </if>
+      <if test="slnr != null">
+        slnr,
+      </if>
+      <if test="ckf != null">
+        ckf,
+      </if>
+      <if test="jlf != null">
+        jlf,
+      </if>
+      <if test="bjlx != null">
+        bjlx,
+      </if>
+      <if test="gzrq != null">
+        gzrq,
+      </if>
+      <if test="gzsj != null">
+        gzsj,
+      </if>
+      <if test="gzdwid != null">
+        gzdwid,
+      </if>
+      <if test="gzczybh != null">
+        gzczybh,
+      </if>
+      <if test="zgqx != null">
+        zgqx,
+      </if>
+      <if test="zgjzrq != null">
+        zgjzrq,
+      </if>
+      <if test="ssqx != null">
+        ssqx,
+      </if>
+      <if test="ssjzrq != null">
+        ssjzrq,
+      </if>
+      <if test="ssbz != null">
+        ssbz,
+      </if>
+      <if test="gdrq != null">
+        gdrq,
+      </if>
+      <if test="gdsj != null">
+        gdsj,
+      </if>
+      <if test="gdczybh != null">
+        gdczybh,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="xmid != null">
+        xmid,
+      </if>
+      <if test="xmmc != null">
+        xmmc,
+      </if>
+      <if test="wygsid != null">
+        wygsid,
+      </if>
+      <if test="wygsmc != null">
+        wygsmc,
+      </if>
+      <if test="zjbh != null">
+        zjbh,
+      </if>
+      <if test="gsryid != null">
+        gsryid,
+      </if>
+      <if test="ryxm != null">
+        ryxm,
+      </if>
+      <if test="sfzbh != null">
+        sfzbh,
+      </if>
+      <if test="hpbid != null">
+        hpbid,
+      </if>
+      <if test="hpbmc != null">
+        hpbmc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="credit_code != null">
+        #{credit_code,jdbcType=VARCHAR},
+      </if>
+      <if test="credit_status != null">
+         #{credit_status,jdbcType=VARCHAR},
+      </if>
+      <if test="info_from != null">
+         #{info_from,jdbcType=VARCHAR},
+      </if>
+      <if test="bllx != null">
+         #{bllx,jdbcType=VARCHAR},
+      </if>
+      <if test="jlrq != null">
+        #{jlrq,jdbcType=VARCHAR},
+      </if>
+      <if test="jlsj != null">
+        #{jlsj,jdbcType=VARCHAR},
+      </if>
+      <if test="jldwid != null">
+         #{jldwid,jdbcType=VARCHAR},
+      </if>
+      <if test="jlczybh != null">
+        #{jlczybh,jdbcType=VARCHAR},
+      </if>
+      <if test="slnr != null">
+        #{slnr,jdbcType=VARCHAR},
+      </if>
+      <if test="ckf != null">
+        #{ckf,jdbcType=VARCHAR},
+      </if>
+      <if test="jlf != null">
+        #{jlf,jdbcType=VARCHAR},
+      </if>
+      <if test="bjlx != null">
+        #{bjlx,jdbcType=VARCHAR},
+      </if>
+      <if test="gzrq != null">
+        #{gzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="gzsj != null">
+         #{gzsj,jdbcType=VARCHAR},
+      </if>
+      <if test="gzdwid != null">
+        #{gzdwid,jdbcType=VARCHAR},
+      </if>
+      <if test="gzczybh != null">
+        #{gzczybh,jdbcType=VARCHAR},
+      </if>
+      <if test="zgqx != null">
+        #{zgqx,jdbcType=VARCHAR},
+      </if>
+      <if test="zgjzrq != null">
+        #{zgjzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ssqx != null">
+        #{ssqx,jdbcType=VARCHAR},
+      </if>
+      <if test="ssjzrq != null">
+        #{ssjzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="ssbz != null">
+        #{ssbz,jdbcType=VARCHAR},
+      </if>
+      <if test="gdrq != null">
+        #{gdrq,jdbcType=VARCHAR},
+      </if>
+      <if test="gdsj != null">
+        #{gdsj,jdbcType=VARCHAR},
+      </if>
+      <if test="gdczybh != null">
+        #{gdczybh,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="xmid != null">
+        #{xmid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmmc != null">
+        #{xmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsid != null">
+        #{wygsid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+         #{wygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zjbh != null">
+         #{zjbh,jdbcType=VARCHAR},
+      </if>
+      <if test="gsryid != null">
+        #{gsryid,jdbcType=VARCHAR},
+      </if>
+      <if test="ryxm != null">
+        #{ryxm,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzbh != null">
+        #{sfzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        #{hpbmc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--  映射插入语句 saveCreditQuotaInfo-->  
+  <insert id="saveCreditQuotaInfo" parameterType="java.lang.String">
+  INSERT INTO CREDIT_BLZB
+  (CREDIT_SEQ,CREDIT_CODE,JFYJ,SYZT,JFBZ,CKF,JLF,SCORE,JFSM,CLYJ)
+  SELECT CREDIT_SEQ,CREDIT_CODE,JFYJ,SYZT,JFBZ,CKF,JLF,SCORE,JFSM,CLYJ FROM CREDIT_BLZB_TEMP 
+  WHERE CREDIT_CODE=#{credit_code,jdbcType=VARCHAR}
+  </insert>
+  <!--  映射查询语句 getCreditRecordQuotaList-->
+  <select id="getCreditRecordQuotaList" resultMap="QuotaResultMap"  parameterType="java.lang.String">
+  	select zb.credit_seq,zb.jfyj,zb.syzt,zb.ckfz as ckf,zb.jfbz,bzb.credit_code,bzb.jlf,bzb.score,bzb.jfsm,bzb.clyj 
+  	from CREDIT_JFZB zb join CREDIT_BLZB bzb on zb.credit_seq=bzb.credit_seq 
+  	where zb.zblx='02' and bzb.credit_code= #{credit_code,jdbcType=VARCHAR}
+  	order by zb.zbbm
+  </select>
+  <!-- 映射查询语句 getCreditBadRecordDocment-->
+  <select id="getCreditBadRecordDocment" resultMap="BaseResultMap"  parameterType="java.lang.String">
+  	SELECT * FROM CREDIT_BAD_RECORD WHERE CREDIT_CODE=  #{credit_code,jdbcType=VARCHAR}
+  </select>
+  <!--  映射查询语句 getCreditBadRecordTempList-->
+  <select id="getCreditBadRecordTempList" resultMap="BaseResultMap"  parameterType="com.indihx.credit.vo.CreditBadVo">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  	FROM CREDIT_BAD_RECORD_TEMP
+    WHERE SSBZ = '0' AND CREDIT_STATUS='03'
+  </select>
+</mapper>

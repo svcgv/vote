@@ -1,0 +1,4 @@
+
+function openPages(pages){
+}
+

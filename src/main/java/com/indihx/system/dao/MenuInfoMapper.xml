@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.system.dao.MenuInfoMapper">
+	<!-- 支持缓存配置(必须配置否则缓存无效) -->
+	<cache type="com.indihx.cache.RedisCache" />
+	<resultMap id="BaseResultMap" type="com.indihx.system.entity.MenuInfo">
+		<id column="MENU_ID" jdbcType="DECIMAL" property="menuId" />
+		<result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
+		<result column="PARENT_ID" jdbcType="DECIMAL" property="parentId" />
+		<result column="MENU_URL" jdbcType="VARCHAR" property="menuUrl" />
+		<result column="OPER_USER" jdbcType="DECIMAL" property="operUser" />
+		<result column="MENU_LEVEL" jdbcType="CHAR" property="menuLevel" />
+		<result column="CLASS_NAME" jdbcType="VARCHAR" property="className" />
+		<result column="TM_SMP" jdbcType="DECIMAL" property="tmSmp" />
+		<result column="CSS_ICON" jdbcType="VARCHAR" property="cssIcon" />
+		<result column="SORT_NUM" jdbcType="VARCHAR" property="sortNum" />
+		<result column="IS_HOME" jdbcType="VARCHAR" property="isHome" />
+		<result column="HOME_ICON" jdbcType="VARCHAR" property="homeIcon" />
+	</resultMap>
+	<resultMap id="AllResultMap" type="com.indihx.system.vo.MenuVo">
+		<id column="MENU_ID" jdbcType="DECIMAL" property="menuId" />
+		<result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
+		<result column="PARENT_ID" jdbcType="DECIMAL" property="parentId" />
+		<result column="MENU_URL" jdbcType="VARCHAR" property="menuUrl" />
+		<result column="OPER_USER" jdbcType="DECIMAL" property="operUser" />
+		<result column="MENU_LEVEL" jdbcType="CHAR" property="menuLevel" />
+		<result column="CLASS_NAME" jdbcType="VARCHAR" property="className" />
+		<result column="TM_SMP" jdbcType="DECIMAL" property="tmSmp" />
+		<result column="CODE_VAL" jdbcType="VARCHAR" property="codeVal" />
+		<result column="USR_NAME" jdbcType="VARCHAR" property="usrName" />
+		<result column="CSS_ICON" jdbcType="VARCHAR" property="cssIcon" />
+		<result column="SORT_NUM" jdbcType="VARCHAR" property="sortNum" />
+	</resultMap>
+
+	<resultMap type="com.indihx.system.entity.CodeData" id="MenuRageResult">
+		<result column="CODE_VAL" jdbcType="VARCHAR" property="codeVal" />
+		<result column="CODE_KEY" jdbcType="VARCHAR" property="codeKey" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		MENU_ID, MENU_NAME, PARENT_ID, MENU_URL, OPER_USER, MENU_LEVEL,
+		TM_SMP,SORT_NUM,CSS_ICON
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from MENU_INFO
+		where MENU_ID = #{menuId,jdbcType=DECIMAL}
+		order by MENU_LEVEL,SORT_NUM
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from MENU_INFO
+		where MENU_ID = #{menuId,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.indihx.system.entity.MenuInfo">
+		insert into MENU_INFO (MENU_ID, MENU_NAME, PARENT_ID,
+		MENU_URL, OPER_USER, MENU_LEVEL,
+		TM_SMP,CSS_ICON,SORT_NUM)
+		values (#{menuId,jdbcType=DECIMAL}, #{menuName,jdbcType=VARCHAR},
+		#{parentId,jdbcType=DECIMAL},
+		#{menuUrl,jdbcType=VARCHAR}, #{operUser,jdbcType=DECIMAL},
+		#{menuLevel,jdbcType=CHAR},
+		#{tmSmp,jdbcType=DECIMAL},#{cssIcon,jdbcType=VARCHAR},#{sortNum,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.indihx.system.entity.MenuInfo">
+		insert into MENU_INFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="menuId != null">
+				MENU_ID,
+			</if>
+			<if test="menuName != null">
+				MENU_NAME,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="menuUrl != null">
+				MENU_URL,
+			</if>
+			<if test="operUser != null">
+				OPER_USER,
+			</if>
+			<if test="menuLevel != null">
+				MENU_LEVEL,
+			</if>
+			<if test="className != null">
+				CLASS_NAME,
+			</if>
+			<if test="tmSmp != null">
+				TM_SMP,
+			</if>
+			<if test="sortNum != null">
+				SORT_NUM,
+			</if>
+			<if test="cssIcon != null">
+				CSS_ICON,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="menuId != null">
+				#{menuId,jdbcType=DECIMAL},
+			</if>
+			<if test="menuName != null">
+				#{menuName,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="menuUrl != null">
+				#{menuUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="operUser != null">
+				#{operUser,jdbcType=DECIMAL},
+			</if>
+			<if test="menuLevel != null">
+				#{menuLevel,jdbcType=CHAR},
+			</if>
+			<if test="className != null">
+				#{className,jdbcType=VARCHAR},
+			</if>
+			<if test="tmSmp != null">
+				#{tmSmp,jdbcType=DECIMAL},
+			</if>
+			<if test="sortNum != null">
+				#{sortNum,jdbcType=VARCHAR},
+			</if>
+			<if test="cssIcon != null">
+				#{cssIcon,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.indihx.system.entity.MenuInfo">
+		update MENU_INFO
+		<set>
+			<if test="menuName != null">
+				MENU_NAME = #{menuName,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="menuUrl != null">
+				MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="operUser != null">
+				OPER_USER = #{operUser,jdbcType=DECIMAL},
+			</if>
+			<if test="menuLevel != null">
+				MENU_LEVEL = #{menuLevel,jdbcType=CHAR},
+			</if>
+			<if test="className != null">
+				CLASS_NAME = #{className,jdbcType=VARCHAR},
+			</if>
+			<if test="tmSmp != null">
+				TM_SMP = #{tmSmp,jdbcType=DECIMAL},
+			</if>
+			<if test="sortNum != null">
+				SORT_NUM=#{sortNum,jdbcType=VARCHAR},
+			</if>
+			<if test="cssIcon != null">
+				CSS_ICON=#{cssIcon,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where MENU_ID = #{menuId,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.indihx.system.entity.MenuInfo">
+		update MENU_INFO
+		set MENU_NAME = #{menuName,jdbcType=VARCHAR},
+		PARENT_ID = #{parentId,jdbcType=DECIMAL},
+		MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+		OPER_USER = #{operUser,jdbcType=DECIMAL},
+		MENU_LEVEL = #{menuLevel,jdbcType=CHAR},
+		SORT_NUM=#{sortNum,jdbcType=VARCHAR},
+		CSS_ICON=#{cssIcon,jdbcType=VARCHAR},
+		TM_SMP = #{tmSmp,jdbcType=DECIMAL}
+		where MENU_ID = #{menuId,jdbcType=DECIMAL}
+	</update>
+	<select id="qryMenuInfoByUsr" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from MENU_INFO
+		where menu_level=#{menuLevel}
+		<if test="parentId != null and parentId != ''">
+			and parent_id = #{parentId}
+		</if>
+	</select>
+	<select id="qryMuneInfoAll" resultMap="AllResultMap">
+		select m.* ,c.code_val ,u.usr_name from menu_info m
+		inner join code_data c on c.code_key=m.menu_level and c.CODE_NO='MENU_LIST'
+		left join usr_info u on u.usr_id=m.oper_user
+		where 1=1 
+		<!-- select * from menu_info where 1=1 -->
+		<if test="menuName != null and menuName !=''">
+			and MENU_NAME  like CONCAT(CONCAT('%',#{menuName}),'%')
+		</if>
+		<if test="menuLevel != null and menuLevel !=''">
+			and MENU_LEVEL=#{menuLevel,jdbcType=CHAR}
+		</if>
+		<if test="parentId !=null and parentId !=''">
+			and PARENT_ID=#{parentId,jdbcType=VARCHAR}
+		</if>
+		
+		<if test="tmSmp != null and tmSmp !=''">
+			and TM_SMP = #{tmSmp,jdbcType=VARCHAR}
+		</if>
+		order by m.menu_level,m.sort_num
+	</select>
+
+	<select id="qryParentId" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select * from menu_info where PARENT_ID=#{parentId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="qryMenuRage" resultMap="MenuRageResult"
+		parameterType="java.lang.String">
+		select * from CODE_DATA where code_no=#{codeNo,jdbcType=VARCHAR}
+	</select>
+
+	<select id="qryMenuInfoByRoleUser" resultMap="BaseResultMap">
+		select
+		distinct t1.*
+		from MENU_INFO t1
+		join role_menu t2 on t1.menu_id = t2.menu_id
+		join usr_role t3 on t2.role_id
+		= t3.role_id
+		where menu_level=#{menuLevel}
+		<if test="usrId != null and usrId != ''">
+			and usr_id = #{usrId}
+		</if>
+		<if test="parentId != null and parentId != ''">
+			and parent_id = #{parentId}
+		</if>
+		<if test="isHome != null and isHome != ''">
+			and IS_HOME = #{isHome}
+		</if>
+		order by t1.menu_level,t1.sort_num ASC
+	</select>
+</mapper>

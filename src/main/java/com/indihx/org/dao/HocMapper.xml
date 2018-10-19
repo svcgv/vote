@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.org.dao.HocMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+
+  <resultMap id="BaseResultMap" type="com.indihx.org.entity.WY_YWH">
+    <id column="YWHID" jdbcType="DECIMAL" property="ywhid" />
+    <result column="YWHMC" jdbcType="VARCHAR" property="ywhmc" />   
+    <result column="YWHDZ" jdbcType="VARCHAR" property="ywhdz" />   
+    <result column="HPBID" jdbcType="VARCHAR" property="hpbid" />   
+    <result column="YWHDM" jdbcType="VARCHAR" property="ywhdm" />   
+    <result column="LXR" jdbcType="VARCHAR" property="lxr" />   
+    <result column="LXRDH" jdbcType="VARCHAR" property="lxrdh" />   
+    <result column="TERM" jdbcType="VARCHAR" property="term" />   
+    <result column="RQ" jdbcType="VARCHAR" property="rq" />
+    <result column="CLRQ" jdbcType="VARCHAR" property="clrq" />
+    <result column="BJKSRQ" jdbcType="VARCHAR" property="bjksrq" />
+    <result column="BJJZRQ" jdbcType="VARCHAR" property="bjjzrq" />
+    <result column="BARQ" jdbcType="VARCHAR" property="barq" />  
+    <result column="SFKZ" jdbcType="VARCHAR" property="sfkz" />   
+  </resultMap>
+ 
+ 
+  <resultMap id="StaffResultMap" type="com.indihx.org.entity.WY_HOC_STAFF">
+    <id column="YWHRYID" jdbcType="DECIMAL" property="ywhryid" />
+    <result column="YWHID" jdbcType="VARCHAR" property="ywhid" />
+    <result column="RYLX" jdbcType="VARCHAR" property="rylx" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="RYXM" jdbcType="VARCHAR" property="ryxm" />
+    <result column="RYXB" jdbcType="VARCHAR" property="ryxb" />
+    <result column="CSRQ" jdbcType="VARCHAR" property="csrq" />
+    <result column="ZJLX" jdbcType="VARCHAR" property="zjlx" />
+    <result column="ZJHM" jdbcType="VARCHAR" property="zjhm" />
+    <result column="WHCD" jdbcType="VARCHAR" property="whcd" />
+    <result column="RYYX" jdbcType="VARCHAR" property="ryyx" />
+    <result column="LXDH" jdbcType="VARCHAR" property="lxdh" />
+    <result column="RZRQ" jdbcType="VARCHAR" property="rzrq" />
+  </resultMap>  
+   
+
+ <!--  查询所有业委会信息 -->
+  <select id="hocListAll" resultMap="BaseResultMap">
+    SELECT t1.YWHID,t1.YWHDM,t1.YWHMC,t1.YWHDZ,t1.RQ,t1.TERM 
+	FROM WY_YWH t1   
+	where 1=1
+	<if test="ywhdm!=  null and ywhdm!=''">
+	and t1.YWHDM like CONCAT(CONCAT('%',#{ywhdm}),'%')
+   </if>
+   <if test="ywhmc != null and ywhmc !=''">
+	and t1.YWHMC like CONCAT(CONCAT('%',#{ywhmc}),'%')
+   </if>
+   <if test="hpbid !=null and hpbid != ''">
+    and t1.HPBID = #{hpbid,jdbcType=VARCHAR}
+    </if>
+  </select>
+ 
+ 
+   <!--  根据业委会名称和社会信用代码查询是否存在重复业委会 -->
+  <select id="validHocIsExists" resultMap="BaseResultMap" parameterType="com.indihx.org.entity.WY_YWH">
+  	select YWHDM,YWHMC  from WY_YWH
+    <where>
+    	<if test="ywhdm !=null and ywhdm != ''">
+    		((YWHDM = #{ywhdm})
+    	</if>
+    	<if test="ywhmc !=null and ywhmc != ''">
+    		OR (YWHMC = #{ywhmc}))
+    	</if>
+    	<if test="ywhid !=null and ywhid != ''">
+    		and YWHID != #{ywhid}
+    	</if>
+    </where>
+  </select>
+   
+  
+  <!--  新增业委会信息 -->
+   <insert id="insertHoc" parameterType="com.indihx.org.entity.WY_YWH">
+    insert into WY_YWH
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+    	<if test="ywhid != null">
+        YWHID,
+      </if>
+      <if test="ywhmc != null">
+        YWHMC,
+      </if>
+      <if test="ywhdz!= null">
+        YWHDZ,
+      </if>
+       <if test="hpbid != null">
+        HPBID,
+      </if>
+      <if test="ywhdm != null">
+        YWHDM,
+      </if>
+       <if test="lxr != null">
+        LXR,
+      </if>
+       <if test="lxrdh != null">
+        LXRDH,
+      </if>
+       <if test="term != null">
+        TERM,
+      </if>
+      <if test="rq != null">
+        RQ,
+      </if>
+      <if test="clrq != null">
+        CLRQ,
+      </if>
+      <if test="bjksrq != null">
+        BJKSRQ,
+      </if>
+       <if test="bjjzrq != null">
+        BJJZRQ,
+      </if>
+      <if test="barq != null">
+        BARQ,
+      </if>
+      <if test="sfkz != null">
+        SFKZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     <if test="ywhid != null">
+        #{ywhid,jdbcType=DECIMAL},
+      </if>
+      <if test="ywhmc != null">
+        #{ywhmc,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhdz != null">
+        #{ywhdz,jdbcType=VARCHAR},
+      </if>
+       <if test="hpbid != null">
+        #{hpbid,jdbcType=VARCHAR},
+      </if>
+       <if test="ywhdm != null">
+        #{ywhdm,jdbcType=VARCHAR},
+      </if>
+       <if test="lxr != null">
+        #{lxr,jdbcType=VARCHAR},
+      </if>
+       <if test="lxrdh != null">
+        #{lxrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="term != null">
+        #{term,jdbcType=VARCHAR},
+      </if>
+       <if test="rq != null">
+        #{rq,jdbcType=VARCHAR},
+      </if>
+      <if test="clrq != null">
+        #{clrq,jdbcType=VARCHAR},
+      </if>
+       <if test="bjksrq != null">
+        #{bjksrq,jdbcType=VARCHAR},
+      </if>
+      <if test="bjjzrq != null">
+        #{bjjzrq,jdbcType=VARCHAR},
+      </if>
+       <if test="barq != null">
+        #{barq,jdbcType=VARCHAR},
+      </if>
+      <if test="sfkz != null">
+        #{sfkz,jdbcType=VARCHAR},
+      </if>
+       
+    </trim>
+  </insert>  
+  
+  
+   <!--  新增机构信息 -->
+   <insert id="insertOrgInfo" parameterType="com.indihx.org.entity.ORG_INFO">
+    insert into ORG_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+    	<if test="parent_org_no != null">
+        PARENT_ORG_NO,
+      </if>
+      <if test="parent_org_name != null">
+        PARENT_ORG_NAME,
+      </if> 
+       <if test="org_no != null">
+        ORG_NO,
+      </if> 
+       <if test="org_name != null">
+        ORG_NAME,
+      </if> 
+       <if test="org_type != null">
+        ORG_TYPE,
+      </if> 
+       <if test="addres != null">
+        ADDRES,
+      </if> 
+      <if test="tel_no != null">
+        TEL_NO,
+      </if> 
+      <if test="oper_usr != null">
+        OPER_USR,
+      </if> 
+       <if test="tm_smp != null">
+        TM_SMP,
+      </if> 
+       <if test="org_status != null">
+        ORG_STATUS,
+      </if> 
+       <if test="link_man != null">
+        LINK_MAN,
+      </if> 
+       <if test="email != null">
+        EMAIL,
+      </if> 
+       <if test="post_code != null">
+        POST_CODE,
+      </if> 
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     <if test="parent_org_no != null">
+        #{parent_org_no,jdbcType=DECIMAL},
+      </if>
+      <if test="parent_org_name != null">
+        #{parent_org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_no != null">
+        #{org_no,jdbcType=VARCHAR},
+      </if>
+      <if test="org_name != null">
+        #{org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_type != null">
+        #{org_type,jdbcType=VARCHAR},
+      </if>
+       <if test="addres != null">
+        #{addres,jdbcType=VARCHAR},
+      </if>
+      <if test="tel_no != null">
+        #{tel_no,jdbcType=VARCHAR},
+      </if>
+      <if test="oper_usr != null">
+        #{oper_usr,jdbcType=VARCHAR},
+      </if>
+      <if test="tm_smp != null">
+        #{tm_smp,jdbcType=VARCHAR},
+      </if>
+      <if test="org_status != null">
+        #{org_status,jdbcType=VARCHAR},
+      </if>
+      <if test="link_man != null">
+        #{link_man,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="post_code != null">
+        #{post_code,jdbcType=VARCHAR},
+      </if> 
+    </trim>
+  </insert>  
+  
+    <!--  根据ID删除业委会信息 -->
+   <delete id="deleteHoc" parameterType="java.lang.Long">
+    delete from WY_YWH
+    where ywhid = #{ywhid,jdbcType=DECIMAL}
+  </delete>
+ 
+    <!--  根据ID删除机构信息 -->
+    <delete id="deleteOrgInfo" parameterType="java.lang.String">
+    delete from ORG_INFO
+    where org_no = #{org_no,jdbcType=VARCHAR}
+    </delete>
+    
+ 
+  <!--  根据ID查看业委会详情-->
+ <select id="qrHocInfoById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+   SELECT t1.ywhid,t1.ywhmc,t1.ywhdz,t1.ywhdm,t1.lxr,t1.lxrdh,t1.term,t1.rq,t1.clrq
+   ,t1.bjksrq,t1.bjjzrq,t1.barq,t1.sfkz,t1.hpbid
+	from WY_YWH t1
+	WHERE 1 = 1
+    and t1.ywhid = #{ywhid,jdbcType=DECIMAL}
+  </select>
+  
+ 
+ 
+  <!--  根据ID更新业委会详情-->
+ <update id="updateHoc" parameterType="com.indihx.org.entity.WY_YWH">
+    update WY_YWH
+    <set>
+      <if test="ywhmc != null">
+        ywhmc = #{ywhmc,jdbcType=VARCHAR},
+      </if>
+       <if test="ywhdz != null">
+        ywhdz = #{ywhdz,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        hpbid = #{hpbid,jdbcType=VARCHAR},
+      </if>
+       <if test="ywhdm != null">
+        ywhdm = #{ywhdm,jdbcType=VARCHAR},
+      </if>
+       <if test="lxr != null">
+        lxr = #{lxr,jdbcType=VARCHAR},
+      </if>
+        <if test="lxrdh != null">
+        lxrdh = #{lxrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="term != null">
+        term = #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="rq != null">
+        rq = #{rq,jdbcType=VARCHAR},
+      </if>
+       <if test="clrq != null">
+        clrq = #{clrq,jdbcType=VARCHAR},
+      </if>
+       <if test="bjksrq != null">
+        bjksrq = #{bjksrq,jdbcType=VARCHAR},
+      </if>
+       <if test="bjjzrq != null">
+        bjjzrq = #{bjjzrq,jdbcType=VARCHAR},
+      </if>
+      <if test="barq != null">
+        barq = #{barq,jdbcType=VARCHAR},
+      </if>
+       <if test="sfkz != null">
+        sfkz = #{sfkz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ywhid = #{ywhid,jdbcType=DECIMAL}
+  </update> 
+ 
+ 
+ <!--  新增业委会人员信息 -->
+   <insert id="insertHocStaff" parameterType="com.indihx.org.entity.WY_HOC_STAFF">
+    insert into WY_HOC_STAFF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+    	<if test="ywhryid != null">
+        YWHRYID,
+       </if>
+       <if test="ywhid != null">
+        YWHID,
+       </if>
+       <if test="rylx != null">
+        RYLX,
+       </if>
+       <if test="status != null">
+        STATUS,
+       </if>
+       <if test="ryxm != null">
+        RYXM,
+       </if>
+       <if test="ryxb != null">
+        RYXB,
+       </if>
+       <if test="csrq != null">
+        CSRQ,
+       </if>
+       <if test="zjlx != null">
+        ZJLX,
+       </if>
+        <if test="zjhm != null">
+        ZJHM,
+       </if>
+        <if test="whcd != null">
+        WHCD,
+       </if>
+       <if test="ryyx != null">
+        RYYX,
+       </if>
+        <if test="lxdh != null">
+        LXDH,
+       </if>
+       <if test="rzrq != null">
+        RZRQ,
+       </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ywhryid != null">
+        #{ywhryid,jdbcType=DECIMAL},
+      </if>
+       <if test="ywhid != null">
+        #{ywhid,jdbcType=DECIMAL},
+      </if>
+       <if test="rylx != null">
+        #{rylx,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+        <if test="ryxm != null">
+        #{ryxm,jdbcType=VARCHAR},
+      </if>
+       <if test="ryxb != null">
+        #{ryxb,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null">
+        #{csrq,jdbcType=VARCHAR},
+      </if>
+      <if test="zjlx != null">
+        #{zjlx,jdbcType=VARCHAR},
+      </if> 
+      <if test="zjhm != null">
+        #{zjhm,jdbcType=VARCHAR},
+      </if>
+      <if test="whcd != null">
+        #{whcd,jdbcType=VARCHAR},
+      </if>
+      <if test="ryyx != null">
+        #{ryyx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdh != null">
+        #{lxdh,jdbcType=VARCHAR},
+      </if>
+      <if test="rzrq != null">
+        #{rzrq,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+    <!--  根据ID删除业委会人员信息 -->
+   <delete id="deleteHocStaff" parameterType="java.lang.Long">
+    delete from WY_HOC_STAFF
+    where ywhid = #{ywhid,jdbcType=DECIMAL}
+  </delete>  
+ 
+  <!--  根据ID查看业委会人员详情-->
+ <select id="qrHocStaffInfoById" parameterType="java.lang.Long"  resultMap="StaffResultMap">
+   SELECT t1.*
+	from WY_HOC_STAFF t1
+	WHERE 1 = 1
+    and t1.YWHID = #{0}
+    and t1.RYLX = #{1}
+  </select>
+  
+  <!--  根据ID更新业委会人员详情-->
+ <update id="updateHocStaff" parameterType="com.indihx.org.entity.WY_HOC_STAFF">
+    update WY_HOC_STAFF
+    <set> 
+      <if test="ryxm != null">
+        ryxm = #{ryxm,jdbcType=VARCHAR},
+      </if>
+      <if test="ryxb != null">
+        ryxb = #{ryxb,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null">
+        csrq = #{csrq,jdbcType=VARCHAR},
+      </if>
+       <if test="zjlx != null">
+        zjlx = #{zjlx,jdbcType=VARCHAR},
+      </if>
+       <if test="zjhm != null">
+        zjhm = #{zjhm,jdbcType=VARCHAR},
+      </if>
+       <if test="whcd != null">
+        whcd = #{whcd,jdbcType=VARCHAR},
+      </if>
+       <if test="ryyx != null">
+        ryyx = #{ryyx,jdbcType=VARCHAR},
+      </if>
+         <if test="lxdh != null">
+        lxdh = #{lxdh,jdbcType=VARCHAR},
+      </if>
+       <if test="rzrq != null">
+        rzrq = #{rzrq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ywhryid = #{ywhryid,jdbcType=DECIMAL}
+  </update> 
+ 
+  
+    <!--  根据ID更新企业详情-->
+	<update id="updateOrgInfo" parameterType="com.indihx.org.entity.ORG_INFO">
+    update ORG_INFO
+    <set>
+      <if test="org_name != null">
+        org_name = #{org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_type != null">
+        org_type = #{org_type,jdbcType=VARCHAR},
+      </if>
+      <if test="addres != null">
+        addres = #{addres,jdbcType=VARCHAR},
+      </if>
+       <if test="tel_no != null">
+        tel_no = #{tel_no,jdbcType=VARCHAR},
+      </if>
+       <if test="link_man != null">
+        link_man = #{link_man,jdbcType=VARCHAR},
+      </if>
+        <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+       <if test="post_code != null">
+        post_code = #{post_code,jdbcType=VARCHAR},
+      </if> 
+    </set>
+    where org_no = #{org_no,jdbcType=DECIMAL}
+  </update> 
+ 
+ 
+</mapper>

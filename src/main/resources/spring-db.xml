@@ -1,0 +1,162 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+      http://www.springframework.org/schema/context  
+      http://www.springframework.org/schema/context/spring-context.xsd  
+      http://www.springframework.org/schema/mvc  
+      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+      http://www.springframework.org/schema/cache
+      http://www.springframework.org/schema/cache/spring-cache.xsd">
+     
+     <!-- srvice的扫描放到数据库连接中，防止事务失效 -->
+     <context:component-scan base-package="com.indihx.*.service.impl" >
+		 <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />  
+	</context:component-scan>
+	
+	<!-- 扫描所有Repository的注解 -->
+	<context:component-scan base-package="com.indihx.*">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+      
+     <!-- 引入外置文件 -->  
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="locations"> 
+        <list>
+            <value>classpath:jdbc.properties</value> 
+            <value>classpath:redis.properties</value> 
+        </list>
+    	</property>
+    </bean> 
+    
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<!-- property池启动时的初始值 -->
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="1" />
+		<!-- 连接池的最大值 -->
+		<property name="maxActive" value="500" />
+		<!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 -->
+		<property name="maxIdle" value="2" />
+		<!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
+		<property name="minIdle" value="1" />
+	</bean>
+	
+	<!-- 将数据源映射到	中 -->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+     	<property name="dataSource" ref="dataSource" />  
+     	<!-- 具体指定xml文件，可不配 --> 
+        <property name="configLocation" value="classpath:mybatis-config.xml"/> 
+        <!-- 自动扫描mapping.xml文件，**表示迭代查找 ,,也可在mybatis-config.xml中单独指定xml文件  
+        <property name="mapperLocations" value="classpath:com/indihx/**/dao/*.xml" />--> 
+    </bean>  
+    
+    <!-- 配置sqlSessionTemplate -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<!-- Spring使用构造器进行注入 -->
+	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+    
+    <!-- 数据层配置文件和类的自动扫描和加载 -->
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 ,否则容器注入会失败,未在当前扫描包中，则请使用@MapperScan注解 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.indihx.*.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+	
+	<!-- 事务管理器  -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource" />  
+    </bean> 
+    <!-- 使用注解事务，需要在Service方法中添加Transactional注解属性 -->
+    <tx:annotation-driven transaction-manager="transactionManager"  proxy-target-class="true"/>
+   
+    <!-- 配置redis 单机版 -->
+    <!-- redis数据源 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <!-- 最大空闲数 -->
+        <property name="maxIdle" value="${redis.maxIdle}" />  
+        <!-- 最大空连接数 -->
+        <property name="maxTotal" value="${redis.maxActive}" />  
+        <!-- 最大等待时间 -->
+        <property name="maxWaitMillis" value="${redis.maxWait}" />  
+        <!-- 返回连接时，检测连接是否成功 -->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />  
+    </bean>
+    
+    <!-- Spring-redis连接池管理工厂 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <!-- IP地址 -->
+        <property name="hostName" value="${redis.host}" />
+        <!-- 端口号 -->
+        <property name="port" value="${redis.port}" />
+        <!-- 超时时间 -->
+        <property name="timeout" value="${redis.timeout}" />
+        <property name="poolConfig" ref="poolConfig" />
+    </bean> 
+    
+    <!-- redis模板类，提供了对缓存的增删改查 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+    </bean>
+    
+    <!-- StrRedisTemplate -->
+    <bean id="strRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+    </bean>
+    
+    <!-- 使用中间类解决RedisCache.jedisConnectionFactory的静态注入，从而使MyBatis实现第三方缓存 -->
+    <bean id="redisCacheTransfer" class="com.indihx.cache.RedisCacheTransfer">
+        <property name="jedisConnectionFactory" ref="jedisConnectionFactory"/>
+    </bean> 
+    <!-- //End 单机版Redis集成 -->
+    
+    <!-- Redis缓存管理对象 -->
+    <!-- <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg index="0" ref="redisTemplate" />
+    </bean> -->
+    
+    <!-- spring自己的换管理器，这里定义了两个缓存位置名称 ，既注解中的value -->  
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">  
+        <property name="caches">  
+            <set>  
+                <bean class="com.indihx.cache.SpringRedisCache">  
+                    <property name="redisTemplate" ref="redisTemplate" />  
+                    <property name="name" value="lf_cache"/>  
+                </bean>  
+            </set>  
+        </property>  
+    </bean>  
+     
+    <!-- 开启Spring缓存 -->
+    <cache:annotation-driven cache-manager="cacheManager"/>
+    
+    <!-- Spring容器实例 -->
+    <!-- <bean class="com.indihx.cache.SpringContext" /> -->
+    <bean id="applicationStartListener" class="com.indihx.system.listener.ApplicationStartListener"/>
+    
+</beans>  

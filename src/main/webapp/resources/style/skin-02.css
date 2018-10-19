@@ -1,0 +1,119 @@
+@charset "utf-8";
+/* css for  datagrid*/
+.datagrid_gridtb  .gridheadclass
+	{
+	font-size:12px;font-weight:bold;font-family:tahoma;color:#FFFFFF;
+	background: #fafafa url(../images/grid/dgbg02.gif) ;
+	border: 1px solid #9BB3D3;
+	overflow: hidden;
+	height: 28px;
+	cursor: default;
+	text-align: center;
+	
+	}
+.datagrid_gridtb tbody tr.trSelected 
+	{
+	background: #84e9a3 !important;
+	border-right: 1px solid #d2e3ec;
+	border-left: 1px solid #eef8ff;
+	border-bottom: 1px solid #a8d8eb;
+	
+	}
+.datagrid_gridtb div.filterdiv {
+	position: absolute;
+	height: 24px;
+	width: 14px;
+	z-index: 900;
+	background: url(../images/grid/dgbg02.gif)  ;
+	border: 1px solid #9BB3D3;
+	border-right: 1px solid #9BB3D3;
+	top: 0px;
+	left: 0px;
+	margin-top: 1px;
+	cursor: pointer;
+}	
+/*css for PicButton */
+
+button.web-ui-btn {cursor:pointer; border:none;
+	background:none;padding:0;margin:0;width:auto;overflow:visible;text-align:center; white-space:nowrap;height:21px;line-height:21px;}
+button.web-ui-btn div.pic-l, button.web-ui-btn span.pic-r {  
+	text-decoration:none;display:block;height:21px;  line-height:21px;margin:0;} 
+.web-ui-btn .btn_pic {
+	 background:url(../images/btn.png) no-repeat; *background-image:url("../images/btn.gif")
+}
+.btn_pic.pic-l{padding-left:7px; left 0;} 
+.btn_pic.pic-r{color:#fff;font-style:normal;padding-right:13px; background-position:100% 0;}
+.btn_pic.pic-l-o{padding-left:7px; background-position: left -21px;} 
+.btn_pic.pic-r-o{ color:#fff;  font-style:normal;padding-right:13px; background-position: 100% -21px;}
+.btn_pic.pic-l-a{padding-left:7px; background-position: left -42px;} 
+.btn_pic.pic-r-a{ color:#fff;  font-style:normal;padding-right:13px;  background-position: 100% -42px;}
+button.web-ui-btn:focus{border-style:solid;border-width:1px;border-color:red;}
+.btn_pic.pic-r span.btn_icon{
+	line-height:0; margin-bottom:5px;padding:0px; width:16px; height:16px; display: inline-block; vertical-align:middle;
+	border:0 none; cursor: pointer;outline:none;background-color:transparent; background-repeat:no-repeat;
+	background-image:url("../images/icons.png"); *background-image:url("../images/icons.gif")}
+.btn_icon_def  {background-position: -288px -0px; width: 16px; height: 16px; }
+.icon_add1			  {background-position: -0px -0px; width: 16px; height: 16px; }       
+.icon_del1        {background-position: -16px -0px; width: 16px; height: 16px; }      
+.icon_add2        {background-position: -32px -0px; width: 16px; height: 16px; }      
+.icon_del2        {background-position: -48px -0px; width: 16px; height: 16px; }      
+.icon_edit1       {background-position: -64px -0px; width: 16px; height: 16px; }      
+.icon_edit2       {background-position: -80px -0px; width: 16px; height: 16px; }      
+.icon_search      {background-position: -96px -0px; width: 16px; height: 16px; }      
+.icon_info        {background-position: -112px -0px; width: 16px; height: 16px; }     
+.icon_cancel      {background-position: -128px -0px; width: 16px; height: 16px; }     
+.icon_ok          {background-position: -144px -0px; width: 16px; height: 16px; }     
+.icon_save1       {background-position: -160px -0px; width: 16px; height: 16px; }     
+.icon_save2       {background-position: -176px -0px; width: 16px; height: 16px; }     
+.icon_browser     {background-position: -192px -0px; width: 16px; height: 16px; }     
+.icon_next        {background-position: -208px -0px; width: 16px; height: 16px; }     
+.icon_down2       {background-position: -224px -0px; width: 16px; height: 16px; }     
+.icon_up2         {background-position: -240px -0px; width: 16px; height: 16px; }     
+.icon_down        {background-position: -256px -0px; width: 16px; height: 16px; }     
+.icon_up1         {background-position: -272px -0px; width: 16px; height: 16px; }     
+.icon_run1        {background-position: -288px -0px; width: 16px; height: 16px; }     
+.icon_run2        {background-position: -304px -0px; width: 16px; height: 16px; }     
+.icon_close       {background-position: -320px -0px; width: 16px; height: 16px; }     
+.icon_close       {background-position: -336px -0px; width: 16px; height: 16px; }     
+.icon_redo        {background-position: -352px -0px; width: 16px; height: 16px; }     
+.icon_undo        {background-position: -368px -0px; width: 16px; height: 16px; }     
+.icon_print       {background-position: -384px -0px; width: 16px; height: 16px; }     
+.icon_back        {background-position: -0px -16px; width: 16px; height: 16px; }      
+.icon_cut         {background-position: -16px -16px; width: 16px; height: 16px; }     
+.icon_help        {background-position: -32px -16px; width: 16px; height: 16px; }     
+.icon_reload      {background-position: -48px -16px; width: 16px; height: 16px; }     
+.icon_set         {background-position: -64px -16px; width: 16px; height: 16px; }     
+.icon_set2        {background-position: -80px -16px; width: 16px; height: 16px; }     
+.icon_excel       {background-position: -96px -16px; width: 16px; height: 16px; }     
+.icon_sum         {background-position: -112px -16px; width: 16px; height: 16px; }    
+.icon_view        {background-position: -128px -16px; width: 16px; height: 16px; }    
+.icon_up2         {background-position: -144px -16px; width: 16px; height: 16px; }    
+.icon_pic         {background-position: -160px -16px; width: 16px; height: 16px; }    
+.icon_tip         {background-position: -176px -16px; width: 16px; height: 16px; }    
+.icon_warning     {background-position: -192px -16px; width: 16px; height: 16px; }    
+
+.web-ui-btn_toolbar {height:24px;margin:3px 5px 5px 5px;padding:0 0 0 0;}
+.web-ui-btn_toolbar .btn_condition {display:none;}
+	 
+/*css for multi-accordion*/
+
+.multi-accordion-padding1{ padding-left: 2px;}
+.multi-accordion-padding2{ padding-left: 10px;}
+.multi-accordion-padding3{ padding-left: 25px;}
+.multi-accordion .multi-accordion-head1 {height:auto;  line-height:25px; cursor: pointer;overflow:hidden;   margin:1px 0px 1px 0px; font-size:12px;font-family:tahoma; COLOR: #476074; background-image: url('../images/accord/menu1_bg.gif');}
+.multi-accordion .multi-accordion-head1 a { font-size: 1em;font-family:tahoma; COLOR: #476074; }
+.multi-accordion .multi-accordion-head2 { cursor: pointer;margin:1px 0px 1px 0px;font-size:12px;font-family:tahoma;color:#476074; solid #737573; BACKGROUND: url('../images/accord/menu2_bg.png');}
+.multi-accordion .multi-accordion-head2 a { font-size: 1em;font-family:tahoma;color:#FFFFFF; }
+.multi-accordion .multi-accordion-head3 {  margin:1px 0px 1px 0px;line-height:25px; font-size:12px;;font-family:tahoma;color:#444444;background-color:#FFF9B2; solid #ffffff;}
+.multi-accordion .multi-accordion-head3 a { font-size:12px; text-decoration: none }
+.multi-accordion .multi-accordion-level1 { cursor: pointer; margin:1px 0px 0px 0px;line-height:25px; }
+.multi-accordion .multi-accordion-level2 { cursor: pointer;margin:1px 0px 0px 0px; line-height:25px;}
+.multi-accordion .multi-accordion-level3 { margin:1px 0px 1px 0px; line-height:25px;}
+.multi-accordion .multi-accordion-active{line-height:25px; cursor: pointer; margin:1px 0px 1px 0px; font-size:12px;font-family:tahoma;color:#000000;BACKGROUND: url(../images/accord/menu2_bg.png) 0px -24px;solid #D06403}
+.multi-accordion .multi-accordion-active3 {background-color: #FFF6E7;text-decoration: none;border: 1px outset #DE7E20;FONT-WEIGHT: bold;color: #000000;    font-family: tahoma; }
+/*.multi-accordion .multi-accordion-icon { line-height:25px;  width: 16px; height: 16px; background-image: url('../images/menu/ui-icons_ef8c08_256x240.png'); display: block;background-repeat: no-repeat;overflow: hidden;text-indent: -99999px; left: 0.5em; margin-top: 5px; position: absolute;  }
+*/
+.multi-accordion .multi-accordion-icon {  line-height:25px;  width: 16px; height: 16px; display: inline;overflow: hidden;margin:0px 0px 1px 0px; padding-left:3px;  }
+.multi-accordion .multi-accordion-icon-circle-arrow-e  {  background: url('../images/accord/menu_arrow11.png') no-repeat left;  }
+.multi-accordion .multi-accordion-icon-circle-arrow-s  {  background: url('../images/accord/menu_arrow22.png') no-repeat left;  }
+ 

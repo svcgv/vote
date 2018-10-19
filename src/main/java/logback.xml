@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration> 
+	<property name="LOG_HOME" value="D:/log/vote/" /> 
+	<!-- ch.qos.logback.core.ConsoleAppender 表示控制台输出 -->
+  	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">  
+  		<Encoding>UTF-8</Encoding>
+  		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+   			<!--日志输出格式：%d表示日期时间，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %logger{36} 表示logger名字最长50个字符，否则按照句点分割。 %msg：日志消息，%n是换行符-->
+    		<pattern>%d{YYYY-MM-DD HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%L]- %msg%n</pattern>  
+   		</encoder>  
+  	</appender> 
+  	
+ 	<!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 --> 
+ 	<appender name="appLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  		<Encoding>UTF-8</Encoding>
+  		<!-- 指定日志文件的名称 --> 
+    	<File>${LOG_HOME}/mylog.log</File>
+    	<append>true</append><!-- 日志追加 --> 
+    	<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      		<FileNamePattern>${LOG_HOME}/mylog.%i.log</FileNamePattern>    
+      		<MinIndex>1</MinIndex>    
+      		<MaxIndex>5</MaxIndex>    
+    	</rollingPolicy>  
+    	<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">  
+      		<MaxFileSize>5MB</MaxFileSize>    
+    	</triggeringPolicy>  
+    	<layout class="ch.qos.logback.classic.PatternLayout">  
+     		<Pattern>%d{YYYY-MM-DD HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%L]- %msg%n</Pattern>    
+    	</layout>  
+ 	</appender>
+ 	
+ 	<logger name="com.framework" level="DEBUG" />  
+ 	<logger name="jdbc.sqltiming" level="DEBUG"/>  
+ 	<logger name="com.ibatis" level="DEBUG" />
+    <logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG" />
+    <logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG" />
+    <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" />
+    <logger name="java.sql.Connection" level="DEBUG" />
+    <logger name="java.sql.Statement" level="DEBUG" />
+    <logger name="java.sql.PreparedStatement" level="DEBUG" />
+    <logger name="com.indihx.elecvote" level="DEBUG"/>
+    <logger name="com.indihx.wechat" level="DEBUG"/>
+ 	
+
+   	<!-- 
+    root与logger是父子关系，没有特别定义则默认为root，任何一个类只会和一个logger对应，
+   	 要么是定义的logger，要么是root，判断的关键在于找到这个logger，然后判断这个logger的appender和level。 
+    -->
+    <root level="info">  
+    	<appender-ref ref="STDOUT" />  
+        <appender-ref ref="com.framework" />  
+        <appender-ref ref="com.ibatis" />
+        <appender-ref ref="appLogAppender" />
+    </root>  
+</configuration> 

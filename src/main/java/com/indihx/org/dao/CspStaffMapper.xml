@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.org.dao.CspStaffMapper">
+	<!-- 支持缓存配置(必须配置否则缓存无效) -->
+	<cache type="com.indihx.cache.RedisCache" />
+	<!-- 用来描述如何从数据库结果集中来加载你的对象 -->
+	<resultMap id="BaseResultMap" type="com.indihx.org.entity.WY_WYGS_STAFF">
+		<id column="GSRYID" jdbcType="VARCHAR" property="gsryid" />
+		<result column="WYGSID" jdbcType="DECIMAL" property="wygsid" />
+		<result column="RYLX" jdbcType="VARCHAR" property="rylx" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="ZJLX" jdbcType="CHAR" property="zjlx" />
+		<result column="ZJHM" jdbcType="VARCHAR" property="zjhm" />
+		<result column="RYXM" jdbcType="VARCHAR" property="ryxm" />
+		<result column="RYXB" jdbcType="CHAR" property="ryxb" />
+		<result column="WHCD" jdbcType="CHAR" property="whcd" />
+		<result column="DRZW" jdbcType="VARCHAR" property="drzw" />
+		<result column="LXSJ" jdbcType="VARCHAR" property="lxsj" />
+		<result column="LXDH" jdbcType="VARCHAR" property="lxdh" />
+		<result column="LXYX" jdbcType="VARCHAR" property="lxyx" />
+		<result column="CSRQ" jdbcType="VARCHAR" property="csrq" />
+		<result column="YZBM" jdbcType="VARCHAR" property="yzbm" />
+		<result column="HTKSRQ" jdbcType="VARCHAR" property="htksrq" />
+		<result column="HTJZRQ" jdbcType="VARCHAR" property="htjzrq" />
+		<result column="WGNX" jdbcType="VARCHAR" property="wgnx" />
+		<result column="LXDZ" jdbcType="VARCHAR" property="lxdz" />
+		<result column="BZ" jdbcType="VARCHAR" property="bz" />
+	</resultMap> 
+	
+	<!--  映射查询语句 -->
+	<select id="getStaffList" parameterType="com.indihx.org.entity.WY_WYGS_STAFF" resultMap="BaseResultMap">
+		select 
+		t.GSRYID,t.WYGSID,t.RYLX,t.STATUS,t.ZJLX,t.ZJHM,t.RYXM,t.RYXB,t.WHCD,t.DRZW,t.LXSJ,t.LXDH,t.LXYX,t.CSRQ,t.YZBM,t.HTKSRQ,t.HTJZRQ,t.WGNX,t.LXDZ,t.BZ
+		from wy_wygs_staff t
+		where t.WYGSID = #{wygsid,jdbcType=VARCHAR}
+		<if test="ryxm !=null and ryxm != ''">
+			and  t.GLCMC like CONCAT(CONCAT('%',#{ryxm,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="rylx !=null and rylx != ''">
+			and  t.GLCDZ = #{rylx,jdbcType=VARCHAR}
+		</if>
+		order by t.GSRYID asc
+	</select>  
+ 
+	<!--  新增管理处信息 -->
+	<insert id="insertStaff" parameterType="com.indihx.org.entity.WY_WYGS_STAFF">
+	insert into WY_WYGS_STAFF
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="gsryid != null and gsryid != ''">
+			  GSRYID,
+			</if>
+			<if test="wygsid != null and wygsid != ''">
+			  WYGSID,
+			</if>
+			<if test="rylx != null and rylx != ''">
+			  RYLX,
+			</if>
+			<if test="status != null and status != ''">
+			  STATUS,
+			</if>
+			<if test="zjlx != null and zjlx != ''">
+			  ZJLX,
+			</if>
+			<if test="zjhm != null and zjhm != ''">
+			  ZJHM,
+			</if>
+			<if test="ryxm != null and ryxm != ''">
+			  RYXM,
+			</if>
+			<if test="ryxb != null and ryxb != ''">
+			  RYXB,
+			</if>
+			<if test="whcd != null and whcd != ''">
+			  WHCD,
+			</if>
+			<if test="drzw != null and drzw != ''">
+			  DRZW,
+			</if>
+			<if test="lxsj != null and lxsj != ''">
+			  LXSJ,
+			</if>
+			<if test="lxdh != null and lxdh != ''">
+			  LXDH,
+			</if>
+			<if test="lxyx != null and lxyx != ''">
+			  LXYX,
+			</if>
+			<if test="csrq != null and csrq != ''">
+			  CSRQ,
+			</if>
+			<if test="yzbm != null and yzbm != ''">
+			  YZBM,
+			</if>
+			<if test="htksrq != null and htksrq != ''">
+			  HTKSRQ,
+			</if>
+			<if test="htjzrq != null and htjzrq != ''">
+			  HTJZRQ,
+			</if>
+			<if test="wgnx != null and wgnx != ''">
+			  WGNX,
+			</if>
+			<if test="lxdz != null and lxdz != ''">
+			  LXDZ,
+			</if>
+			<if test="bz != null and bz != ''">
+			  BZ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="gsryid != null and gsryid != ''">
+			  #{gsryid,jdbcType=VARCHAR},
+			</if>
+			<if test="wygsid != null and wygsid != ''">
+			  #{wygsid,jdbcType=VARCHAR},
+			</if>
+			<if test="rylx != null and rylx != ''">
+			  #{rylx,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''">
+			  #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="zjlx != null and zjlx != ''">
+			  #{zjlx,jdbcType=VARCHAR},
+			</if>
+			<if test="zjhm != null and zjhm != ''">
+			  #{zjhm,jdbcType=VARCHAR},
+			</if>
+			<if test="ryxm != null and ryxm != ''">
+			  #{ryxm,jdbcType=VARCHAR},
+			</if>
+			<if test="ryxb != null and ryxb != ''">
+			  #{ryxb,jdbcType=VARCHAR},
+			</if>
+			<if test="whcd != null and whcd != ''">
+			  #{whcd,jdbcType=VARCHAR},
+			</if>
+			<if test="drzw != null and drzw != ''">
+			  #{drzw,jdbcType=VARCHAR},
+			</if>
+			<if test="lxsj != null and lxsj != ''">
+			  #{lxsj,jdbcType=VARCHAR},
+			</if>
+			<if test="lxdh != null and lxdh != ''">
+			  #{lxdh,jdbcType=VARCHAR},
+			</if>
+			<if test="lxyx != null and lxyx != ''">
+			  #{lxyx,jdbcType=VARCHAR},
+			</if>
+			<if test="csrq != null and csrq != ''">
+			  #{csrq,jdbcType=VARCHAR},
+			</if>
+			<if test="yzbm != null and yzbm != ''">
+			  #{yzbm,jdbcType=VARCHAR},
+			</if>
+			<if test="htksrq != null and htksrq != ''">
+			  #{htksrq,jdbcType=VARCHAR},
+			</if>
+			<if test="htjzrq != null and htjzrq != ''">
+			  #{htjzrq,jdbcType=VARCHAR},
+			</if>
+			<if test="wgnx != null and wgnx != ''">
+			  #{wgnx,jdbcType=VARCHAR},
+			</if>
+			<if test="lxdz != null and lxdz != ''">
+			  #{lxdz,jdbcType=VARCHAR},
+			</if>
+			<if test="bz != null and bz != ''">
+			  #{bz,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert> 
+	
+	<!--  根据ID删除人员信息 -->
+	<delete id="deleteStaff" parameterType="java.lang.Long">
+	delete from WY_WYGS_STAFF
+	where GSRYID = #{gsryid,jdbcType=DECIMAL}
+	</delete>
+  
+	<!--  根据ID查询人员信息 -->
+	<select id="qrStaffInfoById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+	t.GSRYID,t.WYGSID,t.RYLX,t.STATUS,t.ZJLX,t.ZJHM,t.RYXM,t.RYXB,t.WHCD,t.DRZW,t.LXSJ,t.LXDH,t.LXYX,t.CSRQ,t.YZBM,t.HTKSRQ,t.HTJZRQ,t.WGNX,t.LXDZ,t.BZ
+	from WY_WYGS_STAFF t
+	where t.GSRYID = #{gsryid,jdbcType=DECIMAL}
+	</select>
+  
+	<!--  根据ID更新人员信息 -->
+	<update id="updateStaff" parameterType="com.indihx.org.entity.WY_WYGS_STAFF">
+    update WY_WYGS_STAFF
+    <set>
+		<if test="wygsid != null and wygsid != ''">
+		  WYGSID = #{wygsid,jdbcType=VARCHAR},
+		</if>
+		<if test="rylx != null and rylx != ''">
+		  RYLX = #{rylx,jdbcType=VARCHAR},
+		</if>
+		<if test="status != null and status != ''">
+		  STATUS = #{status,jdbcType=VARCHAR},
+		</if>
+		<if test="zjlx != null and zjlx != ''">
+		  ZJLX = #{zjlx,jdbcType=VARCHAR},
+		</if>
+		<if test="zjhm != null and zjhm != ''">
+		 ZJHM = #{zjhm,jdbcType=VARCHAR},
+		</if>
+		<if test="ryxm != null and ryxm != ''">
+		  RYXM = #{ryxm,jdbcType=VARCHAR},
+		</if>
+		<if test="ryxb != null and ryxb != ''">
+		  RYXB = #{ryxb,jdbcType=VARCHAR},
+		</if>
+		<if test="whcd != null and whcd != ''">
+		  WHCD = #{whcd,jdbcType=VARCHAR},
+		</if>
+		<if test="drzw != null and drzw != ''">
+		  DRZW = #{drzw,jdbcType=VARCHAR},
+		</if>
+		<if test="lxsj != null and lxsj != ''">
+		  LXSJ = #{lxsj,jdbcType=VARCHAR},
+		</if>
+		<if test="lxdh != null and lxdh != ''">
+		  LXDH = #{lxdh,jdbcType=VARCHAR},
+		</if>
+		<if test="lxyx != null and lxyx != ''">
+		  LXYX = #{lxyx,jdbcType=VARCHAR},
+		</if>
+		<if test="csrq != null and csrq != ''">
+		  CSRQ = #{csrq,jdbcType=VARCHAR},
+		</if>
+		<if test="yzbm != null and yzbm != ''">
+		  YZBM = #{yzbm,jdbcType=VARCHAR},
+		</if>
+		<if test="htksrq != null and htksrq != ''">
+		  HTKSRQ = #{htksrq,jdbcType=VARCHAR},
+		</if>
+		<if test="htjzrq != null and htjzrq != ''">
+		  HTJZRQ = #{htjzrq,jdbcType=VARCHAR},
+		</if>
+		<if test="wgnx != null and wgnx != ''">
+		  WGNX = #{wgnx,jdbcType=VARCHAR},
+		</if>
+		<if test="lxdz != null and lxdz != ''">
+		  LXDZ = #{lxdz,jdbcType=VARCHAR},
+		</if>
+		<if test="bz != null and bz != ''">
+		  BZ = #{bz,jdbcType=VARCHAR},
+		</if>
+    </set>
+    where GSRYID = #{gsryid,jdbcType=DECIMAL}
+	</update>
+  
+</mapper>

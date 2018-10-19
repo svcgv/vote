@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="LEAVE_HUIQIAN" name="请假会签流程" isExecutable="true">
+    <startEvent id="START" name="Start"></startEvent>
+    <userTask id="N0001" name="员工"></userTask>
+    <userTask id="N0002" name="经理会签">
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="userIdList" activiti:elementVariable="userId">
+        <completionCondition>${count == sucess}</completionCondition>
+      </multiInstanceLoopCharacteristics>
+    </userTask>
+    <userTask id="N0003" name="老总"></userTask>
+    <endEvent id="END" name="End"></endEvent>
+    <sequenceFlow id="flow1" sourceRef="START" targetRef="N0001"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="N0001" targetRef="N0002"></sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="N0002" targetRef="N0003"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="N0003" targetRef="END"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_LEAVE_HUIQIAN">
+    <bpmndi:BPMNPlane bpmnElement="LEAVE_HUIQIAN" id="BPMNPlane_LEAVE_HUIQIAN">
+      <bpmndi:BPMNShape bpmnElement="START" id="BPMNShape_START">
+        <omgdc:Bounds height="35.0" width="35.0" x="54.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="N0001" id="BPMNShape_N0001">
+        <omgdc:Bounds height="55.0" width="105.0" x="171.0" y="140.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="N0002" id="BPMNShape_N0002">
+        <omgdc:Bounds height="55.0" width="105.0" x="360.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="N0003" id="BPMNShape_N0003">
+        <omgdc:Bounds height="55.0" width="105.0" x="560.0" y="140.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="END" id="BPMNShape_END">
+        <omgdc:Bounds height="35.0" width="35.0" x="770.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="89.0" y="167.0"></omgdi:waypoint>
+        <omgdi:waypoint x="171.0" y="167.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="276.0" y="167.0"></omgdi:waypoint>
+        <omgdi:waypoint x="360.0" y="147.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="465.0" y="147.0"></omgdi:waypoint>
+        <omgdi:waypoint x="560.0" y="167.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="665.0" y="167.0"></omgdi:waypoint>
+        <omgdi:waypoint x="770.0" y="167.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

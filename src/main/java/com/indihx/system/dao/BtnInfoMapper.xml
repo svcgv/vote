@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.system.dao.BtnInfoMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  <resultMap id="BaseResultMap" type="com.indihx.system.entity.BtnInfo">
+    <id column="BTN_ID" jdbcType="VARCHAR" property="btnId" />
+    <result column="BTN_NAME" jdbcType="VARCHAR" property="btnName" />
+    <result column="BTN_RMK" jdbcType="VARCHAR" property="btnRmk" />
+    <result column="BTN_PAGE" jdbcType="VARCHAR" property="btnPage" />
+    <result column="TM_SMP" jdbcType="VARCHAR" property="tmSmp" />
+    <result column="rolebtnId" jdbcType="VARCHAR" property="roleBtnId" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BTN_ID, BTN_NAME, BTN_RMK, BTN_PAGE, TM_SMP
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BTN_INFO
+    where BTN_ID = #{btnId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BTN_INFO
+    where BTN_ID = #{btnId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertSelective" parameterType="com.indihx.system.entity.BtnInfo">
+    insert into BTN_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="btnId != null">
+        BTN_ID,
+      </if>
+      <if test="btnName != null">
+        BTN_NAME,
+      </if>
+      <if test="btnRmk != null">
+        BTN_RMK,
+      </if>
+      <if test="btnPage != null">
+        BTN_PAGE,
+      </if>
+      <if test="tmSmp != null">
+        TM_SMP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="btnId != null">
+        #{btnId,jdbcType=VARCHAR},
+      </if>
+      <if test="btnName != null">
+        #{btnName,jdbcType=VARCHAR},
+      </if>
+      <if test="btnRmk != null">
+        #{btnRmk,jdbcType=VARCHAR},
+      </if>
+      <if test="btnPage != null">
+        #{btnPage,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null">
+        #{tmSmp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.indihx.system.entity.BtnInfo">
+    update BTN_INFO
+    <set>
+      <if test="btnName != null">
+        BTN_NAME = #{btnName,jdbcType=VARCHAR},
+      </if>
+      <if test="btnRmk != null">
+        BTN_RMK = #{btnRmk,jdbcType=VARCHAR},
+      </if>
+      <if test="btnPage != null">
+        BTN_PAGE = #{btnPage,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null">
+        TM_SMP = #{tmSmp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BTN_ID = #{btnId,jdbcType=VARCHAR}
+  </update>
+  <select id="qryBtnInfoAll" resultMap="BaseResultMap" parameterType="com.indihx.system.entity.BtnInfo">
+  	select info.btn_id,
+       info.btn_name, info.btn_rmk, info.btn_page, info.tm_smp
+    from btn_info info
+  	 <where>
+  		<if test="btnName != null and btnName !=''">
+  			 info.btn_name like CONCAT(CONCAT('%',#{btnName}),'%')
+  		</if>
+  		<if test="btnPage!=null and btnPage !=''">
+  			 info.btn_page like CONCAT(CONCAT('%',#{btnPage}),'%')
+  		</if>
+  	</where> 
+  		order by info.btn_id,info.btn_name ASC
+  </select>
+  <select id="qryRoleBtnAll" resultMap="BaseResultMap" parameterType="com.indihx.system.entity.BtnInfo">
+  	select info.btn_id,info.btn_name, info.btn_rmk, info.btn_page, info.tm_smp,role.btn_id as roleBtnId
+    from btn_info info left join btn_role role on info.btn_id = role.btn_id and role.role_id=#{roleId,jdbcType=VARCHAR}
+  	 <where>
+  		<if test="btnName != null and btnName !=''">
+  			 info.btn_name like CONCAT(CONCAT('%',#{btnName}),'%')
+  		</if>
+  		<if test="btnPage!=null and btnPage !=''">
+  			 info.btn_page like CONCAT(CONCAT('%',#{btnPage}),'%')
+  		</if>
+  	</where> 
+  		order by info.btn_id,info.btn_name ASC
+  </select>
+</mapper>

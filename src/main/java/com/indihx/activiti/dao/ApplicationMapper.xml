@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.activiti.dao.ApplicationMapper">
+    <!-- 支持缓存配置(必须配置否则缓存无效) -->
+    <cache type="com.indihx.cache.RedisCache" />
+	<resultMap id="BaseResultMap" type="com.indihx.activiti.entity.Application">
+		<id column="APP_ID" jdbcType="DECIMAL" property="appId" />
+		<result column="ACT_ID" jdbcType="VARCHAR" property="actId" />
+		<result column="APP_NAME" jdbcType="VARCHAR" property="appName" />
+		<result column="START_DATE" jdbcType="VARCHAR" property="startDate" />
+		<result column="CREATE_ID" jdbcType="VARCHAR" property="createId" />
+		<result column="APP_TYPE" jdbcType="VARCHAR" property="appType" />
+		<result column="END_DATE" jdbcType="VARCHAR" property="endDate" />
+		<result column="CURR_STATUS" jdbcType="VARCHAR" property="currStatus" />
+		<result column="CURR_USER_ID" jdbcType="VARCHAR" property="currUserId" />
+		<result column="CURR_NODE_ID" jdbcType="VARCHAR" property="currNodeId" />
+		<result column="CURR_NODE_NAME" jdbcType="VARCHAR" property="currNodeName" />
+		<result column="CURR_ORG_ID" jdbcType="VARCHAR" property="currOrgId" />
+		<result column="CURR_ROLE_ID" jdbcType="DECIMAL" property="currRoleId" />
+		<result column="FRONT_NODE_ID" jdbcType="VARCHAR" property="frontNodeId" />
+		<result column="FRONT_NODE_NAME" jdbcType="VARCHAR" property="frontNodeName" />
+		<result column="FRONT_USER_ID" jdbcType="VARCHAR" property="frontUserId" />
+		<result column="USR_NAME" jdbcType="VARCHAR" property="createUserName" />
+		<result column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+		<result column="END_TIME" jdbcType="VARCHAR" property="endTime" />
+		<result column="START_TIME" jdbcType="VARCHAR" property="startTime" />
+		<result column="NEXT_ORG_ID" jdbcType="VARCHAR" property="nextOrgId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		APP_ID, ACT_ID, APP_NAME, START_DATE, CREATE_ID, APP_TYPE,
+		END_DATE,
+		CURR_STATUS,
+		CURR_USER_ID,
+		CURR_NODE_ID,CURR_NODE_NAME,CURR_ROLE_ID,CURR_ORG_ID,FRONT_NODE_ID,FRONT_NODE_NAME,FRONT_USER_ID
+	</sql>
+
+	<select id="queryUsrInfoByFlowNode" resultType="java.util.Map">
+		SELECT T2.* FROM ACT_HI_TASKINST T1
+		INNER JOIN USR_INFO T2 ON T1.ASSIGNEE_=T2.USR_ID
+		WHERE TASK_DEF_KEY_=#{1} AND PROC_INST_ID_=#{0}
+	</select>
+
+	<!-- 查询代办任务的信息 -->
+	<select id="queryToDo" parameterType="com.indihx.activiti.vo.ApplicationVo"
+		resultMap="BaseResultMap">
+		SELECT DISTINCT A.* FROM (
+		<!-- 查询指定到用户的任务 -->
+		select t1.*,t2.usr_name,t3.id_ AS TASK_ID from application t1
+		INNER
+		JOIN ACT_RU_TASK T3 ON t1.curr_user_id =t3.assignee_ AND
+		T1.Act_Id=T3.PROC_INST_ID_
+		left join usr_info t2 on
+		t1.create_id
+		=t2.usr_id
+		<where>
+			curr_user_id = #{currUserId}
+			AND T1.CURR_STATUS NOT IN ('03','05') <!-- 
+				查询状态未结束 -->
+			<if test="currOrgId != null and currOrgId != ''">
+				AND T1.CURR_ORG_ID = #{currOrgId}
+			</if>
+			<if test="appType != null and appType != ''">
+				AND APP_TYPE = #{appType}
+			</if>
+		</where>
+		UNION <!-- 查询指定到角色的任务 -->
+		SELECT T1.*,T4.USR_NAME,T5.ID_ AS TASK_ID FROM APPLICATION T1
+		INNER
+		JOIN USR_ROLE T2 ON T1.CURR_ROLE_ID=T2.ROLE_ID
+		INNER JOIN USR_INFO T3
+		ON T2.USR_ID=T3.USR_ID
+		INNER JOIN ACT_RU_TASK T5 ON T1.ACT_ID=T5.PROC_INST_ID_
+		LEFT JOIN USR_INFO T4 ON
+		T1.CREATE_ID=T4.USR_ID
+		<where>
+			T2.USR_ID = #{currUserId}
+			AND T1.CURR_STATUS NOT IN ('03','05') <!-- 查询状态未结束 -->
+			AND (T1.CURR_USER_ID IS NULL OR T1.CURR_USER_ID = '')
+			<if test="currOrgId != null and currOrgId != ''">
+				AND T1.CURR_ORG_ID = #{currOrgId}
+			</if>
+			<if test="appType != null and appType != ''">
+				AND T1.APP_TYPE = #{appType}
+			</if>
+		</where>
+		UNION  <!-- 查询会签任务 -->
+		SELECT T1.*,T3.USR_NAME,T2.ID_ AS TASK_ID FROM APPLICATION T1
+		INNER
+		JOIN ACT_RU_TASK T2 ON T1.ACT_ID=T2.PROC_INST_ID_
+		LEFT JOIN USR_INFO T3
+		ON T1.CREATE_ID = T3.USR_ID
+		<where>
+			T2.ASSIGNEE_=#{currUserId}
+			AND T1.CURR_STATUS='05'
+			<if test="currOrgId != null and currOrgId != ''">
+				AND T1.CURR_ORG_ID = #{currOrgId}
+			</if>
+		</where>
+		) A
+	</select>
+
+	<!-- 查询已办任务 -->
+	<select id="queryCompToDo" parameterType="com.indihx.activiti.vo.ApplicationVo"
+		resultMap="BaseResultMap">
+		SELECT T2.*,T3.USR_NAME,to_char(T1.END_TIME_,'YYYY-MM-DD HH:mm:ss')
+		END_TIME,to_char(T1.START_TIME_,'YYYY-MM-DD HH:mm:ss')
+		START_TIME,T1.ID_ TASK_ID FROM ACT_HI_TASKINST T1
+		JOIN APPLICATION T2
+		ON
+		T1.PROC_INST_ID_=T2.ACT_ID
+		LEFT JOIN USR_INFO T3 ON
+		T2.CREATE_ID=T3.USR_ID
+		<where>
+			T1.ASSIGNEE_ = #{currUserId}
+			AND NOT EXISTS
+			(SELECT 1 FROM ACT_RU_TASK T4 WHERE T1.PROC_INST_ID_=T4.PROC_INST_ID_ AND
+			T1.TASK_DEF_KEY_=T4.TASK_DEF_KEY_)
+			<if test="appType != null and appType != ''">
+				AND APP_TYPE = #{appType}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from APPLICATION
+		where APP_ID = #{appId,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		APPLICATION
+		where APP_ID = #{appId,jdbcType=DECIMAL}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.indihx.activiti.entity.Application">
+		insert into APPLICATION
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="appId != null">
+				APP_ID,
+			</if>
+			<if test="actId != null">
+				ACT_ID,
+			</if>
+			<if test="appName != null">
+				APP_NAME,
+			</if>
+			<if test="startDate != null">
+				START_DATE,
+			</if>
+			<if test="createId != null">
+				CREATE_ID,
+			</if>
+			<if test="appType != null">
+				APP_TYPE,
+			</if>
+			<if test="endDate != null">
+				END_DATE,
+			</if>
+			<if test="currStatus != null">
+				CURR_STATUS,
+			</if>
+			<if test="currUserId != null">
+				CURR_USER_ID,
+			</if>
+			<if test="currNodeId != null">
+				CURR_NODE_ID,
+			</if>
+			<if test="currOrgId != null">
+				CURR_ORG_ID,
+			</if>
+			<if test="currNodeName != null">
+				CURR_NODE_NAME,
+			</if>
+			<if test="currRoleId != null">
+				CURR_ROLE_ID,
+			</if>
+			<if test="frontNodeId != null">
+				FRONT_NODE_ID,
+			</if>
+			<if test="frontNodeName != null">
+				FRONT_NODE_NAME,
+			</if>
+			<if test="frontUserId != null">
+				FRONT_USER_ID,
+			</if>
+			<if test="nextOrgId != null">
+				NEXT_ORG_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="appId != null">
+				#{appId,jdbcType=DECIMAL},
+			</if>
+			<if test="actId != null">
+				#{actId,jdbcType=VARCHAR},
+			</if>
+			<if test="appName != null">
+				#{appName,jdbcType=VARCHAR},
+			</if>
+			<if test="startDate != null">
+				#{startDate,jdbcType=VARCHAR},
+			</if>
+			<if test="createId != null">
+				#{createId,jdbcType=VARCHAR},
+			</if>
+			<if test="appType != null">
+				#{appType,jdbcType=VARCHAR},
+			</if>
+			<if test="endDate != null">
+				#{endDate,jdbcType=VARCHAR},
+			</if>
+			<if test="currStatus != null">
+				#{currStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="currUserId != null">
+				#{currUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="currNodeId != null">
+				#{currNodeId,jdbcType=VARCHAR},
+			</if>
+			<if test="currOrgId != null">
+				#{currOrgId,jdbcType=VARCHAR},
+			</if>
+			<if test="currNodeName != null">
+				#{currNodeName,jdbcType=VARCHAR},
+			</if>
+			<if test="currRoleId != null">
+				#{currRoleId},
+			</if>
+			<if test="frontNodeId != null">
+				#{frontNodeId},
+			</if>
+			<if test="frontNodeName != null">
+				#{frontNodeName},
+			</if>
+			<if test="frontUserId != null">
+				#{frontUserId},
+			</if>
+			<if test="nextOrgId != null">
+				#{nextOrgId},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.indihx.activiti.entity.Application">
+		update APPLICATION
+		<set>
+			<if test="actId != null">
+				ACT_ID = #{actId,jdbcType=VARCHAR},
+			</if>
+			<if test="appName != null">
+				APP_NAME = #{appName,jdbcType=VARCHAR},
+			</if>
+			<if test="startDate != null">
+				START_DATE = #{startDate,jdbcType=VARCHAR},
+			</if>
+			<if test="createId != null">
+				CREATE_ID = #{createId,jdbcType=VARCHAR},
+			</if>
+			<if test="appType != null">
+				APP_TYPE = #{appType,jdbcType=VARCHAR},
+			</if>
+			<if test="endDate != null">
+				END_DATE = #{endDate,jdbcType=VARCHAR},
+			</if>
+			<if test="currStatus != null">
+				CURR_STATUS = #{currStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="currUserId != null">
+				CURR_USER_ID = #{currUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="currNodeId != null">
+				CURR_NODE_ID = #{currNodeId,jdbcType=VARCHAR},
+			</if>
+			<if test="currNodeName != null">
+				CURR_NODE_NAME=#{currNodeName,jdbcType=VARCHAR},
+			</if>
+			<if test="currRoleId != null">
+				CURR_ROLE_ID=#{currRoleId,jdbcType=DECIMAL},
+			</if>
+			<if test="currOrgId != null">
+				CURR_ORG_ID = #{currOrgId,jdbcType=VARCHAR},
+			</if>
+			<if test="frontNodeId != null">
+				FRONT_NODE_ID=#{frontNodeId,jdbcType=VARCHAR},
+			</if>
+			<if test="frontNodeName != null">
+				FRONT_NODE_NAME=#{frontNodeName,jdbcType=VARCHAR},
+			</if>
+			<if test="frontUserId != null">
+				FRONT_USER_ID=#{frontUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="nextOrgId != null">
+				NEXT_ORG_ID=#{nextOrgId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where APP_ID = #{appId,jdbcType=DECIMAL}
+	</update>
+
+
+</mapper>

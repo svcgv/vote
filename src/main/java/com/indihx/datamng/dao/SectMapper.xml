@@ -1,0 +1,1649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.datamng.dao.SectMapper">
+  
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  
+  <!-- 用来描述如何从数据库结果集中来加载你的对象 -->
+  <resultMap id="BaseResultMap" type="com.indihx.datamng.entity.Wy_Sect_Temp">
+    <id column="XMID" jdbcType="VARCHAR" property="xmid" /><!-- column：查询出来的列名  property：type指定的实体类型中的属性名 ，最终resultMap对column和property做一个映射关系（对应关系）  -->
+    <result column="APP_ID" jdbcType="VARCHAR" property="app_id"/>
+    <result column="XMBM"  jdbcType="VARCHAR" property="xmbm" />
+    <result column="SJZT"  jdbcType="VARCHAR" property="sjzt" />
+    <result column="CJSJ"  jdbcType="VARCHAR" property="cjsj" />
+    <result column="XMMC"  jdbcType="VARCHAR" property="xmmc" />
+    <result column="XMDZ"  jdbcType="VARCHAR" property="xmdz" />
+    <result column="HPBID" jdbcType="VARCHAR" property="hpbid" />
+    <result column="HPBMC" jdbcType="VARCHAR" property="hpbmc" />
+    <result column="JDID"  jdbcType="VARCHAR" property="jdid" />
+    <result column="JDMC"  jdbcType="VARCHAR" property="jdmc" />
+    <result column="SQID"  jdbcType="VARCHAR" property="sqid" />
+    <result column="SQMC"  jdbcType="VARCHAR" property="sqmc" />
+    <result column="SZDZ"  jdbcType="VARCHAR" property="szdz" />
+    <result column="SZNZ"  jdbcType="VARCHAR" property="sznz" />
+    <result column="SZXZ"  jdbcType="VARCHAR" property="szxz" />
+    <result column="SZBZ"  jdbcType="VARCHAR" property="szbz" />
+    <result column="WYXZ" jdbcType="VARCHAR" property="wyxz" />
+    <result column="WYLX" jdbcType="VARCHAR" property="wylx" />
+    <result column="JZMJ"  jdbcType="DECIMAL" property="jzmj" />
+    <result column="ZZJZMJ"  jdbcType="DECIMAL" property="zzjzmj" />
+    <result column="SYJZMJ"  jdbcType="DECIMAL" property="syjzmj" />
+    <result column="QTJZMJ"  jdbcType="DECIMAL" property="qtjzmj" />
+    <result column="ZDMJ"  jdbcType="DECIMAL" property="zdmj" />
+    <result column="ZDS"   jdbcType="DECIMAL" property="zds" />
+    <result column="ZHS"   jdbcType="DECIMAL" property="zhs" />
+    <result column="JZMD"   jdbcType="DECIMAL" property="jzmd" />
+    <result column="RJL"   jdbcType="DECIMAL" property="rjl" />
+    <result column="LHL"   jdbcType="DECIMAL" property="lhl" />
+    <result column="LHMJ"   jdbcType="DECIMAL" property="lhmj" />
+    <result column="JZLHL"   jdbcType="DECIMAL" property="jzlhl" />
+    <result column="JZLHMJ"   jdbcType="DECIMAL" property="jzlhmj" />
+    <result column="DSCWS"   jdbcType="DECIMAL" property="dscws" />
+    <result column="DXCWS"   jdbcType="DECIMAL" property="dxcws" />
+    <result column="KGSJ"   jdbcType="DECIMAL" property="kgsj" />
+    <result column="TERMS"   jdbcType="DECIMAL" property="terms" />
+    <result column="JHJFSJ"  jdbcType="VARCHAR" property="jhjfsj" />
+    <result column="BQJZMJ"   jdbcType="DECIMAL" property="bqjzmj" />
+    <result column="JFSYSJ"   jdbcType="DECIMAL" property="jfsysj" />
+    <result column="WYGLYFMJ"   jdbcType="DECIMAL" property="wyglyfmj" />
+    <result column="YWHYFMJ"   jdbcType="DECIMAL" property="ywhyfmj" />
+    <result column="MWFMJ"   jdbcType="DECIMAL" property="mwfmj" />
+    <result column="DHJMJ"   jdbcType="DECIMAL" property="dhjmj" />
+    <result column="JKSMJ"   jdbcType="DECIMAL" property="jksmj" />
+    <result column="FJDCCKMJ"   jdbcType="DECIMAL" property="fjdcckmj" />
+    <result column="BNCMJ"   jdbcType="DECIMAL" property="bncmj" />
+    <result column="SBCMJ"   jdbcType="DECIMAL" property="sbcmj" />
+    <result column="GYBFQTMS"   jdbcType="DECIMAL" property="gybfqtms" />
+    <result column="WYGSID"  jdbcType="VARCHAR" property="wygsid" />
+    <result column="WYGSMC"  jdbcType="VARCHAR" property="wygsmc" />
+    <result column="GLCID"   jdbcType="VARCHAR" property="glcid" />
+    <result column="GLCMC"   jdbcType="VARCHAR" property="glcmc" />
+    <result column="GSRYID"  jdbcType="VARCHAR" property="gsryid" />
+    <result column="XMJLXM"  jdbcType="VARCHAR" property="xmjlxm" />
+    <result column="YWHFLAG" jdbcType="VARCHAR" property="ywhflag" />
+    <result column="YWHID"   jdbcType="VARCHAR" property="ywhid" />
+    <result column="YWHMC"   jdbcType="VARCHAR" property="ywhmc" />
+    <result column="XMMS"    jdbcType="VARCHAR" property="xmms" />
+    <result column="OLDXMID" jdbcType="VARCHAR" property="oldxmid" />
+  </resultMap>
+  <!-- 用来描述如何从数据库结果集中来加载你的对象 -->
+  <resultMap id="BaseResultMap1" type="com.indihx.datamng.entity.Wy_Sect">
+    <id column="XMID" jdbcType="VARCHAR" property="xmid" /><!-- column：查询出来的列名  property：type指定的实体类型中的属性名 ，最终resultMap对column和property做一个映射关系（对应关系）  -->
+    <result column="XMBM"  jdbcType="VARCHAR" property="xmbm" />
+    <result column="SJZT"  jdbcType="VARCHAR" property="sjzt" />
+    <result column="CJSJ"  jdbcType="VARCHAR" property="cjsj" />
+    <result column="XMMC"  jdbcType="VARCHAR" property="xmmc" />
+    <result column="XMDZ"  jdbcType="VARCHAR" property="xmdz" />
+    <result column="HPBID" jdbcType="VARCHAR" property="hpbid" />
+    <result column="HPBMC" jdbcType="VARCHAR" property="hpbmc" />
+    <result column="JDID"  jdbcType="VARCHAR" property="jdid" />
+    <result column="JDMC"  jdbcType="VARCHAR" property="jdmc" />
+    <result column="SQID"  jdbcType="VARCHAR" property="sqid" />
+    <result column="SQMC"  jdbcType="VARCHAR" property="sqmc" />
+    <result column="SZDZ"  jdbcType="VARCHAR" property="szdz" />
+    <result column="SZNZ"  jdbcType="VARCHAR" property="sznz" />
+    <result column="SZXZ"  jdbcType="VARCHAR" property="szxz" />
+    <result column="SZBZ"  jdbcType="VARCHAR" property="szbz" />
+    <result column="WYXZ" jdbcType="VARCHAR" property="wyxz" />
+    <result column="WYLX" jdbcType="VARCHAR" property="wylx" />
+    <result column="JZMJ"  jdbcType="DECIMAL" property="jzmj" />
+    <result column="ZZJZMJ"  jdbcType="DECIMAL" property="zzjzmj" />
+    <result column="SYJZMJ"  jdbcType="DECIMAL" property="syjzmj" />
+    <result column="QTJZMJ"  jdbcType="DECIMAL" property="qtjzmj" />
+    <result column="ZDMJ"  jdbcType="DECIMAL" property="zdmj" />
+    <result column="ZDS"   jdbcType="DECIMAL" property="zds" />
+    <result column="ZHS"   jdbcType="DECIMAL" property="zhs" />
+    <result column="JZMD"   jdbcType="DECIMAL" property="jzmd" />
+    <result column="RJL"   jdbcType="DECIMAL" property="rjl" />
+    <result column="LHL"   jdbcType="DECIMAL" property="lhl" />
+    <result column="LHMJ"   jdbcType="DECIMAL" property="lhmj" />
+    <result column="JZLHL"   jdbcType="DECIMAL" property="jzlhl" />
+    <result column="JZLHMJ"   jdbcType="DECIMAL" property="jzlhmj" />
+    <result column="DSCWS"   jdbcType="DECIMAL" property="dscws" />
+    <result column="DXCWS"   jdbcType="DECIMAL" property="dxcws" />
+    <result column="KGSJ"   jdbcType="DECIMAL" property="kgsj" />
+    <result column="TERMS"   jdbcType="DECIMAL" property="terms" />
+    <result column="JHJFSJ"  jdbcType="VARCHAR" property="jhjfsj" />
+    <result column="BQJZMJ"   jdbcType="DECIMAL" property="bqjzmj" />
+    <result column="JFSYSJ"   jdbcType="DECIMAL" property="jfsysj" />
+    <result column="WYGLYFMJ"   jdbcType="DECIMAL" property="wyglyfmj" />
+    <result column="YWHYFMJ"   jdbcType="DECIMAL" property="ywhyfmj" />
+    <result column="MWFMJ"   jdbcType="DECIMAL" property="mwfmj" />
+    <result column="DHJMJ"   jdbcType="DECIMAL" property="dhjmj" />
+    <result column="JKSMJ"   jdbcType="DECIMAL" property="jksmj" />
+    <result column="FJDCCKMJ"   jdbcType="DECIMAL" property="fjdcckmj" />
+    <result column="BNCMJ"   jdbcType="DECIMAL" property="bncmj" />
+    <result column="SBCMJ"   jdbcType="DECIMAL" property="sbcmj" />
+    <result column="GYBFQTMS"   jdbcType="DECIMAL" property="gybfqtms" />
+    <result column="WYGSID"  jdbcType="VARCHAR" property="wygsid" />
+    <result column="WYGSMC"  jdbcType="VARCHAR" property="wygsmc" />
+    <result column="GLCID"   jdbcType="VARCHAR" property="glcid" />
+    <result column="GLCMC"   jdbcType="VARCHAR" property="glcmc" />
+    <result column="GSRYID"  jdbcType="VARCHAR" property="gsryid" />
+    <result column="XMJLXM"  jdbcType="VARCHAR" property="xmjlxm" />
+    <result column="YWHFLAG" jdbcType="VARCHAR" property="ywhflag" />
+    <result column="YWHID"   jdbcType="VARCHAR" property="ywhid" />
+    <result column="YWHMC"   jdbcType="VARCHAR" property="ywhmc" />
+    <result column="XMMS"    jdbcType="VARCHAR" property="xmms" />
+    <result column="OLDXMID" jdbcType="VARCHAR" property="oldxmid" />
+  </resultMap>
+  <!-- 可以重用的 SQL 块,也可以被其他语句引用 -->
+  <sql id="Base_Column_List">
+    HPBID,HPBMC,JDID,JDMC,SQID,SQMC,XMID,XMBM,XMMC,XMDZ,WYXZ,JZMJ,CJSJ,SJZT,WYGSID,WYGSMC,GSRYID,XMJLXM
+  </sql>
+  <!--  映射查询语句 getSectList-->
+  <select id="getSectList" resultMap="BaseResultMap"  parameterType="com.indihx.datamng.vo.SectVo">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM WY_SECT
+    <where>
+    	<if test="hpbid !=null and hpbid != ''">
+    		HPBID = #{hpbid,jdbcType=VARCHAR}
+    	</if>
+    	<if test="jdid !=null and jdid != ''">
+    		AND JDID = #{jdid,jdbcType=VARCHAR}
+    	</if>
+    	<if test="wygsid !=null and wygsid != ''">
+    		AND WYGSID = #{wygsid,jdbcType=VARCHAR}
+    	</if>
+    	<if test="xmmc !=null and xmmc != ''">
+    		AND XMMC LIKE CONCAT(CONCAT('%',#{xmmc}),'%')
+    	</if>
+    	<if test="xmdz !=null and xmdz != ''">
+    		AND XMDZ LIKE CONCAT(CONCAT('%',#{xmdz}),'%')
+    	</if>
+    	<if test="wygsmc !=null and wygsmc != ''">
+    		AND WYGSMC LIKE CONCAT(CONCAT('%',#{wygsmc}),'%')
+    	</if>
+    	<if test="xmjlxm !=null and xmjlxm != ''">
+    		AND XMJLXM LIKE CONCAT(CONCAT('%',#{xmjlxm}),'%')
+    	</if>
+    </where>
+    ORDER BY XMBM ASC
+  </select>
+  <!--  映射查询语句 getTempSectInfo-->
+  <select id="getTempSectInfo" resultMap="BaseResultMap" parameterType="com.indihx.datamng.vo.SectVo">
+  	SELECT * FROM WY_SECT_TEMP
+    <where>
+    	<if test="xmid !=null and xmid != ''">
+    		AND XMID = #{xmid}
+    	</if>
+    	<if test="app_id !=null and app_id != ''">
+    		AND APP_ID = #{app_id}
+    	</if>
+    </where>
+  </select>
+  <!--  映射插入语句 saveSectTemp-->
+  <insert id="saveSectTemp" parameterType="com.indihx.datamng.entity.Wy_Sect_Temp">
+    insert into WY_SECT_TEMP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="xmid != null">
+        XMID,
+      </if>
+      <if test="app_id != null">
+        APP_ID,
+      </if>
+      <if test="xmbm != null">
+        XMBM,
+      </if>
+      <if test="sjzt != null">
+        SJZT,
+      </if>
+      <if test="cjsj != null">
+        CJSJ,
+      </if>
+      <if test="xmmc != null">
+        XMMC,
+      </if>
+      <if test="xmdz != null">
+        XMDZ,
+      </if>
+      <if test="hpbid != null">
+        HPBID,
+      </if>
+      <if test="hpbmc != null">
+        HPBMC,
+      </if>
+      <if test="jdid != null">
+        JDID,
+      </if>
+      <if test="jdmc != null">
+        JDMC,
+      </if>
+      <if test="sqid != null">
+        SQID,
+      </if>
+      <if test="sqmc != null">
+        SQMC,
+      </if>
+      <if test="szdz != null">
+        SZDZ,
+      </if>
+      <if test="sznz != null">
+        SZNZ,
+      </if>
+      <if test="szxz != null">
+        SZXZ,
+      </if>
+      <if test="szbz != null">
+        SZBZ,
+      </if>
+      <if test="wyxz != null">
+        WYXZ,
+      </if>
+      <if test="wylx != null">
+        WYLX,
+      </if>
+      <if test="zzjzmj != null">
+        ZZJZMJ,
+      </if>
+      <if test="syjzmj != null">
+        SYJZMJ,
+      </if>
+       <if test="qtjzmj != null">
+        QTJZMJ,
+      </if>
+      <if test="jzmj != null">
+        JZMJ,
+      </if>
+      <if test="zdmj != null">
+        ZDMJ,
+      </if>
+      <if test="zds != null">
+        ZDS,
+      </if>
+      <if test="zhs != null">
+        ZHS,
+      </if>
+      <if test="jzmd != null">
+        JZMD,
+      </if>
+      <if test="rjl != null">
+        RJL,
+      </if>
+      <if test="lhl != null">
+        LHL,
+      </if>
+      <if test="lhmj != null">
+        LHMJ,
+      </if>
+      <if test="jzlhl != null">
+        JZLHL,
+      </if>
+      <if test="jzlhmj != null">
+        JZLHMJ,
+      </if>
+      <if test="dscws != null">
+        DSCWS,
+      </if>
+      <if test="dxcws != null">
+        DXCWS,
+      </if>
+      <if test="kgsj != null">
+        KGSJ,
+      </if>
+      <if test="terms != null">
+        TERMS,
+      </if>
+      <if test="jhjfsj != null">
+        JHJFSJ,
+      </if>
+      <if test="bqjzmj != null">
+        BQJZMJ,
+      </if>
+      <if test="jfsysj != null">
+        JFSYSJ,
+      </if>
+      <if test="wyglyfmj != null">
+        WYGLYFMJ,
+      </if>	
+      <if test="ywhyfmj != null">
+        YWHYFMJ,
+      </if>
+      <if test="mwfmj != null">
+        MWFMJ,
+      </if>
+      <if test="dhjmj != null">
+        DHJMJ,
+      </if>	
+      <if test="jksmj != null">
+        JKSMJ,
+      </if>
+      <if test="fjdcckmj != null">
+        FJDCCKMJ,
+      </if>
+      <if test="bncmj != null">
+        BNCMJ,
+      </if>
+      <if test="sbcmj != null">
+        SBCMJ,
+      </if>
+      <if test="gybfqtms != null">
+       GYBFQTMS,
+      </if>
+      <if test="wygsid != null">
+        WYGSID,
+      </if>
+      <if test="wygsmc != null">
+        WYGSMC,
+      </if>
+      <if test="glcid != null">
+        GLCID,
+      </if>
+      <if test="glcmc != null">
+        GLCMC,
+      </if>
+      <if test="gsryid != null">
+        GSRYID,
+      </if>
+      <if test="xmjlxm != null">
+        XMJLXM,
+      </if>
+      <if test="ywhflag != null">
+        YWHFLAG,
+      </if>
+      <if test="ywhid != null">
+        YWHID,
+      </if>
+      <if test="ywhmc != null">
+        YWHMC,
+      </if>
+      <if test="xmms != null">
+        XMMS,
+      </if>
+      <if test="oldxmid != null">
+        OLDXMID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="xmid != null">
+        #{xmid,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        #{app_id,jdbcType=DECIMAL},
+      </if>
+      <if test="xmbm != null">
+        #{xmbm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjzt != null">
+        #{sjzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null">
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="xmmc != null">
+        #{xmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xmdz != null">
+        #{xmdz,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        #{hpbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="jdid != null">
+        #{jdid,jdbcType=VARCHAR},
+      </if>
+      <if test="jdmc != null">
+        #{jdmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqid != null">
+        #{sqid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqmc != null">
+        #{sqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdz != null">
+        #{szdz,jdbcType=VARCHAR},
+      </if>
+      <if test="sznz != null">
+        #{sznz,jdbcType=VARCHAR},
+      </if>
+      <if test="szxz != null">
+        #{szxz,jdbcType=VARCHAR},
+      </if>
+      <if test="szbz != null">
+        #{szbz,jdbcType=VARCHAR},
+      </if>
+      <if test="wyxz != null">
+        #{wyxz,jdbcType=VARCHAR},
+      </if>
+      <if test="wylx != null">
+        #{wylx,jdbcType=VARCHAR},
+      </if>
+      <if test="jzmj != null">
+        #{jzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjzmj != null">
+         #{zzjzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="syjzmj != null">
+        #{syjzmj,jdbcType=VARCHAR},
+      </if>
+       <if test="qtjzmj != null">
+         #{qtjzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zdmj != null">
+        #{zdmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zds != null">
+        #{zds,jdbcType=DECIMAL},
+      </if>
+      <if test="zhs != null">
+        #{zhs,jdbcType=DECIMAL},
+      </if>
+      <if test="jzmd != null">
+        #{jzmd,jdbcType=DECIMAL},
+      </if>
+      <if test="rjl != null">
+        #{rjl,jdbcType=DECIMAL},
+      </if>
+      <if test="lhl != null">
+        #{lhl,jdbcType=DECIMAL},
+      </if>
+      <if test="lhmj != null">
+        #{lhmj,jdbcType=DECIMAL},
+      </if>
+      <if test="jzlhl != null">
+        #{jzlhl,jdbcType=DECIMAL},
+      </if>
+      <if test="jzlhmj != null">
+        #{jzlhmj,jdbcType=DECIMAL},
+      </if>
+      <if test="dscws != null">
+        #{dscws,jdbcType=DECIMAL},
+      </if>
+      <if test="dxcws != null">
+        #{dxcws,jdbcType=DECIMAL},
+      </if>
+      <if test="kgsj != null">
+        #{kgsj,jdbcType=DECIMAL},
+      </if>
+      <if test="terms != null">
+        #{terms,jdbcType=DECIMAL},
+      </if>
+      <if test="jhjfsj != null">
+        #{jhjfsj,jdbcType=DECIMAL},
+      </if>
+      <if test="bqjzmj != null">
+        #{bqjzmj,jdbcType=DECIMAL},
+      </if>
+      <if test="jfsysj != null">
+        #{jfsysj,jdbcType=DECIMAL},
+      </if>
+      <if test="wyglyfmj != null">
+        #{wyglyfmj,jdbcType=DECIMAL},
+      </if>	
+      <if test="ywhyfmj != null">
+        #{ywhyfmj,jdbcType=DECIMAL},
+      </if>
+      <if test="mwfmj != null">
+        #{mwfmj,jdbcType=DECIMAL},
+      </if>
+      <if test="dhjmj != null">
+        #{dhjmj,jdbcType=DECIMAL},
+      </if>	
+      <if test="jksmj != null">
+        #{jksmj,jdbcType=DECIMAL},
+      </if>
+      <if test="fjdcckmj != null">
+        #{fjdcckmj,jdbcType=DECIMAL},
+      </if>
+      <if test="bncmj != null">
+        #{bncmj,jdbcType=DECIMAL},
+      </if>
+      <if test="sbcmj != null">
+        #{sbcmj,jdbcType=DECIMAL},
+      </if>
+      <if test="gybfqtms != null">
+        #{gybfqtms,jdbcType=DECIMAL},
+      </if>				
+      <if test="wygsid != null">
+        #{wygsid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+        #{wygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="glcid != null">
+        #{glcid,jdbcType=VARCHAR},
+      </if>
+      <if test="glcmc != null">
+        #{glcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gsryid != null">
+        #{gsryid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmjlxm != null">
+        #{xmjlxm,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhflag != null">
+        #{ywhflag,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhid != null">
+        #{ywhid,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhmc != null">
+        #{ywhmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xmms != null">
+        #{xmms,jdbcType=VARCHAR},
+      </if>
+      <if test="oldxmid != null">
+        #{oldxmid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--  映射更新语句 updateSectTemp-->
+  <update id="updateSectTemp" parameterType="com.indihx.datamng.entity.Wy_Sect_Temp">
+    update WY_SECT_TEMP
+    <set>
+      <if test="xmid != null">
+        XMID=#{xmid,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        APP_ID=#{app_id,jdbcType=DECIMAL},
+      </if>
+      <if test="xmbm != null">
+        XMBM=#{xmbm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjzt != null">
+        SJZT=#{sjzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null">
+        CJSJ=#{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="xmmc != null">
+        XMMC=#{xmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xmdz != null">
+        XMDZ=#{xmdz,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        HPBID=#{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        HPBMC=#{hpbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="jdid != null">
+        JDID=#{jdid,jdbcType=VARCHAR},
+      </if>
+      <if test="jdmc != null">
+        JDMC=#{jdmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqid != null">
+        SQID=#{sqid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqmc != null">
+        SQMC=#{sqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdz != null">
+        SZDZ=#{szdz,jdbcType=VARCHAR},
+      </if>
+      <if test="szxz != null">
+        SZXZ=#{szxz,jdbcType=VARCHAR},
+      </if>
+      <if test="sznz != null">
+        SZNZ=#{sznz,jdbcType=VARCHAR},
+      </if>
+      <if test="szbz != null">
+        SZBZ=#{szbz,jdbcType=VARCHAR},
+      </if>
+      <if test="wyxz != null">
+        WYxz=#{wyxz,jdbcType=VARCHAR},
+      </if>
+      <if test="wylx != null">
+        WYLX=#{wylx,jdbcType=VARCHAR},
+      </if>
+      <if test="jzmj != null">
+        JZMJ=#{jzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjzmj != null">
+        ZZJZMJ=#{zzjzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="syjzmj != null">
+        SYJZMJ=#{syjzmj,jdbcType=VARCHAR},
+      </if>
+       <if test="qtjzmj != null">
+        QTJZMJ=#{qtjzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zdmj != null">
+        ZDMJ=#{zdmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zds != null">
+        ZDS=#{zds,jdbcType=DECIMAL},
+      </if>
+      <if test="zhs != null">
+        ZHS=#{zhs,jdbcType=DECIMAL},
+      </if>
+      <if test="jzmd != null">
+        JZMD=#{jzmd,jdbcType=DECIMAL},
+      </if>
+      <if test="rjl != null">
+        RJL=#{rjl,jdbcType=DECIMAL},
+      </if>
+      <if test="lhl != null">
+        LHL=#{lhl,jdbcType=DECIMAL},
+      </if>
+      <if test="lhmj != null">
+        LHMJ=#{lhmj,jdbcType=DECIMAL},
+      </if>
+      <if test="jzlhl != null">
+        JZLHL=#{jzlhl,jdbcType=DECIMAL},
+      </if>
+      <if test="jzlhmj != null">
+        JZLHMJ=#{jzlhmj,jdbcType=DECIMAL},
+      </if>
+      <if test="dscws != null">
+        DSCWS=#{dscws,jdbcType=DECIMAL},
+      </if>
+      <if test="dxcws != null">
+        DXCWS=#{dxcws,jdbcType=DECIMAL},
+      </if>
+      <if test="kgsj != null">
+        KGSJ=#{kgsj,jdbcType=DECIMAL},
+      </if>
+      <if test="terms != null">
+        TERMS=#{terms,jdbcType=DECIMAL},
+      </if>
+      <if test="jhjfsj != null">
+        JHJFSJ=#{jhjfsj,jdbcType=DECIMAL},
+      </if>
+      <if test="bqjzmj != null">
+        BQJZMJ=#{bqjzmj,jdbcType=DECIMAL},
+      </if>
+      <if test="jfsysj != null">
+        JFSYSJ=#{jfsysj,jdbcType=DECIMAL},
+      </if>
+      <if test="wyglyfmj != null">
+        WYGLYFMJ=#{wyglyfmj,jdbcType=DECIMAL},
+      </if>	
+      <if test="ywhyfmj != null">
+        YWHYFMJ=#{ywhyfmj,jdbcType=DECIMAL},
+      </if>
+      <if test="mwfmj != null">
+        MWFMJ=#{mwfmj,jdbcType=DECIMAL},
+      </if>
+      <if test="dhjmj != null">
+        DHJMJ=#{dhjmj,jdbcType=DECIMAL},
+      </if>	
+      <if test="jksmj != null">
+        JKSMJ=#{jksmj,jdbcType=DECIMAL},
+      </if>
+      <if test="fjdcckmj != null">
+        FJDCCKMJ=#{fjdcckmj,jdbcType=DECIMAL},
+      </if>
+      <if test="bncmj != null">
+        BNCMJ=#{bncmj,jdbcType=DECIMAL},
+      </if>
+      <if test="sbcmj != null">
+        SBCMJ=#{sbcmj,jdbcType=DECIMAL},
+      </if>
+      <if test="gybfqtms != null">
+        GYBFQTMS=#{gybfqtms,jdbcType=DECIMAL},
+      </if>	
+      <if test="wygsid != null">
+        WYGSID=#{wygsid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+        WYGSMC=#{wygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="glcid != null">
+        GLCID=#{glcid,jdbcType=VARCHAR},
+      </if>
+      <if test="glcmc != null">
+        GLCMC=#{glcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gsryid != null">
+        GSRYID=#{gsryid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmjlxm != null">
+        XMJLXM=#{xmjlxm,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhflag != null">
+        YWHFLAG=#{ywhflag,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhid != null">
+        YWHID=#{ywhid,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhmc != null">
+        YWHMC=#{ywhmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xmms != null">
+        XMMS=#{xmms,jdbcType=VARCHAR},
+      </if>
+      <if test="oldxmid != null">
+        OLIDXMID=#{oldxmid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where XMID = #{xmid,jdbcType=DECIMAL}
+  </update>
+  <!--  映射插入语句 saveSectHisInfo-->
+  <insert id="saveSectHisInfo" parameterType="com.indihx.datamng.vo.SectVo">
+    insert into WY_SECT_HIS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+     <if test="task_id != null">
+        TASK_ID,
+      </if>
+      <if test="xmid != null">
+        XMID,
+      </if>
+      <if test="app_id != null">
+        APP_ID,
+      </if>
+      <if test="xmbm != null">
+        XMBM,
+      </if>
+      <if test="sjzt != null">
+        SJZT,
+      </if>
+      <if test="cjsj != null">
+        CJSJ,
+      </if>
+      <if test="xmmc != null">
+        XMMC,
+      </if>
+      <if test="xmdz != null">
+        XMDZ,
+      </if>
+      <if test="hpbid != null">
+        HPBID,
+      </if>
+      <if test="hpbmc != null">
+        HPBMC,
+      </if>
+      <if test="jdid != null">
+        JDID,
+      </if>
+      <if test="jdmc != null">
+        JDMC,
+      </if>
+      <if test="sqid != null">
+        SQID,
+      </if>
+      <if test="sqmc != null">
+        SQMC,
+      </if>
+      <if test="szdz != null">
+        SZDZ,
+      </if>
+      <if test="sznz != null">
+        SZNZ,
+      </if>
+      <if test="szxz != null">
+        SZXZ,
+      </if>
+      <if test="szbz != null">
+        SZBZ,
+      </if>
+      <if test="wyxz != null">
+        WYXZ,
+      </if>
+      <if test="wylx != null">
+        WYLX,
+      </if>
+      <if test="zzjzmj != null">
+        ZZJZMJ,
+      </if>
+      <if test="syjzmj != null">
+        SYJZMJ,
+      </if>
+       <if test="qtjzmj != null">
+        QTJZMJ,
+      </if>
+      <if test="jzmj != null">
+        JZMJ,
+      </if>
+      <if test="zdmj != null">
+        ZDMJ,
+      </if>
+      <if test="zds != null">
+        ZDS,
+      </if>
+      <if test="zhs != null">
+        ZHS,
+      </if>
+      <if test="jzmd != null">
+        JZMD,
+      </if>
+      <if test="rjl != null">
+        RJL,
+      </if>
+      <if test="lhl != null">
+        LHL,
+      </if>
+      <if test="lhmj != null">
+        LHMJ,
+      </if>
+      <if test="jzlhl != null">
+        JZLHL,
+      </if>
+      <if test="jzlhmj != null">
+        JZLHMJ,
+      </if>
+      <if test="dscws != null">
+        DSCWS,
+      </if>
+      <if test="dxcws != null">
+        DXCWS,
+      </if>
+      <if test="kgsj != null">
+        KGSJ,
+      </if>
+      <if test="terms != null">
+        TERMS,
+      </if>
+      <if test="jhjfsj != null">
+        JHJFSJ,
+      </if>
+      <if test="bqjzmj != null">
+        BQJZMJ,
+      </if>
+      <if test="jfsysj != null">
+        JFSYSJ,
+      </if>
+      <if test="wyglyfmj != null">
+        WYGLYFMJ,
+      </if>	
+      <if test="ywhyfmj != null">
+        YWHYFMJ,
+      </if>
+      <if test="mwfmj != null">
+        MWFMJ,
+      </if>
+      <if test="dhjmj != null">
+        DHJMJ,
+      </if>	
+      <if test="jksmj != null">
+        JKSMJ,
+      </if>
+      <if test="fjdcckmj != null">
+        FJDCCKMJ,
+      </if>
+      <if test="bncmj != null">
+        BNCMJ,
+      </if>
+      <if test="sbcmj != null">
+        SBCMJ,
+      </if>
+      <if test="gybfqtms != null">
+       GYBFQTMS,
+      </if>
+      <if test="wygsid != null">
+        WYGSID,
+      </if>
+      <if test="wygsmc != null">
+        WYGSMC,
+      </if>
+      <if test="glcid != null">
+        GLCID,
+      </if>
+      <if test="glcmc != null">
+        GLCMC,
+      </if>
+      <if test="gsryid != null">
+        GSRYID,
+      </if>
+      <if test="xmjlxm != null">
+        XMJLXM,
+      </if>
+      <if test="ywhflag != null">
+        YWHFLAG,
+      </if>
+      <if test="ywhid != null">
+        YWHID,
+      </if>
+      <if test="ywhmc != null">
+        YWHMC,
+      </if>
+      <if test="xmms != null">
+        XMMS,
+      </if>
+      <if test="oldxmid != null">
+        OLDXMID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="task_id != null">
+        #{task_id,jdbcType=VARCHAR},
+      </if>
+      <if test="xmid != null">
+        #{xmid,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        #{app_id,jdbcType=DECIMAL},
+      </if>
+      <if test="xmbm != null">
+        #{xmbm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjzt != null">
+        #{sjzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null">
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="xmmc != null">
+        #{xmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xmdz != null">
+        #{xmdz,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        #{hpbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="jdid != null">
+        #{jdid,jdbcType=VARCHAR},
+      </if>
+      <if test="jdmc != null">
+        #{jdmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqid != null">
+        #{sqid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqmc != null">
+        #{sqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdz != null">
+        #{szdz,jdbcType=VARCHAR},
+      </if>
+      <if test="sznz != null">
+        #{sznz,jdbcType=VARCHAR},
+      </if>
+      <if test="szxz != null">
+        #{szxz,jdbcType=VARCHAR},
+      </if>
+      <if test="szbz != null">
+        #{szbz,jdbcType=VARCHAR},
+      </if>
+      <if test="wyxz != null">
+        #{wyxz,jdbcType=VARCHAR},
+      </if>
+      <if test="wylx != null">
+        #{wylx,jdbcType=VARCHAR},
+      </if>
+      <if test="jzmj != null">
+        #{jzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjzmj != null">
+         #{zzjzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="syjzmj != null">
+        #{syjzmj,jdbcType=VARCHAR},
+      </if>
+       <if test="qtjzmj != null">
+         #{qtjzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zdmj != null">
+        #{zdmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zds != null">
+        #{zds,jdbcType=DECIMAL},
+      </if>
+      <if test="zhs != null">
+        #{zhs,jdbcType=DECIMAL},
+      </if>
+      <if test="jzmd != null">
+        #{jzmd,jdbcType=DECIMAL},
+      </if>
+      <if test="rjl != null">
+        #{rjl,jdbcType=DECIMAL},
+      </if>
+      <if test="lhl != null">
+        #{lhl,jdbcType=DECIMAL},
+      </if>
+      <if test="lhmj != null">
+        #{lhmj,jdbcType=DECIMAL},
+      </if>
+      <if test="jzlhl != null">
+        #{jzlhl,jdbcType=DECIMAL},
+      </if>
+      <if test="jzlhmj != null">
+        #{jzlhmj,jdbcType=DECIMAL},
+      </if>
+      <if test="dscws != null">
+        #{dscws,jdbcType=DECIMAL},
+      </if>
+      <if test="dxcws != null">
+        #{dxcws,jdbcType=DECIMAL},
+      </if>
+      <if test="kgsj != null">
+        #{kgsj,jdbcType=DECIMAL},
+      </if>
+      <if test="terms != null">
+        #{terms,jdbcType=DECIMAL},
+      </if>
+      <if test="jhjfsj != null">
+        #{jhjfsj,jdbcType=DECIMAL},
+      </if>
+      <if test="bqjzmj != null">
+        #{bqjzmj,jdbcType=DECIMAL},
+      </if>
+      <if test="jfsysj != null">
+        #{jfsysj,jdbcType=DECIMAL},
+      </if>
+      <if test="wyglyfmj != null">
+        #{wyglyfmj,jdbcType=DECIMAL},
+      </if>	
+      <if test="ywhyfmj != null">
+        #{ywhyfmj,jdbcType=DECIMAL},
+      </if>
+      <if test="mwfmj != null">
+        #{mwfmj,jdbcType=DECIMAL},
+      </if>
+      <if test="dhjmj != null">
+        #{dhjmj,jdbcType=DECIMAL},
+      </if>	
+      <if test="jksmj != null">
+        #{jksmj,jdbcType=DECIMAL},
+      </if>
+      <if test="fjdcckmj != null">
+        #{fjdcckmj,jdbcType=DECIMAL},
+      </if>
+      <if test="bncmj != null">
+        #{bncmj,jdbcType=DECIMAL},
+      </if>
+      <if test="sbcmj != null">
+        #{sbcmj,jdbcType=DECIMAL},
+      </if>
+      <if test="gybfqtms != null">
+        #{gybfqtms,jdbcType=DECIMAL},
+      </if>				
+      <if test="wygsid != null">
+        #{wygsid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+        #{wygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="glcid != null">
+        #{glcid,jdbcType=VARCHAR},
+      </if>
+      <if test="glcmc != null">
+        #{glcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gsryid != null">
+        #{gsryid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmjlxm != null">
+        #{xmjlxm,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhflag != null">
+        #{ywhflag,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhid != null">
+        #{ywhid,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhmc != null">
+        #{ywhmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xmms != null">
+        #{xmms,jdbcType=VARCHAR},
+      </if>
+      <if test="oldxmid != null">
+        #{oldxmid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--  映射插入语句 saveSectInfo-->
+  <insert id="saveSectInfo" parameterType="com.indihx.datamng.vo.SectVo">
+    insert into WY_SECT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="xmid != null">
+        XMID,
+      </if>
+      <if test="xmbm != null">
+        XMBM,
+      </if>
+      <if test="sjzt != null">
+        SJZT,
+      </if>
+      <if test="cjsj != null">
+        CJSJ,
+      </if>
+      <if test="xmmc != null">
+        XMMC,
+      </if>
+      <if test="xmdz != null">
+        XMDZ,
+      </if>
+      <if test="hpbid != null">
+        HPBID,
+      </if>
+      <if test="hpbmc != null">
+        HPBMC,
+      </if>
+      <if test="jdid != null">
+        JDID,
+      </if>
+      <if test="jdmc != null">
+        JDMC,
+      </if>
+      <if test="sqid != null">
+        SQID,
+      </if>
+      <if test="sqmc != null">
+        SQMC,
+      </if>
+      <if test="szdz != null">
+        SZDZ,
+      </if>
+      <if test="sznz != null">
+        SZNZ,
+      </if>
+      <if test="szxz != null">
+        SZXZ,
+      </if>
+      <if test="szbz != null">
+        SZBZ,
+      </if>
+      <if test="wyxz != null">
+        WYXZ,
+      </if>
+      <if test="wylx != null">
+        WYLX,
+      </if>
+      <if test="zzjzmj != null">
+        ZZJZMJ,
+      </if>
+      <if test="syjzmj != null">
+        SYJZMJ,
+      </if>
+       <if test="qtjzmj != null">
+        QTJZMJ,
+      </if>
+      <if test="jzmj != null">
+        JZMJ,
+      </if>
+      <if test="zdmj != null">
+        ZDMJ,
+      </if>
+      <if test="zds != null">
+        ZDS,
+      </if>
+      <if test="zhs != null">
+        ZHS,
+      </if>
+      <if test="jzmd != null">
+        JZMD,
+      </if>
+      <if test="rjl != null">
+        RJL,
+      </if>
+      <if test="lhl != null">
+        LHL,
+      </if>
+      <if test="lhmj != null">
+        LHMJ,
+      </if>
+      <if test="jzlhl != null">
+        JZLHL,
+      </if>
+      <if test="jzlhmj != null">
+        JZLHMJ,
+      </if>
+      <if test="dscws != null">
+        DSCWS,
+      </if>
+      <if test="dxcws != null">
+        DXCWS,
+      </if>
+      <if test="kgsj != null">
+        KGSJ,
+      </if>
+      <if test="terms != null">
+        TERMS,
+      </if>
+      <if test="jhjfsj != null">
+        JHJFSJ,
+      </if>
+      <if test="bqjzmj != null">
+        BQJZMJ,
+      </if>
+      <if test="jfsysj != null">
+        JFSYSJ,
+      </if>
+      <if test="wyglyfmj != null">
+        WYGLYFMJ,
+      </if>	
+      <if test="ywhyfmj != null">
+        YWHYFMJ,
+      </if>
+      <if test="mwfmj != null">
+        MWFMJ,
+      </if>
+      <if test="dhjmj != null">
+        DHJMJ,
+      </if>	
+      <if test="jksmj != null">
+        JKSMJ,
+      </if>
+      <if test="fjdcckmj != null">
+        FJDCCKMJ,
+      </if>
+      <if test="bncmj != null">
+        BNCMJ,
+      </if>
+      <if test="sbcmj != null">
+        SBCMJ,
+      </if>
+      <if test="gybfqtms != null">
+       GYBFQTMS,
+      </if>
+      <if test="wygsid != null">
+        WYGSID,
+      </if>
+      <if test="wygsmc != null">
+        WYGSMC,
+      </if>
+      <if test="glcid != null">
+        GLCID,
+      </if>
+      <if test="glcmc != null">
+        GLCMC,
+      </if>
+      <if test="gsryid != null">
+        GSRYID,
+      </if>
+      <if test="xmjlxm != null">
+        XMJLXM,
+      </if>
+      <if test="ywhflag != null">
+        YWHFLAG,
+      </if>
+      <if test="ywhid != null">
+        YWHID,
+      </if>
+      <if test="ywhmc != null">
+        YWHMC,
+      </if>
+      <if test="xmms != null">
+        XMMS,
+      </if>
+      <if test="oldxmid != null">
+        OLDXMID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="xmid != null">
+        #{xmid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmbm != null">
+        #{xmbm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjzt != null">
+        #{sjzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null">
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="xmmc != null">
+        #{xmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xmdz != null">
+        #{xmdz,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        #{hpbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="jdid != null">
+        #{jdid,jdbcType=VARCHAR},
+      </if>
+      <if test="jdmc != null">
+        #{jdmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqid != null">
+        #{sqid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqmc != null">
+        #{sqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdz != null">
+        #{szdz,jdbcType=VARCHAR},
+      </if>
+      <if test="sznz != null">
+        #{sznz,jdbcType=VARCHAR},
+      </if>
+      <if test="szxz != null">
+        #{szxz,jdbcType=VARCHAR},
+      </if>
+      <if test="szbz != null">
+        #{szbz,jdbcType=VARCHAR},
+      </if>
+      <if test="wyxz != null">
+        #{wyxz,jdbcType=VARCHAR},
+      </if>
+      <if test="wylx != null">
+        #{wylx,jdbcType=VARCHAR},
+      </if>
+      <if test="jzmj != null">
+        #{jzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjzmj != null">
+         #{zzjzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="syjzmj != null">
+        #{syjzmj,jdbcType=VARCHAR},
+      </if>
+       <if test="qtjzmj != null">
+         #{qtjzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zdmj != null">
+        #{zdmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zds != null">
+        #{zds,jdbcType=DECIMAL},
+      </if>
+      <if test="zhs != null">
+        #{zhs,jdbcType=DECIMAL},
+      </if>
+      <if test="jzmd != null">
+        #{jzmd,jdbcType=DECIMAL},
+      </if>
+      <if test="rjl != null">
+        #{rjl,jdbcType=DECIMAL},
+      </if>
+      <if test="lhl != null">
+        #{lhl,jdbcType=DECIMAL},
+      </if>
+      <if test="lhmj != null">
+        #{lhmj,jdbcType=DECIMAL},
+      </if>
+      <if test="jzlhl != null">
+        #{jzlhl,jdbcType=DECIMAL},
+      </if>
+      <if test="jzlhmj != null">
+        #{jzlhmj,jdbcType=DECIMAL},
+      </if>
+      <if test="dscws != null">
+        #{dscws,jdbcType=DECIMAL},
+      </if>
+      <if test="dxcws != null">
+        #{dxcws,jdbcType=DECIMAL},
+      </if>
+      <if test="kgsj != null">
+        #{kgsj,jdbcType=DECIMAL},
+      </if>
+      <if test="terms != null">
+        #{terms,jdbcType=DECIMAL},
+      </if>
+      <if test="jhjfsj != null">
+        #{jhjfsj,jdbcType=DECIMAL},
+      </if>
+      <if test="bqjzmj != null">
+        #{bqjzmj,jdbcType=DECIMAL},
+      </if>
+      <if test="jfsysj != null">
+        #{jfsysj,jdbcType=DECIMAL},
+      </if>
+      <if test="wyglyfmj != null">
+        #{wyglyfmj,jdbcType=DECIMAL},
+      </if>	
+      <if test="ywhyfmj != null">
+        #{ywhyfmj,jdbcType=DECIMAL},
+      </if>
+      <if test="mwfmj != null">
+        #{mwfmj,jdbcType=DECIMAL},
+      </if>
+      <if test="dhjmj != null">
+        #{dhjmj,jdbcType=DECIMAL},
+      </if>	
+      <if test="jksmj != null">
+        #{jksmj,jdbcType=DECIMAL},
+      </if>
+      <if test="fjdcckmj != null">
+        #{fjdcckmj,jdbcType=DECIMAL},
+      </if>
+      <if test="bncmj != null">
+        #{bncmj,jdbcType=DECIMAL},
+      </if>
+      <if test="sbcmj != null">
+        #{sbcmj,jdbcType=DECIMAL},
+      </if>
+      <if test="gybfqtms != null">
+        #{gybfqtms,jdbcType=DECIMAL},
+      </if>				
+      <if test="wygsid != null">
+        #{wygsid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+        #{wygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="glcid != null">
+        #{glcid,jdbcType=VARCHAR},
+      </if>
+      <if test="glcmc != null">
+        #{glcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gsryid != null">
+        #{gsryid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmjlxm != null">
+        #{xmjlxm,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhflag != null">
+        #{ywhflag,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhid != null">
+        #{ywhid,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhmc != null">
+        #{ywhmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xmms != null">
+        #{xmms,jdbcType=VARCHAR},
+      </if>
+      <if test="oldxmid != null">
+        #{oldxmid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--  映射更新语句 updateSectInfo-->
+  <update id="updateSectInfo" parameterType="com.indihx.datamng.vo.SectVo">
+    update WY_SECT
+     <set>
+      <if test="xmid != null">
+        XMID=#{xmid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmbm != null">
+        XMBM=#{xmbm,jdbcType=VARCHAR},
+      </if>
+      <if test="sjzt != null">
+        SJZT=#{sjzt,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null">
+        CJSJ=#{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="xmmc != null">
+        XMMC=#{xmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xmdz != null">
+        XMDZ=#{xmdz,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+        HPBID=#{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbmc != null">
+        HPBMC=#{hpbmc,jdbcType=VARCHAR},
+      </if>
+      <if test="jdid != null">
+        JDID=#{jdid,jdbcType=VARCHAR},
+      </if>
+      <if test="jdmc != null">
+        JDMC=#{jdmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqid != null">
+        SQID=#{sqid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqmc != null">
+        SQMC=#{sqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="szdz != null">
+        SZDZ=#{szdz,jdbcType=VARCHAR},
+      </if>
+      <if test="szxz != null">
+        SZXZ=#{szxz,jdbcType=VARCHAR},
+      </if>
+      <if test="sznz != null">
+        SZNZ=#{sznz,jdbcType=VARCHAR},
+      </if>
+      <if test="szbz != null">
+        SZBZ=#{szbz,jdbcType=VARCHAR},
+      </if>
+      <if test="wyxz != null">
+        WYXZ=#{wyxz,jdbcType=VARCHAR},
+      </if>
+      <if test="wylx != null">
+        WYLX=#{wylx,jdbcType=VARCHAR},
+      </if>
+      <if test="jzmj != null">
+        JZMJ=#{jzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zzjzmj != null">
+        ZZJZMJ=#{zzjzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="syjzmj != null">
+        SYJZMJ=#{syjzmj,jdbcType=VARCHAR},
+      </if>
+       <if test="qtjzmj != null">
+        QTJZMJ=#{qtjzmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zdmj != null">
+        ZDMJ=#{zdmj,jdbcType=VARCHAR},
+      </if>
+      <if test="zds != null">
+        ZDS=#{zds,jdbcType=DECIMAL},
+      </if>
+      <if test="zhs != null">
+        ZHS=#{zhs,jdbcType=DECIMAL},
+      </if>
+      <if test="jzmd != null">
+        JZMD=#{jzmd,jdbcType=DECIMAL},
+      </if>
+      <if test="rjl != null">
+        RJL=#{rjl,jdbcType=DECIMAL},
+      </if>
+      <if test="lhl != null">
+        LHL=#{lhl,jdbcType=DECIMAL},
+      </if>
+      <if test="lhmj != null">
+        LHMJ=#{lhmj,jdbcType=DECIMAL},
+      </if>
+      <if test="jzlhl != null">
+        JZLHL=#{jzlhl,jdbcType=DECIMAL},
+      </if>
+      <if test="jzlhmj != null">
+        JZLHMJ=#{jzlhmj,jdbcType=DECIMAL},
+      </if>
+      <if test="dscws != null">
+        DSCWS=#{dscws,jdbcType=DECIMAL},
+      </if>
+      <if test="dxcws != null">
+        DXCWS=#{dxcws,jdbcType=DECIMAL},
+      </if>
+      <if test="kgsj != null">
+        KGSJ=#{kgsj,jdbcType=DECIMAL},
+      </if>
+      <if test="terms != null">
+        TERMS=#{terms,jdbcType=DECIMAL},
+      </if>
+      <if test="jhjfsj != null">
+        JHJFSJ=#{jhjfsj,jdbcType=DECIMAL},
+      </if>
+      <if test="bqjzmj != null">
+        BQJZMJ=#{bqjzmj,jdbcType=DECIMAL},
+      </if>
+      <if test="jfsysj != null">
+        JFSYSJ=#{jfsysj,jdbcType=DECIMAL},
+      </if>
+      <if test="wyglyfmj != null">
+        WYGLYFMJ=#{wyglyfmj,jdbcType=DECIMAL},
+      </if>	
+      <if test="ywhyfmj != null">
+        YWHYFMJ=#{ywhyfmj,jdbcType=DECIMAL},
+      </if>
+      <if test="mwfmj != null">
+        MWFMJ=#{mwfmj,jdbcType=DECIMAL},
+      </if>
+      <if test="dhjmj != null">
+        DHJMJ=#{dhjmj,jdbcType=DECIMAL},
+      </if>	
+      <if test="jksmj != null">
+        JKSMJ=#{jksmj,jdbcType=DECIMAL},
+      </if>
+      <if test="fjdcckmj != null">
+        FJDCCKMJ=#{fjdcckmj,jdbcType=DECIMAL},
+      </if>
+      <if test="bncmj != null">
+        BNCMJ=#{bncmj,jdbcType=DECIMAL},
+      </if>
+      <if test="sbcmj != null">
+        SBCMJ=#{sbcmj,jdbcType=DECIMAL},
+      </if>
+      <if test="gybfqtms != null">
+        GYBFQTMS=#{gybfqtms,jdbcType=DECIMAL},
+      </if>	
+      <if test="wygsid != null">
+        WYGSID=#{wygsid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+        WYGSMC=#{wygsmc,jdbcType=VARCHAR},
+      </if>
+      <if test="glcid != null">
+        GLCID=#{glcid,jdbcType=VARCHAR},
+      </if>
+      <if test="glcmc != null">
+        GLCMC=#{glcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gsryid != null">
+        GSRYID=#{gsryid,jdbcType=VARCHAR},
+      </if>
+      <if test="xmjlxm != null">
+        XMJLXM=#{xmjlxm,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhflag != null">
+        YWHFLAG=#{ywhflag,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhid != null">
+        YWHID=#{ywhid,jdbcType=VARCHAR},
+      </if>
+      <if test="ywhmc != null">
+        YWHMC=#{ywhmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xmms != null">
+        XMMS=#{xmms,jdbcType=VARCHAR},
+      </if>
+      <if test="oldxmid != null">
+        OLIDXMID=#{oldxmid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where XMID = #{xmid,jdbcType=DECIMAL}
+  </update>
+  <!--  映射删除语句 deleteSectInfo-->
+  <delete id="deleteSectInfo" parameterType="java.lang.String">
+    delete from WY_SECT
+    where XMID = #{xmid,jdbcType=VARCHAR}
+  </delete>
+   <!--  映射查询语句 getSectInfoById-->
+  <select id="getSectInfoById" resultMap="BaseResultMap1" parameterType="java.lang.String">
+  	SELECT * FROM WY_SECT WHERE XMID = #{xmid}
+  </select>
+  <!--  映射删除语句 clearSectCopyInfo-->
+  <delete id="clearSectCopyInfo" parameterType="java.lang.Long">
+    delete from WY_SECT_TEMP
+    where APP_ID = #{app_id}
+  </delete>
+  <!--  映射更新语句 updateInfoStatus-->
+  <update id="updateInfoStatus" parameterType="com.indihx.datamng.entity.Wy_Sect_Temp">
+    update WY_SECT
+    set SJZT = #{sjzt,jdbcType=VARCHAR}
+    where XMID = #{xmid,jdbcType=DECIMAL}
+  </update>
+  
+</mapper>

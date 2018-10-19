@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.comm.dao.FileUploadMapper">
+	<resultMap id="BaseResultMap" type="com.indihx.comm.entity.FileUpload">
+		<id column="FILE_ID" jdbcType="DECIMAL" property="fileId" />
+		<result column="OLD_FILE_NAME" jdbcType="VARCHAR" property="oldFileName" />
+		<result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
+		<result column="UPLOAD_DATE" jdbcType="VARCHAR" property="uploadDate" />
+		<result column="FILE_ADDRE" jdbcType="VARCHAR" property="fileAddre" />
+		<result column="FILE_STS" jdbcType="VARCHAR" property="fileSts" />
+		<result column="UPLOAD_USER" jdbcType="VARCHAR" property="uploadUser" />
+		<result column="RELA_TABLE" jdbcType="VARCHAR" property="relaTable" />
+		<result column="RELA_TAB_ID" jdbcType="DECIMAL" property="relaTabId" />
+		<result column="FILE_SIZE" jdbcType="VARCHAR" property="fileSize" />
+		<result column="FILE_TYPE" jdbcType="VARCHAR" property="fileType" />
+		<result column="FILE_TYPE_ID" jdbcType="VARCHAR" property="fileTypeId" />
+	</resultMap>
+	<resultMap id="UploadResultMap" type="com.indihx.comm.entity.FileTypeCfg">
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="TRAN_TYPE" jdbcType="VARCHAR" property="tranType" />
+		<result column="FILE_TYPE" jdbcType="VARCHAR" property="fileType" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		FILE_ID, OLD_FILE_NAME, FILE_NAME, UPLOAD_DATE, FILE_ADDRE, FILE_STS,
+		UPLOAD_USER,RELA_TABLE, RELA_TAB_ID,FILE_TYPE,FILE_TYPE_ID,FILE_SIZE
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="com.indihx.comm.entity.FileUpload"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from FILE_UPLOAD
+		<where>
+			<if test="fileId != null and fileId != ''">
+				FILE_ID = #{fileId,jdbcType=DECIMAL}
+			</if>
+			<if test="relaTable != null and relaTable !=''">
+				AND RELA_TABLE = #{relaTable,jdbcType=VARCHAR}
+			</if>
+			<if test="relaTabId != null and relaTabId !=''">
+				AND RELA_TAB_ID = #{relaTabId,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from FILE_UPLOAD
+		where FILE_ID = #{fileId,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insertSelective" parameterType="com.indihx.comm.entity.FileUpload">
+		insert into FILE_UPLOAD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fileId != null">
+				FILE_ID,
+			</if>
+			<if test="oldFileName != null">
+				OLD_FILE_NAME,
+			</if>
+			<if test="fileName != null">
+				FILE_NAME,
+			</if>
+			<if test="uploadDate != null">
+				UPLOAD_DATE,
+			</if>
+			<if test="fileAddre != null">
+				FILE_ADDRE,
+			</if>
+			<if test="fileSts != null">
+				FILE_STS,
+			</if>
+			<if test="uploadUser != null">
+				UPLOAD_USER,
+			</if>
+			<if test="relaTable != null">
+				RELA_TABLE,
+			</if>
+			<if test="relaTabId != null">
+				RELA_TAB_ID,
+			</if>
+			<if test="fileSize != null">
+				FILE_SIZE,
+			</if>
+			<if test="fileType != null">
+				FILE_TYPE,
+			</if>
+			<if test="fileTypeId != null">
+				FILE_TYPE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fileId != null">
+				#{fileId,jdbcType=DECIMAL},
+			</if>
+			<if test="oldFileName != null">
+				#{oldFileName,jdbcType=VARCHAR},
+			</if>
+			<if test="fileName != null">
+				#{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="uploadDate != null">
+				#{uploadDate,jdbcType=VARCHAR},
+			</if>
+			<if test="fileAddre != null">
+				#{fileAddre,jdbcType=VARCHAR},
+			</if>
+			<if test="fileSts != null">
+				#{fileSts,jdbcType=VARCHAR},
+			</if>
+			<if test="uploadUser != null">
+				#{uploadUser,jdbcType=VARCHAR},
+			</if>
+			<if test="relaTable != null">
+				#{relaTable,jdbcType=VARCHAR},
+			</if>
+			<if test="relaTabId != null">
+				#{relaTabId,jdbcType=DECIMAL},
+			</if>
+			<if test="fileSize != null">
+				#{fileSize,jdbcType=VARCHAR},
+			</if>
+			<if test="fileType != null">
+				#{fileType,jdbcType=VARCHAR},
+			</if>
+			<if test="fileTypeId != null">
+				#{fileTypeId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.indihx.comm.entity.FileUpload">
+		update FILE_UPLOAD
+		<set>
+			<if test="oldFileName != null">
+				OLD_FILE_NAME = #{oldFileName,jdbcType=VARCHAR},
+			</if>
+			<if test="fileName != null">
+				FILE_NAME = #{fileName,jdbcType=VARCHAR},
+			</if>
+			<if test="uploadDate != null">
+				UPLOAD_DATE = #{uploadDate,jdbcType=VARCHAR},
+			</if>
+			<if test="fileAddre != null">
+				FILE_ADDRE = #{fileAddre,jdbcType=VARCHAR},
+			</if>
+			<if test="fileSts != null">
+				FILE_STS = #{fileSts,jdbcType=VARCHAR},
+			</if>
+			<if test="uploadUser != null">
+				UPLOAD_USER = #{uploadUser,jdbcType=VARCHAR},
+			</if>
+			<if test="relaTable != null">
+				RELA_TABLE = #{relaTable,jdbcType=VARCHAR},
+			</if>
+			<if test="relaTabId != null">
+				RELA_TAB_ID = #{relaTabId,jdbcType=DECIMAL},
+			</if>
+			<if test="fileSize != null">
+				FILE_SIZE=#{fileSize,jdbcType=VARCHAR},
+			</if>
+			<if test="fileType != null">
+				FILE_TYPE=#{fileType,jdbcType=VARCHAR},
+			</if>
+			<if test="fileTypeId != null">
+				FILE_TYPE_ID=#{fileTypeId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where FILE_ID = #{fileId,jdbcType=DECIMAL}
+	</update>
+	<select id="getFileDocTypeList" parameterType="com.indihx.comm.entity.FileTypeCfg"
+		resultMap="UploadResultMap">
+		select id,tran_type,file_type from file_type_cfg
+		<where>
+			<if test="fileType != null and fileType != ''">
+				file_type = #{fileType,jdbcType=DECIMAL}
+			</if>
+			<if test="tranType != null and tranType !=''">
+				AND tran_type = #{tranType,jdbcType=VARCHAR}
+			</if>
+		</where>
+		ORDER BY ID
+	</select>
+	<select id="getFileTypeId" parameterType="java.lang.Long"
+		resultType="java.lang.Long">
+		select file_type_id from file_upload 
+		where rela_tab_id=#{relaTabId,jdbcType=DECIMAL}
+		group by file_type_id
+	</select>
+</mapper>

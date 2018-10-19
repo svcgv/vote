@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* css for  datagrid*/
+
+
+.webtree {padding:0; margin:0; font-size:12px;}
+.webtree ul { background-color: white;overflow: hidden;}
+.webtree li ul{ margin:0; padding:0 0 0 0px;}
+.webtree li ul.nolast{ background:url("../images/webtree/line1.gif") 0 0 repeat-y;}
+.webtree li {padding:0; margin:0; list-style:none; line-height:14px; text-align:left; white-space:nowrap; outline:0}
+.webtree div.hitbtn {
+	line-height:0; margin:0; width:18px; height:18px; display: inline-block; vertical-align:middle;
+	border:0 none; cursor: pointer;outline:none;
+	background-image: url("../images/webtree/tree_icon.png"); 
+}
+
+
+.webtree li span.selbtn {line-height:0; margin:0; width:16px; height:16px; display: inline-block; vertical-align:middle;
+	border:0 none; cursor: pointer;outline:none;background-image: url("../images/webtree/tree_icon.png");  margin:0 1px 0 0; cursor: auto}
+.webtree li span.selbtn.checkbox0 {background-position: -135px -20px; width: 16px; height: 16px;}
+.webtree li span.selbtn.checkbox1 {background-position: -95px -20px; width: 16px; height: 16px; }
+.webtree li span.selbtn.checkbox2 {background-position: -115px -20px; width: 16px; height: 16px;}
+.webtree li span.selbtn.radio0 {background-position: -175px -20px; width: 16px; height: 16px;}
+.webtree li span.selbtn.radio1 {background-position: -155px -20px; width: 16px; height: 16px; }
+
+.webtree div.nodeitem {/*z-index:-1;position:relative;left:-18px;*/
+	height:auto; width:100%;overflow: hidden; line-height:25px; 
+	padding:1px 0px 0 0px; margin:1px 0px 1px 0px;
+	cursor: pointer;
+	border:1px;
+	font-size:12px;font-family:tahoma;text-decoration:none; 
+	color:#333; background-color: transparent;
+	vertical-align:top; display: inline-block;
+	}
+.webtree div.nodeitem a {
+	font-size:12px;font-family:tahoma;solid #737573;
+	height: 25px;
+	line-height:25px;
+	text-decoration: none
+}
+.webtree div.nodeitem.item_def { }
+.webtree div.nodeitem.item_def a  { }
+.webtree div.nodeitem.item_1 { padding-left:0px; font-size:12px;font-weight:bold;COLOR: #476074; background-image: url('../images/accord/menu1_bg.gif');}
+.webtree div.nodeitem.item_1 a {  COLOR: #476074; }
+.webtree div.nodeitem.item_1.leafitem { padding-left:0px; color:#444444  ; BACKGROUND:url("");background-color:#FFF9B2; solid #ffffff ;}
+.webtree div.nodeitem.item_1.leafitem a,.webtree div.nodeitem.item_2.leafitem a {font-weight:normal !important;}
+.webtree div.nodeitem.item_2 { padding-left:12px; font-size:12px;font-weight:bold;color:#476074; solid #737573; BACKGROUND: url('../images/accord/menu2_bg.png');}
+.webtree div.nodeitem.item_2 a { font-size:12px;font-weight:bold;color:#476074; }
+.webtree div.nodeitem.item_2.leafitem { padding-left:12px; color:#444444; BACKGROUND:url("") ;background-color:#FFF9B2 ; solid #ffffff ;}
+
+.webtree div.nodeitem.item_3 { padding-left:22px; color:#444444;background-color:#FFF9B2; solid #ffffff;}
+.webtree div.nodeitem.item_3 a {  }
+.webtree div.nodeitem.item_4 { padding-left:35px; color:#444444;background-color:#F56232; solid #ffffff;}
+.webtree div.nodeitem.item_4 a {  }
+.webtree div.nodeitem:hover { color:#000000;BACKGROUND: url(../images/accord/menu2_bg.png) 0px -24px !important;solid #D06403}
+.webtree li div.nodeitem.selected {padding-top:0px; background-color:#FFE6B0!important; color:black; height:25px;line-height:25px;
+ border:1px #FFB951 solid; opacity:0.8;}
+
+.webtree .minusf { background-position: -18px -0px; width: 18px; height: 18px; }
+.webtree .minusm { background-position: -0px -0px; width: 18px; height: 18px; }
+.webtree .minusl {background-position: -54px -0px; width: 18px; height: 18px; }
+.webtree .minus {background-position: -36px -0px; width: 18px; height: 18px; }
+.webtree .plusf {background-position: -72px -0px; width: 18px; height: 18px;}
+.webtree .plusm {background-position: -126px -0px; width: 18px; height: 18px; }
+.webtree .plusl { background-position: -108px -0px; width: 18px; height: 18px; }
+.webtree .plus {background-position: -90px -0px; width: 18px; height: 18px; }
+.webtree .linem {background-position: -144px -0px; width: 18px; height: 18px;}
+.webtree .linel { background-position: -180px -0px; width: 18px; height: 18px;}
+.webtree .branch-o {background-position: -20px -20px; width: 18px; height: 18px; }
+.webtree .branch-c { background-position: -0px -20px; width: 18px; height: 18px; }
+.webtree .leaficon1 { background-position: -40px -20px; width: 18px; height: 18px;}
+.webtree .leaficon2 {background-position: -60px -20px; width: 18px; height: 18px; }
+/**/
+.webtree .branch-o2 {background-image: url('../images/accord/menu_arrow22.png')  !important;    }
+.webtree .branch-c2 {background-image: url('../images/accord/menu_arrow11.png')  !important;   }
+
+ 

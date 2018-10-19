@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.credit.dao.CreditFileSignMapper">
+	<resultMap id="BaseResultMap" type="com.indihx.credit.entity.CreditFileSign">
+		<id column="SIGN_ID" jdbcType="DECIMAL" property="signId" />
+		<result column="CREDIT_CODE" jdbcType="DECIMAL" property="credit_code" />
+		<result column="FILE_TYPE_ID" jdbcType="DECIMAL" property="fileTypeId" />
+		<result column="FILE_TYPE" jdbcType="VARCHAR" property="fileType" />
+		<result column="TRAN_TYPE" jdbcType="VARCHAR" property="tranType" />
+		<result column="IS_SIGN" jdbcType="CHAR" property="isSign" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		SIGN_ID, CREDIT_CODE,FILE_TYPE_ID, FILE_TYPE,IS_SIGN
+	</sql>
+	<!-- 查询档案 -->
+	<select id="getFileList" parameterType="com.indihx.credit.entity.CreditFileSign"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from CREDIT_FILE_SIGN
+		<where>
+			<if test="signId != null">
+				SIGN_ID = #{signId,jdbcType=DECIMAL}
+			</if>
+			<if test="credit_code != null">
+				AND CREDIT_CODE = #{credit_code,jdbcType=DECIMAL}
+			</if>
+		</where>
+		ORDER BY SIGN_ID
+	</select>
+	<!-- 删除档案 -->
+	<delete id="deleteFile" parameterType="com.indihx.credit.entity.CreditFileSign">
+		delete from
+		CREDIT_FILE_SIGN
+		<where>
+			<if test="signId != null">
+				SIGN_ID = #{signId,jdbcType=DECIMAL}
+			</if>
+			<if test="credit_code != null">
+				AND CREDIT_CODE = #{credit_code,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</delete>
+	<!-- 新增档案 -->
+	<insert id="saveFile" parameterType="com.indihx.credit.entity.CreditFileSign">
+		insert into CREDIT_FILE_SIGN
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="signId != null">
+				SIGN_ID,
+			</if>
+			<if test="credit_code != null">
+				CREDIT_CODE,
+			</if>
+			<if test="fileTypeId != null">
+				FILE_TYPE_ID,
+			</if>
+			<if test="isSign != null">
+				IS_SIGN,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="signId != null">
+				#{signId,jdbcType=DECIMAL},
+			</if>
+			<if test="credit_code != null">
+				#{credit_code,jdbcType=DECIMAL},
+			</if>
+			<if test="fileTypeId != null">
+				#{fileTypeId,jdbcType=VARCHAR},
+			</if>
+			<if test="isSign != null">
+				#{isSign,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<!-- 修改档案 -->
+	<update id="updateFile" parameterType="com.indihx.credit.entity.CreditFileSign">
+		update CREDIT_FILE_SIGN
+		<set>
+			<if test="credit_code != null">
+				 CREDIT_CODE = #{credit_code,jdbcType=VARCHAR},
+			</if>
+			<if test="fileTypeId != null">
+				FILE_TYPE_ID=#{fileTypeId,jdbcType=VARCHAR},
+			</if>
+			<if test="isSign != null">
+				IS_SIGN = #{isSign,jdbcType=CHAR},
+			</if>
+		</set>
+		<where>
+			<if test="signId != null">
+				SIGN_ID = #{signId,jdbcType=DECIMAL}
+			</if>
+			<if test="credit_code != null">
+				AND CREDIT_CODE = #{credit_code,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</update>
+	<select id="getCreditFileList" parameterType="com.indihx.credit.entity.CreditFileSign" resultMap="BaseResultMap">
+		select cfg.id as file_type_id,cfg.tran_type,cfg.file_type,sign.sign_id,sign.is_sign from file_type_cfg cfg left join credit_file_sign sign on cfg.id=sign.file_type_id
+		and sign.credit_code = #{credit_code,jdbcType=VARCHAR}
+		<where>
+			<if test="signId != null and signId != ''">
+				sign_id = #{signId,jdbcType=DECIMAL}
+			</if>
+			<if test="tranType != null and tranType !=''">
+				AND tran_type = #{tranType,jdbcType=VARCHAR}
+			</if>
+		</where>
+		ORDER BY cfg.ID
+	</select>
+</mapper>

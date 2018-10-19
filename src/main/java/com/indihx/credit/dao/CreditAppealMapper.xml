@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.credit.dao.CreditAppealMapper">
+
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  
+  <!-- 用来描述如何从数据库结果集中来加载你的对象 -->
+  <resultMap id="BaseResultMap" type="com.indihx.credit.entity.CreditBadRecordTemp">
+    <id column="credit_code" jdbcType="VARCHAR" property="credit_code" /><!-- column：查询出来的列名  property：type指定的实体类型中的属性名 ，最终resultMap对column和property做一个映射关系（对应关系）  -->
+    <result column="app_id" jdbcType="VARCHAR" property="app_id" />
+    <result column="credit_status" jdbcType="VARCHAR" property="credit_status"/>
+    <result column="info_from" jdbcType="VARCHAR" property="info_from"/>
+    <result column="bllx" jdbcType="VARCHAR" property="bllx"/>
+    <result column="jlrq" jdbcType="VARCHAR" property="jlrq"/>
+    <result column="jlsj" jdbcType="VARCHAR" property="jlsj"/>
+    <result column="jldwid" jdbcType="VARCHAR" property="jldwid"/>
+    <result column="jlczybh" jdbcType="VARCHAR" property="jlczybh"/>
+    <result column="slnr" jdbcType="VARCHAR" property="slnr"/>
+    <result column="ckf" jdbcType="VARCHAR" property="ckf"/>
+    <result column="jlf" jdbcType="VARCHAR" property="jlf"/>
+    <result column="bjlx" jdbcType="VARCHAR" property="bjlx"/>
+    <result column="gzrq" jdbcType="VARCHAR" property="gzrq"/>
+    <result column="gzsj" jdbcType="VARCHAR" property="gzsj"/>
+    <result column="gzdwid" jdbcType="VARCHAR" property="gzdwid"/>
+    <result column="gzczybh" jdbcType="VARCHAR" property="gzczybh"/>
+    <result column="zgqx" jdbcType="VARCHAR" property="zgqx"/>
+    <result column="zgjzrq" jdbcType="VARCHAR" property="zgjzrq"/>
+    <result column="ssqx" jdbcType="VARCHAR" property="ssqx"/>
+    <result column="ssjzrq" jdbcType="VARCHAR" property="ssjzrq"/>
+    <result column="ssbz" jdbcType="VARCHAR" property="ssbz"/>
+    <result column="gdrq" jdbcType="VARCHAR" property="gdrq"/>
+    <result column="gdsj" jdbcType="VARCHAR" property="gdsj"/>
+    <result column="gdczybh" jdbcType="VARCHAR" property="gdczybh"/>
+    <result column="score" jdbcType="VARCHAR" property="score"/>
+    <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    
+    <result column="xmid" jdbcType="VARCHAR" property="xmid"/>
+    <result column="xmmc" jdbcType="VARCHAR" property="xmmc"/>
+    <result column="wygsid" jdbcType="VARCHAR" property="wygsid"/>
+    <result column="wygsmc" jdbcType="VARCHAR" property="wygsmc"/>
+    <result column="zjbh" jdbcType="VARCHAR" property="zjbh"/>
+    <result column="gsryid" jdbcType="VARCHAR" property="gsryid"/>
+    <result column="ryxm" jdbcType="VARCHAR" property="ryxm"/>
+    <result column="sfzbh" jdbcType="VARCHAR" property="sfzbh"/>
+    <result column="hpbid" jdbcType="VARCHAR" property="hpbid"/>
+    <result column="hpbmc" jdbcType="VARCHAR" property="hpbmc"/>
+  </resultMap>
+  <resultMap id="QuotaResultMap" type="com.indihx.credit.entity.CreditBadQuotaTemp">
+  	<id column="credit_seq" jdbcType="VARCHAR" property="credit_seq" />
+  	 <result column="credit_code" jdbcType="VARCHAR" property="credit_code"/>
+  	 <result column="app_id" jdbcType="VARCHAR" property="app_id"/>
+  	 <result column="jfyj" jdbcType="VARCHAR" property="jfyj"/>
+  	 <result column="syzt" jdbcType="VARCHAR" property="syzt"/>
+  	 <result column="jfbz" jdbcType="VARCHAR" property="jfbz"/>
+  	 <result column="ckf" jdbcType="VARCHAR" property="ckf"/>
+  	 <result column="jlf" jdbcType="VARCHAR" property="jlf"/>
+  	 <result column="score" jdbcType="VARCHAR" property="score"/>
+  	 <result column="jfsm" jdbcType="VARCHAR" property="jfsm"/>
+  	 <result column="clyj" jdbcType="VARCHAR" property="clyj"/>
+  </resultMap>
+  <resultMap id="AppealResultMap" type="com.indihx.credit.entity.CreditAppeal">
+  	<id column="appeal_code" jdbcType="VARCHAR" property="appeal_code" />
+  	 <result column="credit_code" jdbcType="VARCHAR" property="credit_code"/>
+  	 <result column="app_id" jdbcType="VARCHAR" property="app_id"/>
+  	 <result column="appeal_reasion" jdbcType="VARCHAR" property="appeal_reasion"/>
+  	 <result column="appeal_date" jdbcType="VARCHAR" property="appeal_date"/>
+  	 <result column="appeal_time" jdbcType="VARCHAR" property="appeal_time"/>
+  	 <result column="appeal_status" jdbcType="VARCHAR" property="appeal_status"/>
+  	 <result column="appeal_desc" jdbcType="VARCHAR" property="appeal_desc"/>
+  	 <result column="appeal_remark" jdbcType="VARCHAR" property="appeal_remark"/>
+  </resultMap>
+  
+  <!-- 可以重用的 SQL 块,也可以被其他语句引用 -->
+  <sql id="Base_Column_List">
+    CREDIT_CODE,APP_ID,CREDIT_STATUS,INFO_FROM,BLLX,JLRQ,JLSJ,SLNR,BJLX,JLF,SCORE,XMID,XMMC,WYGSID,WYGSMC,GSRYID,RYXM,SFZBH,HPBID,HPBMC,SSJZRQ,SSBZ
+  </sql>
+  <!--  映射查询语句 getAppealBadRecordList-->
+  <select id="getAppealBadRecordList" resultMap="BaseResultMap"  parameterType="com.indihx.credit.vo.CreditBadVo">
+  	SELECT 
+  	<include refid="Base_Column_List" />
+  	FROM CREDIT_BAD_RECORD_TEMP
+    <where>
+    	<if test="credit_code !=null and credit_code != ''">
+    		credit_code = #{credit_code,jdbcType=VARCHAR}
+    	</if>
+    	<if test="credit_status !=null and credit_status != ''">
+    		AND credit_status = #{credit_status,jdbcType=VARCHAR}
+    	</if>
+    	<if test="bjlx !=null and bjlx != ''">
+    		AND bjlx = #{bjlx,jdbcType=VARCHAR}
+    	</if>
+    	<if test="xmmc !=null and xmmc != ''">
+    		AND xmmc = #{xmmc,jdbcType=VARCHAR}
+    	</if>
+    	<if test="wygsmc !=null and wygsmc != ''">
+    		AND wygsmc = #{wygsmc,jdbcType=VARCHAR}
+    	</if>
+    	<if test="wygsid !=null and wygsid != ''">
+    		AND wygsid = #{wygsid,jdbcType=VARCHAR}
+    	</if>
+    	<if test="ryxm !=null and ryxm != ''">
+    		AND ryxm = #{ryxm,jdbcType=VARCHAR}
+    	</if>
+    	<if test="hpbid !=null and hpbid != ''">
+    		AND hpbid = #{hpbid,jdbcType=VARCHAR}
+    	</if>
+    </where>
+    ORDER BY CREDIT_CODE DESC
+  </select>
+  <!--  映射查询语句 getAppealInfo-->
+  <select id="getAppealInfo" resultMap="AppealResultMap"  parameterType="com.indihx.credit.entity.CreditAppeal">
+  	SELECT * FROM CREDIT_APPEAL 
+  	<where>
+  		<if test="credit_code !=null and credit_code != ''">
+    		credit_code = #{credit_code,jdbcType=VARCHAR}
+    	</if>
+    	<if test="appeal_code !=null and appeal_code != ''">
+    		appeal_code = #{appeal_code,jdbcType=VARCHAR}
+    	</if>
+    	<if test="app_id !=null and app_id != ''">
+    		and app_id = #{app_id,jdbcType=VARCHAR}
+    	</if>
+    </where>	
+  </select>
+  <!--  映射插入语句 saveCreditAppealInfo-->
+  <insert id="saveCreditAppealInfo" parameterType="com.indihx.credit.entity.CreditAppeal">
+    insert into CREDIT_APPEAL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+       <if test="appeal_code != null">
+        appeal_code,
+      </if>
+      <if test="credit_code != null">
+        credit_code,
+      </if>
+      <if test="app_id != null">
+        app_id,
+      </if>
+      <if test="appeal_status != null">
+        appeal_status,
+      </if>
+      <if test="appeal_reasion != null">
+        appeal_reasion,
+      </if>
+      <if test="appeal_date != null">
+        appeal_date,
+      </if>
+      <if test="appeal_time != null">
+        appeal_time,
+      </if>
+      <if test="appeal_desc != null">
+        appeal_desc,
+      </if>
+      <if test="appeal_remark != null">
+        appeal_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appeal_code != null">
+        #{appeal_code,jdbcType=VARCHAR},
+      </if>
+      <if test="credit_code != null">
+        #{credit_code,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        #{app_id,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_status != null">
+         #{appeal_status,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_reasion != null">
+         #{appeal_reasion,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_date != null">
+         #{appeal_date,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_time != null">
+        #{appeal_time,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_desc != null">
+        #{appeal_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_remark != null">
+         #{appeal_remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--  映射更新语句 updateCreditAppealInfo-->
+  <update id="updateCreditAppealInfo" parameterType="com.indihx.credit.entity.CreditAppeal">
+    update CREDIT_APPEAL
+    <set>
+      <if test="appeal_code != null">
+       appeal_code= #{appeal_code,jdbcType=VARCHAR},
+      </if>
+      <if test="credit_code != null">
+       credit_code= #{credit_code,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+       app_id= #{app_id,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_status != null">
+       appeal_status=  #{appeal_status,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_reasion != null">
+        appeal_reasion= #{appeal_reasion,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_date != null">
+       appeal_date= #{appeal_date,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_time != null">
+       appeal_time= #{appeal_time,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_desc != null">
+       appeal_desc= #{appeal_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="appeal_remark != null">
+        appeal_remark= #{appeal_remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where appeal_code = #{appeal_code,jdbcType=VARCHAR}
+  </update>
+</mapper>

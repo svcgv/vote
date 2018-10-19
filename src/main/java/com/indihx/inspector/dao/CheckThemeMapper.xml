@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.inspector.dao.CheckThemeMapper">
+
+<!-- 支持缓存配置(必须配置否则缓存无效) -->
+<cache type="com.indihx.cache.RedisCache" />
+
+<resultMap id="BaseResultMap" type="com.indihx.inspector.entity.DC_THEME">
+	<id column="theme_id" jdbcType="VARCHAR" property="theme_id"/>
+	<result column="theme_name" jdbcType="VARCHAR" property="theme_name"/>
+	<result column="start_date" jdbcType="VARCHAR" property="start_date"/> 
+	<result column="end_date" jdbcType="VARCHAR" property="end_date"/> 
+	<result column="design_flag" jdbcType="VARCHAR" property="design_flag"/> 
+	<result column="crt_org" jdbcType="VARCHAR" property="crt_org"/> 
+	<result column="crt_user" jdbcType="VARCHAR" property="crt_user"/> 
+	<result column="crt_date" jdbcType="VARCHAR" property="crt_date"/> 
+	<result column="crt_time" jdbcType="VARCHAR" property="crt_time"/> 
+	<result column="remark" jdbcType="VARCHAR" property="remark"/> 
+	<result column="status" jdbcType="VARCHAR" property="status"/> 
+	<result column="issue_date" jdbcType="VARCHAR" property="issue_date"/> 
+	<result column="issue_time" jdbcType="VARCHAR" property="issue_time"/>
+</resultMap>
+
+<resultMap id="JCXQResultMap" type="com.indihx.inspector.entity.DC_CKSECT">
+	<id column="theme_id" jdbcType="VARCHAR" property="theme_id"/>
+	<result column="sect_id" jdbcType="VARCHAR" property="sect_id"/>
+</resultMap>
+
+<resultMap id="JCZTResultMap" type="com.indihx.inspector.entity.DC_CKZB">
+	<id column="theme_id" jdbcType="VARCHAR" property="theme_id"/>
+	<result column="check_seq" jdbcType="VARCHAR" property="check_seq"/>
+</resultMap>
+
+<!-- 查询检查主题表 -->
+<select id="qryThemeList" resultMap="BaseResultMap">
+	select theme_id,theme_name,start_date,end_date,status
+	from DC_THEME
+	<!-- 创建单位 -->
+	where 1=1
+	<!-- 主题 -->
+	<if test="theme_name !=null and theme_name != ''">
+		and theme_name = #{theme_name}
+	</if>
+	order by end_date desc
+</select>
+
+
+
+
+<!-- 查询检查详情 -->
+<select id="getCheckTheme" resultMap="BaseResultMap">
+	select dt.*
+	from DC_THEME dt
+	where theme_id = #{theme_id,jdbcType=VARCHAR}
+</select>
+ 
+<!-- 查询检查详情 -->
+<select id="getCheckSect" resultMap="JCXQResultMap">
+	select dc.*
+	from DC_CKSECT dc 
+	where theme_id = #{theme_id,jdbcType=VARCHAR}
+</select>
+ 
+ <!-- 查询检查主题表 -->
+<select id="getChecQuotaList" resultMap="JCZTResultMap">
+	select dc.*
+	from DC_CKZB dc
+	where dc.theme_id = #{theme_id,jdbcType=VARCHAR}
+</select>
+ 
+<!-- 新增检查主题表 -->
+<insert id="insertTheme" parameterType="com.indihx.inspector.entity.DC_THEME">
+	insert into DC_THEME
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="theme_id != null and theme_id != ''">
+			theme_id,
+		</if>
+		<if test="theme_name != null and theme_name != ''">
+			theme_name,
+		</if>
+		<if test="start_date != null and start_date != ''">
+			start_date,
+		</if>
+		<if test="end_date != null and end_date != ''">
+			end_date,
+		</if>
+		<if test="design_flag != null and design_flag != ''">
+			design_flag,
+		</if>
+		<if test="crt_org != null and crt_org != ''">
+			crt_org,
+		</if>
+		<if test="crt_user != null and crt_user != ''">
+			crt_user,
+		</if>
+		<if test="crt_date != null and crt_date != ''">
+			crt_date,
+		</if>
+		<if test="crt_time != null and crt_time != ''">
+			crt_time,
+		</if> 
+		<if test="remark != null and remark != ''">
+			remark
+		</if> 
+		
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    	<if test="theme_id != null and theme_id != ''">
+			#{theme_id},
+		</if>
+		<if test="theme_name != null and theme_name != ''">
+			#{theme_name},
+		</if>
+		<if test="start_date != null and start_date != ''">
+			#{start_date},
+		</if>
+		<if test="end_date != null and end_date != ''">
+			#{end_date},
+		</if>
+		<if test="design_flag != null and design_flag != ''">
+			#{design_flag},
+		</if>
+		<if test="crt_org != null and crt_org != ''">
+			#{crt_org},
+		</if>
+		<if test="crt_user != null and crt_user != ''">
+			#{crt_user},
+		</if>
+		<if test="crt_date != null and crt_date != ''">
+			#{crt_date},
+		</if>
+		<if test="crt_time != null and crt_time != ''">
+			#{crt_time},
+		</if>
+		<if test="remark != null and remark != ''">
+			#{remark}
+		</if>
+    </trim>
+</insert>
+
+<!-- 新增指定检查小区 -->
+<insert id="insertCKSECT" parameterType="com.indihx.inspector.entity.DC_CKSECT">
+	insert into DC_CKSECT
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="theme_id != null and theme_id != ''">
+			theme_id,
+		</if>
+		<if test="sect_id != null and sect_id != ''">
+			sect_id,
+		</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    	<if test="theme_id != null and theme_id != ''">
+			#{theme_id},
+		</if>
+		<if test="sect_id != null and sect_id != ''">
+			#{sect_id},
+		</if>
+    </trim>
+</insert>
+
+<!-- 新增检查指标 -->
+<insert id="insertCKZB" parameterType="com.indihx.inspector.entity.DC_CKZB">
+	insert into DC_CKZB
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="theme_id != null and theme_id != ''">
+			theme_id,
+		</if>
+		<if test="check_seq != null and check_seq != ''">
+			check_seq,
+		</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    	<if test="theme_id != null and theme_id != ''">
+			#{theme_id},
+		</if>
+		<if test="check_seq != null and check_seq != ''">
+			#{check_seq},
+		</if>
+    </trim>
+</insert>
+
+
+<!-- 更新督察指标 -->
+<update id="updateTheme" parameterType="com.indihx.inspector.entity.DC_THEME">
+	update DC_THEME
+	<set>
+		<if test="theme_name != null and theme_name != ''">
+			theme_name=#{theme_name},
+		</if>
+		<if test="start_date != null and start_date != ''">
+			start_date=#{start_date},
+		</if>
+		<if test="design_flag != null and design_flag != ''">
+			design_flag=#{design_flag},
+		</if>
+		<if test="crt_org != null and crt_org != ''">
+			crt_org=#{crt_org},
+		</if>
+		<if test="crt_user != null and crt_user != ''">
+			crt_user=#{crt_user},
+		</if>
+		<if test="crt_date != null and crt_date != ''">
+			crt_date=#{crt_date},
+		</if>
+		<if test="crt_time != null and crt_time != ''">
+			crt_time=#{crt_time},
+		</if> 
+		<if test="remark != null and remark != ''">
+			remark=#{remark},
+		</if> 
+	</set>
+	where theme_id=#{theme_id}
+</update>
+
+<!-- 删除检查主题表-->
+<delete id="deleteTheme" parameterType="java.lang.String">
+	delete from DC_THEME where theme_id=#{theme_id,jdbcType=VARCHAR}
+</delete>
+
+<!-- 删除指定检查小区-->
+<delete id="deleteCKSECT" parameterType="java.lang.String">
+	delete from DC_CKSECT where theme_id=#{theme_id,jdbcType=VARCHAR}
+</delete>
+
+<!-- 删除检查指标-->
+<delete id="deleteCKZB" parameterType="java.lang.String">
+	delete from DC_CKZB where theme_id=#{theme_id,jdbcType=VARCHAR}
+</delete>
+
+
+<!-- 发布主题-->
+<update id="updatePublishTheme" parameterType="java.lang.String">
+	update DC_THEME
+	<set>
+		<if test="status != null and status != ''">
+			status=#{status},
+		</if>
+		<if test="issue_date != null and issue_date != ''">
+			issue_date=#{issue_date},
+		</if>
+		<if test="issue_time != null and issue_time != ''">
+			issue_time=#{issue_time},
+		</if>
+	</set>
+	where theme_id=#{theme_id,jdbcType=VARCHAR}
+</update>
+
+</mapper>

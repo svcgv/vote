@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.system.dao.ParamsInfoMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  <resultMap id="BaseResultMap" type="com.indihx.system.entity.ParamsInfo">
+    <id column="PARAMS_NO" jdbcType="VARCHAR" property="paramsNo" />
+    <result column="PARAMS_NAME" jdbcType="VARCHAR" property="paramsName" />
+    <result column="PARAMS_VAL" jdbcType="VARCHAR" property="paramsVal" />
+    <result column="TM_SMP" jdbcType="CHAR" property="tmSmp" />
+    <result column="PARAMS_TYPE" jdbcType="CHAR" property="paramsType"/>
+    <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    PARAMS_NO, PARAMS_NAME, PARAMS_VAL, TM_SMP,PARAMS_TYPE,REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PARAMS_INFO
+    where PARAMS_NO = #{paramsNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PARAMS_INFO
+    where PARAMS_NO = #{paramsNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.indihx.system.entity.ParamsInfo">
+    insert into PARAMS_INFO (PARAMS_NO, PARAMS_NAME, PARAMS_VAL, 
+      TM_SMP,PARAMS_TYPE)
+    values (#{paramsNo,jdbcType=VARCHAR}, #{paramsName,jdbcType=VARCHAR}, #{paramsVal,jdbcType=VARCHAR}, 
+      #{tmSmp,jdbcType=CHAR},#{paramsType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.indihx.system.entity.ParamsInfo">
+    insert into PARAMS_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="paramsNo != null">
+        PARAMS_NO,
+      </if>
+      <if test="paramsName != null">
+        PARAMS_NAME,
+      </if>
+      <if test="paramsVal != null">
+        PARAMS_VAL,
+      </if>
+      <if test="tmSmp != null">
+        TM_SMP,
+      </if>
+       <if test="paramsType != null">
+        PARAMS_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="paramsNo != null">
+        #{paramsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsName != null">
+        #{paramsName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsVal != null">
+        #{paramsVal,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null">
+        #{tmSmp,jdbcType=CHAR},
+      </if>
+      <if test="paramsType != null">
+        #{paramsType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.indihx.system.entity.ParamsInfo">
+    update PARAMS_INFO
+    <set>
+      <if test="paramsName != null">
+        PARAMS_NAME = #{paramsName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramsVal != null">
+        PARAMS_VAL = #{paramsVal,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null">
+        TM_SMP = #{tmSmp,jdbcType=CHAR},
+      </if>
+      	<if test="paramsType != null and paramsType !=''">
+        PARAMS_TYPE = #{paramsType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PARAMS_NO = #{paramsNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.indihx.system.entity.ParamsInfo">
+    update PARAMS_INFO
+    set PARAMS_NAME = #{paramsName,jdbcType=VARCHAR},
+      PARAMS_VAL = #{paramsVal,jdbcType=VARCHAR},
+      TM_SMP = #{tmSmp,jdbcType=CHAR},
+      PARAMS_TYPE = #{paramsType,jdbcType=VARCHAR}
+    where PARAMS_NO = #{paramsNo,jdbcType=VARCHAR}
+  </update>
+  <select id="qryParamsInfoAll" resultMap="BaseResultMap">
+  		select * from params_info where 1=1
+  		<if test="paramsNo != null and paramsNo !=''">
+  			and PARAMS_NO like CONCAT(CONCAT('%',#{paramsNo}),'%')  
+  		</if>
+  		<if test="paramsName !=null and paramsName !=''">
+  			and PARAMS_NAME like CONCAT(CONCAT('%',#{paramsName}),'%')
+  		</if>
+  		<if test="paramsVal != null and paramsVal !=''">
+       	 	and PARAMS_VAL like CONCAT(CONCAT('%',#{paramsVal}),'%')
+      	</if>
+      	<if test="tmSmp != null and tmSmp !=''">
+       	 	and TM_SMP = #{tmSmp,jdbcType=VARCHAR}
+      	</if>
+      	<if test="paramsType != null and paramsType !=''">
+       	 	  and PARAMS_TYPE IN ${paramsType}
+      	</if>
+  </select>
+</mapper>

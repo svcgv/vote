@@ -1,0 +1,71 @@
+/* css for  datagrid*/
+body{font-family:"Î¢ÈíÑÅºÚ","ËÎÌå";font-size:12px;color:#333333;}
+a:link, a:visited, a:active {
+    color: #666666;
+    text-decoration: none;
+}
+a:hover{color:#007fd2; text-decoration:none}
+.datagrid_gridtb {
+    border-collapse: collapse;
+    font-family: "Î¢ÈíÑÅºÚ","ËÎÌå" !important;
+    font-size: 12px !important;
+}
+.datagrid_gridtb  .gridheadclass
+{
+	font-size: 14px !important;
+	font-weight:bold;font-family:tahoma;
+	color: #2C9EE4 !important;
+	background: url("") no-repeat scroll right bottom transparent!important;
+	border: none;
+	overflow: hidden;
+	height: 28px;
+	cursor: default;
+	text-align: left;	
+	}
+.datagrid_gridtb thead tr {
+	background: url("./images/hd_bg.jpg") no-repeat scroll left bottom  !important;
+	
+}
+.datagrid_gridtb tbody tr.trSelected 
+	{
+	background: #84e9a3 !important;
+	border-right: 1px solid #d2e3ec;
+	border-left: 1px solid #eef8ff;
+	border-bottom: 1px solid #a8d8eb;
+	
+	}
+.datagrid_gridtb tbody tr td
+	{
+		border: none !important;
+		height: 24px !important;
+ 
+	}	
+.datagrid_gridtb tbody tr td:first-child{
+	padding-left: 25px;
+} 
+	.datagrid_gridtb tbody  tr{
+		border:none !important;
+	background: url("./images/icon01.png") no-repeat scroll 0 center transparent;
+	border-bottom: 1px dashed #9BB3D3  !important;
+	line-height: 32px !important;
+	}
+
+	.datagrid_gridtb tbody  tr.erow
+	{
+	background: #FFFFFF;
+	border:none !important;
+	border-bottom: 1px dashed #9BB3D3  !important;
+	font-size: 11px;
+	height: 24px;
+	}
+.datagrid_gridtb tbody  tr.orow
+	{
+	background: #DBE2E7;
+	border:none !important;
+	border-bottom: 1px dashed !important;
+	font-size: 11px;
+	height: 24px;
+	}
+div.gridPaginate_navigator{
+	text-align:center !important;
+}

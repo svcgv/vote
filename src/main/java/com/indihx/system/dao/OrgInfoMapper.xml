@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.system.dao.OrgInfoMapper">
+<!-- 支持缓存配置(必须配置否则缓存无效) -->
+<cache type="com.indihx.cache.RedisCache" />
+<resultMap id="BaseResultMap" type="com.indihx.system.entity.OrgInfo">
+<id column="ORG_NO" jdbcType="DECIMAL" property="orgNo"/>
+<result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
+<result column="PARENT_ORG_NO" jdbcType="DECIMAL" property="parentOrgNo"/>
+<result column="PARENT_ORG_NAME" jdbcType="VARCHAR" property="parentOrgName"/>
+<result column="ORG_TYPE" jdbcType="CHAR" property="orgType"/>
+<result column="ADDRES" jdbcType="VARCHAR" property="addres"/>
+<result column="TEL_NO" jdbcType="CHAR" property="telNo"/>
+<result column="ORG_STATUS" jdbcType="CHAR" property="orgStatus"/>
+<result column="OPER_USR" jdbcType="VARCHAR" property="operUsr"/>
+<result column="TM_SMP" jdbcType="CHAR" property="tmSmp"/>
+<result column="DIST_CODE" jdbcType="VARCHAR" property="distCode"/>
+<result column="LINK_MAN" jdbcType="VARCHAR" property="linkMan"/>
+<result column="ORG_MOBILE" jdbcType="VARCHAR" property="orgMobile"/>
+<result column="EMAIL" jdbcType="VARCHAR" property="email"/>
+<result column="POST_CODE" jdbcType="VARCHAR" property="postCode"/>
+<result column="ORG_ADDR" jdbcType="VARCHAR" property="orgAddr"/>
+<result column="REMARK" jdbcType="VARCHAR" property="remark"/>
+<result column="ORG_TEL" jdbcType="VARCHAR" property="orgTel"/>
+</resultMap>
+<resultMap id="StreetBaseResultMap" type="com.indihx.datamng.entity.Wy_Jd">
+    <id column="JDID" jdbcType="DECIMAL" property="jdid" />
+    <result column="HPBID" jdbcType="DECIMAL" property="hpbid" /> 
+    <result column="JDBM" jdbcType="CHAR" property="jdbm" /> 
+    <result column="JDMC" jdbcType="VARCHAR" property="jdmc" /> 
+    <result column="HPBMC" jdbcType="VARCHAR" property="hpbmc" />
+  </resultMap>
+  <resultMap id="AqHpbBaseResultMap" type="com.indihx.datamng.entity.Wy_Hpb">
+     <id column="HPBID" jdbcType="VARCHAR" property="hpbid" /><!-- column：查询出来的列名  property：type指定的实体类型中的属性名 ，最终resultMap对column和property做一个映射关系（对应关系）  -->
+     <result column="HPBBM" jdbcType="DECIMAL" property="hpbbm" />
+     <result column="HPBMC" jdbcType="VARCHAR" property="hpbmc" />
+     <result column="HPBLX" jdbcType="VARCHAR" property="hpblx" />
+     <result column="SJID" jdbcType="VARCHAR" property="sjid" />
+     <result column="CJRQ" jdbcType="VARCHAR" property="cjrq" />
+     <result column="BZ" jdbcType="VARCHAR" property="bz" />
+  </resultMap>
+  <resultMap id="UserBaseResultMap" type="com.indihx.system.entity.UsrInfo">
+    <id column="USR_ID" jdbcType="DECIMAL" property="usrId" />
+    <result column="USR_NO" jdbcType="VARCHAR" property="usrNo" />
+    <result column="USR_NAME" jdbcType="VARCHAR" property="usrName" />
+    <result column="ORG_NO" jdbcType="DECIMAL" property="orgNo" />
+     <result column="CPY_NAME" jdbcType="VARCHAR" property="orgName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ORG_NO, ORG_NAME, PARENT_ORG_NO, PARENT_ORG_NAME, ORG_TYPE, ADDRES,LINK_MAN,POST_CODE,EMAIL,REMARK,TEL_NO, OPER_USR,TM_SMP
+  </sql>
+    <select id="qryOrgInfoInfoAll" resultMap="BaseResultMap">
+  		SELECT oi.ORG_NO, oi.ORG_NAME, oi.ORG_TYPE, oi.LINK_MAN, oi.TEL_NO, oi.OPER_USR, oi.TM_SMP,oi.ORG_STATUS,
+		oi.PARENT_ORG_NAME AS PARENT_ORG_NAME
+		FROM org_info oi
+		LEFT JOIN org_info ar ON ar.ORG_NO = oi.PARENT_ORG_NO
+		WHERE 1 = 1 
+  		<if test="orgName!=null and orgName!=''">
+  		    and oi.ORG_NAME like CONCAT(CONCAT('%',#{orgName}),'%')
+  		</if>
+  		<if test="orgType!=null and orgType!=''">
+  		    and oi.ORG_TYPE IN ${orgType}
+  		</if>
+  		order by oi.org_no DESC
+  </select>
+  <select id="qryParentOrgInfoInfoAll" resultMap="StreetBaseResultMap">
+  	SELECT ss.JDID,ss.JDMC,ss.JDBM, ah.HPBMC,ah.HPBID
+	FROM WY_JD ss
+ 	JOIN WY_HPB ah ON ah.HPBID = ss.HPBID
+	WHERE ah.HPBID IN (
+		SELECT ah.HPBID
+		FROM WY_HPB ah
+		JOIN BASE_ORG_REL abor ON ABOR.PK_ID = ah.HPBID
+		JOIN ORG_INFO OI ON ABOR.ORG_NO = OI.ORG_NO
+		AND OI.ORG_STATUS NOT IN ('2') )
+		AND JDID NOT IN (
+		SELECT s.JDID
+		FROM WY_JD s
+		JOIN BASE_ORG_REL abor ON ABOR.PK_ID = s.JDID
+		JOIN ORG_INFO OI ON ABOR.ORG_NO = OI.ORG_NO
+		AND OI.ORG_STATUS NOT IN('2') )
+		<if test="jdmc!=null and jdmc!=''">
+     	 AND ss.JDMC like CONCAT(CONCAT('%',#{jdmc}),'%')
+       </if>
+  </select>
+  <select id="qryParentOrgHpbInfoAll" resultMap="AqHpbBaseResultMap">
+  		SELECT HPBID,HPBMC,HPBBM
+		FROM WY_HPB
+		WHERE HPBID NOT IN (
+		SELECT ah.HPBID
+		FROM WY_HPB ah
+		JOIN BASE_ORG_REL abor ON ABOR.PK_ID = ah.HPBID
+		JOIN ORG_INFO OI ON ABOR.ORG_NO = OI.ORG_NO
+		AND OI.ORG_STATUS NOT IN('2'))
+	<if test="hpbmc!=null and hpbmc!=''">
+        AND HPBMC like CONCAT(CONCAT('%',#{hpbmc}),'%')
+   </if>
+  </select>
+ <select id="qryParentId" resultMap="BaseResultMap">
+  		SELECT ORG_NO FROM ORG_INFO WHERE 1=1 AND ORG_TYPE='01'
+  </select>
+  <select id="qryParentName" resultMap="BaseResultMap">
+  		SELECT ORG_NAME FROM ORG_INFO WHERE 1=1 AND ORG_TYPE='01'
+  </select>
+  <select id="qryStreetOrgId" resultMap="BaseResultMap">
+  	SELECT oi.ORG_NO from WY_HPB ah 
+	join BASE_ORG_REL abor on AH.HPBID=ABOR.PK_ID
+	join ORG_INFO oi on abor.ORG_NO=oi.ORG_NO
+	where AH.HPBID=#{0} ORDER BY oi.org_no ASC
+  </select>
+  <select id="qryStreetOrgName" resultMap="BaseResultMap">
+  	SELECT oi.ORG_NAME from WY_HPB ah 
+	join BASE_ORG_REL abor on AH.HPBID=ABOR.PK_ID
+	join ORG_INFO oi on abor.ORG_NO=oi.ORG_NO
+	where AH.HPBID=#{0} ORDER BY oi.org_no ASC
+  </select>
+  <insert id="insertSelective" parameterType="com.indihx.system.entity.OrgInfo">
+      insert into org_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgNo != null">
+        ORG_NO,
+      </if>
+      <if test="orgName != null">
+        ORG_NAME,
+      </if>
+      <if test="parentOrgNo != null">
+        PARENT_ORG_NO,
+      </if>
+      <if test="parentOrgName != null">
+        PARENT_ORG_NAME,
+      </if>
+      <if test="orgType != null">
+        ORG_TYPE,
+      </if>
+        <if test="orgStatus != null">
+        ORG_STATUS,
+      </if>
+      <if test="addres != null">
+        ADDRES,
+      </if>
+      <if test="telNo != null">
+        TEL_NO,
+      </if>
+      <if test="operUsr != null">
+        OPER_USR,
+      </if>
+      <if test="tmSmp != null">
+      TM_SMP,
+      </if>
+      <if test="linkMan != null">
+      LINK_MAN,
+      </if>
+      <if test="postCode != null">
+      POST_CODE,
+      </if>
+      <if test="email != null">
+      EMAIL,
+      </if>
+      <if test="remark != null">
+      REMARK
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgNo != null">
+        #{orgNo,jdbcType=DECIMAL},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrgNo != null">
+        #{parentOrgNo,jdbcType=DECIMAL},
+      </if>
+      <if test="parentOrgName != null">
+        #{parentOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null">
+        #{orgType,jdbcType=CHAR},
+      </if>
+       <if test="orgStatus != null">
+        #{orgStatus,jdbcType=CHAR},
+      </if>
+      <if test="addres != null">
+        #{addres,jdbcType=VARCHAR},
+      </if>
+      <if test="telNo != null">
+        #{telNo,jdbcType=CHAR},
+      </if>
+      <if test="operUsr != null">
+        #{operUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="tmSmp != null">
+       #{tmSmp,jdbcType=CHAR},
+      </if>
+      <if test="linkMan != null">
+       #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null">
+       #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+       #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+       #{remark,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from org_info
+    where ORG_NO = #{orgNo,jdbcType=DECIMAL}
+   </select>
+   <update id="updateByPrimaryKeySelective" parameterType="com.indihx.system.entity.OrgInfo">
+      update org_info
+   <set>
+    <if test="orgNo != null">
+        ORG_NO = #{orgNo,jdbcType=DECIMAL},
+     </if>
+     <if test="orgName!=null">
+      ORG_NAME=#{orgName,jdbcType=VARCHAR},
+    </if>
+      <if test="parentOrgNo!=null">
+      PARENT_ORG_NO=#{parentOrgNo,jdbcType=DECIMAL},
+     </if>
+      <if test="parentOrgName!=null">
+      PARENT_ORG_NAME=#{parentOrgName,jdbcType=VARCHAR},
+    </if>
+      <if test="orgType!=null">
+      ORG_TYPE=#{orgType,jdbcType=CHAR},
+    </if>
+      <if test="addres!=null">
+      ADDRES=#{addres,jdbcType=VARCHAR},
+    </if>
+      <if test="telNo!=null">
+      TEL_NO=#{telNo,jdbcType=CHAR},
+    </if>
+      <if test="operUsr!=null">
+      OPER_USR=#{operUsr,jdbcType=VARCHAR},
+    </if>
+      <if test="tmSmp!=null">
+      TM_SMP=#{tmSmp,jdbcType=CHAR},
+    </if>
+    <if test="linkMan!=null">
+      LINK_MAN=#{linkMan,jdbcType=VARCHAR},
+    </if>
+    <if test="postCode!=null">
+      POST_CODE=#{postCode,jdbcType=VARCHAR},
+    </if>
+    <if test="email!=null">
+      EMAIL=#{email,jdbcType=VARCHAR},
+    </if>
+    <if test="tmSmp!=null">
+      REMARK=#{remark,jdbcType=VARCHAR}
+    </if>
+   </set>
+      where ORG_NO = #{orgNo,jdbcType=DECIMAL}
+  <!--  UPDATE ORG_INFO SET PARENT_ORG_NAME = (
+	  SELECT ORG_NAME
+	  FROM ORG_INFO
+	 WHERE ORG_NO = #{orgNo,jdbcType=DECIMAL} )
+	WHERE PARENT_ORG_NO = #{orgNo,jdbcType=DECIMAL}; -->
+   </update>
+   <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update ORG_INFO set ORG_STATUS='2'
+    where ORG_NO = #{orgNo,jdbcType=DECIMAL}
+  </update>
+  <update id="openStaOrgInfo" parameterType="java.lang.Long">
+    update ORG_INFO set ORG_STATUS='0'
+    where ORG_NO = #{orgNo,jdbcType=DECIMAL}
+  </update>
+  <update id="closeStaOrgInfo" parameterType="java.lang.Long">
+    update ORG_INFO set ORG_STATUS='1'
+    where ORG_NO = #{orgNo,jdbcType=DECIMAL}
+  </update>
+    <select id="qryparentOrgNo" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  		select * from org_info where PARENT_ORG_NO=#{parentOrgNo,jdbcType=VARCHAR}
+  	</select>
+  	<select id="qryOrgInfoAll" resultMap="BaseResultMap">
+  		select oi.* from org_info oi where 1=1
+  		<if test="org.orgName!=null and org.orgName!=''">
+  		    and oi.org_name like CONCAT(CONCAT('%',#{org.orgName}),'%')
+  		</if>
+  		 and oi.org_type in
+  	  <foreach collection="org_type" item="org_type" index="index" open="(" close=")" separator=",">
+  	  #{org_type}
+		</foreach>
+  	
+  </select>
+  <insert id="insertAqBaseOrgRel" parameterType="com.indihx.system.entity.BaseOrgRel">
+      insert into BASE_ORG_REL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="relId != null">
+        REL_ID,
+      </if>
+      <if test="orgNo != null">
+        ORG_NO,
+      </if>
+      <if test="pkId != null">
+        PK_ID,
+      </if>
+      <if test="pkTable != null">
+        PK_TABLE
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="relId != null">
+        #{relId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgNo != null">
+        #{orgNo,jdbcType=VARCHAR},
+      </if>
+      <if test="pkId != null">
+        #{pkId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkTable != null">
+        #{pkTable,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <select id="qryFindUsrInfo" resultMap="UserBaseResultMap">
+  		select * from USR_INFO where ORG_NO=#{0} and USR_STA not in('2')
+  	</select>
+  	<select id="selectStreetNameByPrimaryKey" resultMap="StreetBaseResultMap">
+  		select s.JDMC from WY_JD s 
+		join BASE_ORG_REL abor on abor.pk_id=s.jdid
+		join ORG_INFO oi on oi.org_no=abor.org_no where oi.org_no=#{0}
+
+  	</select>
+  	<select id="selectHpbNameByPrimaryKey" resultMap="AqHpbBaseResultMap">
+  		select ah.hpbmc from WY_HPB ah 
+		join BASE_ORG_REL abor on abor.pk_id=ah.hpbid 
+		join ORG_INFO oi on oi.org_no=abor.org_no where oi.org_no=#{0}
+  	</select>
+  	 <select id="qryparOrgNameInfo" resultMap="BaseResultMap">
+  		SELECT ORG_NO,ORG_NAME FROM ORG_INFO where ORG_TYPE='01'
+  </select>
+  <select id="qryparOrgNameInfo2" resultMap="BaseResultMap">
+  		SELECT ORG_NO,ORG_NAME FROM ORG_INFO where ORG_TYPE='01'
+  </select>
+  <select id="qryStreetOrgNameInfo" resultMap="BaseResultMap">
+  		SELECT oi.ORG_NO,oi.ORG_NAME
+		FROM WY_HPB ah
+		JOIN BASE_ORG_REL abor ON AH.HPBID = ABOR.PK_ID
+		JOIN ORG_INFO oi ON abor.ORG_NO = oi.ORG_NO
+		WHERE AH.HPBID =#{0}
+  </select>
+  <select id="qryIsStreetHpbOrgNameInfo" resultMap="AqHpbBaseResultMap">
+  		SELECT ah.HPBID
+		FROM WY_HPB ah
+		JOIN BASE_ORG_REL abor ON ABOR.PK_ID = ah.HPBID
+		JOIN ORG_INFO OI ON ABOR.ORG_NO = OI.ORG_NO
+		AND OI.ORG_STATUS NOT IN ('2')
+		WHERE AH.HPBID =#{0}
+  </select>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry location="E:/programs/apache-tomcat-8.5.16/webapps/vote/WEB-INF/lib/ojdbc6.jar" />
+
+  <context id="vote" targetRuntime="MyBatis3">
+    <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+        connectionURL="jdbc:oracle:thin:@211.159.167.171:1521:orcl"
+        userId="vote"
+        password="vote">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+    <javaModelGenerator targetPackage="com.indihx.elecvote.entity" targetProject="src/main/java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+    <sqlMapGenerator targetPackage="com.indihx.elecvote.dao"  targetProject="src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.indihx.elecvote.dao"  targetProject="src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+    <table  tableName="Vote_Apply_Info"   domainObjectName="VoteApplyInfo"/>
+      <table  tableName="Vote_House_Info"   domainObjectName="VoteHouseInfo"/>
+      <table  tableName="Vote_Owner_History"   domainObjectName="VoteOwnerHistory"/>
+      <table  tableName="Vote_Result_Info"   domainObjectName="VoteResultInfo"/>
+      <table  tableName="Vote_Result_Sum"   domainObjectName="VoteResultSum"/>
+      <table  tableName="Vote_Scope_Info"   domainObjectName="VoteScopeInfo"/>
+      <table  tableName="Vote_Sect_Info"   domainObjectName="VoteSectInfo"/>
+      <table  tableName="Vote_Topic_Info"   domainObjectName="VoteTopicInfo"/>
+      <table  tableName="Vote_Workspace"   domainObjectName="VoteWorkspace"/>
+
+  </context>
+</generatorConfiguration>

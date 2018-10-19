@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.system.dao.leave.VolHisMapper">
+  <resultMap id="BaseResultMap" type="com.indihx.system.entity.leave.VolHis">
+    <id column="HIS_ID" jdbcType="DECIMAL" property="hisId" />
+    <result column="APP_ID" jdbcType="DECIMAL" property="appId" />
+    <result column="TASK_ID" jdbcType="VARCHAR" property="taskId" />
+    <result column="VOA_DESC" jdbcType="VARCHAR" property="voaDesc" />
+    <result column="VOA_USER_ID" jdbcType="VARCHAR" property="voaUserId" />
+    <result column="VOA_DATE" jdbcType="VARCHAR" property="voaDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    HIS_ID, APP_ID, TASK_ID, VOA_DESC, VOA_USER_ID, VOA_DATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from VOL_HIS
+    where HIS_ID = #{hisId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from VOL_HIS
+    where HIS_ID = #{hisId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.indihx.system.entity.leave.VolHis">
+    insert into VOL_HIS (HIS_ID, APP_ID, TASK_ID, 
+      VOA_DESC, VOA_USER_ID, VOA_DATE
+      )
+    values (#{hisId,jdbcType=DECIMAL}, #{appId,jdbcType=DECIMAL}, #{taskId,jdbcType=VARCHAR}, 
+      #{voaDesc,jdbcType=VARCHAR}, #{voaUserId,jdbcType=VARCHAR}, #{voaDate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.indihx.system.entity.leave.VolHis">
+    insert into VOL_HIS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hisId != null">
+        HIS_ID,
+      </if>
+      <if test="appId != null">
+        APP_ID,
+      </if>
+      <if test="taskId != null">
+        TASK_ID,
+      </if>
+      <if test="voaDesc != null">
+        VOA_DESC,
+      </if>
+      <if test="voaUserId != null">
+        VOA_USER_ID,
+      </if>
+      <if test="voaDate != null">
+        VOA_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hisId != null">
+        #{hisId,jdbcType=DECIMAL},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=DECIMAL},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="voaDesc != null">
+        #{voaDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="voaUserId != null">
+        #{voaUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="voaDate != null">
+        #{voaDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.indihx.system.entity.leave.VolHis">
+    update VOL_HIS
+    <set>
+      <if test="appId != null">
+        APP_ID = #{appId,jdbcType=DECIMAL},
+      </if>
+      <if test="taskId != null">
+        TASK_ID = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="voaDesc != null">
+        VOA_DESC = #{voaDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="voaUserId != null">
+        VOA_USER_ID = #{voaUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="voaDate != null">
+        VOA_DATE = #{voaDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where HIS_ID = #{hisId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.indihx.system.entity.leave.VolHis">
+    update VOL_HIS
+    set APP_ID = #{appId,jdbcType=DECIMAL},
+      TASK_ID = #{taskId,jdbcType=VARCHAR},
+      VOA_DESC = #{voaDesc,jdbcType=VARCHAR},
+      VOA_USER_ID = #{voaUserId,jdbcType=VARCHAR},
+      VOA_DATE = #{voaDate,jdbcType=VARCHAR}
+    where HIS_ID = #{hisId,jdbcType=DECIMAL}
+  </update>
+</mapper>

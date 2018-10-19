@@ -1,0 +1,1048 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.org.dao.CspMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+
+  <resultMap id="BaseResultMap" type="com.indihx.org.entity.WY_WYGS_TEMP">
+    <id column="WYGSID" jdbcType="VARCHAR" property="wygsid" />
+    <result column="APP_ID" jdbcType="VARCHAR" property="app_id"/>
+    <result column="SJZT" jdbcType="VARCHAR" property="sjzt" />  
+    <result column="LOCALFLAG" jdbcType="VARCHAR" property="localflag" />  
+    <result column="HPBID" jdbcType="VARCHAR" property="hpbid" />  
+    <result column="WYGSMC" jdbcType="VARCHAR" property="wygsmc" />  
+    <result column="WYGSDZ" jdbcType="VARCHAR" property="wygsdz" />  
+    <result column="CERTFLAG" jdbcType="VARCHAR" property="certflag" />  
+    <result column="SHXYDM" jdbcType="VARCHAR" property="shxydm" />  
+    <result column="YYZZBH" jdbcType="VARCHAR" property="yyzzbh" />  
+    <result column="ZCZZYXQ" jdbcType="VARCHAR" property="zczzyxq" />  
+    <result column="GSLX" jdbcType="VARCHAR" property="gslx" />  
+    <result column="ZCZB" jdbcType="VARCHAR" property="zczb" />  
+    <result column="CLRQ" jdbcType="VARCHAR" property="clrq" />  
+    <result column="WYGLSJ" jdbcType="VARCHAR" property="wyglsj" />  
+    <result column="BGDZ" jdbcType="VARCHAR" property="bgdz" />  
+    <result column="ZCDZ" jdbcType="VARCHAR" property="zcdz" />  
+    <result column="ZZDJ" jdbcType="VARCHAR" property="zzdj" />  
+    <result column="ZZBH" jdbcType="VARCHAR" property="zzbh" />  
+    <result column="QYDH" jdbcType="VARCHAR" property="qydh" />  
+    <result column="QYCZ" jdbcType="VARCHAR" property="qycz" />  
+    <result column="QYYB" jdbcType="VARCHAR" property="qyyb" />  
+    <result column="FRDB" jdbcType="VARCHAR" property="frdb" />  
+    <result column="FRSJ" jdbcType="VARCHAR" property="frsj" />  
+    <result column="QYLXR" jdbcType="VARCHAR" property="qylxr" />  
+    <result column="LXRDH" jdbcType="VARCHAR" property="lxrdh" />  
+    <result column="QYGK" jdbcType="VARCHAR" property="qygk" />  
+    <result column="ZYFW" jdbcType="VARCHAR" property="zyfw" />  
+    <result column="BZ" jdbcType="VARCHAR" property="bz" />  
+    <result column="OLDWYGSID" jdbcType="VARCHAR" property="oldwygsid" />   
+  </resultMap>
+  
+    <resultMap id="CspResultMap" type="com.indihx.org.entity.WY_WYGS">
+    <id column="WYGSID" jdbcType="VARCHAR" property="wygsid" />
+    <result column="SJZT" jdbcType="VARCHAR" property="sjzt" />  
+    <result column="LOCALFLAG" jdbcType="VARCHAR" property="localflag" />  
+    <result column="HPBID" jdbcType="VARCHAR" property="hpbid" />  
+    <result column="WYGSMC" jdbcType="VARCHAR" property="wygsmc" />  
+    <result column="WYGSDZ" jdbcType="VARCHAR" property="wygsdz" />  
+    <result column="CERTFLAG" jdbcType="VARCHAR" property="certflag" />  
+    <result column="SHXYDM" jdbcType="VARCHAR" property="shxydm" />  
+    <result column="YYZZBH" jdbcType="VARCHAR" property="yyzzbh" />  
+    <result column="ZCZZYXQ" jdbcType="VARCHAR" property="zczzyxq" />  
+    <result column="GSLX" jdbcType="VARCHAR" property="gslx" />  
+    <result column="ZCZB" jdbcType="VARCHAR" property="zczb" />  
+    <result column="CLRQ" jdbcType="VARCHAR" property="clrq" />  
+    <result column="WYGLSJ" jdbcType="VARCHAR" property="wyglsj" />  
+    <result column="BGDZ" jdbcType="VARCHAR" property="bgdz" />  
+    <result column="ZCDZ" jdbcType="VARCHAR" property="zcdz" />  
+    <result column="ZZDJ" jdbcType="VARCHAR" property="zzdj" />  
+    <result column="ZZBH" jdbcType="VARCHAR" property="zzbh" />  
+    <result column="QYDH" jdbcType="VARCHAR" property="qydh" />  
+    <result column="QYCZ" jdbcType="VARCHAR" property="qycz" />  
+    <result column="QYYB" jdbcType="VARCHAR" property="qyyb" />  
+    <result column="FRDB" jdbcType="VARCHAR" property="frdb" />  
+    <result column="FRSJ" jdbcType="VARCHAR" property="frsj" />  
+    <result column="QYLXR" jdbcType="VARCHAR" property="qylxr" />  
+    <result column="LXRDH" jdbcType="VARCHAR" property="lxrdh" />  
+    <result column="QYGK" jdbcType="VARCHAR" property="qygk" />  
+    <result column="ZYFW" jdbcType="VARCHAR" property="zyfw" />  
+    <result column="BZ" jdbcType="VARCHAR" property="bz" />  
+    <result column="OLDWYGSID" jdbcType="VARCHAR" property="oldwygsid" />   
+  </resultMap>
+  
+  
+ <!--  查询所有企业信息 -->
+  <select id="cspinfoAll" resultMap="BaseResultMap">
+    SELECT t1.WYGSID,t1.HPBID,t1.WYGSMC,t1.WYGSDZ,t1.GSLX,t1.ZZDJ,t1.FRDB,t1.ZCZB,t1.QYDH,t1.QYLXR,t1.SJZT
+	FROM WY_WYGS t1   
+	where 1=1
+	<if test="wygsmc!=  null and wygsmc!=''">
+	and T1.WYGSMC like CONCAT(CONCAT('%',#{wygsmc}),'%')
+   </if>
+   <if test="wygsdz != null and wygsdz !=''">
+	and T1.WYGSDZ like CONCAT(CONCAT('%',#{wygsdz}),'%')
+   </if>
+   <if test="wygsid != null and wygsid !=''">
+	and T1.WYGSID = #{wygsid}
+   </if>
+   <if test="hpbid != null and hpbid !=''">
+	and T1.HPBID = #{hpbid}
+   </if>
+  </select>
+ 
+ <!--  映射查询语句 getTempSectInfo-->
+  <select id="getTempCspInfo" resultMap="BaseResultMap" parameterType="com.indihx.org.vo.CspInfoVo">
+  	SELECT * FROM WY_WYGS_TEMP
+    <where>
+    	<if test="wygsid !=null and wygsid != ''">
+    		AND WYGSID = #{wygsid}
+    	</if>
+    	<if test="app_id !=null and app_id != ''">
+    		AND APP_ID = #{app_id}
+    	</if>
+    </where>
+  </select>
+  
+  
+  <!--  新增企业信息临时表 -->
+   <insert id="saveCspTemp" parameterType="com.indihx.org.entity.WY_WYGS_TEMP">
+    insert into WY_WYGS_TEMP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+    	<if test="wygsid != null">
+        WYGSID,
+      </if>
+      <if test="app_id != null">
+        APP_ID,
+      </if>
+       <if test="sjzt != null">
+        SJZT,
+      </if>
+      <if test="localflag != null">
+        LOCALFLAG,
+      </if>
+       <if test="hpbid != null">
+        HPBID,
+      </if>
+      <if test="wygsmc!= null">
+        WYGSMC,
+      </if>
+      <if test="wygsdz != null">
+        WYGSDZ,
+      </if>
+      <if test="certflag != null">
+        CERTFLAG,
+      </if>
+      <if test="shxydm != null">
+        SHXYDM,
+      </if>
+      <if test="yyzzbh != null">
+        YYZZBH,
+      </if>
+       <if test="zczzyxq != null">
+        ZCZZYXQ,
+      </if>
+       <if test="gslx != null">
+        GSLX,
+      </if>
+       <if test="zczb != null">
+        ZCZB,
+      </if>
+       <if test="clrq != null">
+        CLRQ,
+      </if>
+       <if test="wyglsj != null">
+        WYGLSJ,
+      </if>
+       <if test="bgdz != null">
+        BGDZ,
+      </if>
+       <if test="zcdz != null">
+        ZCDZ,
+      </if>
+      <if test="zzdj != null">
+        ZZDJ,
+      </if>
+       <if test="zzbh != null">
+        ZZBH,
+      </if>
+       <if test="qydh != null">
+        QYDH,
+      </if>
+      <if test="qycz != null">
+        QYCZ,
+      </if>
+       <if test="qyyb != null">
+        QYYB,
+      </if>
+       <if test="frdb != null">
+        FRDB,
+      </if>
+      <if test="frsj != null">
+        FRSJ,
+      </if>
+       <if test="qylxr != null">
+        QYLXR,
+      </if>
+       <if test="lxrdh != null">
+        LXRDH,
+      </if>
+       <if test="qyyx != null">
+        QYYX,
+      </if>
+       <if test="qygk != null">
+        QYGK,
+      </if>
+       <if test="zyfw != null">
+        ZYFW,
+      </if>
+       <if test="bz != null">
+        BZ,
+      </if> 
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     <if test="wygsid != null">
+        #{wygsid,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        #{app_id,jdbcType=DECIMAL},
+      </if>
+       <if test="sjzt != null">
+        #{sjzt,jdbcType=VARCHAR},
+      </if>
+      <if test="localflag != null">
+        #{localflag,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+         #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+        #{wygsmc,jdbcType=VARCHAR},
+      </if>
+       <if test="wygsdz != null">
+        #{wygsdz,jdbcType=VARCHAR},
+      </if>
+      <if test="certflag != null">
+        #{certflag,jdbcType=VARCHAR},
+      </if>
+       <if test="shxydm != null">
+        #{shxydm,jdbcType=VARCHAR},
+      </if>
+      <if test="yyzzbh != null">
+        #{yyzzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="zczzyxq != null">
+        #{zczzyxq,jdbcType=VARCHAR},
+      </if>
+      <if test="gslx != null">
+        #{gslx,jdbcType=VARCHAR},
+      </if>
+      <if test="zczb != null">
+        #{zczb,jdbcType=VARCHAR},
+      </if>
+       <if test="clrq != null">
+        #{clrq,jdbcType=VARCHAR},
+      </if>
+       <if test="wyglsj != null">
+        #{wyglsj,jdbcType=VARCHAR},
+      </if>
+        <if test="bgdz != null">
+        #{bgdz,jdbcType=VARCHAR},
+      </if>
+        <if test="zcdz != null">
+        #{zcdz,jdbcType=VARCHAR},
+      </if>
+      <if test="zzdj != null">
+        #{zzdj,jdbcType=VARCHAR},
+      </if>
+       <if test="zzbh != null">
+        #{zzbh,jdbcType=VARCHAR},
+      </if>
+       <if test="qydh != null">
+        #{qydh,jdbcType=VARCHAR},
+      </if>
+       <if test="qycz != null">
+        #{qycz,jdbcType=VARCHAR},
+      </if>
+       <if test="qyyb != null">
+        #{qyyb,jdbcType=VARCHAR},
+      </if>
+       <if test="frdb != null">
+        #{frdb,jdbcType=VARCHAR},
+      </if>
+      <if test="frsj != null">
+        #{frsj,jdbcType=VARCHAR},
+      </if>
+       <if test="qylxr != null">
+        #{qylxr,jdbcType=VARCHAR},
+      </if>
+       <if test="lxrdh != null">
+        #{lxrdh,jdbcType=VARCHAR},
+      </if>
+       <if test="qyyx != null">
+        #{qyyx,jdbcType=VARCHAR},
+      </if>
+       <if test="qygk != null">
+        #{qygk,jdbcType=VARCHAR},
+      </if>
+      <if test="zyfw != null">
+        #{zyfw,jdbcType=VARCHAR},
+      </if> 
+       <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if> 
+    </trim>
+  </insert>  
+  
+    
+   <!--  根据ID更新物业企业临时表-->
+ <update id="updateCspTemp" parameterType="com.indihx.org.entity.WY_WYGS_TEMP">
+    update WY_WYGS_TEMP
+    <set>
+       <if test="app_id != null">
+        APP_ID=#{app_id,jdbcType=DECIMAL},
+      </if>
+      <if test="localflag != null">
+        localflag = #{localflag,jdbcType=VARCHAR},
+      </if>
+       <if test="hpbid != null">
+        hpbid = #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="sjzt != null">
+        sjzt = #{sjzt,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+        wygsmc = #{wygsmc,jdbcType=VARCHAR},
+      </if>
+       <if test="wygsdz != null">
+        wygsdz = #{wygsdz,jdbcType=VARCHAR},
+      </if>
+       <if test="certflag != null">
+        certflag = #{certflag,jdbcType=VARCHAR},
+      </if>
+       <if test="shxydm != null">
+        shxydm = #{shxydm,jdbcType=VARCHAR},
+      </if>
+        <if test="yyzzbh != null">
+        yyzzbh = #{yyzzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="zczzyxq != null">
+        zczzyxq = #{zczzyxq,jdbcType=VARCHAR},
+      </if>
+      <if test="gslx != null">
+        gslx = #{gslx,jdbcType=VARCHAR},
+      </if>
+       <if test="zczb != null">
+        zczb = #{zczb,jdbcType=VARCHAR},
+      </if>
+       <if test="clrq != null">
+        clrq = #{clrq,jdbcType=VARCHAR},
+      </if>
+       <if test="wyglsj != null">
+        wyglsj = #{wyglsj,jdbcType=VARCHAR},
+      </if>
+      <if test="bgdz != null">
+        bgdz = #{bgdz,jdbcType=VARCHAR},
+      </if>
+       <if test="zcdz != null">
+        zcdz = #{zcdz,jdbcType=VARCHAR},
+      </if>
+       <if test="zzdj != null">
+        zzdj = #{zzdj,jdbcType=VARCHAR},
+      </if>
+       <if test="zzbh != null">
+        zzbh = #{zzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qydh != null">
+        qydh = #{qydh,jdbcType=VARCHAR},
+      </if>
+       <if test="qycz != null">
+        qycz = #{qycz,jdbcType=VARCHAR},
+      </if>
+       <if test="qyyb != null">
+        qyyb = #{qyyb,jdbcType=VARCHAR},
+      </if>
+      <if test="frdb != null">
+        frdb = #{frdb,jdbcType=VARCHAR},
+      </if>
+      <if test="frsj != null">
+        frsj = #{frsj,jdbcType=VARCHAR},
+      </if>
+      <if test="qylxr != null">
+        qylxr = #{qylxr,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrdh != null">
+        lxrdh = #{lxrdh,jdbcType=VARCHAR},
+      </if>
+       <if test="qyyx != null">
+        qyyx = #{qyyx,jdbcType=VARCHAR},
+      </if>
+      <if test="qygk != null">
+        qygk = #{qygk,jdbcType=VARCHAR},
+      </if>
+       <if test="zyfw != null">
+        zyfw = #{zyfw,jdbcType=VARCHAR},
+      </if>
+       <if test="bz != null">
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wygsid = #{wygsid,jdbcType=DECIMAL}
+  </update> 
+  
+  
+  
+   <!--  新增企业信息临时表 -->
+   <insert id="saveCspHis" parameterType="com.indihx.org.vo.CspInfoVo">
+    insert into WY_WYGS_HIS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+     
+      <if test="task_id != null">
+        TASK_ID,
+      </if>
+      <if test="wygsid != null">
+        WYGSID,
+      </if>
+      <if test="sjzt != null">
+        SJZT,
+      </if>
+      <if test="app_id != null">
+        APP_ID,
+      </if>
+      <if test="localflag != null">
+        LOCALFLAG,
+      </if>
+       <if test="hpbid != null">
+        HPBID,
+      </if>
+      <if test="wygsmc!= null">
+        WYGSMC,
+      </if>
+      <if test="wygsdz != null">
+        WYGSDZ,
+      </if>
+      <if test="certflag != null">
+        CERTFLAG,
+      </if>
+      <if test="shxydm != null">
+        SHXYDM,
+      </if>
+      <if test="yyzzbh != null">
+        YYZZBH,
+      </if>
+       <if test="zczzyxq != null">
+        ZCZZYXQ,
+      </if>
+       <if test="gslx != null">
+        GSLX,
+      </if>
+       <if test="zczb != null">
+        ZCZB,
+      </if>
+       <if test="clrq != null">
+        CLRQ,
+      </if>
+       <if test="wyglsj != null">
+        WYGLSJ,
+      </if>
+       <if test="bgdz != null">
+        BGDZ,
+      </if>
+       <if test="zcdz != null">
+        ZCDZ,
+      </if>
+      <if test="zzdj != null">
+        ZZDJ,
+      </if>
+       <if test="zzbh != null">
+        ZZBH,
+      </if>
+       <if test="qydh != null">
+        QYDH,
+      </if>
+      <if test="qycz != null">
+        QYCZ,
+      </if>
+       <if test="qyyb != null">
+        QYYB,
+      </if>
+       <if test="frdb != null">
+        FRDB,
+      </if>
+      <if test="frsj != null">
+        FRSJ,
+      </if>
+       <if test="qylxr != null">
+        QYLXR,
+      </if>
+       <if test="lxrdh != null">
+        LXRDH,
+      </if>
+       <if test="qyyx != null">
+        QYYX,
+      </if>
+       <if test="qygk != null">
+        QYGK,
+      </if>
+       <if test="zyfw != null">
+        ZYFW,
+      </if>
+       <if test="bz != null">
+        BZ,
+      </if> 
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     <if test="task_id != null">
+        #{task_id,jdbcType=VARCHAR},
+      </if>
+     <if test="wygsid != null">
+        #{wygsid,jdbcType=VARCHAR},
+      </if>
+       <if test="sjzt != null">
+        #{sjzt,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        #{app_id,jdbcType=DECIMAL},
+      </if>
+      <if test="localflag != null">
+        #{localflag,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+         #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+        #{wygsmc,jdbcType=VARCHAR},
+      </if>
+       <if test="wygsdz != null">
+        #{wygsdz,jdbcType=VARCHAR},
+      </if>
+      <if test="certflag != null">
+        #{certflag,jdbcType=VARCHAR},
+      </if>
+       <if test="shxydm != null">
+        #{shxydm,jdbcType=VARCHAR},
+      </if>
+      <if test="yyzzbh != null">
+        #{yyzzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="zczzyxq != null">
+        #{zczzyxq,jdbcType=VARCHAR},
+      </if>
+      <if test="gslx != null">
+        #{gslx,jdbcType=VARCHAR},
+      </if>
+      <if test="zczb != null">
+        #{zczb,jdbcType=VARCHAR},
+      </if>
+       <if test="clrq != null">
+        #{clrq,jdbcType=VARCHAR},
+      </if>
+       <if test="wyglsj != null">
+        #{wyglsj,jdbcType=VARCHAR},
+      </if>
+        <if test="bgdz != null">
+        #{bgdz,jdbcType=VARCHAR},
+      </if>
+        <if test="zcdz != null">
+        #{zcdz,jdbcType=VARCHAR},
+      </if>
+      <if test="zzdj != null">
+        #{zzdj,jdbcType=VARCHAR},
+      </if>
+       <if test="zzbh != null">
+        #{zzbh,jdbcType=VARCHAR},
+      </if>
+       <if test="qydh != null">
+        #{qydh,jdbcType=VARCHAR},
+      </if>
+       <if test="qycz != null">
+        #{qycz,jdbcType=VARCHAR},
+      </if>
+       <if test="qyyb != null">
+        #{qyyb,jdbcType=VARCHAR},
+      </if>
+       <if test="frdb != null">
+        #{frdb,jdbcType=VARCHAR},
+      </if>
+      <if test="frsj != null">
+        #{frsj,jdbcType=VARCHAR},
+      </if>
+       <if test="qylxr != null">
+        #{qylxr,jdbcType=VARCHAR},
+      </if>
+       <if test="lxrdh != null">
+        #{lxrdh,jdbcType=VARCHAR},
+      </if>
+       <if test="qyyx != null">
+        #{qyyx,jdbcType=VARCHAR},
+      </if>
+       <if test="qygk != null">
+        #{qygk,jdbcType=VARCHAR},
+      </if>
+      <if test="zyfw != null">
+        #{zyfw,jdbcType=VARCHAR},
+      </if> 
+       <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if> 
+    </trim>
+  </insert>  
+  
+  
+  
+  
+  
+   
+  
+   
+  
+  
+ 
+   <!--  根据企业名称和社会信用代码查询是否存在重复企业 -->
+  <select id="validCspIsExists" resultMap="BaseResultMap" parameterType="com.indihx.org.vo.CspInfoVo">
+  	select WYGSMC,SHXYDM  from WY_WYGS
+    <where>
+    	<if test="wygsmc !=null and wygsmc != ''">
+    		((WYGSMC = #{wygsmc})
+    	</if>
+    	<if test="shxydm !=null and shxydm != ''">
+    		OR (SHXYDM = #{shxydm}))
+    	</if>
+    	<if test="wygsid !=null and wygsid != ''">
+    		and WYGSID != #{wygsid}
+    	</if>
+    </where>
+  </select>
+   
+  
+  <!--  新增机构信息 -->
+   <insert id="insertOrgInfo" parameterType="com.indihx.org.entity.ORG_INFO">
+    insert into ORG_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+    	<if test="parent_org_no != null">
+        PARENT_ORG_NO,
+      </if>
+      <if test="parent_org_name != null">
+        PARENT_ORG_NAME,
+      </if> 
+       <if test="org_no != null">
+        ORG_NO,
+      </if> 
+       <if test="org_name != null">
+        ORG_NAME,
+      </if> 
+       <if test="org_type != null">
+        ORG_TYPE,
+      </if> 
+       <if test="addres != null">
+        ADDRES,
+      </if> 
+      <if test="tel_no != null">
+        TEL_NO,
+      </if> 
+      <if test="oper_usr != null">
+        OPER_USR,
+      </if> 
+       <if test="tm_smp != null">
+        TM_SMP,
+      </if> 
+       <if test="org_status != null">
+        ORG_STATUS,
+      </if> 
+       <if test="link_man != null">
+        LINK_MAN,
+      </if> 
+       <if test="email != null">
+        EMAIL,
+      </if> 
+       <if test="post_code != null">
+        POST_CODE,
+      </if> 
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     <if test="parent_org_no != null">
+        #{parent_org_no,jdbcType=DECIMAL},
+      </if>
+      <if test="parent_org_name != null">
+        #{parent_org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_no != null">
+        #{org_no,jdbcType=VARCHAR},
+      </if>
+      <if test="org_name != null">
+        #{org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_type != null">
+        #{org_type,jdbcType=VARCHAR},
+      </if>
+       <if test="addres != null">
+        #{addres,jdbcType=VARCHAR},
+      </if>
+      <if test="tel_no != null">
+        #{tel_no,jdbcType=VARCHAR},
+      </if>
+      <if test="oper_usr != null">
+        #{oper_usr,jdbcType=VARCHAR},
+      </if>
+      <if test="tm_smp != null">
+        #{tm_smp,jdbcType=VARCHAR},
+      </if>
+      <if test="org_status != null">
+        #{org_status,jdbcType=VARCHAR},
+      </if>
+      <if test="link_man != null">
+        #{link_man,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="post_code != null">
+        #{post_code,jdbcType=VARCHAR},
+      </if> 
+    </trim>
+  </insert>  
+  
+  
+  
+  <!--  新增企业信息 -->
+   <insert id="insertCsp" parameterType="com.indihx.org.vo.CspInfoVo">
+    insert into WY_WYGS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+    	<if test="wygsid != null">
+        WYGSID,
+      </if>
+       <if test="sjzt != null">
+        SJZT,
+      </if>
+      <if test="localflag != null">
+        LOCALFLAG,
+      </if>
+       <if test="hpbid != null">
+        HPBID,
+      </if>
+      <if test="wygsmc!= null">
+        WYGSMC,
+      </if>
+      <if test="wygsdz != null">
+        WYGSDZ,
+      </if>
+      <if test="certflag != null">
+        CERTFLAG,
+      </if>
+      <if test="shxydm != null">
+        SHXYDM,
+      </if>
+      <if test="yyzzbh != null">
+        YYZZBH,
+      </if>
+       <if test="zczzyxq != null">
+        ZCZZYXQ,
+      </if>
+       <if test="gslx != null">
+        GSLX,
+      </if>
+       <if test="zczb != null">
+        ZCZB,
+      </if>
+       <if test="clrq != null">
+        CLRQ,
+      </if>
+       <if test="wyglsj != null">
+        WYGLSJ,
+      </if>
+       <if test="bgdz != null">
+        BGDZ,
+      </if>
+       <if test="zcdz != null">
+        ZCDZ,
+      </if>
+      <if test="zzdj != null">
+        ZZDJ,
+      </if>
+       <if test="zzbh != null">
+        ZZBH,
+      </if>
+       <if test="qydh != null">
+        QYDH,
+      </if>
+      <if test="qycz != null">
+        QYCZ,
+      </if>
+       <if test="qyyb != null">
+        QYYB,
+      </if>
+       <if test="frdb != null">
+        FRDB,
+      </if>
+      <if test="frsj != null">
+        FRSJ,
+      </if>
+       <if test="qylxr != null">
+        QYLXR,
+      </if>
+       <if test="lxrdh != null">
+        LXRDH,
+      </if>
+       <if test="qyyx != null">
+        QYYX,
+      </if>
+       <if test="qygk != null">
+        QYGK,
+      </if>
+       <if test="zyfw != null">
+        ZYFW,
+      </if>
+       <if test="bz != null">
+        BZ,
+      </if> 
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     <if test="wygsid != null">
+        #{wygsid,jdbcType=VARCHAR},
+      </if>
+       <if test="sjzt != null">
+        #{sjzt,jdbcType=VARCHAR},
+      </if>
+      <if test="localflag != null">
+        #{localflag,jdbcType=VARCHAR},
+      </if>
+      <if test="hpbid != null">
+         #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+        #{wygsmc,jdbcType=VARCHAR},
+      </if>
+       <if test="wygsdz != null">
+        #{wygsdz,jdbcType=VARCHAR},
+      </if>
+      <if test="certflag != null">
+        #{certflag,jdbcType=VARCHAR},
+      </if>
+       <if test="shxydm != null">
+        #{shxydm,jdbcType=VARCHAR},
+      </if>
+      <if test="yyzzbh != null">
+        #{yyzzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="zczzyxq != null">
+        #{zczzyxq,jdbcType=VARCHAR},
+      </if>
+      <if test="gslx != null">
+        #{gslx,jdbcType=VARCHAR},
+      </if>
+      <if test="zczb != null">
+        #{zczb,jdbcType=VARCHAR},
+      </if>
+       <if test="clrq != null">
+        #{clrq,jdbcType=VARCHAR},
+      </if>
+       <if test="wyglsj != null">
+        #{wyglsj,jdbcType=VARCHAR},
+      </if>
+        <if test="bgdz != null">
+        #{bgdz,jdbcType=VARCHAR},
+      </if>
+        <if test="zcdz != null">
+        #{zcdz,jdbcType=VARCHAR},
+      </if>
+      <if test="zzdj != null">
+        #{zzdj,jdbcType=VARCHAR},
+      </if>
+       <if test="zzbh != null">
+        #{zzbh,jdbcType=VARCHAR},
+      </if>
+       <if test="qydh != null">
+        #{qydh,jdbcType=VARCHAR},
+      </if>
+       <if test="qycz != null">
+        #{qycz,jdbcType=VARCHAR},
+      </if>
+       <if test="qyyb != null">
+        #{qyyb,jdbcType=VARCHAR},
+      </if>
+       <if test="frdb != null">
+        #{frdb,jdbcType=VARCHAR},
+      </if>
+      <if test="frsj != null">
+        #{frsj,jdbcType=VARCHAR},
+      </if>
+       <if test="qylxr != null">
+        #{qylxr,jdbcType=VARCHAR},
+      </if>
+       <if test="lxrdh != null">
+        #{lxrdh,jdbcType=VARCHAR},
+      </if>
+       <if test="qyyx != null">
+        #{qyyx,jdbcType=VARCHAR},
+      </if>
+       <if test="qygk != null">
+        #{qygk,jdbcType=VARCHAR},
+      </if>
+      <if test="zyfw != null">
+        #{zyfw,jdbcType=VARCHAR},
+      </if> 
+       <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if> 
+    </trim>
+  </insert>  
+  
+  
+    <!--  根据ID删除机构信息 -->
+   <delete id="deleteOrgInfo" parameterType="java.lang.String">
+    delete from ORG_INFO
+    where org_no = #{org_no,jdbcType=VARCHAR}
+  </delete>
+  
+    <!--  根据ID删除企业信息 -->
+   <delete id="deleteCsp" parameterType="java.lang.String">
+    delete from WY_WYGS
+    where wygsid = #{wygsid,jdbcType=VARCHAR}
+  </delete>
+ 
+ 
+  <!--  根据ID查看企业详情--> 
+   <select id="qrCspInfoById" resultMap="CspResultMap" parameterType="java.lang.Object">
+  	SELECT wy.* FROM WY_WYGS wy WHERE WYGSID = #{wygsid}
+  </select>
+  
+  
+  <!--  根据ID更新企业详情-->
+ <update id="updateOrgInfo" parameterType="com.indihx.org.entity.ORG_INFO">
+    update ORG_INFO
+    <set>
+      <if test="org_name != null">
+        org_name = #{org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_type != null">
+        org_type = #{org_type,jdbcType=VARCHAR},
+      </if>
+      <if test="addres != null">
+        addres = #{addres,jdbcType=VARCHAR},
+      </if>
+       <if test="tel_no != null">
+        tel_no = #{tel_no,jdbcType=VARCHAR},
+      </if>
+       <if test="link_man != null">
+        link_man = #{link_man,jdbcType=VARCHAR},
+      </if>
+        <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+       <if test="post_code != null">
+        post_code = #{post_code,jdbcType=VARCHAR},
+      </if> 
+    </set>
+    where org_no = #{org_no,jdbcType=DECIMAL}
+  </update> 
+  
+ 
+  <!--  根据ID更新企业详情-->
+ <update id="updateCsp" parameterType="com.indihx.org.vo.CspInfoVo">
+    update WY_WYGS
+    <set>
+      <if test="sjzt != null">
+        SJZT=#{sjzt,jdbcType=VARCHAR},
+      </if>
+      <if test="localflag != null">
+        localflag = #{localflag,jdbcType=VARCHAR},
+      </if>
+       <if test="hpbid != null">
+        hpbid = #{hpbid,jdbcType=VARCHAR},
+      </if>
+      <if test="wygsmc != null">
+        wygsmc = #{wygsmc,jdbcType=VARCHAR},
+      </if>
+       <if test="wygsdz != null">
+        wygsdz = #{wygsdz,jdbcType=VARCHAR},
+      </if>
+       <if test="certflag != null">
+        certflag = #{certflag,jdbcType=VARCHAR},
+      </if>
+       <if test="shxydm != null">
+        shxydm = #{shxydm,jdbcType=VARCHAR},
+      </if>
+        <if test="yyzzbh != null">
+        yyzzbh = #{yyzzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="zczzyxq != null">
+        zczzyxq = #{zczzyxq,jdbcType=VARCHAR},
+      </if>
+      <if test="gslx != null">
+        gslx = #{gslx,jdbcType=VARCHAR},
+      </if>
+       <if test="zczb != null">
+        zczb = #{zczb,jdbcType=VARCHAR},
+      </if>
+       <if test="clrq != null">
+        clrq = #{clrq,jdbcType=VARCHAR},
+      </if>
+       <if test="wyglsj != null">
+        wyglsj = #{wyglsj,jdbcType=VARCHAR},
+      </if>
+      <if test="bgdz != null">
+        bgdz = #{bgdz,jdbcType=VARCHAR},
+      </if>
+       <if test="zcdz != null">
+        zcdz = #{zcdz,jdbcType=VARCHAR},
+      </if>
+       <if test="zzdj != null">
+        zzdj = #{zzdj,jdbcType=VARCHAR},
+      </if>
+       <if test="zzbh != null">
+        zzbh = #{zzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="qydh != null">
+        qydh = #{qydh,jdbcType=VARCHAR},
+      </if>
+       <if test="qycz != null">
+        qycz = #{qycz,jdbcType=VARCHAR},
+      </if>
+       <if test="qyyb != null">
+        qyyb = #{qyyb,jdbcType=VARCHAR},
+      </if>
+      <if test="frdb != null">
+        frdb = #{frdb,jdbcType=VARCHAR},
+      </if>
+      <if test="frsj != null">
+        frsj = #{frsj,jdbcType=VARCHAR},
+      </if>
+      <if test="qylxr != null">
+        qylxr = #{qylxr,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrdh != null">
+        lxrdh = #{lxrdh,jdbcType=VARCHAR},
+      </if>
+       <if test="qyyx != null">
+        qyyx = #{qyyx,jdbcType=VARCHAR},
+      </if>
+      <if test="qygk != null">
+        qygk = #{qygk,jdbcType=VARCHAR},
+      </if>
+       <if test="zyfw != null">
+        zyfw = #{zyfw,jdbcType=VARCHAR},
+      </if>
+       <if test="bz != null">
+        bz = #{bz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wygsid = #{wygsid,jdbcType=DECIMAL}
+  </update> 
+  
+  
+  <!--  映射删除语句 clearCspCopyInfo-->
+  <delete id="clearCspCopyInfo" parameterType="java.lang.Long">
+    delete from WY_WYGS_TEMP
+    where APP_ID = #{app_id}
+  </delete>
+  
+  
+   <!--  映射更新语句 updateInfoStatus-->
+  <update id="updateCspStatus" parameterType="com.indihx.org.entity.WY_WYGS_TEMP">
+    update WY_WYGS
+    set SJZT = #{sjzt,jdbcType=VARCHAR}
+    where wygsid = #{wygsid,jdbcType=DECIMAL}
+  </update>
+  
+</mapper>

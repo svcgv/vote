@@ -1,0 +1,25 @@
+@charset "utf-8";
+/* css for  datagrid*/
+ 
+/*css for multi-accordion*/
+
+.multi-accordion-padding1{ padding-left: 2px;}
+.multi-accordion-padding2{ padding-left: 10px;}
+.multi-accordion-padding3{ padding-left: 25px;}
+.multi-accordion .multi-accordion-head1 {height:auto;  line-height:25px; cursor: pointer;overflow:hidden;   margin:1px 0px 1px 0px; font-size:12px;font-family:tahoma; COLOR: #476074; background-image: url('../images/accord/menu1_bg.gif');}
+.multi-accordion .multi-accordion-head1 a { font-size: 1em;font-family:tahoma; COLOR: #476074; }
+.multi-accordion .multi-accordion-head2 { cursor: pointer;margin:1px 0px 1px 0px;font-size:12px;font-family:tahoma;color:#476074; solid #737573; BACKGROUND: url('../images/accord/menu2_bg.png');}
+.multi-accordion .multi-accordion-head2 a { font-size: 1em;font-family:tahoma;color:#FFFFFF; }
+.multi-accordion .multi-accordion-head3 {  margin:1px 0px 1px 0px;line-height:25px; font-size:12px;;font-family:tahoma;color:#444444;background-color:#FFF9B2; solid #ffffff;}
+.multi-accordion .multi-accordion-head3 a { font-size:12px; text-decoration: none }
+.multi-accordion .multi-accordion-level1 { cursor: pointer; margin:1px 0px 0px 0px;line-height:25px; }
+.multi-accordion .multi-accordion-level2 { cursor: pointer;margin:1px 0px 0px 0px; line-height:25px;}
+.multi-accordion .multi-accordion-level3 { margin:1px 0px 1px 0px; line-height:25px;}
+.multi-accordion .multi-accordion-active{line-height:25px; cursor: pointer; margin:1px 0px 1px 0px; font-size:12px;font-family:tahoma;color:#000000;BACKGROUND: url(../images/accord/menu2_bg.png) 0px -24px;solid #D06403}
+.multi-accordion .multi-accordion-active3 {background-color: #FFF6E7;text-decoration: none;border: 1px outset #DE7E20;FONT-WEIGHT: bold;color: #000000;    font-family: tahoma; }
+/*.multi-accordion .multi-accordion-icon { line-height:25px;  width: 16px; height: 16px; background-image: url('../images/menu/ui-icons_ef8c08_256x240.png'); display: block;background-repeat: no-repeat;overflow: hidden;text-indent: -99999px; left: 0.5em; margin-top: 5px; position: absolute;  }
+*/
+.multi-accordion .multi-accordion-icon {  line-height:25px;  width: 16px; height: 16px; display: inline;overflow: hidden;margin:0px 0px 1px 0px; padding-left:3px;  }
+.multi-accordion .multi-accordion-icon-circle-arrow-e  {  background: url('../images/accord/menu_arrow11.png') no-repeat left;  }
+.multi-accordion .multi-accordion-icon-circle-arrow-s  {  background: url('../images/accord/menu_arrow22.png') no-repeat left;  }
+ 

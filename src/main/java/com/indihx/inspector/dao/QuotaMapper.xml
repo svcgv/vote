@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.inspector.dao.QuotaMapper">
+
+<!-- 支持缓存配置(必须配置否则缓存无效) -->
+<cache type="com.indihx.cache.RedisCache" />
+
+<resultMap id="BaseResultMap" type="com.indihx.inspector.entity.Dc_Khzb">
+	<id column="check_seq" jdbcType="DECIMAL" property="check_seq"/>
+	<result column="super_check_seq" jdbcType="DECIMAL" property="super_check_seq"/>
+	<result column="zblb" jdbcType="VARCHAR" property="zblb"/>
+	<result column="zbcj" jdbcType="VARCHAR" property="zbcj"/>
+	<result column="seq_version" jdbcType="VARCHAR" property="seq_version"/>
+	<result column="status" jdbcType="VARCHAR" property="status"/>
+	<result column="zbbm" jdbcType="VARCHAR" property="zbbm"/>
+	<result column="zbmc" jdbcType="VARCHAR" property="zbmc"/>
+	<result column="jfyj" jdbcType="VARCHAR" property="jfyj"/>
+	<result column="cjrq" jdbcType="VARCHAR" property="cjrq"/>
+	<result column="cjsj" jdbcType="VARCHAR" property="cjsj"/>
+	<result column="qyrq" jdbcType="VARCHAR" property="qyrq"/>
+	<result column="sxrq" jdbcType="VARCHAR" property="sxrq"/>
+	<result column="org_no" jdbcType="DECIMAL" property="org_no"/>
+	<result column="czybh" jdbcType="DECIMAL" property="czybh"/>
+	<result column="tseq" jdbcType="VARCHAR" property="tseq"/>
+	<result column="kseq" jdbcType="VARCHAR" property="kseq"/>
+	<result column="jfbz" jdbcType="VARCHAR" property="jfbz"/>
+	<result column="ckfz" jdbcType="VARCHAR" property="ckfz"/>
+	<result column="bz" jdbcType="VARCHAR" property="bz"/>
+</resultMap>
+
+<!-- 查询督察指标列表 -->
+<select id="qryQuotaList" resultMap="BaseResultMap">
+	select check_seq,zblb,zbcj,zbbm,zbmc,jfyj,tseq,kseq,jfbz,ckfz
+	from dc_khzb
+	<!-- 指标状态 -->
+	where status=#{status}
+	<!-- 指标类别 -->
+	<if test="zblb !=null and zblb != ''">
+		and zblb = #{zblb}
+	</if>
+	<!-- 加分减分标志 -->
+	<if test="jfbz !=null and jfbz != ''">
+		and jfbz = #{jfbz}
+	</if>
+	<!-- 指标编码 -->
+	<if test="zbbm !=null and zbbm != ''">
+		and zbbm = #{zbbm}
+	</if>
+	<!-- 指标名称 -->
+	<if test="zbmc !=null and zbmc != ''">
+		and zbmc = #{zbmc}
+	</if>
+	<if test="zbcj !=null and zbcj != ''">
+		and zbcj = #{zbcj}
+	</if>
+	<if test="seq_version !=null and seq_version != ''">
+		and seq_version = #{seq_version}
+	</if>
+	<if test="super_check_seq !=null and super_check_seq != ''">
+		and super_check_seq = #{super_check_seq}
+	</if>
+	order by zbbm asc
+</select>
+ 
+ 
+ <!-- 查询检查详情 -->
+<select id="getQuota" resultMap="BaseResultMap">
+	select dk.*
+	from dc_khzb dk
+	where check_seq = #{check_seq,jdbcType=DECIMAL}
+</select>
+
+
+<!-- 新增督察指标 -->
+<insert id="insertQuota" parameterType="com.indihx.inspector.entity.Dc_Khzb">
+	insert into dc_khzb
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="check_seq != null and check_seq != ''">
+			check_seq,
+		</if>
+		<if test="super_check_seq != null and super_check_seq != ''">
+			super_check_seq,
+		</if>
+		<if test="zblb != null and zblb != ''">
+			zblb,
+		</if>
+		<if test="zbcj != null and zbcj != ''">
+			zbcj,
+		</if>
+		<if test="seq_version != null and seq_version != ''">
+			seq_version,
+		</if>
+		<if test="status != null and status != ''">
+			status,
+		</if>
+		<if test="zbbm != null and zbbm != ''">
+			zbbm,
+		</if>
+		<if test="zbmc != null and zbmc != ''">
+			zbmc,
+		</if>
+		<if test="jfyj != null and jfyj != ''">
+			jfyj,
+		</if>
+		<if test="cjrq != null and cjrq != ''">
+			cjrq,
+		</if>
+		<if test="cjsj != null and cjsj != ''">
+			cjsj,
+		</if>
+		<if test="org_no != null and org_no != ''">
+			org_no,
+		</if>
+		<if test="czybh != null and czybh != ''">
+			czybh,
+		</if>
+		<if test="tseq != null and tseq != ''">
+			tseq,
+		</if>
+		<if test="kseq != null and kseq != ''">
+			kseq,
+		</if>
+		<if test="jfbz != null and jfbz != ''">
+			jfbz,
+		</if>
+		<if test="ckfz != null and ckfz != ''">
+			ckfz,
+		</if>
+		<if test="bz != null and bz != ''">
+			bz,
+		</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    	<if test="check_seq != null and check_seq != ''">
+			#{check_seq},
+		</if>
+		<if test="super_check_seq != null and super_check_seq != ''">
+			#{super_check_seq},
+		</if>
+		<if test="zblb != null and zblb != ''">
+			#{zblb},
+		</if>
+		<if test="zbcj != null and zbcj != ''">
+			#{zbcj},
+		</if>
+		<if test="seq_version != null and seq_version != ''">
+			#{seq_version},
+		</if>
+		<if test="status != null and status != ''">
+			#{status},
+		</if>
+		<if test="zbbm != null and zbbm != ''">
+			#{zbbm},
+		</if>
+		<if test="zbmc != null and zbmc != ''">
+			#{zbmc},
+		</if>
+		<if test="jfyj != null and jfyj != ''">
+			#{jfyj},
+		</if>
+		<if test="cjrq != null and cjrq != ''">
+			#{cjrq},
+		</if>
+		<if test="cjsj != null and cjsj != ''">
+			#{cjsj},
+		</if>
+		<if test="org_no != null and org_no != ''">
+			#{org_no},
+		</if>
+		<if test="czybh != null and czybh != ''">
+			#{czybh},
+		</if>
+		<if test="tseq != null and tseq != ''">
+			#{tseq},
+		</if>
+		<if test="kseq != null and kseq != ''">
+			#{kseq},
+		</if>
+		<if test="jfbz != null and jfbz != ''">
+			#{jfbz},
+		</if>
+		<if test="ckfz != null and ckfz != ''">
+			#{ckfz},
+		</if>
+		<if test="bz != null and bz != ''">
+			#{bz},
+		</if>
+    </trim>
+</insert>
+
+<!-- 更新指标 -->
+<update id="updateQuota" parameterType="com.indihx.inspector.entity.Dc_Khzb">
+	update dc_khzb
+	<set>
+		<if test="super_check_seq != null and super_check_seq != ''">
+			super_check_seq=#{super_check_seq},
+		</if>
+		<if test="zblb != null and zblb != ''">
+			zblb=#{zblb},
+		</if>
+		<if test="zbcj != null and zbcj != ''">
+			zbcj=#{zbcj},
+		</if>
+		<if test="seq_version != null and seq_version != ''">
+			seq_version=#{seq_version},
+		</if>
+		<if test="status != null and status != ''">
+			status=#{status},
+		</if>
+		<if test="zbbm != null and zbbm != ''">
+			zbbm=#{zbbm},
+		</if>
+		<if test="zbmc != null and zbmc != ''">
+			zbmc=#{zbmc},
+		</if>
+		<if test="jfyj != null and jfyj != ''">
+			jfyj=#{jfyj},
+		</if>
+		<if test="cjrq != null and cjrq != ''">
+			cjrq=#{cjrq},
+		</if>
+		<if test="cjsj != null and cjsj != ''">
+			cjsj=#{cjsj},
+		</if>
+		<if test="org_no != null and org_no != ''">
+			org_no=#{org_no},
+		</if>
+		<if test="czybh != null and czybh != ''">
+			czybh=#{czybh},
+		</if>
+		<if test="tseq != null and tseq != ''">
+			tseq=#{tseq},
+		</if>
+		<if test="kseq != null and kseq != ''">
+			kseq=#{kseq},
+		</if>
+		<if test="jfbz != null and jfbz != ''">
+			jfbz=#{jfbz},
+		</if>
+		<if test="ckfz != null and ckfz != ''">
+			ckfz=#{ckfz},
+		</if>
+		<if test="bz != null and bz != ''">
+			bz=#{bz},
+		</if>
+	</set>
+	where check_seq=#{check_seq}
+</update>
+
+<!-- 删除指标 -->
+<delete id="deleteQuota" parameterType="java.lang.Long">
+	delete from dc_khzb where check_seq=#{check_seq,jdbcType=DECIMAL}
+</delete>
+</mapper>

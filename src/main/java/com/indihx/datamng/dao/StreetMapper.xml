@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.datamng.dao.StreetMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  <resultMap id="BaseResultMap" type="com.indihx.datamng.entity.Wy_Jd">
+  	<id column="JDID" jdbcType="DECIMAL" property="jdid" />
+    <result column="HPBID" jdbcType="DECIMAL" property="hpbid" /> 
+    <result column="JDBM" jdbcType="CHAR" property="jdbm" /> 
+    <result column="JDMC" jdbcType="VARCHAR" property="jdmc" /> 
+    <result column="HPBMC" jdbcType="VARCHAR" property="hpbmc" />
+    <result column="CJRQ" jdbcType="VARCHAR" property="cjrq" />
+    <result column="BZ" jdbcType="VARCHAR" property="bz" />
+  </resultMap>
+   <resultMap id="BaseResultMap2" type="com.indihx.datamng.entity.Wy_Hpb">
+   	<id column="HPBID" jdbcType="VARCHAR" property="hpbid" /><!-- column：查询出来的列名  property：type指定的实体类型中的属性名 ，最终resultMap对column和property做一个映射关系（对应关系）  -->
+	<result column="HPBBM" jdbcType="DECIMAL" property="hpbbm" />
+	<result column="HPBMC" jdbcType="VARCHAR" property="hpbmc" />
+	<result column="HPBLX" jdbcType="VARCHAR" property="hpblx" />
+	<result column="SJID" jdbcType="VARCHAR" property="sjid" />
+	<result column="CJRQ" jdbcType="VARCHAR" property="cjrq" />
+	<result column="BZ" jdbcType="VARCHAR" property="bz" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    JDID,HPBID,JDBM,JDMC,CJRQ,HPBMC,BZ
+  </sql>
+   <sql id="Base_Column_List2">
+    HPBID,HPBMC,SJID,HPBLX,CJRQ,HPBBM,BZ
+  </sql>
+  <select id="qryStreetAll" resultMap="BaseResultMap">
+     SELECT S.* FROM WY_JD S JOIN  WY_HPB Z ON S.HPBID = Z.HPBID
+        where 1=1
+      <if test="hpbid != null and hpbid!=''">
+         and Z.HPBID =  #{hpbid,jdbcType=VARCHAR}
+      </if>  
+  	  <if test="hpbmc != null and hpbmc!=''">
+         and Z.HPBMC like CONCAT(CONCAT('%',#{hpbmc}),'%')   
+      </if>
+      <if test="jdmc != null and jdmc!=''">
+        and S.JDMC like CONCAT(CONCAT('%',#{jdmc}),'%') 
+      </if>
+      <if test="jdbm != null and jdbm!=''">
+        and S.JDBM like CONCAT(CONCAT('%',#{jdbm}),'%') 
+      </if>
+  		order by S.JDID DESC
+  </select>
+  <select id="qryRegionList" resultMap="BaseResultMap">
+     SELECT HPBID,HPBMC FROM WY_HPB WHERE HPBLX = 02
+  </select>
+   <select id="selectParentId"  resultMap="BaseResultMap2">
+    select 
+    <include refid="Base_Column_List2" />
+    from WY_HPB
+    where SJID is null
+  </select>
+  <select id="selectByRegionType"  resultMap="BaseResultMap2">
+    select 
+    <include refid="Base_Column_List2" />
+    from WY_HPB
+    where 1=1
+      <if test="hpblx != null and  hpblx !=''">
+        and hpblx = #{hpblx}
+      </if>
+      <if test=" hpbmc != null and  hpbmc !=''">
+        and hpbmc like CONCAT(CONCAT('%',#{hpbmc}),'%') 
+      </if>
+  </select>
+  <insert id="insertSelective" parameterType="com.indihx.datamng.entity.Wy_Jd">
+    insert into WY_JD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+     <if test="jdid != null">
+        JDID,
+      </if>
+      <if test="hpbid != null">
+        HPBID,
+      </if>
+      <if test="hpbmc != null">
+        HPBMC,
+      </if>
+      <if test="jdmc != null">
+        JDMC,
+      </if>
+       <if test="jdbm != null">
+        JDBM,
+      </if>
+       <if test="cjrq != null">
+        CJRQ,
+      </if>
+       <if test="bz != null">
+        BZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jdid != null">
+        #{jdid,jdbcType=DECIMAL},
+      </if>
+      <if test="hpbid != null">
+        #{hpbid,jdbcType=DECIMAL},
+      </if>
+      <if test="hpbmc != null">
+        #{hpbmc,jdbcType=DECIMAL},
+      </if>
+      <if test="jdmc != null">
+        #{jdmc,jdbcType=VARCHAR},
+      </if>
+      <if test="jdbm != null">
+        #{jdbm,jdbcType=CHAR},
+      </if>
+      <if test="cjrq != null">
+        #{cjrq,jdbcType=CHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+     S.*,Z.HPBLX FROM WY_HPB Z INNER JOIN WY_JD S ON S.HPBID = Z.HPBID
+        where 1=1
+    and S.JDID = #{jdid,jdbcType=DECIMAL}
+  </select>
+   <select id="selectByStreetIdKey" parameterType="java.lang.Long" resultMap="BaseResultMap2">
+    select S.*,R.HPBLX,R.SJID from WY_JD S left join WY_HPB R on S.HPBID=R.HPBID 
+	where 1=1
+    and S.JDID = #{jdid,jdbcType=DECIMAL}
+  </select>
+   <update id="updateByPrimaryKeySelective" parameterType="com.indihx.datamng.entity.Wy_Jd">
+    update WY_JD
+    <set>
+      <if test="jdid != null">
+        JDID = #{jdid,jdbcType=DECIMAL},
+      </if>
+      <if test="jdmc != null">
+        JDMC = #{jdmc,jdbcType=VARCHAR},
+      </if>
+       <if test="hpbid != null">
+        HPBID = #{hpbid,jdbcType=DECIMAL},
+      </if>
+      <if test="hpbmc != null">
+        HPBmc = #{hpbmc,jdbcType=DECIMAL},
+      </if>
+      <if test="jdbm != null">
+        JDBM = #{jdbm,jdbcType=CHAR},
+      </if>
+       <if test="bz != null">
+        BZ = #{bz,jdbcType=CHAR},
+      </if>
+    </set>
+    where JDID = #{jdid,jdbcType=DECIMAL}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from WY_JD
+    where JDID = #{jdid,jdbcType=DECIMAL}
+  </delete>
+  <select id="openAqstreetUserList" resultMap="BaseResultMap">
+   SELECT jd.*
+	FROM wy_jd jd
+	JOIN WY_HPB hpb  ON jd.HPBID = hpb.HPBID
+	WHERE 1=1 AND JDID = #{0}
+  </select>
+  <!--  映射查询语句 getOrgRefJdId-->
+  <select id="getOrgRefJdId" parameterType="java.lang.Long"
+		resultType ="java.lang.Long">
+		SELECT PK_ID as jdid FROM BASE_ORG_REL WHERE org_no= #{org_no,jdbcType=DECIMAL}
+   </select> 
+</mapper>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.activiti.dao.ActRoleNodeMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+
+  <resultMap id="BaseResultMap" type="com.indihx.activiti.entity.ActRoleNode">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NODE_ID" jdbcType="VARCHAR" property="nodeId" />
+    <result column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
+    <result column="ORG_ID" jdbcType="DECIMAL" property="orgId" />
+    <result column="ORG_TYPE" jdbcType="VARCHAR" property="orgType" />
+    <result column="NODE_NAME" jdbcType="VARCHAR" property="nodeName" />
+  </resultMap>
+  
+   <resultMap id="userInfoMap" type="com.indihx.system.entity.UsrInfo">
+    <id column="USR_ID" jdbcType="DECIMAL" property="usrId" />
+    <result column="USR_NO" jdbcType="VARCHAR" property="usrNo" />
+    <result column="USR_NAME" jdbcType="VARCHAR" property="usrName" />
+    <result column="SEX" jdbcType="CHAR" property="sex" />
+    <result column="PASS_WORD" jdbcType="VARCHAR" property="passWord" />
+    <result column="BIRTH_DATA" jdbcType="CHAR" property="birthData" />
+    <result column="ORG_NO" jdbcType="DECIMAL" property="orgNo" />
+     <result column="CPY_NAME" jdbcType="VARCHAR" property="orgName" />
+    <result column="MBL_NO" jdbcType="DECIMAL" property="mblNo" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="OPER_USR" jdbcType="DECIMAL" property="operUsr" />
+    <result column="USR_STA" jdbcType="CHAR" property="usrSta" />
+    <result column="ORG_TYPE" jdbcType="VARCHAR" property="orgType" />
+    <result column="TM_SMP" jdbcType="CHAR" property="tmSmp" />
+    <result column="LICENCE_CODE" jdbcType="VARCHAR" property="licenceCode" />
+    <result column="CERT_ID" jdbcType="VARCHAR" property="certId" />
+    <result column="STR_REMARK" jdbcType="VARCHAR" property="strRemark" />
+    
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    ID, NODE_ID, ROLE_ID, ORG_ID, ORG_TYPE,NODE_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.indihx.activiti.entity.ActRoleNode" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ACT_ROLE_NODE
+    <where>
+    	<if test="id != null">
+    		ID = #{id,jdbcType=DECIMAL}
+    	</if>
+    	<if test="orgType != null and orgType != ''">
+    		AND ORG_TYPE=#{orgType,jdbcType=VARCHAR}
+    	</if>
+    	<if test="nodeId != null and nodeId != ''">
+    		AND NODE_ID=#{nodeId,jdbcType=VARCHAR}
+    	</if>
+    	<if test="appType != null and appType != ''">
+    		AND APP_TYPE=#{appType,jdbcType=VARCHAR}
+    	</if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey"  parameterType="com.indihx.activiti.entity.ActRoleNode" >
+    delete from ACT_ROLE_NODE
+    <where>
+    	<if test="id != null">
+    		 ID = #{id,jdbcType=DECIMAL}
+    	</if>
+    	<if test="appType != null">
+    		 AND APP_TYPE = #{appType,jdbcType=DECIMAL}
+    	</if>
+    	<if test="nodeId != null">
+    		 AND NODE_ID = #{nodeId,jdbcType=DECIMAL}
+    	</if>
+    </where>
+  </delete>
+  <insert id="insert" parameterType="com.indihx.activiti.entity.ActRoleNode">
+    insert into ACT_ROLE_NODE (ID, NODE_ID, ROLE_ID, 
+      ORG_ID, ORG_TYPE)
+    values (#{id,jdbcType=DECIMAL}, #{nodeId,jdbcType=VARCHAR}, #{roleId,jdbcType=DECIMAL}, 
+      #{orgId,jdbcType=DECIMAL}, #{orgType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.indihx.activiti.entity.ActRoleNode">
+    insert into ACT_ROLE_NODE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="nodeId != null">
+        NODE_ID,
+      </if>
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="orgId != null">
+        ORG_ID,
+      </if>
+      <if test="orgType != null">
+        ORG_TYPE,
+      </if>
+      <if test="appType != null">
+        APP_TYPE,
+      </if>
+      <if test="nodeName != null">
+        NODE_NAME,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="nodeId != null">
+        #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgType != null">
+        #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="appType != null">
+         #{appType,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeName != null">
+        #{nodeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.indihx.activiti.entity.ActRoleNode">
+    update ACT_ROLE_NODE
+    <set>
+      <if test="nodeId != null">
+        NODE_ID = #{nodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgId != null">
+        ORG_ID = #{orgId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgType != null">
+        ORG_TYPE = #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeName != null">
+        NODE_NAME=#{nodeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.indihx.activiti.entity.ActRoleNode">
+    update ACT_ROLE_NODE
+    set NODE_ID = #{nodeId,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      ORG_ID = #{orgId,jdbcType=DECIMAL},
+      ORG_TYPE = #{orgType,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 根据节点查询当前节点下的用户信息 -->
+  <select id="queryUserByNode" parameterType="java.lang.String" resultMap="userInfoMap">
+  	select t1.* from usr_info t1
+	inner join usr_role t2 on t1.usr_id=t2.usr_id
+	inner join act_role_node t3 on t2.role_id=t3.role_id
+	where t3.node_id=#{0} and t3.APP_TYPE=#{1} and t1.org_no=#{2}
+  </select>
+</mapper>

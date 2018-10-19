@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.credit.dao.CreditQuotaMapper">
+
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  
+  <!-- 用来描述如何从数据库结果集中来加载你的对象 -->
+  <resultMap id="BaseResultMap" type="com.indihx.credit.entity.CreditQuota">
+    <id column="credit_seq" jdbcType="VARCHAR" property="credit_seq" /><!-- column：查询出来的列名  property：type指定的实体类型中的属性名 ，最终resultMap对column和property做一个映射关系（对应关系）  -->
+    <result column="credit_version" jdbcType="VARCHAR" property="credit_version"/>
+    <result column="zblx" jdbcType="VARCHAR" property="zblx"/>
+    <result column="status" jdbcType="VARCHAR" property="status"/>
+    <result column="zbbm" jdbcType="VARCHAR" property="zbbm"/>
+    <result column="jfyj" jdbcType="VARCHAR" property="jfyj"/>
+    <result column="cjrq" jdbcType="VARCHAR" property="cjrq"/>
+    <result column="cjsj" jdbcType="VARCHAR" property="cjsj"/>
+    <result column="qyrq" jdbcType="VARCHAR" property="qyrq"/>
+    <result column="sxrq" jdbcType="VARCHAR" property="sxrq"/>
+    <result column="org_no" jdbcType="VARCHAR" property="org_no"/>
+    <result column="czybh" jdbcType="VARCHAR" property="czybh"/>
+    <result column="tseq" jdbcType="VARCHAR" property="tseq"/>
+    <result column="kseq" jdbcType="VARCHAR" property="kseq"/>
+    <result column="syzt" jdbcType="VARCHAR" property="syzt"/>
+    <result column="jfbz" jdbcType="VARCHAR" property="jfbz"/>
+    <result column="ckfz" jdbcType="VARCHAR" property="ckfz"/>
+    <result column="bz" jdbcType="VARCHAR" property="bz"/>
+  </resultMap>
+  <!-- 可以重用的 SQL 块,也可以被其他语句引用 -->
+  <sql id="Base_Column_List">
+    CREDIT_SEQ,CREDIT_VERSION,ZBLX,STATUS,ZBBM,JFYJ,CJRQ,CJSJ,TSEQ,KSEQ,SYZT,JFBZ,CKFZ
+  </sql>
+  <!--  映射查询语句 getQuotaList-->
+  <select id="getQuotaList" resultMap="BaseResultMap"  parameterType="com.indihx.credit.vo.QuotaVo">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM CREDIT_JFZB
+    <where>
+    	<if test="zblx !=null and zblx != ''">
+    		ZBLX = #{zblx,jdbcType=VARCHAR}
+    	</if>
+    	<if test="status !=null and status != ''">
+    		AND STATUS = #{status,jdbcType=VARCHAR}
+    	</if>
+    	<if test="credit_version !=null and credit_version != ''">
+    		AND CREDIT_VERSION = #{credit_version,jdbcType=VARCHAR}
+    	</if>
+    	<if test="syzt !=null and syzt != ''">
+    		AND SYZT LIKE CONCAT(CONCAT('%',#{syzt}),'%')
+    	</if>
+    	<if test="jfyj !=null and jfyj != ''">
+    		AND JFYJ LIKE CONCAT(CONCAT('%',#{jfyj}),'%')
+    	</if>
+    </where>
+    ORDER BY ZBBM ASC
+  </select>
+  <!--  映射查询语句 getQuotaInfo-->
+  <select id="getQuotaInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	SELECT * FROM CREDIT_JFZB WHERE credit_seq = #{credit_seq,jdbcType=VARCHAR}
+  </select>
+  <!--  映射查询语句 getQuotaByCode-->
+  <select id="getQuotaByCode" resultMap="BaseResultMap" parameterType="com.indihx.credit.vo.QuotaVo">
+  	SELECT * FROM CREDIT_JFZB WHERE ZBBM =  #{zbbm}
+  </select>
+  <!--  映射插入语句 saveQuota-->
+  <insert id="saveQuota" parameterType="com.indihx.credit.vo.QuotaVo">
+    insert into CREDIT_JFZB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="credit_seq != null">
+        credit_seq,
+      </if>
+      <if test="credit_version != null">
+        credit_version,
+      </if>
+      <if test="zblx != null">
+        zblx,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="zbbm != null">
+        zbbm,
+      </if>
+      <if test="jfyj != null">
+        jfyj,
+      </if>
+      <if test="cjrq != null">
+        cjrq,
+      </if>
+      <if test="cjsj != null">
+        cjsj,
+      </if>
+      <if test="qyrq != null">
+        qyrq,
+      </if>
+      <if test="sxrq != null">
+        sxrq,
+      </if>
+      <if test="org_no != null">
+        org_no,
+      </if>
+      <if test="czybh != null">
+        czybh,
+      </if>
+      <if test="tseq != null">
+        tseq,
+      </if>
+      <if test="kseq != null">
+        kseq,
+      </if>
+      <if test="syzt != null">
+        syzt,
+      </if>
+      <if test="jfbz != null">
+        jfbz,
+      </if>
+      <if test="ckfz != null">
+        ckfz,
+      </if>
+      <if test="bz != null">
+        bz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="credit_seq != null">
+        #{credit_seq,jdbcType=VARCHAR},
+      </if>
+      <if test="credit_version != null">
+        #{credit_version,jdbcType=VARCHAR},
+      </if>
+      <if test="zblx != null">
+        #{zblx,jdbcType=DECIMAL},
+      </if>
+       <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="zbbm != null">
+        #{zbbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jfyj != null">
+        #{jfyj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjrq != null">
+        #{cjrq,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null">
+        #{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="qyrq != null">
+        #{qyrq,jdbcType=VARCHAR},
+      </if>
+      <if test="sxrq != null">
+        #{sxrq,jdbcType=VARCHAR},
+      </if>
+      <if test="org_no != null">
+        #{org_no,jdbcType=VARCHAR},
+      </if>
+      <if test="czybh != null">
+        #{czybh,jdbcType=VARCHAR},
+      </if>
+      <if test="tseq != null">
+        #{tseq,jdbcType=VARCHAR},
+      </if>
+      <if test="kseq != null">
+        #{kseq,jdbcType=VARCHAR},
+      </if>
+      <if test="syzt != null">
+        #{syzt,jdbcType=VARCHAR},
+      </if>
+       <if test="jfbz != null">
+        #{jfbz,jdbcType=VARCHAR},
+      </if>
+      <if test="ckfz != null">
+        #{ckfz,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        #{bz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--  映射更新语句 updateQuota-->
+  <update id="updateQuota" parameterType="com.indihx.credit.vo.QuotaVo">
+    update CREDIT_JFZB
+    <set>
+      <if test="credit_seq != null">
+        credit_seq=#{credit_seq,jdbcType=VARCHAR},
+      </if>
+      <if test="credit_version != null">
+        credit_version=#{credit_version,jdbcType=VARCHAR},
+      </if>
+      <if test="zblx != null">
+        zblx=#{zblx,jdbcType=VARCHAR},
+      </if>
+       <if test="status != null">
+        status=#{status,jdbcType=DECIMAL},
+      </if>
+      <if test="zbbm != null">
+        zbbm=#{zbbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jfyj != null">
+        jfyj=#{jfyj,jdbcType=VARCHAR},
+      </if>
+      <if test="cjrq != null">
+        cjrq=#{cjrq,jdbcType=VARCHAR},
+      </if>
+      <if test="cjsj != null">
+        cjsj=#{cjsj,jdbcType=VARCHAR},
+      </if>
+      <if test="qyrq != null">
+        qyrq=#{qyrq,jdbcType=VARCHAR},
+      </if>
+      <if test="sxrq != null">
+        sxrq=#{sxrq,jdbcType=VARCHAR},
+      </if>
+      <if test="org_no != null">
+        org_no=#{org_no,jdbcType=VARCHAR},
+      </if>
+      <if test="czybh != null">
+        czybh=#{czybh,jdbcType=VARCHAR},
+      </if>
+      <if test="tseq != null">
+        tseq=#{tseq,jdbcType=VARCHAR},
+      </if>
+      <if test="kseq != null">
+        kseq=#{kseq,jdbcType=VARCHAR},
+      </if>
+      <if test="syzt != null">
+        syzt=#{syzt,jdbcType=VARCHAR},
+      </if>
+      <if test="jfbz != null">
+        jfbz=#{jfbz,jdbcType=VARCHAR},
+      </if>
+      <if test="ckfz != null">
+        ckfz=#{ckfz,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null">
+        bz=#{bz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where credit_seq = #{credit_seq,jdbcType=VARCHAR}
+  </update>
+  <!--  映射删除语句 deleteQuota-->
+  <delete id="deleteQuota" parameterType="java.lang.String">
+    delete from CREDIT_JFZB
+    where credit_seq = #{credit_seq,jdbcType=VARCHAR}
+  </delete>
+  <!--  映射更新语句 updateQuotaStatus-->
+  <update id="updateQuotaStatus" parameterType="com.indihx.credit.vo.QuotaVo">
+    update CREDIT_JFZB
+    set status = #{status,jdbcType=VARCHAR},sxrq=#{sxrq,jdbcType=VARCHAR}
+    where credit_seq = #{credit_seq,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

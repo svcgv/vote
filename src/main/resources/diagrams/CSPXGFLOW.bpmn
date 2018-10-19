@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="CSPXGFLOW" name=" 企业信息变更" isExecutable="true">
+    <startEvent id="startCsp" name="Start"></startEvent>
+    <endEvent id="FINISH" name="End"></endEvent>
+    <userTask id="Add" name="物业公司编辑"></userTask>
+    <sequenceFlow id="flow1" name="物业公司发起" sourceRef="startCsp" targetRef="Add">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1004"}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="QuJuAudit" name="区局审核"></userTask>
+    <sequenceFlow id="flow2" name="物业公司提交" sourceRef="Add" targetRef="QuJuAudit">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1004"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow3" name="区局归档" sourceRef="QuJuAudit" targetRef="FINISH">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1001"}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="QuJuAddAndConfirm" name="区局发起"></userTask>
+    <sequenceFlow id="flow4" name="区局发起" sourceRef="startCsp" targetRef="QuJuAddAndConfirm">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1001"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow5" name="区局归档" sourceRef="QuJuAddAndConfirm" targetRef="FINISH">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1001"}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="ShiJuAddAndConfirm" name="市局确认"></userTask>
+    <sequenceFlow id="flow6" name="市局发起" sourceRef="startCsp" targetRef="ShiJuAddAndConfirm">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1000"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow7" name="市局归档" sourceRef="ShiJuAddAndConfirm" targetRef="FINISH">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${role_id=="1000"}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_CSPXGFLOW">
+    <bpmndi:BPMNPlane bpmnElement="CSPXGFLOW" id="BPMNPlane_CSPXGFLOW">
+      <bpmndi:BPMNShape bpmnElement="startCsp" id="BPMNShape_startCsp">
+        <omgdc:Bounds height="35.0" width="35.0" x="100.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="FINISH" id="BPMNShape_FINISH">
+        <omgdc:Bounds height="35.0" width="35.0" x="670.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Add" id="BPMNShape_Add">
+        <omgdc:Bounds height="55.0" width="105.0" x="219.0" y="60.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="QuJuAudit" id="BPMNShape_QuJuAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="480.0" y="70.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="QuJuAddAndConfirm" id="BPMNShape_QuJuAddAndConfirm">
+        <omgdc:Bounds height="55.0" width="105.0" x="300.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ShiJuAddAndConfirm" id="BPMNShape_ShiJuAddAndConfirm">
+        <omgdc:Bounds height="55.0" width="105.0" x="290.0" y="260.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="117.0" y="180.0"></omgdi:waypoint>
+        <omgdi:waypoint x="271.0" y="115.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="102.0" y="146.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="324.0" y="87.0"></omgdi:waypoint>
+        <omgdi:waypoint x="480.0" y="97.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="349.0" y="81.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="532.0" y="125.0"></omgdi:waypoint>
+        <omgdi:waypoint x="687.0" y="180.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="552.0" y="137.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="135.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="300.0" y="197.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="190.0" y="180.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="405.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="670.0" y="197.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="514.0" y="191.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="117.0" y="215.0"></omgdi:waypoint>
+        <omgdi:waypoint x="342.0" y="260.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="162.0" y="251.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="342.0" y="260.0"></omgdi:waypoint>
+        <omgdi:waypoint x="687.0" y="215.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="100.0" x="407.0" y="227.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

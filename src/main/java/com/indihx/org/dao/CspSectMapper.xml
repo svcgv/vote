@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.org.dao.CspSectMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  <!-- 用来描述如何从数据库结果集中来加载你的对象 -->
+   <resultMap id="BaseResultMap" type="com.indihx.org.entity.WY_GLC">
+    <id column="GLCID" jdbcType="VARCHAR" property="glcid" />
+    <result column="GSRYID" jdbcType="VARCHAR" property="gsryid" />
+    <result column="WYGSID" jdbcType="VARCHAR" property="wygsid" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="GLCMC" jdbcType="VARCHAR" property="glcmc" />
+    <result column="GLCDZ" jdbcType="VARCHAR" property="glcdz" />
+    <result column="GLCLXR" jdbcType="VARCHAR" property="glclxr" />
+    <result column="GLCLXDH" jdbcType="VARCHAR" property="glclxdh" />
+    <result column="ZBDH" jdbcType="VARCHAR" property="zbdh" />
+    <result column="BXDH" jdbcType="VARCHAR" property="bxdh" />
+    <result column="BZ" jdbcType="VARCHAR" property="bz" />
+  </resultMap> 
+  
+  <!--  映射查询语句 -->
+  <select id="getCsList" parameterType="com.indihx.org.entity.WY_GLC" resultMap="BaseResultMap">
+  	select  t.GLCID, t.STATUS, t.GLCMC, t.GLCDZ, t.GLCLXR, t.GLCLXDH, t.ZBDH, t.BXDH, t.BZ
+    from WY_GLC t
+    where 1=1
+    	<if test="glcmc !=null and glcmc != ''">
+    		and  t.GLCMC like CONCAT(CONCAT('%',#{glcmc}),'%')
+    	</if>
+    	<if test="glcdz !=null and glcdz != ''">
+    		and  t.GLCDZ = #{glcdz}
+    	</if>
+    	<if test="wygsid !=null and wygsid != ''">
+    		and  t.WYGSID = #{wygsid}
+    	</if>
+    order by t.GLCID asc
+  </select>
+  
+  <!--  映射查询语句 -->
+  <select id="getCspSectList" parameterType="com.indihx.datamng.vo.SectVo" resultMap="BaseResultMap">
+  	select 
+    t.GLCID, t.STATUS, t.GLCMC, t.GLCDZ, t.GLCLXR, t.GLCLXDH, t.ZBDH, t.BXDH, t.BZ
+    from WY_GLC t
+    left join wy_sect s on t.glcid = s.glcid
+    where 1=1
+    	<if test="glcmc !=null and glcmc != ''">
+    		and  t.GLCMC like CONCAT(CONCAT('%',#{glcmc}),'%')
+    	</if>
+    	<if test="wygsid !=null and wygsid != ''">
+    		and  t.wygsid = #{wygsid}
+    	</if>
+    	<if test="glcid !=null and glcid != ''">
+    		and  t.glcid = #{glcid}
+    	</if>
+    	<if test="xmid !=null and xmid != ''">
+    		and  s.xmid = #{xmid}
+    	</if>
+    order by t.GLCID asc
+  </select>
+   
+   <!--  根据管理处名称查询是否存在重复 -->
+	<select id="validCsIsExists" parameterType="com.indihx.org.entity.WY_GLC" resultMap="BaseResultMap">
+  	select 
+    t.GLCID, t.STATUS, t.GLCMC, t.GLCDZ, t.GLCLXR, t.GLCLXDH, t.ZBDH, t.BXDH, t.BZ
+    from WY_GLC t
+    where 1=1
+    	<if test="glcmc !=null and glcmc != ''">
+    		and t.GLCMC = #{glcmc,jdbcType=VARCHAR} 
+    	</if>
+    	<if test="glcid !=null and glcid != ''">
+    		and  t.GLCID != #{glcid,jdbcType=DECIMAL} 
+    	</if>
+	</select>
+  
+	<!--  新增管理处信息 -->
+	<insert id="insertCs" parameterType="com.indihx.org.entity.WY_GLC">
+	insert into WY_GLC
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="glcid != null and glcid != ''">
+			  GLCID,
+			</if>
+			<if test="wygsid != null and wygsid != ''">
+			  WYGSID,
+			</if>
+			<if test="gsryid != null and gsryid != ''">
+			  GSRYID,
+			</if>
+			<if test="glcmc != null and glcmc != ''">
+			  GLCMC,
+			</if>
+			<if test="glcdz !=  null and glcdz != ''">
+			  GLCDZ,
+			</if>
+			<if test="glclxr != null and glclxr != ''">
+			  GLCLXR,
+			</if>
+			<if test="glclxdh != null and glclxdh != ''">
+			  GLCLXDH,
+			</if>
+			<if test="zbdh != null and zbdh != ''">
+			  ZBDH,
+			</if>
+			<if test="bxdh != null and bxdh != ''">
+			  BXDH,
+			</if>
+			 <if test="bz != null and bz != ''">
+			  BZ,
+			</if>
+			 <if test="status != null and status != ''">
+			  STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="glcid != null and glcid != ''">
+				#{glcid,jdbcType=VARCHAR},
+			</if>
+			<if test="wygsid != null and wygsid != ''">
+				#{wygsid,jdbcType=VARCHAR},
+			</if>
+			<if test="gsryid != null and gsryid != ''">
+				#{gsryid,jdbcType=VARCHAR},
+			</if> 
+			<if test="glcmc != null and glcmc != ''">
+			  #{glcmc,jdbcType=VARCHAR},
+			</if>
+			<if test="glcdz != null and glcdz != ''">
+			  #{glcdz,jdbcType=VARCHAR},
+			</if>
+			<if test="glclxr != null and glclxr != ''">
+			  #{glclxr,jdbcType=VARCHAR},
+			</if>
+			<if test="glclxdh != null and glclxdh != ''">
+			  #{glclxdh,jdbcType=VARCHAR},
+			</if>
+			<if test="zbdh != null and zbdh != ''">
+			  #{zbdh,jdbcType=VARCHAR},
+			</if>
+			<if test="bxdh != null and bxdh != ''">
+			  #{bxdh,jdbcType=VARCHAR},
+			</if>
+			 <if test="bz != null and bz != ''">
+			  #{bz,jdbcType=VARCHAR},
+			</if>
+			 <if test="status != null and status != ''">
+			  #{status,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert> 
+	
+	 <!--  新增机构信息 -->
+   <insert id="insertOrgInfo" parameterType="com.indihx.org.entity.ORG_INFO">
+    insert into ORG_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+    	<if test="parent_org_no != null">
+        PARENT_ORG_NO,
+      </if>
+      <if test="parent_org_name != null">
+        PARENT_ORG_NAME,
+      </if> 
+       <if test="org_no != null">
+        ORG_NO,
+      </if> 
+       <if test="org_name != null">
+        ORG_NAME,
+      </if> 
+       <if test="org_type != null">
+        ORG_TYPE,
+      </if> 
+       <if test="addres != null">
+        ADDRES,
+      </if> 
+      <if test="tel_no != null">
+        TEL_NO,
+      </if> 
+      <if test="oper_usr != null">
+        OPER_USR,
+      </if> 
+       <if test="tm_smp != null">
+        TM_SMP,
+      </if> 
+       <if test="org_status != null">
+        ORG_STATUS,
+      </if> 
+       <if test="link_man != null">
+        LINK_MAN,
+      </if> 
+       <if test="email != null">
+        EMAIL,
+      </if> 
+       <if test="post_code != null">
+        POST_CODE,
+      </if> 
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+     <if test="parent_org_no != null">
+        #{parent_org_no,jdbcType=DECIMAL},
+      </if>
+      <if test="parent_org_name != null">
+        #{parent_org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_no != null">
+        #{org_no,jdbcType=VARCHAR},
+      </if>
+      <if test="org_name != null">
+        #{org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_type != null">
+        #{org_type,jdbcType=VARCHAR},
+      </if>
+       <if test="addres != null">
+        #{addres,jdbcType=VARCHAR},
+      </if>
+      <if test="tel_no != null">
+        #{tel_no,jdbcType=VARCHAR},
+      </if>
+      <if test="oper_usr != null">
+        #{oper_usr,jdbcType=VARCHAR},
+      </if>
+      <if test="tm_smp != null">
+        #{tm_smp,jdbcType=VARCHAR},
+      </if>
+      <if test="org_status != null">
+        #{org_status,jdbcType=VARCHAR},
+      </if>
+      <if test="link_man != null">
+        #{link_man,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="post_code != null">
+        #{post_code,jdbcType=VARCHAR},
+      </if> 
+    </trim>
+  </insert>  
+  
+  
+	<!--  根据ID删除企业信息 -->
+	<delete id="deleteCs" parameterType="java.lang.Long">
+	delete from WY_GLC
+	where GLCID = #{glcid,jdbcType=DECIMAL}
+	</delete>
+	
+    <!--  根据ID删除机构信息 -->
+    <delete id="deleteOrgInfo" parameterType="java.lang.String">
+    delete from ORG_INFO
+    where org_no = #{org_no,jdbcType=VARCHAR}
+    </delete>
+  
+  
+	<!--  根据ID查询企业信息 -->
+	<select id="qrCsInfoById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select 
+    t.GLCID, t.STATUS, t.GLCMC, t.GLCDZ, t.GLCLXR, t.GLCLXDH, t.ZBDH, t.BXDH, t.BZ, t.WYGSID, t.GSRYID
+    from WY_GLC t
+	where t.GLCID = #{glcid,jdbcType=DECIMAL}
+	</select>
+    
+    <!--  根据ID更新管理处详情 -->
+	<update id="updateCs" parameterType="com.indihx.org.entity.WY_GLC">
+    update WY_GLC
+    <set>
+		<if test="wygsid != null and wygsid != ''">
+		  WYGSID = #{wygsid,jdbcType=VARCHAR},
+		</if>
+		<if test="glcmc != null and glcmc != ''">
+		  GLCMC = #{glcmc,jdbcType=VARCHAR},
+		</if>
+		<if test="glcdz !=  null and glcdz != ''">
+		  GLCDZ = #{glcdz,jdbcType=VARCHAR},
+		</if>
+		<if test="glclxr != null and glclxr != ''">
+		  GLCLXR = #{glclxr,jdbcType=VARCHAR},
+		</if>
+		<if test="glclxdh != null and glclxdh != ''">
+		  GLCLXDH = #{glclxdh,jdbcType=VARCHAR},
+		</if>
+		<if test="zbdh != null and zbdh != ''">
+		  ZBDH = #{zbdh,jdbcType=VARCHAR},
+		</if>
+		<if test="bxdh != null and bxdh != ''">
+		  BXDH = #{bxdh,jdbcType=VARCHAR},
+		</if>
+		 <if test="bz != null and bz != ''">
+		  BZ = #{bz,jdbcType=VARCHAR},
+		</if>
+		<if test="status != null and status != ''">
+		  STATUS = #{status,jdbcType=VARCHAR},
+		</if>
+    </set>
+    where GLCID = #{glcid,jdbcType=DECIMAL}
+	</update> 
+	
+	  <!--  根据ID更新企业详情-->
+	<update id="updateOrgInfo" parameterType="com.indihx.org.entity.ORG_INFO">
+    update ORG_INFO
+    <set>
+      <if test="org_name != null">
+        org_name = #{org_name,jdbcType=VARCHAR},
+      </if>
+      <if test="org_type != null">
+        org_type = #{org_type,jdbcType=VARCHAR},
+      </if>
+      <if test="addres != null">
+        addres = #{addres,jdbcType=VARCHAR},
+      </if>
+       <if test="tel_no != null">
+        tel_no = #{tel_no,jdbcType=VARCHAR},
+      </if>
+       <if test="link_man != null">
+        link_man = #{link_man,jdbcType=VARCHAR},
+      </if>
+        <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+       <if test="post_code != null">
+        post_code = #{post_code,jdbcType=VARCHAR},
+      </if> 
+    </set>
+    where org_no = #{org_no,jdbcType=DECIMAL}
+  </update> 
+</mapper>
