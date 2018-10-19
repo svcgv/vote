@@ -12,7 +12,7 @@ if(session!=null && session.getAttribute(InitSysConstants.USER_SESSION)!=null){
 %>
 <html>
 <head>
-<title>电子投票表决系统</title>
+<title>电子投票表决系统2</title>
 <link href="${ctx }/resources/css/style_log.css" rel="stylesheet" />
 <!-- basic styles -->
 <link href="${ctx }/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
