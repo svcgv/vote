@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.excel.dao.ExcelSheetMapper">
+<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.excel.entity.ExcelSheetEntity" id="excelSheetMap">
+        <result property="excelSheetId" column="EXCEL_SHEET_ID"/>
+        <result property="excelFileId" column="EXCEL_FILE_ID"/>
+        <result property="excelSheetCnName" column="EXCEL_SHEET_CN_NAME"/>
+        <result property="excelSheetEnName" column="EXCEL_SHEET_EN_NAME"/>
+        <result property="remark" column="REMARK"/>
+        <result property="isValid" column="IS_VALID"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.indihx.excel.entity.ExcelSheetEntity">
+		select * from EXCEL_SHEET where EXCEL_SHEET_ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.indihx.excel.entity.ExcelSheetEntity">
+		select * from EXCEL_SHEET
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by EXCEL_SHEET_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from EXCEL_SHEET 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.excel.entity.ExcelSheetEntity">
+		insert into EXCEL_SHEET
+		(
+			`EXCEL_SHEET_ID`, 
+			`EXCEL_FILE_ID`, 
+			`EXCEL_SHEET_CN_NAME`, 
+			`EXCEL_SHEET_EN_NAME`, 
+			`REMARK`, 
+			`IS_VALID`
+		)
+		values
+		(
+			#{excelSheetId}, 
+			#{excelFileId}, 
+			#{excelSheetCnName}, 
+			#{excelSheetEnName}, 
+			#{remark}, 
+			#{isValid}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.excel.entity.ExcelSheetEntity">
+		update EXCEL_SHEET 
+		<set>
+			<if test="excelFileId != null">`EXCEL_FILE_ID` = #{excelFileId}, </if>
+			<if test="excelSheetCnName != null">`EXCEL_SHEET_CN_NAME` = #{excelSheetCnName}, </if>
+			<if test="excelSheetEnName != null">`EXCEL_SHEET_EN_NAME` = #{excelSheetEnName}, </if>
+			<if test="remark != null">`REMARK` = #{remark}, </if>
+			<if test="isValid != null">`IS_VALID` = #{isValid}</if>
+		</set>
+		where EXCEL_SHEET_ID = #{excelSheetId}
+	</update>
+	
+	<delete id="delete">
+		delete from EXCEL_SHEET where EXCEL_SHEET_ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from EXCEL_SHEET where EXCEL_SHEET_ID in 
+		<foreach item="excelSheetId" collection="array" open="(" separator="," close=")">
+			#{excelSheetId}
+		</foreach>
+	</delete>
+
+	<select id="querySheetListByFileId" resultType="com.indihx.excel.entity.ExcelSheetEntity" parameterType="long">
+		SELECT * from EXCEL_FILE EF LEFT JOIN EXCEL_SHEET ES on EF.EXCEL_FILE_ID=ES.EXCEL_FILE_ID WHERE EF.EXCEL_FILE_ID=#{id}
+	</select>
+</mapper>

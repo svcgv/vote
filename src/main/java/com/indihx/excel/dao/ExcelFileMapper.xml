@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.excel.dao.ExcelFileMapper">
+
+	 <resultMap type="com.indihx.excel.entity.ExcelFileEntity" id="excelFileMap">
+        <result property="excelFileId" column="EXCEL_FILE_ID"/>
+        <result property="excelFileCnName" column="EXCEL_FILE_CN_NAME"/>
+        <result property="excelFileEnName" column="EXCEL_FILE_EN_NAME"/>
+        <result property="excelDescripte" column="EXCEL_DESCRIPTE"/>
+        <result property="remark" column="REMARK"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.indihx.excel.entity.ExcelFileEntity">
+		select * from EXCEL_FILE where EXCEL_FILE_ID = #{value}
+	</select>
+
+	<select id="queryList" resultType="com.indihx.excel.entity.ExcelFileEntity">
+		select * from EXCEL_FILE
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by EXCEL_FILE_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from EXCEL_FILE 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.excel.entity.ExcelFileEntity">
+		insert into EXCEL_FILE
+		(
+			`EXCEL_FILE_ID`, 
+			`EXCEL_FILE_CN_NAME`, 
+			`EXCEL_FILE_EN_NAME`, 
+			`EXCEL_DESCRIPTE`, 
+			`REMARK`
+		)
+		values
+		(
+			#{excelFileId}, 
+			#{excelFileCnName}, 
+			#{excelFileEnName}, 
+			#{excelDescripte}, 
+			#{remark}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.excel.entity.ExcelFileEntity">
+		update EXCEL_FILE 
+		<set>
+			<if test="excelFileCnName != null">`EXCEL_FILE_CN_NAME` = #{excelFileCnName}, </if>
+			<if test="excelFileEnName != null">`EXCEL_FILE_EN_NAME` = #{excelFileEnName}, </if>
+			<if test="excelDescripte != null">`EXCEL_DESCRIPTE` = #{excelDescripte}, </if>
+			<if test="remark != null">`REMARK` = #{remark}</if>
+		</set>
+		where EXCEL_FILE_ID = #{excelFileId}
+	</update>
+	
+	<delete id="delete">
+		delete from EXCEL_FILE where EXCEL_FILE_ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from EXCEL_FILE where EXCEL_FILE_ID in 
+		<foreach item="excelFileId" collection="array" open="(" separator="," close=")">
+			#{excelFileId}
+		</foreach>
+	</delete>
+	
+	<select id="queryFileInfoByFileCode" resultType="com.indihx.excel.entity.ExcelFileEntity" parameterType="String">
+		SELECT * FROM EXCEL_FILE WHERE EXCEL_FILE_EN_NAME=#{fileCode}
+	</select>
+	
+	
+	
+
+</mapper>
