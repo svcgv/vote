@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmCustomerInfo.dao.PmCustomerGroupRelationMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity" id="pmCustomerGroupRelationMap">
+        <result property="custGroupRelationId" column="CUST_GROUP_RELATION_ID"/>
+        <result property="custGroupId" column="CUST_GROUP_ID"/>
+        <result property="custId" column="CUST_ID"/>
+        <result property="custCnName" column="CUST_CN_NAME"/>
+        <result property="sapCode" column="SAP_CODE"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity">
+		select * from pm_customer_group_relation where CUST_GROUP_RELATION_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmCustomerGroupRelationMap">
+		select 
+		
+		*
+		 from pm_customer_group_relation
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="custGroupRelationId != null">CUST_GROUP_RELATION_ID = #{custGroupRelationId} AND </if>
+						<if test="custGroupId != null">CUST_GROUP_ID = #{custGroupId} AND </if>
+						<if test="custId != null">CUST_ID = #{custId} AND </if>
+						<if test="custCnName != null">CUST_CN_NAME = #{custCnName} AND </if>
+						<if test="sapCode != null">SAP_CODE = #{sapCode}</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_customer_group_relation 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity">
+		insert into pm_customer_group_relation
+		(
+		CUST_GROUP_RELATION_ID
+		<if test="custGroupRelationId != null">
+			,CUST_GROUP_RELATION_ID	
+		</if>
+		<if test="custGroupId != null">
+			,CUST_GROUP_ID	
+		</if>
+		<if test="custId != null">
+			,CUST_ID	
+		</if>
+		<if test="custCnName != null">
+			,CUST_CN_NAME	
+		</if>
+		<if test="sapCode != null">
+			,SAP_CODE	
+		</if>
+		)
+		values
+		(
+		PmCustomerGroupRelation_SEQ.nextval,
+		<if test="custGroupRelationId != null">
+			#{custGroupRelationId}, 		</if>
+		<if test="custGroupId != null">
+			#{custGroupId}, 		</if>
+		<if test="custId != null">
+			#{custId}, 		</if>
+		<if test="custCnName != null">
+			#{custCnName}, 		</if>
+		<if test="sapCode != null">
+			#{sapCode}		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity">
+		update pm_customer_group_relation 
+		<set>
+			<if test="custGroupId != null">CUST_GROUP_ID = #{custGroupId}, </if>
+			<if test="custId != null">CUST_ID = #{custId}, </if>
+			<if test="custCnName != null">CUST_CN_NAME = #{custCnName}, </if>
+			<if test="sapCode != null">SAP_CODE = #{sapCode}</if>
+		</set>
+		where CUST_GROUP_RELATION_ID = #{custGroupRelationId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_customer_group_relation where CUST_GROUP_RELATION_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

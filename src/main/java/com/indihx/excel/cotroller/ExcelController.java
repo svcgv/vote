@@ -71,10 +71,22 @@ public class ExcelController extends AbstractBaseController {
 	 * @return 返回页面模版
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> qryUsrInfo(@RequestParam("file") MultipartFile[] myfiles, HttpServletRequest request) throws IOException {
+	@RequestMapping(value = "/upload/excelFileCode", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> qryUsrInfo(@RequestParam("file") MultipartFile[] myfiles,@RequestParam("fileCode") String fileCode , HttpServletRequest request) throws IOException{
+		return applyExcel(myfiles,fileCode);
+	}
+	
+	
+	/**
+	 * 通用解析excel方法
+	 * @param myfiles
+	 * @param fileCode
+	 * @return
+	 * @throws IOException
+	 */
+	public  Map<String, Object> applyExcel(MultipartFile[] myfiles,String fileCode) throws IOException {
 
-		List<ExcelCellEntity> cellList = getExcelByFileCode("cust");
+		List<ExcelCellEntity> cellList = getExcelByFileCode(fileCode);
 		
 		String SheetType = getExcelType(cellList);
 

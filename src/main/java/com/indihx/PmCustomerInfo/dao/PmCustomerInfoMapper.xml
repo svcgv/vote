@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmCustomerInfo.dao.PmCustomerInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity" id="pmCustomerInfoMap">
+        <result property="custId" column="CUST_ID"/>
+        <result property="custCnName" column="CUST_CN_NAME"/>
+        <result property="custCode" column="CUST_CODE"/>
+        <result property="country" column="COUNTRY"/>
+        <result property="sapCode" column="SAP_CODE"/>
+        <result property="enName" column="EN_NAME"/>
+        <result property="custPatTaxesCode" column="CUST_PAT_TAXES_CODE"/>
+        <result property="custType" column="CUST_TYPE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="cashManagementGroup" column="CASH_MANAGEMENT_GROUP"/>
+        <result property="payCondition" column="PAY_CONDITION"/>
+        <result property="tradeCode" column="TRADE_CODE"/>
+        <result property="regionalMarket" column="REGIONAL_MARKET"/>
+        <result property="mainBusiness" column="MAIN_BUSINESS"/>
+        <result property="area" column="AREA"/>
+        <result property="custTrade" column="CUST_TRADE"/>
+        <result property="payCycle" column="PAY_CYCLE"/>
+        <result property="isUseful" column="IS_USEFUL"/>
+        <result property="groupCompany" column="GROUP_COMPANY"/>
+        <result property="bgVisiable" column="BG_VISIABLE"/>
+        <result property="companyCode" column="COMPANY_CODE"/>
+        <result property="companyFuncCode" column="COMPANY_FUNC_CODE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="addUserId" column="ADD_USER_ID"/>
+        <result property="addTime" column="ADD_TIME"/>
+        <result property="modifier" column="MODIFIER"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity">
+		select * from pm_customer_info where CUST_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmCustomerInfoMap">
+		select 
+		
+		*
+		 from pm_customer_info
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="custId != null">CUST_ID = #{custId} AND </if>
+						<if test="custCnName != null">CUST_CN_NAME = #{custCnName} AND </if>
+						<if test="custCode != null">CUST_CODE = #{custCode} AND </if>
+						<if test="country != null">COUNTRY = #{country} AND </if>
+						<if test="sapCode != null">SAP_CODE = #{sapCode} AND </if>
+						<if test="enName != null">EN_NAME = #{enName} AND </if>
+						<if test="custPatTaxesCode != null">CUST_PAT_TAXES_CODE = #{custPatTaxesCode} AND </if>
+						<if test="custType != null">CUST_TYPE = #{custType} AND </if>
+						<if test="address != null">ADDRESS = #{address} AND </if>
+						<if test="cashManagementGroup != null">CASH_MANAGEMENT_GROUP = #{cashManagementGroup} AND </if>
+						<if test="payCondition != null">PAY_CONDITION = #{payCondition} AND </if>
+						<if test="tradeCode != null">TRADE_CODE = #{tradeCode} AND </if>
+						<if test="regionalMarket != null">REGIONAL_MARKET = #{regionalMarket} AND </if>
+						<if test="mainBusiness != null">MAIN_BUSINESS = #{mainBusiness} AND </if>
+						<if test="area != null">AREA = #{area} AND </if>
+						<if test="custTrade != null">CUST_TRADE = #{custTrade} AND </if>
+						<if test="payCycle != null">PAY_CYCLE = #{payCycle} AND </if>
+						<if test="isUseful != null">IS_USEFUL = #{isUseful} AND </if>
+						<if test="groupCompany != null">GROUP_COMPANY = #{groupCompany} AND </if>
+						<if test="bgVisiable != null">BG_VISIABLE = #{bgVisiable} AND </if>
+						<if test="companyCode != null">COMPANY_CODE = #{companyCode} AND </if>
+						<if test="companyFuncCode != null">COMPANY_FUNC_CODE = #{companyFuncCode} AND </if>
+						<if test="createTime != null">CREATE_TIME = #{createTime} AND </if>
+						<if test="addUserId != null">ADD_USER_ID = #{addUserId} AND </if>
+						<if test="addTime != null">ADD_TIME = #{addTime} AND </if>
+						<if test="modifier != null">MODIFIER = #{modifier} AND </if>
+						<if test="modifyTime != null">MODIFY_TIME = #{modifyTime} AND </if>
+						<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_customer_info 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity">
+		insert into pm_customer_info
+		(
+		CUST_ID
+		<if test="custId != null">
+			,CUST_ID	
+		</if>
+		<if test="custCnName != null">
+			,CUST_CN_NAME	
+		</if>
+		<if test="custCode != null">
+			,CUST_CODE	
+		</if>
+		<if test="country != null">
+			,COUNTRY	
+		</if>
+		<if test="sapCode != null">
+			,SAP_CODE	
+		</if>
+		<if test="enName != null">
+			,EN_NAME	
+		</if>
+		<if test="custPatTaxesCode != null">
+			,CUST_PAT_TAXES_CODE	
+		</if>
+		<if test="custType != null">
+			,CUST_TYPE	
+		</if>
+		<if test="address != null">
+			,ADDRESS	
+		</if>
+		<if test="cashManagementGroup != null">
+			,CASH_MANAGEMENT_GROUP	
+		</if>
+		<if test="payCondition != null">
+			,PAY_CONDITION	
+		</if>
+		<if test="tradeCode != null">
+			,TRADE_CODE	
+		</if>
+		<if test="regionalMarket != null">
+			,REGIONAL_MARKET	
+		</if>
+		<if test="mainBusiness != null">
+			,MAIN_BUSINESS	
+		</if>
+		<if test="area != null">
+			,AREA	
+		</if>
+		<if test="custTrade != null">
+			,CUST_TRADE	
+		</if>
+		<if test="payCycle != null">
+			,PAY_CYCLE	
+		</if>
+		<if test="isUseful != null">
+			,IS_USEFUL	
+		</if>
+		<if test="groupCompany != null">
+			,GROUP_COMPANY	
+		</if>
+		<if test="bgVisiable != null">
+			,BG_VISIABLE	
+		</if>
+		<if test="companyCode != null">
+			,COMPANY_CODE	
+		</if>
+		<if test="companyFuncCode != null">
+			,COMPANY_FUNC_CODE	
+		</if>
+		<if test="createTime != null">
+			,CREATE_TIME	
+		</if>
+		<if test="addUserId != null">
+			,ADD_USER_ID	
+		</if>
+		<if test="addTime != null">
+			,ADD_TIME	
+		</if>
+		<if test="modifier != null">
+			,MODIFIER	
+		</if>
+		<if test="modifyTime != null">
+			,MODIFY_TIME	
+		</if>
+		<if test="isDelete != null">
+			,IS_DELETE	
+		</if>
+		)
+		values
+		(
+		PmCustomerInfo_SEQ.nextval,
+		<if test="custId != null">
+			#{custId}, 		</if>
+		<if test="custCnName != null">
+			#{custCnName}, 		</if>
+		<if test="custCode != null">
+			#{custCode}, 		</if>
+		<if test="country != null">
+			#{country}, 		</if>
+		<if test="sapCode != null">
+			#{sapCode}, 		</if>
+		<if test="enName != null">
+			#{enName}, 		</if>
+		<if test="custPatTaxesCode != null">
+			#{custPatTaxesCode}, 		</if>
+		<if test="custType != null">
+			#{custType}, 		</if>
+		<if test="address != null">
+			#{address}, 		</if>
+		<if test="cashManagementGroup != null">
+			#{cashManagementGroup}, 		</if>
+		<if test="payCondition != null">
+			#{payCondition}, 		</if>
+		<if test="tradeCode != null">
+			#{tradeCode}, 		</if>
+		<if test="regionalMarket != null">
+			#{regionalMarket}, 		</if>
+		<if test="mainBusiness != null">
+			#{mainBusiness}, 		</if>
+		<if test="area != null">
+			#{area}, 		</if>
+		<if test="custTrade != null">
+			#{custTrade}, 		</if>
+		<if test="payCycle != null">
+			#{payCycle}, 		</if>
+		<if test="isUseful != null">
+			#{isUseful}, 		</if>
+		<if test="groupCompany != null">
+			#{groupCompany}, 		</if>
+		<if test="bgVisiable != null">
+			#{bgVisiable}, 		</if>
+		<if test="companyCode != null">
+			#{companyCode}, 		</if>
+		<if test="companyFuncCode != null">
+			#{companyFuncCode}, 		</if>
+		<if test="createTime != null">
+			#{createTime}, 		</if>
+		<if test="addUserId != null">
+			#{addUserId}, 		</if>
+		<if test="addTime != null">
+			#{addTime}, 		</if>
+		<if test="modifier != null">
+			#{modifier}, 		</if>
+		<if test="modifyTime != null">
+			#{modifyTime}, 		</if>
+		<if test="isDelete != null">
+			#{isDelete}		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity">
+		update pm_customer_info 
+		<set>
+			<if test="custCnName != null">CUST_CN_NAME = #{custCnName}, </if>
+			<if test="custCode != null">CUST_CODE = #{custCode}, </if>
+			<if test="country != null">COUNTRY = #{country}, </if>
+			<if test="sapCode != null">SAP_CODE = #{sapCode}, </if>
+			<if test="enName != null">EN_NAME = #{enName}, </if>
+			<if test="custPatTaxesCode != null">CUST_PAT_TAXES_CODE = #{custPatTaxesCode}, </if>
+			<if test="custType != null">CUST_TYPE = #{custType}, </if>
+			<if test="address != null">ADDRESS = #{address}, </if>
+			<if test="cashManagementGroup != null">CASH_MANAGEMENT_GROUP = #{cashManagementGroup}, </if>
+			<if test="payCondition != null">PAY_CONDITION = #{payCondition}, </if>
+			<if test="tradeCode != null">TRADE_CODE = #{tradeCode}, </if>
+			<if test="regionalMarket != null">REGIONAL_MARKET = #{regionalMarket}, </if>
+			<if test="mainBusiness != null">MAIN_BUSINESS = #{mainBusiness}, </if>
+			<if test="area != null">AREA = #{area}, </if>
+			<if test="custTrade != null">CUST_TRADE = #{custTrade}, </if>
+			<if test="payCycle != null">PAY_CYCLE = #{payCycle}, </if>
+			<if test="isUseful != null">IS_USEFUL = #{isUseful}, </if>
+			<if test="groupCompany != null">GROUP_COMPANY = #{groupCompany}, </if>
+			<if test="bgVisiable != null">BG_VISIABLE = #{bgVisiable}, </if>
+			<if test="companyCode != null">COMPANY_CODE = #{companyCode}, </if>
+			<if test="companyFuncCode != null">COMPANY_FUNC_CODE = #{companyFuncCode}, </if>
+			<if test="createTime != null">CREATE_TIME = #{createTime}, </if>
+			<if test="addUserId != null">ADD_USER_ID = #{addUserId}, </if>
+			<if test="addTime != null">ADD_TIME = #{addTime}, </if>
+			<if test="modifier != null">MODIFIER = #{modifier}, </if>
+			<if test="modifyTime != null">MODIFY_TIME = #{modifyTime}, </if>
+			<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+		</set>
+		where CUST_ID = #{custId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_customer_info where CUST_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmCompanyInfo.dao.PmCompanyInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity" id="pmCompanyInfoMap">
+        <result property="companyCode" column="COMPANY_CODE"/>
+        <result property="companyName" column="COMPANY_NAME"/>
+        <result property="companyAddress" column="COMPANY_ADDRESS"/>
+        <result property="remark" column="REMARK"/>
+        <result property="creatorId" column="CREATOR_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="modifier" column="MODIFIER"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity">
+		select * from pm_company_info where COMPANY_CODE = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmCompanyInfoMap">
+		select 
+		
+		*
+		 from pm_company_info
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="companyCode != null">COMPANY_CODE = #{companyCode} AND </if>
+						<if test="companyName != null">COMPANY_NAME = #{companyName} AND </if>
+						<if test="companyAddress != null">COMPANY_ADDRESS = #{companyAddress} AND </if>
+						<if test="remark != null">REMARK = #{remark} AND </if>
+						<if test="creatorId != null">CREATOR_ID = #{creatorId} AND </if>
+						<if test="createTime != null">CREATE_TIME = #{createTime} AND </if>
+						<if test="modifier != null">MODIFIER = #{modifier} AND </if>
+						<if test="modifyTime != null">MODIFY_TIME = #{modifyTime} AND </if>
+						<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_company_info 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity">
+		insert into pm_company_info
+		(
+		COMPANY_CODE
+		<if test="companyCode != null">
+			,COMPANY_CODE	
+		</if>
+		<if test="companyName != null">
+			,COMPANY_NAME	
+		</if>
+		<if test="companyAddress != null">
+			,COMPANY_ADDRESS	
+		</if>
+		<if test="remark != null">
+			,REMARK	
+		</if>
+		<if test="creatorId != null">
+			,CREATOR_ID	
+		</if>
+		<if test="createTime != null">
+			,CREATE_TIME	
+		</if>
+		<if test="modifier != null">
+			,MODIFIER	
+		</if>
+		<if test="modifyTime != null">
+			,MODIFY_TIME	
+		</if>
+		<if test="isDelete != null">
+			,IS_DELETE	
+		</if>
+		)
+		values
+		(
+		PmCompanyInfo_SEQ.nextval,
+		<if test="companyCode != null">
+			#{companyCode}, 		</if>
+		<if test="companyName != null">
+			#{companyName}, 		</if>
+		<if test="companyAddress != null">
+			#{companyAddress}, 		</if>
+		<if test="remark != null">
+			#{remark}, 		</if>
+		<if test="creatorId != null">
+			#{creatorId}, 		</if>
+		<if test="createTime != null">
+			#{createTime}, 		</if>
+		<if test="modifier != null">
+			#{modifier}, 		</if>
+		<if test="modifyTime != null">
+			#{modifyTime}, 		</if>
+		<if test="isDelete != null">
+			#{isDelete}		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity">
+		update pm_company_info 
+		<set>
+			<if test="companyName != null">COMPANY_NAME = #{companyName}, </if>
+			<if test="companyAddress != null">COMPANY_ADDRESS = #{companyAddress}, </if>
+			<if test="remark != null">REMARK = #{remark}, </if>
+			<if test="creatorId != null">CREATOR_ID = #{creatorId}, </if>
+			<if test="createTime != null">CREATE_TIME = #{createTime}, </if>
+			<if test="modifier != null">MODIFIER = #{modifier}, </if>
+			<if test="modifyTime != null">MODIFY_TIME = #{modifyTime}, </if>
+			<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+		</set>
+		where COMPANY_CODE = #{companyCode}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_company_info where COMPANY_CODE = #{value}
+	</delete>
+	
+
+
+</mapper>
