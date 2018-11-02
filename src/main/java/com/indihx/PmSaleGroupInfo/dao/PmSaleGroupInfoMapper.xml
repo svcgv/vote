@@ -5,7 +5,7 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.indihx.PmSaleGroupInfo.entity.PmSaleGroupInfoEntity" id="pmSaleGroupInfoMap">
-        <result property="groupCode" column="GROUP_CODE"/>
+        <result property="groupId" column="GROUP_ID"/>
         <result property="groupName" column="GROUP_NAME"/>
         <result property="ownerOrgId" column="OWNER_ORG_ID"/>
         <result property="remark" column="REMARK"/>
@@ -16,25 +16,24 @@
         <result property="isDelete" column="IS_DELETE"/>
     </resultMap>
 
-	<select id="queryObject" resultType="com.indihx.PmSaleGroupInfo.entity.PmSaleGroupInfoEntity">
-		select * from pm_sale_group_info where GROUP_CODE = #{value}
+	<select id="queryObject" resultMap="pmSaleGroupInfoMap">
+		select * from pm_sale_group_info where GROUP_ID = #{value}
 	</select>
 
 	<select id="queryList" resultMap="pmSaleGroupInfoMap">
 		select 
-		
 		*
 		 from pm_sale_group_info
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-						<if test="groupCode != null">GROUP_CODE = #{groupCode} AND </if>
-						<if test="groupName != null">GROUP_NAME = #{groupName} AND </if>
-						<if test="ownerOrgId != null">OWNER_ORG_ID = #{ownerOrgId} AND </if>
-						<if test="remark != null">REMARK = #{remark} AND </if>
-						<if test="creatorId != null">CREATOR_ID = #{creatorId} AND </if>
-						<if test="createTime != null">CREATE_TIME = #{createTime} AND </if>
-						<if test="modifier != null">MODIFIER = #{modifier} AND </if>
-						<if test="modifyTime != null">MODIFY_TIME = #{modifyTime} AND </if>
-						<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+						<if test="groupId != null and groupId!=''"  >GROUP_ID = #{groupId} AND </if>
+						<if test="groupName != null and groupName!=''"  >GROUP_NAME = #{groupName} AND </if>
+						<if test="ownerOrgId != null and ownerOrgId!=''"  >OWNER_ORG_ID = #{ownerOrgId} AND </if>
+						<if test="remark != null and remark!=''"  >REMARK = #{remark} AND </if>
+						<if test="creatorId != null and creatorId!=''"  >CREATOR_ID = #{creatorId} AND </if>
+						<if test="createTime != null and createTime!=''"  >CREATE_TIME = #{createTime} AND </if>
+						<if test="modifier != null and modifier!=''"  >MODIFIER = #{modifier} AND </if>
+						<if test="modifyTime != null and modifyTime!=''"  >MODIFY_TIME = #{modifyTime} AND </if>
+						<if test="isDelete != null and isDelete!=''"  >IS_DELETE = #{isDelete}</if>
 					</trim> 
 	</select>
 	
@@ -45,10 +44,7 @@
 	<insert id="insert" parameterType="com.indihx.PmSaleGroupInfo.entity.PmSaleGroupInfoEntity">
 		insert into pm_sale_group_info
 		(
-		GROUP_CODE
-		<if test="groupCode != null">
-			,GROUP_CODE	
-		</if>
+		GROUP_ID
 		<if test="groupName != null">
 			,GROUP_NAME	
 		</if>
@@ -76,25 +72,23 @@
 		)
 		values
 		(
-		PmSaleGroupInfo_SEQ.nextval,
-		<if test="groupCode != null">
-			#{groupCode}, 		</if>
+		PmSaleGroupInfo_SEQ.nextval
 		<if test="groupName != null">
-			#{groupName}, 		</if>
+			,#{groupName} 		</if>
 		<if test="ownerOrgId != null">
-			#{ownerOrgId}, 		</if>
+			,#{ownerOrgId} 		</if>
 		<if test="remark != null">
-			#{remark}, 		</if>
+			,#{remark} 		</if>
 		<if test="creatorId != null">
-			#{creatorId}, 		</if>
+			,#{creatorId} 		</if>
 		<if test="createTime != null">
-			#{createTime}, 		</if>
+			,#{createTime} 		</if>
 		<if test="modifier != null">
-			#{modifier}, 		</if>
+			,#{modifier} 		</if>
 		<if test="modifyTime != null">
-			#{modifyTime}, 		</if>
+			,#{modifyTime} 		</if>
 		<if test="isDelete != null">
-			#{isDelete}		</if>
+			,#{isDelete}		</if>
 		)
 	</insert>
 	 
@@ -110,11 +104,11 @@
 			<if test="modifyTime != null">MODIFY_TIME = #{modifyTime}, </if>
 			<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
 		</set>
-		where GROUP_CODE = #{groupCode}
+		where GROUP_ID = #{groupId}
 	</update>
 	
 	<delete id="delete">
-		delete from pm_sale_group_info where GROUP_CODE = #{value}
+		delete from pm_sale_group_info where GROUP_ID = #{value}
 	</delete>
 	
 

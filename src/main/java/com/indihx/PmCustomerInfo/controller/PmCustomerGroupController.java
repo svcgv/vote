@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +42,7 @@ public class PmCustomerGroupController {
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params){
+    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
        
 		List<PmCustomerGroupEntity> pmCustomerGroup = pmCustomerGroupService.queryList(params);
         return R.ok().put("page", pmCustomerGroup);
@@ -52,7 +53,7 @@ public class PmCustomerGroupController {
      * 信息
      */
     @RequestMapping(value="/info",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> info(@RequestParam("custGroupId") String custGroupId){
+    public @ResponseBody Map<String,Object> info(@RequestParam("custGroupId") String custGroupId,HttpSession session){
         
 		PmCustomerGroupEntity entity = pmCustomerGroupService.queryObject(custGroupId);
         return R.ok().put("pmCustomerGroup", entity);
@@ -64,9 +65,10 @@ public class PmCustomerGroupController {
     @RequestMapping(value="/save",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> save(@RequestBody PmCustomerGroupEntity pmCustomerGroup,HttpSession session){
         
-        UsrInfo	currentUser= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
-        pmCustomerGroup.setCreatorId(currentUser.getUsrId());
-        pmCustomerGroup.setCreator(currentUser.getUsrName());
+        UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+        pmCustomerGroup.setCreatorId(user.getUsrId());
+        pmCustomerGroup.setCreator(user.getUsrName());
+        pmCustomerGroup.setCreateTime(new Date());
         pmCustomerGroupService.insert(pmCustomerGroup);
         return R.ok();
     }
@@ -75,8 +77,10 @@ public class PmCustomerGroupController {
      * 修改
      */
     @RequestMapping(value="/update",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> update(@RequestBody PmCustomerGroupEntity pmCustomerGroup){
-        
+    public @ResponseBody Map<String,Object> update(@RequestBody PmCustomerGroupEntity pmCustomerGroup,HttpSession session){
+    	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+        pmCustomerGroup.setModifier(user.getUsrId());
+        pmCustomerGroup.setModifyTime(new Date());
         pmCustomerGroupService.update(pmCustomerGroup);//全部更新
         
         return R.ok();
@@ -86,9 +90,9 @@ public class PmCustomerGroupController {
      * 删除
      */
     @RequestMapping(value="/delete",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> delete(@RequestBody String custGroupId){
+    public @ResponseBody Map<String,Object> delete(@RequestBody String custGroupId,HttpSession session){
         pmCustomerGroupService.delete(custGroupId);
-
+        
         return R.ok();
     }
 

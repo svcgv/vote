@@ -18,16 +18,15 @@
 
 	<select id="queryList" resultMap="pmCustomerGroupRelationMap">
 		select 
-		
 		*
 		 from pm_customer_group_relation
-		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-						<if test="custGroupRelationId != null">CUST_GROUP_RELATION_ID = #{custGroupRelationId} AND </if>
-						<if test="custGroupId != null">CUST_GROUP_ID = #{custGroupId} AND </if>
-						<if test="custId != null">CUST_ID = #{custId} AND </if>
-						<if test="custCnName != null">CUST_CN_NAME = #{custCnName} AND </if>
-						<if test="sapCode != null">SAP_CODE = #{sapCode}</if>
-					</trim> 
+			 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+				<if test="custGroupRelationId != null">CUST_GROUP_RELATION_ID = #{custGroupRelationId} AND </if>
+				<if test="custGroupId != null">CUST_GROUP_ID = #{custGroupId} AND </if>
+				<if test="custId != null">CUST_ID = #{custId} AND </if>
+				<if test="custCnName != null">CUST_CN_NAME = #{custCnName} AND </if>
+				<if test="sapCode != null">SAP_CODE = #{sapCode}</if>
+			</trim> 
 	</select>
 	
  	<select id="queryTotal" resultType="int">
@@ -55,13 +54,13 @@
 		(
 		PmCustomerGroupRelation_SEQ.nextval,
 		<if test="custGroupId != null">
-			#{custGroupId}, 		</if>
+			,#{custGroupId}	</if>
 		<if test="custId != null">
-			#{custId}, 		</if>
+			,#{custId}</if>
 		<if test="custCnName != null">
-			#{custCnName}, 		</if>
+			,#{custCnName} 		</if>
 		<if test="sapCode != null">
-			#{sapCode}		</if>
+			,#{sapCode}		</if>
 		)
 	</insert>
 	 

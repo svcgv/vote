@@ -1,6 +1,9 @@
 package com.indihx.PmSaleGroupInfo.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Map;
 import java.util.List;
 import javax.annotation.Resource;
@@ -15,20 +18,20 @@ public class PmSaleGroupInfoServiceImpl implements PmSaleGroupInfoService {
    	PmSaleGroupInfoMapper pmSaleGroupInfoMapper;
    	
    
-   	public PmSaleGroupInfoEntity queryObject(String id){
+   	public PmSaleGroupInfoEntity queryObject(long id){
    		return pmSaleGroupInfoMapper.queryObject(id);
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmSaleGroupInfoEntity entity){
    		pmSaleGroupInfoMapper.insert(entity);
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmSaleGroupInfoEntity entity){
    		pmSaleGroupInfoMapper.update(entity);
    	}
-
-	public void delete(String groupCode){
-   		pmSaleGroupInfoMapper.delete( groupCode);
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void delete(long groupId){
+   		pmSaleGroupInfoMapper.delete( groupId);
    	}
 
 	public int queryTotal(){

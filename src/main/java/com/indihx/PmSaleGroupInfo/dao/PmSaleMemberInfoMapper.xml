@@ -16,25 +16,24 @@
         <result property="isDelete" column="IS_DELETE"/>
     </resultMap>
 
-	<select id="queryObject" resultType="com.indihx.PmSaleGroupInfo.entity.PmSaleMemberInfoEntity">
+	<select id="queryObject" resultMap="pmSaleMemberInfoMap">
 		select * from pm_sale_member_info where MENBER_USR_ID = #{value}
 	</select>
 
 	<select id="queryList" resultMap="pmSaleMemberInfoMap">
 		select 
-		
 		*
 		 from pm_sale_member_info
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-						<if test="menberUsrId != null">MENBER_USR_ID = #{menberUsrId} AND </if>
-						<if test="groupCode != null">GROUP_CODE = #{groupCode} AND </if>
-						<if test="memberType != null">MEMBER_TYPE = #{memberType} AND </if>
-						<if test="remark != null">REMARK = #{remark} AND </if>
-						<if test="creatorId != null">CREATOR_ID = #{creatorId} AND </if>
-						<if test="createTime != null">CREATE_TIME = #{createTime} AND </if>
-						<if test="modifier != null">MODIFIER = #{modifier} AND </if>
-						<if test="modifyTime != null">MODIFY_TIME = #{modifyTime} AND </if>
-						<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+						<if test="menberUsrId != null and menberUsrId!=''"  >MENBER_USR_ID = #{menberUsrId} AND </if>
+						<if test="groupCode != null and groupCode!=''"  >GROUP_CODE = #{groupCode} AND </if>
+						<if test="memberType != null and memberType!=''"  >MEMBER_TYPE = #{memberType} AND </if>
+						<if test="remark != null and remark!=''"  >REMARK = #{remark} AND </if>
+						<if test="creatorId != null and creatorId!=''"  >CREATOR_ID = #{creatorId} AND </if>
+						<if test="createTime != null and createTime!=''"  >CREATE_TIME = #{createTime} AND </if>
+						<if test="modifier != null and modifier!=''"  >MODIFIER = #{modifier} AND </if>
+						<if test="modifyTime != null and modifyTime!=''"  >MODIFY_TIME = #{modifyTime} AND </if>
+						<if test="isDelete != null and isDelete!=''"  >IS_DELETE = #{isDelete}</if>
 					</trim> 
 	</select>
 	
@@ -46,9 +45,6 @@
 		insert into pm_sale_member_info
 		(
 		MENBER_USR_ID
-		<if test="menberUsrId != null">
-			,MENBER_USR_ID	
-		</if>
 		<if test="groupCode != null">
 			,GROUP_CODE	
 		</if>
@@ -76,25 +72,23 @@
 		)
 		values
 		(
-		PmSaleMemberInfo_SEQ.nextval,
-		<if test="menberUsrId != null">
-			#{menberUsrId}, 		</if>
+		PmSaleMemberInfo_SEQ.nextval
 		<if test="groupCode != null">
-			#{groupCode}, 		</if>
+			,#{groupCode} 		</if>
 		<if test="memberType != null">
-			#{memberType}, 		</if>
+			,#{memberType} 		</if>
 		<if test="remark != null">
-			#{remark}, 		</if>
+			,#{remark} 		</if>
 		<if test="creatorId != null">
-			#{creatorId}, 		</if>
+			,#{creatorId} 		</if>
 		<if test="createTime != null">
-			#{createTime}, 		</if>
+			,#{createTime} 		</if>
 		<if test="modifier != null">
-			#{modifier}, 		</if>
+			,#{modifier} 		</if>
 		<if test="modifyTime != null">
-			#{modifyTime}, 		</if>
+			,#{modifyTime} 		</if>
 		<if test="isDelete != null">
-			#{isDelete}		</if>
+			,#{isDelete}		</if>
 		)
 	</insert>
 	 

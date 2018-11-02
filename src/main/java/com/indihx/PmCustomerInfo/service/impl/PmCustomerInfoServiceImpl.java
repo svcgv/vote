@@ -1,6 +1,9 @@
 package com.indihx.PmCustomerInfo.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Map;
 import java.util.List;
 import javax.annotation.Resource;
@@ -21,15 +24,30 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
    	public PmCustomerInfoEntity queryBySapCode(String code){
    		return pmCustomerInfoMapper.queryBySapCode(code);
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmCustomerInfoEntity entity){
-   		pmCustomerInfoMapper.insert(entity);
+		PmCustomerInfoEntity queryInfo = null;
+		boolean flag = false;
+		if(entity.getSapCode()!=null) {//若有sapCode,且数据库中没有这条数据则执行插入
+			queryInfo = queryBySapCode(entity.getSapCode());
+			if(queryInfo == null) {
+				flag = true;
+			}
+		}
+		else {
+			flag = true;
+		}
+		
+		if(flag) {
+			pmCustomerInfoMapper.insert(entity);
+		}
+   		
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmCustomerInfoEntity entity){
    		pmCustomerInfoMapper.update(entity);
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(long custId){
    		pmCustomerInfoMapper.delete( custId);
    	}

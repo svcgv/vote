@@ -20,7 +20,7 @@ public class PmSaleMemberInfoEntity extends BaseEntity implements Serializable {
 	 * 
 	 */
 
-private Long menberUsrId;
+private long menberUsrId;
 	/**
 	 * 
 	 */
@@ -119,7 +119,7 @@ private String isDelete;
 	/**
 	 * 获取：
 	 */
-	public Long getCreatorId() {
+	public long getCreatorId() {
 		return creatorId;
 	}
 	/**
@@ -143,7 +143,7 @@ private String isDelete;
 	/**
 	 * 获取：
 	 */
-	public Long getModifier() {
+	public long getModifier() {
 		return modifier;
 	}
 	/**

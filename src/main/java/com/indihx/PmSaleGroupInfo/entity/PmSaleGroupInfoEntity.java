@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-10-30 18:46:08
+ * @date 2018-11-02 20:19:45
  */
 public class PmSaleGroupInfoEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +20,7 @@ public class PmSaleGroupInfoEntity extends BaseEntity implements Serializable {
 	 * 
 	 */
 
-private String groupCode;
+private long groupId;
 	/**
 	 * 
 	 */
@@ -50,7 +50,7 @@ private Date createTime;
 	 * 
 	 */
 
-private Long modifier;
+private long modifier;
 	/**
 	 * 
 	 */
@@ -65,14 +65,14 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setGroupCode(String groupCode) {
-		this.groupCode = groupCode;
+	public void setGroupId(long groupId) {
+		this.groupId = groupId;
 	}
 	/**
 	 * 获取：
 	 */
-	public String getGroupCode() {
-		return groupCode;
+	public long getGroupId() {
+		return groupId;
 	}
 	/**
 	 * 设置：
@@ -119,7 +119,7 @@ private String isDelete;
 	/**
 	 * 获取：
 	 */
-	public Long getCreatorId() {
+	public long getCreatorId() {
 		return creatorId;
 	}
 	/**
@@ -143,7 +143,7 @@ private String isDelete;
 	/**
 	 * 获取：
 	 */
-	public Long getModifier() {
+	public long getModifier() {
 		return modifier;
 	}
 	/**

@@ -2,6 +2,10 @@ package com.indihx.PmCompanyInfo.controller;
 
 
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity;
 import com.indihx.PmCompanyInfo.service.PmCompanyInfoService;
 import com.indihx.comm.util.R;
+import com.indihx.system.entity.UsrInfo;
+import com.indihx.util.UserUtil;
 import com.indihx.comm.util.PageUtils;
 
 
@@ -35,7 +41,7 @@ public class PmCompanyInfoController {
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params){
+    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
        
 		List<PmCompanyInfoEntity> pmCompanyInfo = pmCompanyInfoService.queryList(params);
         return R.ok().put("page", pmCompanyInfo);
@@ -46,7 +52,7 @@ public class PmCompanyInfoController {
      * 信息
      */
     @RequestMapping(value="/info",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> info(@RequestParam("companyCode") String companyCode){
+    public @ResponseBody Map<String,Object> info(@RequestParam("companyCode") String companyCode,HttpSession session){
         
 		PmCompanyInfoEntity entity = pmCompanyInfoService.queryObject(companyCode);
         return R.ok().put("pmCompanyInfo", entity);
@@ -56,7 +62,10 @@ public class PmCompanyInfoController {
      * 保存
      */
     @RequestMapping(value="/save",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> save(@RequestBody PmCompanyInfoEntity pmCompanyInfo){
+    public @ResponseBody Map<String,Object> save(@RequestBody PmCompanyInfoEntity pmCompanyInfo,HttpSession session){
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	pmCompanyInfo.setCreatorId(usesr.getUsrId());
+    	pmCompanyInfo.setCreateTime(new Date());
         pmCompanyInfoService.insert(pmCompanyInfo);
 
         return R.ok();
@@ -66,8 +75,10 @@ public class PmCompanyInfoController {
      * 修改
      */
     @RequestMapping(value="/update",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> update(@RequestBody PmCompanyInfoEntity pmCompanyInfo){
-        
+    public @ResponseBody Map<String,Object> update(@RequestBody PmCompanyInfoEntity pmCompanyInfo,HttpSession session){
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	pmCompanyInfo.setModifier(usesr.getUsrId());
+    	pmCompanyInfo.setModifyTime(new Date());
         pmCompanyInfoService.update(pmCompanyInfo);//全部更新
         
         return R.ok();
@@ -77,7 +88,7 @@ public class PmCompanyInfoController {
      * 删除
      */
     @RequestMapping(value="/delete",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> delete(@RequestBody String companyCode){
+    public @ResponseBody Map<String,Object> delete(@RequestBody String companyCode,HttpSession session){
         pmCompanyInfoService.delete(companyCode);
 
         return R.ok();

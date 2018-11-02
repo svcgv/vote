@@ -1,6 +1,8 @@
 package com.indihx.PmSaleGroupInfo.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.indihx.PmSaleGroupInfo.dao.PmSaleMemberInfoMapper;
 import com.indihx.PmSaleGroupInfo.entity.PmSaleMemberInfoEntity;
@@ -20,15 +22,15 @@ public class PmSaleMemberInfoServiceImpl implements PmSaleMemberInfoService {
    	public PmSaleMemberInfoEntity queryObject(Long id){
    		return pmSaleMemberInfoMapper.queryObject(id);
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmSaleMemberInfoEntity entity){
    		pmSaleMemberInfoMapper.insert(entity);
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmSaleMemberInfoEntity entity){
    		pmSaleMemberInfoMapper.update(entity);
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(Long menberUsrId){
    		pmSaleMemberInfoMapper.delete( menberUsrId);
    	}

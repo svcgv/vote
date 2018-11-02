@@ -2,6 +2,7 @@ package com.indihx.PmCustomerInfo.service.impl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.indihx.PmCustomerInfo.dao.PmCustomerGroupMapper;
@@ -34,7 +35,7 @@ public class PmCustomerGroupServiceImpl implements PmCustomerGroupService {
    		return pmCustomerGroupMapper.queryObject(id);
    	}
 
-   	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmCustomerGroupEntity entity){
 		String custGroupId = DateUtil.getSysDate()+RandomUtil.generateString(4);
 		if(entity.getCustGroupId()==null) {
@@ -54,11 +55,11 @@ public class PmCustomerGroupServiceImpl implements PmCustomerGroupService {
    		}
    		
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmCustomerGroupEntity entity){
    		pmCustomerGroupMapper.update(entity);
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(String custGroupId){
    		pmCustomerGroupMapper.delete( custGroupId);
    	}

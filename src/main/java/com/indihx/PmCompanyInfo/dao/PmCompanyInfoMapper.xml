@@ -76,23 +76,23 @@
 		values
 		(
 		<if test="companyCode != null">
-			#{companyCode}, 		</if>
+			,#{companyCode}		</if>
 		<if test="companyName != null">
-			#{companyName}, 		</if>
+			,#{companyName}		</if>
 		<if test="companyAddress != null">
-			#{companyAddress}, 		</if>
+			,#{companyAddress} 		</if>
 		<if test="remark != null">
-			#{remark}, 		</if>
+			,#{remark}		</if>
 		<if test="creatorId != null">
-			#{creatorId}, 		</if>
+			,#{creatorId}		</if>
 		<if test="createTime != null">
-			#{createTime}, 		</if>
+			,#{createTime}		</if>
 		<if test="modifier != null">
-			#{modifier} 		</if>
+			,#{modifier} 	</if>
 		<if test="modifyTime != null">
-			#{modifyTime}, 		</if>
+			,#{modifyTime}	</if>
 		<if test="isDelete != null">
-			,#{isDelete}		</if>
+			,#{isDelete}</if>
 		)
 	</insert>
 	 

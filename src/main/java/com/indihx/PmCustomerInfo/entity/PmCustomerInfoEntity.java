@@ -130,7 +130,7 @@ private String companyFuncCode;
 	 * 
 	 */
 
-private String createTime;
+private Date createTime;
 	/**
 	 * 
 	 */
@@ -424,13 +424,13 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 	/**
 	 * 获取：
 	 */
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 	/**
