@@ -37,6 +37,8 @@
 
 <script type="text/javascript">
 $(function(){
+
+	var testData = []
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table'], function(){
   var layer = layui.layer ,
@@ -47,7 +49,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
   tableGroup.render({
 	    elem: '#customTable',
 	    //url:'custom.json',
-	    height:'260',
+	    height:'250',
 	    width:"690",
 	    title: '客户数据表',
 	    cols: [[
@@ -56,51 +58,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	      {field:'custCnName', title:'客户名称'},
 	    ]],
 	    data:[
-		  		{
-		  			"sapCode":"1",
-					"custCnName":"上海浦东发展银行股份有限公司"
-					
-				},
-				{
-					"sapCode":"2",
-					"custCnName":"南京发展银行股份有限公司"
-				},
-				{
-					"sapCode":"33",
-					"custCnName":"南京发展银行股份有限公司"
-				},
-				{
-					"sapCode":"3",
-					"custCnName":"南京发展银行股份有限公司"
-				},
-				{
-					"sapCode":"4",
-					"custCnName":"南京发展银行股份有限公司"
-				},
-				{
-					"sapCode":"232",
-					"custCnName":"南京发展银行股份有限公司"
-				},
-				{
-					"sapCode":"1232",
-					"custCnName":"南京发展银行股份有限公司"
-				},
-				{
-					"sapCode":"123222",
-					"custCnName":"南京发展银行股份有限公司"
-				},
-				{
-					"sapCode":"21231222",
-					"custCnName":"南京发展银行股份有限公司"
-				},
-				{
-					"sapCode":"1111",
-					"custCnName":"南京发展银行股份有限公司"
-				},
-				{
-					"sapCode":"123121212",
-					"custCnName":"南京发展银行股份有限公司"
-				}
+		  		
 			],
 	    page: true
 	  });
@@ -158,28 +116,46 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	*/
 	$("#customQuery").click(function(){
 		
-		var queryParams=$("#customer-query-form").serialize();
+		var queryParams=$("#formGroup-query-form").serializeObject();
 		console.log(queryParams)
-		tableGroup.reload('customerGroup-table',{
-			url:'form',
-			page:{
-				curr:1 //从第一页开始
-			},
-			method:'post',
-			where:{
-				queryStr:queryParams
-			},
-			done:function(res){
-				console.log(res)
-			}
-			
-		})
+		
+		var newparam = {}
+		 for(var o in queryParams){
+			 if(queryParams[o]){
+				 newparam[o] = queryParams[o]
+			 }
+		 }
+		
+		console.log(newparam)
+		
+		$.ajax({
+			  type: 'POST',
+			  url: '/vote/pmcustomerinfo/list',
+			  data: JSON.stringify(newparam),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			      testData=res.page
+			      tableGroup.render({
+			  	    elem: '#customTable',
+			  	  	height:'250',
+			  	    cols: [[
+			  	    	{type: 'checkbox' },
+			  	      {field:'sapCode', title:'sap编号', sort: true},
+			  	      {field:'custCnName', title:'客户名称'},
+			  	    ]],
+			  	    cellMinWidth:'90',
+			  	    
+			  	    data:testData,
+			  	    page: true
+			  	  });},
+			  dataType: "json"
+			});
 	});
 	
 });
 	
 });
-
 
 
 </script>

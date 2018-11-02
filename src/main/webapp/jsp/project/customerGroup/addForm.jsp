@@ -31,22 +31,7 @@
 	     <div class="layui-inline">
 	     	   <label class="layui-form-label">已选客户：</label>
 		      <div class="layui-input-inline" id="chosed-customer-hook" style="border:#e6e6e6 solid 1px;height:100px;overflow-y:auto;width:320px;">
-		         <span class="customer-list">
-		         	<span class="customerItem" sapCode="1">南京发展银行股份有限公司</span>
-		         	<span onclick="$(this).parent().remove()"><i class="layui-icon layui-icon-close-fill"></i></span>
-		         </span>
-		         <span class="customer-list">
-		         	<span class="customerItem" sapCode="2">北京发展银行股份有限公司</span>
-		         	<span onclick="$(this).parent().remove()"><i class="layui-icon layui-icon-close-fill"></i></span>
-		         </span>
-		         <span class="customer-list">
-		         	<span class="customerItem" sapCode="3">天津发展银行股份有限公司</span>
-		         	<span onclick="$(this).parent().remove()"><i class="layui-icon layui-icon-close-fill"></i></span>
-		         </span>
-		         <span class="customer-list">
-		         	<span class="customerItem" sapCode="4">天津发展银行股份有限公司</span>
-		         	<span onclick="$(this).parent().remove()"><i class="layui-icon layui-icon-close-fill"></i></span>
-		         </span>
+		         
 		      </div>
 	     </div>
 	    
@@ -85,25 +70,22 @@ $(function(){
 				ret.push(sapCode2)
 			});
 			
+			var data = {custGroupName:customerGroupName,sapCode:ret}
 			$.ajax({
-				type:'POST',
-				url:'saveCustomer',
-				data:{
-					name:customerGroupName,
-					ctnCodes:ret.join(",")
-				},
-				success:function(res){
-					layer.msg("新增成功",{icon:1});
-					win.close();
-				},
-				error:function(){
-					layer.msg("新增失败",{icon:5});
-					win.close();
-				}
-				
-				
-			})
-				
+				  type: 'POST',
+				  url: '/vote/pmcustomergroup/save',
+				  data: JSON.stringify(data),
+				  contentType:'application/json',
+				  success:function(res){
+						layer.msg("新增成功",{icon:1});
+						win.close();
+					},
+					error:function(){
+						layer.msg("新增失败",{icon:5});
+						win.close();
+					},
+				  dataType: "json"
+				})
 			
 			return false;
 		})
@@ -111,6 +93,11 @@ $(function(){
 		// 关闭
 		$("#form-customer-hook #customGroup-close-hook").click(function(){
 			win.close();
+			return false;
+		})
+		
+		$("#form-customer-hook #customerGroup-close-hook").click(function(){
+			$(this).getWindow().close();
 			return false;
 		})
 	
