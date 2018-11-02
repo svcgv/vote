@@ -68,7 +68,6 @@ public class PmCustomerGroupController {
         UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
         pmCustomerGroup.setCreatorId(user.getUsrId());
         pmCustomerGroup.setCreator(user.getUsrName());
-        pmCustomerGroup.setCreateTime(new Date());
         pmCustomerGroupService.insert(pmCustomerGroup);
         return R.ok();
     }
@@ -80,7 +79,6 @@ public class PmCustomerGroupController {
     public @ResponseBody Map<String,Object> update(@RequestBody PmCustomerGroupEntity pmCustomerGroup,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
         pmCustomerGroup.setModifier(user.getUsrId());
-        pmCustomerGroup.setModifyTime(new Date());
         pmCustomerGroupService.update(pmCustomerGroup);//全部更新
         
         return R.ok();

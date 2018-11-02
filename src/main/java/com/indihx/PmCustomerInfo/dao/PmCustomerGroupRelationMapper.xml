@@ -52,7 +52,7 @@
 		)
 		values
 		(
-		PmCustomerGroupRelation_SEQ.nextval,
+		PmCustomerGroupRelation_SEQ.nextval
 		<if test="custGroupId != null and  custGroupId !=''">
 			,#{custGroupId}	</if>
 		<if test="custId != null and  custId !=''">

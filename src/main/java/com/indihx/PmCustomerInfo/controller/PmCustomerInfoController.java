@@ -21,6 +21,7 @@ import com.indihx.PmCustomerInfo.service.PmCustomerInfoService;
 import com.indihx.comm.util.R;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.comm.InitSysConstants;
+import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
 
 
@@ -64,7 +65,9 @@ public class PmCustomerInfoController {
     @RequestMapping(value="/save",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> save(@RequestBody PmCustomerInfoEntity pmCustomerInfo,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
-    	pmCustomerInfo.setCreatorId(user.getUsrId());
+    	
+    	pmCustomerInfo.setAddUserId(user.getUsrId());
+    	pmCustomerInfo.setAddTime(DateUtil.getDateTime());
         pmCustomerInfoService.insert(pmCustomerInfo);
 
         return R.ok();
@@ -77,7 +80,7 @@ public class PmCustomerInfoController {
     public @ResponseBody Map<String,Object> update(@RequestBody PmCustomerInfoEntity pmCustomerInfo,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
     	pmCustomerInfo.setModifier(user.getUsrId());
-    	pmCustomerInfo.setModifyTime(new Date());
+    	//pmCustomerInfo.setModifyTime(new Date());
         pmCustomerInfoService.update(pmCustomerInfo);//全部更新
         
         return R.ok();
@@ -91,6 +94,23 @@ public class PmCustomerInfoController {
         pmCustomerInfoService.delete(custId);
 
         return R.ok();
+    }
+    
+    /**
+     * 批量
+     */
+    @RequestMapping(value="/saveList",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> saveList(@RequestBody List<PmCustomerInfoEntity> pmCustomerInfo,HttpSession session){
+    	if(pmCustomerInfo.isEmpty()) {
+    		return R.error("请传入数据");
+    	}
+    	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+       for(int i = 0;i<pmCustomerInfo.size();i++) {
+    	   PmCustomerInfoEntity item = pmCustomerInfo.get(i);
+    	   item.setAddUserId(user.getUsrId());
+    	   pmCustomerInfoService.insert(item);
+       }
+        return R.ok().put("page", pmCustomerInfo);
     }
 
 }

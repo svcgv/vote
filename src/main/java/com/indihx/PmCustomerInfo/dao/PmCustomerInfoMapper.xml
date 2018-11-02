@@ -122,11 +122,11 @@
 				COMPANY_FUNC_CODE = #{companyFuncCode} AND
 			</if>
 			<!-- 开始时间 -->
-			<if test="createTimeStart != null and createTimeStart !=''">
+			<if test="createTimeStart != null ">
 				CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
 			</if>
 			<!-- 结束时间 -->
-			<if test="createTimeEnd != null  and createTimeEnd !=''">
+			<if test="createTimeEnd != null  ">
 				CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
 			</if>
 			
@@ -245,7 +245,7 @@
 		)
 		values
 		(
-		PmCustomerInfo_SEQ.nextval,
+		PmCustomerInfo_SEQ.nextval
 		<if test="custCnName != null and  custCnName !=''">
 			,#{custCnName}
 		</if>

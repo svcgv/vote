@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import com.indihx.PmCustomerInfo.dao.PmCustomerInfoMapper;
@@ -26,11 +27,14 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmCustomerInfoEntity entity){
-		PmCustomerInfoEntity queryInfo = null;
+		List<PmCustomerInfoEntity> queryInfo = null;
 		boolean flag = false;
+		Map<String ,Object> param = new HashMap<String,Object>();
 		if(entity.getSapCode()!=null) {//若有sapCode,且数据库中没有这条数据则执行插入
-			queryInfo = queryBySapCode(entity.getSapCode());
-			if(queryInfo == null) {
+			param.put("sapCode", entity.getSapCode());
+			queryInfo = queryList(param);
+			
+			if(queryInfo.isEmpty()) {
 				flag = true;
 			}
 		}
@@ -57,6 +61,9 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
    	}
 
    	public List<PmCustomerInfoEntity> queryList(Map<String, Object> entity){
+   		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
+   			entity.put("isDelete", "00");
+   		}
    		return pmCustomerInfoMapper.queryList(entity);
    	}
 }

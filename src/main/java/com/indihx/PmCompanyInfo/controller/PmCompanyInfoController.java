@@ -65,7 +65,6 @@ public class PmCompanyInfoController {
     public @ResponseBody Map<String,Object> save(@RequestBody PmCompanyInfoEntity pmCompanyInfo,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmCompanyInfo.setCreatorId(usesr.getUsrId());
-    	pmCompanyInfo.setCreateTime(new Date());
         pmCompanyInfoService.insert(pmCompanyInfo);
 
         return R.ok();
@@ -78,7 +77,6 @@ public class PmCompanyInfoController {
     public @ResponseBody Map<String,Object> update(@RequestBody PmCompanyInfoEntity pmCompanyInfo,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmCompanyInfo.setModifier(usesr.getUsrId());
-    	pmCompanyInfo.setModifyTime(new Date());
         pmCompanyInfoService.update(pmCompanyInfo);//全部更新
         
         return R.ok();

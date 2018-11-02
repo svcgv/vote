@@ -67,8 +67,7 @@
 		)
 		values
 		(
-		<if test="custGroupId != null and  custGroupId !=''">
-			#{custGroupId}		</if>
+			#{custGroupId}
 		<if test="custGroupName != null and  custGroupName !=''">
 			,#{custGroupName}	</if>
 		<if test="creator != null and  creator !=''">

@@ -142,7 +142,7 @@ public class PmCustomerInfoEntity implements Serializable {
 	 * 
 	 */
 
-	private Date addTime;
+	private String addTime;
 	/**
 	 * 
 	 */
@@ -498,14 +498,14 @@ public class PmCustomerInfoEntity implements Serializable {
 	/**
 	 * 设置：
 	 */
-	public void setAddTime(Date addTime) {
+	public void setAddTime(String addTime) {
 		this.addTime = addTime;
 	}
 
 	/**
 	 * 获取：
 	 */
-	public Date getAddTime() {
+	public String getAddTime() {
 		return addTime;
 	}
 
