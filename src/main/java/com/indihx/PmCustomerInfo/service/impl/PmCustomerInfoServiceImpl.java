@@ -18,6 +18,9 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
    	public PmCustomerInfoEntity queryObject(long id){
    		return pmCustomerInfoMapper.queryObject(id);
    	}
+   	public PmCustomerInfoEntity queryBySapCode(String code){
+   		return pmCustomerInfoMapper.queryBySapCode(code);
+   	}
 
 	public void insert(PmCustomerInfoEntity entity){
    		pmCustomerInfoMapper.insert(entity);

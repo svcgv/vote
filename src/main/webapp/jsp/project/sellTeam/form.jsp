@@ -24,12 +24,17 @@
 		     <div class="layui-inline" style="vertical-align:top;">
 		       <div class="layui-btn-container" style="margin-left:15px;">
 			    <button type="button" class="layui-btn layui-btn-sm" id="addOrg-hook"  style="margin-right:15px;"><i class="layui-icon"></i>选择机构</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="addUser-hook"  style="margin-right:15px;"><i class="layui-icon"></i>选择团队成员</button>
 			  </div>
 		    </div>
 		     <div class="layui-inline">
 		     	   <label class="layui-form-label">已选机构：</label>
-			      <div class="layui-input-inline" id="chosed-customer-hook" style="border:#e6e6e6 solid 1px;height:50px;overflow-y:auto;width:320px;">
-			         
+			      <div class="layui-input-inline" id="chosed-customer-hook" style="border:#e6e6e6 solid 1px;height:32px;overflow-y:auto;width:460px;">
+			      </div>
+		     </div>
+		     <div class="layui-inline">
+		     	   <label class="layui-form-label">已选用户：</label>
+			      <div class="layui-input-inline" id="chosed-user-hook" style="border:#e6e6e6 solid 1px;height:50px;overflow-y:auto;width:460px;">
 			      </div>
 		     </div>
 		  </div>
@@ -50,6 +55,14 @@ $(function(){
 		  		width:"400"
 		 	 });
 		});
+		
+		$("#addUser-hook").on("click",function(){
+		  	$.openWindow({
+		  		url:'user',
+		  		title:"选择团队成员",
+		  		width:"700"
+		 	 });
+		});
 		var win=$("#form-customer-hook").getWindow();
 		// 保存
 		$("#form-customer-hook #customGroup-add-hook").click(function(){
@@ -67,12 +80,20 @@ $(function(){
 				ret.push(sapCode2)
 			});
 			
+			var getChosedUser=$("#form-customer-hook #chosed-user-hook");
+			var ret2=[];
+			getChosedUser.children(".customer-list").each(function(){
+				var sapCode2=$(this).children(".customerItem").attr("userId");
+				ret.push(sapCode2)
+			});
+			
 			$.ajax({
 				type:'POST',
 				url:'save',
 				data:{
 					name:customerGroupName,
-					ctnCodes:ret.join(",")
+					orgCodes:ret.join(","),
+					userCodes:ret2.join(",")
 				},
 				success:function(res){
 					layer.msg("新增成功",{icon:1});

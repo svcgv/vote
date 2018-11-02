@@ -12,6 +12,7 @@ import com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity;
  */
 public interface PmCustomerInfoService {
 	public PmCustomerInfoEntity queryObject(long id);
+	public PmCustomerInfoEntity queryBySapCode(String code);
 	public void insert(PmCustomerInfoEntity entity);
 	public void update(PmCustomerInfoEntity entity);
 	public void delete(long custId);

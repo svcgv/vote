@@ -24,7 +24,7 @@
 	  	<div class="layui-inline">
 	       <label class="layui-form-label">SAP编码：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="sapCode"  value="${Custom.sapCode} " <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">
+	         <input type="text" name="sapCode"  value="${Custom.sapCode}" <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
  	 	

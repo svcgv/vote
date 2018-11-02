@@ -65,7 +65,7 @@
 	  	<div class="layui-inline">
 	       <label class="layui-form-label">公司编号：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="companyCode" value="${Company.companyCode} " autocomplete="off" class="layui-input form-control">
+	         <input type="text" name="companyCode" value="${Company.companyCode}" autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
  	 	<div class="layui-inline">

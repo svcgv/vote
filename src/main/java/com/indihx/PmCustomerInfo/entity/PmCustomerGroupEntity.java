@@ -5,6 +5,7 @@ package com.indihx.PmCustomerInfo.entity;
 import com.indihx.BaseEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -56,6 +57,11 @@ private Date modifyTime;
 	 */
 
 private String isDelete;
+
+/**
+ * 中间参数，非表字段
+ */
+private List<String> sapCode;
 
 	/**
 	 * 设置：
@@ -153,4 +159,11 @@ private String isDelete;
 	public String getIsDelete() {
 		return isDelete;
 	}
+	public List<String> getSapCode() {
+		return sapCode;
+	}
+	public void setSapCode(List<String> sapCode) {
+		this.sapCode = sapCode;
+	}
+	
 }

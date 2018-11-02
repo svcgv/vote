@@ -21,18 +21,19 @@
 
 	<select id="queryList" resultMap="pmCustomerGroupMap">
 		select 
+		
 		*
 		 from pm_customer_group
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-			<if test="custGroupId != null">CUST_GROUP_ID = #{custGroupId} AND </if>
-			<if test="custGroupName != null">CUST_GROUP_NAME = #{custGroupName} AND </if>
-			<if test="creator != null">CREATOR = #{creator} AND </if>
-			<if test="creatorId != null">CREATOR_ID = #{creatorId} AND </if>
-			<if test="createTime != null">CREATE_TIME = #{createTime} AND </if>
-			<if test="modifier != null">MODIFIER = #{modifier} AND </if>
-			<if test="modifyTime != null">MODIFY_TIME = #{modifyTime} AND </if>
-			<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
-		</trim> 
+						<if test="custGroupId != null">CUST_GROUP_ID = #{custGroupId} AND </if>
+						<if test="custGroupName != null">CUST_GROUP_NAME = #{custGroupName} AND </if>
+						<if test="creator != null">CREATOR = #{creator} AND </if>
+						<if test="creatorId != null">CREATOR_ID = #{creatorId} AND </if>
+						<if test="createTime != null">CREATE_TIME = #{createTime} AND </if>
+						<if test="modifier != null">MODIFIER = #{modifier} AND </if>
+						<if test="modifyTime != null">MODIFY_TIME = #{modifyTime} AND </if>
+						<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+					</trim> 
 	</select>
 	
  	<select id="queryTotal" resultType="int">
@@ -42,9 +43,8 @@
 	<insert id="insert" parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerGroupEntity">
 		insert into pm_customer_group
 		(
-		CUST_GROUP_ID
 		<if test="custGroupId != null">
-			,CUST_GROUP_ID	
+			CUST_GROUP_ID	
 		</if>
 		<if test="custGroupName != null">
 			,CUST_GROUP_NAME	
@@ -70,23 +70,22 @@
 		)
 		values
 		(
-		PmCustomerGroup_SEQ.nextval
 		<if test="custGroupId != null">
-			,#{custGroupId}</if>
+			#{custGroupId}		</if>
 		<if test="custGroupName != null">
-			,#{custGroupName}</if>
+			,#{custGroupName}	</if>
 		<if test="creator != null">
-			,#{creator}</if>
+			,#{creator} 		</if>
 		<if test="creatorId != null">
-			,#{creatorId}</if>
+			,#{creatorId} 		</if>
 		<if test="createTime != null">
-			,#{createTime}</if>
+			,#{createTime} 		</if>
 		<if test="modifier != null">
-			,#{modifier}</if>
+			,#{modifier} 		</if>
 		<if test="modifyTime != null">
-			,#{modifyTime}</if>
+			,#{modifyTime} 		</if>
 		<if test="isDelete != null">
-			,#{isDelete}</if>
+			,#{isDelete}		</if>
 		)
 	</insert>
 	 

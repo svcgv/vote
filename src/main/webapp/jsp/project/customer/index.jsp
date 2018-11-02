@@ -94,7 +94,7 @@
 		     
 		    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 		    <button type="button" class="layui-btn layui-btn-normal" id="test8">导入</button>
-		    <button type="button" class="layui-btn layui-btn-normal" id="test9">保存导入数据</button>
+		     <button type="button" class="layui-btn layui-btn-normal" id="test9">保存导入数据</button>
 		  </div>
 	   </div>
 	    
@@ -145,7 +145,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
     ,before:function(obj){
     	this.data={fileCode:'cust'}
     }
-    //,multiple: true
     ,done: function(res){
       console.log(res)
       testData=res.list
@@ -164,7 +163,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	      {field:'enName', title:'英文名称',width:100},
   	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
   	      {field:'custType', title:'客户类型'},
-  	      {field:'location', title:'地址'},
+  	      {field:'address', title:'地址'},
   	      {field:'cashManagementGroup', title:'现金管理组'},
   	      {field:'payCondition', title:'付款条件'},
   	      {field:'tradeCode', title:'行业代码'},
@@ -185,11 +184,64 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	    ]],
   	    cellMinWidth:'90',
   	    data:testData,
-  	    page: false
+  	    page: true
   	  });
     }
   });
 	
+	
+	//保存导入数据
+	$("#test9").click(function(){
+		 $.ajax({
+			  type: 'POST',
+			  url: '/vote/pmcustomerinfo/saveList',
+			  data: JSON.stringify(testData),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			      testData=res.page
+			      table.render({
+			  	  	id:"customer-table",
+			  	    elem: '#customTable',
+			  	    //url:'custom.json',
+			  	    toolbar: '#toolbarDemo',
+			  	    height:'full-250',
+			  	    title: '客户数据表',
+			  	    cols: [[
+			  	      {type: 'checkbox', fixed: 'left'},
+			  	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
+			  	      {field:'custCnName', title:'客户名称', width:230},
+			  	      {field:'country', title:'国家/地区', width:90},
+			  	      {field:'enName', title:'英文名称',width:100},
+			  	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
+			  	      {field:'custType', title:'客户类型'},
+			  	      {field:'location', title:'地址'},
+			  	      {field:'cashManagementGroup', title:'现金管理组'},
+			  	      {field:'payCondition', title:'付款条件'},
+			  	      {field:'tradeCode', title:'行业代码'},
+			  	      {field:'regionalMarket', title:'地区市场'},
+			  	      {field:'mainBusiness', title:'主营业务'},
+			  	      {field:'area', title:'地区'},
+			  	      {field:'custTrade', title:'客户行业'},
+			  	      {field:'payCycle', title:'结算周期'},
+			  	      {field:'isUseful', title:'是否有效'},
+			  	      {field:'groupCompany', title:'集团公司'},
+			  	      {field:'bgVisiable', title:'BG隐藏'},
+			  	      {field:'companyCode', title:'公司代码'},
+			  	      {field:'companyFuncCode', title:'公司代码（职能）'},
+			  	      {field:'createTime', title:'创建日期'},
+			  	      {field:'custGroupId', title:'客户群编号'},
+			  	      {field:'custGroupName', title:'客户群名称'},
+			  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+			  	    ]],
+			  	    cellMinWidth:'90',
+			  	    data:testData,
+			  	    page: true
+			  	  });},
+			  dataType: "json"
+			});
+		
+	}); 
 	  
   // table render
   table.render({
@@ -207,7 +259,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      {field:'enName', title:'英文名称',width:100},
 	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
 	      {field:'custType', title:'客户类型'},
-	      {field:'location', title:'地址'},
+	      {field:'address', title:'地址'},
 	      {field:'cashManagementGroup', title:'现金管理组'},
 	      {field:'payCondition', title:'付款条件'},
 	      {field:'tradeCode', title:'行业代码'},
@@ -281,59 +333,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	showFromTable('view',data.custId);
 	    }
 	  });
-	
-	//保存导入数据
-	$("#test9").click(function(){
-		 $.ajax({
-			  type: 'POST',
-			  url: '/vote/pmcustomerinfo/saveList',
-			  data: JSON.stringify(testData),
-			  contentType:'application/json',
-			  success: function(res){
-			      console.log(res)
-			      testData=res.page
-			      table.render({
-			  	  	id:"customer-table",
-			  	    elem: '#customTable',
-			  	    //url:'custom.json',
-			  	    toolbar: '#toolbarDemo',
-			  	    height:'full-250',
-			  	    title: '客户数据表',
-			  	    cols: [[
-			  	      {type: 'checkbox', fixed: 'left'},
-			  	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
-			  	      {field:'custCnName', title:'客户名称', width:230},
-			  	      {field:'country', title:'国家/地区', width:90},
-			  	      {field:'enName', title:'英文名称',width:100},
-			  	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
-			  	      {field:'custType', title:'客户类型'},
-			  	      {field:'location', title:'地址'},
-			  	      {field:'cashManagementGroup', title:'现金管理组'},
-			  	      {field:'payCondition', title:'付款条件'},
-			  	      {field:'tradeCode', title:'行业代码'},
-			  	      {field:'regionalMarket', title:'地区市场'},
-			  	      {field:'mainBusiness', title:'主营业务'},
-			  	      {field:'area', title:'地区'},
-			  	      {field:'custTrade', title:'客户行业'},
-			  	      {field:'payCycle', title:'结算周期'},
-			  	      {field:'isUseful', title:'是否有效'},
-			  	      {field:'groupCompany', title:'集团公司'},
-			  	      {field:'bgVisiable', title:'BG隐藏'},
-			  	      {field:'companyCode', title:'公司代码'},
-			  	      {field:'companyFuncCode', title:'公司代码（职能）'},
-			  	      {field:'createTime', title:'创建日期'},
-			  	      {field:'custGroupId', title:'客户群编号'},
-			  	      {field:'custGroupName', title:'客户群名称'},
-			  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
-			  	    ]],
-			  	    cellMinWidth:'90',
-			  	    data:testData,
-			  	    page: true
-			  	  });},
-			  dataType: "json"
-			});
-		
-	}); 
 	/*
 	* 客户查询按钮
 	*/
@@ -355,7 +354,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  success: function(res){
 			      console.log(res)
 			      testData=res.page
-			      console.log(testData)
 			      table.render({
 			  	  	id:"customer-table",
 			  	    elem: '#customTable',
@@ -371,7 +369,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	      {field:'enName', title:'英文名称',width:100},
 			  	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
 			  	      {field:'custType', title:'客户类型'},
-			  	      {field:'location', title:'地址'},
+			  	      {field:'address', title:'地址'},
 			  	      {field:'cashManagementGroup', title:'现金管理组'},
 			  	      {field:'payCondition', title:'付款条件'},
 			  	      {field:'tradeCode', title:'行业代码'},
@@ -391,7 +389,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 			  	    ]],
 			  	    cellMinWidth:'90',
-			  	    data:[[]],
+			  	    data:testData,
 			  	    page: true
 			  	  });},
 			  dataType: "json"
@@ -465,9 +463,12 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 					  //data:formData,
 					  contentType:'application/json',
 					  success:function(data){
-						 alert("保存成功");
-						  table.reload('customer-table');
-						  layer.close(index)
+						 layer.close(index);
+						  table.reload('customer-table',{page:
+                          {
+                              curr: 1 //重新从第 1 页开始
+                          }});
+						 
 					  }
 				  })
 				 

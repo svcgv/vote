@@ -38,9 +38,6 @@
 		insert into pm_customer_group_relation
 		(
 		CUST_GROUP_RELATION_ID
-		<if test="custGroupRelationId != null">
-			,CUST_GROUP_RELATION_ID	
-		</if>
 		<if test="custGroupId != null">
 			,CUST_GROUP_ID	
 		</if>
@@ -57,8 +54,6 @@
 		values
 		(
 		PmCustomerGroupRelation_SEQ.nextval,
-		<if test="custGroupRelationId != null">
-			#{custGroupRelationId}, 		</if>
 		<if test="custGroupId != null">
 			#{custGroupId}, 		</if>
 		<if test="custId != null">

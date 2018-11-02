@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 
 import com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity;
 import com.indihx.PmCustomerInfo.service.PmCustomerInfoService;
-import com.indihx.PmCustomerInfo.service.impl.PmCustomerInfoServiceImpl;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.PageUtils;
 
@@ -82,21 +81,6 @@ public class PmCustomerInfoController {
         pmCustomerInfoService.delete(custId);
 
         return R.ok();
-    }
-    
-    /**
-     * 列表
-     */
-    @RequestMapping(value="/saveList",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> saveList(@RequestBody List<PmCustomerInfoEntity> pmCustomerInfo){
-    	if(pmCustomerInfo.isEmpty()) {
-    		return R.error("请传入数据");
-    	}
-       for(int i = 0;i<pmCustomerInfo.size();i++) {
-    	   PmCustomerInfoEntity item = pmCustomerInfo.get(i);
-    	   pmCustomerInfoService.insert(item);
-       }
-        return R.ok().put("page", pmCustomerInfo);
     }
 
 }

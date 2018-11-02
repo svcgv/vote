@@ -267,7 +267,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 					  data:JSON.stringify(formData),
 					  contentType:'application/json',
 					  success:function(data){
-						 
+						  layer.close(index);
 						  table.reload('customer-table');
 						 
 					  }

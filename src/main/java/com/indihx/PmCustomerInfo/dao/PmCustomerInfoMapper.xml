@@ -35,52 +35,56 @@
         <result property="isDelete" column="IS_DELETE"/>
     </resultMap>
 
-	<select id="queryObject" resultType="com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity">
-		select * from pm_customer_info where CUST_ID = #{value}
+	<select id="queryObject" resultMap="pmCustomerInfoMap">
+		select * from PM_CUSTOMER_INFO where CUST_ID = #{value}
+	</select>
+	
+		<select id="queryBySapCode" resultMap="pmCustomerInfoMap">
+		select * from PM_CUSTOMER_INFO where SAP_CODE = #{value}
 	</select>
 
 	<select id="queryList" resultMap="pmCustomerInfoMap">
 		select 
 		*
-		 from pm_customer_info
+		 from PM_CUSTOMER_INFO
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-						<if test="custId != null">CUST_ID = #{custId} AND </if>
-						<if test="custCnName != null">CUST_CN_NAME = #{custCnName} AND </if>
-						<if test="custCode != null">CUST_CODE = #{custCode} AND </if>
-						<if test="country != null">COUNTRY = #{country} AND </if>
-						<if test="sapCode != null">SAP_CODE = #{sapCode} AND </if>
-						<if test="enName != null">EN_NAME = #{enName} AND </if>
-						<if test="custPatTaxesCode != null">CUST_PAT_TAXES_CODE = #{custPatTaxesCode} AND </if>
-						<if test="custType != null">CUST_TYPE = #{custType} AND </if>
-						<if test="address != null">ADDRESS = #{address} AND </if>
-						<if test="cashManagementGroup != null">CASH_MANAGEMENT_GROUP = #{cashManagementGroup} AND </if>
-						<if test="payCondition != null">PAY_CONDITION = #{payCondition} AND </if>
-						<if test="tradeCode != null">TRADE_CODE = #{tradeCode} AND </if>
-						<if test="regionalMarket != null">REGIONAL_MARKET = #{regionalMarket} AND </if>
-						<if test="mainBusiness != null">MAIN_BUSINESS = #{mainBusiness} AND </if>
-						<if test="area != null">AREA = #{area} AND </if>
-						<if test="custTrade != null">CUST_TRADE = #{custTrade} AND </if>
-						<if test="payCycle != null">PAY_CYCLE = #{payCycle} AND </if>
-						<if test="isUseful != null">IS_USEFUL = #{isUseful} AND </if>
-						<if test="groupCompany != null">GROUP_COMPANY = #{groupCompany} AND </if>
-						<if test="bgVisiable != null">BG_VISIABLE = #{bgVisiable} AND </if>
-						<if test="companyCode != null">COMPANY_CODE = #{companyCode} AND </if>
-						<if test="companyFuncCode != null">COMPANY_FUNC_CODE = #{companyFuncCode} AND </if>
-						<if test="createTime != null">CREATE_TIME = #{createTime} AND </if>
-						<if test="addUserId != null">ADD_USER_ID = #{addUserId} AND </if>
-						<if test="addTime != null">ADD_TIME = #{addTime} AND </if>
-						<if test="modifier != null">MODIFIER = #{modifier} AND </if>
-						<if test="modifyTime != null">MODIFY_TIME = #{modifyTime} AND </if>
-						<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+						<if test="custId != null and custId!=''"  >CUST_ID = #{custId} AND </if>
+						<if test="custCnName != null and custCnName!=''"  >CUST_CN_NAME = #{custCnName} AND </if>
+						<if test="custCode != null and custCode!=''"  >CUST_CODE = #{custCode} AND </if>
+						<if test="country != null and country!=''"  >COUNTRY = #{country} AND </if>
+						<if test="sapCode != null and sapCode!=''"  >SAP_CODE = #{sapCode} AND </if>
+						<if test="enName != null and enName!=''"  >EN_NAME = #{enName} AND </if>
+						<if test="custPatTaxesCode != null and custPatTaxesCode!=''"  >CUST_PAT_TAXES_CODE = #{custPatTaxesCode} AND </if>
+						<if test="custType != null and custType!=''"  >CUST_TYPE = #{custType} AND </if>
+						<if test="address != null and address!=''"  >ADDRESS = #{address} AND </if>
+						<if test="cashManagementGroup != null and cashManagementGroup!=''"  >CASH_MANAGEMENT_GROUP = #{cashManagementGroup} AND </if>
+						<if test="payCondition != null and payCondition!=''"  >PAY_CONDITION = #{payCondition} AND </if>
+						<if test="tradeCode != null and tradeCode!=''"  >TRADE_CODE = #{tradeCode} AND </if>
+						<if test="regionalMarket != null and regionalMarket!=''"  >REGIONAL_MARKET = #{regionalMarket} AND </if>
+						<if test="mainBusiness != null and mainBusiness!=''"  >MAIN_BUSINESS = #{mainBusiness} AND </if>
+						<if test="area != null and area!=''"  >AREA = #{area} AND </if>
+						<if test="custTrade != null and custTrade!=''"  >CUST_TRADE = #{custTrade} AND </if>
+						<if test="payCycle != null and payCycle!=''"  >PAY_CYCLE = #{payCycle} AND </if>
+						<if test="isUseful != null and isUseful!=''"  >IS_USEFUL = #{isUseful} AND </if>
+						<if test="groupCompany != null and groupCompany!=''"  >GROUP_COMPANY = #{groupCompany} AND </if>
+						<if test="bgVisiable != null and bgVisiable!=''"  >BG_VISIABLE = #{bgVisiable} AND </if>
+						<if test="companyCode != null and companyCode!=''"  >COMPANY_CODE = #{companyCode} AND </if>
+						<if test="companyFuncCode != null and companyFuncCode!=''"  >COMPANY_FUNC_CODE = #{companyFuncCode} AND </if>
+						<if test="createTime != null and createTime!=''"  >CREATE_TIME = #{createTime} AND </if>
+						<if test="addUserId != null and addUserId!=''"  >ADD_USER_ID = #{addUserId} AND </if>
+						<if test="addTime != null and addTime!=''"  >ADD_TIME = #{addTime} AND </if>
+						<if test="modifier != null and modifier!=''"  >MODIFIER = #{modifier} AND </if>
+						<if test="modifyTime != null and modifyTime!=''"  >MODIFY_TIME = #{modifyTime} AND </if>
+						<if test="isDelete != null and isDelete!=''"  >IS_DELETE = #{isDelete}</if>
 					</trim> 
 	</select>
 	
  	<select id="queryTotal" resultType="int">
-		select count(*) from pm_customer_info 
+		select count(*) from PM_CUSTOMER_INFO 
 	</select>
 	 
 	<insert id="insert" parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity">
-		insert into pm_customer_info
+		insert into PM_CUSTOMER_INFO
 		(
 		CUST_ID
 		<if test="custCnName != null">
@@ -167,66 +171,66 @@
 		)
 		values
 		(
-		PmCustomerInfo_SEQ.nextval
+		PmCustomerInfo_SEQ.nextval,
 		<if test="custCnName != null">
-			,#{custCnName}		</if>
+			#{custCnName}, 		</if>
 		<if test="custCode != null">
-			,#{custCode} 		</if>
+			#{custCode}, 		</if>
 		<if test="country != null">
-			,#{country} 		</if>
+			#{country}, 		</if>
 		<if test="sapCode != null">
-			,#{sapCode} 		</if>
+			#{sapCode}, 		</if>
 		<if test="enName != null">
-			,#{enName}</if>
+			#{enName}, 		</if>
 		<if test="custPatTaxesCode != null">
-			,#{custPatTaxesCode}</if>
+			#{custPatTaxesCode}, 		</if>
 		<if test="custType != null">
-			,#{custType} 		</if>
+			#{custType}, 		</if>
 		<if test="address != null">
-			,#{address} </if>
+			#{address}, 		</if>
 		<if test="cashManagementGroup != null">
-			,#{cashManagementGroup} 		</if>
+			#{cashManagementGroup}, 		</if>
 		<if test="payCondition != null">
-			,#{payCondition} 		</if>
+			#{payCondition}, 		</if>
 		<if test="tradeCode != null">
-			,#{tradeCode} 		</if>
+			#{tradeCode}, 		</if>
 		<if test="regionalMarket != null">
-			,#{regionalMarket} 		</if>
+			#{regionalMarket}, 		</if>
 		<if test="mainBusiness != null">
-			,#{mainBusiness} 		</if>
+			#{mainBusiness}, 		</if>
 		<if test="area != null">
-			,#{area} </if>
+			#{area}, 		</if>
 		<if test="custTrade != null">
-			,#{custTrade} </if>
+			#{custTrade}, 		</if>
 		<if test="payCycle != null">
-			,#{payCycle} </if>
+			#{payCycle}, 		</if>
 		<if test="isUseful != null">
-			,#{isUseful} </if>
+			#{isUseful}, 		</if>
 		<if test="groupCompany != null">
-			,#{groupCompany} </if>
+			#{groupCompany}, 		</if>
 		<if test="bgVisiable != null">
-			,#{bgVisiable} </if>
+			#{bgVisiable}, 		</if>
 		<if test="companyCode != null">
-			,#{companyCode}</if>
+			#{companyCode}, 		</if>
 		<if test="companyFuncCode != null">
-			,#{companyFuncCode}</if>
+			#{companyFuncCode}, 		</if>
 		<if test="createTime != null">
-			,#{createTime} </if>
+			#{createTime}, 		</if>
 		<if test="addUserId != null">
-			,#{addUserId}</if>
+			#{addUserId}, 		</if>
 		<if test="addTime != null">
-			,#{addTime} </if>
+			#{addTime}, 		</if>
 		<if test="modifier != null">
-			,#{modifier} </if>
+			#{modifier}		</if>
 		<if test="modifyTime != null">
-			,#{modifyTime}</if>
+			#{modifyTime}, 		</if>
 		<if test="isDelete != null">
-			,#{isDelete}</if>
+			#{isDelete}		</if>
 		)
 	</insert>
 	 
 	<update id="update" parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity">
-		update pm_customer_info 
+		update PM_CUSTOMER_INFO 
 		<set>
 			<if test="custCnName != null">CUST_CN_NAME = #{custCnName}, </if>
 			<if test="custCode != null">CUST_CODE = #{custCode}, </if>
@@ -260,7 +264,7 @@
 	</update>
 	
 	<delete id="delete">
-		delete from pm_customer_info where CUST_ID = #{value}
+		delete from PM_CUSTOMER_INFO where CUST_ID = #{value}
 	</delete>
 	
 

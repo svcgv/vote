@@ -16,7 +16,7 @@
         <result property="isDelete" column="IS_DELETE"/>
     </resultMap>
 
-	<select id="queryObject" resultType="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity">
+	<select id="queryObject" resultMap="pmCompanyInfoMap">
 		select * from pm_company_info where COMPANY_CODE = #{value}
 	</select>
 
@@ -26,10 +26,10 @@
 		*
 		 from pm_company_info
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-						<if test="companyCode != null">COMPANY_CODE = #{companyCode} AND </if>
-						<if test="companyName != null">COMPANY_NAME = #{companyName} AND </if>
-						<if test="companyAddress != null">COMPANY_ADDRESS = #{companyAddress} AND </if>
-						<if test="remark != null">REMARK = #{remark} AND </if>
+						<if test="companyCode != null and companyCode != ''  ">COMPANY_CODE = #{companyCode} AND </if>
+						<if test="companyName != null and companyName != '' ">COMPANY_NAME = #{companyName} AND </if>
+						<if test="companyAddress != null and companyAddress != '' ">COMPANY_ADDRESS = #{companyAddress} AND </if>
+						<if test="remark != null and remark != '' ">REMARK = #{remark} AND </if>
 						<if test="creatorId != null">CREATOR_ID = #{creatorId} AND </if>
 						<if test="createTime != null">CREATE_TIME = #{createTime} AND </if>
 						<if test="modifier != null">MODIFIER = #{modifier} AND </if>
@@ -45,9 +45,8 @@
 	<insert id="insert" parameterType="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity">
 		insert into pm_company_info
 		(
-		COMPANY_CODE
-		<if test="companyCode != null">
-			,COMPANY_CODE	
+		<if test="companyCode != null" >
+			COMPANY_CODE	
 		</if>
 		<if test="companyName != null">
 			,COMPANY_NAME	
@@ -76,7 +75,6 @@
 		)
 		values
 		(
-		PmCompanyInfo_SEQ.nextval,
 		<if test="companyCode != null">
 			#{companyCode}, 		</if>
 		<if test="companyName != null">
@@ -90,11 +88,11 @@
 		<if test="createTime != null">
 			#{createTime}, 		</if>
 		<if test="modifier != null">
-			#{modifier}, 		</if>
+			#{modifier} 		</if>
 		<if test="modifyTime != null">
 			#{modifyTime}, 		</if>
 		<if test="isDelete != null">
-			#{isDelete}		</if>
+			,#{isDelete}		</if>
 		)
 	</insert>
 	 

@@ -37,29 +37,29 @@ $(document).ready(function(){
 });
 */
 var setting={
-		// 增加双击选中事件
-		callback:{
-			onDblClick: zTreeOnSaveEvent
-		}
-	};
+	// 增加双击选中事件
+	callback:{
+		onDblClick: zTreeOnSaveEvent
+	}
+};
 var zNodes =[
 	{ name:"第一事业部", open:true,
 		children: [
-			{ name:"销售一部",orgId:"1",
+			{ name:"研发一部",orgId:"1",
 				children: [
 					{ orgId:"11",name:"上海分部"},
 					{ orgId:"12",name:"北京分部"},
 					{ orgId:"13",name:"深圳分部"},
 					{ orgId:"14",name:"南京分部"}
 				]},
-			{ name:"销售二部",orgId:"2",isParent:false},
-			{ name:"销售三部",orgId:"3",isParent:false}
+			{ name:"研发二部",orgId:"2",isParent:false},
+			{ name:"研发三部",orgId:"3",isParent:false}
 		]},
 	{ name:"第二事业部",orgId:"3",
 		children: [
-			{ orgId:"31",name:"销售六部", open:true,isParent:true},
-			{ orgId:"32",name:"销售二部",isParent:true},
-			{ orgId:"33",name:"销售五部",isParent:true}
+			{ orgId:"31",name:"研发六部", open:true,isParent:true},
+			{ orgId:"32",name:"研发二部",isParent:true},
+			{ orgId:"33",name:"研发五部",isParent:true}
 		]},
 	{ name:"第三事业部", orgId:"4",isParent:true}
 
@@ -77,43 +77,35 @@ $(".org-wrapper #org-add-hook").click(function(){
 			layer.msg("请选择机构")
 		})
 	}else{
-		// 保存到已选机构中
-		var _html='';
-			_html = '<span class="customer-list">'
-	         	      +'<span class="customerItem" orgId="'+getCheckedOrg.orgId+'">'+getCheckedOrg.name+'</span>'
-	               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
-	         		  +'</span>';
-			
-		$("#form-customer-hook #chosed-customer-hook").html(_html);
 		
-		win.close();
 		return false;
 	}
 	
 	
 	
 });
+var act="${act}";// 区分是index页 form页 赋值问题
+function zTreeOnSaveEvent(event, treeId, treeNode) {
+	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
+ // 保存到已选机构中
+ 	if(act == "index"){
+		$("#product-index-form input[name='developmentDeptName']").val(getCheckedOrg.name);
+		$("#product-index-form input[name='developmentDeptId']").val(getCheckedOrg.orgId);
+ 		
+ 	}else if(act =="add"){
+ 		$("#product-addForm-hook input[name='developmentDeptName']").val(getCheckedOrg.name);
+		$("#product-addForm-hook input[name='developmentDeptId']").val(getCheckedOrg.orgId);
+ 	}
+		win.close();
+};
+
 
 //关闭
 $(".org-wrapper #org-close-hook").click(function(){
 	win.close();
 	return false;
 })
-function zTreeOnSaveEvent(event, treeId, treeNode) {
-	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
- // 保存到已选机构中
-	var _html='';
-	for(var i in getCheckedOrg){
-		_html = '<span class="customer-list">'
-         	      +'<span class="customerItem" orgId="'+getCheckedOrg.orgId+'">'+getCheckedOrg.name+'</span>'
-               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
-         		  +'</span>';
-		
-	}
-	$("#form-customer-hook #chosed-customer-hook").html(_html);
-	
-	win.close();
-};
+
 
 
 </script>

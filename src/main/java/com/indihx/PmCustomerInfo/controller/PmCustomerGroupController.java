@@ -2,6 +2,9 @@ package com.indihx.PmCustomerInfo.controller;
 
 
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.indihx.comm.util.R;
+import com.indihx.system.entity.UsrInfo;
 import com.indihx.PmCustomerInfo.entity.PmCustomerGroupEntity;
 import com.indihx.PmCustomerInfo.service.PmCustomerGroupService;
+import com.indihx.comm.InitSysConstants;
 import com.indihx.comm.util.PageUtils;
 
 
@@ -56,9 +62,12 @@ public class PmCustomerGroupController {
      * 保存
      */
     @RequestMapping(value="/save",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> save(@RequestBody PmCustomerGroupEntity pmCustomerGroup){
+    public @ResponseBody Map<String,Object> save(@RequestBody PmCustomerGroupEntity pmCustomerGroup,HttpSession session){
+        
+        UsrInfo	currentUser= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+        pmCustomerGroup.setCreatorId(currentUser.getUsrId());
+        pmCustomerGroup.setCreator(currentUser.getUsrName());
         pmCustomerGroupService.insert(pmCustomerGroup);
-
         return R.ok();
     }
 

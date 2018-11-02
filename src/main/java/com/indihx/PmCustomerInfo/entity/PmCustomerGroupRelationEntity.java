@@ -25,7 +25,7 @@ private long custGroupRelationId;
 	 * 
 	 */
 
-private long custGroupId;
+private String custGroupId;
 	/**
 	 * 
 	 */
@@ -57,13 +57,13 @@ private String sapCode;
 	/**
 	 * 设置：
 	 */
-	public void setCustGroupId(long custGroupId) {
+	public void setCustGroupId(String custGroupId) {
 		this.custGroupId = custGroupId;
 	}
 	/**
 	 * 获取：
 	 */
-	public long getCustGroupId() {
+	public String getCustGroupId() {
 		return custGroupId;
 	}
 	/**
