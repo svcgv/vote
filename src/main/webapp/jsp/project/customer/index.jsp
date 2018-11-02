@@ -31,7 +31,7 @@
 	    </div>
 	    
 	    <div class="layui-inline">
-	      <label class="layui-form-label">地区：</label>
+	      <label class="layui-form-label">国家/地区：</label>
 	      <div class="layui-input-inline">
 	          <select name="country" lay-verify="required" lay-filter="" class="form-control">
 	        	${country.ewTypeHtml }
@@ -94,6 +94,7 @@
 		     
 		    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 		    <button type="button" class="layui-btn layui-btn-normal" id="test8">导入</button>
+		    <button type="button" class="layui-btn layui-btn-normal" id="test9">保存导入数据</button>
 		  </div>
 	   </div>
 	    
@@ -145,7 +146,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
     	this.data={fileCode:'cust'}
     }
     //,multiple: true
-    ,bindAction: '#test9'
     ,done: function(res){
       console.log(res)
       testData=res.list
@@ -185,7 +185,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	    ]],
   	    cellMinWidth:'90',
   	    data:testData,
-  	    page: true
+  	    page: false
   	  });
     }
   });
@@ -255,6 +255,18 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    var data = obj.data;
 	    if(obj.event === 'del'){
 	      layer.confirm('确认删除行么', function(index){
+	    	  $.ajax({
+				  type:"POST",
+				  url:"/vote/pmcustomerinfo/update",
+				  data:JSON.stringify({'custId':data.custId,'isDelete':'00'}),
+				  contentType:'application/json',
+				  success:function(data){
+					 
+					  table.reload('customer-table');
+					 
+				  }
+			  }); 
+	    	 
 	        obj.del();
 	        layer.close(index);
 	        table.reload('customer-table',{
@@ -263,25 +275,87 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
-	    	showFromTable('edit',data.sapCode);
+	    	showFromTable('edit',data.custId);
 	    }else if(obj.event === "view"){
 	    	// 查看
-	    	showFromTable('view',data.sapCode);
+	    	showFromTable('view',data.custId);
 	    }
 	  });
-	/*
-	* 客户查询按钮
-	*/
-	 $("#customQuery").click(function(){
-		 var a = {custId:1}
+	
+	//保存导入数据
+	$("#test9").click(function(){
 		 $.ajax({
 			  type: 'POST',
-			  url: '/vote/pmcustomerinfo/list',
-			  data: JSON.stringify(a),
+			  url: '/vote/pmcustomerinfo/saveList',
+			  data: JSON.stringify(testData),
 			  contentType:'application/json',
 			  success: function(res){
 			      console.log(res)
 			      testData=res.page
+			      table.render({
+			  	  	id:"customer-table",
+			  	    elem: '#customTable',
+			  	    //url:'custom.json',
+			  	    toolbar: '#toolbarDemo',
+			  	    height:'full-250',
+			  	    title: '客户数据表',
+			  	    cols: [[
+			  	      {type: 'checkbox', fixed: 'left'},
+			  	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
+			  	      {field:'custCnName', title:'客户名称', width:230},
+			  	      {field:'country', title:'国家/地区', width:90},
+			  	      {field:'enName', title:'英文名称',width:100},
+			  	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
+			  	      {field:'custType', title:'客户类型'},
+			  	      {field:'location', title:'地址'},
+			  	      {field:'cashManagementGroup', title:'现金管理组'},
+			  	      {field:'payCondition', title:'付款条件'},
+			  	      {field:'tradeCode', title:'行业代码'},
+			  	      {field:'regionalMarket', title:'地区市场'},
+			  	      {field:'mainBusiness', title:'主营业务'},
+			  	      {field:'area', title:'地区'},
+			  	      {field:'custTrade', title:'客户行业'},
+			  	      {field:'payCycle', title:'结算周期'},
+			  	      {field:'isUseful', title:'是否有效'},
+			  	      {field:'groupCompany', title:'集团公司'},
+			  	      {field:'bgVisiable', title:'BG隐藏'},
+			  	      {field:'companyCode', title:'公司代码'},
+			  	      {field:'companyFuncCode', title:'公司代码（职能）'},
+			  	      {field:'createTime', title:'创建日期'},
+			  	      {field:'custGroupId', title:'客户群编号'},
+			  	      {field:'custGroupName', title:'客户群名称'},
+			  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+			  	    ]],
+			  	    cellMinWidth:'90',
+			  	    data:testData,
+			  	    page: true
+			  	  });},
+			  dataType: "json"
+			});
+		
+	}); 
+	/*
+	* 客户查询按钮
+	*/
+	 $("#customQuery").click(function(){
+		 var queryParams=$("#customer-query-form").serializeObject();
+		 console.log(queryParams)
+		 var newparam = {}
+		 for(var o in queryParams){
+			 if(queryParams[o]){
+				 newparam[o] = queryParams[o]
+			 }
+		 }
+		 console.log(newparam)
+		 $.ajax({
+			  type: 'POST',
+			  url: '/vote/pmcustomerinfo/list',
+			  data: JSON.stringify(newparam),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			      testData=res.page
+			      console.log(testData)
 			      table.render({
 			  	  	id:"customer-table",
 			  	    elem: '#customTable',
@@ -351,15 +425,17 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 新增和修改 form 表单
 	*/
 	function showFromTable(isEdit,id){
-		var url='form?act=add&sapCode=';
+		var url='form?act=add&custId=1';
 		var title="新增客户信息";
 		var btn=['保存', '关闭'];
+		var ajaxurl="/vote/pmcustomerinfo/save"; 
 		if(isEdit == "edit"){
-			url='form?act=edit&sapCode='+id;
+			url='form?act=edit&custId='+id;
 			title="修改客户信息";
 			btn=['保存', '关闭'];
+			ajaxurl="/vote/pmcustomerinfo/update"; 
 		}else if(isEdit == "view"){
-			url='form?act=view&sapCode='+id;
+			url='form?act=view&custId='+id;
 			title="查看客户信息";
 			btn=[];
 		}
@@ -381,15 +457,17 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  //zIndex: layer.zIndex,
 			  yes: function(index, layero){
 				  // 保存按钮
-				  var formData = layer.getChildFrame('body', index).find("form").serialize();
+				  var formData = layer.getChildFrame('body', index).find("form").serializeObject();
 				  $.ajax({
 					  type:"POST",
-					  url:'form',
-					  data:formData,
+					  url:ajaxurl,
+					  data:JSON.stringify(formData),
+					  //data:formData,
+					  contentType:'application/json',
 					  success:function(data){
-						 
+						 alert("保存成功");
 						  table.reload('customer-table');
-						 
+						  layer.close(index)
 					  }
 				  })
 				 
@@ -397,6 +475,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		      },
 		      btn2: function(index, layero){
 		    	  // 关闭按钮回调
+		    	  layer.close(index)
 		      }
 			  
 			});

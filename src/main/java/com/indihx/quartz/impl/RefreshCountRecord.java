@@ -39,7 +39,7 @@ public class RefreshCountRecord {
         log.info(dateNowStr+"定时任务执行了...");
         QuartzTask task = new QuartzTask();
 //        task.creditJobCenter();
-        task.timerJobTask();
+//        task.timerJobTask();
         //设置执行日志
         log.info(dateNowStr+"定时执行成功了...");
         

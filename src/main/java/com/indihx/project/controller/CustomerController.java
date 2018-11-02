@@ -30,6 +30,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.indihx.AbstractBaseController;
+import com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity;
+import com.indihx.PmCustomerInfo.service.PmCustomerInfoService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
@@ -42,6 +44,9 @@ import com.indihx.system.service.impl.ParamsInfoServiceimpl;
 public class CustomerController extends AbstractBaseController{
 	@Autowired
 	private ParamsInfoServiceimpl infoservice;
+	
+    @Autowired
+    private PmCustomerInfoService pmCustomerInfoService;
 	
 	@RequestMapping("/customer/index")
 	public ModelAndView addCustomView() {
@@ -59,18 +64,37 @@ public class CustomerController extends AbstractBaseController{
 		return view;
 	}
 	@RequestMapping(value="/customer/form",method=RequestMethod.GET)
-	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("sapCode") String sapCode) {
+	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("custId") long custId) {
 		ModelAndView view = new ModelAndView();
 		
-		view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE"));
-		view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE"));
-		view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE"));
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE"));
-		view.addObject("country",infoservice.qryInfoByCode("COUNTRY"));
+//		view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE"));
+//		view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE"));
+//		view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE"));
+//		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
+//		view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE"));
+//		view.addObject("country",infoservice.qryInfoByCode("COUNTRY"));
 		
+
+		
+		if(!act.equalsIgnoreCase("add")) {
+			PmCustomerInfoEntity custom = pmCustomerInfoService.queryObject(custId);
+			view.addObject("Custom",custom);
+			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE",custom.getCustType()));
+			view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE",custom.getCustTrade()));
+			view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE",custom.getPayCycle()));
+			view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL",custom.getIsUseful()));
+			view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE",custom.getBgVisiable()));
+			view.addObject("country",infoservice.qryInfoByCode("COUNTRY",custom.getCountry()));
+		}else {
+			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE","01"));
+			view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE","01"));
+			view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE","01"));
+			view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
+			view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE","01"));
+			view.addObject("country",infoservice.qryInfoByCode("COUNTRY","01"));
+		}
 		view.addObject("act",act);
-		view.addObject("sapCode",sapCode);
+		view.addObject("custId",custId);
 		
 		view.setViewName("/project/customer/form");
 		return view;
