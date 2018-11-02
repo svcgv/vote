@@ -391,7 +391,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 			  	    ]],
 			  	    cellMinWidth:'90',
-			  	    data:testData,
+			  	    data:[[]],
 			  	    page: true
 			  	  });},
 			  dataType: "json"
