@@ -55,11 +55,11 @@
 		*
 		from pm_customer_info
 		<trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-			<if test="custId != null and custId!=''">
+			<if test="custId != null and   custId!=''">
 				CUST_ID = #{custId} AND
 			</if>
-			<if test="custCnName != null and custCnName!=''">
-				CUST_CN_NAME = #{custCnName} AND
+			<if test="custCnName != null  and custCnName!=''">
+				CUST_CN_NAME like concat(concat('%',#{custCnName}),'%') AND
 			</if>
 			<if test="custCode != null and custCode!=''">
 				CUST_CODE = #{custCode} AND
@@ -67,67 +67,67 @@
 			<if test="country != null and country!=''">
 				COUNTRY = #{country} AND
 			</if>
-			<if test="sapCode != null and sapCode!=''">
-				SAP_CODE = #{sapCode} AND
+			<if test="sapCode != null  and sapCode!=''">
+				SAP_CODE  like concat(concat('%',#{sapCode}),'%')  AND
 			</if>
-			<if test="enName != null and enName!=''">
+			<if test="enName != null  and enName!=''">
 				EN_NAME = #{enName} AND
 			</if>
 			<if test="custPatTaxesCode != null and custPatTaxesCode!=''">
 				CUST_PAT_TAXES_CODE = #{custPatTaxesCode} AND
 			</if>
-			<if test="custType != null and custType!=''">
+			<if test="custType != null  and custType!=''">
 				CUST_TYPE = #{custType} AND
 			</if>
-			<if test="address != null and address!=''">
+			<if test="address != null  and address!=''">
 				ADDRESS = #{address} AND
 			</if>
 			<if test="cashManagementGroup != null and cashManagementGroup!=''">
 				CASH_MANAGEMENT_GROUP = #{cashManagementGroup} AND
 			</if>
-			<if test="payCondition != null and payCondition!=''">
+			<if test="payCondition != null  and payCondition!=''">
 				PAY_CONDITION = #{payCondition} AND
 			</if>
-			<if test="tradeCode != null and tradeCode!=''">
+			<if test="tradeCode != null  and tradeCode!=''">
 				TRADE_CODE = #{tradeCode} AND
 			</if>
-			<if test="regionalMarket != null and regionalMarket!=''">
+			<if test="regionalMarket != null  and regionalMarket!=''">
 				REGIONAL_MARKET = #{regionalMarket} AND
 			</if>
-			<if test="mainBusiness != null and mainBusiness!=''">
+			<if test="mainBusiness != null  and mainBusiness!=''">
 				MAIN_BUSINESS = #{mainBusiness} AND
 			</if>
-			<if test="area != null and area!=''">
+			<if test="area != null  and area!=''">
 				AREA = #{area} AND
 			</if>
-			<if test="custTrade != null and custTrade!=''">
+			<if test="custTrade != null  and custTrade!=''">
 				CUST_TRADE = #{custTrade} AND
 			</if>
-			<if test="payCycle != null and payCycle!=''">
+			<if test="payCycle != null  and payCycle!=''">
 				PAY_CYCLE = #{payCycle} AND
 			</if>
-			<if test="isUseful != null and isUseful!=''">
+			<if test="isUseful != null  and isUseful!=''">
 				IS_USEFUL = #{isUseful} AND
 			</if>
-			<if test="groupCompany != null and groupCompany!=''">
+			<if test="groupCompany != null  and groupCompany!=''">
 				GROUP_COMPANY = #{groupCompany} AND
 			</if>
-			<if test="bgVisiable != null and bgVisiable!=''">
+			<if test="bgVisiable != null  and bgVisiable!=''">
 				BG_VISIABLE = #{bgVisiable} AND
 			</if>
-			<if test="companyCode != null and companyCode!=''">
-				COMPANY_CODE = #{companyCode} AND
+			<if test="companyCode != null  and companyCode!=''">
+				COMPANY_CODE  like concat(concat('%',#{companyCode}),'%') AND
 			</if>
 			<if test="companyFuncCode != null and companyFuncCode!=''">
 				COMPANY_FUNC_CODE = #{companyFuncCode} AND
 			</if>
 			<!-- 开始时间 -->
-			<if test="createTime != null and createTime''">
-				CREATE_TIME <![CDATA[>=]]> #{modifyTimeStart} AND
+			<if test="createTimeStart != null and createTimeStart !=''">
+				CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
 			</if>
 			<!-- 结束时间 -->
-			<if test="createTime != null and createTime''">
-				CREATE_TIME <![CDATA[<=]]> #{createTime} AND
+			<if test="createTimeEnd != null  and createTimeEnd !=''">
+				CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
 			</if>
 			
 			<if test="addUserId != null and addUserId!=''">
@@ -140,15 +140,15 @@
 				MODIFIER = #{modifier} AND
 			</if>
 			<!-- 开始时间 -->
-			<if test="modifyTime != null and modifyTime!=''">
+			<if test="modifyTimeStart != null  and modifyTime!=''">
 				MODIFY_TIME <![CDATA[>=]]> #{modifyTimeStart} AND
 			</if>
 			<!-- 结束时间 -->
-			<if test="modifyTime != null and modifyTime!=''">
+			<if test="modifyTimeEnd != null  and modifyTimeEnd !=''">
 				MODIFY_TIME <![CDATA[<=]]> #{modifyTimeEnd} AND
 			</if>
-			<if test="isDelete != null and isDelete!=''">
-				IS_DELETE = #{isDelete}
+			<if test="isDelete != null  and isDelete!=''">
+				IS_DELETE = '00'
 			</if>
 		</trim>
 	</select>
@@ -163,172 +163,168 @@
 		insert into PM_CUSTOMER_INFO
 		(
 		CUST_ID
-		<if test="custCnName != null">
+		<if test="custCnName != null and  custCnName !=''">
 			,CUST_CN_NAME
 		</if>
-		<if test="custCode != null">
+		<if test="custCode != null and  custCode !=''">
 			,CUST_CODE
 		</if>
-		<if test="country != null">
+		<if test="country != null and country !=''">
 			,COUNTRY
 		</if>
-		<if test="sapCode != null">
+		<if test="sapCode != null and  sapCode !=''">
 			,SAP_CODE
 		</if>
-		<if test="enName != null">
+		<if test="enName != null and   enName !=''">
 			,EN_NAME
 		</if>
-		<if test="custPatTaxesCode != null">
+		<if test="custPatTaxesCode != null and  custPatTaxesCode !=''">
 			,CUST_PAT_TAXES_CODE
 		</if>
-		<if test="custType != null">
+		<if test="custType != null and custType  !=''">
 			,CUST_TYPE
 		</if>
-		<if test="address != null">
+		<if test="address != null and  address !=''">
 			,ADDRESS
 		</if>
-		<if test="cashManagementGroup != null">
+		<if test="cashManagementGroup != null and  cashManagementGroup !=''">
 			,CASH_MANAGEMENT_GROUP
 		</if>
-		<if test="payCondition != null">
+		<if test="payCondition != null and  payCondition !=''">
 			,PAY_CONDITION
 		</if>
-		<if test="tradeCode != null">
+		<if test="tradeCode != null and tradeCode  !=''">
 			,TRADE_CODE
 		</if>
-		<if test="regionalMarket != null">
+		<if test="regionalMarket != null and  regionalMarket !=''">
 			,REGIONAL_MARKET
 		</if>
-		<if test="mainBusiness != null">
+		<if test="mainBusiness != null and  mainBusiness !=''">
 			,MAIN_BUSINESS
 		</if>
-		<if test="area != null">
+		<if test="area != null and  area !=''">
 			,AREA
 		</if>
-		<if test="custTrade != null">
+		<if test="custTrade != null and custTrade  !=''">
 			,CUST_TRADE
 		</if>
-		<if test="payCycle != null">
+		<if test="payCycle != null and  payCycle !=''">
 			,PAY_CYCLE
 		</if>
-		<if test="isUseful != null">
+		<if test="isUseful != null and  isUseful !=''">
 			,IS_USEFUL
 		</if>
-		<if test="groupCompany != null">
+		<if test="groupCompany != null and  groupCompany !=''">
 			,GROUP_COMPANY
 		</if>
-		<if test="bgVisiable != null">
+		<if test="bgVisiable != null and  bgVisiable !=''">
 			,BG_VISIABLE
 		</if>
-		<if test="companyCode != null">
+		<if test="companyCode != null and  companyCode !=''">
 			,COMPANY_CODE
 		</if>
-		<if test="companyFuncCode != null">
+		<if test="companyFuncCode != null and  companyFuncCode !=''">
 			,COMPANY_FUNC_CODE
 		</if>
-		<if test="createTime != null">
+		<if test="createTime != null and  createTime !=''">
 			,CREATE_TIME
 		</if>
-		<if test="addUserId != null">
+		<if test="addUserId != null and  addUserId !=''">
 			,ADD_USER_ID
 		</if>
-		<if test="addTime != null">
+		<if test="addTime != null and addTime  !=''">
 			,ADD_TIME
 		</if>
-		<if test="modifier != null">
+		<if test="modifier != null and  modifier !=''">
 			,MODIFIER
 		</if>
-		<if test="modifyTime != null">
+		<if test="modifyTime != null and  modifyTime !=''">
 			,MODIFY_TIME
 		</if>
-		<if test="isDelete != null">
 			,IS_DELETE
-		</if>
 		)
 		values
 		(
 		PmCustomerInfo_SEQ.nextval,
-		<if test="custCnName != null">
+		<if test="custCnName != null and  custCnName !=''">
 			,#{custCnName}
 		</if>
-		<if test="custCode != null">
+		<if test="custCode != null and custCode  !=''">
 			,#{custCode}
 		</if>
-		<if test="country != null">
+		<if test="country != null and  country !=''">
 			,#{country}
 		</if>
-		<if test="sapCode != null">
+		<if test="sapCode != null and sapCode  !=''">
 			,#{sapCode}
 		</if>
-		<if test="enName != null">
+		<if test="enName != null and enName  !=''">
 			,#{enName}
 		</if>
-		<if test="custPatTaxesCode != null">
+		<if test="custPatTaxesCode != null and custPatTaxesCode  !=''">
 			,#{custPatTaxesCode}
 		</if>
-		<if test="custType != null">
+		<if test="custType != null and  custType !=''">
 			,#{custType}
 		</if>
-		<if test="address != null">
+		<if test="address != null and address  !=''">
 			,#{address}
 		</if>
-		<if test="cashManagementGroup != null">
+		<if test="cashManagementGroup != null and  cashManagementGroup !=''">
 			,#{cashManagementGroup}
 		</if>
-		<if test="payCondition != null">
+		<if test="payCondition != null and  payCondition !=''">
 			,#{payCondition}
 		</if>
-		<if test="tradeCode != null">
+		<if test="tradeCode != null and  tradeCode !=''">
 			,#{tradeCode}
 		</if>
-		<if test="regionalMarket != null">
+		<if test="regionalMarket != null and  regionalMarket !=''">
 			,#{regionalMarket}
 		</if>
-		<if test="mainBusiness != null">
+		<if test="mainBusiness != null and  mainBusiness !=''">
 			,#{mainBusiness}
 		</if>
-		<if test="area != null">
+		<if test="area != null and area  !=''">
 			,#{area}
 		</if>
-		<if test="custTrade != null">
+		<if test="custTrade != null and  custTrade !=''">
 			,#{custTrade}
 		</if>
-		<if test="payCycle != null">
+		<if test="payCycle != null and  payCycle !=''">
 			,#{payCycle}
 		</if>
-		<if test="isUseful != null">
+		<if test="isUseful != null and  isUseful !=''">
 			,#{isUseful}
 		</if>
-		<if test="groupCompany != null">
+		<if test="groupCompany != null and  groupCompany !=''">
 			,#{groupCompany}
 		</if>
-		<if test="bgVisiable != null">
+		<if test="bgVisiable != null and  bgVisiable !=''">
 			,#{bgVisiable}
 		</if>
-		<if test="companyCode != null">
+		<if test="companyCode != null and  companyCode !=''">
 			,#{companyCode}
 		</if>
-		<if test="companyFuncCode != null">
+		<if test="companyFuncCode != null and  companyFuncCode !=''">
 			,#{companyFuncCode}
 		</if>
-		<if test="createTime != null">
+		<if test="createTime != null and createTime  !=''">
 			,#{createTime}
 		</if>
-		<if test="addUserId != null">
+		<if test="addUserId != null and  addUserId !=''">
 			,#{addUserId}
 		</if>
-		<if test="addTime != null">
+		<if test="addTime != null and  addTime !=''">
 			,#{addTime}
 		</if>
-		<if test="modifier != null">
+		<if test="modifier != null and  modifier !=''">
 			,#{modifier}
 		</if>
-		<if test="modifyTime != null">
+		<if test="modifyTime != null and modifyTime  !=''">
 			,#{modifyTime}
 		</if>
-		<if test="isDelete != null">
-			,#{isDelete}
-		</if>
+			,'00'
 		)
 	</insert>
 
@@ -336,33 +332,33 @@
 		parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity">
 		update PM_CUSTOMER_INFO
 		<set>
-			<if test="custCnName != null">CUST_CN_NAME = #{custCnName}, </if>
-			<if test="custCode != null">CUST_CODE = #{custCode}, </if>
-			<if test="country != null">COUNTRY = #{country}, </if>
-			<if test="sapCode != null">SAP_CODE = #{sapCode}, </if>
-			<if test="enName != null">EN_NAME = #{enName}, </if>
-			<if test="custPatTaxesCode != null">CUST_PAT_TAXES_CODE = #{custPatTaxesCode}, </if>
-			<if test="custType != null">CUST_TYPE = #{custType}, </if>
-			<if test="address != null">ADDRESS = #{address}, </if>
-			<if test="cashManagementGroup != null">CASH_MANAGEMENT_GROUP = #{cashManagementGroup}, </if>
-			<if test="payCondition != null">PAY_CONDITION = #{payCondition}, </if>
-			<if test="tradeCode != null">TRADE_CODE = #{tradeCode}, </if>
-			<if test="regionalMarket != null">REGIONAL_MARKET = #{regionalMarket}, </if>
-			<if test="mainBusiness != null">MAIN_BUSINESS = #{mainBusiness}, </if>
-			<if test="area != null">AREA = #{area}, </if>
-			<if test="custTrade != null">CUST_TRADE = #{custTrade}, </if>
-			<if test="payCycle != null">PAY_CYCLE = #{payCycle}, </if>
-			<if test="isUseful != null">IS_USEFUL = #{isUseful}, </if>
-			<if test="groupCompany != null">GROUP_COMPANY = #{groupCompany}, </if>
-			<if test="bgVisiable != null">BG_VISIABLE = #{bgVisiable}, </if>
-			<if test="companyCode != null">COMPANY_CODE = #{companyCode}, </if>
-			<if test="companyFuncCode != null">COMPANY_FUNC_CODE = #{companyFuncCode}, </if>
-			<if test="createTime != null">CREATE_TIME = #{createTime}, </if>
-			<if test="addUserId != null">ADD_USER_ID = #{addUserId}, </if>
-			<if test="addTime != null">ADD_TIME = #{addTime}, </if>
-			<if test="modifier != null">MODIFIER = #{modifier}, </if>
-			<if test="modifyTime != null">MODIFY_TIME = #{modifyTime}, </if>
-			<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+			<if test="custCnName != null and  custCnName !=''">CUST_CN_NAME = #{custCnName}, </if>
+			<if test="custCode != null and  custCode !=''">CUST_CODE = #{custCode}, </if>
+			<if test="country != null and  country !=''">COUNTRY = #{country}, </if>
+			<if test="sapCode != null and sapCode  !=''">SAP_CODE = #{sapCode}, </if>
+			<if test="enName != null and enName  !=''">EN_NAME = #{enName}, </if>
+			<if test="custPatTaxesCode != null and custPatTaxesCode  !=''">CUST_PAT_TAXES_CODE = #{custPatTaxesCode}, </if>
+			<if test="custType != null and  custType !=''">CUST_TYPE = #{custType}, </if>
+			<if test="address != null and address  !=''">ADDRESS = #{address}, </if>
+			<if test="cashManagementGroup != null and  cashManagementGroup !=''">CASH_MANAGEMENT_GROUP = #{cashManagementGroup}, </if>
+			<if test="payCondition != null and  payCondition !=''">PAY_CONDITION = #{payCondition}, </if>
+			<if test="tradeCode != null and  tradeCode !=''">TRADE_CODE = #{tradeCode}, </if>
+			<if test="regionalMarket != null and  regionalMarket !=''">REGIONAL_MARKET = #{regionalMarket}, </if>
+			<if test="mainBusiness != null and mainBusiness  !=''">MAIN_BUSINESS = #{mainBusiness}, </if>
+			<if test="area != null and area  !=''">AREA = #{area}, </if>
+			<if test="custTrade != null and  custTrade !=''">CUST_TRADE = #{custTrade}, </if>
+			<if test="payCycle != null and  payCycle !=''">PAY_CYCLE = #{payCycle}, </if>
+			<if test="isUseful != null and isUseful  !=''">IS_USEFUL = #{isUseful}, </if>
+			<if test="groupCompany != null and  groupCompany !=''">GROUP_COMPANY = #{groupCompany}, </if>
+			<if test="bgVisiable != null and bgVisiable  !=''">BG_VISIABLE = #{bgVisiable}, </if>
+			<if test="companyCode != null and  companyCode !=''">COMPANY_CODE = #{companyCode}, </if>
+			<if test="companyFuncCode != null and companyFuncCode  !=''">COMPANY_FUNC_CODE = #{companyFuncCode}, </if>
+			<if test="createTime != null and  createTime !=''">CREATE_TIME = #{createTime}, </if>
+			<if test="addUserId != null and addUserId  !=''">ADD_USER_ID = #{addUserId}, </if>
+			<if test="addTime != null and  addTime !=''">ADD_TIME = #{addTime}, </if>
+			<if test="modifier != null and  modifier !=''">MODIFIER = #{modifier}, </if>
+			<if test="modifyTime != null and  modifyTime !=''">MODIFY_TIME = #{modifyTime}, </if>
+			<if test="isDelete != null and isDelete  !=''">IS_DELETE = #{isDelete}</if>
 		</set>
 		where CUST_ID = #{custId}
 	</update>

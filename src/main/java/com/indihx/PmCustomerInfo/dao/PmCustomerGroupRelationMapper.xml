@@ -21,11 +21,11 @@
 		*
 		 from pm_customer_group_relation
 			 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-				<if test="custGroupRelationId != null">CUST_GROUP_RELATION_ID = #{custGroupRelationId} AND </if>
-				<if test="custGroupId != null">CUST_GROUP_ID = #{custGroupId} AND </if>
-				<if test="custId != null">CUST_ID = #{custId} AND </if>
-				<if test="custCnName != null">CUST_CN_NAME = #{custCnName} AND </if>
-				<if test="sapCode != null">SAP_CODE = #{sapCode}</if>
+				<if test="custGroupRelationId != null and  custGroupRelationId !=''">CUST_GROUP_RELATION_ID = #{custGroupRelationId} AND </if>
+				<if test="custGroupId != null and custGroupId  !=''">CUST_GROUP_ID = #{custGroupId} AND </if>
+				<if test="custId != null and custId  !=''">CUST_ID = #{custId} AND </if>
+				<if test="custCnName != null and custCnName  !=''">CUST_CN_NAME = #{custCnName} AND </if>
+				<if test="sapCode != null and sapCode  !=''">SAP_CODE = #{sapCode}</if>
 			</trim> 
 	</select>
 	
@@ -37,29 +37,29 @@
 		insert into pm_customer_group_relation
 		(
 		CUST_GROUP_RELATION_ID
-		<if test="custGroupId != null">
+		<if test="custGroupId != null and  custGroupId !=''">
 			,CUST_GROUP_ID	
 		</if>
-		<if test="custId != null">
+		<if test="custId != null and  custId !=''">
 			,CUST_ID	
 		</if>
-		<if test="custCnName != null">
+		<if test="custCnName != null and  custCnName !=''">
 			,CUST_CN_NAME	
 		</if>
-		<if test="sapCode != null">
+		<if test="sapCode != null and  sapCode !=''">
 			,SAP_CODE	
 		</if>
 		)
 		values
 		(
 		PmCustomerGroupRelation_SEQ.nextval,
-		<if test="custGroupId != null">
+		<if test="custGroupId != null and  custGroupId !=''">
 			,#{custGroupId}	</if>
-		<if test="custId != null">
+		<if test="custId != null and  custId !=''">
 			,#{custId}</if>
-		<if test="custCnName != null">
+		<if test="custCnName != null and custCnName  !=''">
 			,#{custCnName} 		</if>
-		<if test="sapCode != null">
+		<if test="sapCode != null and  sapCode !=''">
 			,#{sapCode}		</if>
 		)
 	</insert>
@@ -67,10 +67,10 @@
 	<update id="update" parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity">
 		update pm_customer_group_relation 
 		<set>
-			<if test="custGroupId != null">CUST_GROUP_ID = #{custGroupId}, </if>
-			<if test="custId != null">CUST_ID = #{custId}, </if>
-			<if test="custCnName != null">CUST_CN_NAME = #{custCnName}, </if>
-			<if test="sapCode != null">SAP_CODE = #{sapCode}</if>
+			<if test="custGroupId != null and  custGroupId !=''">CUST_GROUP_ID = #{custGroupId}, </if>
+			<if test="custId != null and custId  !=''">CUST_ID = #{custId}, </if>
+			<if test="custCnName != null and  custCnName !=''">CUST_CN_NAME = #{custCnName}, </if>
+			<if test="sapCode != null and  sapCode !=''">SAP_CODE = #{sapCode}</if>
 		</set>
 		where CUST_GROUP_RELATION_ID = #{custGroupRelationId}
 	</update>

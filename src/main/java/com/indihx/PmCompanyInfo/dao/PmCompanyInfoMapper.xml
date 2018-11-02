@@ -26,15 +26,15 @@
 		*
 		 from pm_company_info
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-						<if test="companyCode != null and companyCode != ''  ">COMPANY_CODE = #{companyCode} AND </if>
+						<if test="companyCode != null  and companyCode != ''  ">COMPANY_CODE = #{companyCode} AND </if>
 						<if test="companyName != null and companyName != '' ">COMPANY_NAME = #{companyName} AND </if>
-						<if test="companyAddress != null and companyAddress != '' ">COMPANY_ADDRESS = #{companyAddress} AND </if>
-						<if test="remark != null and remark != '' ">REMARK = #{remark} AND </if>
-						<if test="creatorId != null">CREATOR_ID = #{creatorId} AND </if>
-						<if test="createTime != null">CREATE_TIME = #{createTime} AND </if>
-						<if test="modifier != null">MODIFIER = #{modifier} AND </if>
-						<if test="modifyTime != null">MODIFY_TIME = #{modifyTime} AND </if>
-						<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+						<if test="companyAddress != null  and companyAddress != '' ">COMPANY_ADDRESS = #{companyAddress} AND </if>
+						<if test="remark != null  and remark != '' ">REMARK = #{remark} AND </if>
+						<if test="creatorId != null and  creatorId !=''">CREATOR_ID = #{creatorId} AND </if>
+						<if test="createTime != null and createTime  !=''">CREATE_TIME = #{createTime} AND </if>
+						<if test="modifier != null and  modifier !=''">MODIFIER = #{modifier} AND </if>
+						<if test="modifyTime != null and  modifyTime !=''">MODIFY_TIME = #{modifyTime} AND </if>
+						<if test="isDelete != null and  isDelete !=''">IS_DELETE = #{isDelete}</if>
 					</trim> 
 	</select>
 	
@@ -45,68 +45,65 @@
 	<insert id="insert" parameterType="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity">
 		insert into pm_company_info
 		(
-		<if test="companyCode != null" >
+		<if test="companyCode != null and  companyCode !=''" >
 			COMPANY_CODE	
 		</if>
-		<if test="companyName != null">
+		<if test="companyName != null and companyName  !=''">
 			,COMPANY_NAME	
 		</if>
-		<if test="companyAddress != null">
+		<if test="companyAddress != null and companyAddress  !=''">
 			,COMPANY_ADDRESS	
 		</if>
-		<if test="remark != null">
+		<if test="remark != null and  remark !=''">
 			,REMARK	
 		</if>
-		<if test="creatorId != null">
+		<if test="creatorId != null and creatorId !=''">
 			,CREATOR_ID	
 		</if>
-		<if test="createTime != null">
+		<if test="createTime != null and  createTime !=''">
 			,CREATE_TIME	
 		</if>
-		<if test="modifier != null">
+		<if test="modifier != null and  modifier !=''">
 			,MODIFIER	
 		</if>
-		<if test="modifyTime != null">
+		<if test="modifyTime != null and modifyTime  !=''">
 			,MODIFY_TIME	
 		</if>
-		<if test="isDelete != null">
 			,IS_DELETE	
-		</if>
 		)
 		values
 		(
-		<if test="companyCode != null">
+		<if test="companyCode != null and  companyCode !=''">
 			,#{companyCode}		</if>
-		<if test="companyName != null">
+		<if test="companyName != null and  companyName !=''">
 			,#{companyName}		</if>
-		<if test="companyAddress != null">
+		<if test="companyAddress != null and  companyAddress !=''">
 			,#{companyAddress} 		</if>
-		<if test="remark != null">
+		<if test="remark != null and remark !=''">
 			,#{remark}		</if>
-		<if test="creatorId != null">
+		<if test="creatorId != null and  creatorId !=''">
 			,#{creatorId}		</if>
-		<if test="createTime != null">
+		<if test="createTime != null and createTime  !=''">
 			,#{createTime}		</if>
-		<if test="modifier != null">
+		<if test="modifier != null and  modifier !=''">
 			,#{modifier} 	</if>
-		<if test="modifyTime != null">
+		<if test="modifyTime != null and modifyTime  !=''">
 			,#{modifyTime}	</if>
-		<if test="isDelete != null">
-			,#{isDelete}</if>
+			,'00'
 		)
 	</insert>
 	 
 	<update id="update" parameterType="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity">
 		update pm_company_info 
 		<set>
-			<if test="companyName != null">COMPANY_NAME = #{companyName}, </if>
-			<if test="companyAddress != null">COMPANY_ADDRESS = #{companyAddress}, </if>
-			<if test="remark != null">REMARK = #{remark}, </if>
-			<if test="creatorId != null">CREATOR_ID = #{creatorId}, </if>
-			<if test="createTime != null">CREATE_TIME = #{createTime}, </if>
-			<if test="modifier != null">MODIFIER = #{modifier}, </if>
-			<if test="modifyTime != null">MODIFY_TIME = #{modifyTime}, </if>
-			<if test="isDelete != null">IS_DELETE = #{isDelete}</if>
+			<if test="companyName != null and companyName  !=''">COMPANY_NAME = #{companyName}, </if>
+			<if test="companyAddress != null and  companyAddress !=''">COMPANY_ADDRESS = #{companyAddress}, </if>
+			<if test="remark != null and  remark !=''">REMARK = #{remark}, </if>
+			<if test="creatorId != null and  creatorId !=''">CREATOR_ID = #{creatorId}, </if>
+			<if test="createTime != null and  createTime !=''">CREATE_TIME = #{createTime}, </if>
+			<if test="modifier != null and  modifier !=''">MODIFIER = #{modifier}, </if>
+			<if test="modifyTime != null and modifyTime  !=''">MODIFY_TIME = #{modifyTime}, </if>
+			<if test="isDelete != null and  isDelete !=''">IS_DELETE = #{isDelete}</if>
 		</set>
 		where COMPANY_CODE = #{companyCode}
 	</update>

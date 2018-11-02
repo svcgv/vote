@@ -65,7 +65,6 @@ public class PmCustomerInfoController {
     public @ResponseBody Map<String,Object> save(@RequestBody PmCustomerInfoEntity pmCustomerInfo,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
     	pmCustomerInfo.setCreatorId(user.getUsrId());
-    	pmCustomerInfo.setCreateTime(new Date());
         pmCustomerInfoService.insert(pmCustomerInfo);
 
         return R.ok();
