@@ -20,6 +20,7 @@
 <script src="${ctx }/resources/admincp/scripts/jquery-ui.js"></script>
 <script src="${ctx }/resources/admincp/scripts/jquery.float.js"></script>
 <script src="${ctx }/resources/admincp/scripts/jquery.window.js"></script>
+<script src="${ctx }/resources/admincp/scripts/commonfunction.js"></script>
 </head>
 
 

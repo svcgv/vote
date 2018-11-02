@@ -30,80 +30,89 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.indihx.AbstractBaseController;
-import com.indihx.PmCompanyInfo.service.PmCompanyInfoService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.system.service.impl.ParamsInfoServiceimpl;
 
+/**
+ * 销售团队管理
+ * */
 
 @Controller
 @RequestMapping("/project")
-public class CompanyController extends AbstractBaseController{
+public class SellTeamController extends AbstractBaseController{
 	@Autowired
 	private ParamsInfoServiceimpl infoservice;
 	
-    @Autowired
-    private PmCompanyInfoService pmCompanyInfoService;
-	
-	@RequestMapping("/company/index")
+	@RequestMapping("/sellTeam/index")
 	public ModelAndView addCustomView() {
 		
 		ModelAndView view = new ModelAndView();
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
 		
-		view.setViewName("/project/company/index");
+		view.setViewName("/project/sellTeam/index");
 		return view;
 	}
-	@RequestMapping(value="/company/form",method=RequestMethod.GET)
+	@RequestMapping(value="/sellTeam/form",method=RequestMethod.GET)
 	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
 		
-//		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
-		if(!act.equalsIgnoreCase("add")) {
-			view.addObject("Company",pmCompanyInfoService.queryObject(id));
-		}
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
+		
 		view.addObject("act",act);
 		if(id !=null && !"".equals(id)) {
 			view.addObject("id",id);
 		}
 		
-		view.setViewName("/project/company/form");
+		view.setViewName("/project/sellTeam/form");
+		return view;
+	}
+	@RequestMapping(value="/sellTeam/edit",method=RequestMethod.GET)
+	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
+		ModelAndView view = new ModelAndView();
+		
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
+		
+		view.addObject("act",act);
+		view.addObject("id",id);
+		
+		view.setViewName("/project/sellTeam/edit");
+		return view;
+	}
+	@RequestMapping(value="/sellTeam/view",method=RequestMethod.GET)
+	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
+		ModelAndView view = new ModelAndView();
+		
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
+		
+		view.addObject("act",act);
+		view.addObject("id",id);
+		
+		view.setViewName("/project/sellTeam/view");
 		return view;
 	}
 	
 	
-	
-	@RequestMapping(value="/company/getAllCustomerList",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String,Object>> getAllCustomerList(@RequestBody Map<String, Object> requestMap){
+	// 机构
+	@RequestMapping(value="/sellTeam/org",method=RequestMethod.GET)
+	public ModelAndView orgFormView() {
+		ModelAndView view = new ModelAndView();
 		
-		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-		Map<String ,Object> map = new HashMap<String ,Object>();
-    	map.put("sapCode", "1000002207");
-    	map.put("custCnName", "中国工商银行股份有限公司南通分行");
-    	list.add(map);
-    	
-    	Map<String ,Object> map1 = new HashMap<String ,Object>();
-    	map.put("sapCode", "1000002207");
-    	map.put("custCnName", "中广核核技术发展股份有限公司");
-    	list.add(map1);
-    	
-    	Map<String ,Object> map2 = new HashMap<String ,Object>();
-    	map.put("sapCode", "1000002197");
-    	map.put("custCnName", "兴业银行股份有限公司");
-    	list.add(map2);
-    	
-    	Map<String ,Object> map3 = new HashMap<String ,Object>();
-    	map.put("sapCode", "1000002196");
-    	map.put("custCnName", "上海砾阳软件有限公司");
-    	list.add(map3);
-    	
-		return list;
+		view.setViewName("/project/sellTeam/org");
+		return view;
 	}
 	
+	// 用户
+	@RequestMapping(value="/sellTeam/user",method=RequestMethod.GET)
+	public ModelAndView userFormView() {
+		ModelAndView view = new ModelAndView();
+		
+		view.setViewName("/project/sellTeam/user");
+		return view;
+	}
 	
 	
 }
