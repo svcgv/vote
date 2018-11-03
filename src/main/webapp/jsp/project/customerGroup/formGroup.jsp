@@ -37,43 +37,31 @@
 
 <script type="text/javascript">
 $(function(){
+
+	var testData = []
 //一般直接写在一个js文件中
-var testData=[];
 layui.use(['layer', 'form','laydate','table'], function(){
   var layer = layui.layer ,
   	  form = layui.form,
   	  tableGroup=layui.table;
-  	
-  	var queryParams=$("#formGroup-query-form").serializeObject();
-  $.ajax({
-		type: 'POST',
-		data: JSON.stringify(queryParams),
-	  url: '/vote/pmcustomerinfo/list',
-	  contentType:'application/json',
-	  success: function(res){
-		  testData=res.page
-		  console.log(testData);
-		  // table render
-		  tableGroup.render({
-			    elem: '#customTable',
-			    id:'customerGroup-table',
-			    //url:'/vote/pmcustomerinfo/list',
-			    method:'post',
-			    height:'260',
-			    width:"690",
-			    title: '客户数据表',
-			    cols: [[
-			      {type: 'checkbox' },
-			      {field:'sapCode', title:'sap编号', sort: true},
-			      {field:'custCnName', title:'客户名称'},
-			    ]],
-			    data:testData,
-			    page: true
-			  });
-		  }
+	  
+  // table render
+  tableGroup.render({
+	    elem: '#customTable',
+	    //url:'custom.json',
+	    height:'250',
+	    width:"690",
+	    title: '客户数据表',
+	    cols: [[
+	      {type: 'checkbox' },
+	      {field:'sapCode', title:'sap编号', sort: true},
+	      {field:'custCnName', title:'客户名称'},
+	    ]],
+	    data:[
+		  		
+			],
+	    page: true
 	  });
-
-  
 	
   /**
   * chechbox 点击事件
@@ -93,7 +81,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			ret.push(sapCode2)
 		});
 		// 遍历选中的CheckBox
-		$(".customGroup-form-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
+		$(".layui-table-body table.layui-table tbody tr").each(function(){
 			var chk=$(this).find(".laytable-cell-checkbox");
 			var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
 			if(isChecked){
@@ -129,59 +117,45 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	$("#customQuery").click(function(){
 		
 		var queryParams=$("#formGroup-query-form").serializeObject();
-		console.log(queryParams);
-		/*tableGroup.reload('customerGroup-table',{
-			url:'/vote/pmcustomerinfo/list',
-			page:{
-				curr:1 //从第一页开始
-			},
-			method:'post',
-			where:{
-				queryStr:JSON.stringify(queryParams)
-			},
-			done:function(res){
-				console.log(res)
-			}
-			
-		})*/
+		console.log(queryParams)
 		
+		var newparam = {}
+		 for(var o in queryParams){
+			 if(queryParams[o]){
+				 newparam[o] = queryParams[o]
+			 }
+		 }
+		
+		console.log(newparam)
 		
 		$.ajax({
-			type: 'POST',
-		  url: '/vote/pmcustomerinfo/list',
-		  data: JSON.stringify(queryParams),
-		  contentType:'application/json',
-		  success: function(res){
-		      console.log(res)
-		      testData=res.page
-		      tableGroup.render({
-		  	  	id:"customerGroup-table",
-		  	    elem: '#customTable',
-		  	    //url:'custom.json',
-			    height:'260',
-			    width:"690",
-			    title: '客户数据表',
-			    cols: [[
-			      {type: 'checkbox' },
-			      {field:'sapCode', title:'sap编号', sort: true},
-			      {field:'custCnName', title:'客户名称'},
-			    ]],
-		  	    cellMinWidth:'90',
-		  	    data:testData,
-		  	    page: true
-		  	  });},
-		  dataType: "json"
-		});
-		
-		
-		
-		
+			  type: 'POST',
+			  url: '/vote/pmcustomerinfo/list',
+			  data: JSON.stringify(newparam),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			      testData=res.page
+			      tableGroup.render({
+			  	    elem: '#customTable',
+			  	  	height:'250',
+			  	    cols: [[
+			  	    	{type: 'checkbox' },
+			  	      {field:'sapCode', title:'sap编号', sort: true},
+			  	      {field:'custCnName', title:'客户名称'},
+			  	    ]],
+			  	    cellMinWidth:'90',
+			  	    
+			  	    data:testData,
+			  	    page: true
+			  	  });},
+			  dataType: "json"
+			});
 	});
 	
 });
 	
 });
-
 
 
 </script>

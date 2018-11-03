@@ -20,4 +20,6 @@ public interface PmCustomerGroupRelationMapper{
 	public void delete(long custGroupRelationId);
 	public List<PmCustomerGroupRelationEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
+	
+	public void deleteByGroupId(String id);
 }

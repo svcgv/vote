@@ -163,7 +163,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 公司查询按钮
 	*/
 	 $("#customQuery").click(function(){
-		 var queryParams=$("#customer-query-form").serializeObject();
+		 var queryParams=$("#customer-query-form").serialize();
 		 $.ajax({
 			  type: 'POST',
 			  url: '/vote/pmcompanyinfo/list',
@@ -189,11 +189,11 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 			  	    ]],
 			  	    cellMinWidth:'90',
-			  	    /*data:[
+			  	    data:[
 						{"groupCode":44,"groupName":"销售team1","ownerOrgId":"销售一部"},
 						{"groupCode":55,"groupName":"销售team1","ownerOrgId":"销售一部"},
 						{"groupCode":66,"groupName":"销售team1","ownerOrgId":"销售一部"}
-			       	],*/
+			       	],
 			  	    page: true
 			  	  	});},
 			  dataType: "json"

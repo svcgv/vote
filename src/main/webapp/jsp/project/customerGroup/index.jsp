@@ -21,35 +21,46 @@
 	      </div>
 	    </div>
 	  
-	  		<div class="layui-inline">
-		      <label class="layui-form-label">是否有效：</label>
-		      <div class="layui-input-inline">
-		        <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
-		        	 ${isUseful.ewTypeHtml }
-		        </select>
-		      </div>
-		    </div>
-	    
-	    
-	     <div class="layui-inline">
-	      <label class="layui-form-label">开始时间：</label>
-	       <div class="layui-input-inline">
-	         <input type="text" name="startTime" id="startTime" autocomplete="off" class="layui-input form-control">
+	    <div class="layui-inline">
+	      <label class="layui-form-label">添加人：</label>
+	      <div class="layui-input-inline">
+	        <input type="text" name="creator"  autocomplete="off" class="layui-input form-control">
 	      </div>
 	    </div>
-		    
-		    <div class="layui-inline">
-		      <label class="layui-form-label">结束时间：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="endTime" id="endTime"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		  </div>
+	    
+	    <div class="layui-inline">
+	      <label class="layui-form-label">添加人编号：</label>
+	      <div class="layui-input-inline">
+	        <input type="text" name="creatorId"   autocomplete="off" class="layui-input form-control">
+	      </div>
+	    </div>
+	    
+	    <div class="layui-inline">
+	      <label class="layui-form-label">添加开始时间：</label>
+	      <div class="layui-input-inline">
+	        <input type="text" name="createTimeStart" id="createTimeStart" autocomplete="off" class="layui-input form-control">
+	      </div>
+	    </div>
+	    
+	    <div class="layui-inline">
+	      <label class="layui-form-label">添加结束时间：</label>
+	      <div class="layui-input-inline">
+	        <input type="text" name="createTimeEnd" id="createTimeEnd" autocomplete="off" class="layui-input form-control">
+	      </div>
+	    </div>
+	    
+	     <div class="layui-inline">
+	      <label class="layui-form-label">修改人：</label>
+	      <div class="layui-input-inline">
+	        <input type="text" name="modifier"  autocomplete="off" class="layui-input form-control">
+	      </div>
+	    </div>
 	    
 	     <div class="layui-inline" style="vertical-align: top;">
 		   <div class="layui-btn-container" style="margin-left:15px;">
 		    <button type="button" class="layui-btn layui-btn-sm" id="query-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 		    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
-		    <button type="button" class="layui-btn layui-btn-sm" id="import-hook"><i class="layui-icon"></i>导入</button>
+	
 		    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 		  </div>
 	   	</div>
@@ -77,17 +88,17 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	  table=layui.table,
 	  	  upload=layui.upload;
 	  
-	//日期
+	  //日期
 	  laydate.render({
-		    elem: "#startTime",
-		    theme: 'molv',
-		    type: 'datetime'
-	 });
-	 laydate.render({
-		    elem: "#endTime",
-		    theme: 'molv',
-		    type: 'datetime'
-	 });
+	    elem: '#createTimeStart',
+	    theme: 'molv',
+	    type: 'datetime'
+	  });
+	  laydate.render({
+	    elem: '#createTimeEnd',
+	    theme: 'molv',
+	    type: 'datetime'
+	  });
 
 	//指定允许上传的文件类型
 		upload.render({
@@ -118,12 +129,12 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		      {type: 'checkbox', fixed: 'left'},
 		      {field:'custGroupId', title:'客户群编号',fixed: 'left', width:110, sort: true},
 		      {field:'custGroupName', title:'客户群名称', width:230},
-		      {field:'creator', title:'添加人', width:90},
-		      {field:'creatorId', title:'添加人编号',width:100},
-		      {field:'createTime', title:'添加时间'},
-		      {field:'modifier', title:'修改人'},
+		      {field:'creator', title:'创建人', width:90},
+		      {field:'creatorId', title:'创建人编号',width:100},
+		      {field:'createTime', title:'创建时间'},
+		      
 		      {field:'modifyTime', title:'修改时间'},
-		      {field:'isDelete', title:'是否删除'},
+		      {field:'isDelete', title:'是否有效'},
 		      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 		    ]],
 		    cellMinWidth:'90',
@@ -155,10 +166,23 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		    if(obj.event === 'del'){
 		      layer.confirm('确认删除行么', function(index){
 		        obj.del();
+		        console.log(data)
+		        var param = {}
+		        param.isDelete = '01'
+		        param.custGroupId=data.custGroupId
+		        $.ajax({
+			  type: 'POST',
+			  url: '/vote/pmcustomergroup/update',
+			  data: JSON.stringify(param),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			  },
+			  dataType: "json"
+			})
+			
 		        layer.close(index);
-		        table.reload('tableID',{
-		        	
-		        });
+		        
 		      });
 		    } else if(obj.event === 'edit'){
 		    	// 编辑
@@ -182,61 +206,47 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		* 查询按钮
 		*/
 		$("#query-hook").click(function(){
-			var queryParams=$("#customer-query-form").serializeObject();
-			 $.ajax({
+			var queryParams=$("#index-query-form").serializeObject();
+			var newparam = {}
+			 for(var o in queryParams){
+				 if(queryParams[o]){
+					 newparam[o] = queryParams[o]
+				 }
+			 }
+			console.log(queryParams)
+			$.ajax({
 				  type: 'POST',
 				  url: '/vote/pmcustomergroup/list',
-				  data: JSON.stringify(queryParams),
+				  data: JSON.stringify(newparam),
 				  contentType:'application/json',
 				  success: function(res){
 				      console.log(res)
 				      testData=res.page
 				      table.render({
-						  	id:"tableID",
-						    elem: '#mainTable',
-						    //url:'custom.json',
-						    height:'full-200',
+				  	    elem: '#mainTable',
 				  	    //url:'custom.json',
 				  	    toolbar: '#toolbarDemo',
-				  	  title: '客户群数据信息',
-					    cols: [[
-					      {type: 'checkbox', fixed: 'left'},
-					      {field:'custGroupId', title:'客户群编号',fixed: 'left', width:110, sort: true},
-					      {field:'custGroupName', title:'客户群名称', width:230},
-					      {field:'creator', title:'添加人', width:90},
-					      {field:'creatorId', title:'添加人编号',width:100},
-					      {field:'createTime', title:'添加时间'},
-					      {field:'modifier', title:'修改人'},
-					      {field:'modifyTime', title:'修改时间'},
-					      {field:'isDelete', title:'是否删除'},
-					      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
-					    ]],
+				  	    height:'full-250',
+				  	    title: '客户数据表',
+				  	    cols: [[
+				  	    	{type: 'checkbox', fixed: 'left'},
+						      {field:'custGroupId', title:'客户群编号',fixed: 'left', width:110, sort: true},
+						      {field:'custGroupName', title:'客户群名称', width:230},
+						      {field:'creator', title:'添加人', width:90},
+						      {field:'creatorId', title:'添加人编号',width:100},
+						      {field:'createTime', title:'添加时间'},
+						      
+						      {field:'modifyTime', title:'修改时间'},
+						      {field:'isDelete', title:'是否有效'},
+						      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+				  	    ]],
 				  	    cellMinWidth:'90',
 				  	    data:testData,
 				  	    page: true
 				  	  });},
 				  dataType: "json"
-				});
+				})
 		});
-			
-			
-			
-			/*var queryParams=$("#index-query-form").serialize();
-			table.reload('tableID',{
-				url:'form',
-				page:{
-					curr:1 //从第一页开始
-				},
-				method:'post',
-				where:{
-					queryStr:queryParams
-				},
-				done:function(res){
-					console.log(res)
-				}
-				
-			})
-		});*/
 		
 		/*
 		* 新增
@@ -300,56 +310,14 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			      },
 			      btn2: function(index, layero){
 			    	  // 关闭按钮回调
+			    	  layer.close(index);
 			      }
 				  
 				});
 		}
 		
 	});
-	var testData=[
-		  		{
-					"custGroupId":"1000000210",
-					"custGroupName":"上海浦东发展银行股份有限公司",
-					"creator":"史定波",
-					"creatorId":'101',
-					"createTime":"2017-10-12",
-					"modifier":"",
-					"modifyTime":"",
-					"isDelete":"否"
-				},
-				{
-					"custGroupId":"1000000210",
-					"custGroupName":"上海浦东发展银行股份有限公司",
-					"creator":"史定波",
-					"creatorId":'101',
-					"createTime":"2017-10-12",
-					"modifier":"",
-					"modifyTime":"",
-					"isDelete":"否"
-				},
-				{
-					"custGroupId":"1000000210",
-					"custGroupName":"上海浦东发展银行股份有限公司",
-					"creator":"史定波",
-					"creatorId":'101',
-					"createTime":"2017-10-12",
-					"modifier":"",
-					"modifyTime":"",
-					"isDelete":"否"
-				},
-				{
-					"custGroupId":"1000000210",
-					"custGroupName":"上海浦东发展银行股份有限公司",
-					"creator":"史定波",
-					"creatorId":'101',
-					"createTime":"2017-10-12",
-					"modifier":"",
-					"modifyTime":"",
-					"isDelete":"否"
-				}
-			]
-
-
+	var testData=[]
 </script>
 
 

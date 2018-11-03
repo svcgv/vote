@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.indihx.comm.util.R;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.PmCustomerInfo.entity.PmCustomerGroupEntity;
+import com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity;
+import com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity;
+import com.indihx.PmCustomerInfo.service.PmCustomerGroupRelationService;
 import com.indihx.PmCustomerInfo.service.PmCustomerGroupService;
+import com.indihx.PmCustomerInfo.service.PmCustomerInfoService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.comm.util.PageUtils;
 
@@ -36,12 +41,18 @@ import com.indihx.comm.util.PageUtils;
 public class PmCustomerGroupController {
     @Autowired
     private PmCustomerGroupService pmCustomerGroupService;
+    
+    @Autowired
+    private PmCustomerGroupRelationService pmCustomerGroupRelationService;
+
+    @Autowired
+    private PmCustomerInfoService pmCustomerInfoService;
 
     /**
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params){
+    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
        
 		List<PmCustomerGroupEntity> pmCustomerGroup = pmCustomerGroupService.queryList(params);
         return R.ok().put("page", pmCustomerGroup);
@@ -52,7 +63,7 @@ public class PmCustomerGroupController {
      * 信息
      */
     @RequestMapping(value="/info",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> info(@RequestParam("custGroupId") String custGroupId){
+    public @ResponseBody Map<String,Object> info(@RequestParam("custGroupId") String custGroupId,HttpSession session){
         
 		PmCustomerGroupEntity entity = pmCustomerGroupService.queryObject(custGroupId);
         return R.ok().put("pmCustomerGroup", entity);
@@ -64,9 +75,9 @@ public class PmCustomerGroupController {
     @RequestMapping(value="/save",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> save(@RequestBody PmCustomerGroupEntity pmCustomerGroup,HttpSession session){
         
-        UsrInfo	currentUser= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
-        pmCustomerGroup.setCreatorId(currentUser.getUsrId());
-        pmCustomerGroup.setCreator(currentUser.getUsrName());
+        UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+        pmCustomerGroup.setCreatorId(user.getUsrId());
+        pmCustomerGroup.setCreator(user.getUsrName());
         pmCustomerGroupService.insert(pmCustomerGroup);
         return R.ok();
     }
@@ -75,8 +86,9 @@ public class PmCustomerGroupController {
      * 修改
      */
     @RequestMapping(value="/update",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> update(@RequestBody PmCustomerGroupEntity pmCustomerGroup){
-        
+    public @ResponseBody Map<String,Object> update(@RequestBody PmCustomerGroupEntity pmCustomerGroup,HttpSession session){
+    	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+        pmCustomerGroup.setModifier(user.getUsrId());
         pmCustomerGroupService.update(pmCustomerGroup);//全部更新
         
         return R.ok();
@@ -86,10 +98,43 @@ public class PmCustomerGroupController {
      * 删除
      */
     @RequestMapping(value="/delete",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> delete(@RequestBody String custGroupId){
+    public @ResponseBody Map<String,Object> delete(@RequestBody String custGroupId,HttpSession session){
         pmCustomerGroupService.delete(custGroupId);
-
+        
         return R.ok();
     }
+    
+    
+    @RequestMapping(value="/changeRelation",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> changeRelation(@RequestBody  Map<String, Object> params,HttpSession session){
+    	String groupId= (String) params.get("custGroupId");
+    	String groupName= (String) params.get("name");
+    	List<String> ctnCodes = (List<String>) params.get("ctnCodes");
+    	PmCustomerGroupEntity pmCustomerGroup = new PmCustomerGroupEntity();
+    	pmCustomerGroup.setCustGroupId(groupId);
+    	pmCustomerGroup.setCustGroupName(groupName);
+    	
+    	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+        pmCustomerGroup.setModifier(user.getUsrId());
+        pmCustomerGroupService.update(pmCustomerGroup);//全部更新
+        pmCustomerGroupRelationService.deleteByGroupId(groupId);
+        if(!ctnCodes.isEmpty()) {
+        	String code=null;
+        	PmCustomerInfoEntity cust = null;
+        	PmCustomerGroupRelationEntity entity = new PmCustomerGroupRelationEntity();
+        	entity.setModifier(user.getUsrId());
+        	entity.setCustGroupId(groupId);
+        	for(int i=0;i<ctnCodes.size();i++) {
+        		code = ctnCodes.get(i);
+        		entity.setSapCode(code);
+        		cust = pmCustomerInfoService.queryBySapCode(code);
+        		entity.setCustCnName(cust.getCustCnName());
+        		entity.setCustId(cust.getCustId());
+        		pmCustomerGroupRelationService.insert(entity);
+        	}
+        }
+        return R.ok();
+    }
+    
 
 }

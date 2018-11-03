@@ -2,6 +2,10 @@ package com.indihx.PmSaleGroupInfo.controller;
 
 
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +19,9 @@ import org.springframework.stereotype.Controller;
 import com.indihx.PmSaleGroupInfo.entity.PmSaleGroupInfoEntity;
 import com.indihx.PmSaleGroupInfo.service.PmSaleGroupInfoService;
 import com.indihx.comm.util.R;
+import com.indihx.system.entity.UsrInfo;
+import com.indihx.comm.InitSysConstants;
+import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
 
 
@@ -22,8 +29,7 @@ import com.indihx.comm.util.PageUtils;
  * 
  *
  * @author hb
- * @email hb1230123@hotmail.com
- * @date 2018-10-30 18:46:08
+ * @date 2018-11-02 20:19:45
  */
 @Controller
 @RequestMapping("/pmsalegroupinfo")
@@ -35,8 +41,7 @@ public class PmSaleGroupInfoController {
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params){
-       
+    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
 		List<PmSaleGroupInfoEntity> pmSaleGroupInfo = pmSaleGroupInfoService.queryList(params);
         return R.ok().put("page", pmSaleGroupInfo);
     }
@@ -46,9 +51,8 @@ public class PmSaleGroupInfoController {
      * 信息
      */
     @RequestMapping(value="/info",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> info(@RequestParam("groupCode") String groupCode){
-        
-		PmSaleGroupInfoEntity entity = pmSaleGroupInfoService.queryObject(groupCode);
+    public @ResponseBody Map<String,Object> info(@RequestParam("groupId") long groupId,HttpSession session){
+		PmSaleGroupInfoEntity entity = pmSaleGroupInfoService.queryObject(groupId);
         return R.ok().put("pmSaleGroupInfo", entity);
     }
 
@@ -56,9 +60,11 @@ public class PmSaleGroupInfoController {
      * 保存
      */
     @RequestMapping(value="/save",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> save(@RequestBody PmSaleGroupInfoEntity pmSaleGroupInfo){
+    public @ResponseBody Map<String,Object> save(@RequestBody PmSaleGroupInfoEntity pmSaleGroupInfo,HttpSession session){
+    	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+    	pmSaleGroupInfo.setCreatorId(user.getUsrId());
+    	pmSaleGroupInfo.setCreateTime(DateUtil.getCurrentTimeMill());
         pmSaleGroupInfoService.insert(pmSaleGroupInfo);
-
         return R.ok();
     }
 
@@ -66,10 +72,11 @@ public class PmSaleGroupInfoController {
      * 修改
      */
     @RequestMapping(value="/update",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> update(@RequestBody PmSaleGroupInfoEntity pmSaleGroupInfo){
-        
+    public @ResponseBody Map<String,Object> update(@RequestBody PmSaleGroupInfoEntity pmSaleGroupInfo,HttpSession session){
+    	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+    	pmSaleGroupInfo.setModifier(user.getUsrId());
+    	pmSaleGroupInfo.setModifyTime(DateUtil.getCurrentTimeMill());
         pmSaleGroupInfoService.update(pmSaleGroupInfo);//全部更新
-        
         return R.ok();
     }
 
@@ -77,9 +84,8 @@ public class PmSaleGroupInfoController {
      * 删除
      */
     @RequestMapping(value="/delete",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> delete(@RequestBody String groupCode){
-        pmSaleGroupInfoService.delete(groupCode);
-
+    public @ResponseBody Map<String,Object> delete(@RequestBody long groupId,HttpSession session){
+        pmSaleGroupInfoService.delete(groupId);
         return R.ok();
     }
 

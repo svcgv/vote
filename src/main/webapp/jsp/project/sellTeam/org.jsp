@@ -36,7 +36,12 @@ $(document).ready(function(){
 	$.fn.zTree.init($("#treeOrg"), setting);
 });
 */
-var setting={};
+var setting={
+		// 增加双击选中事件
+		callback:{
+			onDblClick: zTreeOnSaveEvent
+		}
+	};
 var zNodes =[
 	{ name:"第一事业部", open:true,
 		children: [
@@ -48,7 +53,7 @@ var zNodes =[
 					{ orgId:"14",name:"南京分部"}
 				]},
 			{ name:"销售二部",orgId:"2",isParent:false},
-			{ name:"销售三部",orgId:"2",isParent:false}
+			{ name:"销售三部",orgId:"3",isParent:false}
 		]},
 	{ name:"第二事业部",orgId:"3",
 		children: [
@@ -74,13 +79,11 @@ $(".org-wrapper #org-add-hook").click(function(){
 	}else{
 		// 保存到已选机构中
 		var _html='';
-		for(var i in getCheckedOrg){
 			_html = '<span class="customer-list">'
 	         	      +'<span class="customerItem" orgId="'+getCheckedOrg.orgId+'">'+getCheckedOrg.name+'</span>'
 	               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
 	         		  +'</span>';
 			
-		}
 		$("#form-customer-hook #chosed-customer-hook").html(_html);
 		
 		win.close();
@@ -96,7 +99,21 @@ $(".org-wrapper #org-close-hook").click(function(){
 	win.close();
 	return false;
 })
-
+function zTreeOnSaveEvent(event, treeId, treeNode) {
+	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
+ // 保存到已选机构中
+	var _html='';
+	for(var i in getCheckedOrg){
+		_html = '<span class="customer-list">'
+         	      +'<span class="customerItem" orgId="'+getCheckedOrg.orgId+'">'+getCheckedOrg.name+'</span>'
+               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
+         		  +'</span>';
+		
+	}
+	$("#form-customer-hook #chosed-customer-hook").html(_html);
+	
+	win.close();
+};
 
 
 </script>

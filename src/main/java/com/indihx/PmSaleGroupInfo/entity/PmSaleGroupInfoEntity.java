@@ -4,14 +4,13 @@ package com.indihx.PmSaleGroupInfo.entity;
 
 import com.indihx.BaseEntity;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-10-30 18:46:08
+ * @String 2018-11-02 20:19:45
  */
 public class PmSaleGroupInfoEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +19,7 @@ public class PmSaleGroupInfoEntity extends BaseEntity implements Serializable {
 	 * 
 	 */
 
-private String groupCode;
+private long groupId;
 	/**
 	 * 
 	 */
@@ -45,17 +44,17 @@ private Long creatorId;
 	 * 
 	 */
 
-private Date createTime;
+private String createTime;
 	/**
 	 * 
 	 */
 
-private Long modifier;
+private long modifier;
 	/**
 	 * 
 	 */
 
-private Date modifyTime;
+private String modifyTime;
 	/**
 	 * 
 	 */
@@ -65,14 +64,14 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setGroupCode(String groupCode) {
-		this.groupCode = groupCode;
+	public void setGroupId(long groupId) {
+		this.groupId = groupId;
 	}
 	/**
 	 * 获取：
 	 */
-	public String getGroupCode() {
-		return groupCode;
+	public long getGroupId() {
+		return groupId;
 	}
 	/**
 	 * 设置：
@@ -119,19 +118,19 @@ private String isDelete;
 	/**
 	 * 获取：
 	 */
-	public Long getCreatorId() {
+	public long getCreatorId() {
 		return creatorId;
 	}
 	/**
 	 * 设置：
 	 */
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 	/**
 	 * 获取：
 	 */
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
 	/**
@@ -143,19 +142,19 @@ private String isDelete;
 	/**
 	 * 获取：
 	 */
-	public Long getModifier() {
+	public long getModifier() {
 		return modifier;
 	}
 	/**
 	 * 设置：
 	 */
-	public void setModifyTime(Date modifyTime) {
+	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
 	}
 	/**
 	 * 获取：
 	 */
-	public Date getModifyTime() {
+	public String getModifyTime() {
 		return modifyTime;
 	}
 	/**

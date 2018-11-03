@@ -19,7 +19,7 @@ public class VoteStatusListener {
 	@Autowired  VoteTopicInfoMapper voteTopicInfoMapper;
 	
 	 public void execute(){
-		 logger.info("starttime: " + DateUtil.getSysDate()+" : "+DateUtil.getSysTime());
+		 /*logger.info("starttime: " + DateUtil.getSysDate()+" : "+DateUtil.getSysTime());
 		 
 		 String date = DateUtil.getSysDate();
 		 VoteTopicInfo voteTopicInfo = new VoteTopicInfo();
@@ -30,7 +30,7 @@ public class VoteStatusListener {
 		 criteria.andVoteEndDateLessThan(date);
 		 criteria.andVoteStatusEqualTo(InitSysConstants.VoteStatus_BiaoJueZhong);
 		 
-		 voteTopicInfoMapper.updateByExampleSelective(voteTopicInfo, example);
+		 voteTopicInfoMapper.updateByExampleSelective(voteTopicInfo, example);*/
 		 
 		 logger.info("endtime: " + DateUtil.getSysDate()+" : "+DateUtil.getSysTime());
 	 }

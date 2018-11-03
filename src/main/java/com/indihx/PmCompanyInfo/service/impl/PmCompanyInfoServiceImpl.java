@@ -1,6 +1,9 @@
 package com.indihx.PmCompanyInfo.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Map;
 import java.util.List;
 import javax.annotation.Resource;
@@ -18,14 +21,16 @@ public class PmCompanyInfoServiceImpl implements PmCompanyInfoService {
    	public PmCompanyInfoEntity queryObject(String id){
    		return pmCompanyInfoMapper.queryObject(id);
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmCompanyInfoEntity entity){
    		pmCompanyInfoMapper.insert(entity);
    	}
-
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmCompanyInfoEntity entity){
    		pmCompanyInfoMapper.update(entity);
    	}
+	@Transactional(propagation = Propagation.REQUIRED)
+
 
 	public void delete(String companyCode){
    		pmCompanyInfoMapper.delete( companyCode);

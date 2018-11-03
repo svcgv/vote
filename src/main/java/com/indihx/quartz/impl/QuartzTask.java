@@ -38,9 +38,9 @@ public class QuartzTask {
 	public void creditJobCenter(){
 
 		//获取诚信档案状态为告知中，申诉标志位未进行异议申诉的不良档案
-		List<CreditBadRecordTemp> recordList = creditRecordMapper.getCreditBadRecordTempList(new CreditBadVo());
+		//List<CreditBadRecordTemp> recordList = creditRecordMapper.getCreditBadRecordTempList(new CreditBadVo());
 		//异议申诉期限到期将诚信档案状态更改为已归档，并正式建档；同时调用流程引擎将不良诚信建档流程办结。
-		List<Application> list=creditBadRecordService.bulidCreditDocment(recordList);
+		//List<Application> list=creditBadRecordService.bulidCreditDocment(recordList);
 		
 	}
 

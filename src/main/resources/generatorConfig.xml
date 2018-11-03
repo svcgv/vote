@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-  <classPathEntry location="E:/programs/apache-tomcat-8.5.16/webapps/vote/WEB-INF/lib/ojdbc6.jar" />
+  <classPathEntry location="D:/developer/vote/src/main/webapp/WEB-INF/lib/ojdbc6.jar" />
 
   <context id="vote" targetRuntime="MyBatis3">
     <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
-        connectionURL="jdbc:oracle:thin:@211.159.167.171:1521:orcl"
+        connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
         userId="vote"
         password="vote">
     </jdbcConnection>

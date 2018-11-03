@@ -4,7 +4,6 @@ package com.indihx.PmCustomerInfo.entity;
 
 import com.indihx.BaseEntity;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,7 +11,7 @@ import java.util.List;
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-10-31 19:17:35
+ * @String 2018-10-31 19:17:35
  */
 public class PmCustomerGroupEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -41,7 +40,7 @@ private long creatorId;
 	 * 
 	 */
 
-private Date createTime;
+private String createTime;
 	/**
 	 * 
 	 */
@@ -51,7 +50,7 @@ private long modifier;
 	 * 
 	 */
 
-private Date modifyTime;
+private String modifyTime;
 	/**
 	 * 
 	 */
@@ -114,13 +113,13 @@ private List<String> sapCode;
 	/**
 	 * 设置：
 	 */
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 	/**
 	 * 获取：
 	 */
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
 	/**
@@ -138,13 +137,13 @@ private List<String> sapCode;
 	/**
 	 * 设置：
 	 */
-	public void setModifyTime(Date modifyTime) {
+	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
 	}
 	/**
 	 * 获取：
 	 */
-	public Date getModifyTime() {
+	public String getModifyTime() {
 		return modifyTime;
 	}
 	/**

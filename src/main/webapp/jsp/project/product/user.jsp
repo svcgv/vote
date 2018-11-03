@@ -85,6 +85,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	
 	
 	// 保存 事件
+	var act="${act}";// 区分是index页 form页 赋值问题
 	var win=$(".product-form-wrapper").getWindow();
   	var getExitUser=$("#chosed-user-hook");
 	$(".product-form-wrapper").on("click","#save-hook",function(){
@@ -100,8 +101,15 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			if(isChecked){
 				var userId=$(this).children("td").eq(1).text();
 				var userName=$(this).children("td").eq(2).text();
-				$("input[name='developmentManagerName']").val(userName);
-				$("input[name='developmentManagerId']").val(userId);
+				
+				if(act == "index"){
+					$("#product-index-form input[name='developmentManagerName']").val(userName);
+					$("#product-index-form input[name='developmentManagerId']").val(userId);
+			 		
+			 	}else if(act =="add"){
+			 		$("#product-addForm-hook input[name='developmentManagerName']").val(userName);
+					$("#product-addForm-hook input[name='developmentManagerId']").val(userId);
+			 	}
 			}
 		});
 		

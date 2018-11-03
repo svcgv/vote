@@ -91,36 +91,45 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	*/
 	$("#customQuery").click(function(){
 		
-		var queryParams=$("#customer-query-form").serialize();
+		var queryParams=$("#customer-query-form").serializeObject();
 		console.log(queryParams)
-		tableGroup.reload('customerGroup-table',{
-			url:'form',
-			page:{
-				curr:1 //从第一页开始
-			},
-			method:'post',
-			where:{
-				queryStr:queryParams
-			},
-			done:function(res){
-				console.log(res)
-			}
-			
-		})
+		var newparam = {}
+		 for(var o in queryParams){
+			 if(queryParams[o]){
+				 newparam[o] = queryParams[o]
+			 }
+		 }
+		
+		$.ajax({
+			  type: 'POST',
+			  url: '/vote/pmcustomerinfo/list',
+			  data: JSON.stringify(queryParams),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			      testData=res.page
+			      table.render({
+			  	  	id:"customTable",
+			  	    //url:'custom.json',
+			  	    toolbar: '#toolbarDemo',
+			  	    height:'full-250',
+			  	    title: '客户数据表',
+			  	    cols: [[
+			  	    	 {type: 'checkbox', fixed: 'left'},
+			  		      {field:'sapCode', title:'sap编号',fixed: 'left', sort: true},
+			  		      {field:'custCnName', title:'客户名称'},
+			  	    ]],
+			  	    cellMinWidth:'90',
+			  	    data:testData,
+			  	    page: true
+			  	  });},
+			  dataType: "json"
+			})
+		
 	});
 	
 });
-var testData=[
-	  		{
-	  			"sapCode":"1000000210",
-				"custCnName":"上海浦东发展银行股份有限公司"
-				
-			},
-			{
-				"sapCode":"1000000211",
-				"custCnName":"南京发展银行股份有限公司"
-			}
-		]
+var testData=[]
 	
 });
 </script>
