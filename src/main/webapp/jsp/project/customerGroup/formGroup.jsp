@@ -72,6 +72,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	})
 	
 	// 保存 事件
+	var act="${act}";
 	var win=$(".customGroup-form-wrapper").getWindow();
   	var getExitCustomer=$("#form-customer-hook #chosed-customer-hook");
 	$(".customGroup-form-wrapper").on("click","#save-hook",function(){
@@ -81,7 +82,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			ret.push(sapCode2)
 		});
 		// 遍历选中的CheckBox
-		$(".layui-table-body table.layui-table tbody tr").each(function(){
+		$(".customGroup-form-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
 			var chk=$(this).find(".laytable-cell-checkbox");
 			var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
 			if(isChecked){
