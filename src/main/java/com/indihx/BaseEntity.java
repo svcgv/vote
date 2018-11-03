@@ -1,7 +1,5 @@
 package com.indihx;
 
-import java.util.Date;
-
 public class BaseEntity {
 	// 分页查询开始数
 	private int startNum;
@@ -14,7 +12,7 @@ public class BaseEntity {
 	/**
 	 * 创建时间
 	 */
-	private Date createTime;
+	private String createTime;
 	/**
 	 * 修改人编号
 	 */
@@ -22,7 +20,7 @@ public class BaseEntity {
 	/**
 	 * 修改时间
 	 */
-	private Date modifyTime;
+	private String modifyTime;
 
 	public long getCreatorId() {
 		return creatorId;
@@ -32,11 +30,11 @@ public class BaseEntity {
 		this.creatorId = creatorId;
 	}
 
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 
@@ -48,11 +46,11 @@ public class BaseEntity {
 		this.modifier = modifier;
 	}
 
-	public Date getModifyTime() {
+	public String getModifyTime() {
 		return modifyTime;
 	}
 
-	public void setModifyTime(Date modifyTime) {
+	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
 	}
 

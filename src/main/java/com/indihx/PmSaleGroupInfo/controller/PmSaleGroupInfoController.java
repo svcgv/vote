@@ -21,6 +21,7 @@ import com.indihx.PmSaleGroupInfo.service.PmSaleGroupInfoService;
 import com.indihx.comm.util.R;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.comm.InitSysConstants;
+import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
 
 
@@ -62,7 +63,7 @@ public class PmSaleGroupInfoController {
     public @ResponseBody Map<String,Object> save(@RequestBody PmSaleGroupInfoEntity pmSaleGroupInfo,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
     	pmSaleGroupInfo.setCreatorId(user.getUsrId());
-    	pmSaleGroupInfo.setCreateTime(new Date());
+    	pmSaleGroupInfo.setCreateTime(DateUtil.getCurrentTimeMill());
         pmSaleGroupInfoService.insert(pmSaleGroupInfo);
         return R.ok();
     }
@@ -74,7 +75,7 @@ public class PmSaleGroupInfoController {
     public @ResponseBody Map<String,Object> update(@RequestBody PmSaleGroupInfoEntity pmSaleGroupInfo,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
     	pmSaleGroupInfo.setModifier(user.getUsrId());
-    	pmSaleGroupInfo.setModifyTime(new Date());
+    	pmSaleGroupInfo.setModifyTime(DateUtil.getCurrentTimeMill());
         pmSaleGroupInfoService.update(pmSaleGroupInfo);//全部更新
         return R.ok();
     }

@@ -1,14 +1,13 @@
 package com.indihx.PmCustomerInfo.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-10-31 18:24:22
+ * @String 2018-10-31 18:24:22
  */
 public class PmCustomerInfoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -152,7 +151,7 @@ public class PmCustomerInfoEntity implements Serializable {
 	 * 
 	 */
 
-	private Date modifyTime;
+	private String modifyTime;
 	/**
 	 * 
 	 */
@@ -526,14 +525,14 @@ public class PmCustomerInfoEntity implements Serializable {
 	/**
 	 * 设置：
 	 */
-	public void setModifyTime(Date modifyTime) {
+	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
 	}
 
 	/**
 	 * 获取：
 	 */
-	public Date getModifyTime() {
+	public String getModifyTime() {
 		return modifyTime;
 	}
 

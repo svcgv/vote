@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="cm" uri="http://www.custom.com/01"%>
 <style>
 
 .formDetail-wrapper .customer-list{
@@ -18,24 +21,18 @@
 	    <div class="layui-inline">
 	      <label class="layui-form-label">客户群名称：</label>
 	      <div class="layui-input-inline">
-	         <lable class="layui-form-label">123阿丹上看</lable>
+	         <lable class="layui-form-label">${ctnGroup.custGroupName}</lable>
 	      </div>
 	    </div>
 	     <div class="layui-inline">
 	     	   <label class="layui-form-label">已选客户：</label>
 		      <div class="layui-input-inline" id="chosed-customer-hook" style="border:#e6e6e6 solid 1px;height:100px;overflow-y:auto;width:320px;">
-		         <span class="customer-list">
-		         	<span class="customerItem" sapCode="1">南京发展银行股份有限公司</span>
-		         </span>
-		         <span class="customer-list">
-		         	<span class="customerItem" sapCode="2">北京发展银行股份有限公司</span>
-		         </span>
-		         <span class="customer-list">
-		         	<span class="customerItem" sapCode="3">天津发展银行股份有限公司</span>
-		         </span>
-		         <span class="customer-list">
-		         	<span class="customerItem" sapCode="4">天津发展银行股份有限公司</span>
-		         </span>
+		         <c:forEach items="${customerList }" var="app">					
+						<span class="customer-list">
+				         	<span class="customerItem" sapCode="${app.sapCode}">${app.custCnName}</span>
+				         </span>
+				</c:forEach>
+		         
 
 		      </div>
 	     </div>

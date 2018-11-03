@@ -15,7 +15,7 @@
         <result property="isDelete" column="IS_DELETE"/>
     </resultMap>
 
-	<select id="queryObject" resultType="com.indihx.PmCustomerInfo.entity.PmCustomerGroupEntity">
+	<select id="queryObject" resultMap="pmCustomerGroupMap">
 		select * from pm_customer_group where CUST_GROUP_ID = #{value}
 	</select>
 
@@ -24,15 +24,21 @@
 		*
 		 from pm_customer_group
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-						<if test="custGroupId != null and custGroupId  !=''">CUST_GROUP_ID = #{custGroupId} AND </if>
-						<if test="custGroupName != null and  custGroupName !=''">CUST_GROUP_NAME = #{custGroupName} AND </if>
-						<if test="creator != null and  creator !=''">CREATOR = #{creator} AND </if>
-						<if test="creatorId != null and creatorId  !=''">CREATOR_ID = #{creatorId} AND </if>
-						<if test="createTime != null and createTime  !=''">CREATE_TIME = #{createTime} AND </if>
-						<if test="modifier != null and  modifier !=''">MODIFIER = #{modifier} AND </if>
-						<if test="modifyTime != null and modifyTime  !=''">MODIFY_TIME = #{modifyTime} AND </if>
-						<if test="isDelete != null and  isDelete !=''">IS_DELETE ='00'</if>
-					</trim> 
+			<if test="custGroupId != null and custGroupId  !=''">CUST_GROUP_ID like concat(concat('%',#{custGroupId}),'%') AND </if>
+			<if test="custGroupName != null and  custGroupName !=''">CUST_GROUP_NAME CUST_GROUP_ID like concat(concat('%',#{custGroupName}),'%') AND </if>
+			<if test="creator != null and  creator !=''">CREATOR = #{creator} AND </if>
+			<if test="creatorId != null and creatorId  !=''">CREATOR_ID = #{creatorId} AND </if>
+			<if test="createTimeStart != null ">
+				CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
+			</if>
+			<!-- 结束时间 -->
+			<if test="createTimeEnd != null  ">
+				CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
+			</if>
+			<if test="modifier != null and  modifier !=''">MODIFIER = #{modifier} AND </if>
+			<if test="modifyTime != null and modifyTime  !=''">MODIFY_TIME = #{modifyTime} AND </if>
+			<if test="isDelete != null and  isDelete !=''">IS_DELETE =#{isDelete}</if>
+		</trim> 
 	</select>
 	
  	<select id="queryTotal" resultType="int">
@@ -54,16 +60,16 @@
 		<if test="creatorId != null and  creatorId !=''">
 			,CREATOR_ID	
 		</if>
-		<if test="createTime != null and  createTime !=''">
-			,CREATE_TIME	
+		<if test="modifyTime != null and  modifyTime !=''">
+			,MODIFY_TIME	
 		</if>
-		<if test="modifier != null and modifier  !=''">
-			,MODIFIER	
+		<if test="createTime != null and createTime  !=''">
+			,CREATE_TIME	
 		</if>
 		<if test="modifyTime != null and  modifyTime !=''">
 			,MODIFY_TIME	
 		</if>
-			,IS_DELETE	
+			,IS_DELETE
 		)
 		values
 		(
@@ -74,12 +80,12 @@
 			,#{creator} 		</if>
 		<if test="creatorId != null and  creatorId !=''">
 			,#{creatorId} 		</if>
-		<if test="createTime != null and  createTime !=''">
-			,#{createTime} 		</if>
 		<if test="modifier != null and  modifier !=''">
 			,#{modifier} 		</if>
 		<if test="modifyTime != null and  modifyTime !=''">
-			,#{modifyTime} 		</if>
+		,#{modifyTime} 		</if>
+		<if test="createTime != null and  createTime !=''">
+			,#{createTime} 		</if>
 			,'00'
 		)
 	</insert>

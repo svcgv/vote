@@ -21,6 +21,7 @@ import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.UserUtil;
 import com.indihx.PmSaleGroupInfo.entity.PmSaleMemberInfoEntity;
 import com.indihx.PmSaleGroupInfo.service.PmSaleMemberInfoService;
+import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
 
 
@@ -63,7 +64,7 @@ public class PmSaleMemberInfoController {
     public @ResponseBody Map<String,Object> save(@RequestBody PmSaleMemberInfoEntity pmSaleMemberInfo,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmSaleMemberInfo.setCreatorId(usesr.getUsrId());
-    	pmSaleMemberInfo.setCreateTime(new Date());
+    	pmSaleMemberInfo.setCreateTime(DateUtil.getCurrentTimeMill());
         pmSaleMemberInfoService.insert(pmSaleMemberInfo);
 
         return R.ok();
@@ -76,7 +77,7 @@ public class PmSaleMemberInfoController {
     public @ResponseBody Map<String,Object> update(@RequestBody PmSaleMemberInfoEntity pmSaleMemberInfo,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmSaleMemberInfo.setModifier(usesr.getUsrId());
-    	pmSaleMemberInfo.setModifyTime(new Date());
+    	pmSaleMemberInfo.setModifyTime(DateUtil.getCurrentTimeMill());
         pmSaleMemberInfoService.update(pmSaleMemberInfo);//全部更新
         
         return R.ok();

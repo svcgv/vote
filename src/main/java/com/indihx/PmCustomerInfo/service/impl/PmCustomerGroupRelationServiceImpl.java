@@ -42,4 +42,9 @@ public class PmCustomerGroupRelationServiceImpl implements PmCustomerGroupRelati
    	public List<PmCustomerGroupRelationEntity> queryList(Map<String, Object> entity){
    		return pmCustomerGroupRelationMapper.queryList(entity);
    	}
+   	
+   	@Transactional(propagation = Propagation.REQUIRED)
+	public void deleteByGroupId(String groupId){
+   		pmCustomerGroupRelationMapper.deleteByGroupId( groupId);
+   	}
 }

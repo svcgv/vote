@@ -12,7 +12,7 @@
         <result property="sapCode" column="SAP_CODE"/>
     </resultMap>
 
-	<select id="queryObject" resultType="com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity">
+	<select id="queryObject"  resultMap="pmCustomerGroupRelationMap">
 		select * from pm_customer_group_relation where CUST_GROUP_RELATION_ID = #{value}
 	</select>
 
@@ -78,7 +78,9 @@
 	<delete id="delete">
 		delete from pm_customer_group_relation where CUST_GROUP_RELATION_ID = #{value}
 	</delete>
-	
+	<delete id="deleteByGroupId">
+		delete from pm_customer_group_relation where CUST_GROUP_ID = #{value}
+	</delete>
 
 
 </mapper>

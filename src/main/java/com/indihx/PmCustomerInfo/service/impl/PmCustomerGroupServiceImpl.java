@@ -69,6 +69,9 @@ public class PmCustomerGroupServiceImpl implements PmCustomerGroupService {
    	}
 
    	public List<PmCustomerGroupEntity> queryList(Map<String, Object> entity){
+   		if(entity.get("isDelete") == null) {
+   			entity.put("isDelete", "00");
+   		}
    		return pmCustomerGroupMapper.queryList(entity);
    	}
 }

@@ -36,9 +36,16 @@
 	    </div>
 	    
 	    <div class="layui-inline">
-	      <label class="layui-form-label">添加时间：</label>
+	      <label class="layui-form-label">添加开始时间：</label>
 	      <div class="layui-input-inline">
-	        <input type="text" name="createTime" id="createTime" autocomplete="off" class="layui-input form-control">
+	        <input type="text" name="createTimeStart" id="createTimeStart" autocomplete="off" class="layui-input form-control">
+	      </div>
+	    </div>
+	    
+	    <div class="layui-inline">
+	      <label class="layui-form-label">添加结束时间：</label>
+	      <div class="layui-input-inline">
+	        <input type="text" name="createTimeEnd" id="createTimeEnd" autocomplete="off" class="layui-input form-control">
 	      </div>
 	    </div>
 	    
@@ -83,8 +90,14 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  
 	  //日期
 	  laydate.render({
-	    elem: '#createTime',
-	    theme: 'molv'
+	    elem: '#createTimeStart',
+	    theme: 'molv',
+	    type: 'datetime'
+	  });
+	  laydate.render({
+	    elem: '#createTimeEnd',
+	    theme: 'molv',
+	    type: 'datetime'
 	  });
 
 	//指定允许上传的文件类型
@@ -116,12 +129,12 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		      {type: 'checkbox', fixed: 'left'},
 		      {field:'custGroupId', title:'客户群编号',fixed: 'left', width:110, sort: true},
 		      {field:'custGroupName', title:'客户群名称', width:230},
-		      {field:'creator', title:'添加人', width:90},
-		      {field:'creatorId', title:'添加人编号',width:100},
-		      {field:'createTime', title:'添加时间'},
-		      {field:'modifier', title:'修改人'},
+		      {field:'creator', title:'创建人', width:90},
+		      {field:'creatorId', title:'创建人编号',width:100},
+		      {field:'createTime', title:'创建时间'},
+		      
 		      {field:'modifyTime', title:'修改时间'},
-		      {field:'isDelete', title:'是否删除'},
+		      {field:'isDelete', title:'是否有效'},
 		      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 		    ]],
 		    cellMinWidth:'90',
@@ -153,10 +166,23 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		    if(obj.event === 'del'){
 		      layer.confirm('确认删除行么', function(index){
 		        obj.del();
+		        console.log(data)
+		        var param = {}
+		        param.isDelete = '01'
+		        param.custGroupId=data.custGroupId
+		        $.ajax({
+			  type: 'POST',
+			  url: '/vote/pmcustomergroup/update',
+			  data: JSON.stringify(param),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			  },
+			  dataType: "json"
+			})
+			
 		        layer.close(index);
-		        table.reload('tableID',{
-		        	
-		        });
+		        
 		      });
 		    } else if(obj.event === 'edit'){
 		    	// 编辑
@@ -209,9 +235,9 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 						      {field:'creator', title:'添加人', width:90},
 						      {field:'creatorId', title:'添加人编号',width:100},
 						      {field:'createTime', title:'添加时间'},
-						      {field:'modifier', title:'修改人'},
+						      
 						      {field:'modifyTime', title:'修改时间'},
-						      {field:'isDelete', title:'是否删除'},
+						      {field:'isDelete', title:'是否有效'},
 						      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 				  	    ]],
 				  	    cellMinWidth:'90',
