@@ -62,7 +62,7 @@ public class CompanyController extends AbstractBaseController{
 		ModelAndView view = new ModelAndView();
 		
 //		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 		if(!act.equalsIgnoreCase("add")) {
 			view.addObject("Company",pmCompanyInfoService.queryObject(id));
 		}
