@@ -158,7 +158,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	    height:'full-250',
   	    title: '客户数据表',
   	    cols: [[
-  	      {type: 'checkbox', fixed: 'left'},
+  	     // {type: 'checkbox', fixed: 'left'},
   	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
   	      {field:'custCnName', title:'客户名称', width:230},
   	      {field:'country', title:'国家/地区', width:90},
@@ -209,7 +209,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	    height:'full-250',
 			  	    title: '客户数据表',
 			  	    cols: [[
-			  	      {type: 'checkbox', fixed: 'left'},
+			  	      //{type: 'checkbox', fixed: 'left'},
 			  	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
 			  	      {field:'custCnName', title:'客户名称', width:230},
 			  	      {field:'country', title:'国家/地区', width:90},
@@ -246,6 +246,13 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  
   // table render
   var queryParams=$("#customer-query-form").serializeObject();
+  var newParam = {}
+  for(var i in queryParams){
+	  if(queryParams[i]){
+		  newParam[i] = queryParams[i]
+	  }
+  }
+  queryParams = newParam
   table.render({
 	  	id:"customer-table",
 	    elem: '#customTable',
@@ -262,7 +269,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    height:'full-250',
 	    title: '客户数据表',
 	    cols: [[
-	      {type: 'checkbox', fixed: 'left'},
+	      //{type: 'checkbox', fixed: 'left'},
 	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
 	      {field:'custCnName', title:'客户名称', width:230},
 	      {field:'country', title:'国家/地区', width:90},
@@ -347,6 +354,13 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	*/
 	 $("#customQuery").click(function(){
 		 var queryParams=$("#customer-query-form").serializeObject();
+		 var newParam = {}
+		  for(var i in queryParams){
+			  if(queryParams[i]){
+				  newParam[i] = queryParams[i]
+			  }
+		  }
+		  queryParams = newParam
 		 table.reload('customer-table',{
 				url:'/vote/pmcustomerinfo/list',
 				page:{

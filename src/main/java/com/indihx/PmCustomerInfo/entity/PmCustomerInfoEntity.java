@@ -4,14 +4,13 @@ package com.indihx.PmCustomerInfo.entity;
 
 import com.indihx.BaseEntity;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-10-31 18:24:22
+ * @String 2018-10-31 18:24:22
  */
 public class PmCustomerInfoEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -150,7 +149,7 @@ private long modifier;
 	 * 
 	 */
 
-private Date modifyTime;
+private String modifyTime;
 	/**
 	 * 
 	 */
@@ -472,13 +471,13 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setModifyTime(Date modifyTime) {
+	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
 	}
 	/**
 	 * 获取：
 	 */
-	public Date getModifyTime() {
+	public String getModifyTime() {
 		return modifyTime;
 	}
 	/**
@@ -494,28 +493,5 @@ private String isDelete;
 		return isDelete;
 	}
 
-	public int getStartNum() {
-		return startNum;
-	}
-
-	public void setStartNum(int startNum) {
-		this.startNum = startNum;
-	}
-
-	public int getTotalNum() {
-		return totalNum;
-	}
-
-	public void setTotalNum(int totalNum) {
-		this.totalNum = totalNum;
-	}
-
-	public long getCreatorId() {
-		return creatorId;
-	}
-
-	public void setCreatorId(long creatorId) {
-		this.creatorId = creatorId;
-	}
 
 }

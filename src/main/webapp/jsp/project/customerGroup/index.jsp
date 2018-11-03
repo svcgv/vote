@@ -116,7 +116,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		    toolbar: '#toolbarDemo',
 		    title: '客户群数据信息',
 		    cols: [[
-		      {type: 'checkbox', fixed: 'left'},
+		      //{type: 'checkbox', fixed: 'left'},
 		      {field:'custGroupId', title:'客户群编号',fixed: 'left', width:110, sort: true},
 		      {field:'custGroupName', title:'客户群名称', width:230},
 		      {field:'creator', title:'创建人', width:90},
@@ -221,7 +221,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			}
 			
 		}) 
-			/*$.ajax({
+			$.ajax({
 				  type: 'POST',
 				  url: '/vote/pmcustomergroup/list',
 				  data: JSON.stringify(newparam),
@@ -236,7 +236,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	    height:'full-250',
 				  	    title: '客户数据表',
 				  	    cols: [[
-				  	    	{type: 'checkbox', fixed: 'left'},
+				  	    	//{type: 'checkbox', fixed: 'left'},
 						      {field:'custGroupId', title:'客户群编号',fixed: 'left', width:110, sort: true},
 						      {field:'custGroupName', title:'客户群名称', width:230},
 						      {field:'creator', title:'创建人', width:90},
@@ -254,7 +254,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  dataType: "json"
 				})
 		});
-		*/
 		/*
 		* 新增
 		*/

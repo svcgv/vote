@@ -55,7 +55,7 @@
 		          <input type="hidden" name="developmentDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>部门查询</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		     <div class="layui-inline">
@@ -65,7 +65,7 @@
 		          <input type="hidden" name="developmentManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>负责人查询</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    
@@ -139,7 +139,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    height:'full-250',
 	    title: '产品数据表',
 	    cols: [[
-	    	  {type: 'checkbox', fixed: 'left'},
+	    	  //{type: 'checkbox', fixed: 'left'},
 	  	      {field:'productCode', title:'产品代码',fixed: 'left', width:110, sort: true},
 	  	      {field:'productName', title:'产品名称', width:230},
 	  	      {field:'productSuggestPrice', title:'指导销售价', width:230},
@@ -151,10 +151,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    ]],
 	    cellMinWidth:'90',
 	    data:[
-              {"productCode":1,"productName":"11111","productSuggestPrice":"200","developmentDeptName":"dept10","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
-              {"productCode":2,"productName":"11111","productSuggestPrice":"200","developmentDeptName":"dept10","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
-              {"productCode":3,"productName":"11111","productSuggestPrice":"200","developmentDeptName":"dept10","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
-              {"productCode":4,"productName":"11111","productSuggestPrice":"200","developmentDeptName":"dept10","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
+              {"productCode":1,"productName":"产品1","productSuggestPrice":"200","developmentDeptName":"开发一部","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
+              {"productCode":2,"productName":"产品2","productSuggestPrice":"200","developmentDeptName":"开发二部","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
+              {"productCode":3,"productName":"产品3","productSuggestPrice":"200","developmentDeptName":"开发三部","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
+              {"productCode":4,"productName":"产品4","productSuggestPrice":"200","developmentDeptName":"开发四部","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
        		],
 	    page: true
 	  });
@@ -218,7 +218,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	    height:'full-250',
 			  	    title: '销售数据表',
 			  	    cols: [[
-						  {type: 'checkbox', fixed: 'left'},
+						  //{type: 'checkbox', fixed: 'left'},
 						  {field:'productCode', title:'产品代码',fixed: 'left', width:110, sort: true},
 						  {field:'productName', title:'产品名称', width:230},
 						  {field:'productSuggestPrice', title:'指导销售价', width:230},

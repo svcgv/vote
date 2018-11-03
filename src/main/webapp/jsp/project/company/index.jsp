@@ -108,7 +108,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    height:'full-250',
 	    title: '公司数据表',
 	    cols: [[
-	    	 {type: 'checkbox', fixed: 'left'},
+	    	 //{type: 'checkbox', fixed: 'left'},
 	  	      {field:'companyCode', title:'公司编号',fixed: 'left', width:110, sort: true},
 	  	      {field:'companyName', title:'公司名称', width:230},
 	  	      {field:'companyAddress', title:'公司地址'},
