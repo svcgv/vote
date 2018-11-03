@@ -195,7 +195,15 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   table.render({
 	  	id:"customer-table",
 	    elem: '#customTable',
-	    //url:'custom.json',
+	    url:'/vote/pmcustomerinfo/list',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify(queryParams)
+		},
+		contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    toolbar: '#toolbarDemo',
 	    height:'full-250',
 	    title: '客户数据表',
@@ -227,7 +235,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'90',
-	    data:testData,
 	    page: true
 	  });
 	/*
