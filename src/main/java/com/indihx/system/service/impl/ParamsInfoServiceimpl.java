@@ -73,6 +73,24 @@ public class ParamsInfoServiceimpl  extends AbstractBaseService implements IPara
 		map.put("ewTypeHtml", ewTypeHtml);
 		return map;
 	}
+	
+	public Map<String, Object> qryInfoByCode(String code){
+		// 查询预警主体
+		String ewTypeHtml = ConstantStatic.createHtmlByCode(code);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ewTypeHtml", ewTypeHtml);
+		return map;
+	}
+	
+	public Map<String, Object> qryInfoByCode(String code,String keyCode){
+		// 查询预警主体
+		String ewTypeHtml = ConstantStatic.createHtmlByCode(code,keyCode);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ewTypeHtml", ewTypeHtml);
+		return map;
+	}
+	
+	
     /**
      * 新增保存
      */
