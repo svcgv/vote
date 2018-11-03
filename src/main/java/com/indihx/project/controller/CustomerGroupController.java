@@ -55,7 +55,10 @@ public class CustomerGroupController extends AbstractBaseController{
 	
 	@RequestMapping("/customerGroup/index")
 	public ModelAndView addCustomView() {
+		
 		ModelAndView view = new ModelAndView();
+		//view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
+	
 		view.setViewName("/project/customerGroup/index");
 		return view;
 	}
@@ -63,7 +66,7 @@ public class CustomerGroupController extends AbstractBaseController{
 	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
 		
-		
+		//view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("act",act);
 		if(id !=null && !"".equals(id)) {
 			view.addObject("id",id);

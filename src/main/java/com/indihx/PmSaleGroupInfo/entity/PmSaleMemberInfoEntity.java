@@ -4,12 +4,14 @@ package com.indihx.PmSaleGroupInfo.entity;
 
 import com.indihx.BaseEntity;
 import java.io.Serializable;
+import java.util.Date;
+
 /**
  * 
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @String 2018-10-30 19:04:20
+ * @date 2018-10-30 19:04:20
  */
 public class PmSaleMemberInfoEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;

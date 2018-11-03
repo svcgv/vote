@@ -94,11 +94,16 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		    type: 'datetime'
 	 });
 
+	 var queryParams=$("#customer-query-form").serializeObject();
   // table render
   table.render({
 	  	id:"customer-table",
 	    elem: '#customTable',
-	    //url:'custom.json',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify(queryParams)
+		},
+	    url: '/vote/pmcompanyinfo/list',
 	    toolbar: '#toolbarDemo',
 	    height:'full-250',
 	    title: '公司数据表',
@@ -109,8 +114,13 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'companyAddress', title:'公司地址'},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
+	    response: {
+	    	dataName: 'page'
+	    },
+	    //contentType:false,
+	    contentType:'application/json',
 	    cellMinWidth:'90',
-	    data:testData,
+	    //data:testData,
 	    page: true
 	  });
 	/*
@@ -146,7 +156,9 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  contentType:'application/json',
 				  success:function(data){
 					 
-					  table.reload('customer-table');
+					  table.reload('customer-table',{
+						  
+					  });
 					 
 				  }
 			  });
@@ -154,7 +166,9 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	        obj.del();
 	        layer.close(index);
 	        table.reload('customer-table',{
-	        	
+	        	page: {
+	        	    curr: 1 //重新从第 1 页开始
+	        	  }
 	        });
 	      });
 	    } else if(obj.event === 'edit'){
@@ -170,7 +184,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	*/
 	 $("#customQuery").click(function(){
 		 var queryParams=$("#customer-query-form").serializeObject();
-		 $.ajax({
+		 /*$.ajax({
 			  type: 'POST',
 			  url: '/vote/pmcompanyinfo/list',
 			  data: JSON.stringify(queryParams),
@@ -197,22 +211,27 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	    page: true
 			  	  });},
 			  dataType: "json"
-			});
+			});*/
 		//var queryParams=$("#customer-query-form").serialize();
-		/* table.reload('customer-table',{
-			url:'/vote/bmcustomerinfo/list',
+		 table.reload('customer-table',{
+			url:'/vote/pmcompanyinfo/list',
 			page:{
 				curr:1 //从第一页开始
 			},
-			method:'post',
+		    method:'post',
 			where:{
-				queryStr:queryParams
+				queryStr:JSON.stringify(queryParams)
 			},
+			contentType: 'application/json',
+		    response: {
+		    	dataName: 'page'
+		    },
 			done:function(res){
 				console.log(res)
 			}
 			
-		}) */
+		}) 
+		//table.reload('customer-table');
 		
 	}); 
 	

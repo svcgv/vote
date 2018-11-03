@@ -51,7 +51,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    //url:'custom.json',
 	    height:'260',
 	    width:"690",
-	    title: '用数据表',
+	    title: '用户数据表',
 	    cols: [[
 	      {type: 'checkbox' },
 	      {field:'userId', title:'用户ID', sort: true},
@@ -85,16 +85,16 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	
 	
 	// 保存 事件
-	var win=$(".sellTeam-form-wrapper").getWindow();
+	var win=$(".customGroup-form-wrapper").getWindow();
   	var getExitUser=$("#chosed-user-hook");
-	$(".sellTeam-form-wrapper").on("click","#save-hook",function(){
+	$(".customGroup-form-wrapper").on("click","#save-hook",function(){
 		var ret=[];
 		getExitUser.children(".customer-list").each(function(){
 			var sapCode2=$(this).children(".customerItem").attr("userId");
 			ret.push(sapCode2)
 		});
 		// 遍历选中的CheckBox
-		$(".sellTeam-form-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
+		$(".layui-table-body table.layui-table tbody tr").each(function(){
 			var chk=$(this).find(".laytable-cell-checkbox");
 			var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
 			if(isChecked){
@@ -119,8 +119,8 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	});
 	
 	// 关闭按钮
-	var win=$(".sellTeam-form-wrapper").getWindow();
-	$(".sellTeam-form-wrapper").on("click","#close-hook",function(){
+	var win=$(".customGroup-form-wrapper").getWindow();
+	$(".customGroup-form-wrapper").on("click","#close-hook",function(){
 		win.close();
 	});
 	
@@ -129,22 +129,35 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	*/
 	$("#user-query-form #userQuery").click(function(){
 		
-		var queryParams=$("#user-query-form").serialize();
+		var queryParams=$("#user-query-form").serializeObject();
 		console.log(queryParams)
-		table.reload('customerGroup-table',{
-			url:'form',
-			page:{
-				curr:1 //从第一页开始
-			},
-			method:'post',
-			where:{
-				queryStr:queryParams
-			},
-			done:function(res){
-				console.log(res)
-			}
-			
-		})
+		$.ajax({
+			type: 'POST',
+		  url: '/vote/pmcustomerinfo/list',
+		  data: JSON.stringify(queryParams),
+		  contentType:'application/json',
+		  success: function(res){
+		      console.log(res)
+		      testData=res.page
+		      table.render({
+		  	  	//id:"customerGroup-table",
+		  	    elem: '#userTable',
+		  	    //url:'custom.json',
+			    height:'260',
+			    width:"690",
+			    title: '用户数据表',
+			    cols: [[
+			      {type: 'checkbox' },
+			      {field:'userId', title:'用户ID', sort: true},
+			      {field:'userName', title:'用户名'}
+			    ]],
+		  	    cellMinWidth:'90',
+		  	    data:testData,
+		  	    page: true
+		  	  });},
+		  dataType: "json"
+		});
+
 	});
 	
 });
