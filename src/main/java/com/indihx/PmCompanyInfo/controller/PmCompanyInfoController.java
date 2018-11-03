@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
 import com.indihx.system.entity.UsrInfo;
-import com.indihx.util.UserUtil;
 import com.alibaba.fastjson.JSON;
 import com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity;
 import com.indihx.PmCompanyInfo.service.PmCompanyInfoService;
 import com.indihx.comm.util.R;
+import com.indihx.util.UserUtil;
 import com.indihx.comm.util.PageUtils;
 
 
@@ -42,9 +42,9 @@ public class PmCompanyInfoController {
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list( @RequestBody Map<String, Object> params,HttpSession session){
+    public @ResponseBody Map<String,Object> list( @RequestBody Map<String, Object> params ,HttpSession session){
     	String str = (String) params.get("queryStr");
-    	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str); 
+    	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
 		List<PmCompanyInfoEntity> pmCompanyInfo = pmCompanyInfoService.queryList(maps);
         return R.ok().put("page", pmCompanyInfo);
     }
@@ -55,6 +55,7 @@ public class PmCompanyInfoController {
      */
     @RequestMapping(value="/info",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> info(@RequestParam("companyCode") String companyCode,HttpSession session){
+        
 		PmCompanyInfoEntity entity = pmCompanyInfoService.queryObject(companyCode);
         return R.ok().put("pmCompanyInfo", entity);
     }

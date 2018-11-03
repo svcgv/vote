@@ -61,7 +61,7 @@ $(document).ready(function() {
 					</div>
 					<div class="col-xs-2">
 						<button type="button" class="btn btn-primary "
-							onclick="qryBtnList()" <i class="icon-search"></i> 查询</button>
+							onclick="qryBtnList()" ><i class="icon-search"></i> 查询</button>
 					</div>
 				</div>
 			</form>

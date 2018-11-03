@@ -191,7 +191,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
     }
   });
 	
-	
 	//保存导入数据
 	$("#test9").click(function(){
 		 $.ajax({
@@ -242,14 +241,23 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	  });},
 			  dataType: "json"
 			});
-		
-	}); 
+
+	});
 	  
   // table render
+  var queryParams=$("#customer-query-form").serializeObject();
   table.render({
 	  	id:"customer-table",
 	    elem: '#customTable',
-	    //url:'custom.json',
+	    url:'/vote/pmcustomerinfo/list',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify(queryParams)
+		},
+		contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    toolbar: '#toolbarDemo',
 	    height:'full-250',
 	    title: '客户数据表',
@@ -281,7 +289,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'90',
-	    data:testData,
 	    page: true
 	  });
 	/*
@@ -340,18 +347,28 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	*/
 	 $("#customQuery").click(function(){
 		 var queryParams=$("#customer-query-form").serializeObject();
-		 console.log(queryParams)
-		 var newparam = {}
-		 for(var o in queryParams){
-			 if(queryParams[o]){
-				 newparam[o] = queryParams[o]
-			 }
-		 }
-		 console.log(newparam)
-		 $.ajax({
+		 table.reload('customer-table',{
+				url:'/vote/pmcustomerinfo/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+			    method:'post',
+				where:{
+					queryStr:JSON.stringify(queryParams)
+				},
+				contentType: 'application/json',
+			    response: {
+			    	dataName: 'page'
+			    },
+				done:function(res){
+					console.log(res)
+				}
+
+			})
+		 /*$.ajax({
 			  type: 'POST',
 			  url: '/vote/pmcustomerinfo/list',
-			  data: JSON.stringify(newparam),
+			  data: JSON.stringify(queryParams),
 			  contentType:'application/json',
 			  success: function(res){
 			      console.log(res)
@@ -395,7 +412,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	    page: true
 			  	  });},
 			  dataType: "json"
-			});
+			});*/
 		//var queryParams=$("#customer-query-form").serialize();
 		/* table.reload('customer-table',{
 			url:'/vote/bmcustomerinfo/list',

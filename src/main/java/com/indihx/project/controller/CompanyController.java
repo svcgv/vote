@@ -52,7 +52,7 @@ public class CompanyController extends AbstractBaseController{
 		
 		ModelAndView view = new ModelAndView();
 		
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 		
 		view.setViewName("/project/company/index");
 		return view;

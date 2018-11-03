@@ -42,6 +42,7 @@ public class PmCustomerGroupServiceImpl implements PmCustomerGroupService {
 //			String custGroupId = DateUtil.getSysDate()+RandomUtil.generateString(4);
 			entity.setCustGroupId(custGroupId);
 		}
+		entity.setIsDelete("00");
    		pmCustomerGroupMapper.insert(entity);
    		for(String sapCode:entity.getSapCode()) {
    			PmCustomerGroupRelationEntity RelationEntity = new PmCustomerGroupRelationEntity();

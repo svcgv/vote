@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
+import com.alibaba.fastjson.JSON;
 import com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity;
 import com.indihx.PmCustomerInfo.service.PmCustomerInfoService;
 import com.indihx.comm.util.R;
@@ -43,8 +44,9 @@ public class PmCustomerInfoController {
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
-       
-		List<PmCustomerInfoEntity> pmCustomerInfo = pmCustomerInfoService.queryList(params);
+    	String str = (String) params.get("queryStr");
+    	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
+		List<PmCustomerInfoEntity> pmCustomerInfo = pmCustomerInfoService.queryList(maps);
         return R.ok().put("page", pmCustomerInfo);
     }
 

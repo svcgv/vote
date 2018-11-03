@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-10-30 18:46:08
+ * @String 2018-10-30 18:46:08
  */
 public class PmCompanyInfoEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;

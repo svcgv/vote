@@ -85,16 +85,16 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	
 	
 	// 保存 事件
-	var win=$(".customGroup-form-wrapper").getWindow();
+	var win=$(".sellTeam-form-wrapper").getWindow();
   	var getExitUser=$("#chosed-user-hook");
-	$(".customGroup-form-wrapper").on("click","#save-hook",function(){
+	$(".sellTeam-form-wrapper").on("click","#save-hook",function(){
 		var ret=[];
 		getExitUser.children(".customer-list").each(function(){
 			var sapCode2=$(this).children(".customerItem").attr("userId");
 			ret.push(sapCode2)
 		});
 		// 遍历选中的CheckBox
-		$(".layui-table-body table.layui-table tbody tr").each(function(){
+		$(".sellTeam-form-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
 			var chk=$(this).find(".laytable-cell-checkbox");
 			var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
 			if(isChecked){
@@ -119,8 +119,8 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	});
 	
 	// 关闭按钮
-	var win=$(".customGroup-form-wrapper").getWindow();
-	$(".customGroup-form-wrapper").on("click","#close-hook",function(){
+	var win=$(".sellTeam-form-wrapper").getWindow();
+	$(".sellTeam-form-wrapper").on("click","#close-hook",function(){
 		win.close();
 	});
 	
@@ -129,35 +129,22 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	*/
 	$("#user-query-form #userQuery").click(function(){
 		
-		var queryParams=$("#user-query-form").serializeObject();
+		var queryParams=$("#user-query-form").serialize();
 		console.log(queryParams)
-		$.ajax({
-			type: 'POST',
-		  url: '/vote/pmcustomerinfo/list',
-		  data: JSON.stringify(queryParams),
-		  contentType:'application/json',
-		  success: function(res){
-		      console.log(res)
-		      testData=res.page
-		      table.render({
-		  	  	//id:"customerGroup-table",
-		  	    elem: '#userTable',
-		  	    //url:'custom.json',
-			    height:'260',
-			    width:"690",
-			    title: '用户数据表',
-			    cols: [[
-			      {type: 'checkbox' },
-			      {field:'userId', title:'用户ID', sort: true},
-			      {field:'userName', title:'用户名'}
-			    ]],
-		  	    cellMinWidth:'90',
-		  	    data:testData,
-		  	    page: true
-		  	  });},
-		  dataType: "json"
-		});
-
+		table.reload('customerGroup-table',{
+			url:'form',
+			page:{
+				curr:1 //从第一页开始
+			},
+			method:'post',
+			where:{
+				queryStr:queryParams
+			},
+			done:function(res){
+				console.log(res)
+			}
+			
+		})
 	});
 	
 });

@@ -6,7 +6,7 @@
 </style>
 <div class="custom-info-wrapper">
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-	  <legend>公司信息</legend>
+	  <legend>公司管理</legend>
 	</fieldset>
 	<form class="layui-form" id="customer-query-form" method="POST" action="/vote/bmcustomerinfo/list">
 	   <div class="layui-form-item">
@@ -152,7 +152,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	  $.ajax({
 				  type:"POST",
 				  url:"/vote/pmcompanyinfo/update",
-				  data:JSON.stringify({'companyCode':data.companyCode,'isDelete':'00'}),
+				  data:JSON.stringify({'companyCode':data.companyCode,'isDelete':'01'}),
 				  contentType:'application/json',
 				  success:function(data){
 					 

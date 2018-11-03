@@ -11,7 +11,7 @@ import java.util.List;
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-10-31 19:17:35
+ * @String 2018-10-31 19:17:35
  */
 public class PmCustomerGroupEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;

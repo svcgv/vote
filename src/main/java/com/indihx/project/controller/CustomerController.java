@@ -56,7 +56,7 @@ public class CustomerController extends AbstractBaseController{
 		view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE","01"));
 		view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE","01"));
 		view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE","01"));
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 		view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE","01"));
 		view.addObject("country",infoservice.qryInfoByCode("COUNTRY","01"));
 		
@@ -89,7 +89,7 @@ public class CustomerController extends AbstractBaseController{
 			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE","01"));
 			view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE","01"));
 			view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE","01"));
-			view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
+			view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 			view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE","01"));
 			view.addObject("country",infoservice.qryInfoByCode("COUNTRY","01"));
 		}

@@ -30,6 +30,8 @@ public class PmCompanyInfoServiceImpl implements PmCompanyInfoService {
    		pmCompanyInfoMapper.update(entity);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
+
+
 	public void delete(String companyCode){
    		pmCompanyInfoMapper.delete( companyCode);
    	}

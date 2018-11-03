@@ -51,7 +51,7 @@ public class ProductController extends AbstractBaseController{
 		
 		ModelAndView view = new ModelAndView();
 		
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
 		
 		view.setViewName("/project/product/index");

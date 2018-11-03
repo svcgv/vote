@@ -51,7 +51,7 @@ public class SellTeamController extends AbstractBaseController{
 		
 		ModelAndView view = new ModelAndView();
 		
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 		
 		view.setViewName("/project/sellTeam/index");
 		return view;

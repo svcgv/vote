@@ -1,161 +1,161 @@
 package com.indihx.PmCustomerInfo.entity;
 
+
+
+import com.indihx.BaseEntity;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @String 2018-10-31 18:24:22
+ * @date 2018-10-31 18:24:22
  */
-public class PmCustomerInfoEntity implements Serializable {
+public class PmCustomerInfoEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	// 分页查询开始数
-	private int startNum;
-	// 分页查询每页条数
-	private int totalNum;
-	/**
-	 * 
-	 */
-	private long creatorId;
-	private long custId;
 	/**
 	 * 
 	 */
 
-	private String custCnName;
+private long custId;
 	/**
 	 * 
 	 */
 
-	private String custCode;
+private String custCnName;
 	/**
 	 * 
 	 */
 
-	private String country;
+private String custCode;
 	/**
 	 * 
 	 */
 
-	private String sapCode;
+private String country;
 	/**
 	 * 
 	 */
 
-	private String enName;
+private String sapCode;
 	/**
 	 * 
 	 */
 
-	private String custPatTaxesCode;
+private String enName;
 	/**
 	 * 
 	 */
 
-	private String custType;
+private String custPatTaxesCode;
 	/**
 	 * 
 	 */
 
-	private String address;
+private String custType;
 	/**
 	 * 
 	 */
 
-	private String cashManagementGroup;
+private String address;
 	/**
 	 * 
 	 */
 
-	private String payCondition;
+private String cashManagementGroup;
 	/**
 	 * 
 	 */
 
-	private String tradeCode;
+private String payCondition;
 	/**
 	 * 
 	 */
 
-	private String regionalMarket;
+private String tradeCode;
 	/**
 	 * 
 	 */
 
-	private String mainBusiness;
+private String regionalMarket;
 	/**
 	 * 
 	 */
 
-	private String area;
+private String mainBusiness;
 	/**
 	 * 
 	 */
 
-	private String custTrade;
+private String area;
 	/**
 	 * 
 	 */
 
-	private String payCycle;
+private String custTrade;
 	/**
 	 * 
 	 */
 
-	private String isUseful;
+private String payCycle;
 	/**
 	 * 
 	 */
 
-	private String groupCompany;
+private String isUseful;
 	/**
 	 * 
 	 */
 
-	private String bgVisiable;
+private String groupCompany;
 	/**
 	 * 
 	 */
 
-	private String companyCode;
+private String bgVisiable;
 	/**
 	 * 
 	 */
 
-	private String companyFuncCode;
+private String companyCode;
 	/**
 	 * 
 	 */
 
-	private String createTime;
+private String companyFuncCode;
 	/**
 	 * 
 	 */
 
-	private long addUserId;
+private String createTime;
 	/**
 	 * 
 	 */
 
-	private String addTime;
+private long addUserId;
 	/**
 	 * 
 	 */
 
-	private long modifier;
+private String addTime;
 	/**
 	 * 
 	 */
 
-	private String modifyTime;
+private long modifier;
 	/**
 	 * 
 	 */
 
-	private String isDelete;
+private Date modifyTime;
+	/**
+	 * 
+	 */
+
+private String isDelete;
 
 	/**
 	 * 设置：
@@ -451,11 +451,10 @@ public class PmCustomerInfoEntity implements Serializable {
 	public void setAddTime(String addTime) {
 		this.addTime = addTime;
 	}
-	 /**
-	  *	获取：
-	  */ 
-	 public String setAddTime() {
-		
+	/**
+	 * 获取：
+	 */
+	public String getAddTime() {
 		return addTime;
 	}
 	/**
@@ -470,21 +469,18 @@ public class PmCustomerInfoEntity implements Serializable {
 	public long getModifier() {
 		return modifier;
 	}
-
 	/**
 	 * 设置：
 	 */
-	public void setModifyTime(String modifyTime) {
+	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
-
 	/**
 	 * 获取：
 	 */
-	public String getModifyTime() {
+	public Date getModifyTime() {
 		return modifyTime;
 	}
-
 	/**
 	 * 设置：
 	 */
