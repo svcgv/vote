@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.indihx.comm.util.R;
 import com.indihx.system.entity.UsrInfo;
+import com.alibaba.fastjson.JSON;
 import com.indihx.PmCustomerInfo.entity.PmCustomerGroupEntity;
 import com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity;
 import com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity;
@@ -53,8 +54,9 @@ public class PmCustomerGroupController {
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
-       
-		List<PmCustomerGroupEntity> pmCustomerGroup = pmCustomerGroupService.queryList(params);
+    	String str = (String) params.get("queryStr");
+    	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
+		List<PmCustomerGroupEntity> pmCustomerGroup = pmCustomerGroupService.queryList(maps);
         return R.ok().put("page", pmCustomerGroup);
     }
 

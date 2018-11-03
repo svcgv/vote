@@ -44,11 +44,20 @@ layui.use(['layer', 'form','laydate','table'], function(){
   var layer = layui.layer ,
   	  form = layui.form,
   	  tableGroup=layui.table;
-	  
+  var queryParams=$("#formGroup-query-form").serializeObject();
   // table render
   tableGroup.render({
 	    elem: '#customTable',
-	    //url:'custom.json',
+	    id:'customerGroup-table',
+	    url:'/vote/pmcustomerinfo/list',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify(queryParams)
+		},
+		contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    height:'250',
 	    width:"690",
 	    title: '客户数据表',
@@ -57,9 +66,6 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	      {field:'sapCode', title:'sap编号', sort: true},
 	      {field:'custCnName', title:'客户名称'},
 	    ]],
-	    data:[
-		  		
-			],
 	    page: true
 	  });
 	
@@ -127,8 +133,26 @@ layui.use(['layer', 'form','laydate','table'], function(){
 		 }
 		
 		console.log(newparam)
+		tableGroup.reload('customerGroup-table',{
+			url:'/vote/pmcustomerinfo/list',
+			page:{
+				curr:1 //从第一页开始
+			},
+		    method:'post',
+			where:{
+				queryStr:JSON.stringify(newparam)
+			},
+			contentType: 'application/json',
+		    response: {
+		    	dataName: 'page'
+		    },
+			done:function(res){
+				console.log(res)
+			}
+			
+		}) 
 		
-		$.ajax({
+		/*$.ajax({
 			  type: 'POST',
 			  url: '/vote/pmcustomerinfo/list',
 			  data: JSON.stringify(newparam),
@@ -150,7 +174,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			  	    page: true
 			  	  });},
 			  dataType: "json"
-			});
+			});*/
 	});
 	
 });

@@ -117,11 +117,20 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		  });
 		
 		  
+		var queryParams=$("#index-query-form").serializeObject();
 	  // table render
 	  table.render({
 		  	id:"tableID",
 		    elem: '#mainTable',
-		    //url:'custom.json',
+		    url:'/vote/pmcustomergroup/list',
+		    method:'post',
+			where:{
+				queryStr:JSON.stringify(queryParams)
+			},
+			contentType: 'application/json',
+		    response: {
+		    	dataName: 'page'
+		    },
 		    height:'full-200',
 		    toolbar: '#toolbarDemo',
 		    title: '客户群数据信息',
@@ -213,8 +222,25 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 					 newparam[o] = queryParams[o]
 				 }
 			 }
-			console.log(queryParams)
-			$.ajax({
+			table.reload('tableID',{
+			url:'/vote/pmcustomergroup/list',
+			page:{
+				curr:1 //从第一页开始
+			},
+		    method:'post',
+			where:{
+				queryStr:JSON.stringify(queryParams)
+			},
+			contentType: 'application/json',
+		    response: {
+		    	dataName: 'page'
+		    },
+			done:function(res){
+				console.log(res)
+			}
+			
+		}) 
+			/*$.ajax({
 				  type: 'POST',
 				  url: '/vote/pmcustomergroup/list',
 				  data: JSON.stringify(newparam),
@@ -245,7 +271,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	    page: true
 				  	  });},
 				  dataType: "json"
-				})
+				})*/
 		});
 		
 		/*

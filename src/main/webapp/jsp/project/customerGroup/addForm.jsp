@@ -44,7 +44,10 @@
 </div>
 <script>
 $(function(){
-	layui.use(['layer', 'form'], function(){
+	layui.use(['layer', 'form','table'], function(){
+		 var layer = layui.layer ,
+	  	  form = layui.form,
+	  	  table=layui.table;
 		// 选择客户 
 		$("#addCustomer-hook").on("click",function(){
 		  	$.openWindow({
@@ -77,6 +80,8 @@ $(function(){
 				  data: JSON.stringify(data),
 				  contentType:'application/json',
 				  success:function(res){
+					 // table.reload('customer-table');
+					  location.reload();
 						layer.msg("新增成功",{icon:1});
 						win.close();
 					},
