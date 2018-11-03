@@ -318,8 +318,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		
 	});
 	var testData=[]
-
-
 </script>
 
 

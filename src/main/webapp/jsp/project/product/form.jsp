@@ -36,7 +36,7 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">开始销售日期：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="startSaleDate" id="startSaleDate2" autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="startSaleDate" id="startSaleDate2" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 		     <div class="layui-inline">
