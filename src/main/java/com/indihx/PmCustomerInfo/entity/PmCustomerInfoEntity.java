@@ -494,28 +494,28 @@ private String isDelete;
 		return isDelete;
 	}
 
-	public int getStartNum() {
-		return startNum;
-	}
-
-	public void setStartNum(int startNum) {
-		this.startNum = startNum;
-	}
-
-	public int getTotalNum() {
-		return totalNum;
-	}
-
-	public void setTotalNum(int totalNum) {
-		this.totalNum = totalNum;
-	}
-
-	public long getCreatorId() {
-		return creatorId;
-	}
-
-	public void setCreatorId(long creatorId) {
-		this.creatorId = creatorId;
-	}
+//	public int getStartNum() {
+//		return startNum;
+//	}
+//
+//	public void setStartNum(int startNum) {
+//		this.startNum = startNum;
+//	}
+//
+//	public int getTotalNum() {
+//		return totalNum;
+//	}
+//
+//	public void setTotalNum(int totalNum) {
+//		this.totalNum = totalNum;
+//	}
+//
+//	public long getCreatorId() {
+//		return creatorId;
+//	}
+//
+//	public void setCreatorId(long creatorId) {
+//		this.creatorId = creatorId;
+//	}
 
 }
