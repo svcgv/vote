@@ -3,7 +3,7 @@
 <body>
 <div class="custom-info-wrapper">
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-	  <legend>客户信息</legend>
+	  <legend>客户管理</legend>
 	</fieldset>
 	<form class="layui-form" id="customer-query-form" method="POST" action="/vote/bmcustomerinfo/list">
 	  <div class="layui-form-item">

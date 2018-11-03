@@ -122,11 +122,11 @@
 				COMPANY_FUNC_CODE = #{companyFuncCode} AND
 			</if>
 			<!-- 开始时间 -->
-			<if test="createTimeStart != null ">
+			<if test="createTimeStart != null and createTimeStart!=''">
 				CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
 			</if>
 			<!-- 结束时间 -->
-			<if test="createTimeEnd != null  ">
+			<if test="createTimeEnd != null  and createTimeEnd!=''">
 				CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
 			</if>
 			

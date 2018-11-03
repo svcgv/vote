@@ -82,7 +82,7 @@ public class PmCustomerInfoController {
     public @ResponseBody Map<String,Object> update(@RequestBody PmCustomerInfoEntity pmCustomerInfo,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
     	pmCustomerInfo.setModifier(user.getUsrId());
-    	pmCustomerInfo.setModifyTime(DateUtil.getDateTime());
+//    	pmCustomerInfo.setModifyTime(DateUtil.getDateTime());
         pmCustomerInfoService.update(pmCustomerInfo);//全部更新
         
         return R.ok();

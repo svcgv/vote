@@ -74,7 +74,7 @@
 		values
 		(
 		<if test="companyCode != null and  companyCode !=''">
-			,#{companyCode}		</if>
+			#{companyCode}		</if>
 		<if test="companyName != null and  companyName !=''">
 			,#{companyName}		</if>
 		<if test="companyAddress != null and  companyAddress !=''">

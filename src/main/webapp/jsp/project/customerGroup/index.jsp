@@ -3,7 +3,7 @@
 <body>
 <div class="index-info-wrapper">
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-	  <legend>客户群信息</legend>
+	  <legend>客户群管理</legend>
 	</fieldset>
 	<form class="layui-form" id="index-query-form" action="">
 	  <div class="layui-form-item">
@@ -323,7 +323,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		}
 		
 	});
-	var testData=[]
+	var testData=[];
+	});
 </script>
 
 
