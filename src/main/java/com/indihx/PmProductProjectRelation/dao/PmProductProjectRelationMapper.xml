@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmProductProjectRelation.dao.PmProductProjectRelationMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmProductProjectRelation.entity.PmProductProjectRelationEntity" id="pmProductProjectRelationMap">
+        <result property="productRelationId" column="PRODUCT_RELATION_ID"/>
+        <result property="productName" column="PRODUCT_NAME"/>
+        <result property="productId" column="PRODUCT_ID"/>
+        <result property="productGroupId" column="PRODUCT_GROUP_ID"/>
+        <result property="projectId" column="PROJECT_ID"/>
+        <result property="buildDeptName" column="BUILD_DEPT_NAME"/>
+        <result property="custName" column="CUST_NAME"/>
+        <result property="custCode" column="CUST_CODE"/>
+        <result property="custSapCode" column="CUST_SAP_CODE"/>
+        <result property="projectName" column="PROJECT_NAME"/>
+        <result property="remark" column="REMARK"/>
+        <result property="creatorId" column="CREATOR_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="modifier" column="MODIFIER"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmProductProjectRelationMap">
+		select * from pm_product_project_relation where PRODUCT_RELATION_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmProductProjectRelationMap">
+		select 
+		*
+		 from pm_product_project_relation
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="productRelationId != null and productRelationId!=''"  >
+				PRODUCT_RELATION_ID = #{productRelationId} AND 			</if>
+						<if test="productName != null and productName!=''"  >
+				PRODUCT_NAME = #{productName} AND 			</if>
+						<if test="productId != null and productId!=''"  >
+				PRODUCT_ID = #{productId} AND 			</if>
+						<if test="productGroupId != null and productGroupId!=''"  >
+				PRODUCT_GROUP_ID = #{productGroupId} AND 			</if>
+						<if test="projectId != null and projectId!=''"  >
+				PROJECT_ID = #{projectId} AND 			</if>
+						<if test="buildDeptName != null and buildDeptName!=''"  >
+				BUILD_DEPT_NAME = #{buildDeptName} AND 			</if>
+						<if test="custName != null and custName!=''"  >
+				CUST_NAME = #{custName} AND 			</if>
+						<if test="custCode != null and custCode!=''"  >
+				CUST_CODE = #{custCode} AND 			</if>
+						<if test="custSapCode != null and custSapCode!=''"  >
+				CUST_SAP_CODE = #{custSapCode} AND 			</if>
+						<if test="projectName != null and projectName!=''"  >
+				PROJECT_NAME = #{projectName} AND 			</if>
+						<if test="remark != null and remark!=''"  >
+				REMARK = #{remark} AND 			</if>
+						<if test="creatorId != null and creatorId!=''"  >
+				CREATOR_ID = #{creatorId} AND 			</if>
+						<if test="createTime != null and createTime!=''"  >
+				CREATE_TIME = #{createTime} AND 			</if>
+						<if test="modifier != null and modifier!=''"  >
+				MODIFIER = #{modifier} AND 			</if>
+						<if test="modifyTime != null and modifyTime!=''"  >
+				MODIFY_TIME = #{modifyTime} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_product_project_relation 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmProductProjectRelation.entity.PmProductProjectRelationEntity">
+		insert into pm_product_project_relation
+		(
+		PRODUCT_RELATION_ID
+			<if test="productName != null and productName!=''">
+				,PRODUCT_NAME	
+			</if>
+		
+			<if test="productId != null and productId!=''">
+				,PRODUCT_ID	
+			</if>
+		
+			<if test="productGroupId != null and productGroupId!=''">
+				,PRODUCT_GROUP_ID	
+			</if>
+		
+			<if test="projectId != null and projectId!=''">
+				,PROJECT_ID	
+			</if>
+		
+			<if test="buildDeptName != null and buildDeptName!=''">
+				,BUILD_DEPT_NAME	
+			</if>
+		
+			<if test="custName != null and custName!=''">
+				,CUST_NAME	
+			</if>
+		
+			<if test="custCode != null and custCode!=''">
+				,CUST_CODE	
+			</if>
+		
+			<if test="custSapCode != null and custSapCode!=''">
+				,CUST_SAP_CODE	
+			</if>
+		
+			<if test="projectName != null and projectName!=''">
+				,PROJECT_NAME	
+			</if>
+		
+			<if test="remark != null and remark!=''">
+				,REMARK	
+			</if>
+		
+			<if test="creatorId != null and creatorId!=''">
+				,CREATOR_ID	
+			</if>
+		
+			<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+			</if>
+		
+			<if test="modifier != null and modifier!=''">
+				,MODIFIER	
+			</if>
+		
+			<if test="modifyTime != null and modifyTime!=''">
+				,MODIFY_TIME	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmProductProjectRelation_SEQ.nextval
+		<if test="productName != null and productName!=''">
+			,#{productName}
+		</if>
+		<if test="productId != null and productId!=''">
+			,#{productId}
+		</if>
+		<if test="productGroupId != null and productGroupId!=''">
+			,#{productGroupId}
+		</if>
+		<if test="projectId != null and projectId!=''">
+			,#{projectId}
+		</if>
+		<if test="buildDeptName != null and buildDeptName!=''">
+			,#{buildDeptName}
+		</if>
+		<if test="custName != null and custName!=''">
+			,#{custName}
+		</if>
+		<if test="custCode != null and custCode!=''">
+			,#{custCode}
+		</if>
+		<if test="custSapCode != null and custSapCode!=''">
+			,#{custSapCode}
+		</if>
+		<if test="projectName != null and projectName!=''">
+			,#{projectName}
+		</if>
+		<if test="remark != null and remark!=''">
+			,#{remark}
+		</if>
+		<if test="creatorId != null and creatorId!=''">
+			,#{creatorId}
+		</if>
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
+		<if test="modifier != null and modifier!=''">
+			,#{modifier}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+			,#{modifyTime}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmProductProjectRelation.entity.PmProductProjectRelationEntity">
+		update pm_product_project_relation 
+		<set>
+			<if test="productName != null and productName!=''">PRODUCT_NAME = #{productName}, </if>
+
+			<if test="productId != null and productId!=''">PRODUCT_ID = #{productId}, </if>
+
+			<if test="productGroupId != null and productGroupId!=''">PRODUCT_GROUP_ID = #{productGroupId}, </if>
+
+			<if test="projectId != null and projectId!=''">PROJECT_ID = #{projectId}, </if>
+
+			<if test="buildDeptName != null and buildDeptName!=''">BUILD_DEPT_NAME = #{buildDeptName}, </if>
+
+			<if test="custName != null and custName!=''">CUST_NAME = #{custName}, </if>
+
+			<if test="custCode != null and custCode!=''">CUST_CODE = #{custCode}, </if>
+
+			<if test="custSapCode != null and custSapCode!=''">CUST_SAP_CODE = #{custSapCode}, </if>
+
+			<if test="projectName != null and projectName!=''">PROJECT_NAME = #{projectName}, </if>
+
+			<if test="remark != null and remark!=''">REMARK = #{remark}, </if>
+
+			<if test="creatorId != null and creatorId!=''">CREATOR_ID = #{creatorId}, </if>
+
+			<if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime}, </if>
+
+			<if test="modifier != null and modifier!=''">MODIFIER = #{modifier}, </if>
+
+			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where PRODUCT_RELATION_ID = #{productRelationId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_product_project_relation where PRODUCT_RELATION_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

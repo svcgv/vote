@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmProductInfo.dao.PmProductInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmProductInfo.entity.PmProductInfoEntity" id="pmProductInfoMap">
+        <result property="productId" column="PRODUCT_ID"/>
+        <result property="productCode" column="PRODUCT_CODE"/>
+        <result property="productName" column="PRODUCT_NAME"/>
+        <result property="productSuggestPrice" column="PRODUCT_SUGGEST_PRICE"/>
+        <result property="developmentDeptName" column="DEVELOPMENT_DEPT_NAME"/>
+        <result property="developmentDeptId" column="DEVELOPMENT_DEPT_ID"/>
+        <result property="developmentManagerName" column="DEVELOPMENT_MANAGER_NAME"/>
+        <result property="developmentManagerId" column="DEVELOPMENT_MANAGER_ID"/>
+        <result property="startSaleDate" column="START_SALE_DATE"/>
+        <result property="productType" column="PRODUCT_TYPE"/>
+        <result property="remark" column="REMARK"/>
+        <result property="creatorId" column="CREATOR_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="modifier" column="MODIFIER"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmProductInfoMap">
+		select * from pm_product_info where PRODUCT_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmProductInfoMap">
+		select 
+		*
+		 from pm_product_info
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="productId != null and productId!=''"  >
+				PRODUCT_ID = #{productId} AND 			</if>
+						<if test="productCode != null and productCode!=''"  >
+				PRODUCT_CODE = #{productCode} AND 			</if>
+						<if test="productName != null and productName!=''"  >
+				PRODUCT_NAME = #{productName} AND 			</if>
+						<if test="productSuggestPrice != null and productSuggestPrice!=''"  >
+				PRODUCT_SUGGEST_PRICE = #{productSuggestPrice} AND 			</if>
+						<if test="developmentDeptName != null and developmentDeptName!=''"  >
+				DEVELOPMENT_DEPT_NAME = #{developmentDeptName} AND 			</if>
+						<if test="developmentDeptId != null and developmentDeptId!=''"  >
+				DEVELOPMENT_DEPT_ID = #{developmentDeptId} AND 			</if>
+						<if test="developmentManagerName != null and developmentManagerName!=''"  >
+				DEVELOPMENT_MANAGER_NAME = #{developmentManagerName} AND 			</if>
+						<if test="developmentManagerId != null and developmentManagerId!=''"  >
+				DEVELOPMENT_MANAGER_ID = #{developmentManagerId} AND 			</if>
+						<if test="startSaleDate != null and startSaleDate!=''"  >
+				START_SALE_DATE = #{startSaleDate} AND 			</if>
+						<if test="productType != null and productType!=''"  >
+				PRODUCT_TYPE = #{productType} AND 			</if>
+						<if test="remark != null and remark!=''"  >
+				REMARK = #{remark} AND 			</if>
+						<if test="creatorId != null and creatorId!=''"  >
+				CREATOR_ID = #{creatorId} AND 			</if>
+						<if test="createTime != null and createTime!=''"  >
+				CREATE_TIME = #{createTime} AND 			</if>
+						<if test="modifier != null and modifier!=''"  >
+				MODIFIER = #{modifier} AND 			</if>
+						<if test="modifyTime != null and modifyTime!=''"  >
+				MODIFY_TIME = #{modifyTime} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_product_info 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmProductInfo.entity.PmProductInfoEntity">
+		insert into pm_product_info
+		(
+		PRODUCT_ID
+			<if test="productCode != null and productCode!=''">
+				,PRODUCT_CODE	
+			</if>
+		
+			<if test="productName != null and productName!=''">
+				,PRODUCT_NAME	
+			</if>
+		
+			<if test="productSuggestPrice != null and productSuggestPrice!=''">
+				,PRODUCT_SUGGEST_PRICE	
+			</if>
+		
+			<if test="developmentDeptName != null and developmentDeptName!=''">
+				,DEVELOPMENT_DEPT_NAME	
+			</if>
+		
+			<if test="developmentDeptId != null and developmentDeptId!=''">
+				,DEVELOPMENT_DEPT_ID	
+			</if>
+		
+			<if test="developmentManagerName != null and developmentManagerName!=''">
+				,DEVELOPMENT_MANAGER_NAME	
+			</if>
+		
+			<if test="developmentManagerId != null and developmentManagerId!=''">
+				,DEVELOPMENT_MANAGER_ID	
+			</if>
+		
+			<if test="startSaleDate != null and startSaleDate!=''">
+				,START_SALE_DATE	
+			</if>
+		
+			<if test="productType != null and productType!=''">
+				,PRODUCT_TYPE	
+			</if>
+		
+			<if test="remark != null and remark!=''">
+				,REMARK	
+			</if>
+		
+			<if test="creatorId != null and creatorId!=''">
+				,CREATOR_ID	
+			</if>
+		
+			<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+			</if>
+		
+			<if test="modifier != null and modifier!=''">
+				,MODIFIER	
+			</if>
+		
+			<if test="modifyTime != null and modifyTime!=''">
+				,MODIFY_TIME	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmProductInfo_SEQ.nextval
+		<if test="productCode != null and productCode!=''">
+			,#{productCode}
+		</if>
+		<if test="productName != null and productName!=''">
+			,#{productName}
+		</if>
+		<if test="productSuggestPrice != null and productSuggestPrice!=''">
+			,#{productSuggestPrice}
+		</if>
+		<if test="developmentDeptName != null and developmentDeptName!=''">
+			,#{developmentDeptName}
+		</if>
+		<if test="developmentDeptId != null and developmentDeptId!=''">
+			,#{developmentDeptId}
+		</if>
+		<if test="developmentManagerName != null and developmentManagerName!=''">
+			,#{developmentManagerName}
+		</if>
+		<if test="developmentManagerId != null and developmentManagerId!=''">
+			,#{developmentManagerId}
+		</if>
+		<if test="startSaleDate != null and startSaleDate!=''">
+			,#{startSaleDate}
+		</if>
+		<if test="productType != null and productType!=''">
+			,#{productType}
+		</if>
+		<if test="remark != null and remark!=''">
+			,#{remark}
+		</if>
+		<if test="creatorId != null and creatorId!=''">
+			,#{creatorId}
+		</if>
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
+		<if test="modifier != null and modifier!=''">
+			,#{modifier}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+			,#{modifyTime}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmProductInfo.entity.PmProductInfoEntity">
+		update pm_product_info 
+		<set>
+			<if test="productCode != null and productCode!=''">PRODUCT_CODE = #{productCode}, </if>
+
+			<if test="productName != null and productName!=''">PRODUCT_NAME = #{productName}, </if>
+
+			<if test="productSuggestPrice != null and productSuggestPrice!=''">PRODUCT_SUGGEST_PRICE = #{productSuggestPrice}, </if>
+
+			<if test="developmentDeptName != null and developmentDeptName!=''">DEVELOPMENT_DEPT_NAME = #{developmentDeptName}, </if>
+
+			<if test="developmentDeptId != null and developmentDeptId!=''">DEVELOPMENT_DEPT_ID = #{developmentDeptId}, </if>
+
+			<if test="developmentManagerName != null and developmentManagerName!=''">DEVELOPMENT_MANAGER_NAME = #{developmentManagerName}, </if>
+
+			<if test="developmentManagerId != null and developmentManagerId!=''">DEVELOPMENT_MANAGER_ID = #{developmentManagerId}, </if>
+
+			<if test="startSaleDate != null and startSaleDate!=''">START_SALE_DATE = #{startSaleDate}, </if>
+
+			<if test="productType != null and productType!=''">PRODUCT_TYPE = #{productType}, </if>
+
+			<if test="remark != null and remark!=''">REMARK = #{remark}, </if>
+
+			<if test="creatorId != null and creatorId!=''">CREATOR_ID = #{creatorId}, </if>
+
+			<if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime}, </if>
+
+			<if test="modifier != null and modifier!=''">MODIFIER = #{modifier}, </if>
+
+			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where PRODUCT_ID = #{productId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_product_info where PRODUCT_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

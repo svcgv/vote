@@ -21,19 +21,6 @@
 	      </div>
 	    </div>
 	  
-	    <div class="layui-inline">
-	      <label class="layui-form-label">添加人：</label>
-	      <div class="layui-input-inline">
-	        <input type="text" name="creator"  autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
-	    
-	    <div class="layui-inline">
-	      <label class="layui-form-label">添加人编号：</label>
-	      <div class="layui-input-inline">
-	        <input type="text" name="creatorId"   autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
 	    
 	    <div class="layui-inline">
 	      <label class="layui-form-label">添加开始时间：</label>
@@ -49,12 +36,6 @@
 	      </div>
 	    </div>
 	    
-	     <div class="layui-inline">
-	      <label class="layui-form-label">修改人：</label>
-	      <div class="layui-input-inline">
-	        <input type="text" name="modifier"  autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
 	    
 	     <div class="layui-inline" style="vertical-align: top;">
 		   <div class="layui-btn-container" style="margin-left:15px;">
