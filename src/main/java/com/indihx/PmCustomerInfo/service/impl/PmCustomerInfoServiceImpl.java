@@ -43,6 +43,7 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
 		}
 		
 		if(flag) {
+			entity.setIsDelete("00");
 			pmCustomerInfoMapper.insert(entity);
 		}
    		

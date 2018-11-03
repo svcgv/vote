@@ -171,61 +171,61 @@
 		)
 		values
 		(
-		PmCustomerInfo_SEQ.nextval,
+		PmCustomerInfo_SEQ.nextval
 		<if test="custCnName != null">
-			#{custCnName}, 		</if>
+			,#{custCnName} 		</if>
 		<if test="custCode != null">
-			#{custCode}, 		</if>
+			,#{custCode} 		</if>
 		<if test="country != null">
-			#{country}, 		</if>
+			,#{country} 		</if>
 		<if test="sapCode != null">
-			#{sapCode}, 		</if>
+			,#{sapCode} 		</if>
 		<if test="enName != null">
-			#{enName}, 		</if>
+			,#{enName}		</if>
 		<if test="custPatTaxesCode != null">
-			#{custPatTaxesCode}, 		</if>
+			,#{custPatTaxesCode} 		</if>
 		<if test="custType != null">
-			#{custType}, 		</if>
+			,#{custType} 		</if>
 		<if test="address != null">
-			#{address}, 		</if>
+			,#{address} 		</if>
 		<if test="cashManagementGroup != null">
-			#{cashManagementGroup}, 		</if>
+			,#{cashManagementGroup} 		</if>
 		<if test="payCondition != null">
-			#{payCondition}, 		</if>
+			,#{payCondition} 		</if>
 		<if test="tradeCode != null">
-			#{tradeCode}, 		</if>
+			,#{tradeCode} 		</if>
 		<if test="regionalMarket != null">
-			#{regionalMarket}, 		</if>
+			,#{regionalMarket} 		</if>
 		<if test="mainBusiness != null">
-			#{mainBusiness}, 		</if>
+			,#{mainBusiness} 		</if>
 		<if test="area != null">
-			#{area}, 		</if>
+			,#{area} 		</if>
 		<if test="custTrade != null">
-			#{custTrade}, 		</if>
+			,#{custTrade} 		</if>
 		<if test="payCycle != null">
-			#{payCycle}, 		</if>
+			,#{payCycle} 		</if>
 		<if test="isUseful != null">
-			#{isUseful}, 		</if>
+			,#{isUseful} 		</if>
 		<if test="groupCompany != null">
-			#{groupCompany}, 		</if>
+			,#{groupCompany} 		</if>
 		<if test="bgVisiable != null">
-			#{bgVisiable}, 		</if>
+			,#{bgVisiable} 		</if>
 		<if test="companyCode != null">
-			#{companyCode}, 		</if>
+			,#{companyCode} 		</if>
 		<if test="companyFuncCode != null">
-			#{companyFuncCode}, 		</if>
+			,#{companyFuncCode} 		</if>
 		<if test="createTime != null">
-			#{createTime}, 		</if>
+			,#{createTime} 		</if>
 		<if test="addUserId != null">
-			#{addUserId}, 		</if>
+			,#{addUserId} 		</if>
 		<if test="addTime != null">
-			#{addTime}, 		</if>
+			,#{addTime} 		</if>
 		<if test="modifier != null">
-			#{modifier}		</if>
+			,#{modifier}		</if>
 		<if test="modifyTime != null">
-			#{modifyTime}, 		</if>
+			,#{modifyTime} 		</if>
 		<if test="isDelete != null">
-			#{isDelete}		</if>
+			,#{isDelete}		</if>
 		)
 	</insert>
 	 

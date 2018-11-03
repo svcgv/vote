@@ -57,7 +57,7 @@ public class CustomerGroupController extends AbstractBaseController{
 	public ModelAndView addCustomView() {
 		
 		ModelAndView view = new ModelAndView();
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 	
 		view.setViewName("/project/customerGroup/index");
 		return view;

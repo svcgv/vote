@@ -244,6 +244,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	});
 	  
   // table render
+  var queryParams=$("#customer-query-form").serializeObject();
   table.render({
 	  	id:"customer-table",
 	    elem: '#customTable',
@@ -317,7 +318,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	  $.ajax({
 				  type:"POST",
 				  url:"/vote/pmcustomerinfo/update",
-				  data:JSON.stringify({'custId':data.custId,'isDelete':'00'}),
+				  data:JSON.stringify({'custId':data.custId,'isDelete':'01'}),
 				  contentType:'application/json',
 				  success:function(data){
 					 
