@@ -51,7 +51,7 @@ $(function(){
 		// 选择客户 
 		$("#addCustomer-hook").on("click",function(){
 		  	$.openWindow({
-		  		url:'formGroup',
+		  		url:'formGroup?act=add',
 		  		title:"选择客户",
 		  		width:"700"
 		 	 });

@@ -4,6 +4,8 @@ package com.indihx.PmSaleGroupInfo.entity;
 
 import com.indihx.BaseEntity;
 import java.io.Serializable;
+import java.util.Date;
+
 /**
  * 
  * 

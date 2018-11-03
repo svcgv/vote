@@ -16,14 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
+import com.indihx.system.entity.UsrInfo;
 import com.alibaba.fastjson.JSON;
 import com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity;
 import com.indihx.PmCompanyInfo.service.PmCompanyInfoService;
 import com.indihx.comm.util.R;
-import com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity;
-import com.indihx.PmCompanyInfo.service.PmCompanyInfoService;
-import com.indihx.comm.util.R;
-import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.UserUtil;
 import com.indihx.comm.util.PageUtils;
 

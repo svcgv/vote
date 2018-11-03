@@ -76,7 +76,7 @@
 							// 选择客户 
 							$("#addCustomer-hook").on("click", function() {
 								$.openWindow({
-									url : 'formGroup',
+									url : 'formGroup?act=edit',
 									title : "选择客户",
 									width : "700"
 								});

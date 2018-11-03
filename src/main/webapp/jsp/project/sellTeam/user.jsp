@@ -51,7 +51,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    //url:'custom.json',
 	    height:'260',
 	    width:"690",
-	    title: '用数据表',
+	    title: '用户数据表',
 	    cols: [[
 	      {type: 'checkbox' },
 	      {field:'userId', title:'用户ID', sort: true},

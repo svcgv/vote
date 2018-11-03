@@ -21,19 +21,6 @@
 	      </div>
 	    </div>
 	  
-	    <div class="layui-inline">
-	      <label class="layui-form-label">添加人：</label>
-	      <div class="layui-input-inline">
-	        <input type="text" name="creator"  autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
-	    
-	    <div class="layui-inline">
-	      <label class="layui-form-label">添加人编号：</label>
-	      <div class="layui-input-inline">
-	        <input type="text" name="creatorId"   autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
 	    
 	    <div class="layui-inline">
 	      <label class="layui-form-label">添加开始时间：</label>
@@ -49,12 +36,6 @@
 	      </div>
 	    </div>
 	    
-	     <div class="layui-inline">
-	      <label class="layui-form-label">修改人：</label>
-	      <div class="layui-input-inline">
-	        <input type="text" name="modifier"  autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
 	    
 	     <div class="layui-inline" style="vertical-align: top;">
 		   <div class="layui-btn-container" style="margin-left:15px;">
@@ -258,9 +239,9 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	    	{type: 'checkbox', fixed: 'left'},
 						      {field:'custGroupId', title:'客户群编号',fixed: 'left', width:110, sort: true},
 						      {field:'custGroupName', title:'客户群名称', width:230},
-						      {field:'creator', title:'添加人', width:90},
-						      {field:'creatorId', title:'添加人编号',width:100},
-						      {field:'createTime', title:'添加时间'},
+						      {field:'creator', title:'创建人', width:90},
+						      {field:'creatorId', title:'创建人编号',width:100},
+						      {field:'createTime', title:'创建时间'},
 						      
 						      {field:'modifyTime', title:'修改时间'},
 						      {field:'isDelete', title:'是否有效'},
@@ -271,9 +252,9 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	    page: true
 				  	  });},
 				  dataType: "json"
-				})*/
+				})
 		});
-		
+		*/
 		/*
 		* 新增
 		*/

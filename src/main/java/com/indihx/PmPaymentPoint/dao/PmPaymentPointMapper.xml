@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmPaymentPoint.dao.PmPaymentPointMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity" id="pmPaymentPointMap">
+        <result property="paymentId" column="PAYMENT_ID"/>
+        <result property="paymentForeignId" column="PAYMENT_FOREIGN_ID"/>
+        <result property="paymentForeignCode" column="PAYMENT_FOREIGN_CODE"/>
+        <result property="paymentType" column="PAYMENT_TYPE"/>
+        <result property="paymentDate" column="PAYMENT_DATE"/>
+        <result property="paymentTerm" column="PAYMENT_TERM"/>
+        <result property="paymentRate" column="PAYMENT_RATE"/>
+        <result property="paymentAmount" column="PAYMENT_AMOUNT"/>
+        <result property="remark" column="REMARK"/>
+        <result property="creatorId" column="CREATOR_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="modifier" column="MODIFIER"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmPaymentPointMap">
+		select * from pm_payment_point where PAYMENT_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmPaymentPointMap">
+		select 
+		*
+		 from pm_payment_point
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="paymentId != null and paymentId!=''"  >
+				PAYMENT_ID = #{paymentId} AND 			</if>
+						<if test="paymentForeignId != null and paymentForeignId!=''"  >
+				PAYMENT_FOREIGN_ID = #{paymentForeignId} AND 			</if>
+						<if test="paymentForeignCode != null and paymentForeignCode!=''"  >
+				PAYMENT_FOREIGN_CODE = #{paymentForeignCode} AND 			</if>
+						<if test="paymentType != null and paymentType!=''"  >
+				PAYMENT_TYPE = #{paymentType} AND 			</if>
+						<if test="paymentDate != null and paymentDate!=''"  >
+				PAYMENT_DATE = #{paymentDate} AND 			</if>
+						<if test="paymentTerm != null and paymentTerm!=''"  >
+				PAYMENT_TERM = #{paymentTerm} AND 			</if>
+						<if test="paymentRate != null and paymentRate!=''"  >
+				PAYMENT_RATE = #{paymentRate} AND 			</if>
+						<if test="paymentAmount != null and paymentAmount!=''"  >
+				PAYMENT_AMOUNT = #{paymentAmount} AND 			</if>
+						<if test="remark != null and remark!=''"  >
+				REMARK = #{remark} AND 			</if>
+						<if test="creatorId != null and creatorId!=''"  >
+				CREATOR_ID = #{creatorId} AND 			</if>
+						<if test="createTime != null and createTime!=''"  >
+				CREATE_TIME = #{createTime} AND 			</if>
+						<if test="modifier != null and modifier!=''"  >
+				MODIFIER = #{modifier} AND 			</if>
+						<if test="modifyTime != null and modifyTime!=''"  >
+				MODIFY_TIME = #{modifyTime} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_payment_point 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity">
+		insert into pm_payment_point
+		(
+		PAYMENT_ID
+			<if test="paymentForeignId != null and paymentForeignId!=''">
+				,PAYMENT_FOREIGN_ID	
+			</if>
+		
+			<if test="paymentForeignCode != null and paymentForeignCode!=''">
+				,PAYMENT_FOREIGN_CODE	
+			</if>
+		
+			<if test="paymentType != null and paymentType!=''">
+				,PAYMENT_TYPE	
+			</if>
+		
+			<if test="paymentDate != null and paymentDate!=''">
+				,PAYMENT_DATE	
+			</if>
+		
+			<if test="paymentTerm != null and paymentTerm!=''">
+				,PAYMENT_TERM	
+			</if>
+		
+			<if test="paymentRate != null and paymentRate!=''">
+				,PAYMENT_RATE	
+			</if>
+		
+			<if test="paymentAmount != null and paymentAmount!=''">
+				,PAYMENT_AMOUNT	
+			</if>
+		
+			<if test="remark != null and remark!=''">
+				,REMARK	
+			</if>
+		
+			<if test="creatorId != null and creatorId!=''">
+				,CREATOR_ID	
+			</if>
+		
+			<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+			</if>
+		
+			<if test="modifier != null and modifier!=''">
+				,MODIFIER	
+			</if>
+		
+			<if test="modifyTime != null and modifyTime!=''">
+				,MODIFY_TIME	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmPaymentPoint_SEQ.nextval
+		<if test="paymentForeignId != null and paymentForeignId!=''">
+			,#{paymentForeignId}
+		</if>
+		<if test="paymentForeignCode != null and paymentForeignCode!=''">
+			,#{paymentForeignCode}
+		</if>
+		<if test="paymentType != null and paymentType!=''">
+			,#{paymentType}
+		</if>
+		<if test="paymentDate != null and paymentDate!=''">
+			,#{paymentDate}
+		</if>
+		<if test="paymentTerm != null and paymentTerm!=''">
+			,#{paymentTerm}
+		</if>
+		<if test="paymentRate != null and paymentRate!=''">
+			,#{paymentRate}
+		</if>
+		<if test="paymentAmount != null and paymentAmount!=''">
+			,#{paymentAmount}
+		</if>
+		<if test="remark != null and remark!=''">
+			,#{remark}
+		</if>
+		<if test="creatorId != null and creatorId!=''">
+			,#{creatorId}
+		</if>
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
+		<if test="modifier != null and modifier!=''">
+			,#{modifier}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+			,#{modifyTime}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity">
+		update pm_payment_point 
+		<set>
+			<if test="paymentForeignId != null and paymentForeignId!=''">PAYMENT_FOREIGN_ID = #{paymentForeignId}, </if>
+
+			<if test="paymentForeignCode != null and paymentForeignCode!=''">PAYMENT_FOREIGN_CODE = #{paymentForeignCode}, </if>
+
+			<if test="paymentType != null and paymentType!=''">PAYMENT_TYPE = #{paymentType}, </if>
+
+			<if test="paymentDate != null and paymentDate!=''">PAYMENT_DATE = #{paymentDate}, </if>
+
+			<if test="paymentTerm != null and paymentTerm!=''">PAYMENT_TERM = #{paymentTerm}, </if>
+
+			<if test="paymentRate != null and paymentRate!=''">PAYMENT_RATE = #{paymentRate}, </if>
+
+			<if test="paymentAmount != null and paymentAmount!=''">PAYMENT_AMOUNT = #{paymentAmount}, </if>
+
+			<if test="remark != null and remark!=''">REMARK = #{remark}, </if>
+
+			<if test="creatorId != null and creatorId!=''">CREATOR_ID = #{creatorId}, </if>
+
+			<if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime}, </if>
+
+			<if test="modifier != null and modifier!=''">MODIFIER = #{modifier}, </if>
+
+			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where PAYMENT_ID = #{paymentId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_payment_point where PAYMENT_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

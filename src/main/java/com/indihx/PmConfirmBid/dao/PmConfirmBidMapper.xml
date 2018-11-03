@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmConfirmBid.dao.PmConfirmBidMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmConfirmBid.entity.PmConfirmBidEntity" id="pmConfirmBidMap">
+        <result property="bidId" column="BID_ID"/>
+        <result property="bidName" column="BID_NAME"/>
+        <result property="predictAmount" column="PREDICT_AMOUNT"/>
+        <result property="predictCost" column="PREDICT_COST"/>
+        <result property="predictProfitRate" column="PREDICT_PROFIT_RATE"/>
+        <result property="predictPeriod" column="PREDICT_PERIOD"/>
+        <result property="sellDeptId" column="SELL_DEPT_ID"/>
+        <result property="sellDeptName" column="SELL_DEPT_NAME"/>
+        <result property="custManagerId" column="CUST_MANAGER_ID"/>
+        <result property="custManagerName" column="CUST_MANAGER_NAME"/>
+        <result property="fileCode" column="FILE_CODE"/>
+        <result property="fileName" column="FILE_NAME"/>
+        <result property="filePath" column="FILE_PATH"/>
+        <result property="isWorkAreaExplicit" column="IS_WORK_AREA_EXPLICIT"/>
+        <result property="isChecked" column="IS_CHECKED"/>
+        <result property="remark" column="REMARK"/>
+        <result property="creatorId" column="CREATOR_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="modifier" column="MODIFIER"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmConfirmBidMap">
+		select * from pm_confirm_bid where BID_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmConfirmBidMap">
+		select 
+		*
+		 from pm_confirm_bid
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="bidId != null and bidId!=''"  >
+				BID_ID = #{bidId} AND 			</if>
+						<if test="bidName != null and bidName!=''"  >
+				BID_NAME = #{bidName} AND 			</if>
+						<if test="predictAmount != null and predictAmount!=''"  >
+				PREDICT_AMOUNT = #{predictAmount} AND 			</if>
+						<if test="predictCost != null and predictCost!=''"  >
+				PREDICT_COST = #{predictCost} AND 			</if>
+						<if test="predictProfitRate != null and predictProfitRate!=''"  >
+				PREDICT_PROFIT_RATE = #{predictProfitRate} AND 			</if>
+						<if test="predictPeriod != null and predictPeriod!=''"  >
+				PREDICT_PERIOD = #{predictPeriod} AND 			</if>
+						<if test="sellDeptId != null and sellDeptId!=''"  >
+				SELL_DEPT_ID = #{sellDeptId} AND 			</if>
+						<if test="sellDeptName != null and sellDeptName!=''"  >
+				SELL_DEPT_NAME = #{sellDeptName} AND 			</if>
+						<if test="custManagerId != null and custManagerId!=''"  >
+				CUST_MANAGER_ID = #{custManagerId} AND 			</if>
+						<if test="custManagerName != null and custManagerName!=''"  >
+				CUST_MANAGER_NAME = #{custManagerName} AND 			</if>
+						<if test="fileCode != null and fileCode!=''"  >
+				FILE_CODE = #{fileCode} AND 			</if>
+						<if test="fileName != null and fileName!=''"  >
+				FILE_NAME = #{fileName} AND 			</if>
+						<if test="filePath != null and filePath!=''"  >
+				FILE_PATH = #{filePath} AND 			</if>
+						<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''"  >
+				IS_WORK_AREA_EXPLICIT = #{isWorkAreaExplicit} AND 			</if>
+						<if test="isChecked != null and isChecked!=''"  >
+				IS_CHECKED = #{isChecked} AND 			</if>
+						<if test="remark != null and remark!=''"  >
+				REMARK = #{remark} AND 			</if>
+						<if test="creatorId != null and creatorId!=''"  >
+				CREATOR_ID = #{creatorId} AND 			</if>
+						<if test="createTime != null and createTime!=''"  >
+				CREATE_TIME = #{createTime} AND 			</if>
+						<if test="modifier != null and modifier!=''"  >
+				MODIFIER = #{modifier} AND 			</if>
+						<if test="modifyTime != null and modifyTime!=''"  >
+				MODIFY_TIME = #{modifyTime} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_confirm_bid 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmConfirmBid.entity.PmConfirmBidEntity">
+		insert into pm_confirm_bid
+		(
+		BID_ID
+			<if test="bidName != null and bidName!=''">
+				,BID_NAME	
+			</if>
+		
+			<if test="predictAmount != null and predictAmount!=''">
+				,PREDICT_AMOUNT	
+			</if>
+		
+			<if test="predictCost != null and predictCost!=''">
+				,PREDICT_COST	
+			</if>
+		
+			<if test="predictProfitRate != null and predictProfitRate!=''">
+				,PREDICT_PROFIT_RATE	
+			</if>
+		
+			<if test="predictPeriod != null and predictPeriod!=''">
+				,PREDICT_PERIOD	
+			</if>
+		
+			<if test="sellDeptId != null and sellDeptId!=''">
+				,SELL_DEPT_ID	
+			</if>
+		
+			<if test="sellDeptName != null and sellDeptName!=''">
+				,SELL_DEPT_NAME	
+			</if>
+		
+			<if test="custManagerId != null and custManagerId!=''">
+				,CUST_MANAGER_ID	
+			</if>
+		
+			<if test="custManagerName != null and custManagerName!=''">
+				,CUST_MANAGER_NAME	
+			</if>
+		
+			<if test="fileCode != null and fileCode!=''">
+				,FILE_CODE	
+			</if>
+		
+			<if test="fileName != null and fileName!=''">
+				,FILE_NAME	
+			</if>
+		
+			<if test="filePath != null and filePath!=''">
+				,FILE_PATH	
+			</if>
+		
+			<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''">
+				,IS_WORK_AREA_EXPLICIT	
+			</if>
+		
+			<if test="isChecked != null and isChecked!=''">
+				,IS_CHECKED	
+			</if>
+		
+			<if test="remark != null and remark!=''">
+				,REMARK	
+			</if>
+		
+			<if test="creatorId != null and creatorId!=''">
+				,CREATOR_ID	
+			</if>
+		
+			<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+			</if>
+		
+			<if test="modifier != null and modifier!=''">
+				,MODIFIER	
+			</if>
+		
+			<if test="modifyTime != null and modifyTime!=''">
+				,MODIFY_TIME	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmConfirmBid_SEQ.nextval
+		<if test="bidName != null and bidName!=''">
+			,#{bidName}
+		</if>
+		<if test="predictAmount != null and predictAmount!=''">
+			,#{predictAmount}
+		</if>
+		<if test="predictCost != null and predictCost!=''">
+			,#{predictCost}
+		</if>
+		<if test="predictProfitRate != null and predictProfitRate!=''">
+			,#{predictProfitRate}
+		</if>
+		<if test="predictPeriod != null and predictPeriod!=''">
+			,#{predictPeriod}
+		</if>
+		<if test="sellDeptId != null and sellDeptId!=''">
+			,#{sellDeptId}
+		</if>
+		<if test="sellDeptName != null and sellDeptName!=''">
+			,#{sellDeptName}
+		</if>
+		<if test="custManagerId != null and custManagerId!=''">
+			,#{custManagerId}
+		</if>
+		<if test="custManagerName != null and custManagerName!=''">
+			,#{custManagerName}
+		</if>
+		<if test="fileCode != null and fileCode!=''">
+			,#{fileCode}
+		</if>
+		<if test="fileName != null and fileName!=''">
+			,#{fileName}
+		</if>
+		<if test="filePath != null and filePath!=''">
+			,#{filePath}
+		</if>
+		<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''">
+			,#{isWorkAreaExplicit}
+		</if>
+		<if test="isChecked != null and isChecked!=''">
+			,#{isChecked}
+		</if>
+		<if test="remark != null and remark!=''">
+			,#{remark}
+		</if>
+		<if test="creatorId != null and creatorId!=''">
+			,#{creatorId}
+		</if>
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
+		<if test="modifier != null and modifier!=''">
+			,#{modifier}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+			,#{modifyTime}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmConfirmBid.entity.PmConfirmBidEntity">
+		update pm_confirm_bid 
+		<set>
+			<if test="bidName != null and bidName!=''">BID_NAME = #{bidName}, </if>
+
+			<if test="predictAmount != null and predictAmount!=''">PREDICT_AMOUNT = #{predictAmount}, </if>
+
+			<if test="predictCost != null and predictCost!=''">PREDICT_COST = #{predictCost}, </if>
+
+			<if test="predictProfitRate != null and predictProfitRate!=''">PREDICT_PROFIT_RATE = #{predictProfitRate}, </if>
+
+			<if test="predictPeriod != null and predictPeriod!=''">PREDICT_PERIOD = #{predictPeriod}, </if>
+
+			<if test="sellDeptId != null and sellDeptId!=''">SELL_DEPT_ID = #{sellDeptId}, </if>
+
+			<if test="sellDeptName != null and sellDeptName!=''">SELL_DEPT_NAME = #{sellDeptName}, </if>
+
+			<if test="custManagerId != null and custManagerId!=''">CUST_MANAGER_ID = #{custManagerId}, </if>
+
+			<if test="custManagerName != null and custManagerName!=''">CUST_MANAGER_NAME = #{custManagerName}, </if>
+
+			<if test="fileCode != null and fileCode!=''">FILE_CODE = #{fileCode}, </if>
+
+			<if test="fileName != null and fileName!=''">FILE_NAME = #{fileName}, </if>
+
+			<if test="filePath != null and filePath!=''">FILE_PATH = #{filePath}, </if>
+
+			<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''">IS_WORK_AREA_EXPLICIT = #{isWorkAreaExplicit}, </if>
+
+			<if test="isChecked != null and isChecked!=''">IS_CHECKED = #{isChecked}, </if>
+
+			<if test="remark != null and remark!=''">REMARK = #{remark}, </if>
+
+			<if test="creatorId != null and creatorId!=''">CREATOR_ID = #{creatorId}, </if>
+
+			<if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime}, </if>
+
+			<if test="modifier != null and modifier!=''">MODIFIER = #{modifier}, </if>
+
+			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where BID_ID = #{bidId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_confirm_bid where BID_ID = #{value}
+	</delete>
+	
+
+
+</mapper>
