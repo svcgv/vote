@@ -122,7 +122,6 @@ public class PmCustomerGroupController {
         	String code=null;
         	PmCustomerInfoEntity cust = null;
         	PmCustomerGroupRelationEntity entity = new PmCustomerGroupRelationEntity();
-        	entity.setModifier(user.getUsrId());
         	entity.setCustGroupId(groupId);
         	for(int i=0;i<ctnCodes.size();i++) {
         		code = ctnCodes.get(i);

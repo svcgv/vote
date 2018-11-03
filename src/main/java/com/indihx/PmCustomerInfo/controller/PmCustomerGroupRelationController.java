@@ -64,8 +64,6 @@ public class PmCustomerGroupRelationController {
     @RequestMapping(value="/save",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> save(@RequestBody PmCustomerGroupRelationEntity pmCustomerGroupRelation,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
-    	pmCustomerGroupRelation.setCreatorId(user.getUsrId());
-        
         pmCustomerGroupRelationService.insert(pmCustomerGroupRelation);
 
         return R.ok();
@@ -77,7 +75,6 @@ public class PmCustomerGroupRelationController {
     @RequestMapping(value="/update",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> update(@RequestBody PmCustomerGroupRelationEntity pmCustomerGroupRelation,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
-    	pmCustomerGroupRelation.setModifier(user.getUsrId());
         pmCustomerGroupRelationService.update(pmCustomerGroupRelation);//全部更新
         
         return R.ok();
