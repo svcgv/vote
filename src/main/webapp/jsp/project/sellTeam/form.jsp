@@ -84,18 +84,19 @@ $(function(){
 			var ret2=[];
 			getChosedUser.children(".customer-list").each(function(){
 				var sapCode2=$(this).children(".customerItem").attr("userId");
-				ret.push(sapCode2)
+				ret2.push(sapCode2)
 			});
 			
 			$.ajax({
 				type:'POST',
-				url:'save',
+				url:'/vote/pmsalegroupinfo/save',
 				data:{
-					name:customerGroupName,
-					orgCodes:ret.join(","),
+					groupName:customerGroupName,
+					ownerOrgId:ret.join(","),
 					userCodes:ret2.join(",")
 				},
 				success:function(res){
+					location.reload();
 					layer.msg("新增成功",{icon:1});
 					win.close();
 				},
