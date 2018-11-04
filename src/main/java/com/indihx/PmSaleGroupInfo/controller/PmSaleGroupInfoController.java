@@ -16,9 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.indihx.PmSaleGroupInfo.entity.PmSaleGroupInfoEntity;
+import com.indihx.PmSaleGroupInfo.entity.PmSaleMemberInfoEntity;
 import com.indihx.PmSaleGroupInfo.service.PmSaleGroupInfoService;
+import com.indihx.PmSaleGroupInfo.service.PmSaleMemberInfoService;
 import com.indihx.comm.util.R;
+import com.indihx.comm.util.RandomUtil;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.comm.util.DateUtil;
@@ -36,13 +41,17 @@ import com.indihx.comm.util.PageUtils;
 public class PmSaleGroupInfoController {
     @Autowired
     private PmSaleGroupInfoService pmSaleGroupInfoService;
+    @Autowired
+    private PmSaleMemberInfoService pmSaleMemberInfoService;
 
+    
     /**
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
-    	Map<String,Object> param = (Map<String, Object>) params.get("queryStr");
+    	
+    	Map<String, Object> param = (Map<String, Object>)JSON.parse((String) params.get("queryStr"));
     	params.putAll(param);
 		List<PmSaleGroupInfoEntity> pmSaleGroupInfo = pmSaleGroupInfoService.queryList(params);
         return R.ok().put("page", pmSaleGroupInfo);
@@ -62,11 +71,46 @@ public class PmSaleGroupInfoController {
      * 保存
      */
     @RequestMapping(value="/save",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> save(@RequestBody PmSaleGroupInfoEntity pmSaleGroupInfo,HttpSession session){
+    public @ResponseBody Map<String,Object> save(@RequestBody Map<String,Object> map ,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+    	PmSaleGroupInfoEntity pmSaleGroupInfo = new PmSaleGroupInfoEntity();
+    	pmSaleGroupInfo.setGroupName((String)map.get("groupName"));
     	pmSaleGroupInfo.setCreatorId(user.getUsrId());
     	pmSaleGroupInfo.setCreateTime(DateUtil.getCurrentTimeMill());
+    	String code = "XS"+DateUtil.getSysDate()+RandomUtil.generateString(4);
+    	pmSaleGroupInfo.setGroupCode(code);
         pmSaleGroupInfoService.insert(pmSaleGroupInfo);
+        //获取团队成员管理
+        String monitorId = (String) map.get("monitorId");
+        if(monitorId!=null) {
+        	if(!"".equals(monitorId)) {
+        		long id = Long.parseLong(monitorId);
+        		PmSaleMemberInfoEntity entity = new PmSaleMemberInfoEntity();
+            	entity.setCreatorId(user.getUsrId());
+            	entity.setCreateTime(DateUtil.getCurrentTimeMill());
+            	entity.setGroupCode(code);
+            	entity.setIsDelete("00");
+            	entity.setMemberType("01");
+            	entity.setMenberUsrId(id);
+            	pmSaleMemberInfoService.insert(entity);
+            	
+        	}
+        }
+        //获取团队成员列表，若列表不为空则遍历插入
+        List<Long> userIds = (List<Long>) map.get("userCodes");
+        if(userIds!=null&&(!userIds.isEmpty())) {
+        	PmSaleMemberInfoEntity entity = new PmSaleMemberInfoEntity();
+        	entity.setCreatorId(user.getUsrId());
+        	entity.setCreateTime(DateUtil.getCurrentTimeMill());
+        	entity.setGroupCode(code);
+        	entity.setIsDelete("00");
+        	entity.setMemberType("00");
+        	for(int i = 0;i<userIds.size();i++) {
+        		entity.setMenberUsrId(userIds.get(i));
+        		
+        	}
+        	pmSaleMemberInfoService.insert(entity);
+        }
         return R.ok();
     }
 

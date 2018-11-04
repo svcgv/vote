@@ -86,28 +86,41 @@ $(function(){
 				var sapCode2=$(this).children(".customerItem").attr("userId");
 				ret2.push(sapCode2)
 			});
+			var param = {}
+			param.groupName=customerGroupName
+			param.ownerOrgId=ret
+			param.userCodes=ret2
 			
+		
+				console.log(param)
+				
+				
+				
 			$.ajax({
-				type:'POST',
-				url:'/vote/pmsalegroupinfo/save',
-				data:{
-					groupName:customerGroupName,
-					ownerOrgId:ret.join(","),
-					userCodes:ret2.join(",")
-				},
-				success:function(res){
+			  type: 'POST',
+			  url: '/vote/pmsalegroupinfo/save',
+			  data: JSON.stringify(param),
+			  contentType:'application/json',
+			  success:function(res){
 					location.reload();
 					layer.msg("新增成功",{icon:1});
 					win.close();
 				},
 				error:function(){
 					layer.msg("新增失败",{icon:5});
-					win.close();
-				}
-				
-				
+					//win.close();
+				},
+			  dataType: "json"
 			})
+			/* 	
+			$.ajax({
+				type:'POST',
+				url:'/vote/pmsalegroupinfo/save',
+				data:JSON.stringify(param),
+				 contentType:'application/json',
+				 dataType: "json",
 				
+			}) */
 			
 			return false;
 		})

@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import com.indihx.PmSaleGroupInfo.dao.PmSaleGroupInfoMapper;
 import com.indihx.PmSaleGroupInfo.entity.PmSaleGroupInfoEntity;
 import com.indihx.PmSaleGroupInfo.service.PmSaleGroupInfoService;
+import com.indihx.comm.util.DateUtil;
+import com.indihx.comm.util.RandomUtil;
 
 
 @Service("pmSaleGroupInfoService")
@@ -23,6 +25,7 @@ public class PmSaleGroupInfoServiceImpl implements PmSaleGroupInfoService {
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmSaleGroupInfoEntity entity){
+		
    		pmSaleGroupInfoMapper.insert(entity);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)

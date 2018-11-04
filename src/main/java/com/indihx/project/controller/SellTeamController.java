@@ -56,6 +56,7 @@ public class SellTeamController extends AbstractBaseController{
 		view.setViewName("/project/sellTeam/index");
 		return view;
 	}
+	//新增表单
 	@RequestMapping(value="/sellTeam/form",method=RequestMethod.GET)
 	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
@@ -70,6 +71,7 @@ public class SellTeamController extends AbstractBaseController{
 		view.setViewName("/project/sellTeam/form");
 		return view;
 	}
+	//修改表单
 	@RequestMapping(value="/sellTeam/edit",method=RequestMethod.GET)
 	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
@@ -82,6 +84,7 @@ public class SellTeamController extends AbstractBaseController{
 		view.setViewName("/project/sellTeam/edit");
 		return view;
 	}
+	//查看表单
 	@RequestMapping(value="/sellTeam/view",method=RequestMethod.GET)
 	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();

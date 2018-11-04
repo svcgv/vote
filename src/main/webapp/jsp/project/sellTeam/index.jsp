@@ -43,7 +43,7 @@
 		   <div class="layui-inline">
 		      <label class="layui-form-label">是否有效：</label>
 		      <div class="layui-input-inline">
-		        <select name="isUseful" lay-verify="required" lay-filter="" class="form-control">
+		        <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
 		        	 ${isUseful.ewTypeHtml }
 		        </select>
 		      </div>
@@ -181,7 +181,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				},
 			    method:'post',
 				where:{
-					queryStr:getParam()
+					queryStr:JSON.stringify(getParam())
 				},
 				contentType: 'application/json',
 			    response: {
@@ -196,41 +196,25 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		  $("#customQuery").click(function(){
 			  
 			  var param = getParam()
+table.reload('customer-table',{
+				url:'/vote/pmsalegroupinfo/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+			    method:'post',
+				where:{
+					queryStr:JSON.stringify(getParam())
+				},
+				contentType: 'application/json',
+			    response: {
+			    	dataName: 'page'
+			    },
+				done:function(res){
+					console.log(res)
+				}
 
-			  $.ajax({
-			  			  type: 'POST',
-			  			  url: '/vote/pmsalegroupinfo/list',
-			  			  data: JSON.stringify({queryStr:param}),
-			  			  contentType:'application/json',
-			  			  success: function(res){
-			  			      console.log(res)
-			  			      testData=res.page
-			  			      table.render({
-			  			  	  	id:"customer-table",
-			  			  	    elem: '#customTable',
-			  			  	    //url:'custom.json',
-			  			  	    toolbar: '#toolbarDemo',
-			  			  	    height:'full-250',
-			  			  	    title: '销售团队数据表',
-			  			  	    cols: [[
-			  			  	    {type: 'checkbox', fixed: 'left'},
-			  		  	      {field:'groupCode', title:'团队编号',fixed: 'left', width:110, sort: true},
-			  		  	      {field:'groupName', title:'团队名称', width:230},
-			  		  	      {field:'ownerOrgId', title:'所属机构编号', width:230},
-			  		  	      {field:'orgName', title:'所属机构名称', width:230},
-			  		  	      {field:'createTime', title:'创建时间'},
-			  		  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
-			  			  	    ]],
-			  			  	    cellMinWidth:'90',
-			  			  	    data:testData,
-			  			  	    page: true
-			  			  	  });},
-			  			  dataType: "json"
-			  			})
-			  			
-			  			
-				
-				
+			})
+			  
 	  })
 	  
 	  

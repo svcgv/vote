@@ -37,7 +37,7 @@ public class PmCustomerGroupServiceImpl implements PmCustomerGroupService {
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmCustomerGroupEntity entity){
-		String custGroupId = DateUtil.getSysDate()+RandomUtil.generateString(4);
+		String custGroupId = "KH"+DateUtil.getSysDate()+RandomUtil.generateString(4);
 		if(entity.getCustGroupId()==null) {
 //			String custGroupId = DateUtil.getSysDate()+RandomUtil.generateString(4);
 			entity.setCustGroupId(custGroupId);

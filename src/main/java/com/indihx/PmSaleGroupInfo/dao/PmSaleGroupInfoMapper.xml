@@ -16,6 +16,7 @@
 		<result property="createTime" column="CREATE_TIME" />
 		<result property="modifier" column="MODIFIER" />
 		<result property="modifyTime" column="MODIFY_TIME" />
+		<result property="groupCode" column="GROUP_CODE" />
 		<result property="isDelete" column="IS_DELETE" />
 	</resultMap>
 
@@ -49,12 +50,12 @@
 				#{creatorId} AND
 			</if>
 			<!-- 开始时间 -->
-			<if test="createTime != null and createTime!=''">
+			<if test="createTimeStart != null and createTimeStart !=''">
 				CREATE_TIME <![CDATA[>=]]>
 				#{createTimeStart} AND
 			</if>
 			<!-- 结束时间 -->
-			<if test="createTime != null and createTime!=''">
+			<if test="createTimeEnd != null and createTimeEnd !=''">
 				CREATE_TIME <![CDATA[<=]]>
 				#{createTimeEnd} AND
 			</if>
@@ -72,6 +73,11 @@
 				MODIFY_TIME <![CDATA[<=]]>
 				#{modifyTimeEnd} AND
 			</if>
+			<if test="groupCode != null and groupCode!=''">
+				GROUP_CODE =
+				#{groupCode} AND
+			</if>
+			
 			<if test="isDelete != null and isDelete!=''">
 				IS_DELETE =
 				#{isDelete}
