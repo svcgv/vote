@@ -25,7 +25,22 @@
 		      </div>
 		    </div>
 		    
+		    
+		    
 		     <div class="layui-inline">
+		      <label class="layui-form-label">开始时间：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="createTimeStart" id="startTime" autocomplete="off" class="layui-input form-control">
+		      </div>
+		    </div>
+		    
+		    <div class="layui-inline">
+		      <label class="layui-form-label">结束时间：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="createTimeEnd" id="endTime"  autocomplete="off" class="layui-input form-control">
+		      </div>
+		    </div>
+		   <div class="layui-inline">
 		      <label class="layui-form-label">是否有效：</label>
 		      <div class="layui-input-inline">
 		        <select name="isUseful" lay-verify="required" lay-filter="" class="form-control">
@@ -33,21 +48,6 @@
 		        </select>
 		      </div>
 		    </div>
-		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">开始时间：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="startTime" id="startTime" autocomplete="off" class="layui-input form-control">
-		      </div>
-		    </div>
-		    
-		    <div class="layui-inline">
-		      <label class="layui-form-label">结束时间：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="endTime" id="endTime"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		    </div>
-		  
 		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:15px;">
@@ -74,6 +74,16 @@
 
 <script type="text/javascript">
 
+function getParam(){
+	var queryParams=$("#customer-query-form").serializeObject();
+	 var newParam = {}
+	  for(var i in queryParams){
+		  if(queryParams[i]){
+			  newParam[i] = queryParams[i]
+		  }
+	  }
+	  return newParam
+}
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table','upload'], function(){
   var layer = layui.layer ,
@@ -113,13 +123,15 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    ]],
 	    cellMinWidth:'90',
 	    data:[
-              {"groupCode":1,"groupName":"销售team1","ownerOrgId":"销售一部"},
-              {"groupCode":1,"groupName":"销售team1","ownerOrgId":"销售一部"},
-              {"groupCode":1,"groupName":"销售team1","ownerOrgId":"销售一部"}
+             
               
        		],
 	    page: true
 	  });
+  
+  	
+
+  
 	/*
 	* 监听头工具栏事件 
 	*/
@@ -159,62 +171,74 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	showFromTable('view',data.groupCode);
 	    }
 	  });
-	/*
-	* 公司查询按钮
-	*/
-	 $("#customQuery").click(function(){
-		 var queryParams=$("#customer-query-form").serialize();
-		 $.ajax({
-			  type: 'POST',
-			  url: '/vote/pmcompanyinfo/list',
-			  data: queryParams,
-			  contentType:'application/json',
-			  success: function(res){
-			      console.log(res)
-			      testData=res.page
-			      table.render({
-			  	  	id:"customer-table",
-			  	    elem: '#customTable',
-			  	    //url:'custom.json',
-			  	    toolbar: '#toolbarDemo',
-			  	    height:'full-250',
-			  	    title: '销售数据表',
-			  	    cols: [[
-			  	    	  {type: 'checkbox', fixed: 'left'},
-				  	      {field:'groupCode', title:'团队编号',fixed: 'left', width:110, sort: true},
-				  	      {field:'groupName', title:'团队名称', width:230},
-				  	      {field:'ownerOrgId', title:'所属机构编号', width:230},
-				  	      {field:'orgName', title:'所属机构名称', width:230},
-				  	      {field:'createTime', title:'创建时间'},
-				  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
-			  	    ]],
-			  	    cellMinWidth:'90',
-			  	    data:[
-						{"groupCode":44,"groupName":"销售team1","ownerOrgId":"销售一部"},
-						{"groupCode":55,"groupName":"销售team1","ownerOrgId":"销售一部"},
-						{"groupCode":66,"groupName":"销售team1","ownerOrgId":"销售一部"}
-			       	],
-			  	    page: true
-			  	  	});},
-			  dataType: "json"
-			});
-		//var queryParams=$("#customer-query-form").serialize();
-		/* table.reload('customer-table',{
-			url:'/vote/bmcustomerinfo/list',
-			page:{
-				curr:1 //从第一页开始
-			},
-			method:'post',
-			where:{
-				queryStr:queryParams
-			},
-			done:function(res){
-				console.log(res)
-			}
+	
+	
+	  
+		 table.reload('customer-table',{
+				url:'/vote/pmsalegroupinfo/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+			    method:'post',
+				where:{
+					queryStr:getParam()
+				},
+				contentType: 'application/json',
+			    response: {
+			    	dataName: 'page'
+			    },
+				done:function(res){
+					console.log(res)
+				}
+
+			})
 			
-		}) */
-		
-	}); 
+		  $("#customQuery").click(function(){
+			  
+			  var param = getParam()
+
+			  $.ajax({
+			  			  type: 'POST',
+			  			  url: '/vote/pmsalegroupinfo/list',
+			  			  data: JSON.stringify({queryStr:param}),
+			  			  contentType:'application/json',
+			  			  success: function(res){
+			  			      console.log(res)
+			  			      testData=res.page
+			  			      table.render({
+			  			  	  	id:"customer-table",
+			  			  	    elem: '#customTable',
+			  			  	    //url:'custom.json',
+			  			  	    toolbar: '#toolbarDemo',
+			  			  	    height:'full-250',
+			  			  	    title: '销售团队数据表',
+			  			  	    cols: [[
+			  			  	    {type: 'checkbox', fixed: 'left'},
+			  		  	      {field:'groupCode', title:'团队编号',fixed: 'left', width:110, sort: true},
+			  		  	      {field:'groupName', title:'团队名称', width:230},
+			  		  	      {field:'ownerOrgId', title:'所属机构编号', width:230},
+			  		  	      {field:'orgName', title:'所属机构名称', width:230},
+			  		  	      {field:'createTime', title:'创建时间'},
+			  		  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+			  			  	    ]],
+			  			  	    cellMinWidth:'90',
+			  			  	    data:testData,
+			  			  	    page: true
+			  			  	  });},
+			  			  dataType: "json"
+			  			})
+			  			
+			  			
+				
+				
+	  })
+	  
+	  
+
+	
+	
+	
+				
 	
 	/*
 	* 新增团队
@@ -246,7 +270,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		
 	}
 	
-});
+})
 var testData=null;
 </script>
 </body>

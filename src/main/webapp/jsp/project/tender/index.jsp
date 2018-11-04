@@ -46,6 +46,7 @@
 		      </div>
 		    </div>
 		     -->
+		     
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
@@ -70,7 +71,14 @@
 		      </div>
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
-		    
+		     <div class="layui-inline">
+		      <label class="layui-form-label">是否有效：</label>
+		      <div class="layui-input-inline">
+		        <select name="isUseful" lay-verify="required" lay-filter="" class="form-control">
+		        	 ${isUseful.ewTypeHtml }
+		        </select>
+		      </div>
+		    </div>
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:25px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
@@ -78,6 +86,7 @@
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 			  </div>
 		   </div>
+		   
 	   </div>
 	</form>
 	<table class="layui-hide" id="productTable" lay-filter="custom"></table>

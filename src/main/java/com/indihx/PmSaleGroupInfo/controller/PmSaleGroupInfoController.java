@@ -42,6 +42,8 @@ public class PmSaleGroupInfoController {
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
+    	Map<String,Object> param = (Map<String, Object>) params.get("queryStr");
+    	params.putAll(param);
 		List<PmSaleGroupInfoEntity> pmSaleGroupInfo = pmSaleGroupInfoService.queryList(params);
         return R.ok().put("page", pmSaleGroupInfo);
     }

@@ -29,7 +29,7 @@ private String groupName;
 	 * 
 	 */
 
-private Long ownerOrgId;
+private long ownerOrgId;
 	/**
 	 * 
 	 */
@@ -39,7 +39,7 @@ private String remark;
 	 * 
 	 */
 
-private Long creatorId;
+private long creatorId;
 	/**
 	 * 
 	 */
@@ -88,13 +88,13 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setOwnerOrgId(Long ownerOrgId) {
+	public void setOwnerOrgId(long ownerOrgId) {
 		this.ownerOrgId = ownerOrgId;
 	}
 	/**
 	 * 获取：
 	 */
-	public Long getOwnerOrgId() {
+	public long getOwnerOrgId() {
 		return ownerOrgId;
 	}
 	/**
@@ -112,7 +112,7 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setCreatorId(Long creatorId) {
+	public void setCreatorId(long creatorId) {
 		this.creatorId = creatorId;
 	}
 	/**
@@ -136,7 +136,7 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setModifier(Long modifier) {
+	public void setModifier(long modifier) {
 		this.modifier = modifier;
 	}
 	/**

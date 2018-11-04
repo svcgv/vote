@@ -69,6 +69,15 @@
 		       </div>
 		    </div>
 		    
+		     <div class="layui-inline">
+		      <label class="layui-form-label">是否有效：</label>
+		      <div class="layui-input-inline">
+		        <select name="isUseful" lay-verify="required" lay-filter="" class="form-control">
+		        	 ${isUseful.ewTypeHtml }
+		        </select>
+		      </div>
+		    </div>
+		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:25px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>

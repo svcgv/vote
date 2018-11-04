@@ -35,8 +35,7 @@
 				AND
 			</if>
 			<if test="groupName != null and groupName!=''">
-				GROUP_NAME =
-				#{groupName} AND
+				GROUP_NAME like concat(concat('%',#{groupName}),'%')  AND
 			</if>
 			<if test="ownerOrgId != null and ownerOrgId!=''">
 				OWNER_ORG_ID =
