@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,8 +98,9 @@ public class PmSaleGroupInfoController {
         	}
         }
         //获取团队成员列表，若列表不为空则遍历插入
-        List<String> userIds = (List<String>) map.get("userCodes");
-        if(userIds!=null&&(!userIds.isEmpty())) {
+        List<Map<String, Object>> userIds = (List<Map<String,Object>>) map.get("userCodes");
+        insertMemberList(user,userIds,code);
+        /*if(userIds!=null&&(!userIds.isEmpty())) {
         	PmSaleMemberInfoEntity entity = new PmSaleMemberInfoEntity();
         	entity.setCreatorId(user.getUsrId());
         	entity.setCreateTime(DateUtil.getCurrentTimeMill());
@@ -106,28 +108,80 @@ public class PmSaleGroupInfoController {
         	entity.setIsDelete("00");
         	entity.setMemberType("00");
         	String userId ;
+        	String userName;
         	for(int i = 0;i<userIds.size();i++) {
-        		userId = userIds.get(i);
+        		userId = userIds.get(i).get("userId").toString();
+        		userName = userIds.get(i).get("userName").toString();
         		entity.setMenberUsrId(Long.parseLong(userId));
+        		if(userName!=null) {
+        			entity.setMenberUsrName(userName);
+        		}
+        		
         		pmSaleMemberInfoService.insert(entity);
         	}
         	
-        }
+        }*/
         return R.ok();
     }
 
     /**
      * 修改
+     * 传入
      */
     @RequestMapping(value="/update",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> update(@RequestBody PmSaleGroupInfoEntity pmSaleGroupInfo,HttpSession session){
+    public @ResponseBody Map<String,Object> update(@RequestBody Map<String,Object> param,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+    	//组装团队信息参数
+    	long groupId = Long.parseLong(param.get("groupId").toString());
+    	String groupCode = param.get("groupCode").toString();
+    	long orgNo = Long.parseLong(param.get("orgNo").toString());
+    	String orgName = param.get("orgName").toString();
+    	PmSaleGroupInfoEntity pmSaleGroupInfo = new PmSaleGroupInfoEntity();
+    	pmSaleGroupInfo.setGroupCode(groupCode);
+    	pmSaleGroupInfo.setGroupId(groupId);
     	pmSaleGroupInfo.setModifier(user.getUsrId());
     	pmSaleGroupInfo.setModifyTime(DateUtil.getCurrentTimeMill());
+    	pmSaleGroupInfo.setOwnerOrgId(orgNo);
+    	pmSaleGroupInfo.setOwnerOrgName(orgName);
+    	pmSaleGroupInfo.setGroupName(param.get("groupName").toString());
         pmSaleGroupInfoService.update(pmSaleGroupInfo);//全部更新
+        //通过groupCode删掉团队成员信息
+        pmSaleMemberInfoService.delete(groupCode);
+        //获取团队成员列表批量插入
+        List<Map<String,Object>> users = (List<Map<String, Object>>) param.get("users");
+        insertMemberList(user,users,groupCode);
         return R.ok();
     }
 
+    /**
+     * 
+     * @param user
+     * @param userIds
+     * @param code
+     */
+    public void insertMemberList(UsrInfo user,List<Map<String,Object>> userIds,String code) {
+    	if(userIds!=null&&!userIds.isEmpty()) {
+    		PmSaleMemberInfoEntity entity = new PmSaleMemberInfoEntity();
+        	entity.setCreatorId(user.getUsrId());
+        	entity.setCreateTime(DateUtil.getCurrentTimeMill());
+        	entity.setGroupCode(code);
+        	entity.setIsDelete("00");
+        	entity.setMemberType("00");
+        	String userId ;
+        	String userName;
+        	for(int i = 0;i<userIds.size();i++) {
+        		userId = userIds.get(i).get("userId").toString();
+        		userName = userIds.get(i).get("userName").toString();
+        		entity.setMenberUsrId(Long.parseLong(userId));
+        		if(userName!=null) {
+        			entity.setMenberUsrName(userName);
+        		}
+        		
+        		pmSaleMemberInfoService.insert(entity);
+        	}
+    	}
+    	
+    }
     /**
      * 删除
      */

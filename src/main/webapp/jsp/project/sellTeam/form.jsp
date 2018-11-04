@@ -83,7 +83,9 @@ $(function(){
 			var getChosedUser=$("#form-customer-hook #chosed-user-hook");
 			var ret2=[];
 			getChosedUser.children(".customer-list").each(function(){
-				var sapCode2=$(this).children(".customerItem").attr("userId");
+				var sapCode2={}
+				sapCode2.userId = $(this).children(".customerItem").attr("userId");
+				sapCode2.userName = $(this).children(".customerItem").attr("textContent");
 				ret2.push(sapCode2)
 			});
 			var param = {}
