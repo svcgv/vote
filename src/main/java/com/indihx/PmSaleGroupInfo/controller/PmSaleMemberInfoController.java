@@ -87,9 +87,9 @@ public class PmSaleMemberInfoController {
      * 删除
      */
     @RequestMapping(value="/delete",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> delete(@RequestBody Long menberUsrId,HttpSession session){
+    public @ResponseBody Map<String,Object> delete(@RequestBody String groupCode,HttpSession session){
     	
-        pmSaleMemberInfoService.delete(menberUsrId);
+        pmSaleMemberInfoService.delete(groupCode);
 
         return R.ok();
     }

@@ -6,16 +6,16 @@
 	<form class="layui-form" id="user-query-form" action="">
 	  <div class="layui-form-item">
 	  	<div class="layui-inline">
-	       <label class="layui-form-label">用户ID：</label>
+	       <label class="layui-form-label">用户编号：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="userId"  autocomplete="off" class="layui-input form-control">
+	         <input type="text" name="usrNo"  autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
 	  	
 	  	<div class="layui-inline">
 	      <label class="layui-form-label" >用户名：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="userName"  autocomplete="off" class="layui-input form-control" >
+	         <input type="text" name="usrName"  autocomplete="off" class="layui-input form-control" >
 	      </div>
 	    </div>
 	    
@@ -54,30 +54,12 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    title: '用户数据表',
 	    cols: [[
 	      {type: 'checkbox' },
-	      {field:'userId', title:'用户ID', sort: true},
-	      {field:'userName', title:'用户名'}
+	      {field:'usrId', title:'用户账号', sort: true},
+	      {field:'usrNo', title:'用户编号(博彦)'},
+	      {field:'usrName', title:'用户名'}
 	    ]],
 	    data:[
-		  		{
-		  			"userId":"1000",
-					"userName":"系统管理员"
-					
-				},
-				{
-		  			"userId":"1001",
-					"userName":"admin"
-					
-				},
-				{
-		  			"userId":"1002",
-					"userName":"Superman"
-					
-				},
-				{
-		  			"userId":"1003",
-					"userName":"史定波"
-					
-				}
+		  		
 				
 			],
 	    page: true
@@ -99,13 +81,13 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
 			if(isChecked){
 				var userId=$(this).children("td").eq(1).text();
-				var userName=$(this).children("td").eq(2).text();
+				var usrName=$(this).children("td").eq(3).text();
 				
 				// 遍历不存在的插入
 				
 				if($.inArray(userId,ret) == -1 ){
 					var _html = '<span class="customer-list">'
-			         	      +'<span class="customerItem" userId="'+userId+'">'+userName+'</span>'
+			         	      +'<span class="customerItem" userId="'+userId+'">'+usrName+'</span>'
 			               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
 			         		  +'</span>';
 			         		 getExitUser.append(_html);	  
@@ -129,7 +111,46 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	*/
 	$("#user-query-form #userQuery").click(function(){
 		
-		var queryParams=$("#user-query-form").serialize();
+		var queryParams=$("#user-query-form").serializeObject();
+		
+		var newparam = {}
+		 for(var o in queryParams){
+			 if(queryParams[o]){
+				 newparam[o] = queryParams[o]
+			 }
+		}
+		$.ajax({
+			  type: 'POST',
+			  url: '/vote/queryusrinfo/list',
+			  data: JSON.stringify(newparam),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			      testData=res.page
+
+			      table.render({
+			  	    elem: '#userTable',
+			  	    //url:'custom.json',
+			  	    height:'260',
+			  	    width:"690",
+			  	    title: '用户数据表',
+			  	    cols: [[
+			  	    	{type: 'checkbox' },
+			  	      {field:'usrId', title:'用户账号', sort: true},
+			  	      {field:'usrNo', title:'用户编号(博彦)'},
+			  	      {field:'usrName', title:'用户名'}
+			  	    ]],
+			  	    data:testData,
+			  	    page: true
+			  	  });
+			      
+			      
+			      
+			      ;},
+			  dataType: "json"
+			})
+			
+			
 		console.log(queryParams)
 		table.reload('customerGroup-table',{
 			url:'form',
@@ -151,7 +172,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	
 });
 
-
+var testData = []
 
 </script>
 

@@ -30,6 +30,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.indihx.AbstractBaseController;
+import com.indihx.PmSaleGroupInfo.entity.PmSaleGroupInfoEntity;
+import com.indihx.PmSaleGroupInfo.service.impl.PmSaleGroupInfoServiceImpl;
+import com.indihx.baseTableUtil.entity.QueryUsrInfoEntity;
+import com.indihx.baseTableUtil.service.QueryUsrInfoService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
@@ -45,7 +49,10 @@ import com.indihx.system.service.impl.ParamsInfoServiceimpl;
 public class SellTeamController extends AbstractBaseController{
 	@Autowired
 	private ParamsInfoServiceimpl infoservice;
-	
+	@Autowired
+	PmSaleGroupInfoServiceImpl pmSaleGroupInfoServiceImpl;
+	@Autowired
+	QueryUsrInfoService queryUsrInfoService;
 	@RequestMapping("/sellTeam/index")
 	public ModelAndView addCustomView() {
 		
@@ -75,7 +82,14 @@ public class SellTeamController extends AbstractBaseController{
 	@RequestMapping(value="/sellTeam/edit",method=RequestMethod.GET)
 	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("groupCode", id);
 		
+		List<PmSaleGroupInfoEntity> list = pmSaleGroupInfoServiceImpl.queryList(map);
+		List<QueryUsrInfoEntity> usrs = queryUsrInfoService.queryBySaleGroupCode(list.get(0).getGroupCode());
+		
+		view.addObject("group",list.get(0));
+		view.addObject("users",usrs);
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		
 		view.addObject("act",act);

@@ -7,6 +7,7 @@
 		<ul id="treeOrg" class="ztree"></ul>
 	</div>
 	<div class="layui-layer-btn layui-layer-btn-c">
+	<a class="layui-layer-btn0" id="query-hook" style="background:#009688;border-color:#009688;">查询</a>
     	<a class="layui-layer-btn0" id="org-add-hook" style="background:#009688;border-color:#009688;">保存</a>
     	<a class="layui-layer-btn1" id="org-close-hook">关闭</a>
 	 </div>
@@ -93,6 +94,24 @@ $(".org-wrapper #org-add-hook").click(function(){
 	
 	
 });
+
+
+
+
+$("#query-hook").click(function(){
+	$.ajax({
+		  type: 'POST',
+		  url: '/vote/queryorginfo/getOrgTree',
+		  data: JSON.stringify({}),
+		  contentType:'application/json',
+		  success: function(res){
+		      console.log(res)
+		      zNodes=[res.Tree]
+		      $.fn.zTree.init($("#treeOrg"), setting, zNodes);
+	      },
+		  dataType: "json"
+		})
+})
 
 //关闭
 $(".org-wrapper #org-close-hook").click(function(){

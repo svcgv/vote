@@ -97,7 +97,7 @@ public class PmSaleGroupInfoController {
         	}
         }
         //获取团队成员列表，若列表不为空则遍历插入
-        List<Long> userIds = (List<Long>) map.get("userCodes");
+        List<String> userIds = (List<String>) map.get("userCodes");
         if(userIds!=null&&(!userIds.isEmpty())) {
         	PmSaleMemberInfoEntity entity = new PmSaleMemberInfoEntity();
         	entity.setCreatorId(user.getUsrId());
@@ -105,11 +105,13 @@ public class PmSaleGroupInfoController {
         	entity.setGroupCode(code);
         	entity.setIsDelete("00");
         	entity.setMemberType("00");
+        	String userId ;
         	for(int i = 0;i<userIds.size();i++) {
-        		entity.setMenberUsrId(userIds.get(i));
-        		
+        		userId = userIds.get(i);
+        		entity.setMenberUsrId(Long.parseLong(userId));
+        		pmSaleMemberInfoService.insert(entity);
         	}
-        	pmSaleMemberInfoService.insert(entity);
+        	
         }
         return R.ok();
     }

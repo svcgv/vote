@@ -40,7 +40,7 @@ private String remark;
 	 * 
 	 */
 
-private Long creatorId;
+private long creatorId;
 	/**
 	 * 
 	 */
@@ -50,7 +50,7 @@ private String createTime;
 	 * 
 	 */
 
-private Long modifier;
+private long modifier;
 	/**
 	 * 
 	 */
@@ -65,13 +65,13 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setMenberUsrId(Long menberUsrId) {
+	public void setMenberUsrId(long menberUsrId) {
 		this.menberUsrId = menberUsrId;
 	}
 	/**
 	 * 获取：
 	 */
-	public Long getMenberUsrId() {
+	public long getMenberUsrId() {
 		return menberUsrId;
 	}
 	/**
@@ -113,7 +113,7 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setCreatorId(Long creatorId) {
+	public void setCreatorId(long creatorId) {
 		this.creatorId = creatorId;
 	}
 	/**
@@ -137,7 +137,7 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setModifier(Long modifier) {
+	public void setModifier(long modifier) {
 		this.modifier = modifier;
 	}
 	/**

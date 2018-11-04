@@ -31,8 +31,8 @@ public class PmSaleMemberInfoServiceImpl implements PmSaleMemberInfoService {
    		pmSaleMemberInfoMapper.update(entity);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void delete(Long menberUsrId){
-   		pmSaleMemberInfoMapper.delete( menberUsrId);
+	public void delete(String groupCode){
+   		pmSaleMemberInfoMapper.delete( groupCode);
    	}
 
 	public int queryTotal(){

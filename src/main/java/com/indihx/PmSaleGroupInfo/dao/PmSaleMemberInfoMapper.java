@@ -17,7 +17,7 @@ public interface PmSaleMemberInfoMapper{
 	public PmSaleMemberInfoEntity queryObject(Long id);
 	public void insert(PmSaleMemberInfoEntity entity);
 	public void update(PmSaleMemberInfoEntity entity);
-	public void delete(Long menberUsrId);
+	public void delete(String groupCode);
 	public List<PmSaleMemberInfoEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
 }

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.baseTableUtil.dao.QueryOrgInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+	<resultMap
+		type="com.indihx.baseTableUtil.entity.QueryOrgInfoEntity" id="orgInfoMap">
+		<result property="parentOrgNo" column="PARENT_ORG_NO" />
+		<result property="parentOrgName" column="PARENT_ORG_NAME" />
+		<result property="orgNo" column="ORG_NO" />
+		<result property="orgName" column="ORG_NAME" />
+		<result property="orgType" column="ORG_TYPE" />
+		<result property="addres" column="ADDRES" />
+		<result property="telNo" column="TEL_NO" />
+		<result property="operUsr" column="OPER_USR" />
+		<result property="tmSmp" column="TM_SMP" />
+		<result property="orgStatus" column="ORG_STATUS" />
+		<result property="linkMan" column="LINK_MAN" />
+		<result property="email" column="EMAIL" />
+		<result property="postCode" column="POST_CODE" />
+		<result property="remark" column="REMARK" />
+	</resultMap>
+
+
+	<resultMap
+		type="java.util.Map" id="queryorgInfoMap">
+		<result property="parentOrgNo" column="PARENT_ORG_NO" />
+		<result property="parentOrgName" column="PARENT_ORG_NAME" />
+		<result property="orgId" column="ORG_NO" />
+		<result property="name" column="ORG_NAME" />
+		<result property="orgType" column="ORG_TYPE" />
+		<result property="addres" column="ADDRES" />
+		<result property="telNo" column="TEL_NO" />
+		<result property="operUsr" column="OPER_USR" />
+		<result property="tmSmp" column="TM_SMP" />
+		<result property="orgStatus" column="ORG_STATUS" />
+		<result property="linkMan" column="LINK_MAN" />
+		<result property="email" column="EMAIL" />
+		<result property="postCode" column="POST_CODE" />
+		<result property="remark" column="REMARK" />
+	</resultMap>
+	
+	<select id="queryObject" resultMap="orgInfoMap">
+		select * from org_info where
+		ORG_NO = #{value}
+	</select>
+
+	<select id="queryList" resultMap="orgInfoMap">
+		select
+		*
+		from org_info
+		<trim prefix="WHERE" prefixOverrides="AND|OR"
+			suffixOverrides="AND|OR">
+			<if test="parentOrgNo != null and parentOrgNo!=''">
+				PARENT_ORG_NO =
+				#{parentOrgNo} AND
+			</if>
+			<if test="parentOrgName != null and parentOrgName!=''">
+				PARENT_ORG_NAME = #{parentOrgName} AND
+			</if>
+			<if test="orgNo != null and orgNo!=''">
+				ORG_NO = #{orgNo} AND
+			</if>
+			<if test="orgName != null and orgName!=''">
+				ORG_NAME = #{orgName}
+				AND
+			</if>
+			<if test="orgType != null and orgType!=''">
+				ORG_TYPE = #{orgType}
+				AND
+			</if>
+			<if test="addres != null and addres!=''">
+				ADDRES = #{addres} AND
+			</if>
+			<if test="telNo != null and telNo!=''">
+				TEL_NO = #{telNo} AND
+			</if>
+			<if test="operUsr != null and operUsr!=''">
+				OPER_USR = #{operUsr}
+				AND
+			</if>
+			<if test="tmSmp != null and tmSmp!=''">
+				TM_SMP = #{tmSmp} AND
+			</if>
+			<if test="orgStatus != null and orgStatus!=''">
+				ORG_STATUS =
+				#{orgStatus} AND
+			</if>
+			<if test="linkMan != null and linkMan!=''">
+				LINK_MAN = #{linkMan}
+				AND
+			</if>
+			<if test="email != null and email!=''">
+				EMAIL = #{email} AND
+			</if>
+			<if test="postCode != null and postCode!=''">
+				POST_CODE =
+				#{postCode} AND
+			</if>
+			<if test="remark != null and remark!=''">
+				REMARK = #{remark}
+			</if>
+		</trim>
+	</select>
+
+	<select id="queryTotal" resultType="int">
+		select count(*) from org_info
+	</select>
+	
+	<select id="queryTopOrg" resultMap="queryorgInfoMap">
+		SELECT * from ORG_INFO WHERE ORG_NO = 1000
+	</select>
+
+	<select id="queryChildrenOrg" resultMap="queryorgInfoMap">
+		SELECT * from ORG_INFO WHERE PARENT_ORG_NO = #{orgId}
+	</select>
+	
+</mapper>

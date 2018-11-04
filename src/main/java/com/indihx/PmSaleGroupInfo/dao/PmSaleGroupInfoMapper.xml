@@ -11,6 +11,7 @@
 		<result property="groupId" column="GROUP_ID" />
 		<result property="groupName" column="GROUP_NAME" />
 		<result property="ownerOrgId" column="OWNER_ORG_ID" />
+		<result property="ownerOrgName" column="OWNER_ORG_NAME" />
 		<result property="remark" column="REMARK" />
 		<result property="creatorId" column="CREATOR_ID" />
 		<result property="createTime" column="CREATE_TIME" />
@@ -74,8 +75,7 @@
 				#{modifyTimeEnd} AND
 			</if>
 			<if test="groupCode != null and groupCode!=''">
-				GROUP_CODE =
-				#{groupCode} AND
+				GROUP_CODE  like concat(concat('%',#{groupCode}),'%') AND
 			</if>
 			
 			<if test="isDelete != null and isDelete!=''">
@@ -116,6 +116,9 @@
 		<if test="modifyTime != null and modifyTime!=''">
 			,MODIFY_TIME
 		</if>
+		<if test="groupCode != null and groupCode!=''">
+			,GROUP_CODE
+		</if>
 			,IS_DELETE
 		)
 		values
@@ -141,6 +144,9 @@
 		</if>
 		<if test="modifyTime != null and modifyTime!=''">
 			,#{modifyTime}
+		</if>
+		<if test="groupCode != null and groupCode!=''">
+			,#{groupCode}
 		</if>
 			,'00'
 		)

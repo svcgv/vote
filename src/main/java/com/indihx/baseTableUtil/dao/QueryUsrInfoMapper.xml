@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.indihx.baseTableUtil.dao.QueryUsrInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+	<resultMap
+		type="com.indihx.baseTableUtil.entity.QueryUsrInfoEntity"
+		id="usrInfoMap">
+		<result property="usrId" column="USR_ID" />
+		<result property="usrNo" column="USR_NO" />
+		<result property="usrName" column="USR_NAME" />
+		<result property="sex" column="SEX" />
+		<result property="passWord" column="PASS_WORD" />
+		<result property="birthDate" column="BIRTH_DATE" />
+		<result property="mblNo" column="MBL_NO" />
+		<result property="email" column="EMAIL" />
+		<result property="operUsr" column="OPER_USR" />
+		<result property="usrSta" column="USR_STA" />
+		<result property="tmSmp" column="TM_SMP" />
+		<result property="orgNo" column="ORG_NO" />
+		<result property="orgType" column="ORG_TYPE" />
+		<result property="licenceCode" column="LICENCE_CODE" />
+		<result property="certId" column="CERT_ID" />
+		<result property="sessionId" column="SESSION_ID" />
+		<result property="lastActiveTime" column="LAST_ACTIVE_TIME" />
+		<result property="strRemark" column="STR_REMARK" />
+	</resultMap>
+
+	<select id="queryObject" resultMap="usrInfoMap">
+		select
+		USR_ID,
+		USR_NO,
+		USR_NAME,
+		OPER_USR,
+		USR_STA,
+		TM_SMP,
+		ORG_NO,
+		ORG_TYPE,
+		LICENCE_CODE,
+		CERT_ID
+		from
+		usr_info
+		where
+		USR_ID = #{value}
+	</select>
+
+	<select id="queryObjectAll" resultMap="usrInfoMap">
+		select * from usr_info
+		where
+		USR_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="usrInfoMap">
+		select
+		USR_ID,
+		USR_NO,
+		USR_NAME,
+		OPER_USR,
+		USR_STA,
+		TM_SMP,
+		ORG_NO,
+		ORG_TYPE,
+		LICENCE_CODE,
+		CERT_ID
+		from usr_info
+		<trim prefix="WHERE" prefixOverrides="AND|OR"
+			suffixOverrides="AND|OR">
+			<if test="usrId != null and usrId!=''">
+				USR_ID = #{usrId} AND
+			</if>
+			<if test="usrNo != null and usrNo!=''">
+				USR_NO like concat(concat('%',#{usrNo}),'%') AND
+			</if>
+			<if test="usrName != null and usrName!=''">
+				USR_NAME like concat(concat('%',#{usrName}),'%') AND
+			</if>
+			<if test="sex != null and sex!=''">
+				SEX = #{sex} AND
+			</if>
+			<if test="passWord != null and passWord!=''">
+				PASS_WORD =
+				#{passWord} AND
+			</if>
+			<if test="birthDate != null and birthDate!=''">
+				BIRTH_DATE =
+				#{birthDate} AND
+			</if>
+			<if test="mblNo != null and mblNo!=''">
+				MBL_NO = #{mblNo} AND
+			</if>
+			<if test="email != null and email!=''">
+				EMAIL = #{email} AND
+			</if>
+			<if test="operUsr != null and operUsr!=''">
+				OPER_USR = #{operUsr}
+				AND
+			</if>
+			<if test="usrSta != null and usrSta!=''">
+				USR_STA = #{usrSta} AND
+			</if>
+			<if test="tmSmp != null and tmSmp!=''">
+				TM_SMP = #{tmSmp} AND
+			</if>
+			<if test="orgNo != null and orgNo!=''">
+				ORG_NO = #{orgNo} AND
+			</if>
+			<if test="orgType != null and orgType!=''">
+				ORG_TYPE = #{orgType}
+				AND
+			</if>
+			<if test="licenceCode != null and licenceCode!=''">
+				LICENCE_CODE =
+				#{licenceCode} AND
+			</if>
+			<if test="certId != null and certId!=''">
+				CERT_ID = #{certId} AND
+			</if>
+			<if test="sessionId != null and sessionId!=''">
+				SESSION_ID =
+				#{sessionId} AND
+			</if>
+			<if test="lastActiveTime != null and lastActiveTime!=''">
+				LAST_ACTIVE_TIME = #{lastActiveTime} AND
+			</if>
+			<if test="strRemark != null and strRemark!=''">
+				STR_REMARK =
+				#{strRemark}
+			</if>
+		</trim>
+	</select>
+
+	<select id="queryTotal" resultType="int">
+		select count(1) from usr_info
+	</select>
+
+	<select id="queryListAll" resultMap="usrInfoMap">
+		select
+		*
+		from usr_info
+		<trim prefix="WHERE" prefixOverrides="AND|OR"
+			suffixOverrides="AND|OR">
+			<if test="usrId != null and usrId!=''">
+				USR_ID = #{usrId} AND
+			</if>
+			<if test="usrNo != null and usrNo!=''">
+				USR_NO like concat(concat('%',#{usrNo}),'%') AND
+			</if>
+			<if test="usrName != null and usrName!=''">
+				USR_NAME like concat(concat('%',#{usrName}),'%') AND
+			</if>
+			<if test="sex != null and sex!=''">
+				SEX = #{sex} AND
+			</if>
+			<if test="passWord != null and passWord!=''">
+				PASS_WORD =
+				#{passWord} AND
+			</if>
+			<if test="birthDate != null and birthDate!=''">
+				BIRTH_DATE =
+				#{birthDate} AND
+			</if>
+			<if test="mblNo != null and mblNo!=''">
+				MBL_NO = #{mblNo} AND
+			</if>
+			<if test="email != null and email!=''">
+				EMAIL = #{email} AND
+			</if>
+			<if test="operUsr != null and operUsr!=''">
+				OPER_USR = #{operUsr}
+				AND
+			</if>
+			<if test="usrSta != null and usrSta!=''">
+				USR_STA = #{usrSta} AND
+			</if>
+			<if test="tmSmp != null and tmSmp!=''">
+				TM_SMP = #{tmSmp} AND
+			</if>
+			<if test="orgNo != null and orgNo!=''">
+				ORG_NO = #{orgNo} AND
+			</if>
+			<if test="orgType != null and orgType!=''">
+				ORG_TYPE = #{orgType}
+				AND
+			</if>
+			<if test="licenceCode != null and licenceCode!=''">
+				LICENCE_CODE =
+				#{licenceCode} AND
+			</if>
+			<if test="certId != null and certId!=''">
+				CERT_ID = #{certId} AND
+			</if>
+			<if test="sessionId != null and sessionId!=''">
+				SESSION_ID =
+				#{sessionId} AND
+			</if>
+			<if test="lastActiveTime != null and lastActiveTime!=''">
+				LAST_ACTIVE_TIME = #{lastActiveTime} AND
+			</if>
+			<if test="strRemark != null and strRemark!=''">
+				STR_REMARK =
+				#{strRemark}
+			</if>
+		</trim>
+	</select>
+
+
+
+
+	<select id="queryBySaleGroupCode" resultMap="usrInfoMap">
+		SELECT
+		B.USR_ID,
+		B.USR_NO,
+		B.USR_NAME
+		FROM
+		PM_SALE_MEMBER_INFO A
+		LEFT JOIN USR_INFO B ON A .MENBER_USR_ID = B.USR_ID
+		WHERE
+		A.GROUP_CODE=#{groupCode}
+	</select>
+
+</mapper>

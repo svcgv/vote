@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="cm" uri="http://www.custom.com/01"%>
 <style>
 
 .formDetail-wrapper .customer-list{
@@ -18,7 +21,8 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">销售团队名称：</label>
 		      <div class="layui-input-inline">
-		         <input type="text" name="groupName" autocomplete="off" value="返写" class="layui-input form-control">
+		         <input type="text" name="groupName" autocomplete="off" value="${group.groupName}" class="layui-input form-control">
+		          <input type="hidden" name="groupName" autocomplete="off" value="${group.groupId}" class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline" style="vertical-align:top;">
@@ -31,7 +35,7 @@
 	     	   <label class="layui-form-label">已选机构：</label>
 			       <div class="layui-input-inline" id="chosed-customer-hook" style="border:#e6e6e6 solid 1px;height:32px;overflow-y:auto;width:460px;">
 			     	 <span class="customer-list">
-			    		<span class="customerItem" orgId="123">返写</span>
+			    		<span class="customerItem" orgId="${group.ownerOrgId}">${group.ownerOrgName}</span>
 			    		<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>
 			    	</span>
 			       </div>
@@ -39,10 +43,14 @@
 		     <div class="layui-inline">
 		     	   <label class="layui-form-label">已选用户：</label>
 			      <div class="layui-input-inline" id="chosed-user-hook" style="border:#e6e6e6 solid 1px;height:50px;overflow-y:auto;width:460px;">
-			      	<span class="customer-list">
-			    		<span class="customerItem" userId="1000">系统管理员</span>
-			    		<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>
-			    	</span>
+			      	
+			    	<c:forEach items="${users}" var="app">
+						<span class="customer-list">
+				    		<span class="customerItem" userId="${app.usrId}">${app.usrName}</span>
+				    		<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>
+			    		</span>
+					</c:forEach>
+			    	
 			      </div>
 		     </div>
 		  </div>

@@ -31,6 +31,8 @@ public class PmSaleGroupInfoEntity extends BaseEntity implements Serializable {
 	/**
 	 * 
 	 */
+	
+	private String ownerOrgName;
 
 	private String remark;
 	/**
@@ -60,6 +62,15 @@ public class PmSaleGroupInfoEntity extends BaseEntity implements Serializable {
 	private String isDelete;
 
 	private String groupCode;
+
+	
+	public String getOwnerOrgName() {
+		return ownerOrgName;
+	}
+
+	public void setOwnerOrgName(String ownerOrgName) {
+		this.ownerOrgName = ownerOrgName;
+	}
 
 	public String getGroupCode() {
 		return groupCode;

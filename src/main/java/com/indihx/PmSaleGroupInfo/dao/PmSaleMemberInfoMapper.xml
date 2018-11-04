@@ -90,9 +90,7 @@
 		insert into pm_sale_member_info
 		(
 		MENBER_USR_ID
-		<if test="groupCode != null and groupCode!=''">
 			,GROUP_CODE
-		</if>
 		<if test="memberType != null and memberType!=''">
 			,MEMBER_TYPE
 		</if>
@@ -115,10 +113,8 @@
 		)
 		values
 		(
-		PmSaleMemberInfo_SEQ.nextval
-		<if test="groupCode != null and groupCode!=''">
+		#{menberUsrId}
 			,#{groupCode}
-		</if>
 		<if test="memberType != null and memberType!=''">
 			,#{memberType}
 		</if>
@@ -158,7 +154,7 @@
 	</update>
 
 	<delete id="delete">
-		delete from pm_sale_member_info where MENBER_USR_ID =
+		delete from pm_sale_member_info where GROUP_CODE =
 		#{value}
 	</delete>
 
