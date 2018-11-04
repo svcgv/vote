@@ -35,14 +35,14 @@
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">开始时间：</label>
+		      <label class="layui-form-label">创建时间(开始)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="startTime" id="startTime" autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">结束时间：</label>
+		      <label class="layui-form-label">创建时间(结束)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="endTime" id="endTime"  autocomplete="off" class="layui-input form-control">
 		      </div>

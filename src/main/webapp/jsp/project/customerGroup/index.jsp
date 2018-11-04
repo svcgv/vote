@@ -23,19 +23,26 @@
 	  
 	    
 	    <div class="layui-inline">
-	      <label class="layui-form-label">添加开始时间：</label>
+	      <label class="layui-form-label">创建时间(开始)：</label>
 	      <div class="layui-input-inline">
 	        <input type="text" name="createTimeStart" id="createTimeStart" autocomplete="off" class="layui-input form-control">
 	      </div>
 	    </div>
 	    
 	    <div class="layui-inline">
-	      <label class="layui-form-label">添加结束时间：</label>
+	      <label class="layui-form-label">创建时间(结束)：</label>
 	      <div class="layui-input-inline">
 	        <input type="text" name="createTimeEnd" id="createTimeEnd" autocomplete="off" class="layui-input form-control">
 	      </div>
 	    </div>
-	    
+	    <div class="layui-inline">
+		      <label class="layui-form-label">是否有效：</label>
+		      <div class="layui-input-inline">
+		        <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
+		        	 ${isUseful.ewTypeHtml }
+		        </select>
+		      </div>
+		    </div>
 	    
 	     <div class="layui-inline" style="vertical-align: top;">
 		   <div class="layui-btn-container" style="margin-left:15px;">
@@ -322,7 +329,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				});
 		}
 		
-	});
 	var testData=[];
 	});
 </script>

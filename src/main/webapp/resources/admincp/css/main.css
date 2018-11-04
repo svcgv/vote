@@ -84,10 +84,26 @@ background-color: #009688!important;
 
 .window-content{position:relative;overflow:hidden;overflow-x:hidden;overflow-y:auto;}
 
-/*客户群*/
-
-
-
+.layui-form-select dl dd.layui-this{
+	background-color:#009688;
+}
+/**日历图标*/
+.hasDatepicker{
+  background:url('../images/calendar.png') white 98% center no-repeat;
+  background-size: 28px 28px;
+}
+/* switch*/
+.layui-form-onswitch{
+	border-color: #009688;
+    background-color: #009688;
+}
+/* 删除按钮*/
+.formDetail-wrapper .layui-icon-close-fill{
+	color:red!important;
+}
+input.disabledColor{	
+	background:#f2f2f2;
+}
 
 
 
