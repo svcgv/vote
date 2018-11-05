@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="cm" uri="http://www.custom.com/01"%>
 <style>
 
 .formDetail-wrapper .customer-list{
@@ -18,23 +21,27 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">销售团队名称：</label>
 		      <div class="layui-input-inline">
-		       	<label class="layui-form-label">反写名称</label>
+		       	<label class="layui-form-label">${group.groupName}</label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 	     	   <label class="layui-form-label">已选机构：</label>
 		       <div class="layui-input-inline">
-		       	<label class="layui-form-label">反写机构</label>
+		       	<label class="layui-form-label">${group.ownerOrgName}</label>
 		      </div>
 		     </div>
-		     <div class="layui-inline">
-		     	   <label class="layui-form-label">已选用户：</label>
-			      <div class="layui-input-inline" id="chosed-user-hook" style="border:#e6e6e6 solid 1px;height:50px;overflow-y:auto;width:460px;">
-			      	<span class="customer-list">
-			    		<span class="customerItem" userId="1000">系统管理员</span>
-			    	</span>
-			      </div>
-		     </div>
+
+		    <div class="layui-inline">
+	     	   <label class="layui-form-label">已选用户：</label>
+		      <div class="layui-input-inline" id="chosed-user-hook" style="border:#e6e6e6 solid 1px;height:100px;overflow-y:auto;width:460px;">
+		         <c:forEach items="${users}" var="app">					
+						<span class="customer-list">
+				         	<span class="customerItem" userId="${app.usrId}" userName="${app.usrName}">${app.usrName}</span>
+				         </span>
+				</c:forEach>
+		      </div>
+	     </div>
+		     
 		  </div>
 		</form>
 		<div class="layui-layer-btn layui-layer-btn-c">

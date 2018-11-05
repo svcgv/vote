@@ -102,6 +102,13 @@ public class SellTeamController extends AbstractBaseController{
 	@RequestMapping(value="/sellTeam/view",method=RequestMethod.GET)
 	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("groupCode", id);
+		List<PmSaleGroupInfoEntity> list = pmSaleGroupInfoServiceImpl.queryList(map);
+		List<QueryUsrInfoEntity> usrs = queryUsrInfoService.queryBySaleGroupCode(list.get(0).getGroupCode());
+		
+		view.addObject("group",list.get(0));
+		view.addObject("users",usrs);
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		

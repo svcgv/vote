@@ -117,7 +117,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'groupCode', title:'团队编号',fixed: 'left', width:110, sort: true},
 	  	      {field:'groupName', title:'团队名称', width:230},
 	  	      {field:'ownerOrgId', title:'所属机构编号', width:230},
-	  	      {field:'orgName', title:'所属机构名称', width:230},
+	  	      {field:'ownerOrgName', title:'所属机构名称', width:230},
 	  	      {field:'createTime', title:'创建时间'},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
@@ -159,9 +159,22 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      layer.confirm('确认删除行么', function(index){
 	        obj.del();
 	        layer.close(index);
-	        table.reload('customer-table',{
+	        var param = {}
+	        param.isDelete = '01'
+	        param.groupId=data.groupId
+	        $.ajax({
+		  type: 'POST',
+		  url: '/vote/pmsalegroupinfo/update',
+		  data: JSON.stringify(param),
+		  contentType:'application/json',
+		  success: function(res){
+		      console.log(res)
+		  },
+		  dataType: "json"
+		})
+	        //table.reload('customer-table',{
 	        	
-	        });
+	        //});
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
