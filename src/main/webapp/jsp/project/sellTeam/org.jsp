@@ -81,7 +81,7 @@ $(".org-wrapper #org-add-hook").click(function(){
 		// 保存到已选机构中
 		var _html='';
 			_html = '<span class="customer-list">'
-	         	      +'<span class="customerItem" orgId="'+getCheckedOrg.orgId+'">'+getCheckedOrg.name+'</span>'
+	         	      +'<span class="customerItem" orgId="'+getCheckedOrg.orgId+'" orgName="'+getCheckedOrg.name+'">'+getCheckedOrg.name+'</span>'
 	               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
 	         		  +'</span>';
 			

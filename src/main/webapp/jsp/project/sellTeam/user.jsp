@@ -87,7 +87,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 				
 				if($.inArray(userId,ret) == -1 ){
 					var _html = '<span class="customer-list">'
-			         	      +'<span class="customerItem" userId="'+userId+'">'+usrName+'</span>'
+			         	      +'<span class="customerItem" userId="'+userId+' userName="'+usrName+'">'+usrName+'</span>'
 			               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
 			         		  +'</span>';
 			         		 getExitUser.append(_html);	  

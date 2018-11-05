@@ -96,7 +96,7 @@
 		     
 		    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 		    <button type="button" class="layui-btn layui-btn-normal" id="test8">导入</button>
-		     <button type="button" class="layui-btn layui-btn-normal" id="test9">保存导入数据</button>
+		     <button type="button" class="layui-btn layui-btn-normal" id="test9" style="opacity:0">保存导入数据</button>
 		  </div>
 	   </div>
 	    
@@ -116,7 +116,7 @@
 </script>
 
 <script type="text/javascript">
-
+var test_button = document.getElementById('btn-refesh')
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table','upload'], function(){
   var layer = layui.layer ,
@@ -181,13 +181,14 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	      {field:'companyFuncCode', title:'公司代码（职能）'},
   	      {field:'createTime', title:'创建日期'},
   	      {field:'custGroupId', title:'客户群编号'},
-  	      {field:'custGroupName', title:'客户群名称'},
-  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+  	      {field:'custGroupName', title:'客户群名称'}
   	    ]],
   	    cellMinWidth:'90',
   	    data:testData,
   	    page: true
   	  });
+      test_button.style.opacity=1
+      layer.msg("excel解析成功，数据确认无误后，请点击按钮：保存导入数据以进行保存",{icon:1});
     }
   });
 	
@@ -241,7 +242,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	  });},
 			  dataType: "json"
 			});
-
+		 test_button.style.opacity=0
+		 layer.msg("保存成功",{icon:1});
 	});
 	  
   // table render

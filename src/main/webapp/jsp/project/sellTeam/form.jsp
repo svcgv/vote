@@ -76,7 +76,10 @@ $(function(){
 			var getChosedCustomer=$("#form-customer-hook #chosed-customer-hook");
 			var ret=[];
 			getChosedCustomer.children(".customer-list").each(function(){
-				var sapCode2=$(this).children(".customerItem").attr("orgId");
+				var sapCode2{};
+				sapCode2.orgId=$(this).children(".customerItem").attr("orgId")
+				sapCode2.orgName=$(this).children(".customerItem").attr("orgName")
+				
 				ret.push(sapCode2)
 			});
 			
@@ -85,13 +88,16 @@ $(function(){
 			getChosedUser.children(".customer-list").each(function(){
 				var sapCode2={}
 				sapCode2.userId = $(this).children(".customerItem").attr("userId");
-				sapCode2.userName = $(this).children(".customerItem").attr("textContent");
+				sapCode2.userName = $(this).children(".customerItem").attr("userName");
 				ret2.push(sapCode2)
 			});
 			var param = {}
 			param.groupName=customerGroupName
-			param.ownerOrgId=ret
+			param.ownerOrgId=ret[0]
 			param.userCodes=ret2
+			param.orgNo=ret[0].orgId
+			param.orgName=ret[0].orgName
+			
 			
 		
 				console.log(param)

@@ -46,7 +46,7 @@
 			      	
 			    	<c:forEach items="${users}" var="app">
 						<span class="customer-list">
-				    		<span class="customerItem" userId="${app.usrId}">${app.usrName}</span>
+				    		<span class="customerItem" userId="${app.usrId}" userName="${app.usrName}">${app.usrName}</span>
 				    		<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>
 			    		</span>
 					</c:forEach>
@@ -98,18 +98,28 @@ $(function(){
 			var getChosedUser=$("#form-customer-hook #chosed-user-hook");
 			var ret2=[];
 			getChosedUser.children(".customer-list").each(function(){
-				var sapCode2=$(this).children(".customerItem").attr("userId");
+				var sapCode2={};
+				sapCode2.userId=$(this).children(".customerItem").attr("userId")
+				sapCode2.userName=$(this).children(".customerItem").attr("userName")
+				
 				ret.push(sapCode2)
 			});
 			
+			var param = {}
+			param.groupName=customerGroupName
+			param.ownerOrgId=ret[0]
+			param.users=ret2
+			
+			param.orgNo=ret[0].orgId
+			param.orgName=ret[0].orgName
 			
 			$.ajax({
 				type:'POST',
 				url:'save',
 				data:{
 					name:customerGroupName,
-					orgCodes:ret.join(","),
-					userCodes:ret2.join(",")
+					orgCodes:ret,
+					userCodes:ret2
 				},
 				success:function(res){
 					layer.msg("新增成功",{icon:1});
