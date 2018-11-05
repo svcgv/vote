@@ -205,4 +205,5 @@ public class PmSaleGroupInfoEntity extends BaseEntity implements Serializable {
 	public String getIsDelete() {
 		return isDelete;
 	}
+	
 }

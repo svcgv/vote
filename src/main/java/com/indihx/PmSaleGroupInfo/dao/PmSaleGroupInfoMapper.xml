@@ -19,6 +19,7 @@
 		<result property="modifyTime" column="MODIFY_TIME" />
 		<result property="groupCode" column="GROUP_CODE" />
 		<result property="isDelete" column="IS_DELETE" />
+		<result property="ownerOrgName" column="OWNER_ORG_NAME" />
 	</resultMap>
 
 	<select id="queryObject" resultMap="pmSaleGroupInfoMap">
@@ -119,6 +120,9 @@
 		<if test="groupCode != null and groupCode!=''">
 			,GROUP_CODE
 		</if>
+		<if test="ownerOrgName != null and ownerOrgName!=''">
+			,OWNER_ORG_NAME
+		</if>
 			,IS_DELETE
 		)
 		values
@@ -148,6 +152,9 @@
 		<if test="groupCode != null and groupCode!=''">
 			,#{groupCode}
 		</if>
+		<if test="ownerOrgName != null and ownerOrgName!=''">
+			,#{ownerOrgName}
+		</if>
 			,'00'
 		)
 	</insert>
@@ -164,6 +171,7 @@
 			<if test="modifier != null and modifier!=''">MODIFIER = #{modifier}, </if>
 			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
 			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+			<if test="ownerOrgName != null and ownerOrgName!=''">OWNER_ORG_NAME = #{ownerOrgName}</if>
 		</set>
 		where GROUP_ID = #{groupId}
 	</update>
