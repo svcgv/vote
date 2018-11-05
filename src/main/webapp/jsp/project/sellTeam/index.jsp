@@ -164,7 +164,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	        param.groupId=data.groupId
 	        $.ajax({
 		  type: 'POST',
-		  url: '/vote/pmsalegroupinfo/update',
+		  url: '/vote/pmsalegroupinfo/update2',
 		  data: JSON.stringify(param),
 		  contentType:'application/json',
 		  success: function(res){

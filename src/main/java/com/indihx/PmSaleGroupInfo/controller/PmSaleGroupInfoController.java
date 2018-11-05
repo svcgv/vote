@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity;
 import com.indihx.PmSaleGroupInfo.entity.PmSaleGroupInfoEntity;
 import com.indihx.PmSaleGroupInfo.entity.PmSaleMemberInfoEntity;
 import com.indihx.PmSaleGroupInfo.service.PmSaleGroupInfoService;
@@ -26,6 +27,7 @@ import com.indihx.PmSaleGroupInfo.service.PmSaleMemberInfoService;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.RandomUtil;
 import com.indihx.system.entity.UsrInfo;
+import com.indihx.util.UserUtil;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
@@ -128,6 +130,19 @@ public class PmSaleGroupInfoController {
         return R.ok();
     }
 
+    
+    /**
+     * 删除
+     */
+    @RequestMapping(value="/update2",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> update(@RequestBody PmSaleGroupInfoEntity pmSaleGroupInfoEntity,HttpSession session){
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	pmSaleGroupInfoEntity.setModifier(usesr.getUsrId());
+    	pmSaleGroupInfoService.update(pmSaleGroupInfoEntity);//全部更新
+        
+        return R.ok();
+    }
+    
     /**
      * 修改
      * 传入
