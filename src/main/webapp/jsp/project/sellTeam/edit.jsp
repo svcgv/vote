@@ -4,7 +4,7 @@
 <%@ taglib prefix="cm" uri="http://www.custom.com/01"%>
 <style>
 
-.formDetail-wrapper .customer-list{
+.formDetail-wrapper .customer-list {
 	word-wrap:normal;
 	word-break:keep-all;
 	padding:5px;
@@ -22,7 +22,8 @@
 		      <label class="layui-form-label">销售团队名称：</label>
 		      <div class="layui-input-inline">
 		         <input type="text" name="groupName" autocomplete="off" value="${group.groupName}" class="layui-input form-control">
-		          <input type="hidden" name="groupName" autocomplete="off" value="${group.groupId}" class="layui-input form-control">
+		          <input type="hidden" name="groupId" autocomplete="off" value="${group.groupId}" class="layui-input form-control">
+		          <input type="hidden" name="groupCode" autocomplete="off" value="${group.groupCode}" class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline" style="vertical-align:top;">
@@ -35,7 +36,7 @@
 	     	   <label class="layui-form-label">已选机构：</label>
 			       <div class="layui-input-inline" id="chosed-customer-hook" style="border:#e6e6e6 solid 1px;height:32px;overflow-y:auto;width:460px;">
 			     	 <span class="customer-list">
-			    		<span class="customerItem" orgId="${group.ownerOrgId}">${group.ownerOrgName}</span>
+			    		<span class="customerItem" orgId="${group.ownerOrgId}" orgName="${group.ownerOrgName}">${group.ownerOrgName}</span>
 			    		<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>
 			    	</span>
 			       </div>
@@ -82,6 +83,8 @@ $(function(){
 		// 保存
 		$("#form-customer-hook #customGroup-add-hook").click(function(){
 			var customerGroupName=$("#form-customer-hook input[name='groupName']").val();
+			var customerGroupID=$("#form-customer-hook input[name='groupId']").val();
+			var customerGroupCode=$("#form-customer-hook input[name='groupCode']").val();
 			console.log(customerGroupName)
 			if($.trim(customerGroupName) ==''){
 				layer.msg("请输入团队名称");
@@ -91,7 +94,10 @@ $(function(){
 			var getChosedCustomer=$("#form-customer-hook #chosed-customer-hook");
 			var ret=[];
 			getChosedCustomer.children(".customer-list").each(function(){
-				var sapCode2=$(this).children(".customerItem").attr("orgId");
+				//var sapCode2=$(this).children(".customerItem").attr("orgId");
+				var sapCode2={};
+				sapCode2.orgId=$(this).children(".customerItem").attr("orgId")
+				sapCode2.orgName=$(this).children(".customerItem").attr("orgName")
 				ret.push(sapCode2)
 			});
 			
@@ -102,26 +108,26 @@ $(function(){
 				sapCode2.userId=$(this).children(".customerItem").attr("userId")
 				sapCode2.userName=$(this).children(".customerItem").attr("userName")
 				
-				ret.push(sapCode2)
+				ret2.push(sapCode2)
 			});
 			
 			var param = {}
-			param.groupName=customerGroupName
-			param.ownerOrgId=ret[0]
-			param.users=ret2
 			
+			//param.users=ret2
+			param.groupName=customerGroupName
+			param.groupId=customerGroupID
+			param.groupCode=customerGroupCode
+			param.users=ret2
 			param.orgNo=ret[0].orgId
 			param.orgName=ret[0].orgName
 			
 			$.ajax({
 				type:'POST',
-				url:'save',
-				data:{
-					name:customerGroupName,
-					orgCodes:ret,
-					userCodes:ret2
-				},
+				url:'/vote/pmsalegroupinfo/update',
+				data:JSON.stringify(param),
+				contentType:'application/json',
 				success:function(res){
+					location.reload();
 					layer.msg("新增成功",{icon:1});
 					win.close();
 				},
