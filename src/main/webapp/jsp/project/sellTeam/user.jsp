@@ -39,6 +39,16 @@
 
 <script type="text/javascript">
 $(function(){
+	function getParam(){
+		var queryParams=$("#customer-query-form").serializeObject();
+		 var newParam = {}
+		  for(var i in queryParams){
+			  if(queryParams[i]){
+				  newParam[i] = queryParams[i]
+			  }
+		  }
+		  return newParam
+	}
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table'], function(){
   var layer = layui.layer ,
@@ -48,7 +58,16 @@ layui.use(['layer', 'form','laydate','table'], function(){
   // table render
   table.render({
 	    elem: '#userTable',
-	    //url:'custom.json',
+	    id:'user-table',
+	    url:'/vote/queryusrinfo/list',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify(getParam())
+		},
+		contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    height:'260',
 	    width:"690",
 	    title: '用户数据表',
@@ -87,7 +106,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 				
 				if($.inArray(userId,ret) == -1 ){
 					var _html = '<span class="customer-list">'
-			         	      +'<span class="customerItem" userId="'+userId+' userName="'+usrName+'">'+usrName+'</span>'
+			         	      +'<span class="customerItem" userId="'+userId+'" userName="'+usrName+'">'+usrName+'</span>'
 			               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
 			         		  +'</span>';
 			         		 getExitUser.append(_html);	  
@@ -152,7 +171,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			
 			
 		console.log(queryParams)
-		table.reload('customerGroup-table',{
+		/*table.reload('customerGroup-table',{
 			url:'form',
 			page:{
 				curr:1 //从第一页开始
@@ -165,7 +184,25 @@ layui.use(['layer', 'form','laydate','table'], function(){
 				console.log(res)
 			}
 			
-		})
+		})*/
+		 /*table.reload('user-table',{
+				url:'/vote/queryusrinfo/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+			    method:'post',
+				where:{
+					queryStr:JSON.stringify(getParam())
+				},
+				contentType: 'application/json',
+			    response: {
+			    	dataName: 'page'
+			    },
+				done:function(res){
+					console.log(res)
+				}
+
+			})*/
 	});
 	
 });

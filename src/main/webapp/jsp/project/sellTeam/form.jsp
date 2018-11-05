@@ -76,7 +76,7 @@ $(function(){
 			var getChosedCustomer=$("#form-customer-hook #chosed-customer-hook");
 			var ret=[];
 			getChosedCustomer.children(".customer-list").each(function(){
-				var sapCode2{};
+				var sapCode2={};
 				sapCode2.orgId=$(this).children(".customerItem").attr("orgId")
 				sapCode2.orgName=$(this).children(".customerItem").attr("orgName")
 				

@@ -74,8 +74,12 @@ public class PmSaleGroupInfoController {
     @RequestMapping(value="/save",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> save(@RequestBody Map<String,Object> map ,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+    	long orgNo = Long.parseLong(map.get("orgNo").toString());
+    	String orgName = map.get("orgName").toString();
     	PmSaleGroupInfoEntity pmSaleGroupInfo = new PmSaleGroupInfoEntity();
     	pmSaleGroupInfo.setGroupName((String)map.get("groupName"));
+    	pmSaleGroupInfo.setOwnerOrgId(orgNo);
+    	pmSaleGroupInfo.setOwnerOrgName(orgName);
     	pmSaleGroupInfo.setCreatorId(user.getUsrId());
     	pmSaleGroupInfo.setCreateTime(DateUtil.getCurrentTimeMill());
     	String code = "XS"+DateUtil.getSysDate()+RandomUtil.generateString(4);

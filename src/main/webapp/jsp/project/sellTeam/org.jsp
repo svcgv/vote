@@ -7,7 +7,7 @@
 		<ul id="treeOrg" class="ztree"></ul>
 	</div>
 	<div class="layui-layer-btn layui-layer-btn-c">
-	<a class="layui-layer-btn0" id="query-hook" style="background:#009688;border-color:#009688;">查询</a>
+	
     	<a class="layui-layer-btn0" id="org-add-hook" style="background:#009688;border-color:#009688;">保存</a>
     	<a class="layui-layer-btn1" id="org-close-hook">关闭</a>
 	 </div>
@@ -43,31 +43,21 @@ var setting={
 			onDblClick: zTreeOnSaveEvent
 		}
 	};
-var zNodes =[
-	{ name:"第一事业部", open:true,
-		children: [
-			{ name:"销售一部",orgId:"1",
-				children: [
-					{ orgId:"11",name:"上海分部"},
-					{ orgId:"12",name:"北京分部"},
-					{ orgId:"13",name:"深圳分部"},
-					{ orgId:"14",name:"南京分部"}
-				]},
-			{ name:"销售二部",orgId:"2",isParent:false},
-			{ name:"销售三部",orgId:"3",isParent:false}
-		]},
-	{ name:"第二事业部",orgId:"3",
-		children: [
-			{ orgId:"31",name:"销售六部", open:true,isParent:true},
-			{ orgId:"32",name:"销售二部",isParent:true},
-			{ orgId:"33",name:"销售五部",isParent:true}
-		]},
-	{ name:"第三事业部", orgId:"4",isParent:true}
-
-];
+var zNodes =[];
 
 $(document).ready(function(){
-	$.fn.zTree.init($("#treeOrg"), setting, zNodes);
+	$.ajax({
+		  type: 'POST',
+		  url: '/vote/queryorginfo/getOrgTree',
+		  data: JSON.stringify({}),
+		  contentType:'application/json',
+		  success: function(res){
+		      console.log(res)
+		      zNodes=[res.Tree]
+		      $.fn.zTree.init($("#treeOrg"), setting, zNodes);
+	      },
+		  dataType: "json"
+		})
 });
 //保存
 var win=$(".org-wrapper").getWindow();
