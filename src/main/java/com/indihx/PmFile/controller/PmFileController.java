@@ -2,7 +2,10 @@ package com.indihx.PmFile.controller;
 
 
 import java.util.Map;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.stereotype.Controller;
 import com.indihx.system.entity.UsrInfo;
+import com.indihx.util.FileUtils;
 import com.indihx.util.UserUtil;
 import com.indihx.PmFile.entity.PmFileEntity;
 import com.indihx.PmFile.service.PmFileService;
@@ -86,5 +91,20 @@ public class PmFileController {
         pmFileService.delete(fileId);
         return R.ok();
     }
+    
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> pmFileUpload(@RequestParam("file") MultipartFile[] myfiles,@RequestParam("fileCode") String fileCode ,@RequestParam("uploadType") String uploadType, HttpSession session) throws IOException{
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	PmFileEntity pmFile=new PmFileEntity();
+    	pmFile.setCreatorId(usesr.getUsrId());
+    	pmFile.setCreateTime(DateUtil.getDateTime());
+    	for(int i=0;i<myfiles.length;i++) {
+    		pmFile.setFilePath(FileUtils.writeFile(myfiles[i]));;
+    		pmFile.setFileUploadName(myfiles[i].getOriginalFilename());
+    		pmFileService.insert(pmFile);
+    	}
+    	
+    	return R.ok();
+	}
 
 }

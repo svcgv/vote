@@ -65,7 +65,18 @@ var zNodes =[
 ];
 
 $(document).ready(function(){
-	$.fn.zTree.init($("#treeOrg"), setting, zNodes);
+	$.ajax({
+		  type: 'POST',
+		  url: '/vote/queryorginfo/getOrgTree',
+		  data: JSON.stringify({}),
+		  contentType:'application/json',
+		  success: function(res){
+		      console.log(res)
+		      zNodes=[res.Tree]
+		      $.fn.zTree.init($("#treeOrg"), setting, zNodes);
+	      },
+		  dataType: "json"
+		})
 });
 //保存
 var win=$(".org-wrapper").getWindow();
@@ -79,8 +90,6 @@ $(".org-wrapper #org-add-hook").click(function(){
 		
 		return false;
 	}
-	
-	
 	
 });
 var act="${act}";// 区分是index页 form页 赋值问题

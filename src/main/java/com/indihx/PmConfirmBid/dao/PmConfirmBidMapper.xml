@@ -190,13 +190,12 @@
 				,MODIFY_TIME	
 			</if>
 		
-			<if test="isDelete != null and isDelete!=''">
-				,IS_DELETE	
-			</if>
+				
 		
 			<if test="paymentPoint != null and paymentPoint!=''">
 				,PAYMENT_POINT	
 			</if>
+			,IS_DELETE	
 		
 		)
 		values
@@ -268,12 +267,11 @@
 		<if test="modifyTime != null and modifyTime!=''">
 			,#{modifyTime}
 		</if>
-		<if test="isDelete != null and isDelete!=''">
-			,#{isDelete}
-		</if>
+		
 		<if test="paymentPoint != null and paymentPoint!=''">
 			,#{paymentPoint}
 		</if>
+		,'00'
 		)
 	</insert>
 	 

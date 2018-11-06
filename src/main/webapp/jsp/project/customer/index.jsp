@@ -117,7 +117,7 @@
 </script>
 
 <script type="text/javascript">
-var test_button = document.getElementById('btn-refesh')
+var test_button = document.getElementById('test9')
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table','upload'], function(){
   var layer = layui.layer ,

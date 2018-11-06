@@ -38,7 +38,6 @@ public class PmConfirmBidController {
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
-
 		List<PmConfirmBidEntity> pmConfirmBid = pmConfirmBidService.queryList(params);
         return R.ok().put("page", pmConfirmBid);
     }
