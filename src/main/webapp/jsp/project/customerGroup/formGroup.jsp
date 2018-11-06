@@ -79,6 +79,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	
 	// 保存 事件
 	var act="${act}";
+	var data=[];
 	var win=$(".customGroup-form-wrapper").getWindow();
   	var getExitCustomer=$("#form-customer-hook #chosed-customer-hook");
 	$(".customGroup-form-wrapper").on("click","#save-hook",function(){
@@ -94,7 +95,8 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			if(isChecked){
 				var sapCode=$(this).children("td").eq(1).text();
 				var name=$(this).children("td").eq(2).text();
-				
+				var object={"sapCode":sapCode,"custCnName":name};
+				data.push(object);
 				// 遍历不存在的插入
 				
 				if($.inArray(sapCode,ret) == -1 ){
@@ -108,7 +110,21 @@ layui.use(['layer', 'form','laydate','table'], function(){
 				
 			}
 		});
-		
+		tableGroup.render({
+		    elem: '#customInnerTable',
+		    id:'customerInner-table',
+		    height:'250',
+		    width:"690",
+		    title: '客户数据表',
+		    cols: [[
+		      {field:'sapCode', title:'sap编号', sort: true},
+		      {field:'custCnName', title:'客户名称'},
+		    ]],
+		    data:data,
+		    page: true
+		  });
+		//location.reload();
+		//tableGroup.reload('customerInner-table');
 		win.close();
 	});
 	

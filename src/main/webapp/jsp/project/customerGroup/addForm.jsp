@@ -35,6 +35,8 @@
 		      </div>
 	     </div>
 	    
+	    <table class="layui-hide" id="customInnerTable" lay-filter="custom" style="overflow:hidden;"></table>
+	    
 	  </div>
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
@@ -48,6 +50,30 @@ $(function(){
 		 var layer = layui.layer ,
 	  	  form = layui.form,
 	  	  table=layui.table;
+		 
+		 var getChosedCustomer=$("#form-customer-hook #chosed-customer-hook");
+			var data=[];
+			getChosedCustomer.children(".customer-list").each(function(){
+				var sapCode2=$(this).children(".customerItem").attr("sapCode");
+				data.push(sapCode2)
+			});
+		 
+		 //table render
+		 table.render({
+			    elem: '#customInnerTable',
+			    id:'customerInner-table',
+			    height:'250',
+			    width:"690",
+			    title: '客户数据表',
+			    cols: [[
+			      {field:'sapCode', title:'sap编号', sort: true},
+			      {field:'custCnName', title:'客户名称'},
+			    ]],
+			    data:[],
+			    page: true
+			  });
+		 
+		 
 		// 选择客户 
 		$("#addCustomer-hook").on("click",function(){
 		  	$.openWindow({
