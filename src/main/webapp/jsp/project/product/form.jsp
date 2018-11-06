@@ -154,13 +154,24 @@ $(function(){
 			});
 			
 			var formDatas=$("#product-addForm-hook form").serializeObject();
+			
+			
+			 
+			 var newparam = {}
+	 		 for(var o in formDatas){
+	 			 if(formDatas[o]){
+	 				 newparam[o] = formDatas[o]
+	 			 }
+	 		 }
+			 
+			 
 			formDatas=$.extend({},true,formDatas,{projectIds:ret.join(",")});
 			$.ajax({
 				type:'POST',
-				url:'save',
-				data:{
-					queryParams:formDatas
-				},
+				 contentType:'application/json',
+				 dataType: "json",
+				url:'/vote/pmproductinfo/save',
+				data: JSON.stringify(newparam),
 				success:function(res){
 					layer.msg("新增成功",{icon:1});
 					win.close();

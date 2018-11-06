@@ -210,43 +210,58 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 查询按钮
 	*/
 	 $("#customQuery").click(function(){
-		 var queryParams=$("#product-index-form").serialize();
+		 var queryParams=$("#product-index-form").serializeObject();
+		 
+		 
+
+		 
+		 var newparam = {}
+ 		 for(var o in queryParams){
+ 			 if(queryParams[o]){
+ 				 newparam[o] = queryParams[o]
+ 			 }
+ 		 }
+
 		 $.ajax({
-			  type: 'POST',
-			  url: '/vote/pmcompanyinfo/list',
-			  data: queryParams,
-			  contentType:'application/json',
-			  success: function(res){
-			      console.log(res)
-			      testData=res.page
-			      table.render({
-			  	  	id:"customer-table",
-			  	    elem: '#productTable',
-			  	    //url:'custom.json',
-			  	    toolbar: '#toolbarDemo',
-			  	    height:'full-250',
-			  	    title: '销售数据表',
-			  	    cols: [[
-						  {type: 'checkbox', fixed: 'left'},
-						  {field:'productCode', title:'产品代码',fixed: 'left', width:110, sort: true},
-						  {field:'productName', title:'产品名称', width:230},
-						  {field:'productSuggestPrice', title:'指导销售价', width:230},
-						  {field:'developmentDeptName', title:'研发部门名称', width:230},
-						  {field:'developmentManagerName', title:'研发负责人名称'},
-						  {field:'startSaleDate', title:'开始销售日期'},
-						  {field:'productType', title:'产品类型'},
-				  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
-			  	    ]],
-			  	    cellMinWidth:'90',
-			  	    data:[
-						{"groupCode":44,"groupName":"销售team1","ownerOrgId":"销售一部"},
-						{"groupCode":55,"groupName":"销售team1","ownerOrgId":"销售一部"},
-						{"groupCode":66,"groupName":"销售team1","ownerOrgId":"销售一部"}
-			       	],
-			  	    page: true
-			  	  	});},
-			  dataType: "json"
-			});
+		 			  type: 'POST',
+		 			  url: '/vote/pmproductinfo/list',
+		 			  data: JSON.stringify(newparam),
+		 			  contentType:'application/json',
+		 			  success: function(res){
+		 			      console.log(res)
+		 			      testData=res.page
+		 			     console.log(res)
+					      testData=res.page
+					      table.render({
+					  	  	id:"customer-table",
+					  	    elem: '#productTable',
+					  	    //url:'custom.json',
+					  	    toolbar: '#toolbarDemo',
+					  	    height:'full-250',
+					  	    title: '销售数据表',
+					  	    cols: [[
+								  {type: 'checkbox', fixed: 'left'},
+								  {field:'productCode', title:'产品代码',fixed: 'left', width:110, sort: true},
+								  {field:'productName', title:'产品名称', width:230},
+								  {field:'productSuggestPrice', title:'指导销售价', width:230},
+								  {field:'developmentDeptName', title:'研发部门名称', width:230},
+								  {field:'developmentManagerName', title:'研发负责人名称'},
+								  {field:'startSaleDate', title:'开始销售日期'},
+								  {field:'productType', title:'产品类型'},
+						  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+					  	    ]],
+					  	    cellMinWidth:'90',
+					  	    data:testData,
+					  	    page: true
+					  	  	});},
+		 			  dataType: "json"
+		 			})
+		 			
+		 			
+		 			
+		 			
+		 			
+		 
 		//var queryParams=$("#product-index-form").serialize();
 		/* table.reload('customer-table',{
 			url:'/vote/bmcustomerinfo/list',
@@ -296,7 +311,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	}
 	
 });
-var testData=null;
+var testData=[];
 </script>
 </body>
 </html>
