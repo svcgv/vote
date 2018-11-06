@@ -72,7 +72,7 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">是否有效：</label>
 		      <div class="layui-input-inline">
-		        <select name="isUseful" lay-verify="required" lay-filter="" class="form-control">
+		        <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
 		        	 ${isUseful.ewTypeHtml }
 		        </select>
 		      </div>
