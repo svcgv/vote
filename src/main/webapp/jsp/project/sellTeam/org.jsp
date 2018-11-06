@@ -88,20 +88,6 @@ $(".org-wrapper #org-add-hook").click(function(){
 
 
 
-$("#query-hook").click(function(){
-	$.ajax({
-		  type: 'POST',
-		  url: '/vote/queryorginfo/getOrgTree',
-		  data: JSON.stringify({}),
-		  contentType:'application/json',
-		  success: function(res){
-		      console.log(res)
-		      zNodes=[res.Tree]
-		      $.fn.zTree.init($("#treeOrg"), setting, zNodes);
-	      },
-		  dataType: "json"
-		})
-})
 
 //关闭
 $(".org-wrapper #org-close-hook").click(function(){

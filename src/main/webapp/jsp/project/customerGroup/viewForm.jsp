@@ -25,7 +25,7 @@
 	      </div>
 	    </div>
 	     <div class="layui-inline">
-	     	   <label class="layui-form-label">已选客户：</label>
+	     	   <label class="layui-form-label">客户列表：</label>
 		      <div class="layui-input-inline" id="chosed-customer-hook" style="border:#e6e6e6 solid 1px;height:100px;overflow-y:auto;width:320px;">
 		         <c:forEach items="${customerList }" var="app">					
 						<span class="customer-list">

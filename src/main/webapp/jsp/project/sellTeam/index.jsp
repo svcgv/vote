@@ -206,10 +206,9 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 
 			})
 			
+			//查询
 		  $("#customQuery").click(function(){
-			  
-			  var param = getParam()
-table.reload('customer-table',{
+			  table.reload('customer-table',{
 				url:'/vote/pmsalegroupinfo/list',
 				page:{
 					curr:1 //从第一页开始

@@ -30,6 +30,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.indihx.AbstractBaseController;
+import com.indihx.PmProductInfo.entity.PmProductInfoEntity;
+import com.indihx.PmProductInfo.service.PmProductInfoService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
@@ -45,6 +47,9 @@ import com.indihx.system.service.impl.ParamsInfoServiceimpl;
 public class ProductController extends AbstractBaseController{
 	@Autowired
 	private ParamsInfoServiceimpl infoservice;
+	
+    @Autowired
+    private PmProductInfoService pmProductInfoService;
 	
 	@RequestMapping("/product/index")
 	public ModelAndView addCustomView() {
@@ -71,12 +76,15 @@ public class ProductController extends AbstractBaseController{
 		return view;
 	}
 	@RequestMapping(value="/product/edit",method=RequestMethod.GET)
-	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
+	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
 		ModelAndView view = new ModelAndView();
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
 		
+		
+		PmProductInfoEntity entity = pmProductInfoService.queryObject(id);
+		view.addObject("product",entity);
+		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE",entity.getProductType()));
 		view.addObject("act",act);
 		view.addObject("id",id);
 		
@@ -84,12 +92,12 @@ public class ProductController extends AbstractBaseController{
 		return view;
 	}
 	@RequestMapping(value="/product/view",method=RequestMethod.GET)
-	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
+	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
 		ModelAndView view = new ModelAndView();
-		
+		PmProductInfoEntity entity = pmProductInfoService.queryObject(id);
+		view.addObject("product",entity);
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
-		
+		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE",entity.getProductType()));
 		view.addObject("act",act);
 		view.addObject("id",id);
 		

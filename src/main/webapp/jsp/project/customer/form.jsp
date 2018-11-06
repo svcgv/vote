@@ -131,7 +131,7 @@
 	     <div class="layui-inline">
 	      <label class="layui-form-label">是否有效：</label>
 	      <div class="layui-input-inline">
-	        <select name="isUseful" lay-verify="required" <c:if test="${act =='view'}">disabled=true</c:if> lay-filter="" class="form-control">
+	        <select name="isUseful" lay-verify="required"  disabled=true  lay-filter="" class="form-control">
 	        	 ${isUseful.ewTypeHtml }
 	        </select>
 	      </div>
@@ -174,11 +174,11 @@
 	    <div class="layui-inline">
 		    <label class="layui-form-label">选择客户群：</label>
 	       <div class="layui-input-inline">
-	          <select name="choseGroup" lay-verify="required" lay-search="">
-		          <option value="">选择客户群</option>
-		          <option value="1">group1</option>
-		          <option value="2">group2</option>
-		          <option value="3">group3</option>
+	          <select name="custGroupId" lay-verify="required"  <c:if test="${act =='view'}">disabled=true</c:if> lay-search="">
+	          <option value="">选择客户群</option>
+	          <c:forEach items="${customerGroup}" var="app">
+		          <option value="${app.custGroupId}">${app.custGroupName}</option>
+		          </c:forEach>
 	          </select>
 	       </div>
 	   </div>

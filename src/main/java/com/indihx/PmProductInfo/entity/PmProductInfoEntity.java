@@ -4,8 +4,7 @@ package com.indihx.PmProductInfo.entity;
 
 import com.indihx.BaseEntity;
 import java.io.Serializable;
-import java.util.Date;
-
+import java.math.BigDecimal;
 /**
  * 
  * 
@@ -45,7 +44,7 @@ private String developmentDeptName;
 	 * 
 	 */
 
-private long developmentDeptId;
+private BigDecimal developmentDeptId;
 	/**
 	 * 
 	 */
@@ -60,7 +59,7 @@ private long developmentManagerId;
 	 * 
 	 */
 
-private Date startSaleDate;
+private String startSaleDate;
 	/**
 	 * 
 	 */
@@ -160,13 +159,13 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setDevelopmentDeptId(long developmentDeptId) {
+	public void setDevelopmentDeptId(BigDecimal developmentDeptId) {
 		this.developmentDeptId = developmentDeptId;
 	}
 	/**
 	 * 获取：
 	 */
-	public long getDevelopmentDeptId() {
+	public BigDecimal getDevelopmentDeptId() {
 		return developmentDeptId;
 	}
 	/**
@@ -196,13 +195,13 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setStartSaleDate(Date startSaleDate) {
+	public void setStartSaleDate(String startSaleDate) {
 		this.startSaleDate = startSaleDate;
 	}
 	/**
 	 * 获取：
 	 */
-	public Date getStartSaleDate() {
+	public String getStartSaleDate() {
 		return startSaleDate;
 	}
 	/**

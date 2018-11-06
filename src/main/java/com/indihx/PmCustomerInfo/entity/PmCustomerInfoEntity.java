@@ -156,6 +156,8 @@ private String modifyTime;
 
 private String isDelete;
 
+private String custGroupId;
+
 	/**
 	 * 设置：
 	 */
@@ -492,6 +494,14 @@ private String isDelete;
 	public String getIsDelete() {
 		return isDelete;
 	}
+	public String getCustGroupId() {
+		return custGroupId;
+	}
+	public void setCustGroupId(String custGroupId) {
+		this.custGroupId = custGroupId;
+	}
+	
+	
 
 //	public int getStartNum() {
 //		return startNum;

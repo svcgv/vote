@@ -29,8 +29,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.indihx.AbstractBaseController;
+import com.indihx.PmCustomerInfo.entity.PmCustomerGroupEntity;
 import com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity;
+import com.indihx.PmCustomerInfo.service.PmCustomerGroupService;
 import com.indihx.PmCustomerInfo.service.PmCustomerInfoService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
@@ -47,6 +50,9 @@ public class CustomerController extends AbstractBaseController{
 	
     @Autowired
     private PmCustomerInfoService pmCustomerInfoService;
+    
+    @Autowired
+    private PmCustomerGroupService pmCustomerGroupService;
 	
 	@RequestMapping("/customer/index")
 	public ModelAndView addCustomView() {
@@ -67,17 +73,16 @@ public class CustomerController extends AbstractBaseController{
 	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("custId") long custId) {
 		ModelAndView view = new ModelAndView();
 		
-//		view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE"));
-//		view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE"));
-//		view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE"));
-//		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-//		view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE"));
-//		view.addObject("country",infoservice.qryInfoByCode("COUNTRY"));
+		Map<String,Object> maps = new HashMap<String, Object>();
+		maps.put("isDelete", "00");
+		List<PmCustomerGroupEntity> pmCustomerGroup = pmCustomerGroupService.queryList(maps);
+		view.addObject("customerGroup",pmCustomerGroup);
 		
 
 		
 		if(!act.equalsIgnoreCase("add")) {
 			PmCustomerInfoEntity custom = pmCustomerInfoService.queryObject(custId);
+//			PmCustomerGroupEntity customGroupEntity = pmCustomerGroupService.queryObject(custId);
 			view.addObject("Custom",custom);
 			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE",custom.getCustType()));
 			view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE",custom.getCustTrade()));
@@ -86,6 +91,7 @@ public class CustomerController extends AbstractBaseController{
 			view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE",custom.getBgVisiable()));
 			view.addObject("country",infoservice.qryInfoByCode("COUNTRY",custom.getCountry()));
 		}else {
+//			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE","01"));
 			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE","01"));
 			view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE","01"));
 			view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE","01"));

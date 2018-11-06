@@ -158,7 +158,7 @@
 		PM_CUSTOMER_INFO
 	</select>
 
-	<insert id="insert"
+	<insert id="insert"  useGeneratedKeys="true"  keyProperty="custId"  keyColumn="CUST_ID"
 		parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity">
 		insert into PM_CUSTOMER_INFO
 		(

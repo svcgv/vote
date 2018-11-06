@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <style>
 
 .formDetail-wrapper .customer-list{
@@ -18,45 +19,46 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">产品代码：</label>
 		      <div class="layui-input-inline">
-		          <label class="layui-form-label">查看反写</label>
+		          <label class="layui-form-label">${product.productCode}</label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">产品名称：</label>
 		      <div class="layui-input-inline">
-		          <label class="layui-form-label">查看反写</label>
+		          <label class="layui-form-label">${product.productName}</label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">指导销售价：</label>
 		       <div class="layui-input-inline">
-		          <label class="layui-form-label">查看反写</label>
+		          <label class="layui-form-label">${product.productSuggestPrice}</label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">开始销售日期：</label>
 		       <div class="layui-input-inline">
-		          <label class="layui-form-label">查看反写</label>
+		          <label class="layui-form-label">${product.startSaleDate}</label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">产品类型：</label>
 		      <div class="layui-input-inline">
-		        <label class="layui-form-label">2018-10-12</label>
+		        <select name="productType" lay-verify="required"  disabled="true" lay-filter="" class="form-control">
+		        	 ${productType.ewTypeHtml }
+		        </select>
 		      </div>
 		    </div>
-		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">研发部门：</label>
 		       <div class="layui-input-inline">
-		         <label class="layui-form-label">查看反写</label>
+		         <label class="layui-form-label">${product.developmentDeptName}</label>
 		      </div>
 		       
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">研发负责人：</label>
 		       <div class="layui-input-inline">
-		         <label class="layui-form-label">查看反写</label>
+		         <label class="layui-form-label">${product.developmentManagerName}</label>
 		      </div>
 		       
 		    </div>
@@ -74,7 +76,7 @@
 	       <div class="layui-inline">
 	       		 <label class="layui-form-label">备注：</label>
 	       		 <div class="layui-input-block" style="margin-left:130px;width:323px;">
-			      <textarea name="remark" readonly="readonly" class="layui-textarea form-control">撒大声地</textarea>
+			      <textarea name="remark" readonly="readonly" class="layui-textarea form-control">${product.remark}</textarea>
 			    </div>
 	       </div>
 		     
@@ -85,15 +87,20 @@
     	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
     </div>
 </div>
+
 <script>
 $(function(){
+	layui.use(['layer', 'form'], function(){
+		var layer = layui.layer ,
+	  	  form = layui.form;
+		  form.render();
 		var win=$("#product-addForm-hook").getWindow();
 		// 关闭
 		$("#product-addForm-hook #customerGroup-close-hook").click(function(){
 			win.close();
 			return false;
 		})
-	
+	});
 });
 
 </script>

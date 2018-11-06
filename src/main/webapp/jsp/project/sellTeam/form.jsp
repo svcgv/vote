@@ -110,8 +110,8 @@ $(function(){
 			  data: JSON.stringify(param),
 			  contentType:'application/json',
 			  success:function(res){
-					location.reload();
 					layer.msg("新增成功",{icon:1});
+					location.reload();
 					win.close();
 				},
 				error:function(){

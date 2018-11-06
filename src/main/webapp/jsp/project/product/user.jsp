@@ -8,14 +8,14 @@
 	  	<div class="layui-inline">
 	       <label class="layui-form-label">用户ID：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="userId"  autocomplete="off" class="layui-input form-control">
+	         <input type="text" name="usrId"  autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
 	  	
 	  	<div class="layui-inline">
 	      <label class="layui-form-label" >用户名：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="userName"  autocomplete="off" class="layui-input form-control" >
+	         <input type="text" name="usrName"  autocomplete="off" class="layui-input form-control" >
 	      </div>
 	    </div>
 	    
@@ -39,6 +39,16 @@
 
 <script type="text/javascript">
 $(function(){
+	function getParam(){
+		var queryParams=$("#user-query-form").serializeObject();
+		 var newParam = {}
+		  for(var i in queryParams){
+			  if(queryParams[i]){
+				  newParam[i] = queryParams[i]
+			  }
+		  }
+		  return newParam
+	}
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table'], function(){
   var layer = layui.layer ,
@@ -48,38 +58,24 @@ layui.use(['layer', 'form','laydate','table'], function(){
   // table render
   table.render({
 	    elem: '#userTable',
-	    //url:'custom.json',
+	    id:'user-table',
+	    url:'/vote/queryusrinfo/list',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify(getParam())
+		},
+		contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    height:'260',
 	    width:"690",
-	    title: '用数据表',
+	    title: '用户数据表',
 	    cols: [[
 	      {type: 'radio' },
-	      {field:'userId', title:'用户ID', sort: true},
-	      {field:'userName', title:'用户名'}
+	      {field:'usrId', title:'用户ID', sort: true},
+	      {field:'usrName', title:'用户名'}
 	    ]],
-	    data:[
-		  		{
-		  			"userId":"1000",
-					"userName":"系统管理员"
-					
-				},
-				{
-		  			"userId":"1001",
-					"userName":"admin"
-					
-				},
-				{
-		  			"userId":"1002",
-					"userName":"Superman"
-					
-				},
-				{
-		  			"userId":"1003",
-					"userName":"史定波"
-					
-				}
-				
-			],
 	    page: true
 	  });
 	
@@ -126,23 +122,35 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	* 客户查询按钮
 	*/
 	$("#user-query-form #userQuery").click(function(){
-		
-		var queryParams=$("#user-query-form").serialize();
-		console.log(queryParams)
-		table.reload('customerGroup-table',{
-			url:'form',
-			page:{
-				curr:1 //从第一页开始
-			},
-			method:'post',
-			where:{
-				queryStr:queryParams
-			},
-			done:function(res){
-				console.log(res)
-			}
-			
-		})
+		$.ajax({
+			  type: 'POST',
+			  url: '/vote/queryusrinfo/list',
+			  data: JSON.stringify(getParam()),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			      testData=res.page
+
+			      table.render({
+			  	    elem: '#userTable',
+			  	    //url:'custom.json',
+			  	    height:'260',
+			  	    width:"690",
+				    title: '用户数据表',
+				    cols: [[
+				      {type: 'radio' },
+				      {field:'usrId', title:'用户ID', sort: true},
+				      {field:'usrName', title:'用户名'}
+				    ]],
+			  	    data:testData,
+			  	    page: true
+			  	  });
+			      
+			      
+			      
+			      ;},
+			  dataType: "json"
+			})
 	});
 	
 });

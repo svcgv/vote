@@ -55,7 +55,7 @@
 		          <input type="hidden" name="developmentDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>部门查询</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>部门</button>
 		       </div>
 		    </div>
 		     <div class="layui-inline">
@@ -65,7 +65,7 @@
 		          <input type="hidden" name="developmentManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>负责人查询</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>负责人</button>
 		       </div>
 		    </div>
 		    
@@ -102,6 +102,17 @@
 </script>
 
 <script type="text/javascript">
+
+function getParam(){
+	var queryParams=$("#product-index-form").serializeObject();
+	 var newParam = {}
+	  for(var i in queryParams){
+		  if(queryParams[i]){
+			  newParam[i] = queryParams[i]
+		  }
+	  }
+	  return newParam
+}
 
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table','upload'], function(){
@@ -143,7 +154,15 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   table.render({
 	  	id:"customer-table",
 	    elem: '#productTable',
-	    //url:'custom.json',
+	    url:'/vote/pmproductinfo/list',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify(getParam())
+		},
+		contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    toolbar: '#toolbarDemo',
 	    height:'full-250',
 	    title: '产品数据表',
@@ -159,12 +178,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'90',
-	    data:[
-              {"productCode":1,"productName":"11111","productSuggestPrice":"200","developmentDeptName":"dept10","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
-              {"productCode":2,"productName":"11111","productSuggestPrice":"200","developmentDeptName":"dept10","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
-              {"productCode":3,"productName":"11111","productSuggestPrice":"200","developmentDeptName":"dept10","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
-              {"productCode":4,"productName":"11111","productSuggestPrice":"200","developmentDeptName":"dept10","developmentManagerName":"asdas","startSaleDate":"2018-11-01","productType":"01"},
-       		],
 	    page: true
 	  });
 	/*
@@ -192,6 +205,17 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    var data = obj.data;
 	    if(obj.event === 'del'){
 	      layer.confirm('确认删除行么', function(index){
+	    	  $.ajax({
+				  type:"POST",
+				  url:"/vote/pmproductinfo/update",
+				  data:JSON.stringify({'productId':data.productId,'isDelete':'01'}),
+				  contentType:'application/json',
+				  success:function(data){
+					 
+					  table.reload('customer-table');
+					 
+				  }
+			  }); 
 	        obj.del();
 	        layer.close(index);
 	        table.reload('customer-table',{
@@ -200,29 +224,37 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
-	    	showFromTable('edit',data.groupCode);
+	    	showFromTable('edit',data.productId);
 	    }else if(obj.event === "view"){
 	    	// 查看
-	    	showFromTable('view',data.groupCode);
+	    	showFromTable('view',data.productId);
 	    }
 	  });
 	/*
 	* 查询按钮
 	*/
 	 $("#customQuery").click(function(){
-		 var queryParams=$("#product-index-form").serializeObject();
 		 
-		 
+		 table.reload('customer-table',{
+				url:'/vote/pmproductinfo/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+			    method:'post',
+				where:{
+					queryStr:JSON.stringify(getParam())
+				},
+				contentType: 'application/json',
+			    response: {
+			    	dataName: 'page'
+			    },
+				done:function(res){
+					console.log(res)
+				}
 
-		 
-		 var newparam = {}
- 		 for(var o in queryParams){
- 			 if(queryParams[o]){
- 				 newparam[o] = queryParams[o]
- 			 }
- 		 }
+			})
 
-		 $.ajax({
+		 /*$.ajax({
 		 			  type: 'POST',
 		 			  url: '/vote/pmproductinfo/list',
 		 			  data: JSON.stringify(newparam),
@@ -255,28 +287,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 					  	    page: true
 					  	  	});},
 		 			  dataType: "json"
-		 			})
-		 			
-		 			
-		 			
-		 			
-		 			
-		 
-		//var queryParams=$("#product-index-form").serialize();
-		/* table.reload('customer-table',{
-			url:'/vote/bmcustomerinfo/list',
-			page:{
-				curr:1 //从第一页开始
-			},
-			method:'post',
-			where:{
-				queryStr:queryParams
-			},
-			done:function(res){
-				console.log(res)
-			}
-			
-		}) */
+		 			})*/
+
 		
 	}); 
 	

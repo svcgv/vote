@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
+
+import com.indihx.PmCustomerInfo.dao.PmCustomerGroupRelationMapper;
 import com.indihx.PmCustomerInfo.dao.PmCustomerInfoMapper;
+import com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity;
 import com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity;
 import com.indihx.PmCustomerInfo.service.PmCustomerInfoService;
 
@@ -17,7 +20,8 @@ import com.indihx.PmCustomerInfo.service.PmCustomerInfoService;
 public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
 	@Resource
    	PmCustomerInfoMapper pmCustomerInfoMapper;
-   	
+	@Resource
+   	PmCustomerGroupRelationMapper pmCustomerGroupRelationMapper;
    
    	public PmCustomerInfoEntity queryObject(long id){
    		return pmCustomerInfoMapper.queryObject(id);
@@ -43,8 +47,13 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
 		}
 		
 		if(flag) {
-			entity.setIsDelete("00");
 			pmCustomerInfoMapper.insert(entity);
+  			PmCustomerGroupRelationEntity RelationEntity = new PmCustomerGroupRelationEntity();
+   			RelationEntity.setSapCode(entity.getSapCode());
+   			RelationEntity.setCustGroupId(entity.getCustGroupId());
+   			RelationEntity.setCustCnName(entity.getCustCnName());
+   			RelationEntity.setCustId(entity.getCustId());
+			pmCustomerGroupRelationMapper.insert(RelationEntity);
 		}
    		
    	}

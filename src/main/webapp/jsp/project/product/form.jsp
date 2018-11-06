@@ -174,6 +174,7 @@ $(function(){
 				data: JSON.stringify(newparam),
 				success:function(res){
 					layer.msg("新增成功",{icon:1});
+					location.reload();
 					win.close();
 				},
 				error:function(){

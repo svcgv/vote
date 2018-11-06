@@ -42,47 +42,46 @@ var setting={
 		onDblClick: zTreeOnSaveEvent
 	}
 };
-var zNodes =[
-	{ name:"第一事业部", open:true,
-		children: [
-			{ name:"研发一部",orgId:"1",
-				children: [
-					{ orgId:"11",name:"上海分部"},
-					{ orgId:"12",name:"北京分部"},
-					{ orgId:"13",name:"深圳分部"},
-					{ orgId:"14",name:"南京分部"}
-				]},
-			{ name:"研发二部",orgId:"2",isParent:false},
-			{ name:"研发三部",orgId:"3",isParent:false}
-		]},
-	{ name:"第二事业部",orgId:"3",
-		children: [
-			{ orgId:"31",name:"研发六部", open:true,isParent:true},
-			{ orgId:"32",name:"研发二部",isParent:true},
-			{ orgId:"33",name:"研发五部",isParent:true}
-		]},
-	{ name:"第三事业部", orgId:"4",isParent:true}
-
-];
+var zNodes =[];
 
 $(document).ready(function(){
-	$.fn.zTree.init($("#treeOrg"), setting, zNodes);
+	$.ajax({
+		  type: 'POST',
+		  url: '/vote/queryorginfo/getOrgTree',
+		  data: JSON.stringify({}),
+		  contentType:'application/json',
+		  success: function(res){
+		      console.log(res)
+		      zNodes=[res.Tree]
+		      $.fn.zTree.init($("#treeOrg"), setting, zNodes);
+	      },
+		  dataType: "json"
+		})
 });
 //保存
 var win=$(".org-wrapper").getWindow();
 $(".org-wrapper #org-add-hook").click(function(){
 	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
+	console.log("getCheckedOrg"+getCheckedOrg);
+	console.log(getCheckedOrg == "undefined");
 	if(getCheckedOrg == "undefined"){
 		layui.use(['layer'], function(){
 			layer.msg("请选择机构")
 		})
-	}else{
-		
+	}else{	
+		var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
+		 // 保存到已选机构中
+		 	if(act == "index"){
+				$("#product-index-form input[name='developmentDeptName']").val(getCheckedOrg.name);
+				$("#product-index-form input[name='developmentDeptId']").val(getCheckedOrg.orgId);
+		 		
+		 	}else if(act =="add"){
+		 		$("#product-addForm-hook input[name='developmentDeptName']").val(getCheckedOrg.name);
+				$("#product-addForm-hook input[name='developmentDeptId']").val(getCheckedOrg.orgId);
+		 	}
+		 	win.close();
 		return false;
 	}
-	
-	
-	
 });
 var act="${act}";// 区分是index页 form页 赋值问题
 function zTreeOnSaveEvent(event, treeId, treeNode) {

@@ -8,12 +8,7 @@
 	<form class="layui-form" id="customer-query-form" method="POST" action="/vote/bmcustomerinfo/list">
 	  <div class="layui-form-item">
 	  
-	  <div class="layui-inline">
-	      <label class="layui-form-label">客户名称：</label>
-	       <div class="layui-input-inline">
-	         <input type="text" name="custCnName"  autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
+
 	  	<div class="layui-inline">
 	       <label class="layui-form-label">SAP编码：</label>
 	       <div class="layui-input-inline">
@@ -21,7 +16,21 @@
 	       </div>
  	 	</div>
 	  	
-	  	
+	  	<div class="layui-inline">
+	      <label class="layui-form-label">客户名称：</label>
+	       <div class="layui-input-inline">
+	         <input type="text" name="custCnName"  autocomplete="off" class="layui-input form-control">
+	      </div>
+	    </div>
+	  
+	  <div class="layui-inline">
+	      <label class="layui-form-label">国家/地区：</label>
+	      <div class="layui-input-inline">
+	          <select name="country" lay-verify="required" lay-filter="" class="form-control">
+	        	${country.ewTypeHtml }
+	        </select>
+	      </div>
+	    </div>
 	  
 	    <div class="layui-inline">
 	      <label class="layui-form-label">客户类型：</label>
@@ -32,14 +41,6 @@
 	      </div>
 	    </div>
 	    
-	    <div class="layui-inline">
-	      <label class="layui-form-label">国家/地区：</label>
-	      <div class="layui-input-inline">
-	          <select name="country" lay-verify="required" lay-filter="" class="form-control">
-	        	${country.ewTypeHtml }
-	        </select>
-	      </div>
-	    </div>
 	    
 		<div class="layui-inline">
 	      <label class="layui-form-label">客户行业：</label>

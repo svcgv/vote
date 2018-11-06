@@ -18,25 +18,26 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">产品代码：</label>
 		      <div class="layui-input-inline">
-		         <input type="text" name="productCode" value="修改反写" autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="productCode" value="${product.productCode}" autocomplete="off" class="layui-input form-control">
+		         <input type="hidden" name="productId" autocomplete="off" value="${product.productId}" class="layui-input form-control">
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">产品名称：</label>
 		      <div class="layui-input-inline">
-		         <input type="text" name="productName" autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="productName" value="${product.productName}" autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">指导销售价：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="productSuggestPrice"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="productSuggestPrice"  value="${product.productSuggestPrice}"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">开始销售日期：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="startSaleDate" id="startSaleDate2" autocomplete="off" class="layui-input form-control hasDatepicker">
+		         <input type="text" name="startSaleDate" id="startSaleDate2"  value="${product.startSaleDate}"  autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 		     <div class="layui-inline">
@@ -51,8 +52,8 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">研发部门：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="developmentDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
-		          <input type="hidden" name="developmentDeptId">
+		         <input type="text" name="developmentDeptName" readonly="readonly"  value="${product.developmentDeptName}"  autocomplete="off" class="layui-input form-control">
+		          <input type="hidden" name="developmentDeptId" value="${product.developmentDeptId}"  >
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>部门查询</button>
@@ -61,8 +62,8 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">研发负责人：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="developmentManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control">
-		          <input type="hidden" name="developmentManagerId">
+		          <input type="text" name="developmentManagerName"  value="${product.developmentManagerName}"   readonly="readonly" autocomplete="off" class="layui-input form-control">
+		          <input type="hidden" name="developmentManagerId" value="${product.developmentManagerId}"  >
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>人员查询</button>
@@ -85,7 +86,7 @@
 	       <div class="layui-inline">
 	       		 <label class="layui-form-label">备注：</label>
 	       		 <div class="layui-input-block" style="margin-left:130px;width:323px;">
-			      <textarea name="remark"  class="layui-textarea form-control"></textarea>
+			      <textarea name="remark"   class="layui-textarea form-control">${product.remark}</textarea>
 			    </div>
 	       </div>
 		     
@@ -161,16 +162,16 @@ $(function(){
 			formDatas=$.extend({},true,formDatas,{projectIds:ret.join(",")});
 			$.ajax({
 				type:'POST',
-				url:'save',
-				data:{
-					queryParams:formDatas
-				},
+				url:'/vote/pmproductinfo/update',
+				data:JSON.stringify(formDatas),
+				contentType:'application/json',
 				success:function(res){
-					layer.msg("新增成功",{icon:1});
+					location.reload();
+					layer.msg("修改成功",{icon:1});
 					win.close();
 				},
 				error:function(){
-					layer.msg("新增失败",{icon:5});
+					layer.msg("修改失败",{icon:5});
 					win.close();
 				}
 			})

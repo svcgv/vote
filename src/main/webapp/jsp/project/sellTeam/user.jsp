@@ -101,7 +101,6 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			if(isChecked){
 				var userId=$(this).children("td").eq(1).text();
 				var usrName=$(this).children("td").eq(3).text();
-				
 				// 遍历不存在的插入
 				
 				if($.inArray(userId,ret) == -1 ){
