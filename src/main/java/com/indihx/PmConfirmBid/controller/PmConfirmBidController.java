@@ -2,10 +2,8 @@ package com.indihx.PmConfirmBid.controller;
 
 
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +25,7 @@ import com.indihx.comm.InitSysConstants;
  * 
  *
  * @author hb
- * @date 2018-11-03 17:12:08
+ * @date 2018-11-06 19:51:55
  */
 @Controller
 @RequestMapping("/pmconfirmbid")

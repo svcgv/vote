@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmReviewCommentInfo.dao.PmReviewCommentInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmReviewCommentInfo.entity.PmReviewCommentInfoEntity" id="pmReviewCommentInfoMap">
+        <result property="commentId" column="COMMENT_ID"/>
+        <result property="commentType" column="COMMENT_TYPE"/>
+        <result property="reviewId" column="REVIEW_ID"/>
+        <result property="reviewCode" column="REVIEW_CODE"/>
+        <result property="result" column="RESULT"/>
+        <result property="wrotenUserId" column="WROTEN_USER_ID"/>
+        <result property="wrotenUserName" column="WROTEN_USER_NAME"/>
+        <result property="commentDetail" column="COMMENT_DETAIL"/>
+        <result property="writeTime" column="WRITE_TIME"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmReviewCommentInfoMap">
+		select * from pm_review_comment_info where COMMENT_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmReviewCommentInfoMap">
+		select 
+		*
+		 from pm_review_comment_info
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="commentId != null and commentId!=''"  >
+				COMMENT_ID = #{commentId} AND 			</if>
+						<if test="commentType != null and commentType!=''"  >
+				COMMENT_TYPE = #{commentType} AND 			</if>
+						<if test="reviewId != null and reviewId!=''"  >
+				REVIEW_ID = #{reviewId} AND 			</if>
+						<if test="reviewCode != null and reviewCode!=''"  >
+				REVIEW_CODE = #{reviewCode} AND 			</if>
+						<if test="result != null and result!=''"  >
+				RESULT = #{result} AND 			</if>
+						<if test="wrotenUserId != null and wrotenUserId!=''"  >
+				WROTEN_USER_ID = #{wrotenUserId} AND 			</if>
+						<if test="wrotenUserName != null and wrotenUserName!=''"  >
+				WROTEN_USER_NAME = #{wrotenUserName} AND 			</if>
+						<if test="commentDetail != null and commentDetail!=''"  >
+				COMMENT_DETAIL = #{commentDetail} AND 			</if>
+						<if test="writeTime != null and writeTime!=''"  >
+				WRITE_TIME = #{writeTime} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_review_comment_info 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmReviewCommentInfo.entity.PmReviewCommentInfoEntity">
+		insert into pm_review_comment_info
+		(
+		COMMENT_ID
+			<if test="commentType != null and commentType!=''">
+				,COMMENT_TYPE	
+			</if>
+		
+			<if test="reviewId != null and reviewId!=''">
+				,REVIEW_ID	
+			</if>
+		
+			<if test="reviewCode != null and reviewCode!=''">
+				,REVIEW_CODE	
+			</if>
+		
+			<if test="result != null and result!=''">
+				,RESULT	
+			</if>
+		
+			<if test="wrotenUserId != null and wrotenUserId!=''">
+				,WROTEN_USER_ID	
+			</if>
+		
+			<if test="wrotenUserName != null and wrotenUserName!=''">
+				,WROTEN_USER_NAME	
+			</if>
+		
+			<if test="commentDetail != null and commentDetail!=''">
+				,COMMENT_DETAIL	
+			</if>
+		
+			<if test="writeTime != null and writeTime!=''">
+				,WRITE_TIME	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmReviewCommentInfo_SEQ.nextval
+		<if test="commentType != null and commentType!=''">
+			,#{commentType}
+		</if>
+		<if test="reviewId != null and reviewId!=''">
+			,#{reviewId}
+		</if>
+		<if test="reviewCode != null and reviewCode!=''">
+			,#{reviewCode}
+		</if>
+		<if test="result != null and result!=''">
+			,#{result}
+		</if>
+		<if test="wrotenUserId != null and wrotenUserId!=''">
+			,#{wrotenUserId}
+		</if>
+		<if test="wrotenUserName != null and wrotenUserName!=''">
+			,#{wrotenUserName}
+		</if>
+		<if test="commentDetail != null and commentDetail!=''">
+			,#{commentDetail}
+		</if>
+		<if test="writeTime != null and writeTime!=''">
+			,#{writeTime}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmReviewCommentInfo.entity.PmReviewCommentInfoEntity">
+		update pm_review_comment_info 
+		<set>
+			<if test="commentType != null and commentType!=''">COMMENT_TYPE = #{commentType}, </if>
+
+			<if test="reviewId != null and reviewId!=''">REVIEW_ID = #{reviewId}, </if>
+
+			<if test="reviewCode != null and reviewCode!=''">REVIEW_CODE = #{reviewCode}, </if>
+
+			<if test="result != null and result!=''">RESULT = #{result}, </if>
+
+			<if test="wrotenUserId != null and wrotenUserId!=''">WROTEN_USER_ID = #{wrotenUserId}, </if>
+
+			<if test="wrotenUserName != null and wrotenUserName!=''">WROTEN_USER_NAME = #{wrotenUserName}, </if>
+
+			<if test="commentDetail != null and commentDetail!=''">COMMENT_DETAIL = #{commentDetail}, </if>
+
+			<if test="writeTime != null and writeTime!=''">WRITE_TIME = #{writeTime}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where COMMENT_ID = #{commentId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_review_comment_info where COMMENT_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

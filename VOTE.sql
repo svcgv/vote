@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2018-11-04 23:35:16
+Date: 2018-11-06 19:53:23
 */
 
 
@@ -903,8 +903,7 @@ INSERT INTO "VOTE"."CODE_DATA" VALUES ('CreditBadRecordKind', 'CreditBadRecordKi
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('CreditBadRecordKind', 'CreditBadRecordKind', '不良信息类型', '04', '社会公众和媒体曝光，造成恶劣影响的或业主合理投诉得不到有效解决的信息', '2018-03-14');
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('CreditBadRecordKind', 'CreditBadRecordKind', '不良信息类型', '05', '房屋主管部门认定可记录的其他信息', '2018-03-14');
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('APP_TYPE', 'APP_TYPE', '流程类型', 'CSPADDFLOW', '物业公司信息采集', '2018-02-11');
-INSERT INTO "VOTE"."CODE_DATA" VALUES ('PRODUCT_TYPE', 'PRODUCT_TYPE', '产品类型', '01', '人力', '2018-03-12');
-INSERT INTO "VOTE"."CODE_DATA" VALUES ('PRODUCT_TYPE', 'PRODUCT_TYPE', '产品类型', '02', '整包项目', '2018-03-12');
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('PRODUCT_TYPE', 'PRODUCT_TYPE', '产品类型', '01', '大数据', '2018-03-12');
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('IS_USEFUL', 'IS_USEFUL', '是否有效', '01', '无效', '2018-03-12');
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('WAS_USEFUL', 'WAS_USEFUL', '是否有效', '有效', '有效', '2018-03-12');
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('ORG_TYPE', 'ORG_TYPE', '机构类型', '07', '6级组织', '2018-03-12');
@@ -1074,6 +1073,7 @@ INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('141', '11', null, null, '0', '0', null,
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('142', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('81', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('161', '11', null, null, '0', '0', null, null, null, '00');
+INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('182', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('64', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('101', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('102', '11', null, null, '0', '0', null, null, null, '00');
@@ -1087,6 +1087,7 @@ INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('166', '11', null, null, '0', '0', null,
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('62', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('65', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('110', '11', null, null, '0', '0', null, null, null, '00');
+INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('181', '11', null, null, '0', '0', null, null, null, '00');
 
 -- ----------------------------
 -- Table structure for EXCEL_FILE
@@ -1290,9 +1291,11 @@ COMMENT ON COLUMN "VOTE"."ORG_INFO"."REMARK" IS '备注';
 -- Records of ORG_INFO
 -- ----------------------------
 INSERT INTO "VOTE"."ORG_INFO" VALUES ('1000', null, '1', '交付中心', '02', '上海市长宁区天山路8号', '13711111111', 'username', '20181103', '2', 'PMS_管理员（娄）', 'mailwork_sh@163.com', '201201', '交付中心');
-INSERT INTO "VOTE"."ORG_INFO" VALUES ('0', null, '1000', '金融解决方案业务部', '01', '上海市长宁区天山路8号', '13711111111', 'username', '20181103', '0', 'PMS_管理员（娄）', 'mailwork_sh@163.com', '201201', '金融政府服务部');
+INSERT INTO "VOTE"."ORG_INFO" VALUES ('0', null, '1000', '金融政府事业群', '01', '上海市长宁区天山路8号', '13711111111', 'username', '20181103', '0', 'PMS_管理员（娄）', 'mailwork_sh@163.com', '201201', '金融政府服务部');
 INSERT INTO "VOTE"."ORG_INFO" VALUES ('1000', null, '2', '销售中心', '02', '上海市长宁区天山路8号', '13711111111', 'username', '20181103', '0', 'PMS_管理员（娄）', 'mailwork_sh@163.com', '201201', '销售中心');
 INSERT INTO "VOTE"."ORG_INFO" VALUES ('1000', null, '5', '管理中心', '02', '上海市长宁区天山路8号', '13711111111', 'username', '20181103', '0', 'PMS_管理员（娄）', 'mailwork_sh@163.com', '201201', '交付中心');
+INSERT INTO "VOTE"."ORG_INFO" VALUES ('1', null, '9', '事业部', '02', null, null, null, null, '0', null, null, null, null);
+INSERT INTO "VOTE"."ORG_INFO" VALUES ('9', null, '10', '开发部', '03', null, null, null, null, '0', null, null, null, null);
 INSERT INTO "VOTE"."ORG_INFO" VALUES ('2', null, '6', '二级机构', '02', '测试中心', null, null, null, '0', null, null, null, null);
 INSERT INTO "VOTE"."ORG_INFO" VALUES ('2', null, '7', '二级机构二号', '02', null, null, null, null, '0', null, null, null, null);
 INSERT INTO "VOTE"."ORG_INFO" VALUES ('7', null, '8', '三级机构一号', '02', null, null, null, null, '0', null, null, null, null);
@@ -1358,6 +1361,7 @@ NOCACHE
 -- Records of PM_COMPANY_INFO
 -- ----------------------------
 INSERT INTO "VOTE"."PM_COMPANY_INFO" VALUES ('asdasd', '公司名称', '大苏打', '备注', null, null, '22', null, null);
+INSERT INTO "VOTE"."PM_COMPANY_INFO" VALUES ('100000', '测试公司', '地址', '备注', '22', null, null, null, '00');
 
 -- ----------------------------
 -- Table structure for PM_CONFIRM_BID
@@ -1365,26 +1369,30 @@ INSERT INTO "VOTE"."PM_COMPANY_INFO" VALUES ('asdasd', '公司名称', '大苏�
 DROP TABLE "VOTE"."PM_CONFIRM_BID";
 CREATE TABLE "VOTE"."PM_CONFIRM_BID" (
 "BID_ID" NUMBER(10) NOT NULL ,
-"BID_NAME" VARCHAR2(128 BYTE) DEFAULT NULL  NULL ,
-"PREDICT_AMOUNT" NUMBER(10,2) DEFAULT NULL  NULL ,
-"PREDICT_COST" NUMBER(10,2) DEFAULT NULL  NULL ,
-"PREDICT_PROFIT_RATE" NUMBER(10,4) DEFAULT NULL  NULL ,
-"PREDICT_PERIOD" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
-"SELL_DEPT_ID" NUMBER(16) DEFAULT NULL  NULL ,
-"SELL_DEPT_NAME" VARCHAR2(128 BYTE) DEFAULT NULL  NULL ,
-"CUST_MANAGER_ID" NUMBER(10) DEFAULT NULL  NULL ,
-"CUST_MANAGER_NAME" VARCHAR2(64 BYTE) DEFAULT NULL  NULL ,
-"FILE_CODE" VARCHAR2(64 BYTE) DEFAULT NULL  NULL ,
-"FILE_NAME" VARCHAR2(128 BYTE) DEFAULT NULL  NULL ,
-"FILE_PATH" VARCHAR2(128 BYTE) DEFAULT NULL  NULL ,
-"IS_WORK_AREA_EXPLICIT" CHAR(2 BYTE) DEFAULT NULL  NULL ,
-"IS_CHECKED" CHAR(2 BYTE) DEFAULT NULL  NULL ,
-"REMARK" VARCHAR2(256 BYTE) DEFAULT NULL  NULL ,
-"CREATOR_ID" NUMBER(10) DEFAULT NULL  NULL ,
-"CREATE_TIME" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
-"MODIFIER" NUMBER(10) DEFAULT NULL  NULL ,
-"MODIFY_TIME" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
-"IS_DELETE" CHAR(2 BYTE) DEFAULT NULL  NULL 
+"BID_NAME" VARCHAR2(128 BYTE) NULL ,
+"FIRST_BID_AMOUNT" NUMBER(10,2) NULL ,
+"PREDICT_AMOUNT" NUMBER(10,2) NULL ,
+"PREDICT_COST" NUMBER(10,2) NULL ,
+"PREDICT_PROFIT_RATE" NUMBER(10,4) NULL ,
+"PREDICT_PERIOD" VARCHAR2(32 BYTE) NULL ,
+"CUST_ID" NUMBER(10) NULL ,
+"CUST_CN_NAME" VARCHAR2(256 BYTE) NULL ,
+"CUST_SAP_CODE" VARCHAR2(128 BYTE) NULL ,
+"CONSTRUCTION_DEPT_ID" NUMBER(16) NULL ,
+"CONSTRUCTION_DEPT_NAME" VARCHAR2(256 BYTE) NULL ,
+"SELL_DEPT_ID" NUMBER(16) NULL ,
+"SELL_DEPT_NAME" VARCHAR2(128 BYTE) NULL ,
+"CUST_MANAGER_ID" NUMBER(10) NULL ,
+"CUST_MANAGER_NAME" VARCHAR2(64 BYTE) NULL ,
+"IS_WORK_AREA_EXPLICIT" CHAR(2 BYTE) NULL ,
+"IS_CHECKED" CHAR(2 BYTE) NULL ,
+"REMARK" VARCHAR2(256 BYTE) NULL ,
+"CREATOR_ID" NUMBER(10) NULL ,
+"CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"MODIFIER" NUMBER(10) NULL ,
+"MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+"PAYMENT_POINT" VARCHAR2(512 BYTE) NULL 
 )
 LOGGING
 NOCOMPRESS
@@ -1424,9 +1432,10 @@ INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811039721', 'testGrouptttt', 
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811034593', '敖德萨', '系统管理员', '1000', null, '1000', null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811036859', '2313', '系统管理员', '1000', null, '1000', null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811033643', '123-----;"', '系统管理员', '1000', null, '1000', null, '01');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('KH201811050204', '客户群', '系统管理员_TEST2', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811034512', 'ssss', '系统管理员', '1000', null, '22', null, '01');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811038225', 'aasda', '系统管理员', '1000', null, '1000', null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811032744', '客户群名称', '系统管理员_TEST2', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811032744', '客户群名称', '系统管理员_TEST2', '22', null, '22', null, '00');
 
 -- ----------------------------
 -- Table structure for PM_CUSTOMER_GROUP_RELATION
@@ -1457,8 +1466,75 @@ INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('60', '201811034512', '4
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('54', '201811036859', '61', '中国工商银行股份有限公司南通分行', '10000022072');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('61', '201811034512', '61', '中国工商银行股份有限公司南通分行', '10000022072');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('67', '201811033643', '61', '中国工商银行股份有限公司南通分行', '10000022072');
-INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('83', '201811032744', '390', '中广核新能源投资（深圳）有限公司北京分公司', '1000001264');
-INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('84', '201811032744', '391', '长城（天津）股权投资基金管理有限责任公司', '1000001257');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('164', '201811032744', '390', '中广核新能源投资（深圳）有限公司北京分公司', '1000001264');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('85', 'KH201811050204', '390', '中广核新能源投资（深圳）有限公司北京分公司', '1000001264');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('165', '201811032744', '393', '北京鑫运联合科技有限公司', '1000001230');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('86', 'KH201811050204', '391', '长城（天津）股权投资基金管理有限责任公司', '1000001257');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('166', '201811032744', '394', '众邦金控投资有限公司', '1000001218');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('167', '201811032744', '430', '中广核服务集团有限公司', '1000000253');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('168', '201811032744', '320', '南通双阳软件科技有限公司', '1000001912');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('169', '201811032744', '321', '南京亚软信息技术有限公司', '1000001911');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('170', '201811032744', '322', '嘉兴市住房保障局', '1000001910');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('171', '201811032744', '323', '天安财产保险股份有限公司', '1000001904');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('172', '201811032744', '324', '中国再保险（集团）股份有限公司', '1000001899');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('173', '201811032744', '325', '中国广核能源国际控股有限公司', '1000001892');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('174', '201811032744', '331', '全国水产技术推广总站', '1000001838');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('175', '201811032744', '335', '国义招标股份有限公司', '1000001823');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('176', '201811032744', '336', '中国建设银行股份有限公司上海普陀支行', '1000001818');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('177', '201811032744', '337', '山西炬飞科贸有限公司', '1000001814');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('178', '201811032744', '338', '北京兴融信息技术有限公司', '1000001802');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('179', '201811032744', '339', '中国远东国际招标有限公司', '1000001797');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('180', '201811032744', '340', '深圳市星河智善互联网技术有限公司', '1000001796');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('181', '201811032744', '341', '广东有德招标采购有限公司东莞分公司', '1000001795');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('182', '201811032744', '342', '宁波合创智能科技有限公司', '1000001787');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('183', '201811032744', '343', '广东新禾道信息科技有限公司', '1000001779');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('184', '201811032744', '344', '浙江奥维数据技术有限公司', '1000001775');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('185', '201811032744', '345', '深圳市雷鸟信息科技有限公司', '1000001766');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('186', '201811032744', '346', '广州银行股份有限公司', '1000001757');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('187', '201811032744', '347', '国信招标集团股份有限公司湖北分公司', '1000001738');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('188', '201811032744', '348', '华西证券股份有限公司', '1000001734');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('189', '201811032744', '349', '南通市房地产交易服务中心有限公司', '1000001719');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('190', '201811032744', '350', '宜昌市智慧城市建设办公室', '1000001703');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('191', '201811032744', '351', '湖北恒基建设工程项目管理有限公司宜昌分公司', '1000001699');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('192', '201811032744', '352', '湖北恒基建设工程项目管理有限公司', '1000001697');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('193', '201811032744', '353', '江苏省渔业技术推广中心', '1000001693');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('194', '201811032744', '354', '深圳数位传媒科技有限公司', '1000001682');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('195', '201811032744', '355', '嘉善县住房和城乡规划建设局', '1000001674');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('196', '201811032744', '356', '江苏华凌科技咨询有限公司', '1000001657');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('197', '201811032744', '357', '上海东方投资监理有限公司', '1000001647');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('198', '201811032744', '358', '博易数通（徐州）信息技术有限公司', '1000001229');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('199', '201811032744', '359', '上海润之信息科技有限公司', '1000000777');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('200', '201811032744', '360', '中远集装箱运输有限公司/中远海运集装箱运输有限公司', '1000000275');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('201', '201811032744', '361', '河南省伟信招标管理咨询有限公司', '1000001635');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('202', '201811032744', '362', '天津港保税区世纪龙科技发展有限公司', '1000001625');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('203', '201811032744', '363', '水利部新疆维吾尔自治区水利水电勘测设计研究院伊犁招标代理中心', '1000001618');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('204', '201811032744', '364', '兴业银行股份有限公司信用卡中心', '1000001612');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('205', '201811032744', '365', '中国工商银行股份有限公司嘉善支行', '1000001585');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('206', '201811032744', '366', '中科军信股份有限公司', '1000001569');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('207', '201811032744', '367', '中国建设银行股份有限公司南通分行', '1000001565');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('208', '201811032744', '368', '上海临泰企业服务有限公司', '1000001536');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('209', '201811032744', '369', '中国工商银行股份有限公司青岛市南第四支行', '1000001530');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('210', '201811032744', '370', '苏州太湖国家旅游度假区房产管理中心', '1000001520');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('211', '201811032744', '371', '上海浦东发展银行股份有限公司苏州分行', '1000001519');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('212', '201811032744', '372', '中国银行股份有限公司常州分行', '1000001514');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('213', '201811032744', '373', '北京星际安讯科技有限公司', '1000001501');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('214', '201811032744', '374', '山东超越数控电子股份有限公司', '1000001483');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('215', '201811032744', '375', '江苏银行股份有限公司南通开发区支行', '1000001479');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('216', '201811032744', '376', '中国农业银行股份有限公司', '1000001467');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('217', '201811032744', '377', '国家邮政局邮政业安全中心', '1000001451');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('218', '201811032744', '378', '常熟市信息化发展有限公司', '1000001448');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('219', '201811032744', '379', '上海林享信息科技有限公司', '1000001441');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('220', '201811032744', '380', '华夏银行股份有限公司苏州分行', '1000001439');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('221', '201811032744', '381', '雪松控股集团有限公司', '1000001429');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('222', '201811032744', '382', '青岛市国土资源和房屋管理局', '1000001428');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('223', '201811032744', '383', '青岛市房地产资源信息服务有限公司', '1000001421');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('224', '201811032744', '384', '大丰银行股份有限公司', '1000001414');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('225', '201811032744', '385', '江苏银行股份有限公司南通分行', '1000001366');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('226', '201811032744', '386', '天津银行股份有限公司第一中心支行', '1000001332');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('227', '201811032744', '388', '深圳前海星概念信息技术有限公司', '1000001306');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('228', '201811032744', '389', '阳光资产管理股份有限公司', '1000001280');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('162', '201811032744', '391', '长城（天津）股权投资基金管理有限责任公司', '1000001257');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('163', '201811032744', '392', '中国农业银行股份有限公司嘉兴南湖支行', '1000001247');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('81', '201811038225', '391', '长城（天津）股权投资基金管理有限责任公司', '1000001257');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('82', '201811038225', '392', '中国农业银行股份有限公司嘉兴南湖支行', '1000001247');
 
@@ -1512,152 +1588,7 @@ INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('391', '长城（天津）股权�
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('392', '中国农业银行股份有限公司嘉兴南湖支行', null, '中国', '1000001247', null, '913304028464994749', 'Blank', '嘉兴市景湖路336号', '主营业务客户', null, '金融', '中国', '银行，金融', '嘉兴', '金融', '两月结（60天）结算周期', '有效', '中国农业发展银行', '金融解决方案业务部', null, null, '2017-06-12 11:11:24', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('393', '北京鑫运联合科技有限公司', null, '中国', '1000001230', null, '911101133484223356', 'Copper', '北京市顺义区临空经济核心区汇海南路1号院1号楼5层1-601', '主营业务客户', null, '高科技', '中国', '信息咨询（不含中介服务）；技术开发、技术服务、技术咨询；应用软件服务（不含医用软件）；基础软件服务；计算机信息系统集成服务；软件开发；租赁通讯设备。（企业依法自主选择经营项目，开展经营活动；依法须经批准的项目，经相关部门批准后依批准的内容开展经营活动；不得从事本市产业政策禁止和限制类项目的经营活动。）', '北京', '高科技', '月结(30天)结算周期', '有效', '北京鑫运联合科技有限公司', '金融解决方案业务部', null, null, '2017-05-24 15:50:18', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('394', '众邦金控投资有限公司', null, '中国', '1000001218', null, '91440300350000836X', 'Blank', '上海市浦东新区浦明路898号海航大厦13楼', '主营业务客户', null, '金融', '中国', 'ppp投资、养老、旅游地产和健康（医疗）产业。', '上海', '金融', '季结（90天）结算周期', '有效', '众邦金控投资有限公司', '金融解决方案业务部', null, null, '2017-05-12 17:16:33', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('395', '中国建设银行股份有限公司', null, '中国', '1000000856', null, '911100001000044477', 'Blank', '北京市西城区金融大街25号', '服务类供应商', '立即应付的 到期净值', null, '中国', '存取款，基金', '北京', '金融', '半年结（180天）结算周期', '有效', '中国建设银行', '金融解决方案业务部', '1004', null, '2017-05-09 15:43:41', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('396', '江苏银行股份有限公司苏州分行', null, '中国', '1000001180', null, '91320594798305865H', 'Blank', '苏州工业园区苏雅路157号', '主营业务客户', null, '金融', '中国', '银行', '苏州', '金融', '月结(30天)结算周期', '有效', '江苏银行股份有限公司', '金融解决方案业务部', null, null, '2017-03-31 16:33:07', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('397', '南通市物业管理中心', null, '中国', '1000001163', null, '12320600467544204R', 'Blank', '南通市工农南路150', '主营业务客户', null, '政府', '中国', '房产信息', '南通市', '政府/非营利机构', '两月结（60天）结算周期', '有效', '南通市房产信息中心', '金融解决方案业务部', null, null, '2017-03-22 16:21:27', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('398', '宁波银行股份有限公司苏州分行', null, '中国', '1000001108', null, '9132059468715251XX', 'Blank', '苏州工业园区旺墩路129号', '主营业务客户', null, '金融', '中国', '金融', '苏州', '金融', '月结(30天)结算周期', '有效', null, '金融解决方案业务部', null, null, '2017-02-13 16:23:33', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('399', '南通市房产信息中心', null, '中国', '1000001101', null, '事业单位无0', 'Blank', '江苏省南通市人民东路42号', '主营业务客户', null, '政府', '中国', '南通市房产信息', '南通市', '政府/非营利机构', '月结(30天)结算周期', '有效', '南通市房产信息中心', '金融解决方案业务部', null, null, '2017-02-08 14:40:23', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('400', '浙江禾城农村商业银行股份有限公司', null, '中国', '1000001086', null, '91330400146466356E', 'Blank', '浙江省嘉兴市中山西路735号', '主营业务客户', null, '金融', '中国', '金融银行', '嘉兴', '金融', '月结(30天)结算周期', '有效', '浙江禾城农村商业银行股份有限公司', '金融解决方案业务部', null, null, '2017-01-23 09:59:59', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('401', '上海通太网络科技有限公司', null, '中国', '1000001062', null, '91310109MA1G582C37', 'Blank', '上海市浦东新区峨山路91弄100号陆家嘴软件园2号楼406室', '主营业务客户', null, '高科技', '中国', '事网络信息、计算机、系统集成科技专业领域内的技术开发、技术转让、技术咨询、技术服务，财务咨询，商务咨询，企业管理咨询，市场营销策划，会务服务（主办、承办会议、展览除外），广告设计、制作、代理、发布；销售计算机、软件及辅助设备。', '上海', '高科技', '两月结（60天）结算周期', '有效', '上海通联金融服务有限公司', '金融解决方案业务部', null, null, '2017-01-09 15:51:56', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('402', '中国建设银行股份有限公司青岛市分行', null, '中国', '1000001061', null, '91370200863581525Q', 'Blank', '青岛市崂山区深圳路222号', '主营业务客户', null, '金融', '中国', '存款、贷款', '青岛', '金融', '两月结（60天）结算周期', '有效', '中国建设银行', '金融解决方案业务部', null, null, '2017-01-05 16:01:56', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('403', '上海中文在线文化发展有限公司', null, '中国', '1000001057', null, '913100007956874747', 'Silver', '上海市黄浦区斜土路768号致远大厦21楼J-M', '主营业务客户', null, null, '中国', '经营“文化艺术交流策划，电脑图文设计，展览展示服务，医疗器械、医药领域技术开发、技术转让、技术咨询、技术服务，计算机领域技术服务，教育信息咨询，经济信息咨询，投资咨询（除经纪）（上述经营范围涉及许可经营的凭许可证经营）。”等产品。', '上海', '媒体/出版/文化传播', '月结(30天)结算周期', '有效', '上海中文在线文化发展有限公司', '金融解决方案业务部', null, null, '2017-01-03 10:48:26', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('404', '深圳微众云科技有限公司', null, '中国', '1000001035', null, '91440300MA5DG9H32Q', 'Blank', '深圳市前海深港合作区前湾一路1号A栋201室', '主营业务客户', null, '金融', '中国', '依托互联网等技术手段;提供金融中介服务（根据国家规定需要审批的;获得审批后方可经营）；金融信息咨询、投资咨询（以上均不含限制项目）；企业管理咨询；受托资产管理、投资管理（不得从事信托、金融资产管理、证券资产管理及其他限制项目）；投资兴办实业（具体项目另行申报）；受托管理股权投资基金（不得以任何方式公开募集及发行基金、不得从事公开募集及发行基金管理业务）', '深圳', '金融', '月结(30天)结算周期', '有效', '深圳微众云科技有限公司', '金融解决方案业务部', null, null, '2016-12-26 15:38:29', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('405', '毕孚自动化设备贸易（上海）有限公司', null, '中国', '1000001043', null, '91310000660756137Y', 'Blank', '上海市静安区江场三路163号501室', '主营业务客户', null, '商业和零售', '中国', '贸易', '上海', '贸易/进出口', '月结(30天)结算周期', '有效', '毕孚自动化设备贸易（上海）有限公司', '金融解决方案业务部', null, null, '2016-12-21 11:26:18', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('406', '云台技术科技（北京）有限公司', null, '中国', '1000001026', null, '110108078546513', 'Blank', '总部位于海淀区上地信息路', '主营业务客户', null, '互联网和电商', '中国', '云台软件主要负责APP开发，微信商城开发，提供用友服务', '北京', '其他', '月结(30天)结算周期', '有效', '云台技术科技（北京）有限公司', '金融解决方案业务部', null, null, '2016-12-14 10:59:41', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('407', '中国工商银行股份有限公司嘉兴分行', null, '中国', '1000001008', null, '后补5', 'Blank', '嘉兴市南湖区禾兴南路443号?', '主营业务客户', null, null, '中国', '金融银行', '嘉兴', '金融', '月结(30天)结算周期', '有效', '中国工商银行', '金融解决方案业务部', null, null, '2016-12-06 16:50:55', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('408', '天津金融资产登记结算有限公司', null, '中国', '1000001003', null, '120107559482880', 'Blank', '天津市河西区围堤道103号', '主营业务客户', null, null, '中国', '各类金融产品的登记、托管、结算；金融创新产品的研究、开发、设计与相关技术服务。', '天津', '金融', '两月结（60天）结算周期', '有效', '天津金融资产交易所有限责任公司', '金融解决方案业务部', null, null, '2016-12-06 11:16:44', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('409', '博时基金管理有限公司', null, '中国', '1000000974', null, '91440300710922202N', 'Blank', '深圳市福田区深南大道7088号招商银行大厦29层', '主营业务客户', null, null, '中国', '基金', '北京', '金融', '季结（90天）结算周期', '有效', '博时基金管理有限公司', '金融解决方案业务部', null, null, '2016-12-02 10:06:03', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('410', '中国银行股份有限公司常熟支行', null, '中国', '1000001000', null, '后补3', 'Blank', '常熟市海虞北路13号', '主营业务客户', null, null, '中国', '金融，银行', '常熟', '金融', '月结(30天)结算周期', '有效', null, '金融解决方案业务部', null, null, '2016-11-21 14:31:29', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('411', '中国农业银行股份有限公司苏州姑苏支行', null, '中国', '1000000999', null, '后补1', 'Blank', '苏州市旧学前105号', '主营业务客户', null, null, '中国', '金融', '上海', '金融', '月结(30天)结算周期', '有效', null, '金融解决方案业务部', null, null, '2016-11-16 11:47:31', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('412', '上海爱可生信息技术股份有限公司', null, '中国', '1000000989', null, '91310000747273971D', 'Blank', '上海市徐汇区虹梅路1905号，远中科研楼甲幢4 / 7层', '主营业务客户', null, null, '中国', '算机软硬件的研发、设计、制作、销售，系统集成，并提供相关的“四技”服务，机电产品，日用百货的销售，会务服务。通讯设备及器材，从事货物与技术的进出口业务，各类广告的设计、制作、代理。', '上海', '互联网', '两月结（60天）结算周期', '有效', null, '金融解决方案业务部', null, null, '2016-11-15 16:28:15', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('413', '民生加银资产管理有限公司', null, '中国', '1000000216', null, '91310101061121973Y', 'Blank', '上海市黄浦区西藏中路336号1806－8室', '主营业务客户', null, null, '中国', '基金', '北京', '金融', '季结（90天）结算周期', '有效', '民生加银资产管理有限公司', '金融解决方案业务部', null, null, '2016-10-28 15:32:10', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('414', '北京万集科技股份有限公司', null, '中国', '1000000252', null, '11010810114488X', 'Golden', '北京市海淀区上地东路1号盈创动力E601', '主营业务客户', null, null, '中国', '产品制造，工程施工', '北京', '其他', '季结（90天）结算周期', '有效', '万象', '金融解决方案业务部', null, null, '2016-10-14 17:40:13', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('415', '中国建设银行股份有限公司平湖支行', null, '中国', '1000000303', null, '91330482846657938H', 'Copper', '平湖市当湖街道当湖东路86-108号', '主营业务客户', null, null, '中国', '金融，银行', '上海', '其他', '月结(30天)结算周期', '有效', '中国建设银行', '金融解决方案业务部', null, null, '2016-10-14 13:55:36', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('416', '中国农业银行股份有限公司常熟分行', null, '中国', '1000000304', null, '1', 'Copper', '常熟市海虞北路17号', '主营业务客户', null, null, '中国', '金融银行类', '上海', '金融', '月结(30天)结算周期', '有效', '中国农业发展银行', '金融解决方案业务部', null, null, '2016-10-08 14:13:16', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('417', '广州农村商业银行股份有限公司', null, '中国', '1000000554', null, '1', 'Silver', '广州市珠江新城华夏路1号信合大厦', '主营业务客户', null, null, '中国', '贷款、储蓄', '广州', '金融', '月结(30天)结算周期', '有效', '广州市房屋安全管理所', '金融解决方案业务部', null, null, '2016-10-08 14:08:03', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('418', '南通市住房保障和房产管理局', null, '中国', '1000000760', null, '2', 'Copper', '江苏省南通市崇川区工农南路150号', '主营业务客户', null, '政府', '中国', '房管', '南通市', '政府/非营利机构', '月结(30天)结算周期', '有效', '南通市全通房产信息咨询网络有限公司', '金融解决方案业务部', null, null, '2016-09-30 11:22:43', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('419', '中国光大银行股份有限公司', null, '中国', '1000000608', null, '91110000100011743X', 'Copper', '北京市西城区太平桥大街25号、甲25号中国光大中心', null, null, null, '中国', '吸收公众存款；发放短期、中期和长期贷款；办理国内外结算；办理票据贴现；发行金融债券；代理发行、代理兑付、承销政府债券；买卖政府债券；从事同业拆借；买卖、代理买卖外汇；提供信用证服务及担保；代理收付款项及代理保险业务；提供保管箱服务；经中国人民银行和国家外汇管理局批准的其他业务。（企业依法自主选择经营项目，开展经营活动；依法须经批准的项目，... 详细', '北京', '金融', '半年结（180天）结算周期', '有效', '光大银行', '金融解决方案业务部', null, null, '2016-09-29 16:09:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('420', '中广核欧洲能源公司', null, '法国', '1000000875', null, '803353424', 'Silver', 'Pactific Tower 11 Cours Valmy 92800 Puteaux France', '主营业务客户', null, null, '欧洲', '由国务院国资委监管的特大型清洁能源中央企业，中广核主要业务为核电、核燃料、非核清洁能源、金融及综合服务。', '巴黎', '其他', '半年结（180天）结算周期', '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-09-29 16:07:07', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('421', '中国建设银行股份有限公司嘉兴分行', null, '中国', '1000001054', null, '91330402846466074M', 'Copper', '嘉兴市紫阳街208号', '主营业务客户', null, '金融', '中国', '金融', '上海', '金融', '月结(30天)结算周期', '有效', null, '金融解决方案业务部', null, null, '2016-09-29 13:57:10', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('422', '上海新梨视网络科技有限公司', null, '中国', '1000000911', null, '91310230MA1JX6RUXU', 'Silver', '上海市静安区灵石路718号', '主营业务客户', null, null, '中国', '网络科技领域内的技术开发、技术转让、技术咨询和技术服务，商务信息咨询，设计、制作各类广告，会务会展服务，公关活动策划，企业形象策划，电子产品、五金交电、办公设备、日用百货、广告材料的销售。', '上海', '高科技', '月结(30天)结算周期', '有效', null, '金融解决方案业务部', null, null, '2016-09-28 14:25:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('423', '中国农业银行股份有限公司苏州分行', null, '中国', '1000000305', null, '91320500837748926Q', 'Copper', '苏州市新区狮山路21-23号', '主营业务客户', null, null, '中国', '金融业', '上海', '金融业(投资/保险/证/银行/基金)', '月结(30天)结算周期', '有效', '中国农业发展银行', '金融解决方案业务部', null, null, '2016-09-26 10:24:13', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('424', '上海奈博信息科技有限公司', null, '中国', '1000000779', null, '1', 'Copper', '中国（上海）自由贸易试验区郭守敬路351号2号楼A665-23室', '关联企业客户', '60天之内 到期净值', '互联网和电商', '中国', '社区服务', '上海', '互联网', '月结(30天)结算周期', '有效', '上海奈博信息科技有限公司', '金融解决方案业务部', '1040', null, '2016-09-19 17:34:22', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('504', '交通银行股份有限公司宜昌分行', null, '中国', '1000000270', null, '1', 'Paper', '宜昌市胜利四路22号', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('505', '交通银行股份有限公司上海分行', null, '中国', '1000000255', null, '91310000132207804B', 'Copper', '江西中路200号', '主营业务客户', null, null, '中国', null, '上海', '其他', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('506', '交通银行股份有限公司', null, '中国', '1000000262', null, '31004310000595X', 'Golden', '上海银城中路188号', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('507', '交通银行股份有限公司湖北省分行', null, '中国', '1000000278', null, '91420100931155553N', 'Paper', '武汉市建设大道847号瑞通广场A座', '主营业务客户', null, null, '中国', null, '武汉', '其他', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('508', '江苏吴江农村商业银行股份有限公司', null, '中国', '1000000276', null, '91320500251317395W', 'Copper', '吴江市中山南路1777号', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '江苏吴江农商行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('509', '江苏常熟农村商业银行股份有限公司', null, '中国', '1000000296', null, '91320000251448088B', 'Paper', '江苏省常熟市新世纪大道58号', '主营业务客户', '60天之内 到期净值', null, '中国', '银行', '常熟', '金融', '月结(30天)结算周期', '有效', '江苏常熟农商行', '金融解决方案业务部', '1040', null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('510', '江苏启东农村商业银行股份有限公司', null, '中国', '1000000302', null, '91320600586694854E', 'Paper', '启东市人民中路599号', '主营业务客户', null, null, '中国', null, '启东', '金融', null, '有效', '江苏启东农商行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('511', '建信基金管理有限责任公司', null, '中国', '1000000195', null, '1', 'Golden', '北京市西城区金融大街7号', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '建信基金', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('512', '吉林银行股份有限公司', null, '中国', '1000000242', null, '9122010170255776XN', 'Golden', '吉林省长春市东南湖大路1817号', '主营业务客户', null, null, '中国', null, '长春', '金融', null, '有效', '吉林银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('513', '华夏资本管理有限公司', null, '中国', '1000000215', null, '440300060299438', 'Paper', '北京市西城区金融大街33号通泰大厦B座15层', '主营业务客户', null, null, '中国', null, '北京', '金融', null, '有效', '华夏基金', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('514', '华夏基金管理有限公司', null, '中国', '1000000006', null, '911100006336940653', 'Golden', '北京市顺义区天竺空港工业区A区 　', '主营业务客户', null, null, '亚太地区', null, '北京', '计算机', null, '有效', '华夏基金', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('515', '华宝信托有限责任公司', null, '中国', '1000000300', null, '91310115631241927F', 'Golden', '中国（上海）自由贸易试验区世纪大道100号59层', '主营业务客户', null, null, '中国', null, '上海', '计算机', null, '有效', '华宝信托有限责任公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('516', '国金道富投资服务有限公司', null, '中国', '1000000759', null, '310109398606001', 'Paper', '1088号紫竹国际大 浦东新区芳甸路', '主营业务客户', null, '金融', '中国', null, '上海', '金融业(投资/保险/证/银行/基金)', null, '有效', '国金道富投资服务有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('517', '国家开发银行', null, '中国', '1000000207', null, '911100000000184548', null, '北京市西城区复兴门内大街18号', '主营业务客户', null, null, null, null, '北京', '金融业(投资/保险/证/银行/基金)', null, '有效', '国家开发银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('518', '广州市房屋安全管理所', null, '中国', '1000000293', null, '1', 'Paper', null, '主营业务客户', null, null, '中国', null, '广州', '其他', null, '有效', '广州市房屋安全管理所', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('519', '工银瑞信基金管理有限公司', null, '中国', '1000000224', null, '91110000717856308U', 'Paper', '北京市西城区金融大街5号、甲5号6层甲5号601', '主营业务客户', null, null, '中国', null, '北京', '其他', null, '有效', '工银瑞信基金管理公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('520', '富国基金管理有限公司', null, '中国', '1000000280', null, '91310000710924515X', 'Paper', '上海市浦东新区世纪大道8号上海国金中心二期16-17楼', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '富国基金', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('521', '东方证券股份有限公司', null, '中国', '1000000198', null, '310101132294776', 'Copper', null, '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '东方证券', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('522', '北京先进数通信息技术股份公司', null, '中国', '1000000248', null, '110108801146341', 'Copper', '北京市海淀区车道沟一号滨河大厦D座6层', '主营业务客户', null, null, '中国', null, '北京', '高科技', null, '有效', '北京先进数通信息技术股份公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('523', '奥地利奥合国际银行股份有限公司北京分行', null, '中国', '1000000214', null, '91110000710926297C', null, '北京市朝阳区建国门外大街21号北京国际俱乐部200室', '主营业务客户', null, null, null, null, '北京', '金融', null, '有效', '奥地利奥合国际银行股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('524', '安信证券股份有限公司', null, '中国', '1000000120', null, '91440300792573957K', 'Copper', '深圳市福田区金田路4018号安联大厦35层、28层A02单元', '主营业务客户', null, null, '中国', null, '深圳', '金融', null, '有效', '安信证券', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('541', null, null, null, 'dddd', null, null, null, null, null, null, null, null, null, null, null, '01', null, null, null, null, null, null, '1000', '20181103195011', null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('425', '青岛市房地产信息与交易资金监管中心', null, '中国', '1000000555', null, '1', 'Silver', '青岛市瞿塘峡路20号', null, null, null, '中国', '维修资金', '青岛', '其他', '两月结（60天）结算周期', '有效', '青岛市房地产信息与交易资金监管中心', '金融解决方案业务部', null, null, '2016-09-18 16:47:32', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('426', '天津金融资产交易所有限责任公司', null, '中国', '1000000780', null, '1', 'Copper', '天津市河西区围堤道103号', '主营业务客户', null, '金融', '中国', '资产转让、理财产品', '天津', '金融业(投资/保险/证/银行/基金)', '月结(30天)结算周期', '有效', '天津金融资产交易所有限责任公司', '金融解决方案业务部', null, null, '2016-09-18 10:11:53', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('427', '上海清算信息技术有限公司', null, '中国', '1000000245', null, '9131010432425957X4', 'Silver', '上海市徐汇区天钥桥路329号812室G座', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '上海清算信息技术有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('428', '招商基金管理有限公司', null, '中国', '1000000204', null, '1', 'Paper', null, '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '招商证券', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('429', '中广核风电有限公司', null, '中国', '1000000249', null, '110106717827080', 'Silver', '北京市丰台区南四环西路188号12区2号楼', '主营业务客户', null, null, '中国', null, '北京', '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('430', '中广核服务集团有限公司', null, '中国', '1000000253', null, '440300190334561', 'Silver', null, '主营业务客户', null, null, '中国', null, '深圳', '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('431', '华泰证券（上海）资产管理有限公司', null, '中国', '1000000250', null, '1', 'Paper', '北京市西城区丰盛胡同28号太平洋保险大厦A座6层', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '华泰证券（上海）资产管理有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('432', '中国对外经济贸易信托有限公司', null, '中国', '1000000251', null, '91110000100006653M', 'Paper', '北京市西城区复兴门内大街28号凯晨世贸中心中座F6', '主营业务客户', null, null, '中国', null, '北京', '金融', null, '有效', '中国对外经济贸易信托有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('433', '天弘基金管理有限公司', null, '中国', '1000000247', null, '91120116767620408K', 'Paper', '天津自贸区（中心商务区）响螺湾旷世国际大厦A座1704-241号　', '主营业务客户', null, null, '中国', null, '北京', '金融', null, '有效', '天弘基金管理有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('434', '中广核资本控股有限公司', null, '中国', '1000000229', null, '1', 'Silver', null, '主营业务客户', null, null, '中国', null, '深圳', '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('435', '深圳高速工程顾问有限公司', null, '中国', '1000000147', null, '91440300741243026T', 'Paper', '深圳市福田区梅坳一路268号深燃大厦6楼601', '主营业务客户', null, null, '中国', '项目管理咨询、城乡规划咨询、信息咨询', '深圳', '交通/运输/物流', '月结(30天)结算周期', '有效', '深圳高速工程顾问有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('436', '众安在线财产保险股份有限公司', null, '中国', '1000000292', null, '91310000080013687R', 'Golden', '上海市南京东路130号', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '众安在线财产保险股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('437', '中信证券信息与量化服务（深圳）有限责任公司', null, '中国', '1000000211', null, '440300081867385', 'Paper', '中国深圳市前海深港现代服务业合作区管理局A栋201室', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '中信证券', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('438', '中信证券股份有限公司', null, '中国', '1000000213', null, '1', null, null, '主营业务客户', null, null, null, null, null, '其他', null, '有效', '中信证券', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('439', '中国银行间市场交易商协会', null, '中国', '1000000243', null, '1', 'Golden', null, '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '中国银行间市场交易商协会', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('440', '中国农业银行股份有限公司嘉兴分行', null, '中国', '1000000273', null, '1', 'Paper', '浙江省嘉兴市斜西街383号', '主营业务客户', null, null, '中国', null, null, '其他', null, '有效', '中国农业发展银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('441', '中国农业发展银行', null, '中国', '1000000202', null, '91100000100017045K', null, '北京市西城区月坛北街甲2号', '主营业务客户', null, null, null, null, '北京', '金融业(投资/保险/证/银行/基金)', null, '有效', '中国农业发展银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('442', '中国建设银行股份有限公司上海市分行', null, '中国', '1000000265', null, '310043132204400', 'Paper', '上海市浦东新区陆家嘴环路900号', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '中国建设银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('443', '中国建设银行股份有限公司深圳市分行', null, '中国', '1000000208', null, '440301455766379', 'Silver', '深圳市福田区益田路6003号荣超商务中心A座', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '中国建设银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('444', '中国工商银行股份有限公司苏州分行', null, '中国', '1000000778', null, '1', 'Golden', '苏州市阊胥路88号', '主营业务客户', null, '金融', '中国', null, null, '金融业(投资/保险/证/银行/基金)', null, '有效', '中国工商银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('445', '中广核汉江水电开发有限公司', null, '中国', '1000000238', null, '610929687991305', 'Silver', '中广核汉江水电', '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('446', '中广核古顶水电有限公司', null, '中国', '1000000237', null, '450225751214093', 'Silver', null, '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('447', '中广核桂柳水电有限公司', null, '中国', '1000000236', null, '45022270860714X', 'Silver', null, '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('448', '中广核红花水电有限公司', null, '中国', '1000000235', null, '450221747987050', 'Silver', null, '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('449', '中广核炉霍鲜水河水电开发有限公司', null, '中国', '1000000239', null, '513327671411943', 'Silver', null, '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('450', '四川天全脚基坪水力发电有限公司', null, '中国', '1000000234', null, '511825762344862', 'Silver', null, '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('451', '四川玉田能源发展有限公司', null, '中国', '1000000233', null, '513435754713066', 'Silver', null, '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('452', '中广核洪雅高凤山水力发电有限公司', null, '中国', '1000000232', null, '511423731597533', 'Silver', null, '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('453', '四川洪雅百花滩水力发电有限公司', null, '中国', '1000000231', null, '511423749634339', 'Silver', null, '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('454', '中广核核电运营有限公司', null, '中国', '1000000240', null, '440300052768628', 'Silver', '广东省深圳市福田区彩田路7018号新浩E都A座37层', '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('455', '中国广核集团有限公司', null, '中国', '1000000227', null, '44030010001694X', 'Silver', null, '主营业务客户', null, null, '中国', null, null, '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('456', '中广核财务有限责任公司', null, '中国', '1000000228', null, '9144030010002726X7', 'Silver', null, '主营业务客户', null, null, '中国', null, '深圳', '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('457', '中国广核电力股份有限公司', null, '中国', '1000000219', null, '91440300093677087R', 'Copper', '深圳市福田区深南大道2002号中广核大厦南楼18楼', '主营业务客户', null, null, '中国', null, '深圳', '能源', null, '有效', '中广核集团', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('458', '招商证券（香港）有限公司', null, '中国', '12543', null, null, 'Silver', '香港中环区', '主营业务客户', '30天之内 到期净值', null, '中国', null, null, '金融', null, '有效', '招商证券', '金融解决方案业务部', '1040', null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('459', '招商证券股份有限公司', null, '中国', '1000000209', null, '91440300192238549B', 'Copper', '深圳市福田区益田路江苏大厦A座38-45楼', '主营业务客户', null, null, '中国', null, '深圳', '金融', null, '有效', '招商证券', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('460', '招商银行股份有限公司常熟支行', null, '中国', '1000000291', null, '1', 'Paper', '常熟市海虞北路45号', '主营业务客户', null, null, '中国', null, null, '其他', null, '有效', '招商银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('461', '长城证券股份有限公司', null, '中国', '1000000205', null, '91440300192431912U', 'Copper', '深圳市福田区深南大道6008号特区报业大厦16-17楼', '主营业务客户', null, null, '中国', '经营范围包括证券经纪；证券投资咨询；与证券交易、证券投资活动有关的财务顾问等。', '深圳', '金融', '季结（90天）结算周期', '有效', '长城证券', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('462', '远景能源（江苏）有限公司', null, '中国', '1000000225', null, '91320281673004487B', 'Paper', '江苏省江阴市申港街道申庄路3号', '主营业务客户', null, null, '中国', '1.5兆瓦及以上风力发电设备的研发、生产，并提供相关技术培训、技术咨询、技术服务；提供风电场勘测、设计、施工服务。（依法须经批准的项目，经相关部门批准后方可开展经营活动）', '苏州', '能源', '月结(30天)结算周期', '有效', '远景能源（江苏）有限公司', '金融解决方案业务部、企业服务事业群', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('463', '银华基金管理股份有限公司', null, '中国', '1000000199', null, '914403007109283569', 'Copper', '深圳市福田区深南大道6008号特区报业大厦东区19层', '主营业务客户', null, null, '亚太地区', null, '北京', '计算机', null, '有效', '银华基金', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('464', '银行间市场清算所股份有限公司', null, '中国', '1000000194', null, '310101697287637', 'Diamond', null, '主营业务客户', null, null, '中国', null, '上海', '计算机', null, '有效', '银行间市场清算所股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('465', '易方达基金管理有限公司', null, '中国', '1000000200', null, '91440000727878666D', 'Copper', '广东省珠海市横琴新区宝华路6号105室-42891（集中办公区）', '主营业务客户', null, null, '亚太地区', null, '广州', '计算机', null, '有效', '易方达', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('466', '兴业银行股份有限公司', null, '中国', '1000000263', null, '91350000158142711F', null, '福州市（鼓东街道中山社区）湖东路154号', '主营业务客户', null, null, null, null, '上海', '金融', null, '有效', '兴业银行股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('467', '武汉市住房保障和房屋管理局', null, '中国', '1000000298', null, '1', 'Copper', '武汉市建设大道702号', '主营业务客户', null, null, '中国', null, '武汉', '其他', null, '有效', '武汉市住房保障和房屋管理局', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('468', '天津市房屋维修资金管理中心', null, '中国', '1000000268', null, '12120000744038503Y', 'Copper', '天津市河北区海河东路52号奥式商务区C座', '主营业务客户', null, null, '中国', null, '天津', '其他', null, '有效', '天津市房屋维修资金管理中心', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('469', '深圳市腾邦信息技术有限公司', null, '中国', '1000000592', null, '1', 'Copper', '中国深圳腾邦国际互联网金融产业园', '主营业务客户', null, null, '中国', null, null, '互联网', null, '有效', null, '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('470', '深圳市腾邦国际商业服务股份有限公司', null, '中国', '1000000201', null, '1', 'Silver', null, '主营业务客户', null, null, '中国', null, null, '其他', null, '有效', '腾邦信息', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('471', '泰康资产管理有限责任公司', null, '中国', '1000000570', null, '91110000784802043P', 'Copper', '上海市浦东区张杨路828-838号 26F07、08室', '主营业务客户', '60天之内 到期净值', null, '中国', '管理运用自有资金及保险资金，受托资金管理业务等', '北京', '金融', '半年结（180天）结算周期', '有效', '泰康资产管理有限责任公司', '金融解决方案业务部', '1019 1004', null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('472', '苏州银行股份有限公司', null, '中国', '1000000289', null, '91320000768299855B', 'Paper', '苏州市园区钟园路728号', '主营业务客户', null, null, '中国', null, null, '其他', null, '有效', '苏州银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('473', '苏州市住房和城乡建设部', null, '中国', '1000000773', null, '1', 'Paper', '苏州市锦帆路239号', '主营业务客户', null, '政府', '中国', null, '苏州', '政府/非营利机构', null, '有效', '苏州市住房和城乡建设部', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('474', '深圳市鹏鼎创盈金融信息服务股份有限公司', null, '中国', '1000000230', null, '1', 'Paper', '深圳市福田区深南大道6023号创建大厦30楼', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '深圳市鹏鼎创盈金融信息服务股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('475', '深圳前海微众银行股份有限公司', null, '中国', '1000000223', null, '9144030031977063XH', 'Paper', '深圳市前海深港合作区前湾一路1号A栋201室（入驻深圳市前海商务秘书有限公司）', '主营业务客户', null, null, '中国', null, '深圳', '其他', null, '有效', '深圳前海微众银行股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('476', '深圳农村商业银行股份有限公司', null, '中国', '1000000222', null, '91440300782792953J', 'Paper', '深圳市罗湖区深南东路3038号', '主营业务客户', null, null, '中国', '经营范围包括证券经纪；证券投资咨询；与证券交易、证券投资活动有关的财务顾问等。', '深圳', '金融', '季结（90天）结算周期', '有效', '深圳农商行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('477', '上海证券交易所', null, '中国', '1000000218', null, '310043132200581', 'Diamond', '528号 浦东新区 浦东南路', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '上海证券交易所', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('478', '银联数据服务有限公司', null, '中国', '1000000297', null, '310115746189532', 'Copper', '浦东新区顾唐路1899号银联数据大楼', '主营业务客户', null, null, '中国', null, '上海', '其他', null, '有效', '上海银联数据服务有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('479', '上海银行股份有限公司', null, '中国', '1000000258', null, '91310000132257510M', 'Paper', '中国（上海）自由贸易试验区银城中路168号', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '上海银行股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('480', '上海通联金融服务有限公司', null, '中国', '1000000261', null, '310109551517321', 'Silver', '浦东新区杨高南路428号由由世纪广场3号楼9层', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '上海通联金融服务有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('481', '上海天玑科技股份有限公司', null, '中国', '1000000285', null, '1', 'Paper', '2号楼11-12楼 上海市桂林路406号', '主营业务客户', '立即应付的 到期净值', null, '中国', null, '上海', '其他', null, '有效', '上海天玑科技股份有限公司', '金融解决方案业务部', '1040', null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('482', '上海数据港股份有限公司', null, '中国', '1000000288', null, '91310000697241508E', 'Paper', '上海市江场三路250号9楼', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '上海数据港股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('483', '上海市物业管理事务中心', null, '中国', '1000000264', null, '1231000075317059XM', 'Silver', '上海北京西路95号', '主营业务客户', null, null, '中国', null, '上海', '其他', null, '有效', '上海市物业管理事务中心', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('484', '上海普陀商业（集团）有限公司', null, '中国', '1000000287', null, '91310000132209025H', 'Paper', '上海市普陀区兰溪路182号8楼801室', '主营业务客户', null, null, '中国', '酒类商品批发，预包装食品（不含熟食卤味、冷冻冷藏）批发，服装鞋帽，日用百货，五金交电，汽车配件，建筑材料及五金，装潢材料，黄金饰品（限零售），工艺品，自有房屋租赁。', '上海', '零售', '季结（90天）结算周期', '有效', '上海普陀商业（集团）有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('485', '上海浦东发展银行股份有限公司', null, '中国', '1000000210', null, '9131000013221158XC', 'Diamond', '上海市中山东一路12号', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '上海浦东发展银行股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('486', '上海农村商业银行股份有限公司', null, '中国', '1000000256', null, '913100007793473149', 'Golden', '上海市黄浦区中山东二路70号', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '上海农商行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('487', '上海东方报业有限公司', null, '中国', '1000000060', null, '913101065981888955', 'Copper', '延安中路839号1705室', '主营业务客户', null, '互联网和电商', '中国', null, '上海', '互联网/电子商务', null, '有效', '上海东方报业有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('488', '青岛银行股份有限公司', null, '中国', '1000000267', null, '370202264609602', 'Paper', '青岛市香港中路68号', '主营业务客户', null, null, '中国', null, '青岛', '金融', null, '有效', '青岛银行股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('489', '奇瑞汽车股份有限公司', null, '中国', '1000000212', null, '340207713970875', null, '安徽省芜湖市', '主营业务客户', null, null, null, null, null, '汽车/摩托车(制造维护配件销售服务)', null, '有效', '奇瑞汽车股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('490', '平湖市物业管理处', null, '中国', '1000000563', null, '1', 'Paper', '平湖市东湖大道617号', '主营业务客户', null, null, '中国', null, null, '其他', null, '有效', '平湖市物业管理处', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('491', '南通市全通房产信息咨询网络有限公司', null, '中国', '1000000284', null, '1', 'Paper', '南通市人民东路42号B座502室', '主营业务客户', null, null, '中国', null, null, '其他', null, '有效', '南通市全通房产信息咨询网络有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('492', '南京金融票据中心', null, '中国', '1000000299', null, '1', 'Paper', '南京市中山南路315号瑞华大厦3楼', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '南京金融票据中心', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('493', '中国民生银行股份有限公司青岛分行', null, '中国', '1000000286', null, '1', 'Paper', '山东省青岛市市南区福州南路18号', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '民生银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('494', '中国民生银行股份有限公司', null, '中国', '1000000246', null, '91110000100018988F', 'Silver', '北京市西城区复兴门内大街2号', '主营业务客户', null, null, '中国', null, '北京', '金融', null, '有效', '民生银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('495', '京东方科技集团股份有限公司', null, '中国', '1000000241', null, '110105101101660', 'Paper', '北京市朝阳区酒仙桥路10号', '主营业务客户', null, null, '中国', null, null, '硬件与电子产品', null, '有效', '京东方科技集团股份有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('496', '交银国际信托有限公司', null, '中国', '1000000295', null, '914200001775900000', 'Paper', '武汉市建设大道847号瑞通广场B座16-17层', '主营业务客户', null, null, '中国', null, '上海', '金融', null, '有效', '交银国际信托有限公司', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('497', '交通银行股份有限公司湖南分行', null, '中国', '1000000776', null, '1', 'Paper', '长沙市 韶山中路1号', '主营业务客户', null, '金融', '中国', null, '长沙', '金融业(投资/保险/证/银行/基金)', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('498', '交通银行股份有限公司宁波分行', null, '中国', '1000000290', null, '91330200844098028L', 'Paper', '宁波市中山东路55号', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('499', '交通银行股份有限公司青岛分行', null, '中国', '1000000279', null, '1', 'Golden', '青岛市中山路六号', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('500', '交通银行股份有限公司北京分行', null, '中国', '1000000281', null, '1', 'Copper', null, '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('501', '交通银行股份有限公司太平洋信用卡中心', null, '中国', '1000000257', null, '1', 'Paper', '上海市张江高科技园区松涛路80号1，2幢', '主营业务客户', null, null, '中国', null, null, '其他', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('502', '交通银行股份有限公司广东省分行', null, '中国', '1000000269', null, '91440101190510588J', 'Silver', '广州市天河区冼村路11号', '主营业务客户', null, null, '中国', null, '广州', '金融', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('503', '交通银行股份有限公司苏州分行', null, '中国', '1000000274', null, '1', 'Paper', '苏州市十梓街628号', '主营业务客户', null, null, '中国', null, null, '金融', null, '有效', '交通银行', '金融解决方案业务部', null, null, '2016-08-28 09:55:45', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('305', '兴业银行股份有限公司南通分行', null, '中国', '1000002197', null, '91320600699344906N', 'Paper', '南通市崇川区世纪大道18号兴业大厦', '主营业务客户', '180天之内 到期净值', '金融', '中国', '吸收公众存款，发放贷款，办理国内外结算，办理票据承兑和贴现，提供信用证服务及担保，代理发行、代理兑付政府债券，代理收付款项，经中国银行业监督管理委员会批准并经上级行授权的其它业务。', '南通市', '金融', '两月结（60天）结算周期', '有效', '兴业银行股份有限公司', '金融解决方案业务部', '1070', null, '2018-10-17 17:31:28', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('306', '上海砾阳软件有限公司', null, '中国', '1000002196', null, '91310104747636015G', 'Paper', '上海浦东张江路185号403A', '主营业务客户', '180天之内 到期净值', '互联网和电商', '中国', '计算机专业领域内的四技服务，计算机软硬件、电子通讯系统集成，计算机软硬件及配件、电子产品及通信设备销售及售后服务。', '上海', '服务业', '季结（90天）结算周期', '有效', '上海砾阳软件有限公司', '金融解决方案业务部', '1040', null, '2018-10-17 17:28:35', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('307', '扬州市邗江区住房保障和房产管理局', null, '中国', '1000002184', null, 'NNA', 'Copper', '江苏省扬州市邗江区百祥路37', '主营业务客户', '180天之内 到期净值', '政府', '中国', '(一)贯彻执行国家、省住房保障和房地产业的法律、法规、规章和有关方针、政策,拟订全区住房保障和房产管理的政策和规范性文件。(二)研究编制全区住房保障和房地产业发展规划、住宅建设规划并组织实施。(三)负责全区房地产开发管理,参与住宅小区规划;参与国有土地使用权出让和房地产开发利用工作;负责管理、监督房地产开发项目的实施;负责全区房地产开发企业的资质管理;负责住宅小区等群体房地产开发项目综合验收;指导住宅新技术的推广应用。', '扬州市', '政府/非营利机构', '月结(30天)结算周期', '有效', '扬州市邗江区住房保障和房产管理局', '金融解决方案业务部', '1005', null, '2018-10-12 13:29:43', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('308', '中国农业银行股份有限公司扬州邗江支行', null, '中国', '1000002183', null, '913210038412745912', 'Copper', '江苏省扬州市文昌西路242号', '主营业务客户', '180天之内 到期净值', '金融', '中国', '吸收公众存款；发放短期、中期、长期贷款；办理国内外结算；办理票据承兑与贴现；发行金融债券；代理发行、代理兑付、承销政府债券；买卖政府债券；从事同业拆借；结汇、售汇；从事银行卡业务；提供信用证服务及担保；代理收付款项；提供保管箱服务；代理资金清算；各类汇兑业务；代理政策性银行贷款业务；贷款承诺；组织或参加银团贷款；', '扬州市', '金融', '月结(30天)结算周期', '有效', '中国农业银行股份有限公司', '金融解决方案业务部', '1005', null, '2018-10-12 11:02:47', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('309', '中广核核技术发展股份有限公司', null, '中国', '1000002181', null, '91210200241281202G', 'Copper', '大连市西岗区黄河路219号', '主营业务客户', '30天之内 到期净值', '能源', '中国', '核技术开发、技术转让、技术咨询、技术服务', '大连', '能源', '月结(30天)结算周期', '有效', '中广核集团', '金融解决方案业务部', '1004', null, '2018-10-11 10:12:27', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('310', '上汽通用汽车金融有限责任公司', null, '中国', '1000001990', null, '913100007178520166', 'Paper', '中国（上海）自由贸易试验区浦明路160号财富广场F幢', '主营业务客户', '60天之内 到期净值', '金融', '中国', '汽车金融', '上海', '金融', '两月结（60天）结算周期', '有效', '上海汽车集团股份有限公司', '金融解决方案业务部', '1005', null, '2018-09-26 19:18:06', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('311', '上海弘弘供应链管理有限公司', null, '中国', '1000001980', null, '91310115MA1H87736U', 'Paper', '上海市张东路1387号8号楼', '主营业务客户', '60天之内 到期净值', '交通和物流', '中国', '供应链', '上海', '服务业', '月结(30天)结算周期', '有效', '上海弘弘供应链管理有限公司', '金融解决方案业务部', '1005', null, '2018-09-21 16:17:28', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('312', '贵州银行股份有限公司', null, '中国', '1000001977', null, '915200000550280000', 'Paper', '贵州省贵阳市云岩区瑞金中路41号', '主营业务客户', '60天之内 到期净值', '金融', '中国', '金融', '贵阳', '金融', '月结(30天)结算周期', '有效', '贵州银行股份有限公司', '金融解决方案业务部', '1004', null, '2018-09-20 14:52:22', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('313', '中国农业银行股份有限公司南通分行', null, '中国', '1000001969', null, '91320600838303064H', 'Paper', '南通市姚港路18号', '主营业务客户', '60天之内 到期净值', '金融', '中国', '银行', '南通市', '金融', '月结(30天)结算周期', '有效', '中国农业银行股份有限公司', '金融解决方案业务部', '1070', null, '2018-09-13 15:52:13', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('314', '青岛妙益丰信息咨询有限公司', null, '中国', '1000001963', null, '91370203321429799E', 'Paper', '岛市黑龙江路2号万科中心C座2019室', '主营业务客户', '180天之内 到期净值', '商业和零售', '中国', '工程造价咨询；【工程招标代理；政府采购代理（凭资质经营）】；计算机软件设计及开发；销售：网络设备；计算机系统集成；货物及技术的进出口业务（国家法律法规禁止经营的不得经营，国家法律法规限制经营的须凭许可经营）。（依法须经批准的项目，经相关部门批准后方可开展经营活动）。', '青岛', '专业服务(咨询/财会/法律等)', '季结（90天）结算周期', '有效', '青岛妙益丰信息咨询有限公司', '金融解决方案业务部', '1040', null, '2018-09-10 16:01:19', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('315', '中广核铀业发展有限公司', null, '中国', '1000001943', null, '9111000071093430X6', 'Copper', '北京市芍药居北里101号世奥国际中心A座30层', '主营业务客户', '30天之内 到期净值', '能源', '中国', '核燃料供应与服务', '北京', '能源', '月结(30天)结算周期', '有效', '中广核集团', '金融解决方案业务部', '1004', null, '2018-08-28 10:29:42', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('316', '中国农业银行股份有限公司南通崇川支行', null, '中国', '1000001942', null, '9132060083830186XX', 'Paper', '南通市孩儿巷南路50号', '主营业务客户', null, '金融', '中国', '银行', '南通市', '金融', '月结(30天)结算周期', '有效', '中国农业银行股份有限公司', '金融解决方案业务部', null, null, '2018-08-24 18:13:42', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('317', '北京云测信息技术有限公司', null, '中国', '1000001939', null, '91110105664641441Q', 'Paper', '北京市朝阳区酒仙桥52号院4301号', '主营业务客户', null, '互联网和电商', '中国', '技术开发、技术转让、技术咨询、技术服务；会议服务；企业管理；企业管理咨询；发布广告；计算机系统服务；软件设计；销售计算机、软件及辅助设备、电子产品；互联网信息服务。', '北京', '互联网', '季结（90天）结算周期', '有效', '北京云测信息技术有限公司', '金融解决方案业务部', null, null, '2018-08-23 18:21:58', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('318', '贵州鹏业工程建设咨询事务有限责任公司', null, '中国', '1000001936', null, '91520100775340705D', 'Paper', '贵阳市观山湖区毕节路58号联合广场4号楼33层', '主营业务客户', null, '商业和零售', '中国', '招标代理', '贵阳', '中介服务(人才/商标专利)', '月结(30天)结算周期', '有效', '贵州鹏业工程建设咨询事务有限责任公司', '金融解决方案业务部', null, null, '2018-08-22 15:32:16', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('319', '中电科新型智慧城市研究院有限公司', null, '中国', '1000001933', null, '91440300MA5D9U1Q82', 'Copper', '广东省深圳市福田区国际创新中心C座19楼', '主营业务客户', null, '高科技', '中国', '人力外包，项目整包', '深圳', '高科技', '月结(30天)结算周期', '有效', '中国电科', '金融解决方案业务部', null, null, '2018-08-21 15:13:20', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('320', '南通双阳软件科技有限公司', null, '中国', '1000001912', null, '91320600MA1MBAF607', 'Paper', '南通市工农路6号华丽大厦1202室', '主营业务客户', null, '高科技', '中国', '软件科技', '南通市', '高科技', '月结(30天)结算周期', '有效', '南通双阳软件科技有限公司', '金融解决方案业务部', null, null, '2018-08-14 15:08:43', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('321', '南京亚软信息技术有限公司', null, '中国', '1000001911', null, '913201025804746311', 'Paper', '江苏省南京市玄武大道徐庄软件园江苏软件园29幢', '主营业务客户', null, '高科技', '中国', '信息技术', '南京', '高科技', '月结(30天)结算周期', '有效', '南京亚软信息技术有限公司', '金融解决方案业务部', null, null, '2018-08-14 10:03:43', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('322', '嘉兴市住房保障局', null, '中国', '1000001910', null, '事业单位无', 'Paper', '嘉兴市花园路616号市建委6号楼', '主营业务客户', null, '政府', '中国', '房屋维护等', '嘉兴', '政府/非营利机构', '两月结（60天）结算周期', '有效', '嘉兴市住房保障局', '金融解决方案业务部', null, null, '2018-08-14 09:12:48', '22', null, null, null, '00');
@@ -1730,24 +1661,54 @@ INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('388', '深圳前海星概念信�
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('389', '阳光资产管理股份有限公司', null, '中国', '1000001280', null, '91440300058959652N', 'Blank', '深圳市南山区临海路海运中心主塔楼609房', '主营业务客户', null, '金融', '中国', '受托管理委托人委托的人民币、外币资金；管理运用自有人民币', '北京', '金融', '季结（90天）结算周期', '有效', '阳光资产管理股份有限公司', '金融解决方案', null, null, '2017-07-11 09:10:50', '22', null, null, null, '00');
 
 -- ----------------------------
+-- Table structure for PM_FILE
+-- ----------------------------
+DROP TABLE "VOTE"."PM_FILE";
+CREATE TABLE "VOTE"."PM_FILE" (
+"FILE_ID" NUMBER(10) NOT NULL ,
+"FILE_UPLOAD_NAME" VARCHAR2(256 BYTE) NULL ,
+"FILE_PATH" VARCHAR2(512 BYTE) NULL ,
+"FILE_SAVE_NAME" VARCHAR2(256 BYTE) NULL ,
+"UPLOAD_TYPE" CHAR(2 BYTE) NULL ,
+"FILE_SIZE" NUMBER(10) NULL ,
+"FOREIGN_ID" NUMBER(10) NULL ,
+"FOREIGN_CODE" VARCHAR2(32 BYTE) NULL ,
+"REMARK" VARCHAR2(256 BYTE) NULL ,
+"CREATOR_ID" NUMBER(10) NULL ,
+"CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"MODIFIER" NUMBER(10) NULL ,
+"MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of PM_FILE
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for PM_PAYMENT_POINT
 -- ----------------------------
 DROP TABLE "VOTE"."PM_PAYMENT_POINT";
 CREATE TABLE "VOTE"."PM_PAYMENT_POINT" (
 "PAYMENT_ID" NUMBER(10) NOT NULL ,
-"PAYMENT_FOREIGN_ID" NUMBER(10) DEFAULT NULL  NULL ,
-"PAYMENT_FOREIGN_CODE" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
-"PAYMENT_TYPE" CHAR(2 BYTE) DEFAULT NULL  NULL ,
-"PAYMENT_DATE" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
-"PAYMENT_TERM" NUMBER(10,2) DEFAULT NULL  NULL ,
-"PAYMENT_RATE" NUMBER(10,4) DEFAULT NULL  NULL ,
-"PAYMENT_AMOUNT" NUMBER(10,2) DEFAULT NULL  NULL ,
-"REMARK" VARCHAR2(256 BYTE) DEFAULT NULL  NULL ,
-"CREATOR_ID" NUMBER(10) DEFAULT NULL  NULL ,
-"CREATE_TIME" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
-"MODIFIER" NUMBER(10) DEFAULT NULL  NULL ,
-"MODIFY_TIME" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
-"IS_DELETE" CHAR(2 BYTE) DEFAULT NULL  NULL 
+"PAYMENT_FOREIGN_ID" NUMBER(10) NULL ,
+"PAYMENT_FOREIGN_CODE" VARCHAR2(32 BYTE) NULL ,
+"PAYMENT_TYPE" CHAR(2 BYTE) NULL ,
+"PAYMENT_DATE" VARCHAR2(32 BYTE) NULL ,
+"PAYMENT_TERM" NUMBER(10,2) NULL ,
+"PAYMENT_RATE" NUMBER(10,4) NULL ,
+"PAYMENT_AMOUNT" NUMBER(10,2) NULL ,
+"REMARK" VARCHAR2(256 BYTE) NULL ,
+"CREATOR_ID" NUMBER(10) NULL ,
+"CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"MODIFIER" NUMBER(10) NULL ,
+"MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL 
 )
 LOGGING
 NOCOMPRESS
@@ -1772,7 +1733,7 @@ CREATE TABLE "VOTE"."PM_PRODUCT_INFO" (
 "DEVELOPMENT_DEPT_ID" NUMBER(16) DEFAULT NULL  NULL ,
 "DEVELOPMENT_MANAGER_NAME" VARCHAR2(128 BYTE) DEFAULT NULL  NULL ,
 "DEVELOPMENT_MANAGER_ID" NUMBER(10) DEFAULT NULL  NULL ,
-"START_SALE_DATE" DATE DEFAULT NULL  NULL ,
+"START_SALE_DATE" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
 "PRODUCT_TYPE" CHAR(2 BYTE) DEFAULT NULL  NULL ,
 "REMARK" VARCHAR2(256 BYTE) DEFAULT NULL  NULL ,
 "CREATOR_ID" NUMBER(10) DEFAULT NULL  NULL ,
@@ -1790,6 +1751,9 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_PRODUCT_INFO
 -- ----------------------------
+INSERT INTO "VOTE"."PM_PRODUCT_INFO" VALUES ('1', 'productCode', 'name', '1000', '研发部门', '1000', '研发经理', '1000', '2018-11-21', '00', '备注', '1000', '系统管理员', '1000', '20181106172603', '01');
+INSERT INTO "VOTE"."PM_PRODUCT_INFO" VALUES ('2', null, 'dsad', '100', null, null, null, null, null, null, 'adas', '1000', '20181106081016', null, null, null);
+INSERT INTO "VOTE"."PM_PRODUCT_INFO" VALUES ('3', 'code', '产品名称：', '1000', '金融政府事业群', '1000', '系统管理员', '1000', '2018-11-09 00:00:00', '01', 'sss', '1000', '20181106173117', null, null, '00');
 
 -- ----------------------------
 -- Table structure for PM_PRODUCT_PROJECT_RELATION
@@ -1824,6 +1788,32 @@ NOCACHE
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for PM_REVIEW_COMMENT_INFO
+-- ----------------------------
+DROP TABLE "VOTE"."PM_REVIEW_COMMENT_INFO";
+CREATE TABLE "VOTE"."PM_REVIEW_COMMENT_INFO" (
+"COMMENT_ID" NUMBER(10) NOT NULL ,
+"COMMENT_TYPE" CHAR(2 BYTE) NULL ,
+"REVIEW_ID" NUMBER(10) NULL ,
+"REVIEW_CODE" VARCHAR2(32 BYTE) NULL ,
+"RESULT" CHAR(2 BYTE) NULL ,
+"WROTEN_USER_ID" NUMBER(10) NULL ,
+"WROTEN_USER_NAME" VARCHAR2(64 BYTE) NULL ,
+"COMMENT_DETAIL" VARCHAR2(1024 BYTE) NULL ,
+"WRITE_TIME" VARCHAR2(32 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of PM_REVIEW_COMMENT_INFO
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for PM_SALE_GROUP_INFO
 -- ----------------------------
 DROP TABLE "VOTE"."PM_SALE_GROUP_INFO";
@@ -1849,28 +1839,28 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_SALE_GROUP_INFO
 -- ----------------------------
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('2', 'asd', '1', 'sddss', '1000', '2018-10-10', null, null, '00', 'aaa', null);
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('1', null, null, null, '1000', '20181104154226960', null, null, '00', null, null);
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('5', 'dasda', null, null, '22', '20181104191948281', null, null, '00', null, null);
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('6', 'ddd', null, null, '22', '20181104193418061', null, null, '00', null, null);
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('7', 'ddd', null, null, '22', '20181104193435878', null, null, '00', null, null);
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('19', 'adas', null, null, '1000', '20181104232918816', null, null, '00', 'XS201811046712', null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('2', 'asd', '1', 'sddss', '1000', '2018-10-10', '22', null, '01', 'aaa', null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('1', null, null, null, '1000', '20181104154226960', '22', null, '01', null, null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('5', 'dasda', null, null, '22', '20181104191948281', '22', null, '01', null, null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('6', 'ddd', null, null, '22', '20181104193418061', '22', null, '01', null, null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('7', 'ddd', null, null, '22', '20181104193435878', '22', null, '01', null, null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('19', 'adas', '5', null, '1000', '20181104232918816', '1000', '20181106172542802', '00', 'XS201811046712', '管理中心');
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('20', 'asd', null, null, '1000', '20181104233029755', null, null, '00', 'XS201811041523', null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('21', 'asd', null, null, '1000', '20181104233111309', null, null, '00', 'XS201811044363', null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('22', 'asd', null, null, '1000', '20181104233138932', null, null, '00', 'XS201811049296', null);
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('2', 'dasda', null, null, '1000', '20181104160315720', null, null, '00', null, null);
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('3', 'dasda', null, null, '1000', '20181104160346405', null, null, '00', null, null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('2', 'dasda', null, null, '1000', '20181104160315720', '22', null, '01', null, null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('3', 'dasda', null, null, '1000', '20181104160346405', '22', null, '01', null, null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('4', 'ddddd', null, null, '1000', '20181104160618957', null, null, '00', null, null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('8', 'asdasdas', null, null, '22', '20181104193825785', null, null, '00', null, null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('9', 'dasd', null, null, '1000', '20181104194011590', null, null, '00', null, null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('10', 'ddaa', null, null, '1000', '20181104194024685', null, null, '00', null, null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('11', 'asdas', null, null, '1000', '20181104194235432', null, null, '00', null, null);
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('12', 'asdas', null, null, '1000', '20181104194344937', null, null, '00', null, null);
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('16', 'asdasaaa', null, null, '1000', '20181104200315123', null, null, '00', 'XS201811048960', null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('12', 'asdas', null, null, '1000', '20181104194344937', '22', null, '01', null, null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('16', 'asdasaaa', null, null, '1000', '20181104200315123', '22', null, '01', 'XS201811048960', null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('17', 'asda', null, null, '22', '20181104200633842', null, null, '00', 'XS201811048864', null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('18', 'asda', null, null, '1000', '20181104200944280', null, null, '00', 'XS201811043928', null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('13', 'asd', null, null, '1000', '20181104194548457', null, null, '00', null, null);
-INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('14', 'asdaa', null, null, '1000', '20181104195049221', null, null, '00', null, null);
+INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('14', 'asdaa', null, null, '1000', '20181104195049221', '22', null, '01', null, null);
 INSERT INTO "VOTE"."PM_SALE_GROUP_INFO" VALUES ('15', 'asdaa', null, null, '1000', '20181104195154489', null, null, '00', null, null);
 
 -- ----------------------------
@@ -1900,6 +1890,8 @@ NOCACHE
 -- ----------------------------
 INSERT INTO "VOTE"."PM_SALE_MEMBER_INFO" VALUES ('1000', 'XS201811044171', '00', null, '1000', '20181104195209293', '0', null, '00', null);
 INSERT INTO "VOTE"."PM_SALE_MEMBER_INFO" VALUES ('1000', 'XS201811043928', '00', null, '1000', '20181104200948011', null, null, '00', null);
+INSERT INTO "VOTE"."PM_SALE_MEMBER_INFO" VALUES ('41', 'XS201811046712', '00', null, '1000', '20181106172542825', null, null, '00', null);
+INSERT INTO "VOTE"."PM_SALE_MEMBER_INFO" VALUES ('1000', 'XS201811046712', '00', null, '1000', '20181106172542825', null, null, '00', null);
 
 -- ----------------------------
 -- Table structure for REVIEW_INFO
@@ -1955,8 +1947,11 @@ INSERT INTO "VOTE"."ROLE" VALUES ('32', '实施管理部负责人', '实施管�
 INSERT INTO "VOTE"."ROLE" VALUES ('34', '交付部负责人', ' 交付部负责人', '20181103');
 INSERT INTO "VOTE"."ROLE" VALUES ('35', '后台管理部负责人', '后台管理部负责人', '20181103');
 INSERT INTO "VOTE"."ROLE" VALUES ('36', '交付部经理', '交付部经理', '20181103');
-INSERT INTO "VOTE"."ROLE" VALUES ('37', '销售部经理', '销售部经理', '20181103');
+INSERT INTO "VOTE"."ROLE" VALUES ('37', '客户经理', '客户经理', '20181105');
 INSERT INTO "VOTE"."ROLE" VALUES ('38', '普通用户', '普通用户', '20181103');
+INSERT INTO "VOTE"."ROLE" VALUES ('51', '项目经理', '项目经理', '20181105');
+INSERT INTO "VOTE"."ROLE" VALUES ('52', '销售部助理', '销售部助理', '20181105');
+INSERT INTO "VOTE"."ROLE" VALUES ('53', '后台管理部助理', '后台管理部助理', '20181105');
 
 -- ----------------------------
 -- Table structure for ROLE_MENU
@@ -2153,8 +2148,8 @@ COMMENT ON COLUMN "VOTE"."USR_INFO"."STR_REMARK" IS '备注';
 -- Records of USR_INFO
 -- ----------------------------
 INSERT INTO "VOTE"."USR_INFO" VALUES ('41', null, 'PMS_管理员（娄）', '1', '111111', '2018-11-03', '13711111111', 'mailwork_sh@163.com', '22', '0', '20181103', null, '01', '111111111111111', '111111111111111', null, null, '111111');
-INSERT INTO "VOTE"."USR_INFO" VALUES ('1000', 'Aoot', '系统管理员', '0', '111111', '20170523', '111111', '11111', null, '1', '20170217', '1000', '01', null, null, 'B3CF95153E04D0283D6AE86758B71C3A', '20181104233138920', null);
-INSERT INTO "VOTE"."USR_INFO" VALUES ('22', null, '系统管理员_TEST2', '1', '111111', '2018-10-12', '13666666666', '35q13w5eq@qq.com', '22', '0', '20181103', '1000', '01', '3123123', '420123123123123', null, '20181104224532845', 'asda');
+INSERT INTO "VOTE"."USR_INFO" VALUES ('1000', 'Aoot', '系统管理员', '0', '111111', '20170523', '111111', '11111', null, '1', '20170217', '1000', '01', null, null, 'D9EED4A1B9796E6254DB2F7A67B072B8', '20181106173837803', null);
+INSERT INTO "VOTE"."USR_INFO" VALUES ('22', null, '系统管理员_TEST2', '1', '111111', '2018-10-12', '13666666666', '35q13w5eq@qq.com', '22', '0', '20181103', '1000', '01', '3123123', '420123123123123', null, '20181105154411716', 'asda');
 
 -- ----------------------------
 -- Table structure for USR_MENU
@@ -3275,7 +3270,7 @@ CREATE SEQUENCE "VOTE"."EXCEL_ID"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 181
+ START WITH 201
  CACHE 20;
 
 -- ----------------------------
@@ -3374,7 +3369,7 @@ CREATE SEQUENCE "VOTE"."PMCUSTOMERGROUPRELATION_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 101
+ START WITH 241
  CACHE 20;
 
 -- ----------------------------
@@ -3386,6 +3381,17 @@ CREATE SEQUENCE "VOTE"."PMCUSTOMERINFO_SEQ"
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
  START WITH 561
+ CACHE 20;
+
+-- ----------------------------
+-- Sequence structure for PMPRODUCTINFO_SEQ
+-- ----------------------------
+DROP SEQUENCE "VOTE"."PMPRODUCTINFO_SEQ";
+CREATE SEQUENCE "VOTE"."PMPRODUCTINFO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 21
  CACHE 20;
 
 -- ----------------------------
@@ -3462,7 +3468,7 @@ CREATE SEQUENCE "VOTE"."USRIDSEQUENCE"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 999999999999999999999999999
- START WITH 51
+ START WITH 61
  CACHE 10;
 
 -- ----------------------------
@@ -4303,13 +4309,17 @@ ALTER TABLE "VOTE"."PM_CUSTOMER_INFO" ADD CHECK ("CUST_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."PM_CUSTOMER_INFO" ADD CHECK ("CUST_ID" IS NOT NULL);
 
 -- ----------------------------
--- Indexes structure for table PM_PAYMENT_POINT
+-- Indexes structure for table PM_FILE
 -- ----------------------------
 
 -- ----------------------------
--- Checks structure for table PM_PAYMENT_POINT
+-- Primary Key structure for table PM_FILE
 -- ----------------------------
-ALTER TABLE "VOTE"."PM_PAYMENT_POINT" ADD CHECK ("PAYMENT_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."PM_FILE" ADD PRIMARY KEY ("FILE_ID");
+
+-- ----------------------------
+-- Indexes structure for table PM_PAYMENT_POINT
+-- ----------------------------
 
 -- ----------------------------
 -- Primary Key structure for table PM_PAYMENT_POINT
@@ -4343,6 +4353,15 @@ ALTER TABLE "VOTE"."PM_PRODUCT_PROJECT_RELATION" ADD CHECK ("PRODUCT_RELATION_ID
 -- Primary Key structure for table PM_PRODUCT_PROJECT_RELATION
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_PRODUCT_PROJECT_RELATION" ADD PRIMARY KEY ("PRODUCT_RELATION_ID");
+
+-- ----------------------------
+-- Indexes structure for table PM_REVIEW_COMMENT_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table PM_REVIEW_COMMENT_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_REVIEW_COMMENT_INFO" ADD PRIMARY KEY ("COMMENT_ID");
 
 -- ----------------------------
 -- Checks structure for table PM_SALE_GROUP_INFO

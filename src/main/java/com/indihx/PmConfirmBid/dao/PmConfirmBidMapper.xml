@@ -7,17 +7,20 @@
     <resultMap type="com.indihx.PmConfirmBid.entity.PmConfirmBidEntity" id="pmConfirmBidMap">
         <result property="bidId" column="BID_ID"/>
         <result property="bidName" column="BID_NAME"/>
+        <result property="firstBidAmount" column="FIRST_BID_AMOUNT"/>
         <result property="predictAmount" column="PREDICT_AMOUNT"/>
         <result property="predictCost" column="PREDICT_COST"/>
         <result property="predictProfitRate" column="PREDICT_PROFIT_RATE"/>
         <result property="predictPeriod" column="PREDICT_PERIOD"/>
+        <result property="custId" column="CUST_ID"/>
+        <result property="custCnName" column="CUST_CN_NAME"/>
+        <result property="custSapCode" column="CUST_SAP_CODE"/>
+        <result property="constructionDeptId" column="CONSTRUCTION_DEPT_ID"/>
+        <result property="constructionDeptName" column="CONSTRUCTION_DEPT_NAME"/>
         <result property="sellDeptId" column="SELL_DEPT_ID"/>
         <result property="sellDeptName" column="SELL_DEPT_NAME"/>
         <result property="custManagerId" column="CUST_MANAGER_ID"/>
         <result property="custManagerName" column="CUST_MANAGER_NAME"/>
-        <result property="fileCode" column="FILE_CODE"/>
-        <result property="fileName" column="FILE_NAME"/>
-        <result property="filePath" column="FILE_PATH"/>
         <result property="isWorkAreaExplicit" column="IS_WORK_AREA_EXPLICIT"/>
         <result property="isChecked" column="IS_CHECKED"/>
         <result property="remark" column="REMARK"/>
@@ -26,6 +29,7 @@
         <result property="modifier" column="MODIFIER"/>
         <result property="modifyTime" column="MODIFY_TIME"/>
         <result property="isDelete" column="IS_DELETE"/>
+        <result property="paymentPoint" column="PAYMENT_POINT"/>
     </resultMap>
 
 	<select id="queryObject" resultMap="pmConfirmBidMap">
@@ -41,6 +45,8 @@
 				BID_ID = #{bidId} AND 			</if>
 						<if test="bidName != null and bidName!=''"  >
 				BID_NAME = #{bidName} AND 			</if>
+						<if test="firstBidAmount != null and firstBidAmount!=''"  >
+				FIRST_BID_AMOUNT = #{firstBidAmount} AND 			</if>
 						<if test="predictAmount != null and predictAmount!=''"  >
 				PREDICT_AMOUNT = #{predictAmount} AND 			</if>
 						<if test="predictCost != null and predictCost!=''"  >
@@ -49,6 +55,16 @@
 				PREDICT_PROFIT_RATE = #{predictProfitRate} AND 			</if>
 						<if test="predictPeriod != null and predictPeriod!=''"  >
 				PREDICT_PERIOD = #{predictPeriod} AND 			</if>
+						<if test="custId != null and custId!=''"  >
+				CUST_ID = #{custId} AND 			</if>
+						<if test="custCnName != null and custCnName!=''"  >
+				CUST_CN_NAME = #{custCnName} AND 			</if>
+						<if test="custSapCode != null and custSapCode!=''"  >
+				CUST_SAP_CODE = #{custSapCode} AND 			</if>
+						<if test="constructionDeptId != null and constructionDeptId!=''"  >
+				CONSTRUCTION_DEPT_ID = #{constructionDeptId} AND 			</if>
+						<if test="constructionDeptName != null and constructionDeptName!=''"  >
+				CONSTRUCTION_DEPT_NAME = #{constructionDeptName} AND 			</if>
 						<if test="sellDeptId != null and sellDeptId!=''"  >
 				SELL_DEPT_ID = #{sellDeptId} AND 			</if>
 						<if test="sellDeptName != null and sellDeptName!=''"  >
@@ -57,12 +73,6 @@
 				CUST_MANAGER_ID = #{custManagerId} AND 			</if>
 						<if test="custManagerName != null and custManagerName!=''"  >
 				CUST_MANAGER_NAME = #{custManagerName} AND 			</if>
-						<if test="fileCode != null and fileCode!=''"  >
-				FILE_CODE = #{fileCode} AND 			</if>
-						<if test="fileName != null and fileName!=''"  >
-				FILE_NAME = #{fileName} AND 			</if>
-						<if test="filePath != null and filePath!=''"  >
-				FILE_PATH = #{filePath} AND 			</if>
 						<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''"  >
 				IS_WORK_AREA_EXPLICIT = #{isWorkAreaExplicit} AND 			</if>
 						<if test="isChecked != null and isChecked!=''"  >
@@ -78,7 +88,9 @@
 						<if test="modifyTime != null and modifyTime!=''"  >
 				MODIFY_TIME = #{modifyTime} AND 			</if>
 						<if test="isDelete != null and isDelete!=''"  >
-				IS_DELETE = #{isDelete}			</if>
+				IS_DELETE = #{isDelete} AND 			</if>
+						<if test="paymentPoint != null and paymentPoint!=''"  >
+				PAYMENT_POINT = #{paymentPoint}			</if>
 					</trim> 
 	</select>
 	
@@ -92,6 +104,10 @@
 		BID_ID
 			<if test="bidName != null and bidName!=''">
 				,BID_NAME	
+			</if>
+		
+			<if test="firstBidAmount != null and firstBidAmount!=''">
+				,FIRST_BID_AMOUNT	
 			</if>
 		
 			<if test="predictAmount != null and predictAmount!=''">
@@ -110,6 +126,26 @@
 				,PREDICT_PERIOD	
 			</if>
 		
+			<if test="custId != null and custId!=''">
+				,CUST_ID	
+			</if>
+		
+			<if test="custCnName != null and custCnName!=''">
+				,CUST_CN_NAME	
+			</if>
+		
+			<if test="custSapCode != null and custSapCode!=''">
+				,CUST_SAP_CODE	
+			</if>
+		
+			<if test="constructionDeptId != null and constructionDeptId!=''">
+				,CONSTRUCTION_DEPT_ID	
+			</if>
+		
+			<if test="constructionDeptName != null and constructionDeptName!=''">
+				,CONSTRUCTION_DEPT_NAME	
+			</if>
+		
 			<if test="sellDeptId != null and sellDeptId!=''">
 				,SELL_DEPT_ID	
 			</if>
@@ -124,18 +160,6 @@
 		
 			<if test="custManagerName != null and custManagerName!=''">
 				,CUST_MANAGER_NAME	
-			</if>
-		
-			<if test="fileCode != null and fileCode!=''">
-				,FILE_CODE	
-			</if>
-		
-			<if test="fileName != null and fileName!=''">
-				,FILE_NAME	
-			</if>
-		
-			<if test="filePath != null and filePath!=''">
-				,FILE_PATH	
 			</if>
 		
 			<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''">
@@ -170,12 +194,19 @@
 				,IS_DELETE	
 			</if>
 		
+			<if test="paymentPoint != null and paymentPoint!=''">
+				,PAYMENT_POINT	
+			</if>
+		
 		)
 		values
 		(
 		PmConfirmBid_SEQ.nextval
 		<if test="bidName != null and bidName!=''">
 			,#{bidName}
+		</if>
+		<if test="firstBidAmount != null and firstBidAmount!=''">
+			,#{firstBidAmount}
 		</if>
 		<if test="predictAmount != null and predictAmount!=''">
 			,#{predictAmount}
@@ -189,6 +220,21 @@
 		<if test="predictPeriod != null and predictPeriod!=''">
 			,#{predictPeriod}
 		</if>
+		<if test="custId != null and custId!=''">
+			,#{custId}
+		</if>
+		<if test="custCnName != null and custCnName!=''">
+			,#{custCnName}
+		</if>
+		<if test="custSapCode != null and custSapCode!=''">
+			,#{custSapCode}
+		</if>
+		<if test="constructionDeptId != null and constructionDeptId!=''">
+			,#{constructionDeptId}
+		</if>
+		<if test="constructionDeptName != null and constructionDeptName!=''">
+			,#{constructionDeptName}
+		</if>
 		<if test="sellDeptId != null and sellDeptId!=''">
 			,#{sellDeptId}
 		</if>
@@ -200,15 +246,6 @@
 		</if>
 		<if test="custManagerName != null and custManagerName!=''">
 			,#{custManagerName}
-		</if>
-		<if test="fileCode != null and fileCode!=''">
-			,#{fileCode}
-		</if>
-		<if test="fileName != null and fileName!=''">
-			,#{fileName}
-		</if>
-		<if test="filePath != null and filePath!=''">
-			,#{filePath}
 		</if>
 		<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''">
 			,#{isWorkAreaExplicit}
@@ -234,6 +271,9 @@
 		<if test="isDelete != null and isDelete!=''">
 			,#{isDelete}
 		</if>
+		<if test="paymentPoint != null and paymentPoint!=''">
+			,#{paymentPoint}
+		</if>
 		)
 	</insert>
 	 
@@ -241,6 +281,8 @@
 		update pm_confirm_bid 
 		<set>
 			<if test="bidName != null and bidName!=''">BID_NAME = #{bidName}, </if>
+
+			<if test="firstBidAmount != null and firstBidAmount!=''">FIRST_BID_AMOUNT = #{firstBidAmount}, </if>
 
 			<if test="predictAmount != null and predictAmount!=''">PREDICT_AMOUNT = #{predictAmount}, </if>
 
@@ -250,6 +292,16 @@
 
 			<if test="predictPeriod != null and predictPeriod!=''">PREDICT_PERIOD = #{predictPeriod}, </if>
 
+			<if test="custId != null and custId!=''">CUST_ID = #{custId}, </if>
+
+			<if test="custCnName != null and custCnName!=''">CUST_CN_NAME = #{custCnName}, </if>
+
+			<if test="custSapCode != null and custSapCode!=''">CUST_SAP_CODE = #{custSapCode}, </if>
+
+			<if test="constructionDeptId != null and constructionDeptId!=''">CONSTRUCTION_DEPT_ID = #{constructionDeptId}, </if>
+
+			<if test="constructionDeptName != null and constructionDeptName!=''">CONSTRUCTION_DEPT_NAME = #{constructionDeptName}, </if>
+
 			<if test="sellDeptId != null and sellDeptId!=''">SELL_DEPT_ID = #{sellDeptId}, </if>
 
 			<if test="sellDeptName != null and sellDeptName!=''">SELL_DEPT_NAME = #{sellDeptName}, </if>
@@ -257,12 +309,6 @@
 			<if test="custManagerId != null and custManagerId!=''">CUST_MANAGER_ID = #{custManagerId}, </if>
 
 			<if test="custManagerName != null and custManagerName!=''">CUST_MANAGER_NAME = #{custManagerName}, </if>
-
-			<if test="fileCode != null and fileCode!=''">FILE_CODE = #{fileCode}, </if>
-
-			<if test="fileName != null and fileName!=''">FILE_NAME = #{fileName}, </if>
-
-			<if test="filePath != null and filePath!=''">FILE_PATH = #{filePath}, </if>
 
 			<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''">IS_WORK_AREA_EXPLICIT = #{isWorkAreaExplicit}, </if>
 
@@ -278,7 +324,9 @@
 
 			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
 
-			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}, </if>
+
+			<if test="paymentPoint != null and paymentPoint!=''">PAYMENT_POINT = #{paymentPoint}</if>
 
 		</set>
 		where BID_ID = #{bidId}

@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-11-03 17:12:08
+ * @date 2018-11-06 19:51:55
  */
 public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +26,11 @@ private long bidId;
 	 */
 
 private String bidName;
+	/**
+	 * 
+	 */
+
+private long firstBidAmount;
 	/**
 	 * 
 	 */
@@ -50,6 +55,31 @@ private String predictPeriod;
 	 * 
 	 */
 
+private long custId;
+	/**
+	 * 
+	 */
+
+private String custCnName;
+	/**
+	 * 
+	 */
+
+private String custSapCode;
+	/**
+	 * 
+	 */
+
+private long constructionDeptId;
+	/**
+	 * 
+	 */
+
+private String constructionDeptName;
+	/**
+	 * 
+	 */
+
 private long sellDeptId;
 	/**
 	 * 
@@ -66,21 +96,6 @@ private long custManagerId;
 	 */
 
 private String custManagerName;
-	/**
-	 * 
-	 */
-
-private String fileCode;
-	/**
-	 * 
-	 */
-
-private String fileName;
-	/**
-	 * 
-	 */
-
-private String filePath;
 	/**
 	 * 
 	 */
@@ -121,6 +136,11 @@ private String modifyTime;
 	 */
 
 private String isDelete;
+	/**
+	 * 
+	 */
+
+private String paymentPoint;
 
 	/**
 	 * 设置：
@@ -145,6 +165,18 @@ private String isDelete;
 	 */
 	public String getBidName() {
 		return bidName;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setFirstBidAmount(long firstBidAmount) {
+		this.firstBidAmount = firstBidAmount;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getFirstBidAmount() {
+		return firstBidAmount;
 	}
 	/**
 	 * 设置：
@@ -197,6 +229,66 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
+	public void setCustId(long custId) {
+		this.custId = custId;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getCustId() {
+		return custId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setCustCnName(String custCnName) {
+		this.custCnName = custCnName;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getCustCnName() {
+		return custCnName;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setCustSapCode(String custSapCode) {
+		this.custSapCode = custSapCode;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getCustSapCode() {
+		return custSapCode;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setConstructionDeptId(long constructionDeptId) {
+		this.constructionDeptId = constructionDeptId;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getConstructionDeptId() {
+		return constructionDeptId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setConstructionDeptName(String constructionDeptName) {
+		this.constructionDeptName = constructionDeptName;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getConstructionDeptName() {
+		return constructionDeptName;
+	}
+	/**
+	 * 设置：
+	 */
 	public void setSellDeptId(long sellDeptId) {
 		this.sellDeptId = sellDeptId;
 	}
@@ -241,42 +333,6 @@ private String isDelete;
 	 */
 	public String getCustManagerName() {
 		return custManagerName;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setFileCode(String fileCode) {
-		this.fileCode = fileCode;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getFileCode() {
-		return fileCode;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getFileName() {
-		return fileName;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getFilePath() {
-		return filePath;
 	}
 	/**
 	 * 设置：
@@ -373,5 +429,17 @@ private String isDelete;
 	 */
 	public String getIsDelete() {
 		return isDelete;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setPaymentPoint(String paymentPoint) {
+		this.paymentPoint = paymentPoint;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getPaymentPoint() {
+		return paymentPoint;
 	}
 }

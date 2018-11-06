@@ -8,7 +8,7 @@ import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
  *
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-11-03 17:12:08
+ * @date 2018-11-06 19:51:55
  */
 public interface PmConfirmBidService {
 	public PmConfirmBidEntity queryObject(long id);

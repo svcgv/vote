@@ -1,4 +1,4 @@
-package com.indihx.PmPaymentPoint.controller;
+package com.indihx.PmFile.controller;
 
 
 import java.util.Map;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.UserUtil;
-import com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity;
-import com.indihx.PmPaymentPoint.service.PmPaymentPointService;
+import com.indihx.PmFile.entity.PmFileEntity;
+import com.indihx.PmFile.service.PmFileService;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
@@ -28,10 +28,10 @@ import com.indihx.comm.InitSysConstants;
  * @date 2018-11-06 19:33:25
  */
 @Controller
-@RequestMapping("/pmpaymentpoint")
-public class PmPaymentPointController {
+@RequestMapping("/pmfile")
+public class PmFileController {
     @Autowired
-    private PmPaymentPointService pmPaymentPointService;
+    private PmFileService pmFileService;
 
     /**
      * 列表
@@ -39,8 +39,8 @@ public class PmPaymentPointController {
     @RequestMapping(value="/list",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
 
-		List<PmPaymentPointEntity> pmPaymentPoint = pmPaymentPointService.queryList(params);
-        return R.ok().put("page", pmPaymentPoint);
+		List<PmFileEntity> pmFile = pmFileService.queryList(params);
+        return R.ok().put("page", pmFile);
     }
 
 
@@ -48,21 +48,21 @@ public class PmPaymentPointController {
      * 信息
      */
     @RequestMapping(value="/info",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> info(@RequestParam("paymentId") long paymentId,HttpSession session){
+    public @ResponseBody Map<String,Object> info(@RequestParam("fileId") long fileId,HttpSession session){
 
-		PmPaymentPointEntity entity = pmPaymentPointService.queryObject(paymentId);
-        return R.ok().put("pmPaymentPoint", entity);
+		PmFileEntity entity = pmFileService.queryObject(fileId);
+        return R.ok().put("pmFile", entity);
     }
 
     /**
      * 保存
      */
     @RequestMapping(value="/save",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> save(@RequestBody PmPaymentPointEntity pmPaymentPoint,HttpSession session){
+    public @ResponseBody Map<String,Object> save(@RequestBody PmFileEntity pmFile,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
-    	pmPaymentPoint.setCreatorId(usesr.getUsrId());
-    	pmPaymentPoint.setCreateTime(DateUtil.getDateTime());
-        pmPaymentPointService.insert(pmPaymentPoint);
+    	pmFile.setCreatorId(usesr.getUsrId());
+    	pmFile.setCreateTime(DateUtil.getDateTime());
+        pmFileService.insert(pmFile);
         return R.ok();
     }
 
@@ -70,11 +70,11 @@ public class PmPaymentPointController {
      * 修改
      */
     @RequestMapping(value="/update",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> update(@RequestBody PmPaymentPointEntity pmPaymentPoint,HttpSession session){
+    public @ResponseBody Map<String,Object> update(@RequestBody PmFileEntity pmFile,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
-    	pmPaymentPoint.setModifier(usesr.getUsrId());
-    	pmPaymentPoint.setModifyTime(DateUtil.getDateTime());
-        pmPaymentPointService.update(pmPaymentPoint);//全部更新
+    	pmFile.setModifier(usesr.getUsrId());
+    	pmFile.setModifyTime(DateUtil.getDateTime());
+        pmFileService.update(pmFile);//全部更新
         return R.ok();
     }
 
@@ -82,8 +82,8 @@ public class PmPaymentPointController {
      * 删除
      */
     @RequestMapping(value="/delete",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> delete(@RequestBody long paymentId,HttpSession session){
-        pmPaymentPointService.delete(paymentId);
+    public @ResponseBody Map<String,Object> delete(@RequestBody long fileId,HttpSession session){
+        pmFileService.delete(fileId);
         return R.ok();
     }
 

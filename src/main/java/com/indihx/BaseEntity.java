@@ -14,7 +14,17 @@ public class BaseEntity {
 	 * 修改人编号
 	 */
 	private long modifier;
+	
+	private String modifyTime;
 
+
+	public String getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(String modifyTime) {
+		this.modifyTime = modifyTime;
+	}
 
 	public long getCreatorId() {
 		return creatorId;

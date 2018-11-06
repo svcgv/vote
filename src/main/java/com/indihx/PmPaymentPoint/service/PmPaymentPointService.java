@@ -8,7 +8,7 @@ import com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity;
  *
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-11-03 17:11:55
+ * @date 2018-11-06 19:33:25
  */
 public interface PmPaymentPointService {
 	public PmPaymentPointEntity queryObject(long id);
