@@ -52,8 +52,11 @@ $(document).ready(function(){
 		  data: JSON.stringify({}),
 		  contentType:'application/json',
 		  success: function(res){
-		      console.log(res)
-		      zNodes=[res.Tree]
+		      zNodes=[res.Tree];
+		      console.log(zNodes)
+		      if(zNodes.length >0 ){
+		    	  zNodes[0].open=true;
+		      }
 		      $.fn.zTree.init($("#treeOrg"), setting, zNodes);
 	      },
 		  dataType: "json"

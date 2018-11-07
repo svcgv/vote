@@ -10,9 +10,9 @@ if(session!=null && session.getAttribute(InitSysConstants.USER_SESSION)!=null){
 	response.sendRedirect(sUrl);
 }
 %>
-<html>
+<html lang="zh_CN">
 <head>
-<title>电子投票表决系统2</title>
+<title>项目实施管理系统</title>
 <link href="${ctx }/resources/css/style_log.css" rel="stylesheet" />
 <!-- basic styles -->
 <link href="${ctx }/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -35,6 +35,10 @@ if(session!=null && session.getAttribute(InitSysConstants.USER_SESSION)!=null){
 <script src="${ctx }/resources/layer/layui.js"></script>
 <script src="${ctx }/resources/js/web-ui-01.js"></script>
 <script src="${ctx }/resources/js/matrix.login.js"></script>
+
+<!-- change themes -->
+<link rel="stylesheet" href="${ctx }/resources/admincp/css/main.css" />
+
 </head>
 <style type="text/css">
 	.bg-image {
@@ -42,6 +46,16 @@ if(session!=null && session.getAttribute(InitSysConstants.USER_SESSION)!=null){
 		background-size:100% 100%;
 	}
 	.title_class{font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu }
+	 input:-webkit-autofill {
+         -webkit-box-shadow: 0 0 0px 1000px white inset!important;
+         color:#000;
+         background-image:none;
+         background-color:#fff;
+       }
+       input[type=checkbox].ace+.lbl::before{
+	       	vertical-align:top;
+	       	margin-top: 2px;
+       }
 </style>
 <script type="text/javascript">
 //一般直接写在一个js文件中
@@ -50,15 +64,18 @@ layui.use(['layer'], function(){
 });
 </script>
 <body  class="bg-image login-layout">
-<div class="main-container" style="margin-top:160px">
-	<div class="main-content">
+<div class="main-container">
+	<div class="main-content" style="position: relative;">
 		<div class="row">
-			<div class="col-sm-10 col-sm-offset-1">
-				<div class="login-container">
+			<div class="col-sm-10 col-sm-offset-1" style="height:100%;">
+				<div class="logo" style="margin-top:30px;height:84px;">
+					<img src="${ctx }/resources/admincp/images/logo.png"/>
+				</div>
+				<div class="login-container" style="width:375px;height:400px;position:absolute;left:50%;margin-left:-188px;top:50%;margin-top:-200px;">
 					<div class="center">
 						<h1>
 							<span class="red"></span>
-							<span class="blue">电子投票表决系统22222</span>
+							<span class="blue" v-cloak>项目实施管理系统</span>
 						</h1>
 					</div>
 					<div class="space-6"></div>
@@ -66,28 +83,25 @@ layui.use(['layer'], function(){
 						<div id="login-box" class="login-box visible widget-box no-border" style="background-color: transparent">
 							<div>
 								<div class="widget-main" style="border-radius: 5px; border: 2px solid #3AA6E4">
-									<h4 class="header blue" style="text-align:center">
-										<span style="font-family:Microsoft YaHei">用户登录</span><br/>
-										<font style="color:red;font-size:14px;font-family:Microsoft YaHei"></font>
-									</h4>
+									<h4 class="header blue" style="text-align:center;font-family:Microsoft YaHei;margin-top:0px!important;margin-bottom:10px!important;height:auto;padding-top:0px;">用户登录</h4>
 									<div class="space-6"></div>
 									<form name="form1" id="form1" name="form" method="post">
 										<input type="hidden" name="token" value="496e97bf-c39d-4d78-9bdc-9e9d236bec4e">
 										<fieldset>
 											<label class="block clearfix">
 												<span class="block input-icon input-icon-right">
-													<input type="text" class="form-control" v_max="32" maxlength="32" v_empty="0"
-														name="i_userid" id="i_userid" placeholder="用户名">
-													<i class="icon-user"></i>
-													<input type="hidden" name="usrId" id="_usrId" value="2323" />
+													<input type="text" class="form-control form-control-boxShadow " v_max="32" maxlength="32" v_empty="0"
+														name="i_userid" id="i_userid" placeholder="用户名" autocomplete="off">
+													<i class="icon-user" style="right:8px;top:5px;"></i>
+													<input type="hidden" name="usrId" id="_usrId" value="2323" autocomplete="off"/>
 												</span>
 											</label>
-											<label class="block clearfix">
+											<label class="block clearfix" style="margin-top:15px;">
 												<span class="block input-icon input-icon-right">
-													<input type="password" class="form-control" v_max="20" maxlength="32" v_empty="0"
-															name="userpwd" id="userpwd" placeholder="密码"/>
-													<i class="icon-lock"></i>
-													<input type="hidden" name="passWord" id="_passWord">
+													<input type="password" class="form-control form-control-boxShadow " v_max="20" maxlength="32" v_empty="0"
+															name="userpwd" id="userpwd" placeholder="密码" autocomplete="off"/>
+													<i class="icon-lock" style="right:8px;top:5px;"></i>
+													<input type="hidden" name="passWord" id="_passWord" autocomplete="off">
 												</span>
 											</label>
 											<!-- 
@@ -98,7 +112,7 @@ layui.use(['layer'], function(){
 											<div class="space-4">
 											</div>
 											<div class="clearfix center" >
-												<label class="inline pull-left">
+												<label class="inline pull-left" style="position:relative;margin-top:7px;">
 													<input type="checkbox" class="ace" id="remember"/>
 													<span class="lbl"> 记住密码</span>
 												</label>
