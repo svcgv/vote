@@ -87,9 +87,26 @@ $(".org-wrapper #org-add-hook").click(function(){
 			layer.msg("请选择机构")
 		})
 	}else{
-		
+		var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
+		 // 保存到已选机构中
+		 	if(act == "index"){
+				$("#tender-index-form input[name='sellDeptName']").val(getCheckedOrg.name);
+				$("#tender-index-form input[name='sellDeptId']").val(getCheckedOrg.orgId);
+		 	}else if(act == "pay"){
+		 		$("#tender-index-form input[name='payDeptName']").val(getCheckedOrg.name);
+				$("#tender-index-form input[name='payDeptId']").val(getCheckedOrg.orgId);
+		 	}else if(act =="add"){
+		 		$("#tender-addForm-hook input[name='sellDeptName']").val(getCheckedOrg.name);
+				$("#tender-addForm-hook input[name='sellDeptId']").val(getCheckedOrg.orgId);
+		 	}else if(act == "addPay"){
+		 		$("#tender-addForm-hook input[name='payDeptName']").val(getCheckedOrg.name);
+				$("#tender-addForm-hook input[name='payDeptId']").val(getCheckedOrg.orgId);
+		 	}
+		 	win.close();
 		return false;
 	}
+	
+	
 	
 });
 var act="${act}";// 区分是index页 form页 赋值问题

@@ -34,7 +34,7 @@
 		      </div>
 		    </div>
 		     <div class="layui-inline">
-		      <label class="layui-form-label">客户：</label>
+		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="custName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
 		         <input type="hidden" name="custId">
@@ -81,17 +81,19 @@
 		       </div>
 		    </div>
 		    
+		    		    
 		    <div  class="layui-inline">
 		    <label class="layui-form-label">交付部门负责人：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="payDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="payDeptId">
+		          <input type="text" name="constructionDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="hidden" name="constructionDeptManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgMangerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		     </div> 
 		       
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">销售部门：</label>
 		       <div class="layui-input-inline">
@@ -102,19 +104,19 @@
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
-		    
+		     
 		    <div  class="layui-inline">
 		    <label class="layui-form-label">销售部门负责人：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="payDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="payDeptId">
+		          <input type="text" name="sellDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="hidden" name="sellDeptManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userManagerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		     </div> 
-		     
-		     
+		    
+		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
@@ -122,8 +124,15 @@
 		          <input type="hidden" name="custManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
+		    </div>
+		    
+		    <div class="layui-inline">
+		      <label class="layui-form-label">设置付款点：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="paymentPoint"  autocomplete="off" class="layui-input form-control">
+		      </div>
 		    </div>
 		    
 	      <div class="layui-inline">
@@ -257,24 +266,6 @@ $(function(){
 	 });
 	  
 });
-  $("#tender-addForm-hook #payOrgMangerQuery-hook").click(function(){
-	  $.openWindow({
-	  		url:'user?act=add',
-	  		title:"交付部门负责人",
-	  		width:"700"
-	 });
-	  
-});
-  
-  $("#tender-addForm-hook #userManagerQuery-hook").click(function(){
-	  $.openWindow({
-	  		url:'user?act=add',
-	  		title:"销售部门负责人",
-	  		width:"700"
-	 });
-	  
-});
-  
   
   
   $("#tender-addForm-hook #payOrgQuery-hook").click(function(){
@@ -286,6 +277,24 @@ $(function(){
 	  
   });
 	
+  $("#tender-addForm-hook #payOrgMangerQuery-hook").click(function(){
+	  $.openWindow({
+	  		url:'user?act=addDept',
+	  		title:"交付部门负责人",
+	  		width:"700"
+	 });
+	  
+});
+  
+  $("#tender-addForm-hook #userManagerQuery-hook").click(function(){
+	  $.openWindow({
+	  		url:'user?act=addSaleDept',
+	  		title:"销售部门负责人",
+	  		width:"700"
+	 });
+	  
+});
+  
 	 // 选择机构
   $("#tender-addForm-hook #orgQuery-hook").click(function(){
 	  $.openWindow({

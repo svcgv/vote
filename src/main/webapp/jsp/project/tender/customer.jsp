@@ -6,16 +6,16 @@
 	<form class="layui-form" id="customer-query-form" action="">
 	  <div class="layui-form-item">
 	  	<div class="layui-inline">
-	       <label class="layui-form-label">客户ID：</label>
+	       <label class="layui-form-label">客户编号：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="sapCode"  autocomplete="off" class="layui-input form-control">
+	         <input type="text" name="custId"  autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
 	  	
 	  	<div class="layui-inline">
 	      <label class="layui-form-label" >客户名称：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="custCnName"  autocomplete="off" class="layui-input form-control" >
+	         <input type="text" name="custName"  autocomplete="off" class="layui-input form-control" >
 	      </div>
 	    </div>
 	    
@@ -54,11 +54,30 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    title: '客户数据表',
 	    cols: [[
 	      {type: 'radio' },
-	      {field:'custId', title:'客户SAP编号', sort: true},
+	      {field:'custId', title:'客户ID', sort: true},
 	      {field:'custName', title:'客户名称'}
 	    ]],
 	    data:[
-		  		
+		  		{
+		  			"custId":"1000",
+					"custName":"系统管理员"
+					
+				},
+				{
+		  			"custId":"1001",
+					"custName":"admin"
+					
+				},
+				{
+		  			"custId":"1002",
+					"custName":"Superman"
+					
+				},
+				{
+		  			"custId":"1003",
+					"custName":"史定波"
+					
+				}
 				
 			],
 	    page: true
@@ -112,45 +131,22 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	*/
 	$("#customer-query-form #userQuery").click(function(){
 		
-		
-		var queryParams = $("#customer-query-form").serializeObject()
+		var queryParams=$("#customer-query-form").serialize();
 		console.log(queryParams)
-		var newparam = {}
-				 for(var o in queryParams){
-					 if(queryParams[o]){
-						 newparam[o] = queryParams[o]
-					 }
-				 }
-
-		var par = {}
-		par.queryStr=JSON.stringify(newparam)
-		$.ajax({
-		  type: 'POST',
-		  url: '/vote/pmcustomerinfo/list',
-		  data: JSON.stringify(par),
-		  contentType:'application/json',
-		  success: function(res){
-		      console.log(res)
-		      testData=res.page
-		      table.render(
-		    		  {
-	    			    elem: '#userTable',
-	    			    //url:'custom.json',
-	    			    height:'260',
-	    			    width:"690",
-	    			    title: '客户数据表',
-	    			    cols: [[
-	    			      {type: 'radio' },
-	    			      {field:'sapCode', title:'客户SAP编号', sort: true},
-	    			      {field:'custCnName', title:'客户名称'}
-	    			    ]],
-	    			    data:testData,
-	    			    page: true
-	    			  }
-		    		);},
-		  dataType: "json"
+		table.reload('customerGroup-table',{
+			url:'form',
+			page:{
+				curr:1 //从第一页开始
+			},
+			method:'post',
+			where:{
+				queryStr:queryParams
+			},
+			done:function(res){
+				console.log(res)
+			}
+			
 		})
-		
 	});
 	
 });

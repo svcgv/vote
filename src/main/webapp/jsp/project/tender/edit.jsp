@@ -34,7 +34,7 @@
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">客户：</label>
+		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="custName" readonly="readonly" value="反写"  autocomplete="off" class="layui-input form-control disabledColor">
 		         <input type="hidden" name="custId">

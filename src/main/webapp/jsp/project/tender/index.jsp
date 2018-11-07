@@ -46,7 +46,6 @@
 		      </div>
 		    </div>
 		     -->
-		     
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
@@ -71,14 +70,7 @@
 		      </div>
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
-		     <div class="layui-inline">
-		      <label class="layui-form-label">是否有效：</label>
-		      <div class="layui-input-inline">
-		        <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
-		        	 ${isUseful.ewTypeHtml }
-		        </select>
-		      </div>
-		    </div>
+		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:25px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
@@ -86,7 +78,6 @@
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 			  </div>
 		   </div>
-		   
 	   </div>
 	</form>
 	<table class="layui-hide" id="productTable" lay-filter="custom"></table>
@@ -172,12 +163,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'payDeptName', title:'交付部门'},
 	  	      {field:'sellDeptName', title:'销售部门'},
 	  	      {field:'custManagerName', title:'客户经理'},
-	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:310}
+	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
 	    ]],
 	    cellMinWidth:'90',
-	    data:[
-	          
-	    ],
+	    data:[],
 	    page: true
 	  });
 
@@ -213,67 +202,21 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	*/
 	 $("#customQuery").click(function(){
 		 var queryParams=$("#tender-index-form").serializeObject();
-		 
-		 
-		 
 		 var newparam = {}
-		 		 for(var o in queryParams){
-		 			 if(queryParams[o]){
-		 				 newparam[o] = queryParams[o]
-		 			 }
-		 		 }
-
-		 $.ajax({
-		 			  type: 'POST',
-		 			  url: '/vote/pmconfirmbid/list',
-		 			  data: JSON.stringify(newparam),
-		 			  contentType:'application/json',
-		 			  success: function(res){
-
-		 				 testData=res.page
-					      table.render({
-					  	  	id:"customer-table",
-					  	    elem: '#productTable',
-					  	    //url:'custom.json',
-					  	    toolbar: '#toolbarDemo',
-					  	    height:'full-200',
-					  	    title: '投标据表',
-					  	    cols: [[
-								  {type: 'checkbox', fixed: 'left'},
-						  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
-						  	      {field:'bidName', title:'投标名称', width:130},
-						  	      {field:'status', title:'评审状态', width:130},
-						  	      {field:'bidFirstPrice', title:'投标首次报价金额'},
-						  	      {field:'custName', title:'客户名称', width:230},
-						  	      {field:'predictAmount', title:'预估收入金额'},
-						  	      {field:'predictCost', title:'预估成本'},
-						  	      {field:'predictProfitRate', title:'预估利润率'},
-						  	      {field:'predictPeriod', title:'预付期限'},
-						  	      {field:'payDeptName', title:'交付部门'},
-						  	      {field:'sellDeptName', title:'销售部门'},
-						  	      {field:'custManagerName', title:'客户经理'},
-						  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
-					  	    ]],
-					  	    cellMinWidth:'100',
-					  	    data:testData,
-					  	    page: true
-					  	  	});
-		 			  
-		 			  },
-		 			  dataType: "json"
-		 			})
-		 			
-		 			
-		 			
-		 			
+ 		 for(var o in queryParams){
+ 			 if(queryParams[o]){
+ 				 newparam[o] = queryParams[o]
+ 			 }
+ 		 }
+		 
 		 $.ajax({
 			  type: 'POST',
-			  url: '/vote/pmcompanyinfo/list',
-			  data: queryParams,
+			  url: '/vote/pmconfirmbid/list',
+			  data: JSON.stringify(newparam),
 			  contentType:'application/json',
 			  success: function(res){
-			      console.log(res)
-			      testData=res.page
+
+				 testData=res.page
 			      table.render({
 			  	  	id:"customer-table",
 			  	    elem: '#productTable',
@@ -298,11 +241,17 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
 			  	    ]],
 			  	    cellMinWidth:'100',
-			  	    data:[],
+			  	    data:testData,
 			  	    page: true
-			  	  	});},
+			  	  	});
+			  
+			  },
 			  dataType: "json"
-			});
+			})
+			
+			
+			
+			
 		
 	}); 
 	
@@ -332,11 +281,12 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			var url='review?act=review&id='+id;
 	    	var	title="投标评审";
 	    	_width=650;
-		}else if(isEdit == "setMoney"){
+		}
+		/*else if(isEdit == "setMoney"){
 			var url='setMoney?act=setMoneyw&id='+id;
 	    	var	title="设置付款点";
-	    	_width=650;
-		}
+	    	_width=820;
+		}*/
 		$.openWindow({
 	  		url:url,
 	  		title:title,
