@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmProjectGroupRelationInfo.dao.PmProjectGroupRelationInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmProjectGroupRelationInfo.entity.PmProjectGroupRelationInfoEntity" id="pmProjectGroupRelationInfoMap">
+        <result property="relationship" column="RELATIONSHIP"/>
+        <result property="projectGroupId" column="PROJECT_GROUP_ID"/>
+        <result property="wbs" column="WBS"/>
+        <result property="projectId" column="PROJECT_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="creator" column="CREATOR"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="modifier" column="MODIFIER"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmProjectGroupRelationInfoMap">
+		select * from pm_project_group_relation_info where RELATIONSHIP = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmProjectGroupRelationInfoMap">
+		select 
+		*
+		 from pm_project_group_relation_info
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="relationship != null and relationship!=''"  >
+				RELATIONSHIP = #{relationship} AND 			</if>
+						<if test="projectGroupId != null and projectGroupId!=''"  >
+				PROJECT_GROUP_ID = #{projectGroupId} AND 			</if>
+						<if test="wbs != null and wbs!=''"  >
+				WBS = #{wbs} AND 			</if>
+						<if test="projectId != null and projectId!=''"  >
+				PROJECT_ID = #{projectId} AND 			</if>
+						<if test="createTime != null and createTime!=''"  >
+				CREATE_TIME = #{createTime} AND 			</if>
+						<if test="creator != null and creator!=''"  >
+				CREATOR = #{creator} AND 			</if>
+						<if test="modifyTime != null and modifyTime!=''"  >
+				MODIFY_TIME = #{modifyTime} AND 			</if>
+						<if test="modifier != null and modifier!=''"  >
+				MODIFIER = #{modifier} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_project_group_relation_info 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmProjectGroupRelationInfo.entity.PmProjectGroupRelationInfoEntity">
+		insert into pm_project_group_relation_info
+		(
+		RELATIONSHIP
+			<if test="projectGroupId != null and projectGroupId!=''">
+				,PROJECT_GROUP_ID	
+			</if>
+		
+			<if test="wbs != null and wbs!=''">
+				,WBS	
+			</if>
+		
+			<if test="projectId != null and projectId!=''">
+				,PROJECT_ID	
+			</if>
+		
+			<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+			</if>
+		
+			<if test="creator != null and creator!=''">
+				,CREATOR	
+			</if>
+		
+			<if test="modifyTime != null and modifyTime!=''">
+				,MODIFY_TIME	
+			</if>
+		
+			<if test="modifier != null and modifier!=''">
+				,MODIFIER	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmProjectGroupRelationInfo_SEQ.nextval
+		<if test="projectGroupId != null and projectGroupId!=''">
+			,#{projectGroupId}
+		</if>
+		<if test="wbs != null and wbs!=''">
+			,#{wbs}
+		</if>
+		<if test="projectId != null and projectId!=''">
+			,#{projectId}
+		</if>
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
+		<if test="creator != null and creator!=''">
+			,#{creator}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+			,#{modifyTime}
+		</if>
+		<if test="modifier != null and modifier!=''">
+			,#{modifier}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmProjectGroupRelationInfo.entity.PmProjectGroupRelationInfoEntity">
+		update pm_project_group_relation_info 
+		<set>
+			<if test="projectGroupId != null and projectGroupId!=''">PROJECT_GROUP_ID = #{projectGroupId}, </if>
+
+			<if test="wbs != null and wbs!=''">WBS = #{wbs}, </if>
+
+			<if test="projectId != null and projectId!=''">PROJECT_ID = #{projectId}, </if>
+
+			<if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime}, </if>
+
+			<if test="creator != null and creator!=''">CREATOR = #{creator}, </if>
+
+			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
+
+			<if test="modifier != null and modifier!=''">MODIFIER = #{modifier}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where RELATIONSHIP = #{relationship}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_project_group_relation_info where RELATIONSHIP = #{value}
+	</delete>
+	
+
+
+</mapper>

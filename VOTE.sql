@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2018-11-07 10:09:50
+Date: 2018-11-07 20:26:55
 */
 
 
@@ -1796,6 +1796,139 @@ NOCACHE
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for PM_PROJECT_GROUP_INFO
+-- ----------------------------
+DROP TABLE "VOTE"."PM_PROJECT_GROUP_INFO";
+CREATE TABLE "VOTE"."PM_PROJECT_GROUP_INFO" (
+"PROJECT_GROUP_ID" NUMBER(10) NOT NULL ,
+"PROJECT_ID" NUMBER(10) NULL ,
+"WBS" VARCHAR2(32 BYTE) NULL ,
+"PROJECT_GROUP_NAME" VARCHAR2(64 BYTE) NULL ,
+"GROUP_MANAGER_CODE" VARCHAR2(64 BYTE) NULL ,
+"GROUP_MANAGER_ID" NUMBER(10) NULL ,
+"GROUP_CREATOR_ID" NUMBER(10) NULL ,
+"GROUP_CREATOR_NAME" VARCHAR2(64 BYTE) NULL ,
+"GROUP_CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"GROUP_STATUS" CHAR(2 BYTE) NULL ,
+"MODIFIER" NUMBER(10) NULL ,
+"MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of PM_PROJECT_GROUP_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for PM_PROJECT_GROUP_RELATION_INFO
+-- ----------------------------
+DROP TABLE "VOTE"."PM_PROJECT_GROUP_RELATION_INFO";
+CREATE TABLE "VOTE"."PM_PROJECT_GROUP_RELATION_INFO" (
+"RELATIONSHIP" NUMBER(10) NOT NULL ,
+"PROJECT_GROUP_ID" NUMBER(10) NULL ,
+"WBS" VARCHAR2(32 BYTE) NULL ,
+"PROJECT_ID" NUMBER(10) NULL ,
+"CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"CREATOR" NUMBER(10) NULL ,
+"MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
+"MODIFIER" NUMBER(10) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of PM_PROJECT_GROUP_RELATION_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for PM_PROJECT_INCOMMING_INFO
+-- ----------------------------
+DROP TABLE "VOTE"."PM_PROJECT_INCOMMING_INFO";
+CREATE TABLE "VOTE"."PM_PROJECT_INCOMMING_INFO" (
+"RECEIVE_ID" NUMBER(10) NOT NULL ,
+"PROJECT_ID" NUMBER(10) NULL ,
+"WBS" VARCHAR2(32 BYTE) NULL ,
+"PROJECT_NAME" VARCHAR2(256 BYTE) NULL ,
+"RECEIVE_MOUNT" NUMBER(10,2) NULL ,
+"RECEIVE_DATE" VARCHAR2(32 BYTE) NULL ,
+"CREATOR" NUMBER(10) NULL ,
+"CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"RECEIVABLES" CHAR(2 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of PM_PROJECT_INCOMMING_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for PM_PROJECT_MILESTONE_INFO
+-- ----------------------------
+DROP TABLE "VOTE"."PM_PROJECT_MILESTONE_INFO";
+CREATE TABLE "VOTE"."PM_PROJECT_MILESTONE_INFO" (
+"MILESTONE_ID" NUMBER(10) NOT NULL ,
+"PROJECT_ID" NUMBER(10) NULL ,
+"PROJECT_NAME" VARCHAR2(256 BYTE) NULL ,
+"WBS" VARCHAR2(32 BYTE) NULL ,
+"MILE_DATE" VARCHAR2(32 BYTE) NULL ,
+"MILE_DESCRIPT" VARCHAR2(256 BYTE) NULL ,
+"FINISH_STATUS" CHAR(2 BYTE) NULL ,
+"CREATOR_ID" NUMBER(16) NULL ,
+"CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of PM_PROJECT_MILESTONE_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for PM_PROJECT_PROBLEM
+-- ----------------------------
+DROP TABLE "VOTE"."PM_PROJECT_PROBLEM";
+CREATE TABLE "VOTE"."PM_PROJECT_PROBLEM" (
+"PROBLEM_ID" NUMBER(10) NOT NULL ,
+"PROJECT_ID" NUMBER(10) NULL ,
+"PROJECT_NAME" VARCHAR2(256 BYTE) NULL ,
+"WBS" VARCHAR2(32 BYTE) NULL ,
+"PROBLEM_TYPE" CHAR(2 BYTE) NULL ,
+"PROBLEM_DETAIL" VARCHAR2(512 BYTE) NULL ,
+"CREATOR_ID" NUMBER(16) NULL ,
+"CREATOR_NAME" VARCHAR2(256 BYTE) NULL ,
+"CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"PROBLEM_STATUS" CHAR(2 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of PM_PROJECT_PROBLEM
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for PM_REVIEW_COMMENT_INFO
 -- ----------------------------
 DROP TABLE "VOTE"."PM_REVIEW_COMMENT_INFO";
@@ -3414,6 +3547,61 @@ CREATE SEQUENCE "VOTE"."PMPRODUCTINFO_SEQ"
  CACHE 20;
 
 -- ----------------------------
+-- Sequence structure for PMPROJECTGROUPINFO_SEQ
+-- ----------------------------
+DROP SEQUENCE "VOTE"."PMPROJECTGROUPINFO_SEQ";
+CREATE SEQUENCE "VOTE"."PMPROJECTGROUPINFO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ CACHE 20;
+
+-- ----------------------------
+-- Sequence structure for PMPROJECTGROUPRELATIONINFO_SEQ
+-- ----------------------------
+DROP SEQUENCE "VOTE"."PMPROJECTGROUPRELATIONINFO_SEQ";
+CREATE SEQUENCE "VOTE"."PMPROJECTGROUPRELATIONINFO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ CACHE 20;
+
+-- ----------------------------
+-- Sequence structure for PMPROJECTINCOMMINGINFO_SEQ
+-- ----------------------------
+DROP SEQUENCE "VOTE"."PMPROJECTINCOMMINGINFO_SEQ";
+CREATE SEQUENCE "VOTE"."PMPROJECTINCOMMINGINFO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ CACHE 20;
+
+-- ----------------------------
+-- Sequence structure for PMPROJECTMILESTONEINFO_SEQ
+-- ----------------------------
+DROP SEQUENCE "VOTE"."PMPROJECTMILESTONEINFO_SEQ";
+CREATE SEQUENCE "VOTE"."PMPROJECTMILESTONEINFO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ CACHE 20;
+
+-- ----------------------------
+-- Sequence structure for PMPROJECTPROBLEM_SEQ
+-- ----------------------------
+DROP SEQUENCE "VOTE"."PMPROJECTPROBLEM_SEQ";
+CREATE SEQUENCE "VOTE"."PMPROJECTPROBLEM_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ CACHE 20;
+
+-- ----------------------------
 -- Sequence structure for PMSALEGROUPINFO_SEQ
 -- ----------------------------
 DROP SEQUENCE "VOTE"."PMSALEGROUPINFO_SEQ";
@@ -4367,6 +4555,51 @@ ALTER TABLE "VOTE"."PM_PRODUCT_PROJECT_RELATION" ADD CHECK ("PRODUCT_RELATION_ID
 -- Primary Key structure for table PM_PRODUCT_PROJECT_RELATION
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_PRODUCT_PROJECT_RELATION" ADD PRIMARY KEY ("PRODUCT_RELATION_ID");
+
+-- ----------------------------
+-- Indexes structure for table PM_PROJECT_GROUP_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table PM_PROJECT_GROUP_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_GROUP_INFO" ADD PRIMARY KEY ("PROJECT_GROUP_ID");
+
+-- ----------------------------
+-- Indexes structure for table PM_PROJECT_GROUP_RELATION_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table PM_PROJECT_GROUP_RELATION_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_GROUP_RELATION_INFO" ADD PRIMARY KEY ("RELATIONSHIP");
+
+-- ----------------------------
+-- Indexes structure for table PM_PROJECT_INCOMMING_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table PM_PROJECT_INCOMMING_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_INCOMMING_INFO" ADD PRIMARY KEY ("RECEIVE_ID");
+
+-- ----------------------------
+-- Indexes structure for table PM_PROJECT_MILESTONE_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table PM_PROJECT_MILESTONE_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_MILESTONE_INFO" ADD PRIMARY KEY ("MILESTONE_ID");
+
+-- ----------------------------
+-- Indexes structure for table PM_PROJECT_PROBLEM
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table PM_PROJECT_PROBLEM
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_PROBLEM" ADD PRIMARY KEY ("PROBLEM_ID");
 
 -- ----------------------------
 -- Indexes structure for table PM_REVIEW_COMMENT_INFO

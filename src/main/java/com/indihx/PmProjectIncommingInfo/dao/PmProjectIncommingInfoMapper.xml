@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmProjectIncommingInfo.dao.PmProjectIncommingInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmProjectIncommingInfo.entity.PmProjectIncommingInfoEntity" id="pmProjectIncommingInfoMap">
+        <result property="receiveId" column="RECEIVE_ID"/>
+        <result property="projectId" column="PROJECT_ID"/>
+        <result property="wbs" column="WBS"/>
+        <result property="projectName" column="PROJECT_NAME"/>
+        <result property="receiveMount" column="RECEIVE_MOUNT"/>
+        <result property="receiveDate" column="RECEIVE_DATE"/>
+        <result property="creator" column="CREATOR"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="receivables" column="RECEIVABLES"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmProjectIncommingInfoMap">
+		select * from pm_project_incomming_info where RECEIVE_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmProjectIncommingInfoMap">
+		select 
+		*
+		 from pm_project_incomming_info
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="receiveId != null and receiveId!=''"  >
+				RECEIVE_ID = #{receiveId} AND 			</if>
+						<if test="projectId != null and projectId!=''"  >
+				PROJECT_ID = #{projectId} AND 			</if>
+						<if test="wbs != null and wbs!=''"  >
+				WBS = #{wbs} AND 			</if>
+						<if test="projectName != null and projectName!=''"  >
+				PROJECT_NAME = #{projectName} AND 			</if>
+						<if test="receiveMount != null and receiveMount!=''"  >
+				RECEIVE_MOUNT = #{receiveMount} AND 			</if>
+						<if test="receiveDate != null and receiveDate!=''"  >
+				RECEIVE_DATE = #{receiveDate} AND 			</if>
+						<if test="creator != null and creator!=''"  >
+				CREATOR = #{creator} AND 			</if>
+						<if test="createTime != null and createTime!=''"  >
+				CREATE_TIME = #{createTime} AND 			</if>
+						<if test="receivables != null and receivables!=''"  >
+				RECEIVABLES = #{receivables} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_project_incomming_info 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmProjectIncommingInfo.entity.PmProjectIncommingInfoEntity">
+		insert into pm_project_incomming_info
+		(
+		RECEIVE_ID
+			<if test="projectId != null and projectId!=''">
+				,PROJECT_ID	
+			</if>
+		
+			<if test="wbs != null and wbs!=''">
+				,WBS	
+			</if>
+		
+			<if test="projectName != null and projectName!=''">
+				,PROJECT_NAME	
+			</if>
+		
+			<if test="receiveMount != null and receiveMount!=''">
+				,RECEIVE_MOUNT	
+			</if>
+		
+			<if test="receiveDate != null and receiveDate!=''">
+				,RECEIVE_DATE	
+			</if>
+		
+			<if test="creator != null and creator!=''">
+				,CREATOR	
+			</if>
+		
+			<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+			</if>
+		
+			<if test="receivables != null and receivables!=''">
+				,RECEIVABLES	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmProjectIncommingInfo_SEQ.nextval
+		<if test="projectId != null and projectId!=''">
+			,#{projectId}
+		</if>
+		<if test="wbs != null and wbs!=''">
+			,#{wbs}
+		</if>
+		<if test="projectName != null and projectName!=''">
+			,#{projectName}
+		</if>
+		<if test="receiveMount != null and receiveMount!=''">
+			,#{receiveMount}
+		</if>
+		<if test="receiveDate != null and receiveDate!=''">
+			,#{receiveDate}
+		</if>
+		<if test="creator != null and creator!=''">
+			,#{creator}
+		</if>
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
+		<if test="receivables != null and receivables!=''">
+			,#{receivables}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmProjectIncommingInfo.entity.PmProjectIncommingInfoEntity">
+		update pm_project_incomming_info 
+		<set>
+			<if test="projectId != null and projectId!=''">PROJECT_ID = #{projectId}, </if>
+
+			<if test="wbs != null and wbs!=''">WBS = #{wbs}, </if>
+
+			<if test="projectName != null and projectName!=''">PROJECT_NAME = #{projectName}, </if>
+
+			<if test="receiveMount != null and receiveMount!=''">RECEIVE_MOUNT = #{receiveMount}, </if>
+
+			<if test="receiveDate != null and receiveDate!=''">RECEIVE_DATE = #{receiveDate}, </if>
+
+			<if test="creator != null and creator!=''">CREATOR = #{creator}, </if>
+
+			<if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime}, </if>
+
+			<if test="receivables != null and receivables!=''">RECEIVABLES = #{receivables}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where RECEIVE_ID = #{receiveId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_project_incomming_info where RECEIVE_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

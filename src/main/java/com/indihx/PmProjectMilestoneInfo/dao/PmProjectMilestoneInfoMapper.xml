@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmProjectMilestoneInfo.dao.PmProjectMilestoneInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmProjectMilestoneInfo.entity.PmProjectMilestoneInfoEntity" id="pmProjectMilestoneInfoMap">
+        <result property="milestoneId" column="MILESTONE_ID"/>
+        <result property="projectId" column="PROJECT_ID"/>
+        <result property="projectName" column="PROJECT_NAME"/>
+        <result property="wbs" column="WBS"/>
+        <result property="mileDate" column="MILE_DATE"/>
+        <result property="mileDescript" column="MILE_DESCRIPT"/>
+        <result property="finishStatus" column="FINISH_STATUS"/>
+        <result property="creatorId" column="CREATOR_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmProjectMilestoneInfoMap">
+		select * from pm_project_milestone_info where MILESTONE_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmProjectMilestoneInfoMap">
+		select 
+		*
+		 from pm_project_milestone_info
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="milestoneId != null and milestoneId!=''"  >
+				MILESTONE_ID = #{milestoneId} AND 			</if>
+						<if test="projectId != null and projectId!=''"  >
+				PROJECT_ID = #{projectId} AND 			</if>
+						<if test="projectName != null and projectName!=''"  >
+				PROJECT_NAME = #{projectName} AND 			</if>
+						<if test="wbs != null and wbs!=''"  >
+				WBS = #{wbs} AND 			</if>
+						<if test="mileDate != null and mileDate!=''"  >
+				MILE_DATE = #{mileDate} AND 			</if>
+						<if test="mileDescript != null and mileDescript!=''"  >
+				MILE_DESCRIPT = #{mileDescript} AND 			</if>
+						<if test="finishStatus != null and finishStatus!=''"  >
+				FINISH_STATUS = #{finishStatus} AND 			</if>
+						<if test="creatorId != null and creatorId!=''"  >
+				CREATOR_ID = #{creatorId} AND 			</if>
+						<if test="createTime != null and createTime!=''"  >
+				CREATE_TIME = #{createTime} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_project_milestone_info 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmProjectMilestoneInfo.entity.PmProjectMilestoneInfoEntity">
+		insert into pm_project_milestone_info
+		(
+		MILESTONE_ID
+			<if test="projectId != null and projectId!=''">
+				,PROJECT_ID	
+			</if>
+		
+			<if test="projectName != null and projectName!=''">
+				,PROJECT_NAME	
+			</if>
+		
+			<if test="wbs != null and wbs!=''">
+				,WBS	
+			</if>
+		
+			<if test="mileDate != null and mileDate!=''">
+				,MILE_DATE	
+			</if>
+		
+			<if test="mileDescript != null and mileDescript!=''">
+				,MILE_DESCRIPT	
+			</if>
+		
+			<if test="finishStatus != null and finishStatus!=''">
+				,FINISH_STATUS	
+			</if>
+		
+			<if test="creatorId != null and creatorId!=''">
+				,CREATOR_ID	
+			</if>
+		
+			<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmProjectMilestoneInfo_SEQ.nextval
+		<if test="projectId != null and projectId!=''">
+			,#{projectId}
+		</if>
+		<if test="projectName != null and projectName!=''">
+			,#{projectName}
+		</if>
+		<if test="wbs != null and wbs!=''">
+			,#{wbs}
+		</if>
+		<if test="mileDate != null and mileDate!=''">
+			,#{mileDate}
+		</if>
+		<if test="mileDescript != null and mileDescript!=''">
+			,#{mileDescript}
+		</if>
+		<if test="finishStatus != null and finishStatus!=''">
+			,#{finishStatus}
+		</if>
+		<if test="creatorId != null and creatorId!=''">
+			,#{creatorId}
+		</if>
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmProjectMilestoneInfo.entity.PmProjectMilestoneInfoEntity">
+		update pm_project_milestone_info 
+		<set>
+			<if test="projectId != null and projectId!=''">PROJECT_ID = #{projectId}, </if>
+
+			<if test="projectName != null and projectName!=''">PROJECT_NAME = #{projectName}, </if>
+
+			<if test="wbs != null and wbs!=''">WBS = #{wbs}, </if>
+
+			<if test="mileDate != null and mileDate!=''">MILE_DATE = #{mileDate}, </if>
+
+			<if test="mileDescript != null and mileDescript!=''">MILE_DESCRIPT = #{mileDescript}, </if>
+
+			<if test="finishStatus != null and finishStatus!=''">FINISH_STATUS = #{finishStatus}, </if>
+
+			<if test="creatorId != null and creatorId!=''">CREATOR_ID = #{creatorId}, </if>
+
+			<if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where MILESTONE_ID = #{milestoneId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_project_milestone_info where MILESTONE_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmProjectProblem.dao.PmProjectProblemMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmProjectProblem.entity.PmProjectProblemEntity" id="pmProjectProblemMap">
+        <result property="problemId" column="PROBLEM_ID"/>
+        <result property="projectId" column="PROJECT_ID"/>
+        <result property="projectName" column="PROJECT_NAME"/>
+        <result property="wbs" column="WBS"/>
+        <result property="problemType" column="PROBLEM_TYPE"/>
+        <result property="problemDetail" column="PROBLEM_DETAIL"/>
+        <result property="creatorId" column="CREATOR_ID"/>
+        <result property="creatorName" column="CREATOR_NAME"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="problemStatus" column="PROBLEM_STATUS"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmProjectProblemMap">
+		select * from pm_project_problem where PROBLEM_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmProjectProblemMap">
+		select 
+		*
+		 from pm_project_problem
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="problemId != null and problemId!=''"  >
+				PROBLEM_ID = #{problemId} AND 			</if>
+						<if test="projectId != null and projectId!=''"  >
+				PROJECT_ID = #{projectId} AND 			</if>
+						<if test="projectName != null and projectName!=''"  >
+				PROJECT_NAME = #{projectName} AND 			</if>
+						<if test="wbs != null and wbs!=''"  >
+				WBS = #{wbs} AND 			</if>
+						<if test="problemType != null and problemType!=''"  >
+				PROBLEM_TYPE = #{problemType} AND 			</if>
+						<if test="problemDetail != null and problemDetail!=''"  >
+				PROBLEM_DETAIL = #{problemDetail} AND 			</if>
+						<if test="creatorId != null and creatorId!=''"  >
+				CREATOR_ID = #{creatorId} AND 			</if>
+						<if test="creatorName != null and creatorName!=''"  >
+				CREATOR_NAME = #{creatorName} AND 			</if>
+						<if test="createTime != null and createTime!=''"  >
+				CREATE_TIME = #{createTime} AND 			</if>
+						<if test="problemStatus != null and problemStatus!=''"  >
+				PROBLEM_STATUS = #{problemStatus} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_project_problem 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmProjectProblem.entity.PmProjectProblemEntity">
+		insert into pm_project_problem
+		(
+		PROBLEM_ID
+			<if test="projectId != null and projectId!=''">
+				,PROJECT_ID	
+			</if>
+		
+			<if test="projectName != null and projectName!=''">
+				,PROJECT_NAME	
+			</if>
+		
+			<if test="wbs != null and wbs!=''">
+				,WBS	
+			</if>
+		
+			<if test="problemType != null and problemType!=''">
+				,PROBLEM_TYPE	
+			</if>
+		
+			<if test="problemDetail != null and problemDetail!=''">
+				,PROBLEM_DETAIL	
+			</if>
+		
+			<if test="creatorId != null and creatorId!=''">
+				,CREATOR_ID	
+			</if>
+		
+			<if test="creatorName != null and creatorName!=''">
+				,CREATOR_NAME	
+			</if>
+		
+			<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+			</if>
+		
+			<if test="problemStatus != null and problemStatus!=''">
+				,PROBLEM_STATUS	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmProjectProblem_SEQ.nextval
+		<if test="projectId != null and projectId!=''">
+			,#{projectId}
+		</if>
+		<if test="projectName != null and projectName!=''">
+			,#{projectName}
+		</if>
+		<if test="wbs != null and wbs!=''">
+			,#{wbs}
+		</if>
+		<if test="problemType != null and problemType!=''">
+			,#{problemType}
+		</if>
+		<if test="problemDetail != null and problemDetail!=''">
+			,#{problemDetail}
+		</if>
+		<if test="creatorId != null and creatorId!=''">
+			,#{creatorId}
+		</if>
+		<if test="creatorName != null and creatorName!=''">
+			,#{creatorName}
+		</if>
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
+		<if test="problemStatus != null and problemStatus!=''">
+			,#{problemStatus}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmProjectProblem.entity.PmProjectProblemEntity">
+		update pm_project_problem 
+		<set>
+			<if test="projectId != null and projectId!=''">PROJECT_ID = #{projectId}, </if>
+
+			<if test="projectName != null and projectName!=''">PROJECT_NAME = #{projectName}, </if>
+
+			<if test="wbs != null and wbs!=''">WBS = #{wbs}, </if>
+
+			<if test="problemType != null and problemType!=''">PROBLEM_TYPE = #{problemType}, </if>
+
+			<if test="problemDetail != null and problemDetail!=''">PROBLEM_DETAIL = #{problemDetail}, </if>
+
+			<if test="creatorId != null and creatorId!=''">CREATOR_ID = #{creatorId}, </if>
+
+			<if test="creatorName != null and creatorName!=''">CREATOR_NAME = #{creatorName}, </if>
+
+			<if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime}, </if>
+
+			<if test="problemStatus != null and problemStatus!=''">PROBLEM_STATUS = #{problemStatus}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where PROBLEM_ID = #{problemId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_project_problem where PROBLEM_ID = #{value}
+	</delete>
+	
+
+
+</mapper>
