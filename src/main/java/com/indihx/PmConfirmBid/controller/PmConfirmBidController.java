@@ -25,7 +25,7 @@ import com.indihx.comm.InitSysConstants;
  * 
  *
  * @author hb
- * @date 2018-11-06 19:51:55
+ * @date 2018-11-07 10:07:13
  */
 @Controller
 @RequestMapping("/pmconfirmbid")
@@ -38,6 +38,7 @@ public class PmConfirmBidController {
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
+
 		List<PmConfirmBidEntity> pmConfirmBid = pmConfirmBidService.queryList(params);
         return R.ok().put("page", pmConfirmBid);
     }

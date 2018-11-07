@@ -21,15 +21,22 @@
         <result property="sellDeptName" column="SELL_DEPT_NAME"/>
         <result property="custManagerId" column="CUST_MANAGER_ID"/>
         <result property="custManagerName" column="CUST_MANAGER_NAME"/>
+        <result property="technicalDirectorId" column="TECHNICAL_DIRECTOR_ID"/>
+        <result property="technicalDirectorName" column="TECHNICAL_DIRECTOR_NAME"/>
+        <result property="sellDeptManagerName" column="SELL_DEPT_MANAGER_NAME"/>
+        <result property="sellDeptManagerId" column="SELL_DEPT_MANAGER_ID"/>
+        <result property="constructionDeptManagerName" column="CONSTRUCTION_DEPT_MANAGER_NAME"/>
+        <result property="constructionDeptManagerId" column="CONSTRUCTION_DEPT_MANAGER_ID"/>
+        <result property="status" column="STATUS"/>
         <result property="isWorkAreaExplicit" column="IS_WORK_AREA_EXPLICIT"/>
         <result property="isChecked" column="IS_CHECKED"/>
         <result property="remark" column="REMARK"/>
+        <result property="paymentPoint" column="PAYMENT_POINT"/>
         <result property="creatorId" column="CREATOR_ID"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="modifier" column="MODIFIER"/>
         <result property="modifyTime" column="MODIFY_TIME"/>
         <result property="isDelete" column="IS_DELETE"/>
-        <result property="paymentPoint" column="PAYMENT_POINT"/>
     </resultMap>
 
 	<select id="queryObject" resultMap="pmConfirmBidMap">
@@ -73,12 +80,28 @@
 				CUST_MANAGER_ID = #{custManagerId} AND 			</if>
 						<if test="custManagerName != null and custManagerName!=''"  >
 				CUST_MANAGER_NAME = #{custManagerName} AND 			</if>
+						<if test="technicalDirectorId != null and technicalDirectorId!=''"  >
+				TECHNICAL_DIRECTOR_ID = #{technicalDirectorId} AND 			</if>
+						<if test="technicalDirectorName != null and technicalDirectorName!=''"  >
+				TECHNICAL_DIRECTOR_NAME = #{technicalDirectorName} AND 			</if>
+						<if test="sellDeptManagerName != null and sellDeptManagerName!=''"  >
+				SELL_DEPT_MANAGER_NAME = #{sellDeptManagerName} AND 			</if>
+						<if test="sellDeptManagerId != null and sellDeptManagerId!=''"  >
+				SELL_DEPT_MANAGER_ID = #{sellDeptManagerId} AND 			</if>
+						<if test="constructionDeptManagerName != null and constructionDeptManagerName!=''"  >
+				CONSTRUCTION_DEPT_MANAGER_NAME = #{constructionDeptManagerName} AND 			</if>
+						<if test="constructionDeptManagerId != null and constructionDeptManagerId!=''"  >
+				CONSTRUCTION_DEPT_MANAGER_ID = #{constructionDeptManagerId} AND 			</if>
+						<if test="status != null and status!=''"  >
+				STATUS = #{status} AND 			</if>
 						<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''"  >
 				IS_WORK_AREA_EXPLICIT = #{isWorkAreaExplicit} AND 			</if>
 						<if test="isChecked != null and isChecked!=''"  >
 				IS_CHECKED = #{isChecked} AND 			</if>
 						<if test="remark != null and remark!=''"  >
 				REMARK = #{remark} AND 			</if>
+						<if test="paymentPoint != null and paymentPoint!=''"  >
+				PAYMENT_POINT = #{paymentPoint} AND 			</if>
 						<if test="creatorId != null and creatorId!=''"  >
 				CREATOR_ID = #{creatorId} AND 			</if>
 						<if test="createTime != null and createTime!=''"  >
@@ -88,9 +111,7 @@
 						<if test="modifyTime != null and modifyTime!=''"  >
 				MODIFY_TIME = #{modifyTime} AND 			</if>
 						<if test="isDelete != null and isDelete!=''"  >
-				IS_DELETE = #{isDelete} AND 			</if>
-						<if test="paymentPoint != null and paymentPoint!=''"  >
-				PAYMENT_POINT = #{paymentPoint}			</if>
+				IS_DELETE = #{isDelete}			</if>
 					</trim> 
 	</select>
 	
@@ -162,6 +183,34 @@
 				,CUST_MANAGER_NAME	
 			</if>
 		
+			<if test="technicalDirectorId != null and technicalDirectorId!=''">
+				,TECHNICAL_DIRECTOR_ID	
+			</if>
+		
+			<if test="technicalDirectorName != null and technicalDirectorName!=''">
+				,TECHNICAL_DIRECTOR_NAME	
+			</if>
+		
+			<if test="sellDeptManagerName != null and sellDeptManagerName!=''">
+				,SELL_DEPT_MANAGER_NAME	
+			</if>
+		
+			<if test="sellDeptManagerId != null and sellDeptManagerId!=''">
+				,SELL_DEPT_MANAGER_ID	
+			</if>
+		
+			<if test="constructionDeptManagerName != null and constructionDeptManagerName!=''">
+				,CONSTRUCTION_DEPT_MANAGER_NAME	
+			</if>
+		
+			<if test="constructionDeptManagerId != null and constructionDeptManagerId!=''">
+				,CONSTRUCTION_DEPT_MANAGER_ID	
+			</if>
+		
+			<if test="status != null and status!=''">
+				,STATUS	
+			</if>
+		
 			<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''">
 				,IS_WORK_AREA_EXPLICIT	
 			</if>
@@ -172,6 +221,10 @@
 		
 			<if test="remark != null and remark!=''">
 				,REMARK	
+			</if>
+		
+			<if test="paymentPoint != null and paymentPoint!=''">
+				,PAYMENT_POINT	
 			</if>
 		
 			<if test="creatorId != null and creatorId!=''">
@@ -190,12 +243,9 @@
 				,MODIFY_TIME	
 			</if>
 		
-				
-		
-			<if test="paymentPoint != null and paymentPoint!=''">
-				,PAYMENT_POINT	
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
 			</if>
-			,IS_DELETE	
 		
 		)
 		values
@@ -246,6 +296,27 @@
 		<if test="custManagerName != null and custManagerName!=''">
 			,#{custManagerName}
 		</if>
+		<if test="technicalDirectorId != null and technicalDirectorId!=''">
+			,#{technicalDirectorId}
+		</if>
+		<if test="technicalDirectorName != null and technicalDirectorName!=''">
+			,#{technicalDirectorName}
+		</if>
+		<if test="sellDeptManagerName != null and sellDeptManagerName!=''">
+			,#{sellDeptManagerName}
+		</if>
+		<if test="sellDeptManagerId != null and sellDeptManagerId!=''">
+			,#{sellDeptManagerId}
+		</if>
+		<if test="constructionDeptManagerName != null and constructionDeptManagerName!=''">
+			,#{constructionDeptManagerName}
+		</if>
+		<if test="constructionDeptManagerId != null and constructionDeptManagerId!=''">
+			,#{constructionDeptManagerId}
+		</if>
+		<if test="status != null and status!=''">
+			,#{status}
+		</if>
 		<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''">
 			,#{isWorkAreaExplicit}
 		</if>
@@ -254,6 +325,9 @@
 		</if>
 		<if test="remark != null and remark!=''">
 			,#{remark}
+		</if>
+		<if test="paymentPoint != null and paymentPoint!=''">
+			,#{paymentPoint}
 		</if>
 		<if test="creatorId != null and creatorId!=''">
 			,#{creatorId}
@@ -267,11 +341,9 @@
 		<if test="modifyTime != null and modifyTime!=''">
 			,#{modifyTime}
 		</if>
-		
-		<if test="paymentPoint != null and paymentPoint!=''">
-			,#{paymentPoint}
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
 		</if>
-		,'00'
 		)
 	</insert>
 	 
@@ -308,11 +380,27 @@
 
 			<if test="custManagerName != null and custManagerName!=''">CUST_MANAGER_NAME = #{custManagerName}, </if>
 
+			<if test="technicalDirectorId != null and technicalDirectorId!=''">TECHNICAL_DIRECTOR_ID = #{technicalDirectorId}, </if>
+
+			<if test="technicalDirectorName != null and technicalDirectorName!=''">TECHNICAL_DIRECTOR_NAME = #{technicalDirectorName}, </if>
+
+			<if test="sellDeptManagerName != null and sellDeptManagerName!=''">SELL_DEPT_MANAGER_NAME = #{sellDeptManagerName}, </if>
+
+			<if test="sellDeptManagerId != null and sellDeptManagerId!=''">SELL_DEPT_MANAGER_ID = #{sellDeptManagerId}, </if>
+
+			<if test="constructionDeptManagerName != null and constructionDeptManagerName!=''">CONSTRUCTION_DEPT_MANAGER_NAME = #{constructionDeptManagerName}, </if>
+
+			<if test="constructionDeptManagerId != null and constructionDeptManagerId!=''">CONSTRUCTION_DEPT_MANAGER_ID = #{constructionDeptManagerId}, </if>
+
+			<if test="status != null and status!=''">STATUS = #{status}, </if>
+
 			<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''">IS_WORK_AREA_EXPLICIT = #{isWorkAreaExplicit}, </if>
 
 			<if test="isChecked != null and isChecked!=''">IS_CHECKED = #{isChecked}, </if>
 
 			<if test="remark != null and remark!=''">REMARK = #{remark}, </if>
+
+			<if test="paymentPoint != null and paymentPoint!=''">PAYMENT_POINT = #{paymentPoint}, </if>
 
 			<if test="creatorId != null and creatorId!=''">CREATOR_ID = #{creatorId}, </if>
 
@@ -322,9 +410,7 @@
 
 			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
 
-			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}, </if>
-
-			<if test="paymentPoint != null and paymentPoint!=''">PAYMENT_POINT = #{paymentPoint}</if>
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
 
 		</set>
 		where BID_ID = #{bidId}

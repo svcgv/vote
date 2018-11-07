@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-11-06 19:51:55
+ * @date 2018-11-07 10:07:13
  */
 public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -100,6 +100,41 @@ private String custManagerName;
 	 * 
 	 */
 
+private long technicalDirectorId;
+	/**
+	 * 
+	 */
+
+private String technicalDirectorName;
+	/**
+	 * 
+	 */
+
+private String sellDeptManagerName;
+	/**
+	 * 
+	 */
+
+private long sellDeptManagerId;
+	/**
+	 * 
+	 */
+
+private String constructionDeptManagerName;
+	/**
+	 * 
+	 */
+
+private long constructionDeptManagerId;
+	/**
+	 * 
+	 */
+
+private String status;
+	/**
+	 * 
+	 */
+
 private String isWorkAreaExplicit;
 	/**
 	 * 
@@ -111,6 +146,11 @@ private String isChecked;
 	 */
 
 private String remark;
+	/**
+	 * 
+	 */
+
+private String paymentPoint;
 	/**
 	 * 
 	 */
@@ -136,11 +176,6 @@ private String modifyTime;
 	 */
 
 private String isDelete;
-	/**
-	 * 
-	 */
-
-private String paymentPoint;
 
 	/**
 	 * 设置：
@@ -337,6 +372,90 @@ private String paymentPoint;
 	/**
 	 * 设置：
 	 */
+	public void setTechnicalDirectorId(long technicalDirectorId) {
+		this.technicalDirectorId = technicalDirectorId;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getTechnicalDirectorId() {
+		return technicalDirectorId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setTechnicalDirectorName(String technicalDirectorName) {
+		this.technicalDirectorName = technicalDirectorName;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getTechnicalDirectorName() {
+		return technicalDirectorName;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setSellDeptManagerName(String sellDeptManagerName) {
+		this.sellDeptManagerName = sellDeptManagerName;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getSellDeptManagerName() {
+		return sellDeptManagerName;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setSellDeptManagerId(long sellDeptManagerId) {
+		this.sellDeptManagerId = sellDeptManagerId;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getSellDeptManagerId() {
+		return sellDeptManagerId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setConstructionDeptManagerName(String constructionDeptManagerName) {
+		this.constructionDeptManagerName = constructionDeptManagerName;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getConstructionDeptManagerName() {
+		return constructionDeptManagerName;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setConstructionDeptManagerId(long constructionDeptManagerId) {
+		this.constructionDeptManagerId = constructionDeptManagerId;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getConstructionDeptManagerId() {
+		return constructionDeptManagerId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getStatus() {
+		return status;
+	}
+	/**
+	 * 设置：
+	 */
 	public void setIsWorkAreaExplicit(String isWorkAreaExplicit) {
 		this.isWorkAreaExplicit = isWorkAreaExplicit;
 	}
@@ -369,6 +488,18 @@ private String paymentPoint;
 	 */
 	public String getRemark() {
 		return remark;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setPaymentPoint(String paymentPoint) {
+		this.paymentPoint = paymentPoint;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getPaymentPoint() {
+		return paymentPoint;
 	}
 	/**
 	 * 设置：
@@ -429,17 +560,5 @@ private String paymentPoint;
 	 */
 	public String getIsDelete() {
 		return isDelete;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setPaymentPoint(String paymentPoint) {
-		this.paymentPoint = paymentPoint;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getPaymentPoint() {
-		return paymentPoint;
 	}
 }

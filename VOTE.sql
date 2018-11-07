@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2018-11-06 19:53:23
+Date: 2018-11-07 10:09:50
 */
 
 
@@ -1084,6 +1084,7 @@ INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('106', '11', null, null, '0', '0', null,
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('109', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('164', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('166', '11', null, null, '0', '0', null, null, null, '00');
+INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('183', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('62', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('65', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('110', '11', null, null, '0', '0', null, null, null, '00');
@@ -1384,15 +1385,22 @@ CREATE TABLE "VOTE"."PM_CONFIRM_BID" (
 "SELL_DEPT_NAME" VARCHAR2(128 BYTE) NULL ,
 "CUST_MANAGER_ID" NUMBER(10) NULL ,
 "CUST_MANAGER_NAME" VARCHAR2(64 BYTE) NULL ,
+"TECHNICAL_DIRECTOR_ID" NUMBER(10) NULL ,
+"TECHNICAL_DIRECTOR_NAME" VARCHAR2(256 BYTE) NULL ,
+"SELL_DEPT_MANAGER_NAME" VARCHAR2(256 BYTE) NULL ,
+"SELL_DEPT_MANAGER_ID" NUMBER(10) NULL ,
+"CONSTRUCTION_DEPT_MANAGER_NAME" VARCHAR2(256 BYTE) NULL ,
+"CONSTRUCTION_DEPT_MANAGER_ID" NUMBER(10) NULL ,
+"STATUS" CHAR(2 BYTE) NULL ,
 "IS_WORK_AREA_EXPLICIT" CHAR(2 BYTE) NULL ,
 "IS_CHECKED" CHAR(2 BYTE) NULL ,
 "REMARK" VARCHAR2(256 BYTE) NULL ,
+"PAYMENT_POINT" VARCHAR2(512 BYTE) NULL ,
 "CREATOR_ID" NUMBER(10) NULL ,
 "CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
 "MODIFIER" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL ,
-"PAYMENT_POINT" VARCHAR2(512 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL 
 )
 LOGGING
 NOCOMPRESS
@@ -2148,7 +2156,7 @@ COMMENT ON COLUMN "VOTE"."USR_INFO"."STR_REMARK" IS '备注';
 -- Records of USR_INFO
 -- ----------------------------
 INSERT INTO "VOTE"."USR_INFO" VALUES ('41', null, 'PMS_管理员（娄）', '1', '111111', '2018-11-03', '13711111111', 'mailwork_sh@163.com', '22', '0', '20181103', null, '01', '111111111111111', '111111111111111', null, null, '111111');
-INSERT INTO "VOTE"."USR_INFO" VALUES ('1000', 'Aoot', '系统管理员', '0', '111111', '20170523', '111111', '11111', null, '1', '20170217', '1000', '01', null, null, 'D9EED4A1B9796E6254DB2F7A67B072B8', '20181106173837803', null);
+INSERT INTO "VOTE"."USR_INFO" VALUES ('1000', 'Aoot', '系统管理员', '0', '111111', '20170523', '111111', '11111', null, '1', '20170217', '1000', '01', null, null, '49DEAD34BB0C03D9704ED7D88C4987FC', '20181106225219939', null);
 INSERT INTO "VOTE"."USR_INFO" VALUES ('22', null, '系统管理员_TEST2', '1', '111111', '2018-10-12', '13666666666', '35q13w5eq@qq.com', '22', '0', '20181103', '1000', '01', '3123123', '420123123123123', null, '20181105154411716', 'asda');
 
 -- ----------------------------
@@ -3351,6 +3359,17 @@ CREATE SEQUENCE "VOTE"."PMCOMPANYINFO_SEQ"
  CACHE 20;
 
 -- ----------------------------
+-- Sequence structure for PMCONFIRMBID_SEQ
+-- ----------------------------
+DROP SEQUENCE "VOTE"."PMCONFIRMBID_SEQ";
+CREATE SEQUENCE "VOTE"."PMCONFIRMBID_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ CACHE 20;
+
+-- ----------------------------
 -- Sequence structure for PMCUSTOMERGROUP_SEQ
 -- ----------------------------
 DROP SEQUENCE "VOTE"."PMCUSTOMERGROUP_SEQ";
@@ -4261,11 +4280,6 @@ ALTER TABLE "VOTE"."PM_COMPANY_INFO" ADD PRIMARY KEY ("COMPANY_CODE");
 -- ----------------------------
 -- Indexes structure for table PM_CONFIRM_BID
 -- ----------------------------
-
--- ----------------------------
--- Checks structure for table PM_CONFIRM_BID
--- ----------------------------
-ALTER TABLE "VOTE"."PM_CONFIRM_BID" ADD CHECK ("BID_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table PM_CONFIRM_BID
