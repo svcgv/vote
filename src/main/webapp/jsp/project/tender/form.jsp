@@ -30,14 +30,15 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">投标首次报价金额：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="bidFirstPrice"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="firstBidAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="custName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+		         <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
 		         <input type="hidden" name="custId">
+		         <input type="hidden" name="custSapCode">
 		      </div>
 		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -85,8 +86,8 @@
 		    <div  class="layui-inline">
 		    <label class="layui-form-label">交付部门负责人：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="constructionDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="constructionDeptManagerId">
+		          <input type="text" name="constructionDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="hidden" name="constructionDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgMangerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -116,7 +117,6 @@
 		       </div>
 		     </div> 
 		    
-		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
@@ -125,6 +125,17 @@
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		       </div>
+		    </div>
+		    
+		    <div class="layui-inline">
+		      <label class="layui-form-label">技术总监：</label>
+		       <div class="layui-input-inline">
+		          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="hidden" name="technicalDirectorId">
+		      </div>
+		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    
@@ -189,6 +200,17 @@ $(function(){
 		    type: 'datetime'
 	 });
 		
+		function getParam(){
+			var queryParams=$("#tender-addForm-hook form").serializeObject();
+			 var newParam = {}
+			  for(var i in queryParams){
+				  if(queryParams[i]){
+					  newParam[i] = queryParams[i]
+				  }
+			  }
+			  return newParam
+		}
+		 
 	// form 表单手动渲染
 	  form.render();
   //监听指定开关
@@ -267,6 +289,15 @@ $(function(){
 	  
 });
   
+  //查询
+  $("#tender-addForm-hook #techQuery-hook").click(function(){
+	  $.openWindow({
+	  		url:'user?act=addtech',
+	  		title:"选择技术总监",
+	  		width:"700"
+	 });
+	  
+});
   
   $("#tender-addForm-hook #payOrgQuery-hook").click(function(){
 	  $.openWindow({
@@ -323,13 +354,12 @@ $(function(){
 				return false;
 			}
 			
-			var formDatas=$("#tender-addForm-hook form").serializeObject();
+			
 			$.ajax({
 				type:'POST',
-				url:'save',
-				data:{
-					queryParams:formDatas
-				},
+				url:'/vote/pmconfirmbid/save',
+				contentType:'application/json',
+				data: JSON.stringify(getParam()),
 				success:function(res){
 					layer.msg("新增成功",{icon:1});
 					win.close();

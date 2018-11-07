@@ -242,10 +242,7 @@
 			<if test="modifyTime != null and modifyTime!=''">
 				,MODIFY_TIME	
 			</if>
-		
-			<if test="isDelete != null and isDelete!=''">
-				,IS_DELETE	
-			</if>
+			,IS_DELETE
 		
 		)
 		values
@@ -341,9 +338,7 @@
 		<if test="modifyTime != null and modifyTime!=''">
 			,#{modifyTime}
 		</if>
-		<if test="isDelete != null and isDelete!=''">
-			,#{isDelete}
-		</if>
+		,'00'
 		)
 	</insert>
 	 
