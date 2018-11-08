@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmProjectGroupInfo.dao.PmProjectGroupInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity" id="pmProjectGroupInfoMap">
+        <result property="projectGroupId" column="PROJECT_GROUP_ID"/>
+        <result property="projectId" column="PROJECT_ID"/>
+        <result property="wbs" column="WBS"/>
+        <result property="projectGroupName" column="PROJECT_GROUP_NAME"/>
+        <result property="groupManagerCode" column="GROUP_MANAGER_CODE"/>
+        <result property="groupManagerId" column="GROUP_MANAGER_ID"/>
+        <result property="groupCreatorId" column="GROUP_CREATOR_ID"/>
+        <result property="groupCreatorName" column="GROUP_CREATOR_NAME"/>
+        <result property="groupCreateTime" column="GROUP_CREATE_TIME"/>
+        <result property="groupStatus" column="GROUP_STATUS"/>
+        <result property="modifier" column="MODIFIER"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmProjectGroupInfoMap">
+		select * from pm_project_group_info where PROJECT_GROUP_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmProjectGroupInfoMap">
+		select 
+		*
+		 from pm_project_group_info
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="projectGroupId != null and projectGroupId!=''"  >
+				PROJECT_GROUP_ID = #{projectGroupId} AND 			</if>
+						<if test="projectId != null and projectId!=''"  >
+				PROJECT_ID = #{projectId} AND 			</if>
+						<if test="wbs != null and wbs!=''"  >
+				WBS = #{wbs} AND 			</if>
+						<if test="projectGroupName != null and projectGroupName!=''"  >
+				PROJECT_GROUP_NAME = #{projectGroupName} AND 			</if>
+						<if test="groupManagerCode != null and groupManagerCode!=''"  >
+				GROUP_MANAGER_CODE = #{groupManagerCode} AND 			</if>
+						<if test="groupManagerId != null and groupManagerId!=''"  >
+				GROUP_MANAGER_ID = #{groupManagerId} AND 			</if>
+						<if test="groupCreatorId != null and groupCreatorId!=''"  >
+				GROUP_CREATOR_ID = #{groupCreatorId} AND 			</if>
+						<if test="groupCreatorName != null and groupCreatorName!=''"  >
+				GROUP_CREATOR_NAME = #{groupCreatorName} AND 			</if>
+						<if test="groupCreateTime != null and groupCreateTime!=''"  >
+				GROUP_CREATE_TIME = #{groupCreateTime} AND 			</if>
+						<if test="groupStatus != null and groupStatus!=''"  >
+				GROUP_STATUS = #{groupStatus} AND 			</if>
+						<if test="modifier != null and modifier!=''"  >
+				MODIFIER = #{modifier} AND 			</if>
+						<if test="modifyTime != null and modifyTime!=''"  >
+				MODIFY_TIME = #{modifyTime} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_project_group_info 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity">
+		insert into pm_project_group_info
+		(
+		PROJECT_GROUP_ID
+			<if test="projectId != null and projectId!=''">
+				,PROJECT_ID	
+			</if>
+		
+			<if test="wbs != null and wbs!=''">
+				,WBS	
+			</if>
+		
+			<if test="projectGroupName != null and projectGroupName!=''">
+				,PROJECT_GROUP_NAME	
+			</if>
+		
+			<if test="groupManagerCode != null and groupManagerCode!=''">
+				,GROUP_MANAGER_CODE	
+			</if>
+		
+			<if test="groupManagerId != null and groupManagerId!=''">
+				,GROUP_MANAGER_ID	
+			</if>
+		
+			<if test="groupCreatorId != null and groupCreatorId!=''">
+				,GROUP_CREATOR_ID	
+			</if>
+		
+			<if test="groupCreatorName != null and groupCreatorName!=''">
+				,GROUP_CREATOR_NAME	
+			</if>
+		
+			<if test="groupCreateTime != null and groupCreateTime!=''">
+				,GROUP_CREATE_TIME	
+			</if>
+		
+			<if test="groupStatus != null and groupStatus!=''">
+				,GROUP_STATUS	
+			</if>
+		
+			<if test="modifier != null and modifier!=''">
+				,MODIFIER	
+			</if>
+		
+			<if test="modifyTime != null and modifyTime!=''">
+				,MODIFY_TIME	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmProjectGroupInfo_SEQ.nextval
+		<if test="projectId != null and projectId!=''">
+			,#{projectId}
+		</if>
+		<if test="wbs != null and wbs!=''">
+			,#{wbs}
+		</if>
+		<if test="projectGroupName != null and projectGroupName!=''">
+			,#{projectGroupName}
+		</if>
+		<if test="groupManagerCode != null and groupManagerCode!=''">
+			,#{groupManagerCode}
+		</if>
+		<if test="groupManagerId != null and groupManagerId!=''">
+			,#{groupManagerId}
+		</if>
+		<if test="groupCreatorId != null and groupCreatorId!=''">
+			,#{groupCreatorId}
+		</if>
+		<if test="groupCreatorName != null and groupCreatorName!=''">
+			,#{groupCreatorName}
+		</if>
+		<if test="groupCreateTime != null and groupCreateTime!=''">
+			,#{groupCreateTime}
+		</if>
+		<if test="groupStatus != null and groupStatus!=''">
+			,#{groupStatus}
+		</if>
+		<if test="modifier != null and modifier!=''">
+			,#{modifier}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+			,#{modifyTime}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity">
+		update pm_project_group_info 
+		<set>
+			<if test="projectId != null and projectId!=''">PROJECT_ID = #{projectId}, </if>
+
+			<if test="wbs != null and wbs!=''">WBS = #{wbs}, </if>
+
+			<if test="projectGroupName != null and projectGroupName!=''">PROJECT_GROUP_NAME = #{projectGroupName}, </if>
+
+			<if test="groupManagerCode != null and groupManagerCode!=''">GROUP_MANAGER_CODE = #{groupManagerCode}, </if>
+
+			<if test="groupManagerId != null and groupManagerId!=''">GROUP_MANAGER_ID = #{groupManagerId}, </if>
+
+			<if test="groupCreatorId != null and groupCreatorId!=''">GROUP_CREATOR_ID = #{groupCreatorId}, </if>
+
+			<if test="groupCreatorName != null and groupCreatorName!=''">GROUP_CREATOR_NAME = #{groupCreatorName}, </if>
+
+			<if test="groupCreateTime != null and groupCreateTime!=''">GROUP_CREATE_TIME = #{groupCreateTime}, </if>
+
+			<if test="groupStatus != null and groupStatus!=''">GROUP_STATUS = #{groupStatus}, </if>
+
+			<if test="modifier != null and modifier!=''">MODIFIER = #{modifier}, </if>
+
+			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where PROJECT_GROUP_ID = #{projectGroupId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_project_group_info where PROJECT_GROUP_ID = #{value}
+	</delete>
+	
+
+
+</mapper>
