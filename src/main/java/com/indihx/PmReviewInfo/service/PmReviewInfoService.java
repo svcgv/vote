@@ -17,6 +17,6 @@ public interface PmReviewInfoService {
 	public void delete(long reviewId);
 	public List<PmReviewInfoEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
-   
+	public List<Map<String,Object>> selectBidReview(PmReviewInfoEntity entity);
 }
 

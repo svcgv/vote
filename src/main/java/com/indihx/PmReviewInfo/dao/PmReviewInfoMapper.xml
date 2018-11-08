@@ -15,6 +15,44 @@
         <result property="isDelete" column="IS_DELETE"/>
     </resultMap>
 
+	<resultMap type="java.util.Map" id="reviewMap">
+        <result property="reviewId" column="REVIEW_ID"/>
+        <result property="foreignId" column="FOREIGN_ID"/>
+        <result property="foreignCode" column="FOREIGN_CODE"/>
+        <result property="reviewType" column="REVIEW_TYPE"/>
+        <result property="reviewUserName" column="REVIEW_USER_NAME"/>
+        <result property="reviewUserCode" column="REVIEW_USER_CODE"/>
+        <result property="result" column="RESULT"/>
+        <result property="isDelete" column="IS_DELETE"/>
+        <result property="bidId" column="BID_ID"/>
+        <result property="bidName" column="BID_NAME"/>
+        <result property="firstBidAmount" column="FIRST_BID_AMOUNT"/>
+        <result property="predictAmount" column="PREDICT_AMOUNT"/>
+        <result property="predictCost" column="PREDICT_COST"/>
+        <result property="predictProfitRate" column="PREDICT_PROFIT_RATE"/>
+        <result property="predictPeriodStart" column="PREDICT_PERIOD_START"/>
+        <result property="predictPeriodEnd" column="PREDICT_PERIOD_END"/>
+        <result property="custId" column="CUST_ID"/>
+        <result property="custCnName" column="CUST_CN_NAME"/>
+        <result property="custSapCode" column="CUST_SAP_CODE"/>
+        <result property="constructionDeptId" column="CONSTRUCTION_DEPT_ID"/>
+        <result property="constructionDeptName" column="CONSTRUCTION_DEPT_NAME"/>
+        <result property="sellDeptId" column="SELL_DEPT_ID"/>
+        <result property="sellDeptName" column="SELL_DEPT_NAME"/>
+        <result property="custManagerId" column="CUST_MANAGER_ID"/>
+        <result property="custManagerName" column="CUST_MANAGER_NAME"/>
+        <result property="technicalDirectorId" column="TECHNICAL_DIRECTOR_ID"/>
+        <result property="technicalDirectorName" column="TECHNICAL_DIRECTOR_NAME"/>
+        <result property="sellDeptManagerName" column="SELL_DEPT_MANAGER_NAME"/>
+        <result property="sellDeptManagerId" column="SELL_DEPT_MANAGER_ID"/>
+        <result property="constructionDeptManagerName" column="CONSTRUCTION_DEPT_MANAGER_NAME"/>
+        <result property="constructionDeptManagerId" column="CONSTRUCTION_DEPT_MANAGER_ID"/>
+        <result property="status" column="STATUS"/>
+        <result property="isWorkAreaExplicit" column="IS_WORK_AREA_EXPLICIT"/>
+        <result property="isChecked" column="IS_CHECKED"/>
+        <result property="remark" column="REMARK"/>
+        <result property="paymentPoint" column="PAYMENT_POINT"/>
+    </resultMap>
 	<select id="queryObject" resultMap="pmReviewInfoMap">
 		select * from pm_review_info where REVIEW_ID = #{value}
 	</select>
@@ -132,6 +170,28 @@
 		delete from pm_review_info where REVIEW_ID = #{value}
 	</delete>
 	
+	<update id="updateIsDelete" parameterType="com.indihx.PmReviewInfo.entity.PmReviewInfoEntity">
+		update pm_review_info 
+		set IS_DELETE = '00'
+		where 
+			<if test="foreignId != null and foreignId!=''">FOREIGN_ID = #{foreignId}</if>
+			<if test="foreignCode != null and foreignCode!=''">FOREIGN_CODE = #{foreignCode}</if>
+			and REVIEW_TYPE=#{reviewType}
+	</update>
 
 
+	<select id="selectBidReview" resultMap="reviewMap">
+		SELECT *
+		FROM 
+			PM_REVIEW_INFO A 
+		LEFT JOIN 
+			PM_CONFIRM_BID B 
+		ON A.FOREIGN_ID=B.BID_ID 
+		WHERE 
+		A.IS_DELETE='00' 
+		AND 
+		A.REVIEW_USER_CODE=#{reviewUserCode}
+		AND
+		A.REVIEW_TYPE=#{reviewType}
+	</select>
 </mapper>

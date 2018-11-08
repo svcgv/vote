@@ -2,6 +2,7 @@ package com.indihx.PmReviewInfo.controller;
 
 
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +87,31 @@ public class PmReviewInfoController {
         pmReviewInfoService.delete(reviewId);
         return R.ok();
     }
+    
+    /**
+     * 列表
+     * 审批类型reviewType必传
+     */
+    @RequestMapping(value="/currentList",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> currentList(@RequestBody Map<String, Object> params,HttpSession session){
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	params.put("reviewUserCode", usesr.getUsrId());
+		List<PmReviewInfoEntity> pmReviewInfo = pmReviewInfoService.queryList(params);
+        return R.ok().put("page", pmReviewInfo);
+    }
 
+    /**
+     * 获取当前用户的审批列表
+     */
+    @RequestMapping(value="/selectBidReview",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> selectBidReview(@RequestBody Map<String, Object> params,HttpSession session){
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	Map<String,Object> par = new HashMap<String,Object>();
+    	par.put("reviewUserCode", usesr.getUsrId());
+    	par.put("reviewType", "00");
+		List<PmReviewInfoEntity> pmReviewInfo = pmReviewInfoService.queryList(par);
+        return R.ok().put("page", pmReviewInfo);
+    }
+
+    
 }

@@ -20,8 +20,12 @@ public class PmReviewInfoServiceImpl implements PmReviewInfoService {
    	public PmReviewInfoEntity queryObject(long id){
    		return pmReviewInfoMapper.queryObject(id);
    	}
+   	/**
+   	 * 插入数据前先通过评审类型、外键id或code将其它的评审置为无效
+   	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmReviewInfoEntity entity){
+		pmReviewInfoMapper.updateIsDelete(entity);
    		pmReviewInfoMapper.insert(entity);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -43,4 +47,9 @@ public class PmReviewInfoServiceImpl implements PmReviewInfoService {
    		}
    		return pmReviewInfoMapper.queryList(entity);
    	}
+	@Override
+	public List<Map<String, Object>> selectBidReview(PmReviewInfoEntity entity) {
+		// TODO Auto-generated method stub
+		return pmReviewInfoMapper.selectBidReview(entity);
+	}
 }

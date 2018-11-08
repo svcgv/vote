@@ -18,4 +18,6 @@ public interface PmReviewInfoMapper{
 	public void delete(long reviewId);
 	public List<PmReviewInfoEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
+	public void updateIsDelete(PmReviewInfoEntity entity);
+	public List<Map<String,Object>> selectBidReview(PmReviewInfoEntity entity);
 }

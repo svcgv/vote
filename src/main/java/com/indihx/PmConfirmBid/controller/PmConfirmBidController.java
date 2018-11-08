@@ -19,6 +19,7 @@ import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
 import com.indihx.PmFile.entity.PmFileEntity;
 import com.indihx.PmFile.service.PmFileService;
+import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
@@ -37,6 +38,10 @@ public class PmConfirmBidController {
     private PmConfirmBidService pmConfirmBidService;
     @Autowired
     private PmFileService pmFileService;
+    
+    @Autowired
+    private PmReviewInfoService pmReviewInfoService;
+    
     /**
      * 列表
      */
@@ -106,4 +111,15 @@ public class PmConfirmBidController {
         return R.ok();
     }
 
+    /**
+     * 提交评审
+     */
+    @RequestMapping(value="/startReview",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> startReview(@RequestBody PmConfirmBidEntity pmConfirmBid,HttpSession session){
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	pmConfirmBid.setModifier(usesr.getUsrId());
+    	pmConfirmBid.setModifyTime(DateUtil.getDateTime());
+        pmConfirmBidService.update(pmConfirmBid);//全部更新
+        return R.ok();
+    }
 }
