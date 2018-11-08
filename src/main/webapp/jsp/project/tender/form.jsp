@@ -74,8 +74,8 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="payDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="payDeptId">
+		          <input type="text" name="constructionDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="hidden" name="constructionDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -86,8 +86,8 @@
 		    <div  class="layui-inline">
 		    <label class="layui-form-label">交付部门负责人：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="constructionDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="constructionDeptId">
+		          <input type="text" name="constructionDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="hidden" name="constructionDeptManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgMangerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -227,7 +227,7 @@ $(function(){
   var demoListView = $('#wosFileList')
   ,uploadListIns = upload.render({
     elem: '#wosUploads'
-    ,url: '/upload/'
+    ,url: '/vote/pmfile/upload/'
     ,accept: 'file'
     ,multiple: true
     ,auto: false
@@ -289,7 +289,7 @@ $(function(){
 	  
 });
   
-  //查询
+  //查询技术总监
   $("#tender-addForm-hook #techQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'user?act=addtech',
@@ -299,6 +299,7 @@ $(function(){
 	  
 });
   
+  	//查询交付部门
   $("#tender-addForm-hook #payOrgQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'org?act=addPay',
@@ -308,6 +309,7 @@ $(function(){
 	  
   });
 	
+  	//查询交付部门负责人
   $("#tender-addForm-hook #payOrgMangerQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'user?act=addDept',
@@ -317,6 +319,7 @@ $(function(){
 	  
 });
   
+  	//查询销售部门负责人
   $("#tender-addForm-hook #userManagerQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'user?act=addSaleDept',

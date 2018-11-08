@@ -111,6 +111,17 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		    theme: 'molv',
 		    type: 'datetime'
 	 });
+  
+	  function getParam(){
+			var queryParams=$("#tender-index-form").serializeObject();
+			 var newParam = {}
+			  for(var i in queryParams){
+				  if(queryParams[i]){
+					  newParam[i] = queryParams[i]
+				  }
+			  }
+			  return newParam
+		}
   // 选择机构
   $(".tender-info-wrapper #orgQuery-hook").click(function(){
 	  $.openWindow({
@@ -145,7 +156,15 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   table.render({
 	  	id:"customer-table",
 	    elem: '#productTable',
-	    //url:'custom.json',
+	    url:'/vote/pmconfirmbid/list',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify(getParam())
+		},
+		contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    toolbar: '#toolbarDemo',
 	    height:'full-200',
 	    title: '投标数据表',
@@ -154,19 +173,18 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
 	  	      {field:'bidName', title:'投标名称', width:130},
 	  	      {field:'status', title:'评审状态', width:130},
-	  	      {field:'bidFirstPrice', title:'投标首次报价金额', width:150},
-	  	      {field:'custName', title:'客户名称', width:130},
+	  	      {field:'firstBidAmount', title:'投标首次报价金额', width:150},
+	  	      {field:'custCnName', title:'客户名称', width:130},
 	  	      {field:'predictAmount', title:'预估收入金额', width:150},
 	  	      {field:'predictCost', title:'预估成本', width:120},
 	  	      {field:'predictProfitRate', title:'预估利润率'},
 	  	      {field:'predictPeriod', title:'预付期限'},
-	  	      {field:'payDeptName', title:'交付部门'},
+	  	      {field:'constructionDeptName', title:'交付部门'},
 	  	      {field:'sellDeptName', title:'销售部门'},
 	  	      {field:'custManagerName', title:'客户经理'},
-	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
+	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
 	    ]],
 	    cellMinWidth:'90',
-	    data:[],
 	    page: true
 	  });
 
@@ -177,6 +195,15 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    var data = obj.data;
 	    if(obj.event === 'del'){
 	      layer.confirm('确认删除行么', function(index){
+	    	  $.ajax({
+				  type:"POST",
+				  url:"/vote/pmconfirmbid/update",
+				  data:JSON.stringify({'bidId':data.bidId,'isDelete':'01'}),
+				  contentType:'application/json',
+				  success:function(data){
+					  table.reload('customer-table');
+				  }
+			  }); 
 	        obj.del();
 	        layer.close(index);
 	        table.reload('customer-table',{
@@ -201,18 +228,26 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 查询按钮
 	*/
 	 $("#customQuery").click(function(){
-		 var queryParams=$("#tender-index-form").serializeObject();
-		 var newparam = {}
- 		 for(var o in queryParams){
- 			 if(queryParams[o]){
- 				 newparam[o] = queryParams[o]
- 			 }
- 		 }
-		 
-		 $.ajax({
+		 console.log("test");
+		 table.reload('customer-table',{
+				url:'/vote/pmconfirmbid/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+			    method:'post',
+				where:{
+					queryStr:JSON.stringify(getParam())
+				},
+				contentType: 'application/json',
+			    response: {
+			    	dataName: 'page'
+			    }
+
+			})
+		 /*$.ajax({
 			  type: 'POST',
 			  url: '/vote/pmconfirmbid/list',
-			  data: JSON.stringify(newparam),
+			  data: JSON.stringify(getParam()),
 			  contentType:'application/json',
 			  success: function(res){
 
@@ -247,7 +282,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  
 			  },
 			  dataType: "json"
-			})
+			})*/
 			
 			
 			

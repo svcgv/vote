@@ -89,14 +89,20 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			var isChecked=chk.find(".layui-form-radio").hasClass("layui-form-radioed");
 			if(isChecked){
 				var sapCode=$(this).children("td").eq(1).text();
-				var custId=$(this).children("td").eq(2).attr("data-id");
+				var custId=$(this).children("td").eq(2).children("div").children("div").attr("data-id")
 				var custCnName=$(this).children("td").eq(2).text();
+		 		console.log(custCnName);
+		 		console.log(sapCode);
+		 		console.log(custId);
 				if(act == "index"){
 					//$("#tender-index-form input[name='custManagerName']").val(custName);
 					//$("#tender-index-form input[name='developmentManagerId']").val(custId);
 			 	}else if(act =="addCust"){ //编辑 修改 页面
+			 		console.log(custCnName);
+			 		console.log(sapCode);
+			 		console.log(custId);
 			 		$("#tender-addForm-hook input[name='custCnName']").val(custCnName);
-			 		$("#tender-addForm-hook input[name='custSapCode'']").val(sapCode);
+			 		$("#tender-addForm-hook input[name='custSapCode']").val(sapCode);
 					$("#tender-addForm-hook input[name='custId']").val(custId);
 			 	}else if(act =="reviewPay"){ // 投标 评审
 			 		//$("#review-query-form input[name='payDeptName']").val(custName);
@@ -122,22 +128,31 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	*/
 	$("#customer-query-form #userQuery").click(function(){
 		
-		var queryParams=$("#customer-query-form").serialize();
-		console.log(queryParams)
+		var queryParams=$("#customer-query-form").serializeObject();
+		var newparam = {}
+		 for(var o in queryParams){
+			 if(queryParams[o]){
+				 newparam[o] = queryParams[o]
+			 }
+		 }
 		table.reload('customerGroup-table',{
-			url:'form',
+			url:'/vote/pmcustomerinfo/list',
 			page:{
 				curr:1 //从第一页开始
 			},
-			method:'post',
+		    method:'post',
 			where:{
-				queryStr:queryParams
+				queryStr:JSON.stringify(newparam)
 			},
+			contentType: 'application/json',
+		    response: {
+		    	dataName: 'page'
+		    },
 			done:function(res){
 				console.log(res)
 			}
 			
-		})
+		}) 
 	});
 	
 });

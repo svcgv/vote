@@ -29,7 +29,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.indihx.AbstractBaseController;
+import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
+import com.indihx.PmConfirmBid.service.PmConfirmBidService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
@@ -45,6 +48,9 @@ import com.indihx.system.service.impl.ParamsInfoServiceimpl;
 public class TenderController extends AbstractBaseController{
 	@Autowired
 	private ParamsInfoServiceimpl infoservice;
+	@Autowired
+    private PmConfirmBidService pmConfirmBidService;
+	
 	
 	@RequestMapping("/tender/index")
 	public ModelAndView addCustomView() {
@@ -71,9 +77,11 @@ public class TenderController extends AbstractBaseController{
 		return view;
 	}
 	@RequestMapping(value="/tender/edit",method=RequestMethod.GET)
-	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
+	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
 		ModelAndView view = new ModelAndView();
 		
+		PmConfirmBidEntity entity = pmConfirmBidService.queryObject(id);
+		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
 		
@@ -84,9 +92,11 @@ public class TenderController extends AbstractBaseController{
 		return view;
 	}
 	@RequestMapping(value="/tender/view",method=RequestMethod.GET)
-	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
+	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
 		ModelAndView view = new ModelAndView();
 		
+		PmConfirmBidEntity entity = pmConfirmBidService.queryObject(id);
+		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
 		

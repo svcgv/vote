@@ -73,6 +73,9 @@ $(document).ready(function(){
 		  success: function(res){
 		      console.log(res)
 		      zNodes=[res.Tree]
+		      if(zNodes.length >0 ){
+		    	  zNodes[0].open=true;
+		      }
 		      $.fn.zTree.init($("#treeOrg"), setting, zNodes);
 	      },
 		  dataType: "json"
@@ -99,8 +102,8 @@ $(".org-wrapper #org-add-hook").click(function(){
 		 		$("#tender-addForm-hook input[name='sellDeptName']").val(getCheckedOrg.name);
 				$("#tender-addForm-hook input[name='sellDeptId']").val(getCheckedOrg.orgId);
 		 	}else if(act == "addPay"){
-		 		$("#tender-addForm-hook input[name='payDeptName']").val(getCheckedOrg.name);
-				$("#tender-addForm-hook input[name='payDeptId']").val(getCheckedOrg.orgId);
+		 		$("#tender-addForm-hook input[name='constructionDeptName']").val(getCheckedOrg.name);
+				$("#tender-addForm-hook input[name='constructionDeptId']").val(getCheckedOrg.orgId);
 		 	}
 		 	win.close();
 		return false;

@@ -93,7 +93,7 @@ public class PmFileController {
     }
     
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> pmFileUpload(@RequestParam("file") MultipartFile[] myfiles,@RequestParam("fileCode") String fileCode ,@RequestParam("uploadType") String uploadType, HttpSession session) throws IOException{
+	public @ResponseBody Map<String, Object> pmFileUpload(@RequestParam("file") MultipartFile[] myfiles,@RequestParam("uploadType") String uploadType, HttpSession session) throws IOException{
     	UsrInfo usesr = UserUtil.getUser(session);
     	PmFileEntity pmFile=new PmFileEntity();
     	pmFile.setCreatorId(usesr.getUsrId());

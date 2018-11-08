@@ -43,8 +43,14 @@
 				CREATOR_ID = #{creatorId} AND 			</if>
 						<if test="creatorName != null and creatorName!=''"  >
 				CREATOR_NAME = #{creatorName} AND 			</if>
-						<if test="createTime != null and createTime!=''"  >
-				CREATE_TIME = #{createTime} AND 			</if>
+									<!-- 开始时间 -->
+			<if test="createTimeStart != null and createTimeStart!=''">
+				CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
+			</if>
+			<!-- 结束时间 -->
+			<if test="createTimeEnd != null  and createTimeEnd!=''">
+				CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
+			</if>
 						<if test="problemStatus != null and problemStatus!=''"  >
 				PROBLEM_STATUS = #{problemStatus} AND 			</if>
 						<if test="isDelete != null and isDelete!=''"  >
@@ -96,9 +102,7 @@
 				,PROBLEM_STATUS	
 			</if>
 		
-			<if test="isDelete != null and isDelete!=''">
 				,IS_DELETE	
-			</if>
 		
 		)
 		values
@@ -131,9 +135,7 @@
 		<if test="problemStatus != null and problemStatus!=''">
 			,#{problemStatus}
 		</if>
-		<if test="isDelete != null and isDelete!=''">
-			,#{isDelete}
-		</if>
+			,'00'
 		)
 	</insert>
 	 

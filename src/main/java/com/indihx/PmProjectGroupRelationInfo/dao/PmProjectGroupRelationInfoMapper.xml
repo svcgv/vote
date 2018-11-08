@@ -33,8 +33,14 @@
 				WBS = #{wbs} AND 			</if>
 						<if test="projectId != null and projectId!=''"  >
 				PROJECT_ID = #{projectId} AND 			</if>
-						<if test="createTime != null and createTime!=''"  >
-				CREATE_TIME = #{createTime} AND 			</if>
+							<!-- 开始时间 -->
+			<if test="createTimeStart != null and createTimeStart!=''">
+				CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
+			</if>
+			<!-- 结束时间 -->
+			<if test="createTimeEnd != null  and createTimeEnd!=''">
+				CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
+			</if>
 						<if test="creator != null and creator!=''"  >
 				CREATOR = #{creator} AND 			</if>
 						<if test="modifyTime != null and modifyTime!=''"  >
@@ -81,10 +87,7 @@
 			<if test="modifier != null and modifier!=''">
 				,MODIFIER	
 			</if>
-		
-			<if test="isDelete != null and isDelete!=''">
 				,IS_DELETE	
-			</if>
 		
 		)
 		values
@@ -111,9 +114,7 @@
 		<if test="modifier != null and modifier!=''">
 			,#{modifier}
 		</if>
-		<if test="isDelete != null and isDelete!=''">
-			,#{isDelete}
-		</if>
+			,'00'
 		)
 	</insert>
 	 
