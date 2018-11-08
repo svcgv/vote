@@ -11,7 +11,8 @@
         <result property="predictAmount" column="PREDICT_AMOUNT"/>
         <result property="predictCost" column="PREDICT_COST"/>
         <result property="predictProfitRate" column="PREDICT_PROFIT_RATE"/>
-        <result property="predictPeriod" column="PREDICT_PERIOD"/>
+        <result property="predictPeriodStart" column="PREDICT_PERIOD_START"/>
+        <result property="predictPeriodEnd" column="PREDICT_PERIOD_END"/>
         <result property="custId" column="CUST_ID"/>
         <result property="custCnName" column="CUST_CN_NAME"/>
         <result property="custSapCode" column="CUST_SAP_CODE"/>
@@ -60,8 +61,10 @@
 				PREDICT_COST = #{predictCost} AND 			</if>
 						<if test="predictProfitRate != null and predictProfitRate!=''"  >
 				PREDICT_PROFIT_RATE = #{predictProfitRate} AND 			</if>
-						<if test="predictPeriod != null and predictPeriod!=''"  >
-				PREDICT_PERIOD = #{predictPeriod} AND 			</if>
+						<if test="predictPeriodStart != null and predictPeriodStart!=''"  >
+				PREDICT_PERIOD_START = #{predictPeriodStart} AND 			</if>
+						<if test="predictPeriodEnd != null and predictPeriodEnd!=''"  >
+				PREDICT_PERIOD_END = #{predictPeriodEnd} AND 			</if>
 						<if test="custId != null and custId!=''"  >
 				CUST_ID = #{custId} AND 			</if>
 						<if test="custCnName != null and custCnName!=''"  >
@@ -143,8 +146,12 @@
 				,PREDICT_PROFIT_RATE	
 			</if>
 		
-			<if test="predictPeriod != null and predictPeriod!=''">
-				,PREDICT_PERIOD	
+			<if test="predictPeriodStart != null and predictPeriodStart!=''">
+				,PREDICT_PERIOD_START	
+			</if>
+		
+			<if test="predictPeriodEnd != null and predictPeriodEnd!=''">
+				,PREDICT_PERIOD_END	
 			</if>
 		
 			<if test="custId != null and custId!=''">
@@ -242,6 +249,7 @@
 			<if test="modifyTime != null and modifyTime!=''">
 				,MODIFY_TIME	
 			</if>
+		
 			,IS_DELETE
 		
 		)
@@ -263,8 +271,11 @@
 		<if test="predictProfitRate != null and predictProfitRate!=''">
 			,#{predictProfitRate}
 		</if>
-		<if test="predictPeriod != null and predictPeriod!=''">
-			,#{predictPeriod}
+		<if test="predictPeriodStart != null and predictPeriodStart!=''">
+			,#{predictPeriodStart}
+		</if>
+		<if test="predictPeriodEnd != null and predictPeriodEnd!=''">
+			,#{predictPeriodEnd}
 		</if>
 		<if test="custId != null and custId!=''">
 			,#{custId}
@@ -355,7 +366,9 @@
 
 			<if test="predictProfitRate != null and predictProfitRate!=''">PREDICT_PROFIT_RATE = #{predictProfitRate}, </if>
 
-			<if test="predictPeriod != null and predictPeriod!=''">PREDICT_PERIOD = #{predictPeriod}, </if>
+			<if test="predictPeriodStart != null and predictPeriodStart!=''">PREDICT_PERIOD_START = #{predictPeriodStart}, </if>
+
+			<if test="predictPeriodEnd != null and predictPeriodEnd!=''">PREDICT_PERIOD_END = #{predictPeriodEnd}, </if>
 
 			<if test="custId != null and custId!=''">CUST_ID = #{custId}, </if>
 

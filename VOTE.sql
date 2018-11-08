@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2018-11-07 20:26:55
+Date: 2018-11-08 21:47:17
 */
 
 
@@ -1375,7 +1375,7 @@ CREATE TABLE "VOTE"."PM_CONFIRM_BID" (
 "PREDICT_AMOUNT" NUMBER(10,2) NULL ,
 "PREDICT_COST" NUMBER(10,2) NULL ,
 "PREDICT_PROFIT_RATE" NUMBER(10,4) NULL ,
-"PREDICT_PERIOD" VARCHAR2(32 BYTE) NULL ,
+"PREDICT_PERIOD_END" VARCHAR2(32 BYTE) NULL ,
 "CUST_ID" NUMBER(10) NULL ,
 "CUST_CN_NAME" VARCHAR2(256 BYTE) NULL ,
 "CUST_SAP_CODE" VARCHAR2(128 BYTE) NULL ,
@@ -1400,7 +1400,8 @@ CREATE TABLE "VOTE"."PM_CONFIRM_BID" (
 "CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
 "MODIFIER" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+"PREDICT_PERIOD_START" VARCHAR2(32 BYTE) NULL 
 )
 LOGGING
 NOCOMPRESS
@@ -1952,6 +1953,30 @@ NOCACHE
 
 -- ----------------------------
 -- Records of PM_REVIEW_COMMENT_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for PM_REVIEW_INFO
+-- ----------------------------
+DROP TABLE "VOTE"."PM_REVIEW_INFO";
+CREATE TABLE "VOTE"."PM_REVIEW_INFO" (
+"REVIEW_ID" NUMBER(10) NOT NULL ,
+"FOREIGN_ID" NUMBER(10) NULL ,
+"FOREIGN_CODE" VARCHAR2(32 BYTE) NULL ,
+"REVIEW_TYPE" CHAR(2 BYTE) NULL ,
+"REVIEW_USER_NAME" VARCHAR2(64 BYTE) NULL ,
+"REVIEW_USER_CODE" NUMBER(10) NULL ,
+"RESULT" CHAR(2 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of PM_REVIEW_INFO
 -- ----------------------------
 
 -- ----------------------------
@@ -3602,6 +3627,17 @@ CREATE SEQUENCE "VOTE"."PMPROJECTPROBLEM_SEQ"
  CACHE 20;
 
 -- ----------------------------
+-- Sequence structure for PMREVIEWINFO_SEQ
+-- ----------------------------
+DROP SEQUENCE "VOTE"."PMREVIEWINFO_SEQ";
+CREATE SEQUENCE "VOTE"."PMREVIEWINFO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ CACHE 20;
+
+-- ----------------------------
 -- Sequence structure for PMSALEGROUPINFO_SEQ
 -- ----------------------------
 DROP SEQUENCE "VOTE"."PMSALEGROUPINFO_SEQ";
@@ -4609,6 +4645,15 @@ ALTER TABLE "VOTE"."PM_PROJECT_PROBLEM" ADD PRIMARY KEY ("PROBLEM_ID");
 -- Primary Key structure for table PM_REVIEW_COMMENT_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_REVIEW_COMMENT_INFO" ADD PRIMARY KEY ("COMMENT_ID");
+
+-- ----------------------------
+-- Indexes structure for table PM_REVIEW_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table PM_REVIEW_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_REVIEW_INFO" ADD PRIMARY KEY ("REVIEW_ID");
 
 -- ----------------------------
 -- Checks structure for table PM_SALE_GROUP_INFO

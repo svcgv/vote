@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmReviewInfo.dao.PmReviewInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmReviewInfo.entity.PmReviewInfoEntity" id="pmReviewInfoMap">
+        <result property="reviewId" column="REVIEW_ID"/>
+        <result property="foreignId" column="FOREIGN_ID"/>
+        <result property="foreignCode" column="FOREIGN_CODE"/>
+        <result property="reviewType" column="REVIEW_TYPE"/>
+        <result property="reviewUserName" column="REVIEW_USER_NAME"/>
+        <result property="reviewUserCode" column="REVIEW_USER_CODE"/>
+        <result property="result" column="RESULT"/>
+        <result property="isDelete" column="IS_DELETE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmReviewInfoMap">
+		select * from pm_review_info where REVIEW_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmReviewInfoMap">
+		select 
+		*
+		 from pm_review_info
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="reviewId != null and reviewId!=''"  >
+				REVIEW_ID = #{reviewId} AND 			</if>
+						<if test="foreignId != null and foreignId!=''"  >
+				FOREIGN_ID = #{foreignId} AND 			</if>
+						<if test="foreignCode != null and foreignCode!=''"  >
+				FOREIGN_CODE = #{foreignCode} AND 			</if>
+						<if test="reviewType != null and reviewType!=''"  >
+				REVIEW_TYPE = #{reviewType} AND 			</if>
+						<if test="reviewUserName != null and reviewUserName!=''"  >
+				REVIEW_USER_NAME = #{reviewUserName} AND 			</if>
+						<if test="reviewUserCode != null and reviewUserCode!=''"  >
+				REVIEW_USER_CODE = #{reviewUserCode} AND 			</if>
+						<if test="result != null and result!=''"  >
+				RESULT = #{result} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_review_info 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmReviewInfo.entity.PmReviewInfoEntity">
+		insert into pm_review_info
+		(
+		REVIEW_ID
+			<if test="foreignId != null and foreignId!=''">
+				,FOREIGN_ID	
+			</if>
+		
+			<if test="foreignCode != null and foreignCode!=''">
+				,FOREIGN_CODE	
+			</if>
+		
+			<if test="reviewType != null and reviewType!=''">
+				,REVIEW_TYPE	
+			</if>
+		
+			<if test="reviewUserName != null and reviewUserName!=''">
+				,REVIEW_USER_NAME	
+			</if>
+		
+			<if test="reviewUserCode != null and reviewUserCode!=''">
+				,REVIEW_USER_CODE	
+			</if>
+		
+			<if test="result != null and result!=''">
+				,RESULT	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+		)
+		values
+		(
+		PmReviewInfo_SEQ.nextval
+		<if test="foreignId != null and foreignId!=''">
+			,#{foreignId}
+		</if>
+		<if test="foreignCode != null and foreignCode!=''">
+			,#{foreignCode}
+		</if>
+		<if test="reviewType != null and reviewType!=''">
+			,#{reviewType}
+		</if>
+		<if test="reviewUserName != null and reviewUserName!=''">
+			,#{reviewUserName}
+		</if>
+		<if test="reviewUserCode != null and reviewUserCode!=''">
+			,#{reviewUserCode}
+		</if>
+		<if test="result != null and result!=''">
+			,#{result}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmReviewInfo.entity.PmReviewInfoEntity">
+		update pm_review_info 
+		<set>
+			<if test="foreignId != null and foreignId!=''">FOREIGN_ID = #{foreignId}, </if>
+
+			<if test="foreignCode != null and foreignCode!=''">FOREIGN_CODE = #{foreignCode}, </if>
+
+			<if test="reviewType != null and reviewType!=''">REVIEW_TYPE = #{reviewType}, </if>
+
+			<if test="reviewUserName != null and reviewUserName!=''">REVIEW_USER_NAME = #{reviewUserName}, </if>
+
+			<if test="reviewUserCode != null and reviewUserCode!=''">REVIEW_USER_CODE = #{reviewUserCode}, </if>
+
+			<if test="result != null and result!=''">RESULT = #{result}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+
+		</set>
+		where REVIEW_ID = #{reviewId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_review_info where REVIEW_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

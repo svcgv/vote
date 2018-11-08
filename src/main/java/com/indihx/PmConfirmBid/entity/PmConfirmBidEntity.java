@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-11-07 10:07:13
+ * @date 2018-11-08 21:43:00
  */
 public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -50,7 +50,12 @@ private long predictProfitRate;
 	 * 
 	 */
 
-private String predictPeriod;
+private String predictPeriodStart;
+	/**
+	 * 
+	 */
+
+private String predictPeriodEnd;
 	/**
 	 * 
 	 */
@@ -252,14 +257,26 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setPredictPeriod(String predictPeriod) {
-		this.predictPeriod = predictPeriod;
+	public void setPredictPeriodStart(String predictPeriodStart) {
+		this.predictPeriodStart = predictPeriodStart;
 	}
 	/**
 	 * 获取：
 	 */
-	public String getPredictPeriod() {
-		return predictPeriod;
+	public String getPredictPeriodStart() {
+		return predictPeriodStart;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setPredictPeriodEnd(String predictPeriodEnd) {
+		this.predictPeriodEnd = predictPeriodEnd;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getPredictPeriodEnd() {
+		return predictPeriodEnd;
 	}
 	/**
 	 * 设置：
