@@ -21,8 +21,8 @@ public class PmFileServiceImpl implements PmFileService {
    		return pmFileMapper.queryObject(id);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void insert(PmFileEntity entity){
-   		pmFileMapper.insert(entity);
+	public long insert(PmFileEntity entity){
+   		return pmFileMapper.insert(entity);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmFileEntity entity){

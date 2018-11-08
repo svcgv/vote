@@ -208,6 +208,9 @@ $(function(){
 					  newParam[i] = queryParams[i]
 				  }
 			  }
+			 if(fileIds){
+				 newParam.fileIds=fileIds.join(',')
+			 }
 			  return newParam
 		}
 		 
@@ -226,8 +229,11 @@ $(function(){
 //多文件上传
   var demoListView = $('#wosFileList')
   ,uploadListIns = upload.render({
+	  before:function(obj){
+	    	this.data={uploadType:'00'}
+	    },
     elem: '#wosUploads'
-    ,url: '/vote/pmfile/upload/'
+    ,url: '/vote/pmfile/upload'
     ,accept: 'file'
     ,multiple: true
     ,auto: false
@@ -263,6 +269,7 @@ $(function(){
     }
     ,done: function(res, index, upload){
       if(res.code == 0){ //上传成功
+    	  fileIds = res.fileIds
         var tr = demoListView.find('tr#upload-'+ index)
         ,tds = tr.children();
         tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
@@ -277,7 +284,7 @@ $(function(){
       tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
       tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
     }
-  });
+  })
 	
   //客户查询
   $("#tender-addForm-hook #custNameQuery-hook").click(function(){
@@ -383,5 +390,5 @@ $(function(){
 	
 	})
 });
-
+var fileIds = []
 </script>

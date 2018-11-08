@@ -158,14 +158,7 @@
 				      </tr></thead>
 				      <tbody id="wosFileList">
 				      <!-- 反写已上传的数据 -->
-				      	<tr class="edit-wosUploaded">
-					      	<td>Business Analysis Report.xlsx</td>
-					      	<td>15379.5kb</td>
-					      	<td>已上传</td>
-					      	<td>
-				      			<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete" style="margin-left:10px;">删除</button>
-				      		</td>
-				      	</tr>
+				      	
 				      </tbody>
 				    </table>
 				  </div>
@@ -237,11 +230,13 @@ $(function(){
   })
   
   
-//多文件上传
-  var demoListView = $('#wosFileList')
+ var demoListView = $('#wosFileList')
   ,uploadListIns = upload.render({
+	  before:function(obj){
+	    	this.data={uploadType:'00'}
+	    },
     elem: '#wosUploads'
-    ,url: '/upload/'
+    ,url: '/vote/pmfile/upload'
     ,accept: 'file'
     ,multiple: true
     ,auto: false
@@ -277,6 +272,7 @@ $(function(){
     }
     ,done: function(res, index, upload){
       if(res.code == 0){ //上传成功
+    	  fileIds = res.fileIds
         var tr = demoListView.find('tr#upload-'+ index)
         ,tds = tr.children();
         tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
@@ -291,7 +287,9 @@ $(function(){
       tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
       tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
     }
-  });
+  })
+  
+  
   
   //查询技术总监
   $("#tender-addForm-hook #techQuery-hook").click(function(){
@@ -381,11 +379,25 @@ $(function(){
 			}
 			
 			var formDatas=$("#tender-addForm-hook form").serializeObject();
+			
+			function getParam(){
+				var queryParams=$("#tender-addForm-hook form").serializeObject();
+				 var newParam = {}
+				  for(var i in queryParams){
+					  if(queryParams[i]){
+						  newParam[i] = queryParams[i]
+					  }
+				  }
+				 if(fileIds){
+					 newParam.fileIds=fileIds.join(',')
+				 }
+				  return newParam
+			}
 			$.ajax({
 				type:'POST',
 				url:'/vote/pmconfirmbid/update',
 				contentType:'application/json',
-				data:JSON.stringify(formDatas),
+				data:JSON.stringify(getParam()),
 				success:function(res){
 					location.reload();
 					layer.msg("修改成功",{icon:1});
@@ -407,5 +419,5 @@ $(function(){
 	
 	})
 });
-
+var fileIds=[]
 </script>

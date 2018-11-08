@@ -12,7 +12,7 @@ import com.indihx.PmFile.entity.PmFileEntity;
  */
 public interface PmFileService {
 	public PmFileEntity queryObject(long id);
-	public void insert(PmFileEntity entity);
+	public long insert(PmFileEntity entity);
 	public void update(PmFileEntity entity);
 	public void delete(long fileId);
 	public List<PmFileEntity> queryList(Map<String, Object> entity);

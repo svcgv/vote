@@ -122,7 +122,10 @@
 		select count(*) from pm_confirm_bid 
 	</select>
 	 
-	<insert id="insert" parameterType="com.indihx.PmConfirmBid.entity.PmConfirmBidEntity">
+	<insert id="insert" parameterType="com.indihx.PmConfirmBid.entity.PmConfirmBidEntity" useGeneratedKeys="true" keyProperty="bidId">
+	 	<selectKey keyProperty="bidId" order="BEFORE" resultType="java.lang.Long">
+            select PmConfirmBid_SEQ.nextval as bidId from DUAL
+        </selectKey>
 		insert into pm_confirm_bid
 		(
 		BID_ID
@@ -255,7 +258,7 @@
 		)
 		values
 		(
-		PmConfirmBid_SEQ.nextval
+		#{bidId}
 		<if test="bidName != null and bidName!=''">
 			,#{bidName}
 		</if>

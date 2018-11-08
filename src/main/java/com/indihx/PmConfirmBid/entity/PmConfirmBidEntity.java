@@ -5,6 +5,7 @@ package com.indihx.PmConfirmBid.entity;
 import com.indihx.BaseEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -12,6 +13,10 @@ import java.util.Date;
  * @author hb
  * @email hb1230123@hotmail.com
  * @date 2018-11-08 21:43:00
+ */
+/**
+ * @author Ice Cream
+ *
  */
 public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -182,6 +187,17 @@ private String modifyTime;
 
 private String isDelete;
 
+private String fileIds;
+
+
+
+	
+	public String getFileIds() {
+	return fileIds;
+}
+public void setFileIds(String fileIds) {
+	this.fileIds = fileIds;
+}
 	/**
 	 * 设置：
 	 */

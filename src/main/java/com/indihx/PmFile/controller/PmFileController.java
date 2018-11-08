@@ -3,6 +3,7 @@ package com.indihx.PmFile.controller;
 
 import java.util.Map;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -95,16 +96,22 @@ public class PmFileController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> pmFileUpload(@RequestParam("file") MultipartFile[] myfiles,@RequestParam("uploadType") String uploadType, HttpSession session) throws IOException{
     	UsrInfo usesr = UserUtil.getUser(session);
+    	List<Long> idList = new ArrayList<Long>();
     	PmFileEntity pmFile=new PmFileEntity();
     	pmFile.setCreatorId(usesr.getUsrId());
     	pmFile.setCreateTime(DateUtil.getDateTime());
+    	pmFile.setUploadType(uploadType);
     	for(int i=0;i<myfiles.length;i++) {
+    		pmFile.setFileSize(myfiles[i].getSize());
+    		
     		pmFile.setFilePath(FileUtils.writeFile(myfiles[i]));;
     		pmFile.setFileUploadName(myfiles[i].getOriginalFilename());
     		pmFileService.insert(pmFile);
+    		long id = pmFile.getFileId();
+    		idList.add(id);
     	}
     	
-    	return R.ok();
+    	return R.ok().put("fileIds", idList);
 	}
 
 }

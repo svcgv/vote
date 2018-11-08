@@ -1,95 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.indihx.system.dao.RoleInfoMapper">
-<!-- 支持缓存配置(必须配置否则缓存无效) -->
-<cache type="com.indihx.cache.RedisCache" />
-<resultMap type="com.indihx.system.entity.RoleInfo" id="BaseResultMap">
-<id column="ROLE_ID" jdbcType="DECIMAL" property="roleId"/>
-<result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName"/>
-<result column="ROLE_RMK" jdbcType="VARCHAR" property="roleRmk"/>
-<result column="TM_SMP" jdbcType="VARCHAR" property="tmSmp"/>
-</resultMap>
-  <sql id="Base_Column_List">
-    ROLE_ID, ROLE_NAME, ROLE_RMK, TM_SMP
-  </sql>
-  <select id="qryRoleInfoInfoAll" resultMap="BaseResultMap">
-  		select * from role where 1=1
-  		<if test="roleName != null and roleName !=''">
-  			and ROLE_NAME like CONCAT(CONCAT('%',#{roleName}),'%') 
-  		</if>
-  		<if test="tmSmp != null and tmSmp !=''">
-  			and TM_SMP=#{tmSmp,jdbcType=VARCHAR}
-  		</if>
-  		order by ROLE_ID DESC
-  </select>
-  <select id="qryRoleUserEditInfoList" resultMap="BaseResultMap">
-  		select * from role where 1=1
-  		and role_id not in ('999','220')
-  		<if test="roleId != null and roleId !=''">
-  			and role_id=#{roleId,jdbcType=DECIMAL}
-  		</if>
-  		<if test="roleName != null and roleName !=''">
-  			and ROLE_NAME like CONCAT(CONCAT('%',#{roleName}),'%') 
-  		</if>
-  		order by ROLE_ID DESC
-  </select>
-    <insert id="insertSelective" parameterType="com.indihx.system.entity.RoleInfo">
-      insert into role
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="roleId != null">
-        ROLE_ID,
-      </if>
-      <if test="roleName != null">
-        ROLE_NAME,
-      </if>
-      <if test="roleRmk != null">
-        ROLE_RMK,
-      </if>
-      <if test="tmSmp != null">
-        TM_SMP,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="roleId != null">
-        #{roleId,jdbcType=DECIMAL},
-      </if>
-      <if test="roleName != null">
-        #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="roleRmk != null">
-        #{roleRmk,jdbcType=VARCHAR},
-      </if>
-      <if test="tmSmp != null">
-        #{tmSmp,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from role
-    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
-   </select>
-    <update id="updateByPrimaryKeySelective" parameterType="com.indihx.system.entity.OrgInfo">
-      update role
-   <set>
-    <if test="roleId != null">
-        ROLE_ID = #{roleId,jdbcType=DECIMAL},
-     </if>
-     <if test="roleName!=null">
-      ROLE_NAME=#{roleName,jdbcType=VARCHAR},
-     </if>
-     <if test="roleRmk!=null">
-      ROLE_RMK=#{roleRmk,jdbcType=VARCHAR},
-     </if>
-     <if test="tmSmp!=null">
-      TM_SMP=#{tmSmp,jdbcType=VARCHAR},
-     </if>
-   </set>
-      where ROLE_ID = #{roleId,jdbcType=DECIMAL}
-   </update>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from role
-    where ROLE_ID = #{roleId,jdbcType=DECIMAL}
-  </delete>
+	<!-- 支持缓存配置(必须配置否则缓存无效) -->
+	<cache type="com.indihx.cache.RedisCache" />
+	<resultMap type="com.indihx.system.entity.RoleInfo"
+		id="BaseResultMap">
+		<id column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
+		<result column="ROLE_NAME" jdbcType="VARCHAR"
+			property="roleName" />
+		<result column="ROLE_RMK" jdbcType="VARCHAR" property="roleRmk" />
+		<result column="TM_SMP" jdbcType="VARCHAR" property="tmSmp" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ROLE_ID, ROLE_NAME, ROLE_RMK, TM_SMP, ROLE_CODE
+	</sql>
+	<select id="qryRoleInfoInfoAll" resultMap="BaseResultMap">
+		select * from role where 1=1
+		<if test="roleName != null and roleName !=''">
+			and ROLE_NAME like CONCAT(CONCAT('%',#{roleName}),'%')
+		</if>
+		<if test="tmSmp != null and tmSmp !=''">
+			and TM_SMP=#{tmSmp,jdbcType=VARCHAR}
+		</if>
+		<if test="roleCode != null and roleCode !=''">
+			and ROLE_CODE=#{roleCode,jdbcType=VARCHAR}
+		</if>
+		order by ROLE_ID DESC
+	</select>
+	<select id="qryRoleUserEditInfoList" resultMap="BaseResultMap">
+		select * from role where 1=1
+		and role_id not in ('999','220')
+		<if test="roleId != null and roleId !=''">
+			and role_id=#{roleId,jdbcType=DECIMAL}
+		</if>
+		<if test="roleName != null and roleName !=''">
+			and ROLE_NAME like CONCAT(CONCAT('%',#{roleName}),'%')
+		</if>
+		<if test="roleCode != null and roleCode !=''">
+			and ROLE_CODE like CONCAT(CONCAT('%',#{roleCode}),'%')
+		</if>
+
+		order by ROLE_ID DESC
+	</select>
+	<insert id="insertSelective"
+		parameterType="com.indihx.system.entity.RoleInfo">
+		insert into role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">
+				ROLE_ID,
+			</if>
+			<if test="roleName != null">
+				ROLE_NAME,
+			</if>
+			<if test="roleRmk != null">
+				ROLE_RMK,
+			</if>
+			<if test="tmSmp != null">
+				TM_SMP,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">
+				#{roleId,jdbcType=DECIMAL},
+			</if>
+			<if test="roleName != null">
+				#{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="roleRmk != null">
+				#{roleRmk,jdbcType=VARCHAR},
+			</if>
+			<if test="tmSmp != null">
+				#{tmSmp,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role
+		where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+	</select>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.indihx.system.entity.OrgInfo">
+		update role
+		<set>
+			<if test="roleId != null">
+				ROLE_ID = #{roleId,jdbcType=DECIMAL},
+			</if>
+			<if test="roleName!=null">
+				ROLE_NAME=#{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="roleRmk!=null">
+				ROLE_RMK=#{roleRmk,jdbcType=VARCHAR},
+			</if>
+			<if test="tmSmp!=null">
+				TM_SMP=#{tmSmp,jdbcType=VARCHAR},
+			</if>
+			<if test="roleCode != null and roleCode !=''">
+				ROLE_CODE=#{roleCode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+	</update>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from role
+		where ROLE_ID = #{roleId,jdbcType=DECIMAL}
+	</delete>
 </mapper>
