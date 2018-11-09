@@ -21,8 +21,8 @@ public class PmConfirmBidServiceImpl implements PmConfirmBidService {
    		return pmConfirmBidMapper.queryObject(id);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void insert(PmConfirmBidEntity entity){
-   		pmConfirmBidMapper.insert(entity);
+	public long insert(PmConfirmBidEntity entity){
+   		return pmConfirmBidMapper.insert(entity);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmConfirmBidEntity entity){

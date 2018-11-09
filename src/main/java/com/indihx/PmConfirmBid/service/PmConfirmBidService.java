@@ -12,7 +12,7 @@ import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
  */
 public interface PmConfirmBidService {
 	public PmConfirmBidEntity queryObject(long id);
-	public void insert(PmConfirmBidEntity entity);
+	public long insert(PmConfirmBidEntity entity);
 	public void update(PmConfirmBidEntity entity);
 	public void delete(long bidId);
 	public List<PmConfirmBidEntity> queryList(Map<String, Object> entity);

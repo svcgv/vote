@@ -5,13 +5,18 @@ package com.indihx.PmConfirmBid.entity;
 import com.indihx.BaseEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-11-07 10:07:13
+ * @date 2018-11-08 21:43:00
+ */
+/**
+ * @author Ice Cream
+ *
  */
 public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -50,7 +55,12 @@ private long predictProfitRate;
 	 * 
 	 */
 
-private String predictPeriod;
+private String predictPeriodStart;
+	/**
+	 * 
+	 */
+
+private String predictPeriodEnd;
 	/**
 	 * 
 	 */
@@ -177,6 +187,17 @@ private String modifyTime;
 
 private String isDelete;
 
+private String fileIds;
+
+
+
+	
+	public String getFileIds() {
+	return fileIds;
+}
+public void setFileIds(String fileIds) {
+	this.fileIds = fileIds;
+}
 	/**
 	 * 设置：
 	 */
@@ -252,14 +273,26 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setPredictPeriod(String predictPeriod) {
-		this.predictPeriod = predictPeriod;
+	public void setPredictPeriodStart(String predictPeriodStart) {
+		this.predictPeriodStart = predictPeriodStart;
 	}
 	/**
 	 * 获取：
 	 */
-	public String getPredictPeriod() {
-		return predictPeriod;
+	public String getPredictPeriodStart() {
+		return predictPeriodStart;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setPredictPeriodEnd(String predictPeriodEnd) {
+		this.predictPeriodEnd = predictPeriodEnd;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getPredictPeriodEnd() {
+		return predictPeriodEnd;
 	}
 	/**
 	 * 设置：

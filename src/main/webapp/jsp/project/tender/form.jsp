@@ -30,14 +30,15 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">投标首次报价金额：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="bidFirstPrice"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="firstBidAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="custName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+		         <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
 		         <input type="hidden" name="custId">
+		         <input type="hidden" name="custSapCode">
 		      </div>
 		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -73,8 +74,8 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="payDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="payDeptId">
+		          <input type="text" name="constructionDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="hidden" name="constructionDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -116,7 +117,6 @@
 		       </div>
 		     </div> 
 		    
-		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
@@ -125,6 +125,17 @@
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		       </div>
+		    </div>
+		    
+		    <div class="layui-inline">
+		      <label class="layui-form-label">技术总监：</label>
+		       <div class="layui-input-inline">
+		          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="hidden" name="technicalDirectorId">
+		      </div>
+		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    
@@ -189,6 +200,20 @@ $(function(){
 		    type: 'datetime'
 	 });
 		
+		function getParam(){
+			var queryParams=$("#tender-addForm-hook form").serializeObject();
+			 var newParam = {}
+			  for(var i in queryParams){
+				  if(queryParams[i]){
+					  newParam[i] = queryParams[i]
+				  }
+			  }
+			 if(fileIds){
+				 newParam.fileIds=fileIds.join(',')
+			 }
+			  return newParam
+		}
+		 
 	// form 表单手动渲染
 	  form.render();
   //监听指定开关
@@ -204,8 +229,11 @@ $(function(){
 //多文件上传
   var demoListView = $('#wosFileList')
   ,uploadListIns = upload.render({
+	  before:function(obj){
+	    	this.data={uploadType:'00'}
+	    },
     elem: '#wosUploads'
-    ,url: '/upload/'
+    ,url: '/vote/pmfile/upload'
     ,accept: 'file'
     ,multiple: true
     ,auto: false
@@ -241,6 +269,7 @@ $(function(){
     }
     ,done: function(res, index, upload){
       if(res.code == 0){ //上传成功
+    	  fileIds = res.fileIds
         var tr = demoListView.find('tr#upload-'+ index)
         ,tds = tr.children();
         tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
@@ -255,7 +284,7 @@ $(function(){
       tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
       tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
     }
-  });
+  })
 	
   //客户查询
   $("#tender-addForm-hook #custNameQuery-hook").click(function(){
@@ -267,7 +296,17 @@ $(function(){
 	  
 });
   
+  //查询技术总监
+  $("#tender-addForm-hook #techQuery-hook").click(function(){
+	  $.openWindow({
+	  		url:'user?act=addtech',
+	  		title:"选择技术总监",
+	  		width:"700"
+	 });
+	  
+});
   
+  	//查询交付部门
   $("#tender-addForm-hook #payOrgQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'org?act=addPay',
@@ -277,6 +316,7 @@ $(function(){
 	  
   });
 	
+  	//查询交付部门负责人
   $("#tender-addForm-hook #payOrgMangerQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'user?act=addDept',
@@ -286,6 +326,7 @@ $(function(){
 	  
 });
   
+  	//查询销售部门负责人
   $("#tender-addForm-hook #userManagerQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'user?act=addSaleDept',
@@ -323,13 +364,12 @@ $(function(){
 				return false;
 			}
 			
-			var formDatas=$("#tender-addForm-hook form").serializeObject();
+			
 			$.ajax({
 				type:'POST',
-				url:'save',
-				data:{
-					queryParams:formDatas
-				},
+				url:'/vote/pmconfirmbid/save',
+				contentType:'application/json',
+				data: JSON.stringify(getParam()),
 				success:function(res){
 					layer.msg("新增成功",{icon:1});
 					win.close();
@@ -350,5 +390,5 @@ $(function(){
 	
 	})
 });
-
+var fileIds = []
 </script>

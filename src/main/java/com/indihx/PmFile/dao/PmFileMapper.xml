@@ -4,127 +4,154 @@
 <mapper namespace="com.indihx.PmFile.dao.PmFileMapper">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.indihx.PmFile.entity.PmFileEntity" id="pmFileMap">
-        <result property="fileId" column="FILE_ID"/>
-        <result property="fileUploadName" column="FILE_UPLOAD_NAME"/>
-        <result property="filePath" column="FILE_PATH"/>
-        <result property="fileSaveName" column="FILE_SAVE_NAME"/>
-        <result property="uploadType" column="UPLOAD_TYPE"/>
-        <result property="fileSize" column="FILE_SIZE"/>
-        <result property="foreignId" column="FOREIGN_ID"/>
-        <result property="foreignCode" column="FOREIGN_CODE"/>
-        <result property="remark" column="REMARK"/>
-        <result property="creatorId" column="CREATOR_ID"/>
-        <result property="createTime" column="CREATE_TIME"/>
-        <result property="modifier" column="MODIFIER"/>
-        <result property="modifyTime" column="MODIFY_TIME"/>
-        <result property="isDelete" column="IS_DELETE"/>
-    </resultMap>
+	<resultMap type="com.indihx.PmFile.entity.PmFileEntity"
+		id="pmFileMap">
+		<result property="fileId" column="FILE_ID" />
+		<result property="fileUploadName" column="FILE_UPLOAD_NAME" />
+		<result property="filePath" column="FILE_PATH" />
+		<result property="fileSaveName" column="FILE_SAVE_NAME" />
+		<result property="uploadType" column="UPLOAD_TYPE" />
+		<result property="fileSize" column="FILE_SIZE" />
+		<result property="foreignId" column="FOREIGN_ID" />
+		<result property="foreignCode" column="FOREIGN_CODE" />
+		<result property="remark" column="REMARK" />
+		<result property="creatorId" column="CREATOR_ID" />
+		<result property="createTime" column="CREATE_TIME" />
+		<result property="modifier" column="MODIFIER" />
+		<result property="modifyTime" column="MODIFY_TIME" />
+		<result property="isDelete" column="IS_DELETE" />
+	</resultMap>
 
 	<select id="queryObject" resultMap="pmFileMap">
-		select * from pm_file where FILE_ID = #{value}
+		select * from pm_file where
+		FILE_ID = #{value}
 	</select>
 
 	<select id="queryList" resultMap="pmFileMap">
-		select 
+		select
 		*
-		 from pm_file
-		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
-						<if test="fileId != null and fileId!=''"  >
-				FILE_ID = #{fileId} AND 			</if>
-						<if test="fileUploadName != null and fileUploadName!=''"  >
-				FILE_UPLOAD_NAME = #{fileUploadName} AND 			</if>
-						<if test="filePath != null and filePath!=''"  >
-				FILE_PATH = #{filePath} AND 			</if>
-						<if test="fileSaveName != null and fileSaveName!=''"  >
-				FILE_SAVE_NAME = #{fileSaveName} AND 			</if>
-						<if test="uploadType != null and uploadType!=''"  >
-				UPLOAD_TYPE = #{uploadType} AND 			</if>
-						<if test="fileSize != null and fileSize!=''"  >
-				FILE_SIZE = #{fileSize} AND 			</if>
-						<if test="foreignId != null and foreignId!=''"  >
-				FOREIGN_ID = #{foreignId} AND 			</if>
-						<if test="foreignCode != null and foreignCode!=''"  >
-				FOREIGN_CODE = #{foreignCode} AND 			</if>
-						<if test="remark != null and remark!=''"  >
-				REMARK = #{remark} AND 			</if>
-						<if test="creatorId != null and creatorId!=''"  >
-				CREATOR_ID = #{creatorId} AND 			</if>
-						<if test="createTime != null and createTime!=''"  >
-				CREATE_TIME = #{createTime} AND 			</if>
-						<if test="modifier != null and modifier!=''"  >
-				MODIFIER = #{modifier} AND 			</if>
-						<if test="modifyTime != null and modifyTime!=''"  >
-				MODIFY_TIME = #{modifyTime} AND 			</if>
-						<if test="isDelete != null and isDelete!=''"  >
-				IS_DELETE = #{isDelete}			</if>
-					</trim> 
+		from pm_file
+		<trim prefix="WHERE" prefixOverrides="AND|OR"
+			suffixOverrides="AND|OR">
+			<if test="fileId != null and fileId!=''">
+				FILE_ID = #{fileId} AND
+			</if>
+			<if test="fileUploadName != null and fileUploadName!=''">
+				FILE_UPLOAD_NAME = #{fileUploadName} AND
+			</if>
+			<if test="filePath != null and filePath!=''">
+				FILE_PATH =
+				#{filePath} AND
+			</if>
+			<if test="fileSaveName != null and fileSaveName!=''">
+				FILE_SAVE_NAME = #{fileSaveName} AND
+			</if>
+			<if test="uploadType != null and uploadType!=''">
+				UPLOAD_TYPE =
+				#{uploadType} AND
+			</if>
+			<if test="fileSize != null and fileSize!=''">
+				FILE_SIZE =
+				#{fileSize} AND
+			</if>
+			<if test="foreignId != null and foreignId!=''">
+				FOREIGN_ID =
+				#{foreignId} AND
+			</if>
+			<if test="foreignCode != null and foreignCode!=''">
+				FOREIGN_CODE =
+				#{foreignCode} AND
+			</if>
+			<if test="remark != null and remark!=''">
+				REMARK = #{remark} AND
+			</if>
+			<if test="creatorId != null and creatorId!=''">
+				CREATOR_ID =
+				#{creatorId} AND
+			</if>
+			<if test="createTime != null and createTime!=''">
+				CREATE_TIME =
+				#{createTime} AND
+			</if>
+			<if test="modifier != null and modifier!=''">
+				MODIFIER =
+				#{modifier} AND
+			</if>
+			<if test="modifyTime != null and modifyTime!=''">
+				MODIFY_TIME =
+				#{modifyTime} AND
+			</if>
+			<if test="isDelete != null and isDelete!=''">
+				IS_DELETE =
+				#{isDelete}
+			</if>
+		</trim>
 	</select>
-	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from pm_file 
+
+	<select id="queryTotal" resultType="int">
+		select count(*) from pm_file
 	</select>
-	 
-	<insert id="insert" parameterType="com.indihx.PmFile.entity.PmFileEntity">
+
+	<insert id="insert" parameterType="com.indihx.PmFile.entity.PmFileEntity"  useGeneratedKeys="true" keyProperty="fileId">
+		<selectKey keyProperty="fileId" order="BEFORE" resultType="java.lang.Long">
+			select PmFile_SEQ.nextval as fileId from DUAL
+		</selectKey>
 		insert into pm_file
 		(
 		FILE_ID
-			<if test="fileUploadName != null and fileUploadName!=''">
-				,FILE_UPLOAD_NAME	
-			</if>
-		
-			<if test="filePath != null and filePath!=''">
-				,FILE_PATH	
-			</if>
-		
-			<if test="fileSaveName != null and fileSaveName!=''">
-				,FILE_SAVE_NAME	
-			</if>
-		
-			<if test="uploadType != null and uploadType!=''">
-				,UPLOAD_TYPE	
-			</if>
-		
-			<if test="fileSize != null and fileSize!=''">
-				,FILE_SIZE	
-			</if>
-		
-			<if test="foreignId != null and foreignId!=''">
-				,FOREIGN_ID	
-			</if>
-		
-			<if test="foreignCode != null and foreignCode!=''">
-				,FOREIGN_CODE	
-			</if>
-		
-			<if test="remark != null and remark!=''">
-				,REMARK	
-			</if>
-		
-			<if test="creatorId != null and creatorId!=''">
-				,CREATOR_ID	
-			</if>
-		
-			<if test="createTime != null and createTime!=''">
-				,CREATE_TIME	
-			</if>
-		
-			<if test="modifier != null and modifier!=''">
-				,MODIFIER	
-			</if>
-		
-			<if test="modifyTime != null and modifyTime!=''">
-				,MODIFY_TIME	
-			</if>
-		
-			<if test="isDelete != null and isDelete!=''">
-				,IS_DELETE	
-			</if>
-		
+		<if test="fileUploadName != null and fileUploadName!=''">
+			,FILE_UPLOAD_NAME
+		</if>
+
+		<if test="filePath != null and filePath!=''">
+			,FILE_PATH
+		</if>
+
+		<if test="fileSaveName != null and fileSaveName!=''">
+			,FILE_SAVE_NAME
+		</if>
+
+		<if test="uploadType != null and uploadType!=''">
+			,UPLOAD_TYPE
+		</if>
+
+		<if test="fileSize != null and fileSize!=''">
+			,FILE_SIZE
+		</if>
+
+		<if test="foreignId != null and foreignId!=''">
+			,FOREIGN_ID
+		</if>
+
+		<if test="foreignCode != null and foreignCode!=''">
+			,FOREIGN_CODE
+		</if>
+
+		<if test="remark != null and remark!=''">
+			,REMARK
+		</if>
+
+		<if test="creatorId != null and creatorId!=''">
+			,CREATOR_ID
+		</if>
+
+		<if test="createTime != null and createTime!=''">
+			,CREATE_TIME
+		</if>
+
+		<if test="modifier != null and modifier!=''">
+			,MODIFIER
+		</if>
+
+		<if test="modifyTime != null and modifyTime!=''">
+			,MODIFY_TIME
+		</if>
+		,IS_DELETE
+
 		)
 		values
 		(
-		PmFile_SEQ.nextval
+		#{fileId}
 		<if test="fileUploadName != null and fileUploadName!=''">
 			,#{fileUploadName}
 		</if>
@@ -161,14 +188,13 @@
 		<if test="modifyTime != null and modifyTime!=''">
 			,#{modifyTime}
 		</if>
-		<if test="isDelete != null and isDelete!=''">
-			,#{isDelete}
-		</if>
+		,'00'
 		)
 	</insert>
-	 
-	<update id="update" parameterType="com.indihx.PmFile.entity.PmFileEntity">
-		update pm_file 
+
+	<update id="update"
+		parameterType="com.indihx.PmFile.entity.PmFileEntity">
+		update pm_file
 		<set>
 			<if test="fileUploadName != null and fileUploadName!=''">FILE_UPLOAD_NAME = #{fileUploadName}, </if>
 
@@ -199,11 +225,11 @@
 		</set>
 		where FILE_ID = #{fileId}
 	</update>
-	
+
 	<delete id="delete">
 		delete from pm_file where FILE_ID = #{value}
 	</delete>
-	
+
 
 
 </mapper>

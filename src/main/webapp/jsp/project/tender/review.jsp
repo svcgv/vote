@@ -8,8 +8,8 @@
 	  	<div class="layui-inline">
 	       <label class="layui-form-label">交付部门负责人：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="payDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
-	         <input type="hidden" name="payDeptId" >
+	         <input type="text" name="constructionDeptManagerName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
+	         <input type="hidden" name="constructionDeptManagerId" >
 	       </div>
 	       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payManagerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>

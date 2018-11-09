@@ -40,8 +40,14 @@
 				RECEIVE_DATE = #{receiveDate} AND 			</if>
 						<if test="creator != null and creator!=''"  >
 				CREATOR = #{creator} AND 			</if>
-						<if test="createTime != null and createTime!=''"  >
-				CREATE_TIME = #{createTime} AND 			</if>
+							<!-- 开始时间 -->
+			<if test="createTimeStart != null and createTimeStart!=''">
+				CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
+			</if>
+			<!-- 结束时间 -->
+			<if test="createTimeEnd != null  and createTimeEnd!=''">
+				CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
+			</if>
 						<if test="receivables != null and receivables!=''"  >
 				RECEIVABLES = #{receivables} AND 			</if>
 						<if test="isDelete != null and isDelete!=''"  >
@@ -88,10 +94,7 @@
 			<if test="receivables != null and receivables!=''">
 				,RECEIVABLES	
 			</if>
-		
-			<if test="isDelete != null and isDelete!=''">
 				,IS_DELETE	
-			</if>
 		
 		)
 		values
@@ -121,9 +124,7 @@
 		<if test="receivables != null and receivables!=''">
 			,#{receivables}
 		</if>
-		<if test="isDelete != null and isDelete!=''">
-			,#{isDelete}
-		</if>
+			,'00'
 		)
 	</insert>
 	 

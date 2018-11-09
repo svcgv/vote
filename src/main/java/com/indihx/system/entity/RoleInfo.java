@@ -18,6 +18,7 @@ public class RoleInfo implements Serializable{
 	private Long roleId;
 	private String roleName;
 	private String roleRmk;
+	private String roleCode;
 	private String tmSmp;
 	private String crtUser;//创建人
 	
@@ -53,6 +54,12 @@ public class RoleInfo implements Serializable{
 	}
 	public void setTmSmp(String tmSmp) {
 		this.tmSmp = tmSmp;
+	}
+	public String getRoleCode() {
+		return roleCode;
+	}
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
 	}
 
 }

@@ -103,7 +103,10 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			 		
 			 	}else if(act =="add"){ //编辑 修改 页面
 			 		$("#tender-addForm-hook input[name='custManagerName']").val(userName);
-					$("#tender-addForm-hook input[name='developmentManagerId']").val(userId);
+					$("#tender-addForm-hook input[name='custManagerId']").val(userId);
+			 	}else if(act =="addtech"){ //技术总监 页面
+			 		$("#tender-addForm-hook input[name='technicalDirectorName']").val(userName);
+					$("#tender-addForm-hook input[name='technicalDirectorId']").val(userId);
 			 	}else if(act =="addDept"){ // 交付部门负责人页面
 			 		$("#tender-addForm-hook input[name='constructionDeptManagerName']").val(userName);
 					$("#tender-addForm-hook input[name='constructionDeptManagerId']").val(userId);
@@ -111,8 +114,8 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			 		$("#tender-addForm-hook input[name='sellDeptManagerName']").val(userName);
 					$("#tender-addForm-hook input[name='sellDeptManagerId']").val(userId);
 			 	}else if(act =="reviewPay"){ // 投标 评审
-			 		$("#review-query-form input[name='payDeptName']").val(userName);
-					$("#review-query-form input[name='payDeptId']").val(userId);
+			 		$("#review-query-form input[name='constructionDeptManagerName']").val(userName);
+					$("#review-query-form input[name='constructionDeptManagerId']").val(userId);
 			 	}else if(act =="reviewSell"){// 投标 评审
 			 		$("#review-query-form input[name='sellDeptName']").val(userName);
 					$("#review-query-form input[name='sellDeptId']").val(userId);

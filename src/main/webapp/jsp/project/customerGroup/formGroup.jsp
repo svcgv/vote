@@ -6,7 +6,7 @@
 	<form class="layui-form" id="formGroup-query-form" action="">
 	  <div class="layui-form-item">
 	  	<div class="layui-inline">
-	       <label class="layui-form-label">SAP编码：</label>
+	       <label class="layui-form-label">客户SAP编号：</label>
 	       <div class="layui-input-inline">
 	         <input type="text" name="sapCode"  autocomplete="off" class="layui-input form-control">
 	       </div>
@@ -63,7 +63,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    title: '客户数据表',
 	    cols: [[
 	      {type: 'checkbox' },
-	      {field:'sapCode', title:'sap编号', sort: true},
+	      {field:'sapCode', title:'客户SAP编号', sort: true},
 	      {field:'custCnName', title:'客户名称'},
 	    ]],
 	    page: true
