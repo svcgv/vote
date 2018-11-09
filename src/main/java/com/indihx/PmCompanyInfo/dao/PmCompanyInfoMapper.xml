@@ -31,7 +31,14 @@
 						<if test="companyAddress != null  and companyAddress != '' ">COMPANY_ADDRESS = #{companyAddress} AND </if>
 						<if test="remark != null  and remark != '' ">REMARK = #{remark} AND </if>
 						<if test="creatorId != null and  creatorId !=''">CREATOR_ID = #{creatorId} AND </if>
-						<if test="createTime != null and createTime  !=''">CREATE_TIME = #{createTime} AND </if>
+						<!-- 开始时间 -->
+						<if test="startTime != null and startTime != '' ">
+							CREATE_TIME <![CDATA[>=]]> #{startTime} AND
+						</if>
+						<!-- 结束时间 -->
+						<if test="endTime != null  and endTime != '' ">
+							CREATE_TIME <![CDATA[<=]]> #{endTime} AND
+						</if>
 						<if test="modifier != null and  modifier !=''">MODIFIER = #{modifier} AND </if>
 						<if test="modifyTime != null and  modifyTime !=''">MODIFY_TIME = #{modifyTime} AND </if>
 						<if test="isDelete != null and  isDelete !=''">IS_DELETE = #{isDelete}</if>
