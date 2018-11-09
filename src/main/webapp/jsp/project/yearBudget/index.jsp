@@ -85,7 +85,7 @@
 		   
 	   </div>
 	</form>
-	<table id="budgetTable" lay-filter="budgetIndex"</table>
+	<table id="budgetTable" lay-filter="budgetIndex"></table>
  </div>
 <script type="text/html" id="toolbarDemo">
   <div class="layui-btn-container"></div>

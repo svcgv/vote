@@ -66,11 +66,17 @@
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预付期限：</label>
+		      <label class="layui-form-label">预付开始期限：</label>
 		       <div class="layui-input-inline">
-	         		<input type="text" name="predictPeriod" id="predictPeriodDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
+	         		<input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
+			  <div class="layui-inline">
+				  <label class="layui-form-label">预付结束期限：</label>
+				  <div class="layui-input-inline">
+					  <input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
+				  </div>
+			  </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
@@ -140,7 +146,7 @@
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">设置付款点：</label>
+		      <label class="layui-form-label">付款点：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="paymentPoint"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -182,6 +188,7 @@
 		  </div>
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
+		<a class="layui-layer-btn0" id="customGroup-save-hook" style="background:#009688;border-color:#009688;">保存并提交</a>
     	<a class="layui-layer-btn0" id="customGroup-add-hook" style="background:#009688;border-color:#009688;">保存</a>
     	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
     </div>
@@ -195,10 +202,15 @@ $(function(){
 	  	upload=layui.upload;
 		 //日期
 	  laydate.render({
-		    elem: "#predictPeriodDate-edit",
+		    elem: "#predictPeriodStartDate-edit",
 		    theme: 'molv',
 		    type: 'datetime'
 	 });
+        laydate.render({
+            elem: "#predictPeriodEndDate-edit",
+            theme: 'molv',
+            type: 'datetime'
+        });
 		
 		function getParam(){
 			var queryParams=$("#tender-addForm-hook form").serializeObject();
@@ -356,6 +368,33 @@ $(function(){
 	}); 
 	  
 		var win=$("#tender-addForm-hook").getWindow();
+
+        // 保存并提交
+        $("#tender-addForm-hook #customGroup-save-hook").click(function(){
+            var customerGroupName=$("#tender-addForm-hook input[name='bidName']").val();
+            if($.trim(customerGroupName) ==''){
+                layer.msg("请输入投标名称");
+                return false;
+            }
+
+
+            $.ajax({
+                type:'POST',
+                url:'/vote/pmconfirmbid/save2',
+                contentType:'application/json',
+                data: JSON.stringify(getParam()),
+                success:function(res){
+                    location.reload();
+                    layer.msg("新增成功",{icon:1});
+                    win.close();
+                },
+                error:function(){
+                    layer.msg("新增失败",{icon:5});
+                    win.close();
+                }
+            });
+            return false;
+        });
 		// 保存
 		$("#tender-addForm-hook #customGroup-add-hook").click(function(){
 			var customerGroupName=$("#tender-addForm-hook input[name='bidName']").val();
@@ -371,6 +410,7 @@ $(function(){
 				contentType:'application/json',
 				data: JSON.stringify(getParam()),
 				success:function(res){
+                    location.reload();
 					layer.msg("新增成功",{icon:1});
 					win.close();
 				},
@@ -380,7 +420,7 @@ $(function(){
 				}
 			})
 			return false;
-		})
+		});
 		
 		// 关闭
 		$("#tender-addForm-hook #customerGroup-close-hook").click(function(){

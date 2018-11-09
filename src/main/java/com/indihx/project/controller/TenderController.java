@@ -33,6 +33,8 @@ import com.alibaba.fastjson.JSON;
 import com.indihx.AbstractBaseController;
 import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
+import com.indihx.PmFile.entity.PmFileEntity;
+import com.indihx.PmFile.service.PmFileService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
@@ -50,7 +52,8 @@ public class TenderController extends AbstractBaseController{
 	private ParamsInfoServiceimpl infoservice;
 	@Autowired
     private PmConfirmBidService pmConfirmBidService;
-	
+    @Autowired
+    private PmFileService pmFileService;
 	
 	@RequestMapping("/tender/index")
 	public ModelAndView addCustomView() {
@@ -81,6 +84,10 @@ public class TenderController extends AbstractBaseController{
 		ModelAndView view = new ModelAndView();
 		
 		PmConfirmBidEntity entity = pmConfirmBidService.queryObject(id);
+		Map<String,Object> maps = new HashMap<String,Object>();
+		maps.put("foreignId", id);
+		maps.put("isDelete", "00");
+		view.addObject("file",pmFileService.queryList(maps));
 		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
@@ -96,6 +103,11 @@ public class TenderController extends AbstractBaseController{
 		ModelAndView view = new ModelAndView();
 		
 		PmConfirmBidEntity entity = pmConfirmBidService.queryObject(id);
+		Map<String,Object> maps = new HashMap<String,Object>();
+		maps.put("foreignId", id);
+		maps.put("isDelete", "00");
+		List<PmFileEntity> pmFiles = pmFileService.queryList(maps);
+		view.addObject("file",pmFiles);
 		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));

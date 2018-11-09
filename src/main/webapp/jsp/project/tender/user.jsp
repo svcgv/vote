@@ -6,7 +6,7 @@
 	<form class="layui-form" id="user-query-form" action="">
 	  <div class="layui-form-item">
 	  	<div class="layui-inline">
-	       <label class="layui-form-label">用户ID：</label>
+	       <label class="layui-form-label">用户编号：</label>
 	       <div class="layui-input-inline">
 	         <input type="text" name="usrId"  autocomplete="off" class="layui-input form-control">
 	       </div>
@@ -153,7 +153,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 				    title: '用户数据表',
 				    cols: [[
 				      {type: 'radio' },
-				      {field:'usrId', title:'用户ID', sort: true},
+				      {field:'usrId', title:'用户编号', sort: true},
 				      {field:'usrName', title:'用户名'}
 				    ]],
 			  	    data:testData,

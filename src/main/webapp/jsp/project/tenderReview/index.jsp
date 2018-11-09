@@ -38,17 +38,24 @@
 		      </div>
 		    </div>
 		    
-		    <div class="layui-inline">
-		      <label class="layui-form-label">预付期限：</label>
-		       <div class="layui-input-inline">
-	         		<input type="text" name="predictPeriod" id="predictPeriodDate" autocomplete="off" class="layui-input form-control hasDatepicker">
-		      </div>
-		    </div>
+
+		   <div class="layui-inline">
+			   <label class="layui-form-label">预付开始期限：</label>
+			   <div class="layui-input-inline">
+				   <input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
+			   </div>
+		   </div>
+		   <div class="layui-inline">
+			   <label class="layui-form-label">预付结束期限：</label>
+			   <div class="layui-input-inline">
+				   <input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
+			   </div>
+		   </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="payDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="payDeptId">
+		          <input type="text" name="constructionDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="hidden" name="constructionDeptId">
 		      </div>
 	      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -102,10 +109,26 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   
   //日期
 	  laydate.render({
-		    elem: "#predictPeriodDate",
+		    elem: "#predictPeriodStartDate-edit",
 		    theme: 'molv',
 		    type: 'datetime'
 	 });
+    laydate.render({
+        elem: "#predictPeriodEndDate-edit",
+        theme: 'molv',
+        type: 'datetime'
+    });
+    
+    function getParam(){
+		var queryParams=$("#tender-index-form").serializeObject();
+		 var newParam = {}
+		  for(var i in queryParams){
+			  if(queryParams[i]){
+				  newParam[i] = queryParams[i]
+			  }
+		  }
+		  return newParam
+	}
   // 选择机构
   $(".tender-info-wrapper #orgQuery-hook").click(function(){
 	  $.openWindow({
@@ -138,7 +161,15 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   table.render({
 	  	id:"customer-table",
 	    elem: '#productTable',
-	    //url:'custom.json',
+	    url:'/vote/pmreviewinfo/selectBidReview',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify(getParam())
+		},
+		contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    toolbar: '#toolbarDemo',
 	    height:'full-250',
 	    title: '投标数据表',
@@ -147,90 +178,20 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
 	  	      {field:'bidName', title:'投标名称', width:130},
 	  	      {field:'status', title:'评审状态', width:130},
-	  	      {field:'bidFirstPrice', title:'投标首次报价金额', width:150},
-	  	      {field:'custName', title:'客户', width:130},
+	  	      {field:'firstBidAmount', title:'投标首次报价金额', width:150},
+	  	      {field:'custCnName', title:'客户', width:130},
 	  	      {field:'predictAmount', title:'预估收入金额', width:150},
 	  	      {field:'predictCost', title:'预估成本', width:120},
 	  	      {field:'predictProfitRate', title:'预估利润率'},
-	  	      {field:'predictPeriod', title:'预付期限'},
-	  	      {field:'payDeptName', title:'交付部门'},
+            {field:'predictPeriodStart', title:'预付开始期限'},
+            {field:'predictPeriodEnd', title:'预付结束期限'},
+	  	      {field:'constructionDeptName', title:'交付部门'},
 	  	      {field:'sellDeptName', title:'销售部门'},
 	  	      {field:'custManagerName', title:'客户经理'},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:130}
 	    ]],
 	    cellMinWidth:'90',
-	    data:[
-	          {
-	    	bidId:"123",
-	    	bidName:"asdas",
-	    	status:"未评审",
-	    	bidFirstPrice:"2000",
-	    	custName:"asdasd",
-	    	predictAmount:"210",
-	    	predictCost:"123",
-	    	predictProfitRate:"0.8",
-	    	predictPeriod:"2018-12-12",
-	    	payDeptName:"开发2部",
-	    	sellDeptName:"销售一部",
-	    	custManagerName:"赫本"
-	    },
-	    {
-	    	bidId:"123",
-	    	bidName:"asdas",
-	    	status:"交付已评审",
-	    	bidFirstPrice:"2000",
-	    	custName:"asdasd",
-	    	predictAmount:"210",
-	    	predictCost:"123",
-	    	predictProfitRate:"0.8",
-	    	predictPeriod:"2018-12-12",
-	    	payDeptName:"开发2部",
-	    	sellDeptName:"销售一部",
-	    	custManagerName:"赫本"
-	    },
-	    {
-	    	bidId:"123",
-	    	bidName:"asdas",
-	    	status:"销售已评审",
-	    	bidFirstPrice:"2000",
-	    	custName:"asdasd",
-	    	predictAmount:"210",
-	    	predictCost:"123",
-	    	predictProfitRate:"0.8",
-	    	predictPeriod:"2018-12-12",
-	    	payDeptName:"开发2部",
-	    	sellDeptName:"销售一部",
-	    	custManagerName:"赫本"
-	    },
-	    {
-	    	bidId:"123",
-	    	bidName:"asdas",
-	    	status:"评审通过",
-	    	bidFirstPrice:"2000",
-	    	custName:"asdasd",
-	    	predictAmount:"210",
-	    	predictCost:"123",
-	    	predictProfitRate:"0.8",
-	    	predictPeriod:"2018-12-12",
-	    	payDeptName:"开发2部",
-	    	sellDeptName:"销售一部",
-	    	custManagerName:"赫本"
-	    },
-	    {
-	    	bidId:"123",
-	    	bidName:"asdas",
-	    	status:"评审未通过",
-	    	bidFirstPrice:"2000",
-	    	custName:"asdasd",
-	    	predictAmount:"210",
-	    	predictCost:"123",
-	    	predictProfitRate:"0.8",
-	    	predictPeriod:"2018-12-12",
-	    	payDeptName:"开发2部",
-	    	sellDeptName:"销售一部",
-	    	custManagerName:"赫本"
-	    }
-	    ],
+	    
 	    page: true
 	  });
 
@@ -255,7 +216,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		 var queryParams=$("#tender-index-form").serialize();
 		 $.ajax({
 			  type: 'POST',
-			  url: '/vote/pmcompanyinfo/list',
+			  url: '/vote/pmreviewinfo/selectBidReview',
 			  data: queryParams,
 			  contentType:'application/json',
 			  success: function(res){
@@ -273,13 +234,13 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
 				  	      {field:'bidName', title:'投标名称', width:130},
 				  	      {field:'status', title:'评审状态', width:130},
-				  	      {field:'bidFirstPrice', title:'投标首次报价金额', width:150},
-				  	      {field:'custName', title:'客户', width:130},
+				  	      {field:'firstBidAmount', title:'投标首次报价金额', width:150},
+				  	      {field:'custCnName', title:'客户', width:130},
 				  	      {field:'predictAmount', title:'预估收入金额', width:150},
 				  	      {field:'predictCost', title:'预估成本', width:120},
 				  	      {field:'predictProfitRate', title:'预估利润率'},
 				  	      {field:'predictPeriod', title:'预付期限'},
-				  	      {field:'payDeptName', title:'交付部门'},
+				  	      {field:'constructionDeptName', title:'交付部门'},
 				  	      {field:'sellDeptName', title:'销售部门'},
 				  	      {field:'custManagerName', title:'客户经理'},
 				  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:130}

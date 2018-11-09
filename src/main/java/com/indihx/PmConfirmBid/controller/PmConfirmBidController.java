@@ -4,6 +4,9 @@ package com.indihx.PmConfirmBid.controller;
 import java.util.Map;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+
+import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
+import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +22,6 @@ import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
 import com.indihx.PmFile.entity.PmFileEntity;
 import com.indihx.PmFile.service.PmFileService;
-import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
@@ -38,7 +40,6 @@ public class PmConfirmBidController {
     private PmConfirmBidService pmConfirmBidService;
     @Autowired
     private PmFileService pmFileService;
-    
     @Autowired
     private PmReviewInfoService pmReviewInfoService;
     
@@ -72,7 +73,7 @@ public class PmConfirmBidController {
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmConfirmBid.setCreatorId(usesr.getUsrId());
     	pmConfirmBid.setCreateTime(DateUtil.getDateTime());
-        
+        pmConfirmBid.setStatus("00");
         pmConfirmBidService.insert(pmConfirmBid);
         long id = pmConfirmBid.getBidId();
         if(pmConfirmBid.getFileIds()!=null&&!"".equals(pmConfirmBid.getFileIds())) {
@@ -91,6 +92,40 @@ public class PmConfirmBidController {
     }
 
     /**
+     * 保存并提交
+     */
+    @RequestMapping(value="/save2",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> saveAndConfirm(@RequestBody PmConfirmBidEntity pmConfirmBid,HttpSession session){
+        UsrInfo usesr = UserUtil.getUser(session);
+        pmConfirmBid.setCreatorId(usesr.getUsrId());
+        pmConfirmBid.setCreateTime(DateUtil.getDateTime());
+        pmConfirmBid.setStatus("01");
+        pmConfirmBidService.insert(pmConfirmBid);
+        long id = pmConfirmBid.getBidId();
+        PmReviewInfoEntity reviewEntity = new PmReviewInfoEntity();
+        reviewEntity.setForeignId(id);
+        reviewEntity.setReviewType("00");
+        reviewEntity.setReviewUserCode(pmConfirmBid.getConstructionDeptManagerId());
+        reviewEntity.setReviewUserName(pmConfirmBid.getConstructionDeptManagerName());
+        reviewEntity.setCreatorId(usesr.getUsrId());
+        reviewEntity.setCreateTime(DateUtil.getDateTime());
+        pmReviewInfoService.insert(reviewEntity);
+        if(pmConfirmBid.getFileIds()!=null&&!"".equals(pmConfirmBid.getFileIds())) {
+            String fileIds = pmConfirmBid.getFileIds();
+            String[] ids = fileIds.split(",");
+            PmFileEntity pm = new PmFileEntity();
+            pm.setForeignId(id);
+            for(int i=0;i<ids.length;i++) {
+                pm.setFileId(Long.parseLong(ids[i]));
+                pmFileService.update(pm);
+
+            }
+        }
+
+        return R.ok();
+    }
+
+    /**
      * 修改
      */
     @RequestMapping(value="/update",method=RequestMethod.POST)
@@ -98,6 +133,29 @@ public class PmConfirmBidController {
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmConfirmBid.setModifier(usesr.getUsrId());
     	pmConfirmBid.setModifyTime(DateUtil.getDateTime());
+        pmConfirmBidService.update(pmConfirmBid);//全部更新
+        return R.ok();
+    }
+
+    /**
+     * 确认审批
+     */
+    @RequestMapping(value="/submit",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> submit(@RequestBody PmConfirmBidEntity pmConfirmBid,HttpSession session){
+        UsrInfo usesr = UserUtil.getUser(session);
+        pmConfirmBid.setModifier(usesr.getUsrId());
+        pmConfirmBid.setModifyTime(DateUtil.getDateTime());
+        pmConfirmBid.setStatus("01");
+        long id = pmConfirmBid.getBidId();
+        //插入投标审批记录
+        PmReviewInfoEntity reviewEntity = new PmReviewInfoEntity();
+        reviewEntity.setForeignId(id);
+        reviewEntity.setReviewType("00");
+        reviewEntity.setReviewUserCode(pmConfirmBid.getConstructionDeptManagerId());
+        reviewEntity.setReviewUserName(pmConfirmBid.getConstructionDeptManagerName());
+        reviewEntity.setCreatorId(usesr.getUsrId());
+        reviewEntity.setCreateTime(DateUtil.getDateTime());
+        pmReviewInfoService.insert(reviewEntity);
         pmConfirmBidService.update(pmConfirmBid);//全部更新
         return R.ok();
     }

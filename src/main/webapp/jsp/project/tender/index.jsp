@@ -12,7 +12,7 @@
 	   <div class="layui-form-item">
 	   
 		  	<div class="layui-inline">
-		      <label class="layui-form-label">投标名称：</label>
+		      <label class="layui-form-label">投标项目名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -171,14 +171,15 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    cols: [[
 	    	  {type: 'checkbox', fixed: 'left'},
 	  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
-	  	      {field:'bidName', title:'投标名称', width:130},
+	  	      {field:'bidName', title:'投标项目名称', width:130},
 	  	      {field:'status', title:'评审状态', width:130},
 	  	      {field:'firstBidAmount', title:'投标首次报价金额', width:150},
 	  	      {field:'custCnName', title:'客户名称', width:130},
 	  	      {field:'predictAmount', title:'预估收入金额', width:150},
 	  	      {field:'predictCost', title:'预估成本', width:120},
 	  	      {field:'predictProfitRate', title:'预估利润率'},
-	  	      {field:'predictPeriod', title:'预付期限'},
+	  	      {field:'predictPeriodStart', title:'预付开始期限'},
+			{field:'predictPeriodEnd', title:'预付结束期限'},
 	  	      {field:'constructionDeptName', title:'交付部门'},
 	  	      {field:'sellDeptName', title:'销售部门'},
 	  	      {field:'custManagerName', title:'客户经理'},
@@ -218,7 +219,21 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	showFromTable('view',data.bidId);
 	    }else if(obj.event == "tenderReview"){
 	    	// 评审
-	    	showFromTable('review',data.bidId);
+			console.log(data);
+            $.ajax({
+                type:'POST',
+                url:'/vote/pmconfirmbid/submit',
+                contentType:'application/json',
+                data: JSON.stringify(data),
+                success:function(res){
+                    layer.msg("评审成功",{icon:1});
+                },
+                error:function(){
+                    layer.msg("评审失败",{icon:5});
+                }
+            });
+//	    	showFromTable('review',data.bidId);
+
 	    }else if(obj.event == "setMoney"){
 	    	// 评审
 	    	showFromTable('setMoney',data.bidId);
