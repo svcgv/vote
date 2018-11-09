@@ -51,16 +51,16 @@
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
 						<if test="bidId != null and bidId!=''"  >
 				BID_ID = #{bidId} AND 			</if>
-						<if test="bidName != null and bidName!=''"  >
-				BID_NAME = #{bidName} AND 			</if>
+						<if test="bidName != null  and bidName!=''">
+				BID_NAME like concat(concat('%',#{bidName}),'%') AND        </if>
 						<if test="firstBidAmount != null and firstBidAmount!=''"  >
 				FIRST_BID_AMOUNT = #{firstBidAmount} AND 			</if>
-						<if test="predictAmount != null and predictAmount!=''"  >
-				PREDICT_AMOUNT = #{predictAmount} AND 			</if>
-						<if test="predictCost != null and predictCost!=''"  >
-				PREDICT_COST = #{predictCost} AND 			</if>
-						<if test="predictProfitRate != null and predictProfitRate!=''"  >
-				PREDICT_PROFIT_RATE = #{predictProfitRate} AND 			</if>
+						<if test="predictAmount != null  and predictAmount!=''">
+				PREDICT_AMOUNT like concat(concat('%',#{predictAmount}),'%') AND        </if>
+						<if test="predictCost != null  and predictCost!=''">
+				PREDICT_COST like concat(concat('%',#{predictCost}),'%') AND        </if>
+						<if test="predictProfitRate != null  and predictProfitRate!=''">
+				PREDICT_PROFIT_RATE like concat(concat('%',#{predictProfitRate}),'%') AND        </if>
 						<if test="predictPeriodStart != null and predictPeriodStart!=''"  >
 				PREDICT_PERIOD_START = #{predictPeriodStart} AND 			</if>
 						<if test="predictPeriodEnd != null and predictPeriodEnd!=''"  >

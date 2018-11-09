@@ -213,11 +213,20 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 查询按钮
 	*/
 	 $("#tenderReviewQuery").click(function(){
-		 var queryParams=$("#tender-index-form").serialize();
+		 var queryParams=$("#tender-index-form").serializeObject();
+		  var newParam = {}
+		  for(var i in queryParams){
+			  if(queryParams[i]){
+				  newParam[i] = queryParams[i]
+			  }
+		  }
+		  queryParams = newParam
+		  var par = {}
+		  par.queryStr=JSON.stringify(queryParams)
 		 $.ajax({
 			  type: 'POST',
 			  url: '/vote/pmreviewinfo/selectBidReview',
-			  data: queryParams,
+			  data: JSON.stringify(par),
 			  contentType:'application/json',
 			  success: function(res){
 			      console.log(res)
@@ -246,7 +255,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:130}
 			  	    ]],
 			  	    cellMinWidth:'100',
-			  	    data:[],
+			  	    data:testData,
 			  	    page: true
 			  	  	});},
 			  dataType: "json"
@@ -277,7 +286,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	}
 	
 });
-var testData=null;
+var testData=[];
 </script>
 </body>
 </html>
