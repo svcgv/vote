@@ -223,6 +223,12 @@ $(function(){
 			 if(fileIds){
 				 newParam.fileIds=fileIds.join(',')
 			 }
+			 if(queryParams.open=='on'){
+				 newParam.isWorkAreaExplicit='00'
+			 }
+			 else{
+				 newParam.isWorkAreaExplicit='01'
+			 }
 			  return newParam
 		}
 		 

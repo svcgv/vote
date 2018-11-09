@@ -23,96 +23,96 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">投标项目名称：</label>
 		       <div class="layui-input-inline">
-		         <label name="bidName"  class="layui-form-label">投标名称反写</label>
+		         <label name="bidName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">投标首次报价金额：</label>
 		       <div class="layui-input-inline">
-		         <label name="firstBidAmount"  class="layui-form-label">价格反写</label>
+		         <label name="firstBidAmount"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户：</label>
 		       <div class="layui-input-inline">
-		          <label name="custCnName"  class="layui-form-label">客户反写</label>
+		          <label name="custCnName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">预估收入金额：</label>
 		       <div class="layui-input-inline">
-		         <label name="predictAmount"  class="layui-form-label">反写</label>
+		         <label name="predictAmount"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">预估成本：</label>
 		      <div class="layui-input-inline">
-		     	 <label name="predictCost"  class="layui-form-label">反写</label>
+		     	 <label name="predictCost"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">预估利润率：</label>
 		       <div class="layui-input-inline">
-		         <label name="predictProfitRate"  class="layui-form-label">反写</label>
+		         <label name="predictProfitRate"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">预付开始期限：</label>
 		       <div class="layui-input-inline">
-	         	<label name="predictPeriodStart"  class="layui-form-label">反写</label>
+	         	<label name="predictPeriodStart"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">预付结束期限：</label>
 		       <div class="layui-input-inline">
-	         	<label name="predictPeriodEnd"  class="layui-form-label">反写</label>
+	         	<label name="predictPeriodEnd"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
-		         <label name="constructionDeptName"  class="layui-form-label">反写</label>
+		         <label name="constructionDeptName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门负责人：</label>
 		       <div class="layui-input-inline">
-		         <label name="constructionDeptManagerName"  class="layui-form-label">反写</label>
+		         <label name="constructionDeptManagerName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">销售部门：</label>
 		       <div class="layui-input-inline">
-		         <label name="sellDeptName"  class="layui-form-label">反写</label>
+		         <label name="sellDeptName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
-		           <label name="custManagerName"  class="layui-form-label">反写</label>
+		           <label name="custManagerName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">技术总监：</label>
 		       <div class="layui-input-inline">
-		           <label name="technicalDirectorName"  class="layui-form-label">反写</label>
+		           <label name="technicalDirectorName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
 		       <div class="layui-input-inline">
-		           <label name="paymentPoint"  class="layui-form-label">反写</label>
+		           <label name="paymentPoint"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 	      <div class="layui-inline">
 	       		 <label class="layui-form-label" style="width:170px!important;">工作任务及范围是否清晰：</label>
 	       		 <div class="layui-input-inline">
 	       		 	<!-- open 是开启 close 是关闭 (关闭时  设置 file-hook style="display:none;")    对应 isWorkAreaExplicit 数据字典 -->
-			       <label class="layui-form-label">是|否</label>
+			       <label name='isWorkAreaExplicit' class="layui-form-label"></label>
 			    </div>
 	       </div>
 	       <div class="file-hook" style="width:95%;margin:0 auto;">
@@ -130,16 +130,7 @@
 					      	<td>15379.5kb</td>
 					      	<td>已上传</td>
 				      	</tr>
-				      	<tr class="edit-wosUploaded">
-					      	<td>Business Analysis Report.xlsx</td>
-					      	<td>15379.5kb</td>
-					      	<td>已上传</td>
-				      	</tr>
-				      	<tr class="edit-wosUploaded">
-					      	<td>Business Analysis Report.xlsx</td>
-					      	<td>15379.5kb</td>
-					      	<td>已上传</td>
-				      	</tr>
+				      	
 				      </tbody>
 				    </table>
 				  </div>
@@ -147,14 +138,13 @@
 	       <div class="layui-inline">
 	       		 <label class="layui-form-label">备注：</label>
 	       		 <div class="layui-input-inline" style="width:323px;">
-			      <label name="remark"  class="layui-form-label">反写</label>
+			      <label name="remark"  class="layui-form-label"></label>
 			    </div>
 	       </div>
 	       <!-- 未评审时不显示评审记录 -->
 	        <div class="layui-inline">
 	       		 <label class="layui-form-label">评审记录：</label>
 	       		 <div class="layui-input-block" style="margin-left:160px;">
-			     	<div><span>2018-12-28 12:20:22</span> <span>交付部门：</span><strong style="font-weight:bold;">史定波</strong> <span style="margin-left:10px;">评审意见：</span><strong style="font-weight:bold;color:red;">通过</strong> <span style="margin-left:10px;">评审理由：开发难度低</span></div>
 			     	<div><span>2018-12-28 12:20:22</span> <span>销售部门：</span><strong style="font-weight:bold;">史定波</strong> <span style="margin-left:10px;">评审意见：</span><strong style="font-weight:bold;color:red;">不通过</strong> <span style="margin-left:10px;">评审理由：小钱不挣</span></div>
 			    </div>
 	       </div>

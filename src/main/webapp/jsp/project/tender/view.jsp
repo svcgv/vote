@@ -118,7 +118,7 @@
 	       		 <label class="layui-form-label" style="width:170px!important;">工作任务及范围是否清晰：</label>
 	       		 <div class="layui-input-inline">
 	       		 	<!-- open 是开启 close 是关闭 (关闭时  设置 file-hook style="display:none;")    对应 isWorkAreaExplicit 数据字典 -->
-			       <label class="layui-form-label">是|否</label>
+			       <label class="layui-form-label"></label>
 			    </div>
 	       </div>
 	       <div class="file-hook" style="width:95%;margin:0 auto;">

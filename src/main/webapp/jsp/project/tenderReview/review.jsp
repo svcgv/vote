@@ -8,15 +8,16 @@
 	  	<div class="layui-inline">
 	       <label class="layui-form-label">评审人：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="selfName" readonly="readonly" value="史定波"  autocomplete="off" class="layui-input form-control disabledColor">
-	         <input type="hidden" name="selfId" >
+	         <input type="text" name="selfName" readonly="readonly" value="${userName }"  autocomplete="off" class="layui-input form-control disabledColor">
+	         <input type="hidden" name="reviewId" value="${reviewId }">
+	         <input type="hidden" name="reviewType" value="00">
 	       </div>
  	 	</div>
 	  	
 	  	<div class="layui-inline">
 	      <label class="layui-form-label" >评审意见：</label>
 	       <div class="layui-input-inline">
-	        <select name="suggest" lay-verify="required"> <!-- 数据字典 -->
+	        <select name="result" lay-verify="required"> <!-- 数据字典 -->
 		        <option value="">请选择</option>
 		        <option value="00" selected>同意</option>
 		        <option value="01">不同意</option>
@@ -27,7 +28,7 @@
 	    <div class="layui-inline">
 	      <label class="layui-form-label" >评审理由：</label>
 	       <div class="layui-input-inline">
-	        	<textarea name="reason" placeholder="请输入评审理由" class="layui-textarea"></textarea>
+	        	<textarea name="commentDetail" placeholder="请输入评审理由" class="layui-textarea"></textarea>
 	      </div>
 	    </div>
 	    
@@ -74,10 +75,10 @@ $(function(){
 			var formDatas=$(".tender-review-wrapper form").serializeObject();
 			$.ajax({
 				type:'POST',
-				url:'save',
-				data:{
-					queryParams:formDatas
-				},
+				url:'/vote/pmreviewinfo/submit',
+				 data: JSON.stringify(formDatas), 
+				 contentType:'application/json',
+				 dataType: "json",
 				success:function(res){
 					layer.msg("成功",{icon:1});
 					win.close();
