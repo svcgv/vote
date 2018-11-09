@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmProjectInfo.dao.PmProjectInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmProjectInfo.entity.PmProjectInfoEntity" id="pmProjectInfoMap">
+        <result property="projectId" column="PROJECT_ID"/>
+        <result property="buildDeptName" column="BUILD_DEPT_NAME"/>
+        <result property="buildDeptId" column="BUILD_DEPT_ID"/>
+        <result property="buildManagerName" column="BUILD_MANAGER_NAME"/>
+        <result property="buildManagerId" column="BUILD_MANAGER_ID"/>
+        <result property="sellDeptName" column="SELL_DEPT_NAME"/>
+        <result property="sellDeptId" column="SELL_DEPT_ID"/>
+        <result property="sellManagerName" column="SELL_MANAGER_NAME"/>
+        <result property="sellManagerId" column="SELL_MANAGER_ID"/>
+        <result property="technicalDirectorId" column="TECHNICAL_DIRECTOR_ID"/>
+        <result property="technicalDirectorName" column="TECHNICAL_DIRECTOR_NAME"/>
+        <result property="createProjectTime" column="CREATE_PROJECT_TIME"/>
+        <result property="finishProjectTime" column="FINISH_PROJECT_TIME"/>
+        <result property="wbs" column="WBS"/>
+        <result property="custName" column="CUST_NAME"/>
+        <result property="custSapCode" column="CUST_SAP_CODE"/>
+        <result property="projectName" column="PROJECT_NAME"/>
+        <result property="currentYearFollow" column="CURRENT_YEAR_FOLLOW"/>
+        <result property="isContinue" column="IS_CONTINUE"/>
+        <result property="projectStatus" column="PROJECT_STATUS"/>
+        <result property="state" column="STATE"/>
+        <result property="projectType" column="PROJECT_TYPE"/>
+        <result property="predictContractAmount" column="PREDICT_CONTRACT_AMOUNT"/>
+        <result property="profitCenter" column="PROFIT_CENTER"/>
+        <result property="profitCode" column="PROFIT_CODE"/>
+        <result property="costCenter" column="COST_CENTER"/>
+        <result property="costCode" column="COST_CODE"/>
+        <result property="profitRate" column="PROFIT_RATE"/>
+        <result property="profitMount" column="PROFIT_MOUNT"/>
+        <result property="workLoad" column="WORK_LOAD"/>
+        <result property="currendYearIncomming" column="CURREND_YEAR_INCOMMING"/>
+        <result property="currentYearGrossProfit" column="CURRENT_YEAR_GROSS_PROFIT"/>
+        <result property="allIncomming" column="ALL_INCOMMING"/>
+        <result property="overFlowReportIncomming" column="OVER_FLOW_REPORT_INCOMMING"/>
+        <result property="signContractDate" column="SIGN_CONTRACT_DATE"/>
+        <result property="isSignedContract" column="IS_SIGNED_CONTRACT"/>
+        <result property="ftpContractReviewResult" column="FTP_CONTRACT_REVIEW_RESULT"/>
+        <result property="onlineDate" column="ONLINE_DATE"/>
+        <result property="isOnline" column="IS_ONLINE"/>
+        <result property="onlineReportReviewResult" column="ONLINE_REPORT_REVIEW_RESULT"/>
+        <result property="acceptDate" column="ACCEPT_DATE"/>
+        <result property="isAccept" column="IS_ACCEPT"/>
+        <result property="ftpReportReviewResult" column="FTP_REPORT_REVIEW_RESULT"/>
+        <result property="onlineDateLater" column="ONLINE_DATE_LATER"/>
+        <result property="acceptDateLater" column="ACCEPT_DATE_LATER"/>
+        <result property="onlineNum" column="ONLINE_NUM"/>
+        <result property="acceptNum" column="ACCEPT_NUM"/>
+        <result property="isImportant" column="IS_IMPORTANT"/>
+        <result property="budget" column="BUDGET"/>
+        <result property="currentYearMount" column="CURRENT_YEAR_MOUNT"/>
+        <result property="innerAcceptDate" column="INNER_ACCEPT_DATE"/>
+        <result property="netSalary" column="NET_SALARY"/>
+        <result property="yearSalary" column="YEAR_SALARY"/>
+        <result property="predictProfitRate" column="PREDICT_PROFIT_RATE"/>
+        <result property="predictCapitaSalary" column="PREDICT_CAPITA_SALARY"/>
+        <result property="predictCapitaCost" column="PREDICT_CAPITA_COST"/>
+        <result property="predictWorkload" column="PREDICT_WORKLOAD"/>
+        <result property="employeeCost" column="EMPLOYEE_COST"/>
+        <result property="businessTripCost" column="BUSINESS_TRIP_COST"/>
+        <result property="otherCost" column="OTHER_COST"/>
+        <result property="accruedChargesWorkers" column="ACCRUED_CHARGES_WORKERS"/>
+        <result property="accruedChargesProducts" column="ACCRUED_CHARGES_PRODUCTS"/>
+        <result property="remark1" column="REMARK1"/>
+        <result property="remark2" column="REMARK2"/>
+        <result property="remark3" column="REMARK3"/>
+        <result property="isDelete" column="IS_DELETE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="creator" column="CREATOR"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="modifier" column="MODIFIER"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmProjectInfoMap">
+		select * from pm_project_info where PROJECT_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmProjectInfoMap">
+		select 
+		*
+		 from pm_project_info
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="projectId != null and projectId!=''"  >
+				PROJECT_ID = #{projectId} AND 			</if>
+						<if test="buildDeptName != null and buildDeptName!=''"  >
+				BUILD_DEPT_NAME = #{buildDeptName} AND 			</if>
+						<if test="buildDeptId != null and buildDeptId!=''"  >
+				BUILD_DEPT_ID = #{buildDeptId} AND 			</if>
+						<if test="buildManagerName != null and buildManagerName!=''"  >
+				BUILD_MANAGER_NAME = #{buildManagerName} AND 			</if>
+						<if test="buildManagerId != null and buildManagerId!=''"  >
+				BUILD_MANAGER_ID = #{buildManagerId} AND 			</if>
+						<if test="sellDeptName != null and sellDeptName!=''"  >
+				SELL_DEPT_NAME = #{sellDeptName} AND 			</if>
+						<if test="sellDeptId != null and sellDeptId!=''"  >
+				SELL_DEPT_ID = #{sellDeptId} AND 			</if>
+						<if test="sellManagerName != null and sellManagerName!=''"  >
+				SELL_MANAGER_NAME = #{sellManagerName} AND 			</if>
+						<if test="sellManagerId != null and sellManagerId!=''"  >
+				SELL_MANAGER_ID = #{sellManagerId} AND 			</if>
+						<if test="technicalDirectorId != null and technicalDirectorId!=''"  >
+				TECHNICAL_DIRECTOR_ID = #{technicalDirectorId} AND 			</if>
+						<if test="technicalDirectorName != null and technicalDirectorName!=''"  >
+				TECHNICAL_DIRECTOR_NAME = #{technicalDirectorName} AND 			</if>
+						<if test="createProjectTime != null and createProjectTime!=''"  >
+				CREATE_PROJECT_TIME = #{createProjectTime} AND 			</if>
+						<if test="finishProjectTime != null and finishProjectTime!=''"  >
+				FINISH_PROJECT_TIME = #{finishProjectTime} AND 			</if>
+						<if test="wbs != null and wbs!=''"  >
+				WBS = #{wbs} AND 			</if>
+						<if test="custName != null and custName!=''"  >
+				CUST_NAME = #{custName} AND 			</if>
+						<if test="custSapCode != null and custSapCode!=''"  >
+				CUST_SAP_CODE = #{custSapCode} AND 			</if>
+						<if test="projectName != null and projectName!=''"  >
+				PROJECT_NAME = #{projectName} AND 			</if>
+						<if test="currentYearFollow != null and currentYearFollow!=''"  >
+				CURRENT_YEAR_FOLLOW = #{currentYearFollow} AND 			</if>
+						<if test="isContinue != null and isContinue!=''"  >
+				IS_CONTINUE = #{isContinue} AND 			</if>
+						<if test="projectStatus != null and projectStatus!=''"  >
+				PROJECT_STATUS = #{projectStatus} AND 			</if>
+						<if test="state != null and state!=''"  >
+				STATE = #{state} AND 			</if>
+						<if test="projectType != null and projectType!=''"  >
+				PROJECT_TYPE = #{projectType} AND 			</if>
+						<if test="predictContractAmount != null and predictContractAmount!=''"  >
+				PREDICT_CONTRACT_AMOUNT = #{predictContractAmount} AND 			</if>
+						<if test="profitCenter != null and profitCenter!=''"  >
+				PROFIT_CENTER = #{profitCenter} AND 			</if>
+						<if test="profitCode != null and profitCode!=''"  >
+				PROFIT_CODE = #{profitCode} AND 			</if>
+						<if test="costCenter != null and costCenter!=''"  >
+				COST_CENTER = #{costCenter} AND 			</if>
+						<if test="costCode != null and costCode!=''"  >
+				COST_CODE = #{costCode} AND 			</if>
+						<if test="profitRate != null and profitRate!=''"  >
+				PROFIT_RATE = #{profitRate} AND 			</if>
+						<if test="profitMount != null and profitMount!=''"  >
+				PROFIT_MOUNT = #{profitMount} AND 			</if>
+						<if test="workLoad != null and workLoad!=''"  >
+				WORK_LOAD = #{workLoad} AND 			</if>
+						<if test="currendYearIncomming != null and currendYearIncomming!=''"  >
+				CURREND_YEAR_INCOMMING = #{currendYearIncomming} AND 			</if>
+						<if test="currentYearGrossProfit != null and currentYearGrossProfit!=''"  >
+				CURRENT_YEAR_GROSS_PROFIT = #{currentYearGrossProfit} AND 			</if>
+						<if test="allIncomming != null and allIncomming!=''"  >
+				ALL_INCOMMING = #{allIncomming} AND 			</if>
+						<if test="overFlowReportIncomming != null and overFlowReportIncomming!=''"  >
+				OVER_FLOW_REPORT_INCOMMING = #{overFlowReportIncomming} AND 			</if>
+						<if test="signContractDate != null and signContractDate!=''"  >
+				SIGN_CONTRACT_DATE = #{signContractDate} AND 			</if>
+						<if test="isSignedContract != null and isSignedContract!=''"  >
+				IS_SIGNED_CONTRACT = #{isSignedContract} AND 			</if>
+						<if test="ftpContractReviewResult != null and ftpContractReviewResult!=''"  >
+				FTP_CONTRACT_REVIEW_RESULT = #{ftpContractReviewResult} AND 			</if>
+						<if test="onlineDate != null and onlineDate!=''"  >
+				ONLINE_DATE = #{onlineDate} AND 			</if>
+						<if test="isOnline != null and isOnline!=''"  >
+				IS_ONLINE = #{isOnline} AND 			</if>
+						<if test="onlineReportReviewResult != null and onlineReportReviewResult!=''"  >
+				ONLINE_REPORT_REVIEW_RESULT = #{onlineReportReviewResult} AND 			</if>
+						<if test="acceptDate != null and acceptDate!=''"  >
+				ACCEPT_DATE = #{acceptDate} AND 			</if>
+						<if test="isAccept != null and isAccept!=''"  >
+				IS_ACCEPT = #{isAccept} AND 			</if>
+						<if test="ftpReportReviewResult != null and ftpReportReviewResult!=''"  >
+				FTP_REPORT_REVIEW_RESULT = #{ftpReportReviewResult} AND 			</if>
+						<if test="onlineDateLater != null and onlineDateLater!=''"  >
+				ONLINE_DATE_LATER = #{onlineDateLater} AND 			</if>
+						<if test="acceptDateLater != null and acceptDateLater!=''"  >
+				ACCEPT_DATE_LATER = #{acceptDateLater} AND 			</if>
+						<if test="onlineNum != null and onlineNum!=''"  >
+				ONLINE_NUM = #{onlineNum} AND 			</if>
+						<if test="acceptNum != null and acceptNum!=''"  >
+				ACCEPT_NUM = #{acceptNum} AND 			</if>
+						<if test="isImportant != null and isImportant!=''"  >
+				IS_IMPORTANT = #{isImportant} AND 			</if>
+						<if test="budget != null and budget!=''"  >
+				BUDGET = #{budget} AND 			</if>
+						<if test="currentYearMount != null and currentYearMount!=''"  >
+				CURRENT_YEAR_MOUNT = #{currentYearMount} AND 			</if>
+						<if test="innerAcceptDate != null and innerAcceptDate!=''"  >
+				INNER_ACCEPT_DATE = #{innerAcceptDate} AND 			</if>
+						<if test="netSalary != null and netSalary!=''"  >
+				NET_SALARY = #{netSalary} AND 			</if>
+						<if test="yearSalary != null and yearSalary!=''"  >
+				YEAR_SALARY = #{yearSalary} AND 			</if>
+						<if test="predictProfitRate != null and predictProfitRate!=''"  >
+				PREDICT_PROFIT_RATE = #{predictProfitRate} AND 			</if>
+						<if test="predictCapitaSalary != null and predictCapitaSalary!=''"  >
+				PREDICT_CAPITA_SALARY = #{predictCapitaSalary} AND 			</if>
+						<if test="predictCapitaCost != null and predictCapitaCost!=''"  >
+				PREDICT_CAPITA_COST = #{predictCapitaCost} AND 			</if>
+						<if test="predictWorkload != null and predictWorkload!=''"  >
+				PREDICT_WORKLOAD = #{predictWorkload} AND 			</if>
+						<if test="employeeCost != null and employeeCost!=''"  >
+				EMPLOYEE_COST = #{employeeCost} AND 			</if>
+						<if test="businessTripCost != null and businessTripCost!=''"  >
+				BUSINESS_TRIP_COST = #{businessTripCost} AND 			</if>
+						<if test="otherCost != null and otherCost!=''"  >
+				OTHER_COST = #{otherCost} AND 			</if>
+						<if test="accruedChargesWorkers != null and accruedChargesWorkers!=''"  >
+				ACCRUED_CHARGES_WORKERS = #{accruedChargesWorkers} AND 			</if>
+						<if test="accruedChargesProducts != null and accruedChargesProducts!=''"  >
+				ACCRUED_CHARGES_PRODUCTS = #{accruedChargesProducts} AND 			</if>
+						<if test="remark1 != null and remark1!=''"  >
+				REMARK1 = #{remark1} AND 			</if>
+						<if test="remark2 != null and remark2!=''"  >
+				REMARK2 = #{remark2} AND 			</if>
+						<if test="remark3 != null and remark3!=''"  >
+				REMARK3 = #{remark3} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete} AND 			</if>
+						<if test="createTime != null and createTime!=''"  >
+				CREATE_TIME = #{createTime} AND 			</if>
+						<if test="creator != null and creator!=''"  >
+				CREATOR = #{creator} AND 			</if>
+						<if test="modifyTime != null and modifyTime!=''"  >
+				MODIFY_TIME = #{modifyTime} AND 			</if>
+						<if test="modifier != null and modifier!=''"  >
+				MODIFIER = #{modifier}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from pm_project_info 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmProjectInfo.entity.PmProjectInfoEntity">
+		insert into pm_project_info
+		(
+		PROJECT_ID
+			<if test="buildDeptName != null and buildDeptName!=''">
+				,BUILD_DEPT_NAME	
+			</if>
+		
+			<if test="buildDeptId != null and buildDeptId!=''">
+				,BUILD_DEPT_ID	
+			</if>
+		
+			<if test="buildManagerName != null and buildManagerName!=''">
+				,BUILD_MANAGER_NAME	
+			</if>
+		
+			<if test="buildManagerId != null and buildManagerId!=''">
+				,BUILD_MANAGER_ID	
+			</if>
+		
+			<if test="sellDeptName != null and sellDeptName!=''">
+				,SELL_DEPT_NAME	
+			</if>
+		
+			<if test="sellDeptId != null and sellDeptId!=''">
+				,SELL_DEPT_ID	
+			</if>
+		
+			<if test="sellManagerName != null and sellManagerName!=''">
+				,SELL_MANAGER_NAME	
+			</if>
+		
+			<if test="sellManagerId != null and sellManagerId!=''">
+				,SELL_MANAGER_ID	
+			</if>
+		
+			<if test="technicalDirectorId != null and technicalDirectorId!=''">
+				,TECHNICAL_DIRECTOR_ID	
+			</if>
+		
+			<if test="technicalDirectorName != null and technicalDirectorName!=''">
+				,TECHNICAL_DIRECTOR_NAME	
+			</if>
+		
+			<if test="createProjectTime != null and createProjectTime!=''">
+				,CREATE_PROJECT_TIME	
+			</if>
+		
+			<if test="finishProjectTime != null and finishProjectTime!=''">
+				,FINISH_PROJECT_TIME	
+			</if>
+		
+			<if test="wbs != null and wbs!=''">
+				,WBS	
+			</if>
+		
+			<if test="custName != null and custName!=''">
+				,CUST_NAME	
+			</if>
+		
+			<if test="custSapCode != null and custSapCode!=''">
+				,CUST_SAP_CODE	
+			</if>
+		
+			<if test="projectName != null and projectName!=''">
+				,PROJECT_NAME	
+			</if>
+		
+			<if test="currentYearFollow != null and currentYearFollow!=''">
+				,CURRENT_YEAR_FOLLOW	
+			</if>
+		
+			<if test="isContinue != null and isContinue!=''">
+				,IS_CONTINUE	
+			</if>
+		
+			<if test="projectStatus != null and projectStatus!=''">
+				,PROJECT_STATUS	
+			</if>
+		
+			<if test="state != null and state!=''">
+				,STATE	
+			</if>
+		
+			<if test="projectType != null and projectType!=''">
+				,PROJECT_TYPE	
+			</if>
+		
+			<if test="predictContractAmount != null and predictContractAmount!=''">
+				,PREDICT_CONTRACT_AMOUNT	
+			</if>
+		
+			<if test="profitCenter != null and profitCenter!=''">
+				,PROFIT_CENTER	
+			</if>
+		
+			<if test="profitCode != null and profitCode!=''">
+				,PROFIT_CODE	
+			</if>
+		
+			<if test="costCenter != null and costCenter!=''">
+				,COST_CENTER	
+			</if>
+		
+			<if test="costCode != null and costCode!=''">
+				,COST_CODE	
+			</if>
+		
+			<if test="profitRate != null and profitRate!=''">
+				,PROFIT_RATE	
+			</if>
+		
+			<if test="profitMount != null and profitMount!=''">
+				,PROFIT_MOUNT	
+			</if>
+		
+			<if test="workLoad != null and workLoad!=''">
+				,WORK_LOAD	
+			</if>
+		
+			<if test="currendYearIncomming != null and currendYearIncomming!=''">
+				,CURREND_YEAR_INCOMMING	
+			</if>
+		
+			<if test="currentYearGrossProfit != null and currentYearGrossProfit!=''">
+				,CURRENT_YEAR_GROSS_PROFIT	
+			</if>
+		
+			<if test="allIncomming != null and allIncomming!=''">
+				,ALL_INCOMMING	
+			</if>
+		
+			<if test="overFlowReportIncomming != null and overFlowReportIncomming!=''">
+				,OVER_FLOW_REPORT_INCOMMING	
+			</if>
+		
+			<if test="signContractDate != null and signContractDate!=''">
+				,SIGN_CONTRACT_DATE	
+			</if>
+		
+			<if test="isSignedContract != null and isSignedContract!=''">
+				,IS_SIGNED_CONTRACT	
+			</if>
+		
+			<if test="ftpContractReviewResult != null and ftpContractReviewResult!=''">
+				,FTP_CONTRACT_REVIEW_RESULT	
+			</if>
+		
+			<if test="onlineDate != null and onlineDate!=''">
+				,ONLINE_DATE	
+			</if>
+		
+			<if test="isOnline != null and isOnline!=''">
+				,IS_ONLINE	
+			</if>
+		
+			<if test="onlineReportReviewResult != null and onlineReportReviewResult!=''">
+				,ONLINE_REPORT_REVIEW_RESULT	
+			</if>
+		
+			<if test="acceptDate != null and acceptDate!=''">
+				,ACCEPT_DATE	
+			</if>
+		
+			<if test="isAccept != null and isAccept!=''">
+				,IS_ACCEPT	
+			</if>
+		
+			<if test="ftpReportReviewResult != null and ftpReportReviewResult!=''">
+				,FTP_REPORT_REVIEW_RESULT	
+			</if>
+		
+			<if test="onlineDateLater != null and onlineDateLater!=''">
+				,ONLINE_DATE_LATER	
+			</if>
+		
+			<if test="acceptDateLater != null and acceptDateLater!=''">
+				,ACCEPT_DATE_LATER	
+			</if>
+		
+			<if test="onlineNum != null and onlineNum!=''">
+				,ONLINE_NUM	
+			</if>
+		
+			<if test="acceptNum != null and acceptNum!=''">
+				,ACCEPT_NUM	
+			</if>
+		
+			<if test="isImportant != null and isImportant!=''">
+				,IS_IMPORTANT	
+			</if>
+		
+			<if test="budget != null and budget!=''">
+				,BUDGET	
+			</if>
+		
+			<if test="currentYearMount != null and currentYearMount!=''">
+				,CURRENT_YEAR_MOUNT	
+			</if>
+		
+			<if test="innerAcceptDate != null and innerAcceptDate!=''">
+				,INNER_ACCEPT_DATE	
+			</if>
+		
+			<if test="netSalary != null and netSalary!=''">
+				,NET_SALARY	
+			</if>
+		
+			<if test="yearSalary != null and yearSalary!=''">
+				,YEAR_SALARY	
+			</if>
+		
+			<if test="predictProfitRate != null and predictProfitRate!=''">
+				,PREDICT_PROFIT_RATE	
+			</if>
+		
+			<if test="predictCapitaSalary != null and predictCapitaSalary!=''">
+				,PREDICT_CAPITA_SALARY	
+			</if>
+		
+			<if test="predictCapitaCost != null and predictCapitaCost!=''">
+				,PREDICT_CAPITA_COST	
+			</if>
+		
+			<if test="predictWorkload != null and predictWorkload!=''">
+				,PREDICT_WORKLOAD	
+			</if>
+		
+			<if test="employeeCost != null and employeeCost!=''">
+				,EMPLOYEE_COST	
+			</if>
+		
+			<if test="businessTripCost != null and businessTripCost!=''">
+				,BUSINESS_TRIP_COST	
+			</if>
+		
+			<if test="otherCost != null and otherCost!=''">
+				,OTHER_COST	
+			</if>
+		
+			<if test="accruedChargesWorkers != null and accruedChargesWorkers!=''">
+				,ACCRUED_CHARGES_WORKERS	
+			</if>
+		
+			<if test="accruedChargesProducts != null and accruedChargesProducts!=''">
+				,ACCRUED_CHARGES_PRODUCTS	
+			</if>
+		
+			<if test="remark1 != null and remark1!=''">
+				,REMARK1	
+			</if>
+		
+			<if test="remark2 != null and remark2!=''">
+				,REMARK2	
+			</if>
+		
+			<if test="remark3 != null and remark3!=''">
+				,REMARK3	
+			</if>
+		
+			<if test="isDelete != null and isDelete!=''">
+				,IS_DELETE	
+			</if>
+		
+			<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+			</if>
+		
+			<if test="creator != null and creator!=''">
+				,CREATOR	
+			</if>
+		
+			<if test="modifyTime != null and modifyTime!=''">
+				,MODIFY_TIME	
+			</if>
+		
+			<if test="modifier != null and modifier!=''">
+				,MODIFIER	
+			</if>
+		
+		)
+		values
+		(
+		PmProjectInfo_SEQ.nextval
+		<if test="buildDeptName != null and buildDeptName!=''">
+			,#{buildDeptName}
+		</if>
+		<if test="buildDeptId != null and buildDeptId!=''">
+			,#{buildDeptId}
+		</if>
+		<if test="buildManagerName != null and buildManagerName!=''">
+			,#{buildManagerName}
+		</if>
+		<if test="buildManagerId != null and buildManagerId!=''">
+			,#{buildManagerId}
+		</if>
+		<if test="sellDeptName != null and sellDeptName!=''">
+			,#{sellDeptName}
+		</if>
+		<if test="sellDeptId != null and sellDeptId!=''">
+			,#{sellDeptId}
+		</if>
+		<if test="sellManagerName != null and sellManagerName!=''">
+			,#{sellManagerName}
+		</if>
+		<if test="sellManagerId != null and sellManagerId!=''">
+			,#{sellManagerId}
+		</if>
+		<if test="technicalDirectorId != null and technicalDirectorId!=''">
+			,#{technicalDirectorId}
+		</if>
+		<if test="technicalDirectorName != null and technicalDirectorName!=''">
+			,#{technicalDirectorName}
+		</if>
+		<if test="createProjectTime != null and createProjectTime!=''">
+			,#{createProjectTime}
+		</if>
+		<if test="finishProjectTime != null and finishProjectTime!=''">
+			,#{finishProjectTime}
+		</if>
+		<if test="wbs != null and wbs!=''">
+			,#{wbs}
+		</if>
+		<if test="custName != null and custName!=''">
+			,#{custName}
+		</if>
+		<if test="custSapCode != null and custSapCode!=''">
+			,#{custSapCode}
+		</if>
+		<if test="projectName != null and projectName!=''">
+			,#{projectName}
+		</if>
+		<if test="currentYearFollow != null and currentYearFollow!=''">
+			,#{currentYearFollow}
+		</if>
+		<if test="isContinue != null and isContinue!=''">
+			,#{isContinue}
+		</if>
+		<if test="projectStatus != null and projectStatus!=''">
+			,#{projectStatus}
+		</if>
+		<if test="state != null and state!=''">
+			,#{state}
+		</if>
+		<if test="projectType != null and projectType!=''">
+			,#{projectType}
+		</if>
+		<if test="predictContractAmount != null and predictContractAmount!=''">
+			,#{predictContractAmount}
+		</if>
+		<if test="profitCenter != null and profitCenter!=''">
+			,#{profitCenter}
+		</if>
+		<if test="profitCode != null and profitCode!=''">
+			,#{profitCode}
+		</if>
+		<if test="costCenter != null and costCenter!=''">
+			,#{costCenter}
+		</if>
+		<if test="costCode != null and costCode!=''">
+			,#{costCode}
+		</if>
+		<if test="profitRate != null and profitRate!=''">
+			,#{profitRate}
+		</if>
+		<if test="profitMount != null and profitMount!=''">
+			,#{profitMount}
+		</if>
+		<if test="workLoad != null and workLoad!=''">
+			,#{workLoad}
+		</if>
+		<if test="currendYearIncomming != null and currendYearIncomming!=''">
+			,#{currendYearIncomming}
+		</if>
+		<if test="currentYearGrossProfit != null and currentYearGrossProfit!=''">
+			,#{currentYearGrossProfit}
+		</if>
+		<if test="allIncomming != null and allIncomming!=''">
+			,#{allIncomming}
+		</if>
+		<if test="overFlowReportIncomming != null and overFlowReportIncomming!=''">
+			,#{overFlowReportIncomming}
+		</if>
+		<if test="signContractDate != null and signContractDate!=''">
+			,#{signContractDate}
+		</if>
+		<if test="isSignedContract != null and isSignedContract!=''">
+			,#{isSignedContract}
+		</if>
+		<if test="ftpContractReviewResult != null and ftpContractReviewResult!=''">
+			,#{ftpContractReviewResult}
+		</if>
+		<if test="onlineDate != null and onlineDate!=''">
+			,#{onlineDate}
+		</if>
+		<if test="isOnline != null and isOnline!=''">
+			,#{isOnline}
+		</if>
+		<if test="onlineReportReviewResult != null and onlineReportReviewResult!=''">
+			,#{onlineReportReviewResult}
+		</if>
+		<if test="acceptDate != null and acceptDate!=''">
+			,#{acceptDate}
+		</if>
+		<if test="isAccept != null and isAccept!=''">
+			,#{isAccept}
+		</if>
+		<if test="ftpReportReviewResult != null and ftpReportReviewResult!=''">
+			,#{ftpReportReviewResult}
+		</if>
+		<if test="onlineDateLater != null and onlineDateLater!=''">
+			,#{onlineDateLater}
+		</if>
+		<if test="acceptDateLater != null and acceptDateLater!=''">
+			,#{acceptDateLater}
+		</if>
+		<if test="onlineNum != null and onlineNum!=''">
+			,#{onlineNum}
+		</if>
+		<if test="acceptNum != null and acceptNum!=''">
+			,#{acceptNum}
+		</if>
+		<if test="isImportant != null and isImportant!=''">
+			,#{isImportant}
+		</if>
+		<if test="budget != null and budget!=''">
+			,#{budget}
+		</if>
+		<if test="currentYearMount != null and currentYearMount!=''">
+			,#{currentYearMount}
+		</if>
+		<if test="innerAcceptDate != null and innerAcceptDate!=''">
+			,#{innerAcceptDate}
+		</if>
+		<if test="netSalary != null and netSalary!=''">
+			,#{netSalary}
+		</if>
+		<if test="yearSalary != null and yearSalary!=''">
+			,#{yearSalary}
+		</if>
+		<if test="predictProfitRate != null and predictProfitRate!=''">
+			,#{predictProfitRate}
+		</if>
+		<if test="predictCapitaSalary != null and predictCapitaSalary!=''">
+			,#{predictCapitaSalary}
+		</if>
+		<if test="predictCapitaCost != null and predictCapitaCost!=''">
+			,#{predictCapitaCost}
+		</if>
+		<if test="predictWorkload != null and predictWorkload!=''">
+			,#{predictWorkload}
+		</if>
+		<if test="employeeCost != null and employeeCost!=''">
+			,#{employeeCost}
+		</if>
+		<if test="businessTripCost != null and businessTripCost!=''">
+			,#{businessTripCost}
+		</if>
+		<if test="otherCost != null and otherCost!=''">
+			,#{otherCost}
+		</if>
+		<if test="accruedChargesWorkers != null and accruedChargesWorkers!=''">
+			,#{accruedChargesWorkers}
+		</if>
+		<if test="accruedChargesProducts != null and accruedChargesProducts!=''">
+			,#{accruedChargesProducts}
+		</if>
+		<if test="remark1 != null and remark1!=''">
+			,#{remark1}
+		</if>
+		<if test="remark2 != null and remark2!=''">
+			,#{remark2}
+		</if>
+		<if test="remark3 != null and remark3!=''">
+			,#{remark3}
+		</if>
+		<if test="isDelete != null and isDelete!=''">
+			,#{isDelete}
+		</if>
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
+		<if test="creator != null and creator!=''">
+			,#{creator}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+			,#{modifyTime}
+		</if>
+		<if test="modifier != null and modifier!=''">
+			,#{modifier}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmProjectInfo.entity.PmProjectInfoEntity">
+		update pm_project_info 
+		<set>
+			<if test="buildDeptName != null and buildDeptName!=''">BUILD_DEPT_NAME = #{buildDeptName}, </if>
+
+			<if test="buildDeptId != null and buildDeptId!=''">BUILD_DEPT_ID = #{buildDeptId}, </if>
+
+			<if test="buildManagerName != null and buildManagerName!=''">BUILD_MANAGER_NAME = #{buildManagerName}, </if>
+
+			<if test="buildManagerId != null and buildManagerId!=''">BUILD_MANAGER_ID = #{buildManagerId}, </if>
+
+			<if test="sellDeptName != null and sellDeptName!=''">SELL_DEPT_NAME = #{sellDeptName}, </if>
+
+			<if test="sellDeptId != null and sellDeptId!=''">SELL_DEPT_ID = #{sellDeptId}, </if>
+
+			<if test="sellManagerName != null and sellManagerName!=''">SELL_MANAGER_NAME = #{sellManagerName}, </if>
+
+			<if test="sellManagerId != null and sellManagerId!=''">SELL_MANAGER_ID = #{sellManagerId}, </if>
+
+			<if test="technicalDirectorId != null and technicalDirectorId!=''">TECHNICAL_DIRECTOR_ID = #{technicalDirectorId}, </if>
+
+			<if test="technicalDirectorName != null and technicalDirectorName!=''">TECHNICAL_DIRECTOR_NAME = #{technicalDirectorName}, </if>
+
+			<if test="createProjectTime != null and createProjectTime!=''">CREATE_PROJECT_TIME = #{createProjectTime}, </if>
+
+			<if test="finishProjectTime != null and finishProjectTime!=''">FINISH_PROJECT_TIME = #{finishProjectTime}, </if>
+
+			<if test="wbs != null and wbs!=''">WBS = #{wbs}, </if>
+
+			<if test="custName != null and custName!=''">CUST_NAME = #{custName}, </if>
+
+			<if test="custSapCode != null and custSapCode!=''">CUST_SAP_CODE = #{custSapCode}, </if>
+
+			<if test="projectName != null and projectName!=''">PROJECT_NAME = #{projectName}, </if>
+
+			<if test="currentYearFollow != null and currentYearFollow!=''">CURRENT_YEAR_FOLLOW = #{currentYearFollow}, </if>
+
+			<if test="isContinue != null and isContinue!=''">IS_CONTINUE = #{isContinue}, </if>
+
+			<if test="projectStatus != null and projectStatus!=''">PROJECT_STATUS = #{projectStatus}, </if>
+
+			<if test="state != null and state!=''">STATE = #{state}, </if>
+
+			<if test="projectType != null and projectType!=''">PROJECT_TYPE = #{projectType}, </if>
+
+			<if test="predictContractAmount != null and predictContractAmount!=''">PREDICT_CONTRACT_AMOUNT = #{predictContractAmount}, </if>
+
+			<if test="profitCenter != null and profitCenter!=''">PROFIT_CENTER = #{profitCenter}, </if>
+
+			<if test="profitCode != null and profitCode!=''">PROFIT_CODE = #{profitCode}, </if>
+
+			<if test="costCenter != null and costCenter!=''">COST_CENTER = #{costCenter}, </if>
+
+			<if test="costCode != null and costCode!=''">COST_CODE = #{costCode}, </if>
+
+			<if test="profitRate != null and profitRate!=''">PROFIT_RATE = #{profitRate}, </if>
+
+			<if test="profitMount != null and profitMount!=''">PROFIT_MOUNT = #{profitMount}, </if>
+
+			<if test="workLoad != null and workLoad!=''">WORK_LOAD = #{workLoad}, </if>
+
+			<if test="currendYearIncomming != null and currendYearIncomming!=''">CURREND_YEAR_INCOMMING = #{currendYearIncomming}, </if>
+
+			<if test="currentYearGrossProfit != null and currentYearGrossProfit!=''">CURRENT_YEAR_GROSS_PROFIT = #{currentYearGrossProfit}, </if>
+
+			<if test="allIncomming != null and allIncomming!=''">ALL_INCOMMING = #{allIncomming}, </if>
+
+			<if test="overFlowReportIncomming != null and overFlowReportIncomming!=''">OVER_FLOW_REPORT_INCOMMING = #{overFlowReportIncomming}, </if>
+
+			<if test="signContractDate != null and signContractDate!=''">SIGN_CONTRACT_DATE = #{signContractDate}, </if>
+
+			<if test="isSignedContract != null and isSignedContract!=''">IS_SIGNED_CONTRACT = #{isSignedContract}, </if>
+
+			<if test="ftpContractReviewResult != null and ftpContractReviewResult!=''">FTP_CONTRACT_REVIEW_RESULT = #{ftpContractReviewResult}, </if>
+
+			<if test="onlineDate != null and onlineDate!=''">ONLINE_DATE = #{onlineDate}, </if>
+
+			<if test="isOnline != null and isOnline!=''">IS_ONLINE = #{isOnline}, </if>
+
+			<if test="onlineReportReviewResult != null and onlineReportReviewResult!=''">ONLINE_REPORT_REVIEW_RESULT = #{onlineReportReviewResult}, </if>
+
+			<if test="acceptDate != null and acceptDate!=''">ACCEPT_DATE = #{acceptDate}, </if>
+
+			<if test="isAccept != null and isAccept!=''">IS_ACCEPT = #{isAccept}, </if>
+
+			<if test="ftpReportReviewResult != null and ftpReportReviewResult!=''">FTP_REPORT_REVIEW_RESULT = #{ftpReportReviewResult}, </if>
+
+			<if test="onlineDateLater != null and onlineDateLater!=''">ONLINE_DATE_LATER = #{onlineDateLater}, </if>
+
+			<if test="acceptDateLater != null and acceptDateLater!=''">ACCEPT_DATE_LATER = #{acceptDateLater}, </if>
+
+			<if test="onlineNum != null and onlineNum!=''">ONLINE_NUM = #{onlineNum}, </if>
+
+			<if test="acceptNum != null and acceptNum!=''">ACCEPT_NUM = #{acceptNum}, </if>
+
+			<if test="isImportant != null and isImportant!=''">IS_IMPORTANT = #{isImportant}, </if>
+
+			<if test="budget != null and budget!=''">BUDGET = #{budget}, </if>
+
+			<if test="currentYearMount != null and currentYearMount!=''">CURRENT_YEAR_MOUNT = #{currentYearMount}, </if>
+
+			<if test="innerAcceptDate != null and innerAcceptDate!=''">INNER_ACCEPT_DATE = #{innerAcceptDate}, </if>
+
+			<if test="netSalary != null and netSalary!=''">NET_SALARY = #{netSalary}, </if>
+
+			<if test="yearSalary != null and yearSalary!=''">YEAR_SALARY = #{yearSalary}, </if>
+
+			<if test="predictProfitRate != null and predictProfitRate!=''">PREDICT_PROFIT_RATE = #{predictProfitRate}, </if>
+
+			<if test="predictCapitaSalary != null and predictCapitaSalary!=''">PREDICT_CAPITA_SALARY = #{predictCapitaSalary}, </if>
+
+			<if test="predictCapitaCost != null and predictCapitaCost!=''">PREDICT_CAPITA_COST = #{predictCapitaCost}, </if>
+
+			<if test="predictWorkload != null and predictWorkload!=''">PREDICT_WORKLOAD = #{predictWorkload}, </if>
+
+			<if test="employeeCost != null and employeeCost!=''">EMPLOYEE_COST = #{employeeCost}, </if>
+
+			<if test="businessTripCost != null and businessTripCost!=''">BUSINESS_TRIP_COST = #{businessTripCost}, </if>
+
+			<if test="otherCost != null and otherCost!=''">OTHER_COST = #{otherCost}, </if>
+
+			<if test="accruedChargesWorkers != null and accruedChargesWorkers!=''">ACCRUED_CHARGES_WORKERS = #{accruedChargesWorkers}, </if>
+
+			<if test="accruedChargesProducts != null and accruedChargesProducts!=''">ACCRUED_CHARGES_PRODUCTS = #{accruedChargesProducts}, </if>
+
+			<if test="remark1 != null and remark1!=''">REMARK1 = #{remark1}, </if>
+
+			<if test="remark2 != null and remark2!=''">REMARK2 = #{remark2}, </if>
+
+			<if test="remark3 != null and remark3!=''">REMARK3 = #{remark3}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}, </if>
+
+			<if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime}, </if>
+
+			<if test="creator != null and creator!=''">CREATOR = #{creator}, </if>
+
+			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
+
+			<if test="modifier != null and modifier!=''">MODIFIER = #{modifier}</if>
+
+		</set>
+		where PROJECT_ID = #{projectId}
+	</update>
+	
+	<delete id="delete">
+		delete from pm_project_info where PROJECT_ID = #{value}
+	</delete>
+	
+
+
+</mapper>
