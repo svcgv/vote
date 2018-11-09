@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.UserUtil;
+import com.alibaba.fastjson.JSON;
 import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
 import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import com.indihx.comm.util.R;
@@ -105,8 +106,10 @@ public class PmReviewInfoController {
      */
     @RequestMapping(value="/selectBidReview",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> selectBidReview(@RequestBody Map<String, Object> params,HttpSession session){
+    	String str = (String) params.get("queryStr");
+    	Map<String,Object> par = (Map<String,Object>)JSON.parse(str);
     	UsrInfo usesr = UserUtil.getUser(session);
-    	Map<String,Object> par = new HashMap<String,Object>();
+//    	Map<String,Object> par = new HashMap<String,Object>();
     	par.put("reviewUserCode", usesr.getUsrId());
     	par.put("reviewType", "00");
 		List<PmReviewInfoEntity> pmReviewInfo = pmReviewInfoService.queryList(par);

@@ -33,9 +33,8 @@
 		from pm_sale_group_info
 		<trim prefix="WHERE" prefixOverrides="AND|OR"
 			suffixOverrides="AND|OR">
-			<if test="groupId != null and groupId!=''">
-				GROUP_ID = #{groupId}
-				AND
+			<if test="groupId != null and groupId !=''">
+				GROUP_ID like concat(concat('%',#{groupId}),'%')  AND
 			</if>
 			<if test="groupName != null and groupName!=''">
 				GROUP_NAME like concat(concat('%',#{groupName}),'%')  AND

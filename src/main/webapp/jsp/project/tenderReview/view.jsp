@@ -21,70 +21,93 @@
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item">
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标名称：</label>
+		      <label class="layui-form-label">投标项目名称：</label>
 		       <div class="layui-input-inline">
-		         <label class="layui-form-label">投标名称反写</label>
+		         <label name="bidName"  class="layui-form-label">投标名称反写</label>
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">投标首次报价金额：</label>
 		       <div class="layui-input-inline">
-		         <label class="layui-form-label">价格反写</label>
+		         <label name="firstBidAmount"  class="layui-form-label">价格反写</label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户：</label>
 		       <div class="layui-input-inline">
-		          <label class="layui-form-label">客户反写</label>
+		          <label name="custCnName"  class="layui-form-label">客户反写</label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">预估收入金额：</label>
 		       <div class="layui-input-inline">
-		         <label class="layui-form-label">反写</label>
+		         <label name="predictAmount"  class="layui-form-label">反写</label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">预估成本：</label>
 		      <div class="layui-input-inline">
-		     	 <label class="layui-form-label">反写</label>
+		     	 <label name="predictCost"  class="layui-form-label">反写</label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">预估利润率：</label>
 		       <div class="layui-input-inline">
-		         <label class="layui-form-label">反写</label>
+		         <label name="predictProfitRate"  class="layui-form-label">反写</label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预付期限：</label>
+		      <label class="layui-form-label">预付开始期限：</label>
 		       <div class="layui-input-inline">
-	         	<label class="layui-form-label">反写</label>
+	         	<label name="predictPeriodStart"  class="layui-form-label">反写</label>
+		      </div>
+		    </div>
+		    <div class="layui-inline">
+		      <label class="layui-form-label">预付结束期限：</label>
+		       <div class="layui-input-inline">
+	         	<label name="predictPeriodEnd"  class="layui-form-label">反写</label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
-		         <label class="layui-form-label">反写</label>
+		         <label name="constructionDeptName"  class="layui-form-label">反写</label>
+		      </div>
+		    </div>
+		    <div class="layui-inline">
+		      <label class="layui-form-label">交付部门负责人：</label>
+		       <div class="layui-input-inline">
+		         <label name="constructionDeptManagerName"  class="layui-form-label">反写</label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">销售部门：</label>
 		       <div class="layui-input-inline">
-		         <label class="layui-form-label">反写</label>
+		         <label name="sellDeptName"  class="layui-form-label">反写</label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
-		           <label class="layui-form-label">反写</label>
+		           <label name="custManagerName"  class="layui-form-label">反写</label>
 		      </div>
 		    </div>
-		    
+		    <div class="layui-inline">
+		      <label class="layui-form-label">技术总监：</label>
+		       <div class="layui-input-inline">
+		           <label name="technicalDirectorName"  class="layui-form-label">反写</label>
+		      </div>
+		    </div>
+		    <div class="layui-inline">
+		      <label class="layui-form-label">付款点：</label>
+		       <div class="layui-input-inline">
+		           <label name="paymentPoint"  class="layui-form-label">反写</label>
+		      </div>
+		    </div>
 	      <div class="layui-inline">
 	       		 <label class="layui-form-label" style="width:170px!important;">工作任务及范围是否清晰：</label>
 	       		 <div class="layui-input-inline">
@@ -124,7 +147,7 @@
 	       <div class="layui-inline">
 	       		 <label class="layui-form-label">备注：</label>
 	       		 <div class="layui-input-inline" style="width:323px;">
-			      <label class="layui-form-label">反写</label>
+			      <label name="remark"  class="layui-form-label">反写</label>
 			    </div>
 	       </div>
 	       <!-- 未评审时不显示评审记录 -->
@@ -156,6 +179,12 @@ $(function(){
 		    theme: 'molv',
 		    type: 'datetime'
 	 });
+		 var pmConfirmBid = JSON.parse('${pmConfirmBid}');
+		 console.log(pmConfirmBid);
+		 for (var property in pmConfirmBid) {
+		 	$("#tender-addForm-hook label[name='"+property+"']").text(pmConfirmBid[property]);
+
+		 }
 		
 	// form 表单手动渲染
 	  form.render();

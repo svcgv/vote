@@ -1,7 +1,5 @@
 package com.indihx.PmReviewInfo.entity;
 
-
-
 import com.indihx.BaseEntity;
 import java.io.Serializable;
 import java.util.Date;
@@ -20,42 +18,51 @@ public class PmReviewInfoEntity extends BaseEntity implements Serializable {
 	 * 
 	 */
 
-private long reviewId;
+	private long reviewId;
 	/**
 	 * 
 	 */
 
-private long foreignId;
+	private long foreignId;
 	/**
 	 * 
 	 */
 
-private String foreignCode;
+	private String foreignCode;
 	/**
 	 * 
 	 */
 
-private String reviewType;
+	private String reviewType;
 	/**
 	 * 
 	 */
 
-private String reviewUserName;
+	private String reviewUserName;
 	/**
 	 * 
 	 */
 
-private long reviewUserCode;
+	private long reviewUserCode;
 	/**
 	 * 
 	 */
 
-private String result;
+	private String result;
 	/**
 	 * 
 	 */
+	private String commentDetail;
 
-private String isDelete;
+	private String isDelete;
+
+	public String getCommentDetail() {
+		return commentDetail;
+	}
+
+	public void setCommentDetail(String commentDetail) {
+		this.commentDetail = commentDetail;
+	}
 
 	/**
 	 * 设置：
@@ -63,90 +70,105 @@ private String isDelete;
 	public void setReviewId(long reviewId) {
 		this.reviewId = reviewId;
 	}
+
 	/**
 	 * 获取：
 	 */
 	public long getReviewId() {
 		return reviewId;
 	}
+
 	/**
 	 * 设置：
 	 */
 	public void setForeignId(long foreignId) {
 		this.foreignId = foreignId;
 	}
+
 	/**
 	 * 获取：
 	 */
 	public long getForeignId() {
 		return foreignId;
 	}
+
 	/**
 	 * 设置：
 	 */
 	public void setForeignCode(String foreignCode) {
 		this.foreignCode = foreignCode;
 	}
+
 	/**
 	 * 获取：
 	 */
 	public String getForeignCode() {
 		return foreignCode;
 	}
+
 	/**
 	 * 设置：
 	 */
 	public void setReviewType(String reviewType) {
 		this.reviewType = reviewType;
 	}
+
 	/**
 	 * 获取：
 	 */
 	public String getReviewType() {
 		return reviewType;
 	}
+
 	/**
 	 * 设置：
 	 */
 	public void setReviewUserName(String reviewUserName) {
 		this.reviewUserName = reviewUserName;
 	}
+
 	/**
 	 * 获取：
 	 */
 	public String getReviewUserName() {
 		return reviewUserName;
 	}
+
 	/**
 	 * 设置：
 	 */
 	public void setReviewUserCode(long reviewUserCode) {
 		this.reviewUserCode = reviewUserCode;
 	}
+
 	/**
 	 * 获取：
 	 */
 	public long getReviewUserCode() {
 		return reviewUserCode;
 	}
+
 	/**
 	 * 设置：
 	 */
 	public void setResult(String result) {
 		this.result = result;
 	}
+
 	/**
 	 * 获取：
 	 */
 	public String getResult() {
 		return result;
 	}
+
 	/**
 	 * 设置：
 	 */
 	public void setIsDelete(String isDelete) {
 		this.isDelete = isDelete;
 	}
+
 	/**
 	 * 获取：
 	 */

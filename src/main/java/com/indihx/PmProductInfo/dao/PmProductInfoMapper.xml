@@ -34,12 +34,12 @@
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
 						<if test="productId != null and productId!=''"  >
 				PRODUCT_ID = #{productId} AND 			</if>
-						<if test="productCode != null and productCode!=''"  >
-				PRODUCT_CODE = #{productCode} AND 			</if>
-						<if test="productName != null and productName!=''"  >
-				PRODUCT_NAME = #{productName} AND 			</if>
-						<if test="productSuggestPrice != null and productSuggestPrice!=''"  >
-				PRODUCT_SUGGEST_PRICE = #{productSuggestPrice} AND 			</if>
+						<if test="productCode != null  and productCode !=''">
+				PRODUCT_CODE like concat(concat('%',#{productCode}),'%') AND			</if>
+						<if test="productName != null  and productName!=''">
+				PRODUCT_NAME like concat(concat('%',#{productName}),'%') AND			</if>
+						<if test="productSuggestPrice != null  and productSuggestPrice !=''">
+				PRODUCT_SUGGEST_PRICE like concat(concat('%',#{productSuggestPrice}),'%') AND			</if>
 						<if test="developmentDeptName != null and developmentDeptName!=''"  >
 				DEVELOPMENT_DEPT_NAME = #{developmentDeptName} AND 			</if>
 						<if test="developmentDeptId != null and developmentDeptId!=''"  >

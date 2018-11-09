@@ -18,8 +18,8 @@
 	       <div class="layui-input-inline">
 	        <select name="suggest" lay-verify="required"> <!-- 数据字典 -->
 		        <option value="">请选择</option>
-		        <option value="1" selected>同意</option>
-		        <option value="2">不同意</option>
+		        <option value="00" selected>同意</option>
+		        <option value="01">不同意</option>
 		      </select>
 	      </div>
 	    </div>

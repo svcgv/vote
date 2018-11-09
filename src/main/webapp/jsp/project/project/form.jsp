@@ -129,7 +129,7 @@
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">设置付款点：</label>
+		      <label class="layui-form-label">付款点：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="paymentPoint"  autocomplete="off" class="layui-input form-control">
 		      </div>

@@ -158,7 +158,13 @@
 				      </tr></thead>
 				      <tbody id="wosFileList">
 				      <!-- 反写已上传的数据 -->
-				      	
+				      	<c:forEach items="${file}" var="fileInfo" >
+				      	<tr class="edit-wosUploaded">
+					      	<td>${fileInfo.fileUploadName}</td>
+					      	<td>${fileInfo.fileSize}</td>
+					      	<td>已上传</td>
+				      	</tr>
+				      	</c:forEach>
 				      </tbody>
 				    </table>
 				  </div>

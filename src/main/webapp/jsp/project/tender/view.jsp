@@ -21,9 +21,9 @@
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item">
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标名称：</label>
+		      <label class="layui-form-label">投标项目名称：</label>
 		       <div class="layui-input-inline">
-		         <label name="bidName"  class="layui-form-label">投标名称反写</label>
+		         <label name="bidName"  class="layui-form-label">投标项目名称反写</label>
 		      </div>
 		    </div>
 		    
@@ -61,9 +61,15 @@
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预付期限：</label>
+		      <label class="layui-form-label">预付开始期限：</label>
 		       <div class="layui-input-inline">
-	         	<label name="predictPeriod"  class="layui-form-label">反写</label>
+	         	<label name="predictPeriodStart"  class="layui-form-label">反写</label>
+		      </div>
+		    </div>
+		    <div class="layui-inline">
+		      <label class="layui-form-label">预付结束期限：</label>
+		       <div class="layui-input-inline">
+	         	<label name="predictPeriodEnd"  class="layui-form-label">反写</label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
@@ -103,7 +109,7 @@
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">设置付款点：</label>
+		      <label class="layui-form-label">付款点：</label>
 		       <div class="layui-input-inline">
 		           <label name="paymentPoint"  class="layui-form-label">反写</label>
 		      </div>
@@ -125,21 +131,13 @@
 				        <th>状态</th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
+				      <c:forEach items="${file}" var="fileInfo" >
 				      	<tr class="edit-wosUploaded">
-					      	<td>Business Analysis Report.xlsx</td>
-					      	<td>15379.5kb</td>
+					      	<td>${fileInfo.fileUploadName}</td>
+					      	<td>${fileInfo.fileSize}</td>
 					      	<td>已上传</td>
 				      	</tr>
-				      	<tr class="edit-wosUploaded">
-					      	<td>Business Analysis Report.xlsx</td>
-					      	<td>15379.5kb</td>
-					      	<td>已上传</td>
-				      	</tr>
-				      	<tr class="edit-wosUploaded">
-					      	<td>Business Analysis Report.xlsx</td>
-					      	<td>15379.5kb</td>
-					      	<td>已上传</td>
-				      	</tr>
+				      	</c:forEach>
 				      </tbody>
 				    </table>
 				  </div>

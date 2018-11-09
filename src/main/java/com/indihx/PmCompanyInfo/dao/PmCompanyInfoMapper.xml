@@ -27,8 +27,8 @@
 		 from pm_company_info
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
 						<if test="companyCode != null  and companyCode != ''  ">COMPANY_CODE = #{companyCode} AND </if>
-						<if test="companyName != null and companyName != '' ">COMPANY_NAME = #{companyName} AND </if>
-						<if test="companyAddress != null  and companyAddress != '' ">COMPANY_ADDRESS = #{companyAddress} AND </if>
+						<if test="companyName != null  and companyName != '' ">COMPANY_NAME like concat(concat('%',#{companyName}),'%') AND</if>
+						<if test="companyAddress != null  and companyAddress != '' ">COMPANY_ADDRESS like concat(concat('%',#{companyAddress}),'%') AND</if>
 						<if test="remark != null  and remark != '' ">REMARK = #{remark} AND </if>
 						<if test="creatorId != null and  creatorId !=''">CREATOR_ID = #{creatorId} AND </if>
 						<!-- 开始时间 -->
