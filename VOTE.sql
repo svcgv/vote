@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2018-11-08 21:47:17
+Date: 2018-11-09 10:07:13
 */
 
 
@@ -1242,6 +1242,7 @@ INSERT INTO "VOTE"."MENU_INFO" VALUES ('1022', '议题管理', '1000', '/apply/i
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1023', '投票管理', '1000', '/result/index', '1000', '9', '20180821', 'icon-list', '94', 'Y', 'qrzbhxr.png');
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1028', '投标管理', '1026', '/project/tender/index', '1000', '2', '20181104', 'icon-list', '3', null, null);
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1124', '投标评审管理', '1026', '/project/tenderReview/index', '1000', '2', '20181104', 'icon-list', null, null, null);
+INSERT INTO "VOTE"."MENU_INFO" VALUES ('1144', '审批', '1026', '/project/tenderReview/index', '1000', '2', '20181108', 'icon-list', '8', null, null);
 
 -- ----------------------------
 -- Table structure for ORG_INFO
@@ -1412,6 +1413,14 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_CONFIRM_BID
 -- ----------------------------
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('3', 'asd', '1', '2', '3', '4', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'asdasda', 'dasd', '22', '20181108230353', null, null, '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('1', '名称', '1', '1', '2', '3', null, '390', '中广核新能源投资（深圳）有限公司北京分公司', '1000001264', '2', '销售中心', '5', '管理中心', '1000', '系统管理员', '1000', '系统管理员', '系统管理员_TEST2', '22', 'PMS_管理员（娄）', '41', null, null, null, null, 'ddddddddd', '1000', '20181108220614', null, null, '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('6', 'asda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'das', null, '1000', '20181108232325', null, null, '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('7', 'asdas', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1000', '20181108232456', null, null, '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('8', 'asdasd', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1000', '20181108232557', null, null, '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('2', 'asda', '1', '3', '2', '4', null, null, null, null, '5', '管理中心', '2', '销售中心', '41', 'PMS_管理员（娄）', '22', '系统管理员_TEST2', '系统管理员', '1000', '系统管理员', '1000', null, null, null, 'ddd', 'dasdasda', '1000', '20181108230208', null, null, '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('9', 'asdasda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '22', '20181108232839', null, null, '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('10', 'asda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '22', '20181108233633', null, null, '00', null);
 
 -- ----------------------------
 -- Table structure for PM_CUSTOMER_GROUP
@@ -1698,6 +1707,21 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_FILE
 -- ----------------------------
+INSERT INTO "VOTE"."PM_FILE" VALUES ('1', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxfNoB', null, null, null, '1', null, null, '1000', '20181108222815', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('9', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxDpoA', null, '00', '18922', null, null, null, '22', '20181108230251', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('10', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsx4I9n', null, '00', '13130', null, null, null, '22', '20181108231407', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('11', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsx9tND', null, '00', '135932', null, null, null, '22', '20181108231520', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('12', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsx2FCr', null, '00', '18922', null, null, null, '22', '20181108231827', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('13', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsxxFlv', null, '00', '13130', null, null, null, '22', '20181108232106', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('14', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsxJh57', null, '00', '135932', null, null, null, '1000', '20181108232320', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('15', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxuBwi', null, '00', '18922', null, null, null, '1000', '20181108232417', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('16', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsxF22o', null, '00', '135932', null, null, null, '1000', '20181108232552', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('6', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsxp8FF', null, '00', '13130', null, null, null, '1000', '20181108225920', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('7', 'R00-项目基本信息表（1-9事业部）.xls', 'D://upload/20181108/R00-项目基本信息表（1-9事业部）.xlscqGB', null, '00', '499200', null, null, null, '1000', '20181108225920', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('17', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsxghj3', null, '00', '135932', null, null, null, '22', '20181108232838', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('5', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsxCN7N', null, '00', '13130', null, null, null, '1000', '20181108224919', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('8', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsx9FI4', null, '00', '135932', null, null, null, '22', '20181108230251', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('18', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsx8jye', null, '00', '13130', '10', null, null, '22', '20181108233627', null, null, '00');
 
 -- ----------------------------
 -- Table structure for PM_PAYMENT_POINT
@@ -1874,6 +1898,92 @@ NOCACHE
 
 -- ----------------------------
 -- Records of PM_PROJECT_INCOMMING_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for PM_PROJECT_INFO
+-- ----------------------------
+DROP TABLE "VOTE"."PM_PROJECT_INFO";
+CREATE TABLE "VOTE"."PM_PROJECT_INFO" (
+"PROJECT_ID" NUMBER(10) NOT NULL ,
+"BUILD_DEPT_NAME" VARCHAR2(256 BYTE) NULL ,
+"BUILD_DEPT_ID" NUMBER(10) NULL ,
+"BUILD_MANAGER_NAME" VARCHAR2(256 BYTE) NULL ,
+"BUILD_MANAGER_ID" NUMBER(10) NULL ,
+"SELL_DEPT_NAME" VARCHAR2(256 BYTE) NULL ,
+"SELL_DEPT_ID" NUMBER(10) NULL ,
+"SELL_MANAGER_NAME" VARCHAR2(256 BYTE) NULL ,
+"SELL_MANAGER_ID" NUMBER(10) NULL ,
+"TECHNICAL_DIRECTOR_ID" NUMBER(10) NULL ,
+"TECHNICAL_DIRECTOR_NAME" VARCHAR2(256 BYTE) NULL ,
+"CREATE_PROJECT_TIME" VARCHAR2(32 BYTE) NULL ,
+"FINISH_PROJECT_TIME" VARCHAR2(32 BYTE) NULL ,
+"WBS" VARCHAR2(256 BYTE) NULL ,
+"CUST_NAME" VARCHAR2(256 BYTE) NULL ,
+"CUST_SAP_CODE" NUMBER(10) NULL ,
+"PROJECT_NAME" VARCHAR2(256 BYTE) NULL ,
+"CURRENT_YEAR_FOLLOW" CHAR(2 BYTE) NULL ,
+"IS_CONTINUE" CHAR(2 BYTE) NULL ,
+"PROJECT_STATUS" CHAR(2 BYTE) NULL ,
+"STATE" CHAR(2 BYTE) NULL ,
+"PROJECT_TYPE" CHAR(2 BYTE) NULL ,
+"PREDICT_CONTRACT_AMOUNT" NUMBER(10,2) NULL ,
+"PROFIT_CENTER" CHAR(2 BYTE) NULL ,
+"PROFIT_CODE" VARCHAR2(32 BYTE) NULL ,
+"COST_CENTER" CHAR(2 BYTE) NULL ,
+"COST_CODE" VARCHAR2(32 BYTE) NULL ,
+"PROFIT_RATE" NUMBER(10,4) NULL ,
+"PROFIT_MOUNT" NUMBER(10,2) NULL ,
+"WORK_LOAD" NUMBER(10,2) NULL ,
+"CURREND_YEAR_INCOMMING" NUMBER(10,2) NULL ,
+"CURRENT_YEAR_GROSS_PROFIT" NUMBER(10,2) NULL ,
+"ALL_INCOMMING" NUMBER(10,2) NULL ,
+"OVER_FLOW_REPORT_INCOMMING" NUMBER(10,2) NULL ,
+"SIGN_CONTRACT_DATE" VARCHAR2(32 BYTE) NULL ,
+"IS_SIGNED_CONTRACT" CHAR(2 BYTE) NULL ,
+"FTP_CONTRACT_REVIEW_RESULT" CHAR(2 BYTE) NULL ,
+"ONLINE_DATE" VARCHAR2(32 BYTE) NULL ,
+"IS_ONLINE" CHAR(2 BYTE) NULL ,
+"ONLINE_REPORT_REVIEW_RESULT" CHAR(2 BYTE) NULL ,
+"ACCEPT_DATE" VARCHAR2(32 BYTE) NULL ,
+"IS_ACCEPT" CHAR(2 BYTE) NULL ,
+"FTP_REPORT_REVIEW_RESULT" CHAR(2 BYTE) NULL ,
+"ONLINE_DATE_LATER" VARCHAR2(32 BYTE) NULL ,
+"ACCEPT_DATE_LATER" VARCHAR2(32 BYTE) NULL ,
+"ONLINE_NUM" VARCHAR2(32 BYTE) NULL ,
+"ACCEPT_NUM" VARCHAR2(32 BYTE) NULL ,
+"IS_IMPORTANT" CHAR(2 BYTE) NULL ,
+"BUDGET" NUMBER(10,2) NULL ,
+"CURRENT_YEAR_MOUNT" NUMBER(10,2) NULL ,
+"INNER_ACCEPT_DATE" VARCHAR2(32 BYTE) NULL ,
+"NET_SALARY" NUMBER(10,2) NULL ,
+"YEAR_SALARY" NUMBER(10,2) NULL ,
+"PREDICT_PROFIT_RATE" NUMBER(10,4) NULL ,
+"PREDICT_CAPITA_SALARY" NUMBER(10,2) NULL ,
+"PREDICT_CAPITA_COST" NUMBER(10,2) NULL ,
+"PREDICT_WORKLOAD" NUMBER(10) NULL ,
+"EMPLOYEE_COST" NUMBER(10,2) NULL ,
+"BUSINESS_TRIP_COST" NUMBER(10,2) NULL ,
+"OTHER_COST" NUMBER(10,2) NULL ,
+"ACCRUED_CHARGES_WORKERS" NUMBER(10,2) NULL ,
+"ACCRUED_CHARGES_PRODUCTS" NUMBER(10,2) NULL ,
+"REMARK1" VARCHAR2(128 BYTE) NULL ,
+"REMARK2" VARCHAR2(128 BYTE) NULL ,
+"REMARK3" VARCHAR2(128 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+"CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"CREATOR" NUMBER(10) NULL ,
+"MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
+"MODIFIER" NUMBER(10) NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Records of PM_PROJECT_INFO
 -- ----------------------------
 
 -- ----------------------------
@@ -2090,7 +2200,8 @@ CREATE TABLE "VOTE"."ROLE" (
 "ROLE_ID" NUMBER(16) NOT NULL ,
 "ROLE_NAME" VARCHAR2(40 BYTE) NULL ,
 "ROLE_RMK" VARCHAR2(264 BYTE) NULL ,
-"TM_SMP" VARCHAR2(14 BYTE) NULL 
+"TM_SMP" VARCHAR2(14 BYTE) NULL ,
+"ROLE_CODE" VARCHAR2(64 BYTE) NULL 
 )
 LOGGING
 NOCOMPRESS
@@ -2106,18 +2217,18 @@ COMMENT ON COLUMN "VOTE"."ROLE"."TM_SMP" IS '创建时间';
 -- ----------------------------
 -- Records of ROLE
 -- ----------------------------
-INSERT INTO "VOTE"."ROLE" VALUES ('33', '销售部负责人', '销售部负责人', '20181103');
-INSERT INTO "VOTE"."ROLE" VALUES ('31', '总经理', '总经理室', '20181103');
-INSERT INTO "VOTE"."ROLE" VALUES ('999', '系统管理员', '系统管理员', '20180101');
-INSERT INTO "VOTE"."ROLE" VALUES ('32', '实施管理部负责人', '实施管理部负责人', '20181103');
-INSERT INTO "VOTE"."ROLE" VALUES ('34', '交付部负责人', ' 交付部负责人', '20181103');
-INSERT INTO "VOTE"."ROLE" VALUES ('35', '后台管理部负责人', '后台管理部负责人', '20181103');
-INSERT INTO "VOTE"."ROLE" VALUES ('36', '交付部经理', '交付部经理', '20181103');
-INSERT INTO "VOTE"."ROLE" VALUES ('37', '客户经理', '客户经理', '20181105');
-INSERT INTO "VOTE"."ROLE" VALUES ('38', '普通用户', '普通用户', '20181103');
-INSERT INTO "VOTE"."ROLE" VALUES ('51', '项目经理', '项目经理', '20181105');
-INSERT INTO "VOTE"."ROLE" VALUES ('52', '销售部助理', '销售部助理', '20181105');
-INSERT INTO "VOTE"."ROLE" VALUES ('53', '后台管理部助理', '后台管理部助理', '20181105');
+INSERT INTO "VOTE"."ROLE" VALUES ('33', '销售部负责人', '销售部负责人', '20181103', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('31', '总经理', '总经理室', '20181103', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('999', '系统管理员', '系统管理员', '20180101', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('32', '实施管理部负责人', '实施管理部负责人', '20181103', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('34', '交付部负责人', ' 交付部负责人', '20181103', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('35', '后台管理部负责人', '后台管理部负责人', '20181103', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('36', '交付部经理', '交付部经理', '20181103', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('37', '客户经理', '客户经理', '20181105', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('38', '普通用户', '普通用户', '20181103', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('51', '项目经理', '项目经理', '20181105', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('52', '销售部助理', '销售部助理', '20181105', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('53', '后台管理部助理', '后台管理部助理', '20181105', null);
 
 -- ----------------------------
 -- Table structure for ROLE_MENU
@@ -2314,8 +2425,8 @@ COMMENT ON COLUMN "VOTE"."USR_INFO"."STR_REMARK" IS '备注';
 -- Records of USR_INFO
 -- ----------------------------
 INSERT INTO "VOTE"."USR_INFO" VALUES ('41', null, 'PMS_管理员（娄）', '1', '111111', '2018-11-03', '13711111111', 'mailwork_sh@163.com', '22', '0', '20181103', null, '01', '111111111111111', '111111111111111', null, null, '111111');
-INSERT INTO "VOTE"."USR_INFO" VALUES ('1000', 'Aoot', '系统管理员', '0', '111111', '20170523', '111111', '11111', null, '1', '20170217', '1000', '01', null, null, '49DEAD34BB0C03D9704ED7D88C4987FC', '20181106225219939', null);
-INSERT INTO "VOTE"."USR_INFO" VALUES ('22', null, '系统管理员_TEST2', '1', '111111', '2018-10-12', '13666666666', '35q13w5eq@qq.com', '22', '0', '20181103', '1000', '01', '3123123', '420123123123123', null, '20181105154411716', 'asda');
+INSERT INTO "VOTE"."USR_INFO" VALUES ('1000', 'Aoot', '系统管理员', '0', '111111', '20170523', '111111', '11111', null, '1', '20170217', '1000', '01', null, null, '32E4A61D6DBAA140BF88987681C1507C', '20181109095423534', null);
+INSERT INTO "VOTE"."USR_INFO" VALUES ('22', null, '系统管理员_TEST2', '1', '111111', '2018-10-12', '13666666666', '35q13w5eq@qq.com', '22', '0', '20181103', '1000', '01', '3123123', '420123123123123', null, '20181108233633063', 'asda');
 
 -- ----------------------------
 -- Table structure for USR_MENU
@@ -2364,8 +2475,8 @@ COMMENT ON COLUMN "VOTE"."USR_ROLE"."TM_SMP" IS '创建时间';
 -- ----------------------------
 INSERT INTO "VOTE"."USR_ROLE" VALUES ('2', '1', '20180731150933');
 INSERT INTO "VOTE"."USR_ROLE" VALUES ('13', '1', '20180813165527');
-INSERT INTO "VOTE"."USR_ROLE" VALUES ('1000', '1', '20181031001438');
 INSERT INTO "VOTE"."USR_ROLE" VALUES ('22', '1', '20181031001453');
+INSERT INTO "VOTE"."USR_ROLE" VALUES ('1000', '38', '20181108215604');
 
 -- ----------------------------
 -- Table structure for VOTE_APPLY_INFO
@@ -3491,7 +3602,7 @@ CREATE SEQUENCE "VOTE"."MENUIDSEQUENCE"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 999999999999999999999999999
- START WITH 1144
+ START WITH 1164
  CACHE 20;
 
 -- ----------------------------
@@ -3524,7 +3635,7 @@ CREATE SEQUENCE "VOTE"."PMCONFIRMBID_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 1
+ START WITH 21
  CACHE 20;
 
 -- ----------------------------
@@ -3558,6 +3669,17 @@ CREATE SEQUENCE "VOTE"."PMCUSTOMERINFO_SEQ"
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
  START WITH 561
+ CACHE 20;
+
+-- ----------------------------
+-- Sequence structure for PMFILE_SEQ
+-- ----------------------------
+DROP SEQUENCE "VOTE"."PMFILE_SEQ";
+CREATE SEQUENCE "VOTE"."PMFILE_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 21
  CACHE 20;
 
 -- ----------------------------
@@ -3598,6 +3720,17 @@ CREATE SEQUENCE "VOTE"."PMPROJECTGROUPRELATIONINFO_SEQ"
 -- ----------------------------
 DROP SEQUENCE "VOTE"."PMPROJECTINCOMMINGINFO_SEQ";
 CREATE SEQUENCE "VOTE"."PMPROJECTINCOMMINGINFO_SEQ"
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999999999999999999999999
+ START WITH 1
+ CACHE 20;
+
+-- ----------------------------
+-- Sequence structure for PMPROJECTINFO_SEQ
+-- ----------------------------
+DROP SEQUENCE "VOTE"."PMPROJECTINFO_SEQ";
+CREATE SEQUENCE "VOTE"."PMPROJECTINFO_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
@@ -4618,6 +4751,15 @@ ALTER TABLE "VOTE"."PM_PROJECT_GROUP_RELATION_INFO" ADD PRIMARY KEY ("RELATIONSH
 -- Primary Key structure for table PM_PROJECT_INCOMMING_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_PROJECT_INCOMMING_INFO" ADD PRIMARY KEY ("RECEIVE_ID");
+
+-- ----------------------------
+-- Indexes structure for table PM_PROJECT_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Primary Key structure for table PM_PROJECT_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_INFO" ADD PRIMARY KEY ("PROJECT_ID");
 
 -- ----------------------------
 -- Indexes structure for table PM_PROJECT_MILESTONE_INFO
