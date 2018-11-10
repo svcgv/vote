@@ -129,7 +129,6 @@
  
 <script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="tenderReview">提交评审</a>
   <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="view">查看</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -228,24 +227,68 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    toolbar: '#toolbarDemo',
 	    height:'full-200',
 	    title: '投标数据表',
-	    cols: [[
-	    	  {type: 'checkbox', fixed: 'left'},
-	  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
-	  	      {field:'bidName', title:'投标名称', width:130},
-	  	      {field:'status', title:'评审状态', width:130},
-	  	      {field:'bidFirstPrice', title:'投标首次报价金额', width:150},
-	  	      {field:'custName', title:'客户名称', width:130},
-	  	      {field:'predictAmount', title:'预估收入金额', width:150},
-	  	      {field:'predictCost', title:'预估成本', width:120},
-	  	      {field:'predictProfitRate', title:'预估利润率'},
-	  	      {field:'predictPeriod', title:'预付期限'},
-	  	      {field:'payDeptName', title:'交付部门'},
-	  	      {field:'sellDeptName', title:'销售部门'},
-	  	      {field:'custManagerName', title:'客户经理'},
-	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
-	    ]],
-	    cellMinWidth:'90',
-	    data:[],
+	    cols: [
+	    	[
+	    	  
+	  	      {align: 'center', title: '项目信息', colspan: 16},
+	  	      {align: 'center', title: '项目预算', colspan: 6},
+	  	      {align: 'center', title: '上报收入', colspan: 2},
+	  	      {align: 'center',field: 'lastYearRevenue', title: '去年上报的收入', rowspan: 2},
+	  	      {align: 'center',field: 'signContractDate', title: '合同签订日期', rowspan: 2},
+	  	      {align: 'center',field: 'isSignedContract', title: '是否签订', rowspan: 2},
+	  	      {align: 'center',field: 'workLoadConfirm', title: '工作量确认', rowspan: 2},
+	  	      {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
+	   		],
+		    [
+		    	  {type: 'checkbox', fixed: 'left'},
+		  	      {field:'projectId', title:'项目编号', sort: true, width:130},
+		  	      {field:'buildDeptName', title:'实施部门',sort: true, width:130},
+		  	      {field:'buildManagerName', title:'实施负责人' ,sort: true, width:130},
+		  	      {field:'sellDeptName', title:'销售部门', width:130},
+		  	      {field:'sellManagerName', title:'销售负责人', width:130},
+		  	      {field:'createProjectTime', title:'立项时间'},
+		  	      {field:'finishProjectTime', title:'结项时间'},
+		  	      {field:'wbs', title:'WBS编号', width:150},
+		  	      {field:'custName', title:'客户名称', width:150},
+		  	      {field:'projectName', title:'项目名称'},
+		  	      {field:'currentYearFollow', title:'本年关注'},
+		  	      {field:'isContinue', title:'是否延续'},
+		  	      {field:'isSignedContract', title:'是否签订'},
+		  	      {field:'state', title:'状态'},
+		  	      {field:'projectType', title:'项目类型'},
+		  	      
+		    	  {field:'predictContractAmount', title:'合同金额'},
+		    	  {field:'profitRate', title:'利润率'},
+		    	  {field:'profitMount', title:'利润'},
+		    	  {field:'workLoad', title:'工作量'},
+		    	  {field:'currendYearIncomming', title:'本年可报收入'},
+		    	  {field:'currentYearGrossProfit', title:'本年毛利'},
+		    	  
+		    	  {field:'allIncomming', title:'收入合计'},
+		    	  {field:'overFlowReportIncomming', title:'超报收入'},
+		    ]
+	    ],
+	    cellMinWidth:'120',
+	    data:[
+	    	{
+	    		projectId:"pro-01",
+	    		buildDeptName:"实施部门",
+	    		custName:'交通银行 ',
+	    		projectType:'整包',
+	    		predictContractAmount:'2000000000',
+	    		profitRate:'12%',
+	    		allIncomming:'120000',
+	    	},
+	    	{
+	    		projectId:"pro-01",
+	    		buildDeptName:"实施部门",
+	    		custName:'交通银行 ',
+	    		projectType:'整包',
+	    		predictContractAmount:'2000000000',
+	    		profitRate:'12%',
+	    		allIncomming:'120000',
+	    	}
+	    	],
 	    page: true
 	  });
 
@@ -340,8 +383,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	$(".project-info-wrapper #add-hook").click(function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
-	  		title:"新增投标",
-	  		width:"800"
+	  		title:"新增项目",
+	  		width:"90%"
 	  	})
 	});
 	
@@ -349,23 +392,14 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 查看和修改 form 表单
 	*/
 	function showFromTable(isEdit,id){
-		var _width=800;
+		var _width='90%';
 		if(isEdit == "edit"){
 			var url='edit?act=edit&id='+id;
-			var title="修改投标信息";
+			var title="修改项目信息";
 		}else if(isEdit == "view"){
 			var url='view?act=view&id='+id;
-	    	var	title="查看投标信息";
-		}else if(isEdit == "review"){
-			var url='review?act=review&id='+id;
-	    	var	title="投标评审";
-	    	_width=650;
+	    	var	title="查看项目信息";
 		}
-		/*else if(isEdit == "setMoney"){
-			var url='setMoney?act=setMoneyw&id='+id;
-	    	var	title="设置付款点";
-	    	_width=820;
-		}*/
 		$.openWindow({
 	  		url:url,
 	  		title:title,

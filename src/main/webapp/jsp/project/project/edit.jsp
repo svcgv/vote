@@ -3,147 +3,263 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="cm" uri="http://www.custom.com/01"%>
 <style>
-#tender-addForm-hook .layui-form-label {
+#project-addForm-hook .layui-form-label {
     width: 130px!important;
 }
-.formDetail-wrapper .customer-list{
+.project-form-wrapper .customer-list{
 	word-wrap:normal;
 	word-break:keep-all;
 	padding:5px;
 	display: inline-block;
 }
-.formDetail-wrapper .layui-icon-close-fill{
+.project-form-wrapper .layui-icon-close-fill{
 	position:relative;
 	top:1px;
 }
 </style>
-<div id="tender-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
+<div id="project-addForm-hook" class="project-form-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+		  <legend style="font-weight:bold;">项目信息</legend>
+		</fieldset>
 		  <div class="layui-form-item">
-		    <div class="layui-inline">
+		  	
+		  	<div class="layui-inline">
 		      <label class="layui-form-label">投标名称：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="bidName" value="反写"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
+		         <input type="hidden" name="bidId">
+		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="bidNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		  	
+		    <div class="layui-inline" style="margin-right:64px;">
+		      <label class="layui-form-label">项目名称：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name=projectName  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标首次报价金额：</label>
+		      <label class="layui-form-label">实施部门：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="bidFirstPrice" value="反写" autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="buildDeptName"  autocomplete="off" class="layui-input form-control">
+		         <input type="hidden" name="buildDeptId" />
 		      </div>
+		         <button type="button"  class="layui-btn layui-btn-sm" id="buildDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
+		    
+		    <div class="layui-inline">
+			      <label class="layui-form-label">实施负责人：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="buildManagerName"  autocomplete="off" class="layui-input form-control">
+			         <input type="hidden" name="buildManagerId" />
+			      </div>
+			      <button type="button"  class="layui-btn layui-btn-sm" id="buildManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		    
+		     <div class="layui-inline">
+			      <label class="layui-form-label">销售部门：</label>
+			      <div class="layui-input-inline">
+				       <input type="text" name="sellDeptName"  autocomplete="off" class="layui-input form-control">
+				       <inpu type="hidden" name="sellDeptId" />
+			      </div>
+			      <button type="button"  class="layui-btn layui-btn-sm" id="sellDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		    
+		     <div class="layui-inline">
+		      <label class="layui-form-label">销售负责人：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="sellManagerName"  autocomplete="off" class="layui-input form-control">
+		         <input type="hidden" name="sellManagerId" />
+		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="sellManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		    
+		    <div class="layui-inline">
+		      <label class="layui-form-label">WBS编号：</label>
+		       <div class="layui-input-inline">
+	         		<input type="text" name="wbs" autocomplete="off" class="layui-input form-control">
+		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="wbsQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="custName" readonly="readonly" value="反写"  autocomplete="off" class="layui-input form-control disabledColor">
-		         <input type="hidden" name="custId">
+		          <input type="text" name="custName" autocomplete="off" class="layui-input form-control">
 		      </div>
-		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+	      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
-		    <div class="layui-inline">
-		      <label class="layui-form-label">预估收入金额：</label>
+		    
+		     <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">项目类型：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="predictAmount"  autocomplete="off" class="layui-input form-control">
+		          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
+		        	 <option value="">请选择</option>
+		        	 <option value="00" selected>整包项目</option>
+		        	 <option value="01">人力项目</option>
+		        	 <option value="02">订单项目</option>
+		        	 <option value="03">内部研发项目</option>
+		          </select>
+		      </div>
+		    </div>
+		     <div class="layui-inline" style="padding-right:55px;">
+		       <label class="layui-form-label">状态：</label>
+		       <div class="layui-input-inline">
+		          <select name="state" lay-verify="required" lay-filter="" class="form-control">
+		        	 <option value="">请选择</option>
+		        	 <option value="00" selected>进行中</option>
+		        	 <option value="02">待验收</option>
+		        	 <option value="01">结项</option>
+		        	 <option value="03">关闭</option>
+		          </select>
 		      </div>
 		    </div>
 		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">预估成本：</label>
-		      <div class="layui-input-inline">
-		       <input type="text" name="predictCost"  autocomplete="off" class="layui-input form-control">
+		     <div class="layui-inline" style="padding-right:55px;">
+		       <label class="layui-form-label">立项时间：</label>
+		       <div class="layui-input-inline">
+		          <input type="text" name="createProjectTime" id="createProjectTime2-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">预估利润率：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="predictProfitRate"  autocomplete="off" class="layui-input form-control">
-		      </div>
+		     <div class="layui-inline" style="padding-right:55px;">
+			      <label class="layui-form-label">结项时间：</label>
+			       <div class="layui-input-inline">
+			          <input type="text" name="finishProjectTime" id="finishProjectTime2-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
+			      </div>
 		    </div>
-		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">预付期限：</label>
-		       <div class="layui-input-inline">
-	         		<input type="text" name="predictPeriod" id="predictPeriodDate2" autocomplete="off" class="layui-input form-control hasDatepicker">
-		      </div>
-		    </div>
-		    <div class="layui-inline">
-		      <label class="layui-form-label">交付部门：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="payDeptName" readonly="readonly" value="反写部门" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="payDeptId" value="反写ID">
-		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
-		    </div>
-		    <div class="layui-inline">
-		      <label class="layui-form-label">销售部门：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="sellDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="sellDeptId">
-		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
-		    </div>
-		     <div class="layui-inline">
-		      <label class="layui-form-label">客户经理：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="custManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="custManagerId">
-		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
-		    </div>
-		    
-	      <div class="layui-inline">
-	       		 <label class="layui-form-label" style="width:170px!important;">工作任务及范围是否清晰：</label>
-	       		 <div class="layui-input-inline">
-	       		 	<!-- open 是开启 close 是关闭 (关闭时  设置 file-hook style="display:none;")    对应 isWorkAreaExplicit 数据字典 -->
-			        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="是|否">
-			    </div>
-	       </div>
-	       <div class="file-hook" style="width:95%;margin:0 auto;">
-		      <div class="layui-upload">
-			  	<button type="button" class="layui-btn" id="wosUploads"><i class="layui-icon"></i>选择文件</button> 
-				  <div class="layui-upload-list">
-				    <table class="layui-table">
-				      <thead>
-				        <tr><th>文件名</th>
-				        <th>大小</th>
-				        <th>状态</th>
-				        <th>操作</th>
-				      </tr></thead>
-				      <tbody id="wosFileList">
-				      <!-- 反写已上传的数据 -->
-				      	<tr class="edit-wosUploaded">
-					      	<td>Business Analysis Report.xlsx</td>
-					      	<td>15379.5kb</td>
-					      	<td>已上传</td>
-					      	<td>
-				      			<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete" style="margin-left:10px;">删除</button>
-				      		</td>
-				      	</tr>
-				      </tbody>
-				    </table>
-				  </div>
-			  	<button type="button" class="layui-btn" id="wosListAction">开始上传</button>
-			 </div> 
 		  </div>
-	       <div class="layui-inline">
-	       		 <label class="layui-form-label">备注：</label>
-	       		 <div class="layui-input-inline" style="width:323px;">
-			      <textarea name="remark"  class="layui-textarea form-control"></textarea>
+		  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+		 	 <legend style="font-weight:bold;">项目预算</legend>
+		  </fieldset>
+		  <div class="layui-form-item" style="margin-bottom:0px;">
+			    <div class="layui-inline" style="margin-right:64px;">
+			      <label class="layui-form-label">合同金额：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="predictContractAmount"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			   	 </div>
+		    
+			    <div class="layui-inline" style="margin-right:64px;">
+			      <label class="layui-form-label">利润率：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="profitRate"  autocomplete="off" class="layui-input form-control">
+			      </div>
 			    </div>
-	       </div>
+			    
+			    <div class="layui-inline" style="margin-right:64px;">
+			      <label class="layui-form-label">利润：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="profitMount"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			    </div>
+		     </div>
 		     
-		     
+		     <div class="layui-form-item">
+			    <div class="layui-inline" style="margin-right:64px;">
+			      <label class="layui-form-label">工作量：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="workLoad"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			    </div>
+			    
+			    <div class="layui-inline" style="margin-right:64px;">
+			      <label class="layui-form-label">本年可报收入：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="currendYearIncomming"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			    </div>
+			    
+			    <div class="layui-inline" >
+			      <label class="layui-form-label">本年毛利：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="currentYearGrossProfit"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			    </div>
+		   	</div>
+		   	<div class="layui-form-item">
+			    <div class="layui-inline" style="margin-right:64px;">
+			      <label class="layui-form-label">人力费用：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="workLoad"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			    </div>
+			    
+			    <div class="layui-inline" style="margin-right:64px;">
+			      <label class="layui-form-label">差旅费用：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="currendYearIncomming"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			    </div>
+			    
+			    <div class="layui-inline" >
+			      <label class="layui-form-label">其他费用：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="currentYearGrossProfit"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			    </div>
+		   	</div>
+		   <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+		 	 <legend style="font-weight:bold;">上报收入</legend>
+		  </fieldset>
+		  <div class="layui-form-item" >
+		  		<div class="layui-inline" style="margin-right:64px;">
+			      <label class="layui-form-label">收入合计：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="allIncomming"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			    </div>
+		  		<div class="layui-inline" >
+			      <label class="layui-form-label">超报收入：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="overFlowReportIncomming"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			    </div>
 		  </div>
+		  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+		 	 <legend style="font-weight:bold;">其他</legend>
+		  </fieldset>
+		  <div class="layui-form-item" >
+		  		<div class="layui-inline" style="margin-right:64px;">
+			      <label class="layui-form-label">去年上报的收入：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="lastYearRevenue"  autocomplete="off" class="layui-input form-control">
+			      </div>
+			    </div>
+		  		<div class="layui-inline" style="margin-right:64px;">
+			      <label class="layui-form-label">合同签订日期：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="signContractDate" id="signContractDate-form"  autocomplete="off" class="layui-input form-control hasDatepicker">
+			      </div>
+			    </div>
+			    <div class="layui-inline" style="margin-right:64px;">
+		      	   <label class="layui-form-label">是否签订：</label>
+			       <div class="layui-input-inline">
+				        <select name="isSignedContract" lay-verify="required" lay-filter="" class="form-control">
+				        	 <option value="">请选择</option>
+				        	 <option value="01" selected>是</option>
+				        	 <option value="02">否</option>
+			          	</select>
+			      </div>
+			    </div>
+			    <div class="layui-inline" style="margin-right:64px;">
+		      	   <label class="layui-form-label">工作量确认：</label>
+			       <div class="layui-input-inline">
+				        <select name="workLoadConfirm" lay-verify="required" lay-filter="" class="form-control">
+				        	 <option value="">请选择</option>
+				        	 <option value="01" selected>半年确认</option>
+				        	 <option value="02">季度确认</option>
+				        	 <option value="03">每月确认</option>
+			          	</select>
+			      </div>
+			    </div>
+		  </div>
+		   
+		   
+		   
+		   
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
     	<a class="layui-layer-btn0" id="customGroup-add-hook" style="background:#009688;border-color:#009688;">保存</a>
@@ -156,165 +272,61 @@ $(function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
 	  	  laydate=layui.laydate,
-	  	upload=layui.upload;
+	  	  upload=layui.upload;
 		
-		 //日期
-	  laydate.render({
-		    elem: "#predictPeriodDate2",
-		    theme: 'molv',
-		    type: 'datetime'
-	 });
+		//日期
+		   laydate.render({
+				    elem: "#createProjectTime2-hook",
+				    theme: 'molv',
+				    type: 'datetime'
+			 });
+			laydate.render({
+				    elem: "#finishProjectTime2-hook",
+				    theme: 'molv',
+				    type: 'datetime'
+			 });
+			laydate.render({
+				    elem: "#signContractDate-form",
+				    theme: 'molv',
+				    type: 'datetime'
+			 });
 		
 	// form 表单手动渲染
 	  form.render();
-  //监听指定开关
-  form.on('switch(switchTest)', function(data){
-   	 var check= this.checked ? true : false;
-   	 if(check){
-   		 $("#tender-addForm-hook .file-hook").show();
-   	 }else{
-   		 $("#tender-addForm-hook .file-hook").hide();
-   	 }
-  });
-  // 编辑状态 上传的 删除
-  $(".edit-wosUploaded .demo-delete").click(function(){
 	  
-	  $(this).parents("tr").remove();
-	  // 后台数据删除
-	  
-  })
-  
-  
-//多文件上传
-  var demoListView = $('#wosFileList')
-  ,uploadListIns = upload.render({
-    elem: '#wosUploads'
-    ,url: '/upload/'
-    ,accept: 'file'
-    ,multiple: true
-    ,auto: false
-    ,bindAction: '#wosListAction'
-    ,choose: function(obj){   
-      var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
-      //读取本地文件
-      obj.preview(function(index, file, result){
-        var tr = $(['<tr id="upload-'+ index +'">'
-          ,'<td>'+ file.name +'</td>'
-          ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
-          ,'<td>等待上传</td>'
-          ,'<td>'
-            ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
-            ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
-          ,'</td>'
-        ,'</tr>'].join(''));
-        
-        //单个重传
-        tr.find('.demo-reload').on('click', function(){
-          obj.upload(index, file);
-        });
-        
-        //删除
-        tr.find('.demo-delete').on('click', function(){
-          delete files[index]; //删除对应的文件
-          tr.remove();
-          uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
-        });
-        
-        demoListView.append(tr);
-      });
-    }
-    ,done: function(res, index, upload){
-      if(res.code == 0){ //上传成功
-        var tr = demoListView.find('tr#upload-'+ index)
-        ,tds = tr.children();
-        tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
-        tds.eq(3).html(''); //清空操作
-        return delete this.files[index]; //删除文件队列已经上传成功的文件
-      }
-      this.error(index, upload);
-    }
-    ,error: function(index, upload){
-      var tr = demoListView.find('tr#upload-'+ index)
-      ,tds = tr.children();
-      tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
-      tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
-    }
-  });
-  
-  
-  
-  
-  //客户查询
-  $("#tender-addForm-hook #custNameQuery-hook").click(function(){
-	  $.openWindow({
-	  		url:'customer?act=addCust',
-	  		title:"选择客户",
-	  		width:"700"
-	 });
-	  
-	});
-  
-  $("#tender-addForm-hook #payOrgQuery-hook").click(function(){
-	  $.openWindow({
-	  		url:'org?act=addPay',
-	  		title:"选择交付部门",
-	  		width:"400"
-	 });
-	  
-  });
-	
-	 // 选择机构
-  $("#tender-addForm-hook #orgQuery-hook").click(function(){
-	  $.openWindow({
-	  		url:'org?act=add',
-	  		title:"选择销售部门",
-	  		width:"400"
-	 });
-	  
-  });
-  
-  // 选择人员
-  $("#tender-addForm-hook #userQuery-hook").off("click").on("click",function(){
-	  	$.openWindow({
-	  		url:'user?act=add',
-	  		title:"选择客户经理",
-	  		width:"700"
-	 	 });
-	}); 
-	  
-		var win=$("#tender-addForm-hook").getWindow();
-		// 保存
-		$("#tender-addForm-hook #customGroup-add-hook").click(function(){
-			var customerGroupName=$("#tender-addForm-hook input[name='bidName']").val();
-			if($.trim(customerGroupName) ==''){
-				layer.msg("请输入投标名称");
-				return false;
-			}
-			
-			var formDatas=$("#tender-addForm-hook form").serializeObject();
-			$.ajax({
-				type:'POST',
-				url:'save',
-				data:{
-					queryParams:formDatas
-				},
-				success:function(res){
-					layer.msg("新增成功",{icon:1});
-					win.close();
-				},
-				error:function(){
-					layer.msg("新增失败",{icon:5});
-					win.close();
-				}
-			})
+	var win=$("#project-addForm-hook").getWindow();
+	// 保存
+	$("#project-addForm-hook #customGroup-add-hook").click(function(){
+		var customerGroupName=$("#project-addForm-hook input[name='bidName']").val();
+		if($.trim(customerGroupName) ==''){
+			layer.msg("请输入投标名称");
 			return false;
-		})
+		}
 		
-		// 关闭
-		$("#tender-addForm-hook #customerGroup-close-hook").click(function(){
-			win.close();
-			return false;
-		})
+		var formDatas=$("#project-addForm-hook form").serializeObject();
+		$.ajax({
+			type:'POST',
+			url:'save',
+			data:{
+				queryParams:formDatas
+			},
+			success:function(res){
+				layer.msg("新增成功",{icon:1});
+				win.close();
+			},
+			error:function(){
+				layer.msg("新增失败",{icon:5});
+				win.close();
+			}
+		});
+		return false;
+	});
+	
+	// 关闭
+	$("#project-addForm-hook #customerGroup-close-hook").click(function(){
+		win.close();
+		return false;
+	})
 	
 	})
 });
