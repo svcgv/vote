@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
-.project-form-wrapper .layui-form-label{width:70px!important;}
+.project-user-wrapper .layui-form-label{width:70px!important;}
 </style>
-<div style="margin-top:10px;" class="project-form-wrapper">
+<div style="margin-top:10px;" class="project-user-wrapper">
 	<form class="layui-form" id="user-query-form" action="">
 	  <div class="layui-form-item">
 	  	<div class="layui-inline">
@@ -82,28 +82,31 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	
 	// 保存 事件
 	var act="${act}";// 区分是index页 form页 赋值问题
-	var win=$(".project-form-wrapper").getWindow();
-	$(".project-form-wrapper").on("click","#save-hook",function(){
+	var win=$(".project-user-wrapper").getWindow();
+	$(".project-user-wrapper").on("click","#save-hook",function(){
 		// 遍历选中的radio
-		$(".project-form-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
+		$(".project-user-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
 			var chk=$(this).find(".laytable-cell-radio");
 			var isChecked=chk.find(".layui-form-radio").hasClass("layui-form-radioed");
 			if(isChecked){
 				var userId=$(this).children("td").eq(1).text();
 				var userName=$(this).children("td").eq(2).text();
 				if(act == "buildManager"){
+					// index
 					$("#project-index-form input[name='buildManagerName']").val(userName);
 					$("#project-index-form input[name='buildManagerId']").val(userId);
-			 		
 			 	}else if(act =="sellManager"){ 
+			 		// index
 			 		$("#project-index-form input[name='sellManagerName']").val(userName);
 					$("#project-index-form input[name='sellManagerId']").val(userId);
-			 	}else if(act =="addDept"){ // 交付部门负责人页面
-			 		//$("#tender-addForm-hook input[name='constructionDeptManagerName']").val(userName);
-					//$("#tender-addForm-hook input[name='constructionDeptManagerId']").val(userId);
-			 	}else if(act =="addSaleDept"){ //销售部门负责人 页面
-			 		//$("#tender-addForm-hook input[name='sellDeptManagerName']").val(userName);
-					//$("#tender-addForm-hook input[name='sellDeptManagerId']").val(userId);
+			 	}else if(act =="buildManagerForm"){
+			 		// form
+			 		$("#project-form-hook input[name='buildManagerName']").val(userName);
+					$("#project-form-hook input[name='buildManagerId']").val(userId);
+			 	}else if(act =="sellManagerForm"){ 
+			 		// form
+			 		$("#project-form-hook input[name='sellManagerName']").val(userName);
+					$("#project-form-hook input[name='sellManagerId']").val(userId);
 			 	}else if(act =="reviewPay"){ // 投标 评审
 			 		//$("#review-query-form input[name='payDeptName']").val(userName);
 					//$("#review-query-form input[name='payDeptId']").val(userId);
@@ -118,8 +121,8 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	});
 	
 	// 关闭按钮
-	var win=$(".project-form-wrapper").getWindow();
-	$(".project-form-wrapper").on("click","#close-hook",function(){
+	var win=$(".project-user-wrapper").getWindow();
+	$(".project-user-wrapper").on("click","#close-hook",function(){
 		win.close();
 	});
 	

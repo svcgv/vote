@@ -6,14 +6,14 @@
 	<form class="layui-form" id="user-query-form" action="">
 	  <div class="layui-form-item">
 	  	<div class="layui-inline">
-	       <label class="layui-form-label">用户编号：</label>
+	       <label class="layui-form-label">投标编号：</label>
 	       <div class="layui-input-inline">
 	         <input type="text" name="usrId"  autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
 	  	
 	  	<div class="layui-inline">
-	      <label class="layui-form-label" >用户名称：</label>
+	      <label class="layui-form-label" >投标项目名称：</label>
 	       <div class="layui-input-inline">
 	         <input type="text" name="usrName"  autocomplete="off" class="layui-input form-control" >
 	      </div>
@@ -28,7 +28,7 @@
 	    
 	  </div>
 	</form>
-	<table class="layui-hide" id="userTable" lay-filter="custom" style="overflow:hidden;"></table>
+	<table class="layui-hide" id="tenderTable" lay-filter="tenderFilter" style="overflow:hidden;"></table>
 	
     <div class="layui-layer-btn layui-layer-btn-c">
     	<a class="layui-layer-btn0" id="save-hook" style="background:#009688;border-color:#009688;">保存</a>
@@ -57,9 +57,9 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	  
   // table render
   table.render({
-	    elem: '#userTable',
+	    elem: '#tenderTable',
 	    id:'user-table',
-	    url:'/vote/queryusrinfo/list',
+	    url:'/vote/pmconfirmbid/list',
 	    method:'post',
 		where:{
 			queryStr:JSON.stringify(getParam())
@@ -72,13 +72,16 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    width:"690",
 	    title: '用数据表',
 	    cols: [[
-	      {type: 'radio' },
-	      {field:'usrId', title:'用户ID', sort: true},
-	      {field:'usrName', title:'用户名'}
+	      {type: 'radio'},
+	      {field:'bidId', title:'投标编号', width:130,templet:function(d){
+	    	  var jsonStr = JSON.stringify(d);
+	    	  return '<div class="jsonData" dataStr='+jsonStr+'>'+d.bidId+'</div>'
+	      } },
+  	      {field:'bidName', title:'投标项目名称', width:130},
+  	      {field:'custCnName', title:'客户名称'}
 	    ]],
 	    page: true
 	  });
-	
 	
 	// 保存 事件
 	var act="${act}";// 区分是index页 form页 赋值问题
@@ -89,21 +92,35 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			var chk=$(this).find(".laytable-cell-radio");
 			var isChecked=chk.find(".layui-form-radio").hasClass("layui-form-radioed");
 			if(isChecked){
-				var userId=$(this).children("td").eq(1).text();
-				var userName=$(this).children("td").eq(2).text();
-				if(act =="tenderForm"){ // 交付部门负责人页面
+				var dataStr=$(this).children("td").eq(1).find(".jsonData").attr("dataStr");
+				var obj=JSON.parse(dataStr);
+				
+				console.log(obj)
+				if(act == "tenderForm"){
+					// 给form 表单反写值
+					//投标名称
+					$("#project-form-hook input[name='bidName']").val(obj.bidName);
+					$("#project-form-hook input[name='bidId']").val(obj.bidId);
+					
+					$("#project-form-hook input[name='custName']").val(obj.custCnName);
+					$("#project-form-hook input[name='custId']").val(obj.custId);
+					
+					$("#project-form-hook input[name='buildDeptName']").val(obj.constructionDeptName);
+					$("#project-form-hook input[name='buildDeptId']").val(obj.constructionDeptId);
+					
+					$("#project-form-hook input[name='buildManagerName']").val(obj.constructionDeptManagerName);
+					$("#project-form-hook input[name='buildManagerId']").val(obj.constructionDeptManagerId);
+					
+					$("#project-form-hook input[name='sellDeptName']").val(obj.sellDeptName);
+					$("#project-form-hook input[name='sellDeptId']").val(obj.sellDeptId);
+					
+					$("#project-form-hook input[name='sellManagerName']").val(obj.sellDeptManagerName);
+					$("#project-form-hook input[name='sellManagerId']").val(obj.sellDeptManagerId);
+					
+					// 投标里的字段 和项目里的 请确认  我不是很清楚 反写的可能有误
+					$("#project-form-hook input[name='predictContractAmount']").val(obj.predictAmount);
+					$("#project-form-hook input[name='profitMount']").val(obj.predictProfitRate);
 			 		
-			 		$("#project-addForm-hook input[name='bidName']").val(userName);
-					$("#project-addForm-hook input[name='bidId']").val(userId);
-			 	}else if(act =="addSaleDept"){ //销售部门负责人 页面
-			 		//$("#tender-addForm-hook input[name='sellDeptManagerName']").val(userName);
-					//$("#tender-addForm-hook input[name='sellDeptManagerId']").val(userId);
-			 	}else if(act =="reviewPay"){ // 投标 评审
-			 		//$("#review-query-form input[name='payDeptName']").val(userName);
-					//$("#review-query-form input[name='payDeptId']").val(userId);
-			 	}else if(act =="reviewSell"){// 投标 评审
-			 		//$("#review-query-form input[name='sellDeptName']").val(userName);
-					//$("#review-query-form input[name='sellDeptId']").val(userId);
 			 	}
 			}
 		});
@@ -131,7 +148,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			      testData=res.page
 
 			      table.render({
-			  	    elem: '#userTable',
+			  	    elem: '#tenderTable',
 			  	    //url:'custom.json',
 			  	    height:'260',
 			  	    width:"690",
