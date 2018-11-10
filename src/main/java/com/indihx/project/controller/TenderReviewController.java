@@ -33,11 +33,14 @@ import com.alibaba.fastjson.JSON;
 import com.indihx.AbstractBaseController;
 import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
+import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
+import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.system.service.impl.ParamsInfoServiceimpl;
+import com.indihx.util.UserUtil;
 
 /**
  * 投标评审管理
@@ -50,6 +53,11 @@ public class TenderReviewController extends AbstractBaseController{
 	private ParamsInfoServiceimpl infoservice;
 	@Autowired
     private PmConfirmBidService pmConfirmBidService;
+	
+	@Autowired
+    private PmReviewInfoService pmReviewInfoService;
+	
+	
 	
 	@RequestMapping("/tenderReview/index")
 	public ModelAndView addCustomView() {
@@ -122,9 +130,24 @@ public class TenderReviewController extends AbstractBaseController{
 		}
 		// 评审
 		@RequestMapping(value="/tenderReview/review",method=RequestMethod.GET)
-		public ModelAndView reviewFormView(@RequestParam("act") String act) {
+		public ModelAndView reviewFormView(@RequestParam("act") String act,@RequestParam("id")long id,HttpSession session){
+	    	UsrInfo usesr = UserUtil.getUser(session);
 			ModelAndView view = new ModelAndView();
+			Map<String,Object> entity = new HashMap<String,Object>();
+			entity.put("foreignId", id);
+			entity.put("isDelete", "00");
+			
+			List<PmReviewInfoEntity> list = pmReviewInfoService.queryList(entity);
+			if(list.isEmpty()) {
+				view.addObject("reviewId",0);
+			}
+			else {
+				view.addObject("reviewId",list.get(0).getReviewId());
+			}
 			view.addObject("act",act);
+			
+			
+			view.addObject("userName",usesr.getUsrName());
 			view.setViewName("/project/tenderReview/review");
 			return view;
 		}

@@ -163,6 +163,7 @@
 					      	<td>${fileInfo.fileUploadName}</td>
 					      	<td>${fileInfo.fileSize}</td>
 					      	<td>已上传</td>
+					      	<td><a href='${fileInfo.filePath}' download="${fileInfo.fileUploadName}">下载</a></td>
 				      	</tr>
 				      	</c:forEach>
 				      </tbody>
@@ -396,6 +397,12 @@ $(function(){
 				  }
 				 if(fileIds){
 					 newParam.fileIds=fileIds.join(',')
+				 }
+				 if(queryParams.open=='on'){
+					 newParam.isWorkAreaExplicit='00'
+				 }
+				 else{
+					 newParam.isWorkAreaExplicit='01'
 				 }
 				  return newParam
 			}

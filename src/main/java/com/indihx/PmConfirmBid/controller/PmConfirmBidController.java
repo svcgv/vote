@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+
 import com.indihx.system.entity.UsrInfo;
+import com.indihx.util.ReviewUtils;
 import com.indihx.util.UserUtil;
 import com.alibaba.fastjson.JSON;
 import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
@@ -145,10 +148,15 @@ public class PmConfirmBidController {
         UsrInfo usesr = UserUtil.getUser(session);
         pmConfirmBid.setModifier(usesr.getUsrId());
         pmConfirmBid.setModifyTime(DateUtil.getDateTime());
-        pmConfirmBid.setStatus("01");
+        PmConfirmBidEntity entity = pmConfirmBidService.queryObject(pmConfirmBid.getBidId());
+        pmConfirmBid.setStatus( ReviewUtils.getNextState(entity.getStatus(),"00"));
         long id = pmConfirmBid.getBidId();
         //插入投标审批记录
         PmReviewInfoEntity reviewEntity = new PmReviewInfoEntity();
+        if(!(StringUtils.hasLength(pmConfirmBid.getTechnicalDirectorName())&&StringUtils.hasLength(pmConfirmBid.getConstructionDeptManagerName())&& StringUtils.hasLength(pmConfirmBid.getSellDeptManagerName()))) {
+        	return R.error("请选择评审人");
+        }
+       
         reviewEntity.setForeignId(id);
         reviewEntity.setReviewType("00");
         reviewEntity.setReviewUserCode(pmConfirmBid.getConstructionDeptManagerId());
@@ -160,6 +168,7 @@ public class PmConfirmBidController {
         return R.ok();
     }
 
+    
     /**
      * 删除
      */

@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+
 import com.indihx.system.entity.UsrInfo;
+import com.indihx.util.ReviewUtils;
 import com.indihx.util.UserUtil;
 import com.alibaba.fastjson.JSON;
+import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
+import com.indihx.PmConfirmBid.service.PmConfirmBidService;
 import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
 import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import com.indihx.comm.util.R;
@@ -34,7 +39,8 @@ import com.indihx.comm.InitSysConstants;
 public class PmReviewInfoController {
     @Autowired
     private PmReviewInfoService pmReviewInfoService;
-
+    @Autowired
+    private PmConfirmBidService pmConfirmBidService;
     /**
      * 列表
      */
@@ -109,12 +115,62 @@ public class PmReviewInfoController {
     	String str = (String) params.get("queryStr");
     	Map<String,Object> par = (Map<String,Object>)JSON.parse(str);
     	UsrInfo usesr = UserUtil.getUser(session);
-//    	Map<String,Object> par = new HashMap<String,Object>();
-    	par.put("reviewUserCode", usesr.getUsrId());
-    	par.put("reviewType", "00");
-		List<PmReviewInfoEntity> pmReviewInfo = pmReviewInfoService.queryList(par);
+    	PmReviewInfoEntity entity = new PmReviewInfoEntity();
+    	entity.setReviewUserCode( usesr.getUsrId());
+    	entity.setReviewType("00");
+		List<Map<String, Object>> pmReviewInfo = pmReviewInfoService.selectBidReview(entity);
         return R.ok().put("page", pmReviewInfo);
     }
 
+    /**
+     * 修改
+     */
+    @RequestMapping(value="/submit",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> submit(@RequestBody PmReviewInfoEntity pmReviewInfo,HttpSession session){
+    	 UsrInfo usesr = UserUtil.getUser(session);
+    	 //创建一个新的对象用于插入下一条审批数据
+    	 PmReviewInfoEntity reviewEntity = new PmReviewInfoEntity();
+         //获取当前数据库的审批数据
+    	 PmReviewInfoEntity base = pmReviewInfoService.queryObject(pmReviewInfo.getReviewId());
+    	 base.setResult(pmReviewInfo.getResult());
+    	 if(pmReviewInfo.getCommentDetail()!=null) {
+    		 base.setCommentDetail(pmReviewInfo.getCommentDetail());
+    	 }
+    	 base.setModifier(usesr.getUsrId());
+    	 base.setModifyTime(DateUtil.getDateTime());
+    	 //更新审批意见，结果
+    	 pmReviewInfoService.update(base);
+    	 
+    	 reviewEntity.setCreatorId(usesr.getUsrId());
+    	 reviewEntity.setCreateTime(DateUtil.getDateTime());
+    	 reviewEntity.setReviewType(pmReviewInfo.getReviewType());
+    	 reviewEntity.setForeignId(base.getForeignId());
+    	 
+    	 
+    	 if("00".equals(pmReviewInfo.getReviewType())) {
+    		 PmConfirmBidEntity pmConfirmBid = pmConfirmBidService.queryObject(base.getForeignId());
+    		 String state = ReviewUtils.getNextState(pmConfirmBid.getStatus(),pmReviewInfo.getResult());
+    		 pmConfirmBid.setStatus(state );
+    		 pmConfirmBidService.update(pmConfirmBid);
+    		 //若未拒绝且未完成则提交到下个人手上
+    		 if(!("00".equals(state)||"04".equals(state))) {
+    			 if("02".equals(state)) {
+    				 reviewEntity.setReviewUserCode(pmConfirmBid.getSellDeptManagerId());
+    				 reviewEntity.setReviewUserName(pmConfirmBid.getSellDeptManagerName());
+    			 }
+    			 else {
+    				 reviewEntity.setReviewUserCode(pmConfirmBid.getTechnicalDirectorId());
+    				 reviewEntity.setReviewUserName(pmConfirmBid.getTechnicalDirectorName());
+    			 }
+    			 pmReviewInfoService.insert(reviewEntity);
+    		 }
+    		 else {
+    			 base.setIsDelete("01");
+    			 pmReviewInfoService.update(base);
+    		 }
+    	 }
+         
+         return R.ok();
+    }
     
 }
