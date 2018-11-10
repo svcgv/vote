@@ -123,8 +123,8 @@ public class FileUtils {
 	}
 	
 	public static String generalTempFileName(MultipartFile file) {
-		StringBuffer tempName = new StringBuffer(file.getOriginalFilename());
-		tempName.append(RandomUtil.generateMixString(4));
+		StringBuffer tempName = new StringBuffer(RandomUtil.generateMixString(4));
+		tempName.append(file.getOriginalFilename());
 		return tempName.toString();
 	}
 }

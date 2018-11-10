@@ -61,7 +61,7 @@
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预付期限：</label>
+		      <label class="layui-form-label">预估期限：</label>
 		       <div class="layui-input-inline">
 	         	<label class="layui-form-label">反写</label>
 		      </div>

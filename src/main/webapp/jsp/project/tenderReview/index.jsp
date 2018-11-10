@@ -248,7 +248,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	      {field:'predictAmount', title:'预估收入金额', width:150},
 				  	      {field:'predictCost', title:'预估成本', width:120},
 				  	      {field:'predictProfitRate', title:'预估利润率'},
-				  	      {field:'predictPeriod', title:'预付期限'},
+				  	      {field:'predictPeriod', title:'预估期限'},
 				  	      {field:'constructionDeptName', title:'交付部门'},
 				  	      {field:'sellDeptName', title:'销售部门'},
 				  	      {field:'custManagerName', title:'客户经理'},

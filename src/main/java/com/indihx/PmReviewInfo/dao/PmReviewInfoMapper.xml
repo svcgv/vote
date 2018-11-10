@@ -16,6 +16,7 @@
 		<result property="reviewUserCode" column="REVIEW_USER_CODE" />
 		<result property="result" column="RESULT" />
 		<result property="isDelete" column="IS_DELETE" />
+		<result property="commentDetail" column="COMMENT_DETAIL" />
 	</resultMap>
 
 	<resultMap type="java.util.Map" id="reviewMap">
@@ -66,6 +67,8 @@
 		<result property="isChecked" column="IS_CHECKED" />
 		<result property="remark" column="REMARK" />
 		<result property="paymentPoint" column="PAYMENT_POINT" />
+		 <result property="createTime" column="CREATE_TIME"/>
+		  <result property="modifyTime" column="MODIFY_TIME"/>
 	</resultMap>
 	<select id="queryObject" resultMap="pmReviewInfoMap">
 		select * from pm_review_info
@@ -107,6 +110,15 @@
 				IS_DELETE =
 				#{isDelete}
 			</if>
+			<if test="createTimeStart != null and createTimeStart!=''">
+				CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
+			</if>
+			<!-- 结束时间 -->
+			<if test="createTimeEnd != null  and createTimeEnd!=''">
+				CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
+			</if>
+			<if test="modifyTime != null and modifyTime!=''"  >
+				MODIFY_TIME = #{modifyTime} AND 			</if>
 		</trim>
 	</select>
 
@@ -138,8 +150,14 @@
 		<if test="result != null and result!=''">
 			,RESULT
 		</if>
+		<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+		</if>
 		<if test="commentDetail != null and commentDetail!=''">
 				,COMMENT_DETAIL	
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+				,MODIFY_TIME	
 		</if>
 		,IS_DELETE
 		)
@@ -164,15 +182,20 @@
 		<if test="result != null and result!=''">
 			,#{result}
 		</if>
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
 		<if test="commentDetail != null and commentDetail!=''">
 			,#{commentDetail}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+			,#{modifyTime}
 		</if>
 		,'00'
 		)
 	</insert>
 
-	<update id="update"
-		parameterType="com.indihx.PmReviewInfo.entity.PmReviewInfoEntity">
+	<update id="update" parameterType="com.indihx.PmReviewInfo.entity.PmReviewInfoEntity">
 		update pm_review_info
 		<set>
 			<if test="foreignId != null and foreignId!=''">FOREIGN_ID = #{foreignId}, </if>
@@ -187,8 +210,9 @@
 
 			<if test="result != null and result!=''">RESULT = #{result}, </if>
 
-			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
-
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete},</if>
+			<if test="commentDetail != null and commentDetail!=''">COMMENT_DETAIL = #{commentDetail},</if>
+			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
 		</set>
 		where REVIEW_ID = #{reviewId}
 	</update>

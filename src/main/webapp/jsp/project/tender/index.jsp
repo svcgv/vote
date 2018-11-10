@@ -12,7 +12,7 @@
 	   <div class="layui-form-item">
 	   
 		  	<div class="layui-inline">
-		      <label class="layui-form-label">投标项目名称：</label>
+		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -40,7 +40,7 @@
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预付期限：</label>
+		      <label class="layui-form-label">预估期限：</label>
 		       <div class="layui-input-inline">
 	         		<input type="text" name="predictPeriod" id="predictPeriodDate" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
@@ -171,7 +171,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    cols: [[
 	    	  {type: 'checkbox', fixed: 'left'},
 	  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
-	  	      {field:'bidName', title:'投标项目名称', width:130},
+	  	      {field:'bidName', title:'项目名称', width:130},
 	  	      {field:'status', title:'评审状态', width:130},
 	  	      {field:'firstBidAmount', title:'投标首次报价金额', width:150},
 	  	      {field:'custCnName', title:'客户名称', width:130},
