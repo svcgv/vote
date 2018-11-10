@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
-.product-form-wrapper .layui-form-label{width:70px!important;}
+.project-project-wrapper .layui-form-label{width:70px!important;}
 </style>
-<div style="margin-top:10px;" class="product-form-wrapper">
+<div style="margin-top:10px;" class="project-project-wrapper">
 	<form class="layui-form" id="project-query-form" action="">
 	  <div class="layui-form-item">
 	  	<div class="layui-inline">
@@ -53,7 +53,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    width:"690",
 	    title: '项目表信息',
 	    cols: [[
-	      {type: 'checkbox' },
+	      {type: 'radio' },
 	      {field:'projectId', title:'项目编号', sort: true},
 	      {field:'projectName', title:'项目名称'}
 	    ]],
@@ -82,35 +82,25 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			],
 	    page: true
 	  });
-	
-	
+  var act="${act}";
+	console.log(act,'project')
 	// 保存 事件
-	var win=$(".product-form-wrapper").getWindow();
-  	var getExitProject=$("#product-addForm-hook #chosed-project-hook");
-	$(".product-form-wrapper").on("click","#save-hook",function(){
-		var ret=[];
-		getExitProject.children(".customer-list").each(function(){
-			var sapCode2=$(this).children(".customerItem").attr("projectId");
-			ret.push(sapCode2)
-		});
-		// 遍历选中的CheckBox
-		$(".product-form-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
-			var chk=$(this).find(".laytable-cell-checkbox");
-			var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
+	var win=$(".project-project-wrapper").getWindow();
+	$(".project-project-wrapper").on("click","#save-hook",function(){
+		// 遍历选中的radio
+		$(".project-project-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
+			var chk=$(this).find(".laytable-cell-radio");
+			var isChecked=chk.find(".layui-form-radio").hasClass("layui-form-radioed");
 			if(isChecked){
 				var projectId=$(this).children("td").eq(1).text();
 				var projectName=$(this).children("td").eq(2).text();
-				
-				// 遍历不存在的插入
-				
-				if($.inArray(projectId,ret) == -1 ){
-					var _html = '<span class="customer-list">'
-			         	      +'<span class="customerItem" projectId="'+projectId+'">'+projectName+'</span>'
-			               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
-			         		  +'</span>';
-			         		 getExitProject.append(_html);	  
-				}
-				
+				if(act == "wbs"){
+					$(".project-info-wrapper input[name='projectName']").val(projectId);
+					$(".project-info-wrapper input[name='wbs']").val(projectName);
+			 	}else if(act == "wbsForm"){
+					$("#project-form-hook input[name='wbs']").val(projectId);
+					$("#project-form-hook input[name='projectName']").val(projectName);
+			 	}
 				
 			}
 		});
@@ -119,8 +109,8 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	});
 	
 	// 关闭按钮
-	var win=$(".product-form-wrapper").getWindow();
-	$(".product-form-wrapper").on("click","#close-hook",function(){
+	var win=$(".project-project-wrapper").getWindow();
+	$(".project-project-wrapper").on("click","#close-hook",function(){
 		win.close();
 	});
 	

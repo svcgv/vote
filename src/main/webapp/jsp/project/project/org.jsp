@@ -55,11 +55,21 @@ function zTreeOnSaveEvent(event, treeId, treeNode) {
 	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
  // 保存到已选机构中
  	if(act == "buildDept"){
+ 		// index
 		$("#project-index-form input[name='buildDeptName']").val(getCheckedOrg.name);
 		$("#project-index-form input[name='buildDeptId']").val(getCheckedOrg.orgId);
  	}else if(act == "sellDept"){
+ 		// index
  		$("#project-index-form input[name='sellDeptName']").val(getCheckedOrg.name);
 		$("#project-index-form input[name='sellDeptId']").val(getCheckedOrg.orgId);
+ 	}else if(act == "buildDeptForm"){
+ 		// form
+ 		$("#project-form-hook  input[name='buildDeptName']").val(getCheckedOrg.name);
+		$("#project-form-hook  input[name='buildDeptId']").val(getCheckedOrg.orgId);
+ 	}else if(act == "sellDeptForm"){
+ 		// form
+ 		$("#project-form-hook  input[name='sellDeptName']").val(getCheckedOrg.name);
+		$("#project-form-hook  input[name='sellDeptId']").val(getCheckedOrg.orgId);
  	}
 		win.close();
 };

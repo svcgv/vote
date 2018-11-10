@@ -64,6 +64,7 @@ public class ProjectController extends AbstractBaseController{
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
 		
+		view.addObject("projectType","00");
 		view.addObject("act",act);
 		view.addObject("id",id);
 		
@@ -139,6 +140,15 @@ public class ProjectController extends AbstractBaseController{
 			ModelAndView view = new ModelAndView();
 			view.addObject("act",act);
 			view.setViewName("/project/project/setMoney");
+			return view;
+		}
+		
+		// 投标
+		@RequestMapping(value="/project/tender",method=RequestMethod.GET)
+		public ModelAndView tenderFormView(@RequestParam("act") String act) {
+			ModelAndView view = new ModelAndView();
+			view.addObject("act",act);
+			view.setViewName("/project/project/tender");
 			return view;
 		}
 	

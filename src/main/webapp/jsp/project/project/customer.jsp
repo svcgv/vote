@@ -54,7 +54,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    title: '客户数据表',
 	    cols: [[
 	      {type: 'radio' },
-	      {field:'custId', title:'客户ID', sort: true},
+	      {field:'custId', title:'客户编号', sort: true},
 	      {field:'custName', title:'客户名称'}
 	    ]],
 	    data:[
@@ -87,13 +87,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	// 保存 事件
 	var act="${act}";// 区分是index页 form页 赋值问题
 	var win=$(".tender-cust-wrapper").getWindow();
-  	var getExitUser=$("#chosed-user-hook");
 	$(".tender-cust-wrapper").on("click","#save-hook",function(){
-		var ret=[];
-		getExitUser.children(".customer-list").each(function(){
-			var sapCode2=$(this).children(".customerItem").attr("custId");
-			ret.push(sapCode2)
-		});
 		// 遍历选中的radio
 		$(".tender-cust-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
 			var chk=$(this).find(".laytable-cell-radio");
@@ -101,18 +95,12 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			if(isChecked){
 				var custId=$(this).children("td").eq(1).text();
 				var custName=$(this).children("td").eq(2).text();
-				if(act == "index"){
-					//$("#tender-index-form input[name='custManagerName']").val(custName);
-					//$("#tender-index-form input[name='developmentManagerId']").val(custId);
-			 	}else if(act =="addCust"){ //编辑 修改 页面
-			 		$("#tender-addForm-hook input[name='custName']").val(custName);
-					$("#tender-addForm-hook input[name='custId']").val(custId);
-			 	}else if(act =="reviewPay"){ // 投标 评审
-			 		//$("#review-query-form input[name='payDeptName']").val(custName);
-					//$("#review-query-form input[name='payDeptId']").val(custId);
-			 	}else if(act =="reviewSell"){// 投标 评审
-			 		//$("#review-query-form input[name='sellDeptName']").val(custName);
-					//$("#review-query-form input[name='sellDeptId']").val(custId);
+				if(act == "cust"){
+					$(".project-info-wrapper input[name='custName']").val(custName);
+					$(".project-info-wrapper input[name='custId']").val(custId);
+			 	}else if(act == "custForm"){
+					$("#project-form-hook input[name='custName']").val(custName);
+					$("#project-form-hook input[name='custId']").val(custId);
 			 	}
 			}
 		});

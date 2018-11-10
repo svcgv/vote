@@ -67,6 +67,7 @@
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="custName" autocomplete="off" class="layui-input form-control">
+		         <input type="hidden" name="custId" />     
 		      </div>
 	      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -207,9 +208,9 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	 	 });
 	});
   // 选择客户名称
-  $(".project-info-wrapper #wbsQuery-hook").on("click",function(){
+  $(".project-info-wrapper #custNameQuery-hook").on("click",function(){
 	  	$.openWindow({
-	  		url:'user?act=wbs',
+	  		url:'customer?act=cust',
 	  		title:"选择客户名称",
 	  		width:"700"
 	 	 });
