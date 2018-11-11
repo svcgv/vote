@@ -101,7 +101,10 @@ public class ProjectController extends AbstractBaseController {
 
 		view.addObject("isUseful", infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType", infoservice.qryInfoByCode("PRODUCT_TYPE", "01"));
-
+		PmProjectInfoEntity entity = pmProjectInfoServiceImpl.queryObject(Long.parseLong(id));
+		
+		view.addObject("formObj", JSON.toJSONString(entity));
+		
 		view.addObject("act", act);
 		view.addObject("id", id);
 

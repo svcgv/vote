@@ -420,10 +420,10 @@ function rendertable(that){
 }
 
 function del(id){
-	var par = {id:id}
+	var par = {projectId:id,isDelete:'01'}
 	$.ajax({
 		  type: 'POST',
-		  url: '/vote/pmprojectinfo/delete',
+		  url: '/vote/pmprojectinfo/update',
 		  data: JSON.stringify(par),
 		  contentType:'application/json',
 		  success: function(res){
