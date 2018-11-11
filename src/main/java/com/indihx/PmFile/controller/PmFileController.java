@@ -2,11 +2,16 @@ package com.indihx.PmFile.controller;
 
 
 import java.util.Map;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -114,4 +119,27 @@ public class PmFileController {
     	return R.ok().put("fileIds", idList);
 	}
 
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    public @ResponseBody void download(@RequestParam long id,HttpServletRequest request, HttpServletResponse response) throws IOException{
+    	PmFileEntity pmFile= pmFileService.queryObject(id);
+    	System.out.println(pmFile.getFilePath());
+    	String name = pmFile.getFileUploadName();
+		//获取文件的绝对路径
+		String path = pmFile.getFilePath();
+		//设置文件的MIME类型
+		//response.setContentType(getServletContext().getMimeType(name));
+		//设置响应头文件，标识为文件下载类型，并附上文件的名称
+		response.setHeader("Content-Disposition", "attachment;filename="+name);
+	
+		//对文件进行读取和存贮
+		InputStream is = new FileInputStream(path);
+		OutputStream os = response.getOutputStream();
+		byte[] flush = new byte[1024];
+		int len = 0;
+		while((len = is.read(flush))!=-1){
+			os.write(flush,0,len);
+			os.flush();
+		}
+		is.close();
+    }
 }

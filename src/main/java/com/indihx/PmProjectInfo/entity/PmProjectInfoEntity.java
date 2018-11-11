@@ -95,7 +95,7 @@ private String custName;
 	 * 
 	 */
 
-private long custSapCode;
+private String custSapCode;
 	/**
 	 * 
 	 */
@@ -550,13 +550,13 @@ private long modifier;
 	/**
 	 * 设置：
 	 */
-	public void setCustSapCode(long custSapCode) {
+	public void setCustSapCode(String custSapCode) {
 		this.custSapCode = custSapCode;
 	}
 	/**
 	 * 获取：
 	 */
-	public long getCustSapCode() {
+	public String getCustSapCode() {
 		return custSapCode;
 	}
 	/**

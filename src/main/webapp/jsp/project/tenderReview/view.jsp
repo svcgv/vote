@@ -21,7 +21,7 @@
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item">
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标项目名称：</label>
+		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
 		         <label name="bidName"  class="layui-form-label"></label>
 		      </div>
@@ -123,14 +123,21 @@
 				        <tr><th>文件名</th>
 				        <th>大小</th>
 				        <th>状态</th>
+				        <th></th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
-				      	<tr class="edit-wosUploaded">
-					      	<td>Business Analysis Report.xlsx</td>
-					      	<td>15379.5kb</td>
-					      	<td>已上传</td>
-				      	</tr>
 				      	
+				      	
+				      	
+				      	
+				      	<c:forEach items="${fileList}" var="app">
+							<tr class="edit-wosUploaded">
+						      	<td>${app.fileUploadName }</td>
+						      	<td>${app.fileSize}</td>
+						      	<td>已上传</td>
+						      	<td><a href="${app.filePath}" download='${app.fileUploadName }'>下载</a></td>
+					      	</tr>
+						</c:forEach>
 				      </tbody>
 				    </table>
 				  </div>
@@ -145,7 +152,21 @@
 	        <div class="layui-inline">
 	       		 <label class="layui-form-label">评审记录：</label>
 	       		 <div class="layui-input-block" style="margin-left:160px;">
-			     	<div><span>2018-12-28 12:20:22</span> <span>销售部门：</span><strong style="font-weight:bold;">史定波</strong> <span style="margin-left:10px;">评审意见：</span><strong style="font-weight:bold;color:red;">不通过</strong> <span style="margin-left:10px;">评审理由：小钱不挣</span></div>
+			     	<c:forEach items="${reviewHis}" var="app">
+						
+					<div><span>${app.modifyTime} </span> 
+			     	<span>销售部门：</span>
+			     	<strong style="font-weight:bold;">${app.reviewUserName}</strong> 
+			     	<span style="margin-left:10px;">评审结果：</span>
+			     	<strong style="font-weight:bold;color:red;">${app.result}</strong> 
+			     	<span style="margin-left:10px;">评审意见：</span>
+			     	<span style="margin-left:10px;">${app.commentDetail} </span>
+			     	</div>
+
+
+					</c:forEach>
+							
+			     	
 			    </div>
 	       </div>
 		     

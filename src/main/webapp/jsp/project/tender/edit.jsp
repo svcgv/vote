@@ -67,7 +67,7 @@
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预付期限：</label>
+		      <label class="layui-form-label">预估期限：</label>
 		       <div class="layui-input-inline">
 	         		<input type="text" name="predictPeriod" id="predictPeriodDate2" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>

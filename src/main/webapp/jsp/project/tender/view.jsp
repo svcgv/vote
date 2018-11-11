@@ -21,9 +21,9 @@
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item">
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标项目名称：</label>
+		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
-		         <label name="bidName"  class="layui-form-label">投标项目名称反写</label>
+		         <label name="bidName"  class="layui-form-label">项目名称反写</label>
 		      </div>
 		    </div>
 		    

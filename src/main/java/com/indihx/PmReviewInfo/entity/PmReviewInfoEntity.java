@@ -55,6 +55,28 @@ public class PmReviewInfoEntity extends BaseEntity implements Serializable {
 	private String commentDetail;
 
 	private String isDelete;
+	
+	private String createTime;
+	
+	private String modifyTime;
+
+
+	
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(String modifyTime) {
+		this.modifyTime = modifyTime;
+	}
 
 	public String getCommentDetail() {
 		return commentDetail;
