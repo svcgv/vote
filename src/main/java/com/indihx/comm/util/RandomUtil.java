@@ -136,4 +136,11 @@ public class RandomUtil {
 	public static void main(String[] args) {
 		System.out.println(generateString(4));
 	}
+	
+	public static String getCodeByType(String type) {
+		StringBuffer sb = new StringBuffer(type);
+		sb.append(DateUtil.getSysDate());
+		sb.append(generateString(4));
+		return sb.toString();
+	}
 }

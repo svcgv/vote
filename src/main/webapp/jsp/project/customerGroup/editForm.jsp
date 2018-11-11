@@ -25,7 +25,7 @@
 					<input type="text" name="custGroupName"
 						value="${ctnGroup.custGroupName}" autocomplete="off"
 						class="layui-input form-control">
-					<input type="hidden" name="custGroupId" readonly=“readonly”
+					<input type="text" style='display:none' name="custGroupId" readonly=“readonly”
 					value="${ctnGroup.custGroupId}" id='custGroupId' autocomplete="off" enabled= 'false'
 					class="layui-input form-control"> 
 				</div>
@@ -38,8 +38,8 @@
 						id="addCustomer-hook" style="margin-right: 15px;">
 						<i class="layui-icon"></i>添加客户
 					</button>
-					<input type="hidden" id="saveCustomerIds" name="customerIds" /> <input
-						type="hidden" id="saveCustomerNames" name="customerNames" />
+					<input type="text" style='display:none' id="saveCustomerIds" name="customerIds" /> <input
+						type="text" style='display:none' id="saveCustomerNames" name="customerNames" />
 				</div>
 			</div>
 			<div class="layui-inline">

@@ -29,8 +29,8 @@
 	     <div class="layui-inline">
 	       <div class="layui-btn-container" style="margin-left:15px;">
 		    <button type="button" class="layui-btn layui-btn-sm" id="addCustomer-hook"  style="margin-right:15px;"><i class="layui-icon"></i>添加客户</button>
-		    <input type="hidden" id="saveCustomerIds" name="customerIds" />
-		     <input type="hidden" id="saveCustomerNames" name="customerNames" />
+		    <input type="text" style='display:none' id="saveCustomerIds" name="customerIds" />
+		     <input type="text" style='display:none' id="saveCustomerNames" name="customerNames" />
 		  </div>
 	    </div>
 	  </div>

@@ -9,7 +9,7 @@
 	       <label class="layui-form-label">交付部门负责人：</label>
 	       <div class="layui-input-inline">
 	         <input type="text" name="constructionDeptManagerName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
-	         <input type="hidden" name="constructionDeptManagerId" >
+	         <input type="text" style='display:none' name="constructionDeptManagerId" >
 	       </div>
 	       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payManagerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -20,7 +20,7 @@
 	      <label class="layui-form-label" >销售部门负责人：</label>
 	       <div class="layui-input-inline">
 	         <input type="text" name="sellDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control" >
-	          <input type="hidden" name="sellDeptId" >
+	          <input type="text" style='display:none' name="sellDeptId" >
 	      </div>
 	      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="sellManagerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>

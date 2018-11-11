@@ -28,7 +28,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.indihx.AbstractBaseController;
+import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
+import com.indihx.PmProjectInfo.service.impl.PmProjectInfoServiceImpl;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
@@ -45,6 +48,10 @@ public class ProjectController extends AbstractBaseController {
 	@Autowired
 	private ParamsInfoServiceimpl infoservice;
 
+	@Autowired
+	private PmProjectInfoServiceImpl pmProjectInfoServiceImpl;
+
+	
 	@RequestMapping("/project/index")
 	public ModelAndView addCustomView() {
 
@@ -56,7 +63,7 @@ public class ProjectController extends AbstractBaseController {
 
 		view.setViewName("/project/project/index");
 		return view;
-	}
+	}	
 
 	@RequestMapping(value = "/project/form", method = RequestMethod.GET)
 	public ModelAndView customFormView(@RequestParam("act") String act, @RequestParam("id") String id) {
@@ -79,10 +86,11 @@ public class ProjectController extends AbstractBaseController {
 
 		view.addObject("isUseful", infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType", infoservice.qryInfoByCode("PRODUCT_TYPE", "01"));
-
+		PmProjectInfoEntity entity = pmProjectInfoServiceImpl.queryObject(Long.parseLong(id));
 		view.addObject("act", act);
 		view.addObject("id", id);
-
+		view.addObject("formObj", JSON.toJSONString(entity));
+		
 		view.setViewName("/project/project/edit");
 		return view;
 	}

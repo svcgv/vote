@@ -31,7 +31,7 @@
 		      <label class="layui-form-label">投标名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="bidId">
+		         <input type="text" style='display:none' name="bidId">
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="bidNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -47,7 +47,7 @@
 		      <label class="layui-form-label">实施部门：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="buildDeptName"  autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="buildDeptId" />
+		         <input type="text" style='display:none' name="buildDeptId" />
 		      </div>
 		         <button type="button"  class="layui-btn layui-btn-sm" id="buildDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -56,7 +56,7 @@
 			      <label class="layui-form-label">实施负责人：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="buildManagerName"  autocomplete="off" class="layui-input form-control">
-			         <input type="hidden" name="buildManagerId" />
+			         <input type="text" style='display:none' name="buildManagerId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="buildManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -65,7 +65,7 @@
 			      <label class="layui-form-label">销售部门：</label>
 			      <div class="layui-input-inline">
 				       <input type="text" name="sellDeptName"  autocomplete="off" class="layui-input form-control">
-				       <inpu type="hidden" name="sellDeptId" />
+				       <inpu type="text" style='display:none' name="sellDeptId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="sellDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -74,24 +74,23 @@
 		      <label class="layui-form-label">销售负责人：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="sellManagerName"  autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="sellManagerId" />
+		         <input type="text" style='display:none' name="sellManagerId" />
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="sellManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
-		    <div class="layui-inline">
+		    <div class="layui-inline" style="padding-right:55px;">
 		      <label class="layui-form-label">WBS编号：</label>
 		       <div class="layui-input-inline">
 	         		<input type="text" name="wbs" autocomplete="off" class="layui-input form-control">
 		      </div>
-		      <button type="button"  class="layui-btn layui-btn-sm" id="wbsQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="custName" autocomplete="off" class="layui-input form-control">
-		     	  <input type="hidden" name="custId" />
+		     	  <input type="text" style='display:none' name="custSapCode" />
 		      </div>
 	      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -447,11 +446,46 @@ $(function(){
 				    type: 'datetime'
 			 });
 			laydate.render({
-				    elem: "#signContractDate-form",
-				    theme: 'molv',
-				    type: 'datetime'
-			 });
-		
+			    elem: "#signContractDate-form",
+			    theme: 'molv',
+			    type: 'datetime'
+		 	});
+			laydate.render({
+			    elem: "#requirement-datepick-hook",
+			    theme: 'molv',
+			    type: 'datetime'
+		 	});
+			laydate.render({
+			    elem: "#design-datepick-hook",
+			    theme: 'molv',
+			    type: 'datetime'
+		 	});
+			laydate.render({
+			    elem: "#devlopment-datepick-hook",
+			    theme: 'molv',
+			    type: 'datetime'
+		 	});
+			laydate.render({
+			    elem: "#test-datepick-hook",
+			    theme: 'molv',
+			    type: 'datetime'
+		 	});
+			laydate.render({
+			    elem: "#online-datepick-hook",
+			    theme: 'molv',
+			    type: 'datetime'
+		 	});
+			laydate.render({
+			    elem: "#check-datepick-hook",
+			    theme: 'molv',
+			    type: 'datetime'
+		 	});
+			laydate.render({
+			    elem: "#production-datepick-hook",
+			    theme: 'molv',
+			    type: 'datetime'
+		 	});
+	
 	// form 表单手动渲染
 	  form.render();
 	  //选择投标
@@ -532,6 +566,7 @@ $(function(){
 	var win=$("#project-form-hook").getWindow();
 	// 保存
 	$("#project-form-hook #customGroup-add-hook").click(function(){
+		
 		var customerGroupName=$("#project-form-hook input[name='bidName']").val();
 		if($.trim(customerGroupName) ==''){
 			layer.msg("请输入投标名称");
@@ -539,12 +574,18 @@ $(function(){
 		}
 		
 		var formDatas=$("#project-form-hook form").serializeObject();
+		 var newparam = {}
+		 for(var o in formDatas){
+			 if(formDatas[o]){
+				 newparam[o] = formDatas[o]
+			 }
+		 }
+		 
 		$.ajax({
 			type:'POST',
-			url:'save',
-			data:{
-				queryParams:formDatas
-			},
+			url: '/vote/pmprojectinfo/save',
+			 data: JSON.stringify(newparam),
+			 contentType:'application/json',
 			success:function(res){
 				layer.msg("新增成功",{icon:1});
 				win.close();
@@ -552,7 +593,8 @@ $(function(){
 			error:function(){
 				layer.msg("新增失败",{icon:5});
 				win.close();
-			}
+			},
+			 dataType: "json"
 		});
 		return false;
 	});

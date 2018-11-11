@@ -15,7 +15,7 @@
 		      <label class="layui-form-label">实施部门：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="buildDeptName" readonly="true" autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="buildDeptId" />
+		         <input type="text" style='display:none' name="buildDeptId" />
 		      </div>
 		         <button type="button"  class="layui-btn layui-btn-sm" id="buildDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -24,7 +24,7 @@
 			      <label class="layui-form-label">实施负责人：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="buildManagerName" readonly="true" autocomplete="off" class="layui-input form-control">
-			         <input type="hidden" name="buildManagerId" />
+			         <input type="text" style='display:none' name="buildManagerId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="buildManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -33,7 +33,7 @@
 			      <label class="layui-form-label">销售部门：</label>
 			      <div class="layui-input-inline">
 				       <input type="text" name="sellDeptName" readonly="true" autocomplete="off" class="layui-input form-control">
-				       <inpu type="hidden" name="sellDeptId" />
+				       <inpu type="text" style='display:none' name="sellDeptId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="sellDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -42,7 +42,7 @@
 		      <label class="layui-form-label">销售负责人：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="sellManagerName" readonly="true" autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="sellManagerId" />
+		         <input type="text" style='display:none' name="sellManagerId" />
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="sellManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -65,7 +65,7 @@
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="custName" autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="custId" />     
+		         <input type="text" style='display:none' name="custSapCode" />     
 		      </div>
 	      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -143,16 +143,19 @@ var col=[
   	  
 	      {align: 'center', title: '项目信息', colspan: 16},
 	      {align: 'center', title: '项目预算', colspan: 6},
+	      
 	      {align: 'center', title: '上报收入', colspan: 2},
 	      {align: 'center',field: 'lastYearRevenue', title: '去年上报的收入', rowspan: 2},
 	      {align: 'center',field: 'signContractDate', title: '合同签订日期', rowspan: 2},
 	      {align: 'center',field: 'isSignedContract', title: '是否签订', rowspan: 2},
 	      {align: 'center',field: 'workLoadConfirm', title: '工作量确认', rowspan: 2},
+	      
 	      {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
+	      
  		],
 	    [
 	    	  {type: 'checkbox', fixed: 'left'},
-	  	      {field:'projectId', title:'项目编号', sort: true, width:130},
+	  	      {field:'projectCode', title:'项目编号', sort: true, width:130},
 	  	      {field:'buildDeptName', title:'实施部门',sort: true, width:130},
 	  	      {field:'buildManagerName', title:'实施负责人' ,sort: true, width:130},
 	  	      {field:'sellDeptName', title:'销售部门', width:130},
@@ -177,6 +180,7 @@ var col=[
 	    	  
 	    	  {field:'allIncomming', title:'收入合计'},
 	    	  {field:'overFlowReportIncomming', title:'超报收入'},
+	    	  
 	    ]
   ]
 //一般直接写在一个js文件中
@@ -343,11 +347,6 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  },
 			  dataType: "json"
 			})
-			
-			
-			
-			
-		
 	}); 
 	
 	/*

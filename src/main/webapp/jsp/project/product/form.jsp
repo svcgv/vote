@@ -52,7 +52,7 @@
 		      <label class="layui-form-label">研发部门：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="developmentDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
-		          <input type="hidden" name="developmentDeptId">
+		          <input type="text" style='display:none' name="developmentDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>部门查询</button>
@@ -62,7 +62,7 @@
 		      <label class="layui-form-label">研发负责人：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="developmentManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control">
-		          <input type="hidden" name="developmentManagerId">
+		          <input type="text" style='display:none' name="developmentManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>人员查询</button>

@@ -37,8 +37,8 @@
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
-		         <input type="hidden" name="custId">
-		         <input type="hidden" name="custSapCode">
+		         <input type="text" style='display:none' name="custId">
+		         <input type="text" style='display:none' name="custSapCode">
 		      </div>
 		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -81,7 +81,7 @@
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="constructionDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="constructionDeptId">
+		          <input type="text" style='display:none' name="constructionDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -93,7 +93,7 @@
 		    <label class="layui-form-label">交付部门负责人：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="constructionDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="constructionDeptManagerId">
+		          <input type="text" style='display:none' name="constructionDeptManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgMangerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -105,7 +105,7 @@
 		      <label class="layui-form-label">销售部门：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="sellDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="sellDeptId">
+		          <input type="text" style='display:none' name="sellDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -116,7 +116,7 @@
 		    <label class="layui-form-label">销售部门负责人：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="sellDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="sellDeptManagerId">
+		          <input type="text" style='display:none' name="sellDeptManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userManagerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -127,7 +127,7 @@
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="custManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="custManagerId">
+		          <input type="text" style='display:none' name="custManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -138,7 +138,7 @@
 		      <label class="layui-form-label">技术总监：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="technicalDirectorId">
+		          <input type="text" style='display:none' name="technicalDirectorId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>

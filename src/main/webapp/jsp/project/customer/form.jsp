@@ -183,7 +183,7 @@
 	       </div>
 	   </div>
 	   
-	   <input type="hidden" value="${custId}" name="custId" />
+	   <input type="text" style='display:none' value="${custId}" name="custId" />
 	  </div>
 	</form>
 </div>

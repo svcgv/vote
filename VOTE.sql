@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2018-11-09 23:52:29
+Date: 2018-11-09 10:07:13
 */
 
 
@@ -1085,13 +1085,10 @@ INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('109', '11', null, null, '0', '0', null,
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('164', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('166', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('183', '11', null, null, '0', '0', null, null, null, '00');
-INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('185', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('62', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('65', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('110', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('181', '11', null, null, '0', '0', null, null, null, '00');
-INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('184', '11', null, null, '0', '0', null, null, null, '00');
-INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('186', '11', null, null, '0', '0', null, null, null, '00');
 
 -- ----------------------------
 -- Table structure for EXCEL_FILE
@@ -1244,7 +1241,6 @@ INSERT INTO "VOTE"."MENU_INFO" VALUES ('1021', '小区信息', '1000', '/sect/in
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1022', '议题管理', '1000', '/apply/index', '1000', '9', '20180821', 'icon-list', '93', 'Y', 'pbzxm.png');
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1023', '投票管理', '1000', '/result/index', '1000', '9', '20180821', 'icon-list', '94', 'Y', 'qrzbhxr.png');
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1028', '投标管理', '1026', '/project/tender/index', '1000', '2', '20181104', 'icon-list', '3', null, null);
-INSERT INTO "VOTE"."MENU_INFO" VALUES ('1145', '项目管理', '1026', '/project/project/index', '1000', '2', '20181109', 'icon-list', '9', null, null);
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1124', '投标评审管理', '1026', '/project/tenderReview/index', '1000', '2', '20181104', 'icon-list', null, null, null);
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1144', '审批', '1026', '/project/tenderReview/index', '1000', '2', '20181108', 'icon-list', '8', null, null);
 
@@ -1417,11 +1413,10 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_CONFIRM_BID
 -- ----------------------------
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('11', '测试发起评审', '1', '3', '2', '4', null, '392', '中国农业银行股份有限公司嘉兴南湖支行', '1000001247', '5', '管理中心', '1000', '金融政府事业群', '1000', '系统管理员', '22', '系统管理员_TEST2', '系统管理员', '1000', '系统管理员', '1000', '04', '00', null, null, 'asdasdas', '22', '20181109212715', '22', '20181109234347', '00', null);
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('3', 'asd', '1', '2', '3', '4', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '01', null, null, 'asdasda', 'dasd', '22', '20181108230353', '22', '20181109212602', '00', null);
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('1', '名称', '1', '1', '2', '3', null, '390', '中广核新能源投资（深圳）有限公司北京分公司', '1000001264', '2', '销售中心', '5', '管理中心', '1000', '系统管理员', '1000', '系统管理员', '系统管理员', '1000', '系统管理员', '1000', '02', '00', null, null, 'ddddddddd', '1000', '20181108220614', '22', '20181109234919', '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('3', 'asd', '1', '2', '3', '4', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'asdasda', 'dasd', '22', '20181108230353', null, null, '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('1', '名称', '1', '1', '2', '3', null, '390', '中广核新能源投资（深圳）有限公司北京分公司', '1000001264', '2', '销售中心', '5', '管理中心', '1000', '系统管理员', '1000', '系统管理员', '系统管理员_TEST2', '22', 'PMS_管理员（娄）', '41', null, null, null, null, 'ddddddddd', '1000', '20181108220614', null, null, '00', null);
 INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('6', 'asda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'das', null, '1000', '20181108232325', null, null, '00', null);
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('7', 'asdas', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '01', null, null, null, null, '1000', '20181108232456', '22', '20181109212907', '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('7', 'asdas', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1000', '20181108232456', null, null, '00', null);
 INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('8', 'asdasd', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1000', '20181108232557', null, null, '00', null);
 INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('2', 'asda', '1', '3', '2', '4', null, null, null, null, '5', '管理中心', '2', '销售中心', '41', 'PMS_管理员（娄）', '22', '系统管理员_TEST2', '系统管理员', '1000', '系统管理员', '1000', null, null, null, 'ddd', 'dasdasda', '1000', '20181108230208', null, null, '00', null);
 INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('9', 'asdasda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '22', '20181108232839', null, null, '00', null);
@@ -1712,7 +1707,6 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_FILE
 -- ----------------------------
-INSERT INTO "VOTE"."PM_FILE" VALUES ('19', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181109/副本WBS增量表（2018年）.xlsxOFJr', null, '00', '135932', '11', null, null, '22', '20181109212710', null, null, '00');
 INSERT INTO "VOTE"."PM_FILE" VALUES ('1', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxfNoB', null, null, null, '1', null, null, '1000', '20181108222815', null, null, '00');
 INSERT INTO "VOTE"."PM_FILE" VALUES ('9', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxDpoA', null, '00', '18922', null, null, null, '22', '20181108230251', null, null, '00');
 INSERT INTO "VOTE"."PM_FILE" VALUES ('10', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsx4I9n', null, '00', '13130', null, null, null, '22', '20181108231407', null, null, '00');
@@ -2083,8 +2077,7 @@ CREATE TABLE "VOTE"."PM_REVIEW_INFO" (
 "REVIEW_USER_NAME" VARCHAR2(64 BYTE) NULL ,
 "REVIEW_USER_CODE" NUMBER(10) NULL ,
 "RESULT" CHAR(2 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL ,
-"COMMENT_DETAIL" VARCHAR2(1024 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL 
 )
 LOGGING
 NOCOMPRESS
@@ -2095,18 +2088,6 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_REVIEW_INFO
 -- ----------------------------
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('1', '3', null, '00', null, null, null, '00', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('2', '11', null, '00', null, null, null, '01', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('3', '7', null, '00', null, null, null, '00', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('4', '11', null, '00', '系统管理员', '1000', '00', '01', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('5', '11', null, '00', '系统管理员_TEST2', '22', '00', '01', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('6', '11', null, '00', '系统管理员_TEST2', '22', '01', '01', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('7', '11', null, '00', '系统管理员', '1000', '00', '01', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('8', '11', null, '00', '系统管理员', '1000', '00', '01', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('9', '11', null, '00', '系统管理员_TEST2', '22', '00', '01', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('10', '1', null, '00', 'PMS_管理员（娄）', '41', null, '01', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('11', '1', null, '00', '系统管理员', '1000', '00', '01', null);
-INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('12', '1', null, '00', '系统管理员', '1000', null, '00', null);
 
 -- ----------------------------
 -- Table structure for PM_SALE_GROUP_INFO
@@ -2293,25 +2274,38 @@ INSERT INTO "VOTE"."ROLE_MENU" VALUES ('33', '1026', '20181103');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('33', '1087', '20181103');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('34', '1026', '20181103');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('34', '1087', '20181103');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100004', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100008', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100007', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100003', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100005', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1026', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1085', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1064', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1084', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1066', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1044', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1087', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1028', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1145', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1124', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1144', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100001', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100002', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100004', '20181109');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100004', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100008', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100007', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100003', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100005', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1026', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1085', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1064', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1084', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1066', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1044', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1087', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1028', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1124', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100001', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100001', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100002', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100002', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100004', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100008', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100007', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100003', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100005', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1026', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1085', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1064', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1084', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1066', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1044', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1087', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1028', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1124', '20181104');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '100004', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '100008', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '100007', '20181102');
@@ -2330,25 +2324,8 @@ INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '1066', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '1044', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '1087', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '1028', '20181102');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100008', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100001', '20181109');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '100001', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '100002', '20181102');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100002', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100007', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100003', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100005', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1026', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1085', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1064', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1084', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1066', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1044', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1087', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1028', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1145', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1124', '20181109');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1144', '20181109');
 
 -- ----------------------------
 -- Table structure for TABLE_HEADER_INFO
@@ -2448,8 +2425,8 @@ COMMENT ON COLUMN "VOTE"."USR_INFO"."STR_REMARK" IS '备注';
 -- Records of USR_INFO
 -- ----------------------------
 INSERT INTO "VOTE"."USR_INFO" VALUES ('41', null, 'PMS_管理员（娄）', '1', '111111', '2018-11-03', '13711111111', 'mailwork_sh@163.com', '22', '0', '20181103', null, '01', '111111111111111', '111111111111111', null, null, '111111');
-INSERT INTO "VOTE"."USR_INFO" VALUES ('1000', 'Aoot', '系统管理员', '0', '111111', '20170523', '111111', '11111', null, '1', '20170217', '1000', '01', null, null, '687A5E69DB5A430DD39665F8C5902182', '20181109235037374', null);
-INSERT INTO "VOTE"."USR_INFO" VALUES ('22', null, '系统管理员_TEST2', '1', '111111', '2018-10-12', '13666666666', '35q13w5eq@qq.com', '22', '1', '20181103', '1000', '01', '3123123', '420123123123123', null, '20181109234938501', 'asda');
+INSERT INTO "VOTE"."USR_INFO" VALUES ('1000', 'Aoot', '系统管理员', '0', '111111', '20170523', '111111', '11111', null, '1', '20170217', '1000', '01', null, null, '32E4A61D6DBAA140BF88987681C1507C', '20181109095423534', null);
+INSERT INTO "VOTE"."USR_INFO" VALUES ('22', null, '系统管理员_TEST2', '1', '111111', '2018-10-12', '13666666666', '35q13w5eq@qq.com', '22', '0', '20181103', '1000', '01', '3123123', '420123123123123', null, '20181108233633063', 'asda');
 
 -- ----------------------------
 -- Table structure for USR_MENU
@@ -2498,8 +2475,8 @@ COMMENT ON COLUMN "VOTE"."USR_ROLE"."TM_SMP" IS '创建时间';
 -- ----------------------------
 INSERT INTO "VOTE"."USR_ROLE" VALUES ('2', '1', '20180731150933');
 INSERT INTO "VOTE"."USR_ROLE" VALUES ('13', '1', '20180813165527');
+INSERT INTO "VOTE"."USR_ROLE" VALUES ('22', '1', '20181031001453');
 INSERT INTO "VOTE"."USR_ROLE" VALUES ('1000', '38', '20181108215604');
-INSERT INTO "VOTE"."USR_ROLE" VALUES ('22', '38', '20181109233955');
 
 -- ----------------------------
 -- Table structure for VOTE_APPLY_INFO
@@ -3790,7 +3767,7 @@ CREATE SEQUENCE "VOTE"."PMREVIEWINFO_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 21
+ START WITH 1
  CACHE 20;
 
 -- ----------------------------
