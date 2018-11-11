@@ -31,7 +31,31 @@
 	        </select>
 	      </div>
 	    </div>
-	  
+		  <div class="layui-inline">
+			  <label class="layui-form-label">创建时间(开始)：</label>
+			  <div class="layui-input-inline">
+				  <input type="text" name="createTimeStart" id="beginTime"  autocomplete="off" class="layui-input form-control">
+			  </div>
+		  </div>
+
+		  <div class="layui-inline">
+			  <label class="layui-form-label">创建时间(结束)：</label>
+			  <div class="layui-input-inline">
+				  <input type="text" name="createTimeEnd" id="endTime" autocomplete="off" class="layui-input form-control">
+			  </div>
+		  </div>
+		  <div class="layui-inline">
+			  <label class="layui-form-label">客户群编号：</label>
+			  <div class="layui-input-inline">
+				  <input type="text" name="custGroupId"  autocomplete="off" class="layui-input form-control">
+			  </div>
+		  </div>
+		  <div class="layui-inline">
+			  <label class="layui-form-label">客户群名称：</label>
+			  <div class="layui-input-inline">
+				  <input type="text" name="custGroupName"  autocomplete="off" class="layui-input form-control">
+			  </div>
+		  </div>
 	    <div class="layui-inline">
 	      <label class="layui-form-label">客户类型：</label>
 	      <div class="layui-input-inline">
@@ -69,26 +93,7 @@
 	      </div>
 	    </div>
 	    
-	     <div class="layui-inline">
-	       <label class="layui-form-label">开始时间：</label>
-	       <div class="layui-input-inline">
-	         <input type="text" name="createTimeStart" id="beginTime"  autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
-	    
-	    <div class="layui-inline">
-	       <label class="layui-form-label">结束时间：</label>
-	       <div class="layui-input-inline">
-	         <input type="text" name="createTimeEnd" id="endTime" autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
-	    
-	    <div class="layui-inline">
-	       <label class="layui-form-label">公司代码：</label>
-	       <div class="layui-input-inline">
-	         <input type="text" name="companyCode"  autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
+
 	    
  	   <div class="layui-inline" style="vertical-align: top;">
 		   <div class="layui-btn-container" style="margin-left:15px;">
@@ -275,11 +280,12 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      //{type: 'checkbox', fixed: 'left'},
 	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
   	      {field:'custCnName', title:'客户名称', width:230},
-  	      {field:'area', title:'地区'},
-  	      {field:'createTime', title:'创建日期'},
-  	      {field:'companyCode', title:'公司代码'},
-  	      {field:'custGroupId', title:'客户群编号'},
-  	      {field:'custGroupName', title:'客户群名称'},
+            {field:'custGroupId', title:'客户群编号'},
+            {field:'custGroupName', title:'客户群名称'},
+            {field:'isUseful', title:'是否有效'},
+            {field:'area', title:'地区'},
+            {field:'createTime', title:'创建日期'},
+            {field:'companyCode', title:'公司代码'},
   	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
   	      {field:'custType', title:'客户类型'},
   	      {field:'location', title:'地址'},
@@ -290,7 +296,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	      {field:'mainBusiness', title:'主营业务'},
   	      {field:'custTrade', title:'客户行业'},
   	      {field:'payCycle', title:'结算周期'},
-  	      {field:'isUseful', title:'是否有效'},
   	      {field:'groupCompany', title:'集团公司'},
   	      {field:'bgVisiable', title:'BG隐藏'},
   	      {field:'companyFuncCode', title:'公司代码（职能）'},

@@ -70,6 +70,19 @@
 		      </div>
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
+
+		   <div class="layui-inline">
+			   <label class="layui-form-label">预估开始期限：</label>
+			   <div class="layui-input-inline">
+				   <input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
+			   </div>
+		   </div>
+		   <div class="layui-inline">
+			   <label class="layui-form-label">预估结束期限：</label>
+			   <div class="layui-input-inline">
+				   <input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
+			   </div>
+		   </div>
 		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:25px;">
@@ -178,8 +191,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'predictAmount', title:'预估收入金额', width:150},
 	  	      {field:'predictCost', title:'预估成本', width:120},
 	  	      {field:'predictProfitRate', title:'预估利润率'},
-	  	      {field:'predictPeriodStart', title:'预付开始期限'},
-			{field:'predictPeriodEnd', title:'预付结束期限'},
+	  	      {field:'predictPeriodStart', title:'预估开始期限'},
+			{field:'predictPeriodEnd', title:'预估结束期限'},
 	  	      {field:'constructionDeptName', title:'交付部门'},
 	  	      {field:'sellDeptName', title:'销售部门'},
 	  	      {field:'custManagerName', title:'客户经理'},

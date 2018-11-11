@@ -66,13 +66,13 @@
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预付开始期限：</label>
+		      <label class="layui-form-label">预估开始期限：</label>
 		       <div class="layui-input-inline">
 	         		<input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 			  <div class="layui-inline">
-				  <label class="layui-form-label">预付结束期限：</label>
+				  <label class="layui-form-label">预估结束期限：</label>
 				  <div class="layui-input-inline">
 					  <input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 				  </div>
@@ -147,8 +147,8 @@
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="paymentPoint"  autocomplete="off" class="layui-input form-control">
+		       <div class="layui-input-inline" style="width:363px;height: 50px;">
+				   <textarea name="remark" rows="2"  placeholder="在X年X月完成X任务，付款X比例计X元合同款" class="layui-textarea form-control"></textarea>
 		      </div>
 		    </div>
 		    

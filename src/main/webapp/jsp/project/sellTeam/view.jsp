@@ -19,20 +19,20 @@
 	  <form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item">
 		    <div class="layui-inline">
-		      <label class="layui-form-label">销售团队名称：</label>
+		      <label class="layui-form-label">团队名称：</label>
 		      <div class="layui-input-inline">
 		       	<label class="layui-form-label">${group.groupName}</label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
-	     	   <label class="layui-form-label">已选机构：</label>
+	     	   <label class="layui-form-label">所属机构：</label>
 		       <div class="layui-input-inline">
 		       	<label class="layui-form-label">${group.ownerOrgName}</label>
 		      </div>
 		     </div>
 
 		    <div class="layui-inline">
-	     	   <label class="layui-form-label">已选用户：</label>
+	     	   <label class="layui-form-label">团队成员列表：</label>
 		      <div class="layui-input-inline" id="chosed-user-hook" style="border:#e6e6e6 solid 1px;height:100px;overflow-y:auto;width:460px;">
 		         <c:forEach items="${users}" var="app">					
 						<span class="customer-list">

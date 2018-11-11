@@ -55,7 +55,7 @@
 		          <input type="hidden" name="developmentDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>部门查询</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		     <div class="layui-inline">
@@ -65,7 +65,7 @@
 		          <input type="hidden" name="developmentManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>人员查询</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    
@@ -74,7 +74,7 @@
 	           <div class="layui-input-inline" id="chosed-project-hook" style="border:#e6e6e6 solid 1px;height:60px;overflow-y:auto;width:320px;">
 		       </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>项目查询</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    

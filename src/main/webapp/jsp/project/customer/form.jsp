@@ -127,7 +127,7 @@
 	        </select>
 	      </div>
 	    </div>
-	    
+		  <c:if test="${act =='edit'}">
 	     <div class="layui-inline">
 	      <label class="layui-form-label">是否有效：</label>
 	      <div class="layui-input-inline">
@@ -136,6 +136,7 @@
 	        </select>
 	      </div>
 	    </div>
+		  </c:if>
 	  <div class="layui-inline">
 	       <label class="layui-form-label">集团公司：</label>
 	       <div class="layui-input-inline">
@@ -172,7 +173,7 @@
 	   </c:if>
 	   
 	    <div class="layui-inline">
-		    <label class="layui-form-label">选择客户群：</label>
+		    <label class="layui-form-label">所属客户群：</label>
 	       <div class="layui-input-inline">
 	          <select name="custGroupId" lay-verify="required"  <c:if test="${act =='view'}">disabled=true</c:if> lay-search="">
 	          <option value="">选择客户群</option>
