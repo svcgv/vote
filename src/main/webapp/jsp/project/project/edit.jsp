@@ -28,7 +28,7 @@
 		      <label class="layui-form-label">投标名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="bidId">
+		         <input type="text" style='display:none' name="bidId">
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="bidNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -44,7 +44,7 @@
 		      <label class="layui-form-label">实施部门：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="buildDeptName"  autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="buildDeptId" />
+		         <input type="text" style='display:none' name="buildDeptId" />
 		      </div>
 		         <button type="button"  class="layui-btn layui-btn-sm" id="buildDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -53,7 +53,7 @@
 			      <label class="layui-form-label">实施负责人：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="buildManagerName"  autocomplete="off" class="layui-input form-control">
-			         <input type="hidden" name="buildManagerId" />
+			         <input type="text" style='display:none' name="buildManagerId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="buildManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -62,7 +62,7 @@
 			      <label class="layui-form-label">销售部门：</label>
 			      <div class="layui-input-inline">
 				       <input type="text" name="sellDeptName"  autocomplete="off" class="layui-input form-control">
-				       <inpu type="hidden" name="sellDeptId" />
+				       <inpu type="text" style='display:none' name="sellDeptId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="sellDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -71,7 +71,7 @@
 		      <label class="layui-form-label">销售负责人：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="sellManagerName"  autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="sellManagerId" />
+		         <input type="text" style='display:none' name="sellManagerId" />
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="sellManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -292,8 +292,15 @@ $(function(){
 			 });
 		
 	// form 表单手动渲染
-	  form.render();
-	  
+		var data = JSON.parse('${formObj}')
+		console.log(data);
+	 for (var property in data) {
+		 	$("#project-addForm-hook input[name='"+property+"']").val(data[property]);
+		 	if(property=='remark'){
+		 		$("#project-addForm-hook textarea[name='"+property+"']").val(data[property]);
+		 	}
+		 }
+	   form.render();
 	var win=$("#project-addForm-hook").getWindow();
 	// 保存
 	$("#project-addForm-hook #customGroup-add-hook").click(function(){
@@ -327,6 +334,8 @@ $(function(){
 		win.close();
 		return false;
 	})
+	
+	 
 	
 	})
 });

@@ -9,8 +9,8 @@
 	       <label class="layui-form-label">评审人：</label>
 	       <div class="layui-input-inline">
 	         <input type="text" name="selfName" readonly="readonly" value="${userName }"  autocomplete="off" class="layui-input form-control disabledColor">
-	         <input type="hidden" name="reviewId" value="${reviewId }">
-	         <input type="hidden" name="reviewType" value="00">
+	         <input type="text" style='display:none' name="reviewId" value="${reviewId }">
+	         <input type="text" style='display:none' name="reviewType" value="00">
 	       </div>
  	 	</div>
 	  	

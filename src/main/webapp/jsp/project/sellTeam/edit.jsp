@@ -22,8 +22,8 @@
 		      <label class="layui-form-label">团队名称：</label>
 		      <div class="layui-input-inline">
 		         <input type="text" name="groupName" autocomplete="off" value="${group.groupName}" class="layui-input form-control">
-		          <input type="hidden" name="groupId" autocomplete="off" value="${group.groupId}" class="layui-input form-control">
-		          <input type="hidden" name="groupCode" autocomplete="off" value="${group.groupCode}" class="layui-input form-control">
+		          <input type="text" style='display:none' name="groupId" autocomplete="off" value="${group.groupId}" class="layui-input form-control">
+		          <input type="text" style='display:none' name="groupCode" autocomplete="off" value="${group.groupCode}" class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline" style="vertical-align:top;">

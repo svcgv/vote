@@ -9,19 +9,22 @@ import org.springframework.transaction.annotation.Transactional;
 import com.indihx.PmProjectInfo.dao.PmProjectInfoMapper;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectInfo.service.PmProjectInfoService;
+import com.indihx.comm.util.RandomUtil;
 
 
 @Service("pmProjectInfoService")
 public class PmProjectInfoServiceImpl implements PmProjectInfoService {
 	@Resource
    	PmProjectInfoMapper pmProjectInfoMapper;
-   	
+   	private static String type="XM";
    
    	public PmProjectInfoEntity queryObject(long id){
    		return pmProjectInfoMapper.queryObject(id);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmProjectInfoEntity entity){
+		entity.setIsDelete("00");
+		entity.setProjectCode(RandomUtil.getCodeByType(type));
    		pmProjectInfoMapper.insert(entity);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)

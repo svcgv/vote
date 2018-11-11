@@ -21,6 +21,8 @@ public class PmProjectInfoEntity extends BaseEntity implements Serializable {
 	 */
 
 private long projectId;
+
+private String projectCode;
 	/**
 	 * 
 	 */
@@ -316,6 +318,8 @@ private long businessTripCost;
 	 */
 
 private long otherCost;
+
+private long sumAllCost;
 	/**
 	 * 
 	 */
@@ -1207,4 +1211,18 @@ private long modifier;
 	public long getModifier() {
 		return modifier;
 	}
+	public long getSumAllCost() {
+		return sumAllCost;
+	}
+	public void setSumAllCost(long sumAllCost) {
+		this.sumAllCost = sumAllCost;
+	}
+	public String getProjectCode() {
+		return projectCode;
+	}
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+	
+	
 }

@@ -101,7 +101,7 @@
 	         </c:if>
 	       </div>
  	 	</div>
- 	 	<input type="hidden" value="${id}" name="oldCode" />
+ 	 	<input type="text" style='display:none' value="${id}" name="oldCode" />
 	  </div>
 	</form>
 </c:if>
