@@ -1,6 +1,10 @@
 package com.indihx.comm.util;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.github.pagehelper.Page;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,9 +16,31 @@ import java.util.Map;
  */
 public class R extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
-	
+
+	// 返回状态编码
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String code;
+
+	// 返回信息
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String message;
+
+	//总数
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Long total;
+
+	//数据
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private List<?> page;
+
 	public R() {
 		put("code", 0);
+		put("msg", "");
+	}
+	public R(List<?> list) {
+		put("code", 0);
+		put("msg", "");
+		setPage(list);
 	}
 	
 	public static R error() {
@@ -51,5 +77,23 @@ public class R extends HashMap<String, Object> {
 	public R put(String key, Object value) {
 		super.put(key, value);
 		return this;
+	}
+	public void setPage(List<?> page) {
+		this.page = page;
+		if (page instanceof Page) {
+			setTotal(((Page<?>) page).getTotal());
+		} else {
+			setTotal((long) page.size());
+		}
+	}
+	public void setTotal(Long total) {
+		this.total = total;
+	}
+	public List<?> getPage() {
+		return page;
+	}
+
+	public Long getTotal() {
+		return total;
 	}
 }

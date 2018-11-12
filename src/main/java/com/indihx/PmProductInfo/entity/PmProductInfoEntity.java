@@ -34,7 +34,7 @@ private String productName;
 	 * 
 	 */
 
-private long productSuggestPrice;
+private BigDecimal productSuggestPrice;
 	/**
 	 * 
 	 */
@@ -135,13 +135,13 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setProductSuggestPrice(long productSuggestPrice) {
+	public void setProductSuggestPrice(BigDecimal productSuggestPrice) {
 		this.productSuggestPrice = productSuggestPrice;
 	}
 	/**
 	 * 获取：
 	 */
-	public long getProductSuggestPrice() {
+	public BigDecimal getProductSuggestPrice() {
 		return productSuggestPrice;
 	}
 	/**

@@ -83,7 +83,7 @@ public class PmSaleGroupInfoController {
     	pmSaleGroupInfo.setOwnerOrgId(orgNo);
     	pmSaleGroupInfo.setOwnerOrgName(orgName);
     	pmSaleGroupInfo.setCreatorId(user.getUsrId());
-    	pmSaleGroupInfo.setCreateTime(DateUtil.getCurrentTimeMill());
+    	pmSaleGroupInfo.setCreateTime(DateUtil.formatFromDB(DateUtil.getSysDate()));
     	String code = "XS"+DateUtil.getSysDate()+RandomUtil.generateString(4);
     	pmSaleGroupInfo.setGroupCode(code);
         pmSaleGroupInfoService.insert(pmSaleGroupInfo);

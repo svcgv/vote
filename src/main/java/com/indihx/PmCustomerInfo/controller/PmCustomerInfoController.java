@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import java.util.Date;
 import java.util.List;
+
+import com.indihx.comm.util.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,11 +45,16 @@ public class PmCustomerInfoController {
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
+    public @ResponseBody
+    ResponseData list(@RequestBody Map<String, Object> params, HttpSession session){
     	String str = (String) params.get("queryStr");
+        int page = (int)params.get("page");
+        int pageSize = (int) params.get("limit");
     	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
-		List<PmCustomerInfoEntity> pmCustomerInfo = pmCustomerInfoService.queryList(maps);
-        return R.ok().put("page", pmCustomerInfo);
+//		List<PmCustomerInfoEntity> pmCustomerInfo = pmCustomerInfoService.queryList(maps);
+//        R.ok().put("page", pmCustomerInfo);
+//        R.ok().put("count", pmCustomerInfoService.queryTotal());
+        return new ResponseData(pmCustomerInfoService.queryList(maps,page,pageSize));
     }
 
 
