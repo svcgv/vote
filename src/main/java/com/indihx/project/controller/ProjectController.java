@@ -1,4 +1,4 @@
-package com.indihx.project.controller;
+﻿package com.indihx.project.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -113,7 +113,6 @@ public class ProjectController extends AbstractBaseController {
 	}
 
 	// 机构
-<<<<<<< HEAD
 		@RequestMapping(value="/project/org",method=RequestMethod.GET)
 		public ModelAndView orgFormView(@RequestParam("act") String act) {
 			ModelAndView view = new ModelAndView();
@@ -166,8 +165,6 @@ public class ProjectController extends AbstractBaseController {
 			return view;
 		}
 	
-	
-=======
 	@RequestMapping(value = "/project/org", method = RequestMethod.GET)
 	public ModelAndView orgFormView(@RequestParam("act") String act) {
 		ModelAndView view = new ModelAndView();
@@ -222,5 +219,4 @@ public class ProjectController extends AbstractBaseController {
 		return view;
 	}
 
->>>>>>> 4c3dd913d44a2b3c51474572884a8d93027a4fd4
 }
