@@ -89,6 +89,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	
 	// 保存 事件
 	var act="${act}";// 区分是index页 form页 赋值问题
+	var index ="${index}";
 	var win=$(".budget-cust-wrapper").getWindow();
 	$(".budget-cust-wrapper").on("click","#save-hook",function(){
 		// 遍历选中的radio
@@ -101,6 +102,11 @@ layui.use(['layer', 'form','laydate','table'], function(){
 				 if(act =="addCust"){ //编辑 修改 页面
 			 		$("#budget-addForm-hook input[name='projectName']").val(projectName);
 					$("#budget-addForm-hook input[name='wbsCode']").val(wbsCode);
+			 	}else if(act == "addWBS"){
+			 		// form 2 
+			 		console.log(index,'index')
+			 		$("#budget-addForm-hook input[name='wbsCode']").eq(index).val(wbsCode);
+			 		$("#budget-addForm-hook input[name='projectName']").eq(index).val(projectName);
 			 	}
 			}
 		});

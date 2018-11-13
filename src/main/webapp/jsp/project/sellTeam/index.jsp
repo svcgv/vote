@@ -28,14 +28,14 @@
 		    
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">开始时间：</label>
+		      <label class="layui-form-label">创建时间(开始)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="createTimeStart" id="startTime" autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">结束时间：</label>
+		      <label class="layui-form-label">创建时间(结束)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="createTimeEnd" id="endTime"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -119,6 +119,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'ownerOrgId', title:'所属机构编号', width:230},
 	  	      {field:'ownerOrgName', title:'所属机构名称', width:230},
 	  	      {field:'createTime', title:'创建时间'},
+            {field:'isDelete', title:'是否有效'},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'90',

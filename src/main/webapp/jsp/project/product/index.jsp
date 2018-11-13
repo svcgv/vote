@@ -17,7 +17,16 @@
 		         <input type="text" name="productName"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
-		    
+
+		   <div class="layui-inline">
+			   <label class="layui-form-label">产品类型：</label>
+			   <div class="layui-input-inline">
+				   <select name="productType" lay-verify="required" lay-filter="" class="form-control">
+					   ${productType.ewTypeHtml }
+				   </select>
+			   </div>
+		   </div>
+
 		    <div class="layui-inline">
 		      <label class="layui-form-label">产品代码：</label>
 		       <div class="layui-input-inline">
@@ -25,47 +34,40 @@
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">指导销售价：</label>
+		      <label class="layui-form-label">指导销售价(元)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="productSuggestPrice"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		   
 		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">产品类型：</label>
-		      <div class="layui-input-inline">
-		        <select name="productType" lay-verify="required" lay-filter="" class="form-control">
-		        	 ${productType.ewTypeHtml }
-		        </select>
-		      </div>
-		    </div>
+
 		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">开始销售日期：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="startSaleDate" id="startSaleDate" autocomplete="off" class="layui-input form-control hasDatepicker">
-		      </div>
-		    </div>
+		     <%--<div class="layui-inline">--%>
+		      <%--<label class="layui-form-label">开始销售日期：</label>--%>
+		       <%--<div class="layui-input-inline">--%>
+		         <%--<input type="text" name="startSaleDate" id="startSaleDate" autocomplete="off" class="layui-input form-control hasDatepicker">--%>
+		      <%--</div>--%>
+		    <%--</div>--%>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">研发部门：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="developmentDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
-		          <input type="hidden" name="developmentDeptId">
+		          <input type="text" style='display:none' name="developmentDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>部门</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">研发负责人：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="developmentManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control">
-		          <input type="hidden" name="developmentManagerId">
+		          <input type="text" style='display:none' name="developmentManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>负责人</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    

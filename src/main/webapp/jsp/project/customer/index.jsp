@@ -31,7 +31,31 @@
 	        </select>
 	      </div>
 	    </div>
-	  
+		  <div class="layui-inline">
+			  <label class="layui-form-label">创建时间(开始)：</label>
+			  <div class="layui-input-inline">
+				  <input type="text" name="createTimeStart" id="beginTime"  autocomplete="off" class="layui-input form-control">
+			  </div>
+		  </div>
+
+		  <div class="layui-inline">
+			  <label class="layui-form-label">创建时间(结束)：</label>
+			  <div class="layui-input-inline">
+				  <input type="text" name="createTimeEnd" id="endTime" autocomplete="off" class="layui-input form-control">
+			  </div>
+		  </div>
+		  <div class="layui-inline">
+			  <label class="layui-form-label">客户群编号：</label>
+			  <div class="layui-input-inline">
+				  <input type="text" name="custGroupId"  autocomplete="off" class="layui-input form-control">
+			  </div>
+		  </div>
+		  <div class="layui-inline">
+			  <label class="layui-form-label">客户群名称：</label>
+			  <div class="layui-input-inline">
+				  <input type="text" name="custGroupName"  autocomplete="off" class="layui-input form-control">
+			  </div>
+		  </div>
 	    <div class="layui-inline">
 	      <label class="layui-form-label">客户类型：</label>
 	      <div class="layui-input-inline">
@@ -54,9 +78,12 @@
 	     <div class="layui-inline">
 	      <label class="layui-form-label">是否有效：</label>
 	      <div class="layui-input-inline">
-	        <select name="isUseful" lay-verify="required" lay-filter="" class="form-control">
-	        	 ${isUseful.ewTypeHtml }
-	        </select>
+	        <%--<select name="isUseful" lay-verify="required" lay-filter="" class="form-control">--%>
+	        	 <%--${isUseful.ewTypeHtml }--%>
+	        <%--</select>--%>
+			  <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
+				  ${isUseful.ewTypeHtml }
+			  </select>
 	      </div>
 	    </div>
 	    
@@ -69,26 +96,7 @@
 	      </div>
 	    </div>
 	    
-	     <div class="layui-inline">
-	       <label class="layui-form-label">开始时间：</label>
-	       <div class="layui-input-inline">
-	         <input type="text" name="createTimeStart" id="beginTime"  autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
-	    
-	    <div class="layui-inline">
-	       <label class="layui-form-label">结束时间：</label>
-	       <div class="layui-input-inline">
-	         <input type="text" name="createTimeEnd" id="endTime" autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
-	    
-	    <div class="layui-inline">
-	       <label class="layui-form-label">公司代码：</label>
-	       <div class="layui-input-inline">
-	         <input type="text" name="companyCode"  autocomplete="off" class="layui-input form-control">
-	      </div>
-	    </div>
+
 	    
  	   <div class="layui-inline" style="vertical-align: top;">
 		   <div class="layui-btn-container" style="margin-left:15px;">
@@ -160,7 +168,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	    title: '客户数据表',
   	    cols: [[
   	     // {type: 'checkbox', fixed: 'left'},
-  	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
+  	      {field:'sapCode', title:'SAP编码',fixed: 'left', width:110, sort: true},
   	      {field:'custCnName', title:'客户名称', width:230},
   	      {field:'country', title:'国家/地区', width:90},
   	      {field:'enName', title:'英文名称',width:100},
@@ -176,6 +184,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	      {field:'custTrade', title:'客户行业'},
   	      {field:'payCycle', title:'结算周期'},
   	      {field:'isUseful', title:'是否有效'},
+//  	      {field:'isDelete', title:'是否有效'},
   	      {field:'groupCompany', title:'集团公司'},
   	      {field:'bgVisiable', title:'BG隐藏'},
   	      {field:'companyCode', title:'公司代码'},
@@ -214,8 +223,11 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	      //{type: 'checkbox', fixed: 'left'},
 			  	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
 			  	      {field:'custCnName', title:'客户名称', width:230},
-			  	      {field:'country', title:'国家/地区', width:90},
-			  	      {field:'enName', title:'英文名称',width:100},
+			  	      {field:'area', title:'地区'},
+			  	      {field:'createTime', title:'创建日期'},
+			  	      {field:'companyCode', title:'公司代码'},
+			  	      {field:'custGroupId', title:'客户群编号'},
+			  	      {field:'custGroupName', title:'客户群名称'},
 			  	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
 			  	      {field:'custType', title:'客户类型'},
 			  	      {field:'location', title:'地址'},
@@ -224,17 +236,14 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	      {field:'tradeCode', title:'行业代码'},
 			  	      {field:'regionalMarket', title:'地区市场'},
 			  	      {field:'mainBusiness', title:'主营业务'},
-			  	      {field:'area', title:'地区'},
 			  	      {field:'custTrade', title:'客户行业'},
 			  	      {field:'payCycle', title:'结算周期'},
 			  	      {field:'isUseful', title:'是否有效'},
 			  	      {field:'groupCompany', title:'集团公司'},
 			  	      {field:'bgVisiable', title:'BG隐藏'},
-			  	      {field:'companyCode', title:'公司代码'},
 			  	      {field:'companyFuncCode', title:'公司代码（职能）'},
-			  	      {field:'createTime', title:'创建日期'},
-			  	      {field:'custGroupId', title:'客户群编号'},
-			  	      {field:'custGroupName', title:'客户群名称'},
+			  	      {field:'country', title:'国家/地区', width:90},
+			  	      {field:'enName', title:'英文名称',width:100},
 			  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 			  	    ]],
 			  	    cellMinWidth:'90',
@@ -274,29 +283,30 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    cols: [[
 	      //{type: 'checkbox', fixed: 'left'},
 	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
-	      {field:'custCnName', title:'客户名称', width:230},
-	      {field:'country', title:'国家/地区', width:90},
-	      {field:'enName', title:'英文名称',width:100},
-	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
-	      {field:'custType', title:'客户类型'},
-	      {field:'address', title:'地址'},
-	      {field:'cashManagementGroup', title:'现金管理组'},
-	      {field:'payCondition', title:'付款条件'},
-	      {field:'tradeCode', title:'行业代码'},
-	      {field:'regionalMarket', title:'地区市场'},
-	      {field:'mainBusiness', title:'主营业务'},
-	      {field:'area', title:'地区'},
-	      {field:'custTrade', title:'客户行业'},
-	      {field:'payCycle', title:'结算周期'},
-	      {field:'isUseful', title:'是否有效'},
-	      {field:'groupCompany', title:'集团公司'},
-	      {field:'bgVisiable', title:'BG隐藏'},
-	      {field:'companyCode', title:'公司代码'},
-	      {field:'companyFuncCode', title:'公司代码（职能）'},
-	      {field:'createTime', title:'创建日期'},
-	      {field:'custGroupId', title:'客户群编号'},
-	      {field:'custGroupName', title:'客户群名称'},
-	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
+  	      {field:'custCnName', title:'客户名称', width:230},
+            {field:'custGroupId', title:'客户群编号'},
+            {field:'custGroupName', title:'客户群名称'},
+//            {field:'isUseful', title:'是否有效'},
+            {field:'isDelete', title:'是否有效'},
+            {field:'area', title:'地区'},
+            {field:'createTime', title:'创建日期'},
+            {field:'companyCode', title:'公司代码'},
+  	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
+  	      {field:'custType', title:'客户类型'},
+  	      {field:'location', title:'地址'},
+  	      {field:'cashManagementGroup', title:'现金管理组'},
+  	      {field:'payCondition', title:'付款条件'},
+  	      {field:'tradeCode', title:'行业代码'},
+  	      {field:'regionalMarket', title:'地区市场'},
+  	      {field:'mainBusiness', title:'主营业务'},
+  	      {field:'custTrade', title:'客户行业'},
+  	      {field:'payCycle', title:'结算周期'},
+  	      {field:'groupCompany', title:'集团公司'},
+  	      {field:'bgVisiable', title:'BG隐藏'},
+  	      {field:'companyFuncCode', title:'公司代码（职能）'},
+  	      {field:'country', title:'国家/地区', width:90},
+  	      {field:'enName', title:'英文名称',width:100},
+  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'90',
 	    page: true

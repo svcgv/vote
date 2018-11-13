@@ -57,8 +57,23 @@ public class YearBudgetController extends AbstractBaseController{
 		view.setViewName("/project/yearBudget/index");
 		return view;
 	}
-	@RequestMapping(value="/yearBudget/form",method=RequestMethod.GET)
+	// 新form
+	@RequestMapping(value="/yearBudget/form2",method=RequestMethod.GET)
 	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
+		ModelAndView view = new ModelAndView();
+		
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
+		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
+		
+		view.addObject("act",act);
+		view.addObject("id",id);
+		
+		view.setViewName("/project/yearBudget/form2");
+		return view;
+	}
+	// form
+	@RequestMapping(value="/yearBudget/form",method=RequestMethod.GET)
+	public ModelAndView formFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
@@ -107,9 +122,11 @@ public class YearBudgetController extends AbstractBaseController{
 	}
 	// wbs
 	@RequestMapping(value="/yearBudget/wbs",method=RequestMethod.GET)
-	public ModelAndView wbsFormView(@RequestParam("act") String act) {
+	public ModelAndView wbsFormView(@RequestParam("act") String act,@RequestParam("index") String index) {
+		
 		ModelAndView view = new ModelAndView();
 		view.addObject("act",act);
+		view.addObject("index",index);
 		view.setViewName("/project/yearBudget/wbs");
 		return view;
 	}

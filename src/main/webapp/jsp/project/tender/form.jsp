@@ -21,14 +21,14 @@
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item">
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标名称：</label>
+		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标首次报价金额：</label>
+		      <label class="layui-form-label">首次报价（元）：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="firstBidAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -37,42 +37,48 @@
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
-		         <input type="hidden" name="custId">
-		         <input type="hidden" name="custSapCode">
+		         <input type="text" style='display:none' name="custId">
+		         <input type="text" style='display:none' name="custSapCode">
 		      </div>
 		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估收入金额：</label>
+		      <label class="layui-form-label">预估收入（元）：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="predictAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估成本：</label>
+		      <label class="layui-form-label">预估成本（元）：</label>
 		      <div class="layui-input-inline">
 		       <input type="text" name="predictCost"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估利润率：</label>
+		      <label class="layui-form-label">预估利润率（%）：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="predictProfitRate"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
+			  <div class="layui-inline">
+				  <label class="layui-form-label">税率（%）：</label>
+				  <div class="layui-input-inline">
+					  <input type="text" name="taxRate"  autocomplete="off" class="layui-input form-control">
+				  </div>
+			  </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预付开始期限：</label>
+		      <label class="layui-form-label">预估开始期限：</label>
 		       <div class="layui-input-inline">
 	         		<input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 			  <div class="layui-inline">
-				  <label class="layui-form-label">预付结束期限：</label>
+				  <label class="layui-form-label">预估结束期限：</label>
 				  <div class="layui-input-inline">
 					  <input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 				  </div>
@@ -81,7 +87,7 @@
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="constructionDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="constructionDeptId">
+		          <input type="text" style='display:none' name="constructionDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -93,7 +99,7 @@
 		    <label class="layui-form-label">交付部门负责人：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="constructionDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="constructionDeptManagerId">
+		          <input type="text" style='display:none' name="constructionDeptManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgMangerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -105,7 +111,7 @@
 		      <label class="layui-form-label">销售部门：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="sellDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="sellDeptId">
+		          <input type="text" style='display:none' name="sellDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -116,7 +122,7 @@
 		    <label class="layui-form-label">销售部门负责人：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="sellDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="sellDeptManagerId">
+		          <input type="text" style='display:none' name="sellDeptManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userManagerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -127,7 +133,7 @@
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="custManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="custManagerId">
+		          <input type="text" style='display:none' name="custManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -138,7 +144,7 @@
 		      <label class="layui-form-label">技术总监：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="technicalDirectorId">
+		          <input type="text" style='display:none' name="technicalDirectorId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -147,8 +153,8 @@
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="paymentPoint"  autocomplete="off" class="layui-input form-control">
+		       <div class="layui-input-inline" style="width:363px;height: 50px;">
+				   <textarea name="paymentPoint" rows="2"  placeholder="在X年X月完成X任务，付款X比例计X元合同款" class="layui-textarea form-control"></textarea>
 		      </div>
 		    </div>
 		    
@@ -379,7 +385,7 @@ $(function(){
         $("#tender-addForm-hook #customGroup-save-hook").click(function(){
             var customerGroupName=$("#tender-addForm-hook input[name='bidName']").val();
             if($.trim(customerGroupName) ==''){
-                layer.msg("请输入投标名称");
+                layer.msg("请输入项目名称");
                 return false;
             }
 
@@ -405,7 +411,7 @@ $(function(){
 		$("#tender-addForm-hook #customGroup-add-hook").click(function(){
 			var customerGroupName=$("#tender-addForm-hook input[name='bidName']").val();
 			if($.trim(customerGroupName) ==''){
-				layer.msg("请输入投标名称");
+				layer.msg("请输入项目名称");
 				return false;
 			}
 			

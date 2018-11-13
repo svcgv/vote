@@ -19,7 +19,7 @@
 		      <label class="layui-form-label">产品代码：</label>
 		      <div class="layui-input-inline">
 		         <input type="text" name="productCode" value="${product.productCode}" autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="productId" autocomplete="off" value="${product.productId}" class="layui-input form-control">
+		         <input type="text" style='display:none' name="productId" autocomplete="off" value="${product.productId}" class="layui-input form-control">
 		      </div>
 		    </div>
 		    <div class="layui-inline">
@@ -53,7 +53,7 @@
 		      <label class="layui-form-label">研发部门：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="developmentDeptName" readonly="readonly"  value="${product.developmentDeptName}"  autocomplete="off" class="layui-input form-control">
-		          <input type="hidden" name="developmentDeptId" value="${product.developmentDeptId}"  >
+		          <input type="text" style='display:none' name="developmentDeptId" value="${product.developmentDeptId}"  >
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>部门</button>
@@ -63,7 +63,7 @@
 		      <label class="layui-form-label">研发负责人：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="developmentManagerName"  value="${product.developmentManagerName}"   readonly="readonly" autocomplete="off" class="layui-input form-control">
-		          <input type="hidden" name="developmentManagerId" value="${product.developmentManagerId}"  >
+		          <input type="text" style='display:none' name="developmentManagerId" value="${product.developmentManagerId}"  >
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>人员</button>

@@ -116,12 +116,7 @@ public class CustomerGroupController extends AbstractBaseController{
 		ModelAndView view = new ModelAndView();
 		
 		PmCustomerGroupEntity model= pmCustomerGroupService.queryObject(id);
-		Map<String,Object> entity = new HashMap<String,Object>();
-		entity.put("custGroupId", id);
-		List<PmCustomerGroupRelationEntity> list=pmCustomerGroupRelationService.queryList(entity);
-		
 		view.addObject("ctnGroup",model);
-		view.addObject("customerList",list);
 		
 		view.setViewName("/project/customerGroup/editForm");
 		return view;
@@ -132,12 +127,8 @@ public class CustomerGroupController extends AbstractBaseController{
 		public ModelAndView viewFormFormView(@RequestParam("id") String id) {
 			ModelAndView view = new ModelAndView();
 			PmCustomerGroupEntity model= pmCustomerGroupService.queryObject(id);
-			Map<String,Object> entity = new HashMap<String,Object>();
-			entity.put("custGroupId", id);
-			List<PmCustomerGroupRelationEntity> list=pmCustomerGroupRelationService.queryList(entity);
 			
 			view.addObject("ctnGroup",model);
-			view.addObject("customerList",list);
 			view.setViewName("/project/customerGroup/viewForm");
 			return view;
 		}

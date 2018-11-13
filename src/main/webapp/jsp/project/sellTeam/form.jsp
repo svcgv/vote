@@ -16,7 +16,7 @@
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item">
 		    <div class="layui-inline">
-		      <label class="layui-form-label">销售团队名称：</label>
+		      <label class="layui-form-label">团队名称：</label>
 		      <div class="layui-input-inline">
 		         <input type="text" name="groupName" autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -28,12 +28,12 @@
 			  </div>
 		    </div>
 		     <div class="layui-inline">
-		     	   <label class="layui-form-label">已选机构：</label>
+		     	   <label class="layui-form-label">所属机构：</label>
 			      <div class="layui-input-inline" id="chosed-customer-hook" style="border:#e6e6e6 solid 1px;height:32px;overflow-y:auto;width:460px;">
 			      </div>
 		     </div>
 		     <div class="layui-inline">
-		     	   <label class="layui-form-label">已选用户：</label>
+		     	   <label class="layui-form-label">团队成员列表：</label>
 			      <div class="layui-input-inline" id="chosed-user-hook" style="border:#e6e6e6 solid 1px;height:50px;overflow-y:auto;width:460px;">
 			      </div>
 		     </div>

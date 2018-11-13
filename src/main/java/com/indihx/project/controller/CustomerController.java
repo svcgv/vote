@@ -59,13 +59,22 @@ public class CustomerController extends AbstractBaseController{
 		
 		ModelAndView view = new ModelAndView();
 		
-		view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE","01"));
+//		view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE","01"));
+//		view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE","01"));
+//		view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE","01"));
+//		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
+//		view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE","01"));
+//		view.addObject("country",infoservice.qryInfoByCode("COUNTRY","01"));
+
+		view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE"));
 		view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE","01"));
+		view.addObject("tradeCode",infoservice.qryInfoByCode("TRADE_CODE","01"));
+		view.addObject("regionalMarket",infoservice.qryInfoByCode("REGIONAL_MARKET","00"));
 		view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE","01"));
-		view.addObject("isUseful",infoservice.qryInfoByCode("WAS_USEFUL","有效"));
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 		view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE","01"));
-		view.addObject("country",infoservice.qryInfoByCode("COUNTRY","01"));
-		
+		view.addObject("country",infoservice.qryInfoByCode("COUNTRY","00"));
+
 		view.setViewName("/project/customer/index");
 		return view;
 	}
@@ -86,18 +95,21 @@ public class CustomerController extends AbstractBaseController{
 			view.addObject("Custom",custom);
 			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE",custom.getCustType()));
 			view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE",custom.getCustTrade()));
+			view.addObject("tradeCode",infoservice.qryInfoByCode("TRADE_CODE",custom.getTradeCode()));
+			view.addObject("regionalMarket",infoservice.qryInfoByCode("REGIONAL_MARKET",custom.getRegionalMarket()));
 			view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE",custom.getPayCycle()));
 			view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL",custom.getIsUseful()));
 			view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE",custom.getBgVisiable()));
 			view.addObject("country",infoservice.qryInfoByCode("COUNTRY",custom.getCountry()));
 		}else {
-//			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE","01"));
-			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE","01"));
+			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE"));
 			view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE","01"));
+			view.addObject("tradeCode",infoservice.qryInfoByCode("TRADE_CODE","01"));
+			view.addObject("regionalMarket",infoservice.qryInfoByCode("REGIONAL_MARKET","00"));
 			view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE","01"));
 			view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 			view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE","01"));
-			view.addObject("country",infoservice.qryInfoByCode("COUNTRY","01"));
+			view.addObject("country",infoservice.qryInfoByCode("COUNTRY","00"));
 		}
 		view.addObject("act",act);
 		view.addObject("custId",custId);

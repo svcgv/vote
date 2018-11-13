@@ -12,11 +12,28 @@
 	   <div class="layui-form-item">
 	   
 		  	<div class="layui-inline">
-		      <label class="layui-form-label">投标项目名称：</label>
+		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
+		   <div class="layui-inline">
+			   <label class="layui-form-label">投标编号：</label>
+			   <div class="layui-input-inline">
+				   <input type="text" name="bidCode"  autocomplete="off" class="layui-input form-control">
+			   </div>
+		   </div>
+		   <div class="layui-inline">
+			   <label class="layui-form-label">客户名称：</label>
+			   <div class="layui-input-inline">
+				   <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+				   <input type="text" style='display:none' name="custId">
+				   <input type="text" style='display:none' name="custSapCode">
+			   </div>
+			   <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
+				   <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+			   </div>
+		   </div>
 		    <!-- 
 		    <div class="layui-inline">
 		      <label class="layui-form-label">预估收入金额：</label>
@@ -40,7 +57,7 @@
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预付期限：</label>
+		      <label class="layui-form-label">预估期限：</label>
 		       <div class="layui-input-inline">
 	         		<input type="text" name="predictPeriod" id="predictPeriodDate" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
@@ -50,7 +67,7 @@
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="payDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="payDeptId">
+		          <input type="text" style='display:none' name="payDeptId">
 		      </div>
 	      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -58,7 +75,7 @@
 		      <label class="layui-form-label">销售部门：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="sellDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="sellDeptId">
+		          <input type="text" style='display:none' name="sellDeptId">
 		      </div>
 	      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -66,10 +83,31 @@
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="custManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="custManagerId">
+		          <input type="text" style='display:none' name="custManagerId">
 		      </div>
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
+
+		   <div class="layui-inline">
+			   <label class="layui-form-label">评审状态：</label>
+			   <div class="layui-input-inline">
+				   <select name="status" lay-verify="required" lay-filter="" class="form-control">
+					   ${status.ewTypeHtml }
+				   </select>
+			   </div>
+		   </div>
+		   <%--<div class="layui-inline">--%>
+			   <%--<label class="layui-form-label">预估开始期限：</label>--%>
+			   <%--<div class="layui-input-inline">--%>
+				   <%--<input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">--%>
+			   <%--</div>--%>
+		   <%--</div>--%>
+		   <%--<div class="layui-inline">--%>
+			   <%--<label class="layui-form-label">预估结束期限：</label>--%>
+			   <%--<div class="layui-input-inline">--%>
+				   <%--<input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">--%>
+			   <%--</div>--%>
+		   <%--</div>--%>
 		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:25px;">
@@ -170,19 +208,21 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    title: '投标数据表',
 	    cols: [[
 	    	  {type: 'checkbox', fixed: 'left'},
-	  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
-	  	      {field:'bidName', title:'投标项目名称', width:130},
-	  	      {field:'status', title:'评审状态', width:130},
-	  	      {field:'firstBidAmount', title:'投标首次报价金额', width:150},
-	  	      {field:'custCnName', title:'客户名称', width:130},
-	  	      {field:'predictAmount', title:'预估收入金额', width:150},
-	  	      {field:'predictCost', title:'预估成本', width:120},
-	  	      {field:'predictProfitRate', title:'预估利润率'},
-	  	      {field:'predictPeriodStart', title:'预付开始期限'},
-			{field:'predictPeriodEnd', title:'预付结束期限'},
-	  	      {field:'constructionDeptName', title:'交付部门'},
-	  	      {field:'sellDeptName', title:'销售部门'},
-	  	      {field:'custManagerName', title:'客户经理'},
+	  	      {field:'bidCode', title:'投标编号',fixed: 'left', sort: true, width:130},
+            {field:'status', title:'评审状态', width:130},
+            {field:'bidName', title:'项目名称', width:130},
+            {field:'custCnName', title:'客户名称', width:130},
+            {field:'constructionDeptName', title:'交付部门'},
+            {field:'sellDeptName', title:'销售部门'},
+            {field:'custManagerName', title:'客户经理'},
+            {field:'firstBidAmount', title:'首次报价（元）', width:150},
+            {field:'predictAmount', title:'预估收入（元）', width:150},
+            {field:'predictCost', title:'预估成本（元）', width:120},
+            {field:'predictProfitRate', title:'预估利润率（%）'},
+            {field:'taxRate', title:'税率（%）'},
+            {field:'predictPeriodStart', title:'预估开始期限'},
+            {field:'predictPeriodEnd', title:'预估结束期限'},
+            {field:'paymentPoint', title:'付款点'},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
 	    ]],
 	    cellMinWidth:'90',

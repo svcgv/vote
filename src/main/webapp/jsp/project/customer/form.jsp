@@ -88,14 +88,20 @@
 	   <div class="layui-inline">
 		  <label class="layui-form-label">行业代码：</label>
 	     <div class="layui-input-inline">
-	         <input type="text" name="tradeCode"  value="${Custom.tradeCode}"  <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">
-	      </div>
+	         <%--<input type="text" name="tradeCode"  value="${Custom.tradeCode}"  <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">--%>
+		   <select name="tradeCode" lay-verify="required"   <c:if test="${act =='view'}">disabled=true</c:if> lay-filter="" class="form-control">
+			   ${tradeCode.ewTypeHtml }
+		   </select>
+		 </div>
 	   </div>
 	   <div class="layui-inline">
 		  <label class="layui-form-label">地区市场：</label>
 	     <div class="layui-input-inline">
-	         <input type="text" name="regionalMarket"  value="${Custom.regionalMarket}" <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">
-	      </div>
+	         <%--<input type="text" name="regionalMarket"  value="${Custom.regionalMarket}" <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">--%>
+		   <select name="regionalMarket" lay-verify="required"   <c:if test="${act =='view'}">disabled=true</c:if> lay-filter="" class="form-control">
+			   ${regionalMarket.ewTypeHtml }
+		   </select>
+		 </div>
 	   </div>
 	   
 	   <div class="layui-inline">
@@ -127,7 +133,7 @@
 	        </select>
 	      </div>
 	    </div>
-	    
+		  <c:if test="${act =='edit'}">
 	     <div class="layui-inline">
 	      <label class="layui-form-label">是否有效：</label>
 	      <div class="layui-input-inline">
@@ -136,6 +142,7 @@
 	        </select>
 	      </div>
 	    </div>
+		  </c:if>
 	  <div class="layui-inline">
 	       <label class="layui-form-label">集团公司：</label>
 	       <div class="layui-input-inline">
@@ -172,7 +179,7 @@
 	   </c:if>
 	   
 	    <div class="layui-inline">
-		    <label class="layui-form-label">选择客户群：</label>
+		    <label class="layui-form-label">所属客户群：</label>
 	       <div class="layui-input-inline">
 	          <select name="custGroupId" lay-verify="required"  <c:if test="${act =='view'}">disabled=true</c:if> lay-search="">
 	          <option value="">选择客户群</option>
@@ -183,7 +190,7 @@
 	       </div>
 	   </div>
 	   
-	   <input type="hidden" value="${custId}" name="custId" />
+	   <input type="text" style='display:none' value="${custId}" name="custId" />
 	  </div>
 	</form>
 </div>

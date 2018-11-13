@@ -33,6 +33,8 @@ import com.alibaba.fastjson.JSON;
 import com.indihx.AbstractBaseController;
 import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
+import com.indihx.PmFile.entity.PmFileEntity;
+import com.indihx.PmFile.service.PmFileService;
 import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
 import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import com.indihx.comm.InitSysConstants;
@@ -57,6 +59,9 @@ public class TenderReviewController extends AbstractBaseController{
 	@Autowired
     private PmReviewInfoService pmReviewInfoService;
 	
+	@Autowired
+    private PmFileService pmFileService;
+
 	
 	
 	@RequestMapping("/tenderReview/index")
@@ -66,7 +71,6 @@ public class TenderReviewController extends AbstractBaseController{
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
-		
 		view.setViewName("/project/tenderReview/index");
 		return view;
 	}
@@ -98,13 +102,25 @@ public class TenderReviewController extends AbstractBaseController{
 	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
 		ModelAndView view = new ModelAndView();
 		
-		
 		PmConfirmBidEntity entity = pmConfirmBidService.queryObject(id);
 		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
+		Map<String ,Object> map = new HashMap<String,Object>();
+		map.put("reviewType", "00");
+		map.put("isDelete", "01");
+		map.put("foreignId", id);
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("foreignId", id);
+		param.put("isDelete", "00");
+		param.put("uploadType", "00");
+		List<PmFileEntity> fileList = pmFileService.queryList(param);
 		
+		
+		List<PmReviewInfoEntity> list2 = pmReviewInfoService.queryList(map);
+		view.addObject("reviewHis",list2);
 		view.addObject("act",act);
 		view.addObject("id",id);
+		view.addObject("fileList",fileList);
 		
 		view.setViewName("/project/tenderReview/view");
 		return view;
@@ -138,12 +154,18 @@ public class TenderReviewController extends AbstractBaseController{
 			entity.put("isDelete", "00");
 			
 			List<PmReviewInfoEntity> list = pmReviewInfoService.queryList(entity);
+			entity.put("isDelete", "01");
+			List<PmReviewInfoEntity> list2 = pmReviewInfoService.queryList(entity);
+			
 			if(list.isEmpty()) {
 				view.addObject("reviewId",0);
 			}
 			else {
 				view.addObject("reviewId",list.get(0).getReviewId());
 			}
+			
+			view.addObject("reviewHis",list2);
+			
 			view.addObject("act",act);
 			
 			

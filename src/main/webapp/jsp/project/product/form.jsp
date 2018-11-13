@@ -28,9 +28,9 @@
 		      </div>
 		    </div>
 		     <div class="layui-inline">
-		      <label class="layui-form-label">指导销售价：</label>
+		      <label class="layui-form-label">指导销售价(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="productSuggestPrice"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" id="productSuggestPrice" name="productSuggestPrice"  autocomplete="off"  class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline">
@@ -52,20 +52,20 @@
 		      <label class="layui-form-label">研发部门：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="developmentDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
-		          <input type="hidden" name="developmentDeptId">
+		          <input type="text" style='display:none' name="developmentDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>部门查询</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">研发负责人：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="developmentManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control">
-		          <input type="hidden" name="developmentManagerId">
+		          <input type="text" style='display:none' name="developmentManagerId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>人员查询</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    
@@ -74,7 +74,7 @@
 	           <div class="layui-input-inline" id="chosed-project-hook" style="border:#e6e6e6 solid 1px;height:60px;overflow-y:auto;width:320px;">
 		       </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>项目查询</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    
@@ -108,7 +108,15 @@ $(function(){
 	 });
 		
 	// form 表单手动渲染
-	  form.render()		 
+	  form.render();
+
+	  //自动填充小数点
+        $(document).on('change', '#productSuggestPrice', function(data) {
+            var value=parseInt($(this).val()).toFixed(2)
+            console.log(value);
+            $(this).val(value);
+        });
+
 	 // 选择机构
   $("#product-addForm-hook #orgQuery-hook").click(function(){
 	  $.openWindow({

@@ -49,7 +49,7 @@
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="custName"  autocomplete="off" readonly="readonly" class="layui-input form-control disabledColor">
-		         <input  type="hidden" name="custId"/>
+		         <input  type="text" style='display:none' name="custId"/>
 		      </div>
 		      <div class="layui-input-inline layui-btn-container showCustomer-hook" style="margin-left:15px;width: 50px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search "></i></button>
@@ -336,7 +336,7 @@ var table2=null;
 	});
 	$("#budget-addForm-hook #WBSQuery-hook").click(function(){
 		 $.openWindow({
-		  		url:'wbs?act=addCust',
+		  		url:'wbs?act=addCust&index=0',
 		  		title:"选择WBS编号",
 		  		width:"700"
 		 });

@@ -23,28 +23,27 @@
 	<form class="layui-form form-add" action="" lay-filter="customer-form">
 	  <div class="layui-form-item">
 	  	<div class="layui-inline">
-	       <label class="layui-form-label">公司编号：</label>
+	       <label class="layui-form-label">公司实体编号：</label>
 	       <div class="layui-input-inline">
 	         <input type="text" name="companyCode" autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
  	 	<div class="layui-inline">
-	       <label class="layui-form-label">公司名称：</label>
+	       <label class="layui-form-label">公司实体名称：</label>
 	       <div class="layui-input-inline">
 	         <input type="text" name="companyName" autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
- 	 	<div class="layui-inline">
-	       <label class="layui-form-label">公司地址：</label>
-	       <div class="layui-input-inline">
-	         <input type="text" name="companyAddress" autocomplete="off" class="layui-input form-control">
-	       </div>
- 	 	</div>
+ 	 	<%--<div class="layui-inline">--%>
+	       <%--<label class="layui-form-label">公司实体地址：</label>--%>
+	       <%--<div class="layui-input-inline">--%>
+	         <%--<input type="text" name="companyAddress" autocomplete="off" class="layui-input form-control">--%>
+	       <%--</div>--%>
+ 	 	<%--</div>--%>
  	 	<div class="layui-inline">
 	       <label class="layui-form-label">备注：</label>
-	       <div class="layui-input-inline">
-	         <input type="text" name="remark" autocomplete="off" class="layui-input form-control">
-	       </div>
+			<div class="layui-input-inline" style="width:323px;">
+				<textarea name="remark"  class="layui-textarea form-control"></textarea>
  	 	</div>
  	 	
  	 			    
@@ -56,40 +55,53 @@
 	<form class="layui-form form-" action="" lay-filter="customer-form">
 	  <div class="layui-form-item">
 	  	<div class="layui-inline">
-	       <label class="layui-form-label">公司编号：</label>
+	       <label class="layui-form-label">公司实体编号：</label>
+
+	<c:if test="${act =='edit'}">
 	       <div class="layui-input-inline">
 	         <input type="text" name="companyCode" value="${Company.companyCode}" autocomplete="off" class="layui-input form-control">
 	       </div>
+	</c:if>
+			<c:if test="${act =='view'}">
+				<label class="layui-form-label">${Company.companyCode}</label>
+			</c:if>
  	 	</div>
  	 	<div class="layui-inline">
-	       <label class="layui-form-label">公司名称：</label>
+	       <label class="layui-form-label">公司实体名称：</label>
+	<c:if test="${act =='edit'}">
 	       <div class="layui-input-inline">
 	         <input type="text" name="companyName" value="${Company.companyName}" autocomplete="off" class="layui-input form-control">
 	       </div>
+	</c:if>
+			<c:if test="${act =='view'}">
+				<label class="layui-form-label">${Company.companyName}</label>
+			</c:if>
  	 	</div>
- 	 	<div class="layui-inline">
-	       <label class="layui-form-label">公司地址：</label>
-	       <div class="layui-input-inline">
-	        <c:if test="${act =='edit'}">
-	         <input type="text" name="companyAddress" autocomplete="off" value="${Company.companyAddress}"  class="layui-input form-control">
-	         </c:if>
-	         <c:if test="${act =='view'}">
-	          <label class="layui-form-label">${Company.companyAddress}</label>
-	         </c:if>
-	       </div>
- 	 	</div>
+ 	 	<%--<div class="layui-inline">--%>
+	       <%--<label class="layui-form-label">公司实体地址：</label>--%>
+	       <%--<div class="layui-input-inline">--%>
+	        <%--<c:if test="${act =='edit'}">--%>
+	         <%--<input type="text" name="companyAddress" autocomplete="off" value="${Company.companyAddress}"  class="layui-input form-control">--%>
+	         <%--</c:if>--%>
+	         <%--<c:if test="${act =='view'}">--%>
+	          <%--<label class="layui-form-label">${Company.companyAddress}</label>--%>
+	         <%--</c:if>--%>
+	       <%--</div>--%>
+ 	 	<%--</div>--%>
  	 	<div class="layui-inline">
 	       <label class="layui-form-label">备注：</label>
-	       <div class="layui-input-inline">
+			<div class="layui-input-inline" style="width:323px;">
 	      	 <c:if test="${act =='edit'}">
-	         <input type="text" name="remark" autocomplete="off" value="${Company.remark}"  class="layui-input form-control">
+				 <div class="layui-input-inline" style="width:323px;">
+					 <textarea name="remark"  class="layui-textarea form-control">${Company.remark}</textarea>
+				 </div>
 	         </c:if>
 	         <c:if test="${act =='view'}">
 	          <label class="layui-form-label">${Company.remark}</label>
 	         </c:if>
 	       </div>
  	 	</div>
- 	 	<input type="hidden" value="${id}" name="oldCode" />
+ 	 	<input type="text" style='display:none' value="${id}" name="oldCode" />
 	  </div>
 	</form>
 </c:if>

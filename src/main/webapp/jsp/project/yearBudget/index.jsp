@@ -80,6 +80,7 @@
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook2"  style="margin-right:15px;"><i class="layui-icon"></i>新增old</button>
 			  </div>
 		   </div>
 		   
@@ -238,7 +239,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	      {field:'predictAmount', title:'预估收入金额'},
 				  	      {field:'predictCost', title:'预估成本'},
 				  	      {field:'predictProfitRate', title:'预估利润率'},
-				  	      {field:'predictPeriod', title:'预付期限'},
+				  	      {field:'predictPeriod', title:'预估期限'},
 				  	      {field:'payDeptName', title:'交付部门'},
 				  	      {field:'sellDeptName', title:'销售部门'},
 				  	      {field:'custManagerName', title:'客户经理'},
@@ -257,6 +258,13 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 新增
 	*/
 	$(".budget-info-wrapper #add-hook").click(function(){
+		$.openWindow({
+	  		url:'form2?act=add&id=',
+	  		title:"新增预算",
+	  		width:"90%"
+	  	})
+	});
+	$(".budget-info-wrapper #add-hook2").click(function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
 	  		title:"新增预算",

@@ -12,18 +12,24 @@
 	   <div class="layui-form-item">
 	   
 		  	<div class="layui-inline">
-		      <label class="layui-form-label">公司名称：</label>
+		      <label class="layui-form-label">公司实体名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="companyName"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
+		   <div class="layui-inline">
+			   <label class="layui-form-label">公司实体编号：</label>
+			   <div class="layui-input-inline">
+				   <input type="text" name="companyCode"  autocomplete="off" class="layui-input form-control">
+			   </div>
+		   </div>
 		    
-		    <div class="layui-inline">
-		      <label class="layui-form-label">公司地址：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="companyAddress"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		    </div>
+		    <%--<div class="layui-inline">--%>
+		      <%--<label class="layui-form-label">公司地址：</label>--%>
+		       <%--<div class="layui-input-inline">--%>
+		         <%--<input type="text" name="companyAddress"  autocomplete="off" class="layui-input form-control">--%>
+		      <%--</div>--%>
+		    <%--</div>--%>
 		    
 		   
 		    
@@ -109,9 +115,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    title: '公司数据表',
 	    cols: [[
 	    	 //{type: 'checkbox', fixed: 'left'},
-	  	      {field:'companyCode', title:'公司编号',fixed: 'left', width:110, sort: true},
-	  	      {field:'companyName', title:'公司名称', width:230},
-	  	      {field:'companyAddress', title:'公司地址'},
+	  	      {field:'companyCode', title:'公司实体编号',fixed: 'left', width:150, sort: true},
+	  	      {field:'companyName', title:'公司实体名称', width:230},
+	  	      {field:'isDelete', title:'是否有效', width:180},
+	  	      {field:'createTime', title:'创建时间', width:230},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    response: {

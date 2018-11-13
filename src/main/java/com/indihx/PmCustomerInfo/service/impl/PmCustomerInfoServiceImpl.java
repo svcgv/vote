@@ -1,5 +1,6 @@
 package com.indihx.PmCustomerInfo.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,10 +71,21 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
    		return pmCustomerInfoMapper.queryTotal();
    	}
 
-   	public List<PmCustomerInfoEntity> queryList(Map<String, Object> entity){
+   	public List<PmCustomerInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize){
+		if(pageNum != null && pageSize != null) {
+			PageHelper.startPage(pageNum, pageSize);
+		}
    		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
    			entity.put("isDelete", "00");
    		}
    		return pmCustomerInfoMapper.queryList(entity);
    	}
+
+	public List<PmCustomerInfoEntity> queryList(Map<String, Object> entity){
+
+		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
+			entity.put("isDelete", "00");
+		}
+		return pmCustomerInfoMapper.queryList(entity);
+	}
 }

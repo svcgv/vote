@@ -17,6 +17,7 @@ public interface PmCustomerInfoService {
 	public void update(PmCustomerInfoEntity entity);
 	public void delete(long custId);
 	public List<PmCustomerInfoEntity> queryList(Map<String, Object> entity);
+	public List<PmCustomerInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize);
 	public int queryTotal();
    
 }
