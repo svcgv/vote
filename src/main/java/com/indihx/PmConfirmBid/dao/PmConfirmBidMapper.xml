@@ -54,6 +54,7 @@
 		<result property="isDelete" column="IS_DELETE" />
 		<result property="currency" column="CURRENCY" />
 		<result property="taxRate" column="TAX_RATE" />
+		<result property="bidCode" column="BID_CODE" />
 
 
 	</resultMap>
@@ -72,6 +73,8 @@
 			<if test="bidId != null and bidId!=''">
 				BID_ID = #{bidId} AND
 			</if>
+			<if test="bidCode != null  and bidCode!=''">
+				BID_CODE like concat(concat('%',#{bidCode}),'%') AND        </if>
 			<if test="bidName != null  and bidName!=''">
 				BID_NAME like concat(concat('%',#{bidName}),'%') AND        </if>
 			<if test="firstBidAmount != null and firstBidAmount!=''">
@@ -205,6 +208,9 @@
 		insert into pm_confirm_bid
 		(
 		BID_ID
+		<if test="bidCode != null and bidCode!=''">
+			,BID_CODE
+		</if>
 		<if test="bidName != null and bidName!=''">
 			,BID_NAME
 		</if>
@@ -340,6 +346,9 @@
 		values
 		(
 		#{bidId}
+		<if test="bidCode != null and bidCode!=''">
+			,#{bidCode}
+		</if>
 		<if test="bidName != null and bidName!=''">
 			,#{bidName}
 		</if>
@@ -437,7 +446,7 @@
 			,#{currency}
 		</if>
 		<if test="taxRate != null and taxRate!=''">
-			,#{currency}
+			,#{taxRate}
 		</if>
 		,'00'
 		)
@@ -448,6 +457,8 @@
 		update pm_confirm_bid
 		<set>
 			<if test="bidName != null and bidName!=''">BID_NAME = #{bidName}, </if>
+
+			<if test="bidCode != null and bidCode!=''">BID_CODE = #{bidCode}, </if>
 
 			<if test="firstBidAmount != null and firstBidAmount!=''">FIRST_BID_AMOUNT = #{firstBidAmount}, </if>
 

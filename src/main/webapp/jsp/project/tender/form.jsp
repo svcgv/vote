@@ -21,14 +21,14 @@
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item">
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标名称：</label>
+		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标首次报价金额：</label>
+		      <label class="layui-form-label">首次报价（元）：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="firstBidAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -45,25 +45,31 @@
 		       </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估收入金额：</label>
+		      <label class="layui-form-label">预估收入（元）：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="predictAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估成本：</label>
+		      <label class="layui-form-label">预估成本（元）：</label>
 		      <div class="layui-input-inline">
 		       <input type="text" name="predictCost"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估利润率：</label>
+		      <label class="layui-form-label">预估利润率（%）：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="predictProfitRate"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
+			  <div class="layui-inline">
+				  <label class="layui-form-label">税率（%）：</label>
+				  <div class="layui-input-inline">
+					  <input type="text" name="taxRate"  autocomplete="off" class="layui-input form-control">
+				  </div>
+			  </div>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">预估开始期限：</label>
@@ -148,7 +154,7 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
 		       <div class="layui-input-inline" style="width:363px;height: 50px;">
-				   <textarea name="remark" rows="2"  placeholder="在X年X月完成X任务，付款X比例计X元合同款" class="layui-textarea form-control"></textarea>
+				   <textarea name="paymentPoint" rows="2"  placeholder="在X年X月完成X任务，付款X比例计X元合同款" class="layui-textarea form-control"></textarea>
 		      </div>
 		    </div>
 		    
@@ -379,7 +385,7 @@ $(function(){
         $("#tender-addForm-hook #customGroup-save-hook").click(function(){
             var customerGroupName=$("#tender-addForm-hook input[name='bidName']").val();
             if($.trim(customerGroupName) ==''){
-                layer.msg("请输入投标名称");
+                layer.msg("请输入项目名称");
                 return false;
             }
 
@@ -405,7 +411,7 @@ $(function(){
 		$("#tender-addForm-hook #customGroup-add-hook").click(function(){
 			var customerGroupName=$("#tender-addForm-hook input[name='bidName']").val();
 			if($.trim(customerGroupName) ==''){
-				layer.msg("请输入投标名称");
+				layer.msg("请输入项目名称");
 				return false;
 			}
 			
