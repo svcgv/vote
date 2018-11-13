@@ -42,25 +42,7 @@ var setting={
 	}
 };
 var zNodes =[
-	{ name:"第一事业部",orgId:"100", open:true,
-		children: [
-			{ name:"销售一部",orgId:"1",
-				children: [
-					{ orgId:"11",name:"上海分部"},
-					{ orgId:"12",name:"北京分部"},
-					{ orgId:"13",name:"深圳分部"},
-					{ orgId:"14",name:"南京分部"}
-				]},
-			{ name:"销售二部",orgId:"2",isParent:false},
-			{ name:"销售三部",orgId:"3",isParent:false}
-		]},
-	{ name:"第二事业部",orgId:"3",
-		children: [
-			{ orgId:"31",name:"销售六部", open:true,isParent:true},
-			{ orgId:"32",name:"销售二部",isParent:true},
-			{ orgId:"33",name:"销售五部",isParent:true}
-		]},
-	{ name:"第三事业部", orgId:"4",isParent:true}
+	
 
 ];
 
@@ -113,8 +95,28 @@ $(".org-wrapper #org-add-hook").click(function(){
 	
 });
 var act="${act}";// 区分是index页 form页 赋值问题
+var roleCode="${roleCode}"
 function zTreeOnSaveEvent(event, treeId, treeNode) {
 	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
+	//若roleCode存在，则向后台查一把，根据act返现再页面上
+	if(roleCode){
+		var param = {}
+		param.orgNo=getCheckedOrg.orgId
+		param.roleCode=roleCode
+		$.ajax({
+			  type: 'POST',
+			  url: '/vote/queryusrinfo/queryUserByRoleCodeAndOrgNo',
+			  data: JSON.stringify(param),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			      if(res.page){
+			    	  
+			      }
+		      },
+			  dataType: "json"
+			})
+	}
  // 保存到已选机构中
  	if(act == "index"){
 		$("#tender-index-form input[name='sellDeptName']").val(getCheckedOrg.name);

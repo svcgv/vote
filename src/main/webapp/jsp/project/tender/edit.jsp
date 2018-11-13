@@ -29,9 +29,9 @@
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标首次报价金额：</label>
+		      <label class="layui-form-label">首次报价（元）：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="firstBidAmount"  value="sa"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="firstBidAmount"  value="sa"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    <div class="layui-inline">
@@ -46,32 +46,38 @@
 		       </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估收入金额：</label>
+		      <label class="layui-form-label">预估合同金额：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="predictAmount"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="predictAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估成本：</label>
+		      <label class="layui-form-label">预估成本（元）：</label>
 		      <div class="layui-input-inline">
-		       <input type="text" name="predictCost"  autocomplete="off" class="layui-input form-control">
+		       <input type="number" name="predictCost"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估利润率：</label>
+		      <label class="layui-form-label">预估利润率（%）：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="predictProfitRate"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="predictProfitRate"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估期限：</label>
+		      <label class="layui-form-label">项目开始时间：</label>
 		       <div class="layui-input-inline">
-	         		<input type="text" name="predictPeriod" id="predictPeriodDate2" autocomplete="off" class="layui-input form-control hasDatepicker">
+	         		<input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
+			  <div class="layui-inline">
+				  <label class="layui-form-label">项目结束时间：</label>
+				  <div class="layui-input-inline">
+					  <input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
+				  </div>
+			  </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
@@ -88,9 +94,7 @@
 		          <input type="text" name="constructionDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="constructionDeptManagerId">
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgMangerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+		      
 		     </div> 
 		    <div class="layui-inline">
 		      <label class="layui-form-label">销售部门：</label>
@@ -108,9 +112,6 @@
 		          <input type="text" name="sellDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="sellDeptManagerId">
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userManagerQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
 		     </div> 
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
@@ -132,19 +133,13 @@
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
-		    <div class="layui-inline">
-		      <label class="layui-form-label">设置付款点：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="paymentPoint"  autocomplete="off" class="layui-input form-control">
+		     <div class="layui-inline">
+		      <label class="layui-form-label">付款点：</label>
+		       <div class="layui-input-inline" style="width:363px;height: 50px;">
+				   <textarea name="paymentPoint" rows="2"  placeholder="3/3/3/1,月/季/年" class="layui-textarea form-control"></textarea>
 		      </div>
 		    </div>
-	      <div class="layui-inline">
-	       		 <label class="layui-form-label" style="width:170px!important;">工作任务及范围是否清晰：</label>
-	       		 <div class="layui-input-inline">
-	       		 	<!-- open 是开启 close 是关闭 (关闭时  设置 file-hook style="display:none;")    对应 isWorkAreaExplicit 数据字典 -->
-			        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="是|否">
-			    </div>
-	       </div>
+	      
 	       <div class="file-hook" style="width:95%;margin:0 auto;">
 		      <div class="layui-upload">
 			  	<button type="button" class="layui-btn" id="wosUploads"><i class="layui-icon"></i>选择文件</button> 
@@ -197,7 +192,12 @@ $(function(){
 		
 		 //日期
 	  laydate.render({
-		    elem: "#predictPeriodDate2",
+		    elem: "#predictPeriodStartDate-edit",
+		    theme: 'molv',
+		    type: 'datetime'
+	 });
+	  laydate.render({
+		    elem: "#predictPeriodEndDate-edit",
 		    theme: 'molv',
 		    type: 'datetime'
 	 });

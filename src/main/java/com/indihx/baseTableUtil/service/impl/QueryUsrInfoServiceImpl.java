@@ -35,4 +35,10 @@ public class QueryUsrInfoServiceImpl implements QueryUsrInfoService {
 		// TODO Auto-generated method stub
 		return queryUsrInfoMapper.queryBySaleGroupCode(code);
 	}
+
+	@Override
+	public List<Map<String, Object>> queryUserByRoleCodeAndOrgNo(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return queryUsrInfoMapper.queryUserByRoleCodeAndOrgNo(param);
+	}
 }

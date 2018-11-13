@@ -62,7 +62,7 @@ public class TenderController extends AbstractBaseController{
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
-		view.addObject("status",infoservice.qryInfoByCode("STATUS"));
+		view.addObject("status",infoservice.qryInfoByCode("BID_STATUS"));
 		view.setViewName("/project/tender/index");
 		return view;
 	}

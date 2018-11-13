@@ -191,6 +191,7 @@
 				#{isDelete}
 			</if>
 		</trim>
+		 ORDER BY status ASC
 	</select>
 
 	<select id="queryTotal" resultType="int">

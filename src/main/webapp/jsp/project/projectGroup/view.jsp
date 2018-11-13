@@ -28,7 +28,7 @@
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标首次报价金额：</label>
+		      <label class="layui-form-label">首次报价（元）：</label>
 		       <div class="layui-input-inline">
 		         <label class="layui-form-label">价格反写</label>
 		      </div>
@@ -40,21 +40,21 @@
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估收入金额：</label>
+		      <label class="layui-form-label">预估收入（元）：</label>
 		       <div class="layui-input-inline">
 		         <label class="layui-form-label">反写</label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估成本：</label>
+		      <label class="layui-form-label">预估成本（元）：</label>
 		      <div class="layui-input-inline">
 		     	 <label class="layui-form-label">反写</label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估利润率：</label>
+		      <label class="layui-form-label">预估利润率（%）：</label>
 		       <div class="layui-input-inline">
 		         <label class="layui-form-label">反写</label>
 		      </div>
