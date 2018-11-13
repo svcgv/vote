@@ -50,9 +50,6 @@
         <a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
     </div>
 </div>
-<script type="text/html" id="toolAddBarDemo">
-    <div class="layui-btn-container"></div>
-</script>
 
 <script type="text/html" id="addBarDemo">
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
@@ -78,7 +75,6 @@
                 height: '250',
                 width: "690",
                 title: '客户数据表',
-                toolbar: '#toolAddBarDemo',
                 cols: [[
                     {field: 'sapCode', title: 'sap编号', sort: true},
                     {field: 'custCnName', title: '客户名称'},

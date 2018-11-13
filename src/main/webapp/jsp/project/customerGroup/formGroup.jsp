@@ -187,6 +187,7 @@
                         dataName: 'page'
                     },
                     done: function (res) {
+                        console.log(res)
                     }
 
                 })

@@ -78,9 +78,12 @@
 	     <div class="layui-inline">
 	      <label class="layui-form-label">是否有效：</label>
 	      <div class="layui-input-inline">
-	        <select name="isUseful" lay-verify="required" lay-filter="" class="form-control">
-	        	 ${isUseful.ewTypeHtml }
-	        </select>
+	        <%--<select name="isUseful" lay-verify="required" lay-filter="" class="form-control">--%>
+	        	 <%--${isUseful.ewTypeHtml }--%>
+	        <%--</select>--%>
+			  <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
+				  ${isUseful.ewTypeHtml }
+			  </select>
 	      </div>
 	    </div>
 	    
@@ -165,7 +168,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	    title: '客户数据表',
   	    cols: [[
   	     // {type: 'checkbox', fixed: 'left'},
-  	      {field:'sapCode', title:'SAP编号',fixed: 'left', width:110, sort: true},
+  	      {field:'sapCode', title:'SAP编码',fixed: 'left', width:110, sort: true},
   	      {field:'custCnName', title:'客户名称', width:230},
   	      {field:'country', title:'国家/地区', width:90},
   	      {field:'enName', title:'英文名称',width:100},
@@ -181,6 +184,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	      {field:'custTrade', title:'客户行业'},
   	      {field:'payCycle', title:'结算周期'},
   	      {field:'isUseful', title:'是否有效'},
+//  	      {field:'isDelete', title:'是否有效'},
   	      {field:'groupCompany', title:'集团公司'},
   	      {field:'bgVisiable', title:'BG隐藏'},
   	      {field:'companyCode', title:'公司代码'},
@@ -282,7 +286,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	      {field:'custCnName', title:'客户名称', width:230},
             {field:'custGroupId', title:'客户群编号'},
             {field:'custGroupName', title:'客户群名称'},
-            {field:'isUseful', title:'是否有效'},
+//            {field:'isUseful', title:'是否有效'},
+            {field:'isDelete', title:'是否有效'},
             {field:'area', title:'地区'},
             {field:'createTime', title:'创建日期'},
             {field:'companyCode', title:'公司代码'},

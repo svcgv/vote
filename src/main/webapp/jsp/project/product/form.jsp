@@ -30,7 +30,7 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">指导销售价：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="productSuggestPrice"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" id="productSuggestPrice" name="productSuggestPrice"  autocomplete="off"  class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline">
@@ -108,7 +108,15 @@ $(function(){
 	 });
 		
 	// form 表单手动渲染
-	  form.render()		 
+	  form.render();
+
+	  //自动填充小数点
+        $(document).on('change', '#productSuggestPrice', function(data) {
+            var value=parseInt($(this).val()).toFixed(2)
+            console.log(value);
+            $(this).val(value);
+        });
+
 	 // 选择机构
   $("#product-addForm-hook #orgQuery-hook").click(function(){
 	  $.openWindow({

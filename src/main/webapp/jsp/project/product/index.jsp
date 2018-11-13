@@ -17,7 +17,16 @@
 		         <input type="text" name="productName"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
-		    
+
+		   <div class="layui-inline">
+			   <label class="layui-form-label">产品类型：</label>
+			   <div class="layui-input-inline">
+				   <select name="productType" lay-verify="required" lay-filter="" class="form-control">
+					   ${productType.ewTypeHtml }
+				   </select>
+			   </div>
+		   </div>
+
 		    <div class="layui-inline">
 		      <label class="layui-form-label">产品代码：</label>
 		       <div class="layui-input-inline">
@@ -32,14 +41,7 @@
 		    </div>
 		   
 		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">产品类型：</label>
-		      <div class="layui-input-inline">
-		        <select name="productType" lay-verify="required" lay-filter="" class="form-control">
-		        	 ${productType.ewTypeHtml }
-		        </select>
-		      </div>
-		    </div>
+
 		    
 		     <%--<div class="layui-inline">--%>
 		      <%--<label class="layui-form-label">开始销售日期：</label>--%>

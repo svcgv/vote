@@ -88,14 +88,20 @@
 	   <div class="layui-inline">
 		  <label class="layui-form-label">行业代码：</label>
 	     <div class="layui-input-inline">
-	         <input type="text" name="tradeCode"  value="${Custom.tradeCode}"  <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">
-	      </div>
+	         <%--<input type="text" name="tradeCode"  value="${Custom.tradeCode}"  <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">--%>
+		   <select name="tradeCode" lay-verify="required"   <c:if test="${act =='view'}">disabled=true</c:if> lay-filter="" class="form-control">
+			   ${tradeCode.ewTypeHtml }
+		   </select>
+		 </div>
 	   </div>
 	   <div class="layui-inline">
 		  <label class="layui-form-label">地区市场：</label>
 	     <div class="layui-input-inline">
-	         <input type="text" name="regionalMarket"  value="${Custom.regionalMarket}" <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">
-	      </div>
+	         <%--<input type="text" name="regionalMarket"  value="${Custom.regionalMarket}" <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">--%>
+		   <select name="regionalMarket" lay-verify="required"   <c:if test="${act =='view'}">disabled=true</c:if> lay-filter="" class="form-control">
+			   ${regionalMarket.ewTypeHtml }
+		   </select>
+		 </div>
 	   </div>
 	   
 	   <div class="layui-inline">
