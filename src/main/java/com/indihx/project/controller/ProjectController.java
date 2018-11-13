@@ -112,15 +112,6 @@ public class ProjectController extends AbstractBaseController {
 		return view;
 	}
 
-	// 机构
-		@RequestMapping(value="/project/org",method=RequestMethod.GET)
-		public ModelAndView orgFormView(@RequestParam("act") String act) {
-			ModelAndView view = new ModelAndView();
-			view.addObject("act",act);
-			
-			view.setViewName("/project/project/org");
-			return view;
-		}
 		
 		// 用户
 		@RequestMapping(value="/project/user",method=RequestMethod.GET)
@@ -128,14 +119,6 @@ public class ProjectController extends AbstractBaseController {
 			ModelAndView view = new ModelAndView();
 			view.addObject("act",act);
 			view.setViewName("/project/project/user");
-			return view;
-		}
-		//项目
-		@RequestMapping(value="/project/project",method=RequestMethod.GET)
-		public ModelAndView reviewFormView(@RequestParam("act") String act) {
-			ModelAndView view = new ModelAndView();
-			view.addObject("act",act);
-			view.setViewName("/project/project/project");
 			return view;
 		}
 		
@@ -148,14 +131,6 @@ public class ProjectController extends AbstractBaseController {
 			return view;
 		}
 		
-		// 投标
-		@RequestMapping(value="/project/tender",method=RequestMethod.GET)
-		public ModelAndView tenderFormView(@RequestParam("act") String act) {
-			ModelAndView view = new ModelAndView();
-			view.addObject("act",act);
-			view.setViewName("/project/project/tender");
-			return view;
-		}
 		// 立项审批
 		@RequestMapping(value="/project/review",method=RequestMethod.GET)
 		public ModelAndView projectReviewFormView(@RequestParam("act") String act) {
@@ -174,14 +149,6 @@ public class ProjectController extends AbstractBaseController {
 		return view;
 	}
 
-	// 用户
-	@RequestMapping(value = "/project/user", method = RequestMethod.GET)
-	public ModelAndView userFormView(@RequestParam("act") String act) {
-		ModelAndView view = new ModelAndView();
-		view.addObject("act", act);
-		view.setViewName("/project/project/user");
-		return view;
-	}
 
 	// 项目
 	@RequestMapping(value = "/project/project", method = RequestMethod.GET)
@@ -189,15 +156,6 @@ public class ProjectController extends AbstractBaseController {
 		ModelAndView view = new ModelAndView();
 		view.addObject("act", act);
 		view.setViewName("/project/project/project");
-		return view;
-	}
-
-	// 客户
-	@RequestMapping(value = "/project/customer", method = RequestMethod.GET)
-	public ModelAndView customerFormView(@RequestParam("act") String act) {
-		ModelAndView view = new ModelAndView();
-		view.addObject("act", act);
-		view.setViewName("/project/project/customer");
 		return view;
 	}
 
