@@ -92,8 +92,7 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="tenderReview">评审</a>
-  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="view">查看</a>
+  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="view">评审</a>
 </script>
 
 <script type="text/javascript">
