@@ -73,8 +73,7 @@ var getData=[
 				}
 				
 			];
-// 获取 form页 当前所有已选的产品
-var getExitProducts=$("#budget-addForm-hook #chosedProduct-hook");
+
 if(act == "viewProduct"){ // 查看按钮
 	getData=[];
 	getExitProducts.children(".customer-list").each(function(){
@@ -124,52 +123,37 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	  });
   }
 	// 保存 事件
-	
+	var index ="${index}";
+	var YIndex ="${YIndex}";
 	var win=$(".budget-cust-wrapper").getWindow();
-	$(".budget-cust-wrapper").on("click","#save-hook",function(){
-		var ret=[];
-		getExitProducts.children(".customer-list").each(function(){
-			var sapCode2=$(this).children(".customerItem").attr("productId");
-			ret.push(sapCode2)
-		});
-		// 遍历选中的CheckBox
-		if($(".budget-cust-wrapper .layui-table-body table.layui-table tbody tr").length == 0){
-			if(act == "viewProduct"){
-				getExitProducts.html(""); 
-			}
+	// 获取 form页 当前所有已选的产品
+		var target=$(".budget-wrapper").find("tbody tr").eq(YIndex).find(".project-list").eq(3).children(".productItem");
+		var oldProducts= target.find("button.productQuery-hook").nextAll(".layui-badge");
+		var oldRet=[];
+		for(var i=0;i<oldProducts.length;i++){
+			var pid=oldProducts.eq(i).attr("productid");
+			oldRet.push(pid)
 		}
-		$(".budget-cust-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
-			var productId=$(this).children("td").eq(1).text();
-			var productName=$(this).children("td").eq(2).text();
-			if(act == "viewProduct"){
-				console.log(productId,productName)
-				
-					var _html = '<span class="customer-list">'
-		         	      +'<span class="customerItem" productId="'+productId+'">'+productName+'</span>'
-		               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
-		         		  +'</span>';
-		         		  // 替换
-		         		 getExitProducts.html(_html); 
-				
-			}else if(act == "addCust"){
-				var chk=$(this).find(".laytable-cell-checkbox");
-				var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
-				if(isChecked){
-					    //编辑 修改 页面
-					if($.inArray(productId,ret) == -1 ){
-						var _html = '<span class="customer-list">'
-				         	      +'<span class="customerItem" productId="'+productId+'">'+productName+'</span>'
-				               	  +'<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>'
-				         		  +'</span>';
-				         		 getExitProducts.append(_html); 
+	$(".budget-cust-wrapper").on("click","#save-hook",function(){
+		if(act == "formProduct"){
+				var _html="";
+				$(".budget-cust-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
+					var chk=$(this).find(".laytable-cell-checkbox");
+					var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
+					if(isChecked){
+						var productId=$(this).children("td").eq(1).text();
+						var productName=$(this).children("td").eq(2).text();
+							console.log(productId,productName)
+							if($.inArray(productId,oldRet) == -1){
+								_html += '<span class="layui-badge layui-bg-gray" productId="'+productId+'" style="margin-right:5px;">'+productName+'</span>';
+							}
 					}
-				}
+				});
+				//第4列 产品列表
+				console.log(YIndex,index,'index')
 				
+				target.eq(index).append(_html);
 			}
-			
-			
-		});
-		
 		win.close();
 	});
 	
