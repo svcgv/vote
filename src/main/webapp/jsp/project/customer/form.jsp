@@ -182,7 +182,7 @@
 		    <label class="layui-form-label">所属客户群：</label>
 	       <div class="layui-input-inline">
 	          <select name="custGroupId" lay-verify="required"  <c:if test="${act =='view'}">disabled=true</c:if> lay-search="">
-	          <option value="">选择客户群</option>
+	          <option value="${customerGroupValue}">${customerGroupName}</option>
 	          <c:forEach items="${customerGroup}" var="app">
 		          <option value="${app.custGroupId}">${app.custGroupName}</option>
 		          </c:forEach>

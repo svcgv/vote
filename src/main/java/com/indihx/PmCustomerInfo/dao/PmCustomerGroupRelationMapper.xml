@@ -74,6 +74,16 @@
 		</set>
 		where CUST_GROUP_RELATION_ID = #{custGroupRelationId}
 	</update>
+
+	<update id="updateByCustId" parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity">
+		update pm_customer_group_relation
+		<set>
+			<if test="custGroupId != null and  custGroupId !=''">CUST_GROUP_ID = #{custGroupId}, </if>
+			<if test="custCnName != null and  custCnName !=''">CUST_CN_NAME = #{custCnName}, </if>
+			<if test="sapCode != null and  sapCode !=''">SAP_CODE = #{sapCode}</if>
+		</set>
+		where CUST_ID = #{custId}
+	</update>
 	
 	<delete id="delete">
 		delete from pm_customer_group_relation where CUST_GROUP_RELATION_ID = #{value}

@@ -156,7 +156,14 @@ private String modifyTime;
 
 private String isDelete;
 
-private String custGroupId;
+	/**
+	 * 中间字段
+	 */
+	private String custGroupId;
+	/**
+	 * 中间字段
+	 */
+private String custGroupName;
 
 	/**
 	 * 设置：
@@ -500,10 +507,16 @@ private String custGroupId;
 	public void setCustGroupId(String custGroupId) {
 		this.custGroupId = custGroupId;
 	}
-	
-	
 
-//	public int getStartNum() {
+	public String getCustGroupName() {
+		return custGroupName;
+	}
+
+	public void setCustGroupName(String custGroupName) {
+		this.custGroupName = custGroupName;
+	}
+
+	//	public int getStartNum() {
 //		return startNum;
 //	}
 //

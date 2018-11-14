@@ -158,8 +158,12 @@
 		PM_CUSTOMER_INFO
 	</select>
 
-	<insert id="insert"  useGeneratedKeys="true"  keyProperty="custId"  keyColumn="CUST_ID"
+	<insert id="insert"  useGeneratedKeys="true"  keyProperty="custId"
 		parameterType="com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity">
+		<selectKey keyProperty="custId" order="BEFORE"
+				   resultType="java.lang.Long">
+			select PmCustomerInfo_SEQ.nextval as custId from DUAL
+		</selectKey>
 		insert into PM_CUSTOMER_INFO
 		(
 		CUST_ID
@@ -245,7 +249,7 @@
 		)
 		values
 		(
-		PmCustomerInfo_SEQ.nextval
+		#{custId}
 		<if test="custCnName != null and  custCnName !=''">
 			,#{custCnName}
 		</if>
