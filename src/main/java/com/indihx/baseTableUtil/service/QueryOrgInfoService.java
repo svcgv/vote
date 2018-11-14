@@ -20,5 +20,8 @@ public interface QueryOrgInfoService {
 	public List<Map<String,Object>> queryChildrenOrg(BigDecimal orgNo);
 
 	public Map<String, Object> getFullChildrenTree(BigDecimal i);
+	
+	
+	
 }
 

@@ -20,107 +20,113 @@
 <div id="tender-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item">
+			  <div class="layui-inline">
+			      <label class="layui-form-label">投标编号：</label>
+			       <div class="layui-input-inline">
+			         <label type='text' readonly='true' name="bidCode"  class="layui-form-label"></label>
+			      </div>
+			    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
-		         <label name="bidName"  class="layui-form-label">项目名称反写</label>
+		         <label type='text' readonly='true' name="bidName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">投标首次报价金额：</label>
+		      <label class="layui-form-label">首次报价（元）：</label>
 		       <div class="layui-input-inline">
-		         <label name="firstBidAmount"  class="layui-form-label">价格反写</label>
+		         <label type='text' readonly='true' name="firstBidAmount"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
-		          <label name="custCnName"  class="layui-form-label">客户反写</label>
+		          <label name="custCnName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估收入金额：</label>
+		      <label class="layui-form-label">预估合同金额：</label>
 		       <div class="layui-input-inline">
-		         <label name="predictAmount"  class="layui-form-label">反写</label>
+		         <label name="predictAmount"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估成本：</label>
+		      <label class="layui-form-label">预估成本（元）：</label>
 		      <div class="layui-input-inline">
-		     	 <label name="predictCost"  class="layui-form-label">反写</label>
+		     	 <label name="predictCost"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估利润率：</label>
+		      <label class="layui-form-label">预估利润率（%）：</label>
 		       <div class="layui-input-inline">
-		         <label name="predictProfitRate"  class="layui-form-label">反写</label>
+		         <label name="predictProfitRate"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">预付开始期限：</label>
 		       <div class="layui-input-inline">
-	         	<label name="predictPeriodStart"  class="layui-form-label">反写</label>
+	         	<label name="predictPeriodStart"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">预付结束期限：</label>
 		       <div class="layui-input-inline">
-	         	<label name="predictPeriodEnd"  class="layui-form-label">反写</label>
+	         	<label name="predictPeriodEnd"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
-		         <label name="constructionDeptName"  class="layui-form-label">反写</label>
+		         <label name="constructionDeptName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门负责人：</label>
 		       <div class="layui-input-inline">
-		         <label name="constructionDeptManagerName"  class="layui-form-label">反写</label>
+		         <label name="constructionDeptManagerName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">销售部门：</label>
 		       <div class="layui-input-inline">
-		         <label name="sellDeptName"  class="layui-form-label">反写</label>
+		         <label name="sellDeptName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">销售部门负责人：</label>
 		       <div class="layui-input-inline">
-		         <label name="sellDeptManagerName"  class="layui-form-label">反写</label>
+		         <label name="sellDeptManagerName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
-		           <label name="custManagerName"  class="layui-form-label">反写</label>
+		           <label name="custManagerName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">技术总监：</label>
 		       <div class="layui-input-inline">
-		           <label name="technicalDirectorName"  class="layui-form-label">反写</label>
+		           <label name="technicalDirectorName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
 		       <div class="layui-input-inline">
-		           <label name="paymentPoint"  class="layui-form-label">反写</label>
+		           <label name="paymentPoint"  class="layui-form-label"></label>
 		      </div>
 		    </div>
-	      <div class="layui-inline">
+	     <!--  <div class="layui-inline">
 	       		 <label class="layui-form-label" style="width:170px!important;">工作任务及范围是否清晰：</label>
 	       		 <div class="layui-input-inline">
-	       		 	<!-- open 是开启 close 是关闭 (关闭时  设置 file-hook style="display:none;")    对应 isWorkAreaExplicit 数据字典 -->
+	       		 	open 是开启 close 是关闭 (关闭时  设置 file-hook style="display:none;")    对应 isWorkAreaExplicit 数据字典
 			       <label class="layui-form-label"></label>
 			    </div>
-	       </div>
+	       </div> -->
 	       <div class="file-hook" style="width:95%;margin:0 auto;">
 	          <!-- 反写已上传的数据 -->
 		      <div class="layui-upload-list">
@@ -145,7 +151,7 @@
 	       <div class="layui-inline">
 	       		 <label class="layui-form-label">备注：</label>
 	       		 <div class="layui-input-inline" style="width:323px;">
-			      <label name="remark"  class="layui-form-label">反写</label>
+			      <label name="remark"  class="layui-form-label"></label>
 			    </div>
 	       </div>
 	       <!-- 未评审时不显示评审记录 -->

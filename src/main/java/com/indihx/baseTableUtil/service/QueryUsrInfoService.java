@@ -18,5 +18,7 @@ public interface QueryUsrInfoService {
 	public int queryTotal();
 
 	public List<QueryUsrInfoEntity> queryBySaleGroupCode(String code);
+	
+	public List<Map<String,Object>> queryUserByRoleCodeAndOrgNo(Map<String,Object> param);
 }
 

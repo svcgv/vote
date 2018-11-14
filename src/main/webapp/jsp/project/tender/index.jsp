@@ -36,7 +36,7 @@
 		   </div>
 		    <!-- 
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估收入金额：</label>
+		      <label class="layui-form-label">预估合同金额：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="predictAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -210,6 +210,28 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	  {type: 'checkbox', fixed: 'left'},
 	  	      {field:'bidCode', title:'投标编号',fixed: 'left', sort: true, width:130},
             {field:'status', title:'评审状态', width:130},
+            {field:'status', title: '评审状态', width: 200
+      	      ,templet: function(d){
+      	    	if(d.status=='00'){
+      	        	return '已录入'
+      	        }
+      	    	if(d.status=='01'){
+      	        	return '交付部门负责人评审'
+      	        }
+      	    	if(d.status=='02'){
+      	        	return '销售部门负责人评审'
+      	        }
+      	    	if(d.status=='03'){
+      	        	return '技术总监评审'
+      	        }
+      	    	if(d.status=='04'){
+      	        	return '评审完成'
+      	        }
+      	    	else{
+      	    		return '数据待完善'
+      	    	}
+      	      },rowspan: 2
+      	    },
             {field:'bidName', title:'项目名称', width:130},
             {field:'custCnName', title:'客户名称', width:130},
             {field:'constructionDeptName', title:'交付部门'},
@@ -220,8 +242,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
             {field:'predictCost', title:'预估成本（元）', width:120},
             {field:'predictProfitRate', title:'预估利润率（%）'},
             {field:'taxRate', title:'税率（%）'},
-            {field:'predictPeriodStart', title:'预估开始期限'},
-            {field:'predictPeriodEnd', title:'预估结束期限'},
+            {field:'predictPeriodStart', title:'项目开始时间'},
+            {field:'predictPeriodEnd', title:'项目结束时间'},
             {field:'paymentPoint', title:'付款点'},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
 	    ]],
@@ -235,6 +257,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  table.on('tool(custom)', function(obj){
 	    var data = obj.data;
 	    if(obj.event === 'del'){
+	    	if(data.status != '00'){
+	    		layer.msg("当前已发起过评审，不可删除",{icon:5});
+	    		return
+	    	}
 	      layer.confirm('确认删除行么', function(index){
 	    	  $.ajax({
 				  type:"POST",
@@ -253,12 +279,20 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
+	    	if(data.status != '00'){
+	    		layer.msg("投标正在评审中，请勿修改",{icon:5});
+	    		return
+	    	}
 	    	showFromTable('edit',data.bidId);
 	    }else if(obj.event === "view"){
 	    	// 查看
 	    	showFromTable('view',data.bidId);
 	    }else if(obj.event == "tenderReview"){
 	    	// 评审
+	    	if(data.status!=='00'){
+	    		layer.msg("当前已发起过评审，请勿重复发起",{icon:5});
+	    		return;
+	    	}
 			console.log(data);
             $.ajax({
                 type:'POST',
@@ -309,7 +343,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
 	  		title:"新增投标",
-	  		width:"800"
+	  		width:"1000"
 	  	})
 	});
 	

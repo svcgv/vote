@@ -18,5 +18,11 @@ public interface QueryUsrInfoMapper{
 	public List<QueryUsrInfoEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
 	public List<QueryUsrInfoEntity> queryBySaleGroupCode(String code);
+	/**
+	 * 
+	 * @param param{orgNo:,roleCode:''}
+	 * @return
+	 */
+	public List<Map<String,Object>> queryUserByRoleCodeAndOrgNo(Map<String,Object> param);
 	
 }
