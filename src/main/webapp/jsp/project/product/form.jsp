@@ -112,7 +112,7 @@ $(function(){
 
 	  //自动填充小数点
         $(document).on('change', '#productSuggestPrice', function(data) {
-            var value=parseInt($(this).val()).toFixed(2)
+            var value=(parseInt($(this).val()*100)/100).toFixed(2);
             console.log(value);
             $(this).val(value);
         });

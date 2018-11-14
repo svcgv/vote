@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity;
+import com.indihx.PmCustomerInfo.service.PmCustomerGroupRelationService;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -53,7 +55,9 @@ public class CustomerController extends AbstractBaseController{
     
     @Autowired
     private PmCustomerGroupService pmCustomerGroupService;
-	
+
+	@Autowired
+	private PmCustomerGroupRelationService pmCustomerGroupRelationService;
 	@RequestMapping("/customer/index")
 	public ModelAndView addCustomView() {
 		
@@ -91,7 +95,23 @@ public class CustomerController extends AbstractBaseController{
 		
 		if(!act.equalsIgnoreCase("add")) {
 			PmCustomerInfoEntity custom = pmCustomerInfoService.queryObject(custId);
+			Map<String,Object> relationMap = new HashMap<String, Object>();
+			relationMap.put("custId", custId);
+			List<PmCustomerGroupRelationEntity> pmCustomerGroupRelationEntity = pmCustomerGroupRelationService.queryList(relationMap);
 //			PmCustomerGroupEntity customGroupEntity = pmCustomerGroupService.queryObject(custId);
+			//代码待改善，可以通过写sql的方式直接获取，暂时先通过遍历，且目前并不完整
+			if(!pmCustomerGroupRelationEntity.isEmpty()){
+				for(PmCustomerGroupEntity groupId:pmCustomerGroup){
+					if(groupId.getCustGroupId().equalsIgnoreCase(pmCustomerGroupRelationEntity.get(0).getCustGroupId())){
+						view.addObject("customerGroupValue",groupId.getCustGroupId());
+						view.addObject("customerGroupName",groupId.getCustGroupName());
+					}
+
+				}
+			}else{
+				view.addObject("customerGroupValue",null);
+				view.addObject("customerGroupName","选择客户群");
+			}
 			view.addObject("Custom",custom);
 			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE",custom.getCustType()));
 			view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE",custom.getCustTrade()));

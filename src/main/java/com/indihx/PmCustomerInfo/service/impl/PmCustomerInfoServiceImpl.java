@@ -1,6 +1,7 @@
 package com.indihx.PmCustomerInfo.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.indihx.comm.util.DateUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,14 +33,15 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmCustomerInfoEntity entity){
-		List<PmCustomerInfoEntity> queryInfo = null;
+		PmCustomerInfoEntity queryInfo = null;
 		boolean flag = false;
 		Map<String ,Object> param = new HashMap<String,Object>();
 		if(entity.getSapCode()!=null) {//若有sapCode,且数据库中没有这条数据则执行插入
-			param.put("sapCode", entity.getSapCode());
-			queryInfo = queryList(param);
-			
-			if(queryInfo.isEmpty()) {
+//			param.put("sapCode", entity.getSapCode());
+//			queryInfo = queryList(param);
+			queryInfo = queryBySapCode(entity.getSapCode());
+			if(queryInfo==null) {
+				entity.setCreateTime(DateUtil.formatFromDB(DateUtil.getSysDate()));
 				flag = true;
 			}
 		}
@@ -49,17 +51,28 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
 		
 		if(flag) {
 			pmCustomerInfoMapper.insert(entity);
-  			PmCustomerGroupRelationEntity RelationEntity = new PmCustomerGroupRelationEntity();
-   			RelationEntity.setSapCode(entity.getSapCode());
-   			RelationEntity.setCustGroupId(entity.getCustGroupId());
-   			RelationEntity.setCustCnName(entity.getCustCnName());
-   			RelationEntity.setCustId(entity.getCustId());
-			pmCustomerGroupRelationMapper.insert(RelationEntity);
+			if(entity.getCustGroupId() != null){
+				PmCustomerGroupRelationEntity RelationEntity = new PmCustomerGroupRelationEntity();
+				RelationEntity.setSapCode(entity.getSapCode());
+				RelationEntity.setCustGroupId(entity.getCustGroupId());
+				RelationEntity.setCustCnName(entity.getCustCnName());
+				RelationEntity.setCustId(entity.getCustId());
+				pmCustomerGroupRelationMapper.insert(RelationEntity);
+			}
 		}
    		
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmCustomerInfoEntity entity){
+		//需要考虑新增情况
+		if(entity.getCustGroupId() != null){
+			PmCustomerGroupRelationEntity RelationEntity = new PmCustomerGroupRelationEntity();
+			RelationEntity.setSapCode(entity.getSapCode());
+			RelationEntity.setCustGroupId(entity.getCustGroupId());
+			RelationEntity.setCustCnName(entity.getCustCnName());
+			RelationEntity.setCustId(entity.getCustId());
+			pmCustomerGroupRelationMapper.updateByCustId(RelationEntity);
+		}
    		pmCustomerInfoMapper.update(entity);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)

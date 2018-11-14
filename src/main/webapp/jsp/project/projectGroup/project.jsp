@@ -107,30 +107,61 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
        //复选框选中监听,将选中的id 设置到缓存数组,或者删除缓存数组
        var ids=[];
         table.on('checkbox(projectTableFilter)', function (obj) {
-        	console.log(obj,'click');return;
+            var tempArray=[];
+            var count=0;
+            var tempId;
+            $(".projectGroup-project-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
+                var dataStr=$(this).children("td").eq(1).find(".jsonData").attr("dataStr");
+                var chk=$(this).find(".laytable-cell-checkbox");
+                var obj=JSON.parse(dataStr);
+                var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
+                if(!isChecked){
+                    count=count+1;
+                    tempId=obj.projectId;
+				}
+                tempArray.push(obj)
+            })
+        	console.log(obj,'click');
+        	console.log(obj.checked,'是否选中');
            if(obj.checked==true){
-               if(obj.type=='one'){// 选中一个 
+               if(obj.type=='one' && count!=0){// 选中一个
                    ids.push(obj.data.projectId);
+                   console.log(ids);
               }else{ // 全选
-                   for(var i=0;i<table_data.length;i++){
-                       ids.push(table_data[i].id);
+                   for(var i=0;i<tempArray.length;i++){
+                       if($.inArray(tempArray[i].projectId, ids) == -1) {
+                           ids.push(tempArray[i].projectId);
+					   }
                    }
+                   console.log(ids);
                }
            }else{
                if(obj.type=='one'){ // 取消选中的
-                   for(var i=0;i<ids.length;i++){
-                      if(ids[i]==obj.data.projectId){
-                           ids.remove(i);
+				   if(count==1){
+                       for(var i=0;i<ids.length;i++){
+                           if(ids[i]==tempId){
+                               ids.remove(i);
+                           }
                        }
-                  }
+				   }else{
+                       for(var i=0;i<ids.length;i++){
+                           if(ids[i]==obj.data.projectId){
+                               ids.remove(i);
+                           }
+                       }
+				   }
+                   console.log(ids);
                }else{// 取消全选
+				   //这方法也能返回数组下标
+                   //i = $.inArray(tempArray[j].projectId, ids);
                    for(var i=0;i<ids.length;i++){
-                       for(var j=0;j<table_data.length;j++){
-                           if(ids[i]==table_data[j].id){
+                       for(var j=0;j<tempArray.length;j++){
+                           if(ids[i]==tempArray[j].projectId){
                               ids.remove(i);
                           }
                        }
                    }
+                   console.log(ids);
                }
            }
         });
@@ -154,6 +185,7 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 	$(".projectGroup-project-wrapper").on("click","#save-hook",function(){
 		// 遍历选中的CheckBox
 		$(".projectGroup-project-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
+            console.log(ids);
 			var chk=$(this).find(".laytable-cell-checkbox");
 			var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
 			if(isChecked){
