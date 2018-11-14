@@ -84,7 +84,6 @@
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook2"  style="margin-right:15px;"><i class="layui-icon"></i>新增old</button>
 			  </div>
 		   </div>
 		   
@@ -232,7 +231,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	    //url:'custom.json',
 			  	    toolbar: '#toolbarDemo',
 			  	    height:'full-200',
-			  	    title: '投标据表',
+			  	    title: '年度预算表',
 			  	    cols: [[
 						  {type: 'checkbox', fixed: 'left'},
 				  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
@@ -284,29 +283,21 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  		width:"95%"
 	  	})
 	});
-	$(".budget-info-wrapper #add-hook2").click(function(){
-		$.openWindow({
-	  		url:'form?act=add&id=',
-	  		title:"新增预算",
-	  		width:"90%"
-	  	})
-	});
-	
 	/*
 	* 查看和修改 form 表单
 	*/
 	function showFromTable(isEdit,id){
 		if(isEdit == "edit"){
 			var url='edit?act=edit&id='+id;
-			var title="修改投标信息";
+			var title="修改预算信息";
 		}else if(isEdit == "view"){
 			var url='view?act=view&id='+id;
-	    	var	title="查看投标信息";
+	    	var	title="查看预算信息";
 		}
 		$.openWindow({
 	  		url:url,
 	  		title:title,
-	  		width:"90%"
+	  		width:"95%"
 	  	})
 		
 	}
