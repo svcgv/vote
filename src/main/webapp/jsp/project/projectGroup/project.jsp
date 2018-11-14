@@ -99,8 +99,6 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 	    data:testData,
 	    page: true,
 	    done:function(res,curr,count){
-	    	//testData=res.data;
-	    	console.log(res)
 	    }
 	  });
   	
@@ -212,7 +210,7 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 		chosedLayTable.reload('table-chosedProject',{
 					data:chosedProject
 			})
-		//win.close();
+		win.close();
 	});
 	
 	// 关闭按钮
