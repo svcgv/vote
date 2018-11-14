@@ -169,6 +169,7 @@
 				        <th>大小</th>
 				        <th>状态</th>
 				        <th>操作</th>
+				        <th>文件类型</th>
 				      </tr></thead>
 				      <tbody id="wosFileList"></tbody>
 				    </table>
@@ -249,6 +250,7 @@ $(function(){
   ,uploadListIns = upload.render({
 	  before:function(obj){
 	    	this.data={uploadType:'00'}
+	    	console.log(this)
 	    },
     elem: '#wosUploads'
     ,url: '/vote/pmfile/upload'
@@ -268,8 +270,17 @@ $(function(){
             ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
             ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
           ,'</td>'
+          ,'<td>'
+            ,' <div class="layui-input-inline">'
+           	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+	          ,'<option value="">请选择</option>'
+	        	,'<option value="01" selected>项目</option>'
+	        	,'<option value="02">产品</option>'
+	        	,'<option value="03" >人力</option>'
+	        	,'</select>'
+  				,'</div>'
+          ,'</td>'
         ,'</tr>'].join(''));
-        
         //单个重传
         tr.find('.demo-reload').on('click', function(){
           obj.upload(index, file);
@@ -283,6 +294,9 @@ $(function(){
         });
         
         demoListView.append(tr);
+        setTimeout(function(){
+	        form.render();
+        },400)
       });
     }
     ,done: function(res, index, upload){
@@ -293,6 +307,7 @@ $(function(){
         tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
         tds.eq(3).html(''); //清空操作
         return delete this.files[index]; //删除文件队列已经上传成功的文件
+        
       }
       this.error(index, upload);
     }
