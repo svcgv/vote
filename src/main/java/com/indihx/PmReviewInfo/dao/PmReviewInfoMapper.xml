@@ -17,6 +17,8 @@
 		<result property="result" column="RESULT" />
 		<result property="isDelete" column="IS_DELETE" />
 		<result property="commentDetail" column="COMMENT_DETAIL" />
+		<result property="modifyTime" column="MODIFY_TIME" />
+		
 	</resultMap>
 
 	<resultMap type="java.util.Map" id="reviewMap">

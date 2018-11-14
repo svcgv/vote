@@ -209,7 +209,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    cols: [[
 	    	  {type: 'checkbox', fixed: 'left'},
 	  	      {field:'bidCode', title:'投标编号',fixed: 'left', sort: true, width:130},
-            {field:'status', title:'评审状态', width:130},
             {field:'status', title: '评审状态', width: 200
       	      ,templet: function(d){
       	    	if(d.status=='00'){
