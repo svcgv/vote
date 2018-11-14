@@ -19,7 +19,7 @@
 		    <div class="layui-inline">
 			      <label class="layui-form-label">项目群名称：</label>
 			       <div class="layui-input-inline">
-			         <input type="text" name="projectGroupName"  autocomplete="off" class="layui-input form-control">
+			         <input type="text" name="projectGroupName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 			       </div>
 			       <button type="button"  class="layui-btn layui-btn-sm" id="projectGroupNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
