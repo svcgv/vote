@@ -89,6 +89,8 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	
 	// 保存 事件
 	var act="${act}";// 区分是index页 form页 赋值问题
+	var index ="${index}";
+	var YIndex ="${YIndex}";
 	var win=$(".budget-cust-wrapper").getWindow();
 	$(".budget-cust-wrapper").on("click","#save-hook",function(){
 		// 遍历选中的radio
@@ -98,9 +100,14 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			if(isChecked){
 				var wbsCode=$(this).children("td").eq(1).text();
 				var projectName=$(this).children("td").eq(2).text();
-				 if(act =="addCust"){ //编辑 修改 页面
-			 		$("#budget-addForm-hook input[name='projectName']").val(projectName);
-					$("#budget-addForm-hook input[name='wbsCode']").val(wbsCode);
+				if(act == "indexSearch"){
+					$(".budget-info-wrapper input[name='projectName']").val(projectName);
+					$(".budget-info-wrapper input[name='wbsCode']").val(wbsCode);
+				}else if(act == "addWBS" || act == "addProjectName"){
+			 		// form 2 
+			 		console.log(index,YIndex,'index')
+			 		$(".budget-wrapper").find("tbody tr").eq(YIndex).find(".project-list").eq(0).children(".item").eq(index).find("input[name='wbsCode']").val(wbsCode);
+			 		$(".budget-wrapper").find("tbody tr").eq(YIndex).find(".project-list").eq(1).children(".item").eq(index).find("input[name='projectName']").val(projectName);
 			 	}
 			}
 		});

@@ -107,6 +107,9 @@ layui.use(['layer', 'form','laydate','table'], function(){
 					table2.reload('custRevSummaryTableID',{
 						data:customerData
 					})
+			 	}else if(act == "indexSearch"){
+			 		$(".budget-info-wrapper input[name='custName']").val(custName);
+					$(".budget-info-wrapper input[name='custId']").val(custId);
 			 	}
 			}
 		});

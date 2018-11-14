@@ -7,3 +7,5 @@ redis.bat
 .settings/org.eclipse.wst.common.component
 redis-clear.bat
 redis.bat
+.classpath
+

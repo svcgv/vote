@@ -2,6 +2,7 @@ package com.indihx.baseTableUtil.controller;
 
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 import com.indihx.system.entity.UsrInfo;
+import com.indihx.util.BeanUtils;
 import com.indihx.util.UserUtil;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
@@ -54,5 +56,26 @@ public class QueryUsrInfoController {
         return R.ok().put("usrInfo", entity);
     }
 
-
+    /**
+     * 通过roleCode和orgNo查询对应的用户
+     * @throws SecurityException 
+     * @throws NoSuchFieldException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
+     */
+    @RequestMapping(value="/queryUserByRoleCodeAndOrgNo",method=RequestMethod.POST)
+	public @ResponseBody Map<String,Object> queryUserByRoleCodeAndOrgNo(Map<String, Object> param) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException {
+		// TODO Auto-generated method stub
+    	List<Map<String, Object>> res = usrInfoService.queryUserByRoleCodeAndOrgNo(param);
+    	
+    	List<QueryUsrInfoEntity> list = new ArrayList<QueryUsrInfoEntity>();
+    	if(res.isEmpty()) {
+    		return R.error();
+    	}
+    	for(int i =0;i<res.size();i++) {
+    		list.add(BeanUtils.Map2Bean(res.get(i), QueryUsrInfoEntity.class));
+    	}
+    	
+		return R.ok().put("page", list);
+	}
 }

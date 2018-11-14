@@ -18,21 +18,21 @@
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估收入金额：</label>
+		      <label class="layui-form-label">预估收入（元）：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="predictAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估成本：</label>
+		      <label class="layui-form-label">预估成本（元）：</label>
 		      <div class="layui-input-inline">
 		       <input type="text" name="predictCost"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估利润率：</label>
+		      <label class="layui-form-label">预估利润率（%）：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="predictProfitRate"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -178,11 +178,11 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
 	  	      {field:'bidName', title:'投标名称', width:130},
 	  	      {field:'status', title:'评审状态', width:130},
-	  	      {field:'firstBidAmount', title:'投标首次报价金额', width:150},
+	  	      {field:'firstBidAmount', title:'首次报价（元）', width:150},
 	  	      {field:'custCnName', title:'客户', width:130},
-	  	      {field:'predictAmount', title:'预估收入金额', width:150},
-	  	      {field:'predictCost', title:'预估成本', width:120},
-	  	      {field:'predictProfitRate', title:'预估利润率'},
+	  	      {field:'predictAmount', title:'预估收入（元）', width:150},
+	  	      {field:'predictCost', title:'预估成本（元）', width:120},
+	  	      {field:'predictProfitRate', title:'预估利润率（%）'},
             {field:'predictPeriodStart', title:'预付开始期限'},
             {field:'predictPeriodEnd', title:'预付结束期限'},
 	  	      {field:'constructionDeptName', title:'交付部门'},
@@ -243,11 +243,11 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
 				  	      {field:'bidName', title:'投标名称', width:130},
 				  	      {field:'status', title:'评审状态', width:130},
-				  	      {field:'firstBidAmount', title:'投标首次报价金额', width:150},
+				  	      {field:'firstBidAmount', title:'首次报价（元）', width:150},
 				  	      {field:'custCnName', title:'客户', width:130},
-				  	      {field:'predictAmount', title:'预估收入金额', width:150},
-				  	      {field:'predictCost', title:'预估成本', width:120},
-				  	      {field:'predictProfitRate', title:'预估利润率'},
+				  	      {field:'predictAmount', title:'预估收入（元）', width:150},
+				  	      {field:'predictCost', title:'预估成本（元）', width:120},
+				  	      {field:'predictProfitRate', title:'预估利润率（%）'},
 				  	      {field:'predictPeriod', title:'预估期限'},
 				  	      {field:'constructionDeptName', title:'交付部门'},
 				  	      {field:'sellDeptName', title:'销售部门'},

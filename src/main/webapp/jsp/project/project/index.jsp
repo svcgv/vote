@@ -14,8 +14,8 @@
 		  	<div class="layui-inline">
 		      <label class="layui-form-label">实施部门：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="buildDeptName" readonly="true" autocomplete="off" class="layui-input form-control">
-		         <input type="text" style='display:none' name="buildDeptId" />
+		         <input type="text" name="buildDeptName"  autocomplete="off" class="layui-input form-control">
+		         <input type="hidden" name="buildDeptId" />
 		      </div>
 		         <button type="button"  class="layui-btn layui-btn-sm" id="buildDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -23,8 +23,8 @@
 		    <div class="layui-inline">
 			      <label class="layui-form-label">实施负责人：</label>
 			       <div class="layui-input-inline">
-			         <input type="text" name="buildManagerName" readonly="true" autocomplete="off" class="layui-input form-control">
-			         <input type="text" style='display:none' name="buildManagerId" />
+			         <input type="text" name="buildManagerName"  autocomplete="off" class="layui-input form-control">
+			         <input type="hidden" name="buildManagerId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="buildManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -41,8 +41,8 @@
 		     <div class="layui-inline">
 			      <label class="layui-form-label">销售部门：</label>
 			      <div class="layui-input-inline">
-				       <input type="text" name="sellDeptName" readonly="true" autocomplete="off" class="layui-input form-control">
-				       <inpu type="text" style='display:none' name="sellDeptId" />
+				       <input type="text" name="sellDeptName"  autocomplete="off" class="layui-input form-control">
+				       <inpu type="hidden" name="sellDeptId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="sellDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -50,8 +50,8 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">销售负责人：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="sellManagerName" readonly="true" autocomplete="off" class="layui-input form-control">
-		         <input type="text" style='display:none' name="sellManagerId" />
+		         <input type="text" name="sellManagerName"  autocomplete="off" class="layui-input form-control">
+		         <input type="hidden" name="sellManagerId" />
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="sellManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -70,20 +70,22 @@
 		       <div class="layui-input-inline">
 	         		<input type="text" name="wbs" autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="wbsQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		     
-		     <div class="layui-inline" style="padding-right:55px;">
+		     <div class="layui-inline">
 		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="projectName"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="projectNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="custName" autocomplete="off" class="layui-input form-control">
-		         <input type="text" style='display:none' name="custSapCode" />     
+		         <input type="hidden" name="custId" />     
 		      </div>
 	      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -93,7 +95,10 @@
 		       <div class="layui-input-inline">
 		          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
 		        	 <option value="">请选择</option>
-		        	 ${projectType.ewTypeHtml }
+		        	 <option value="00" selected>整包项目</option>
+		        	 <option value="01">人力项目</option>
+		        	 <option value="02">订单项目</option>
+		        	 <option value="03">内部研发项目</option>
 		          </select>
 		      </div>
 		    </div>
@@ -102,7 +107,10 @@
 		       <div class="layui-input-inline">
 		          <select name="state" lay-verify="required" lay-filter="" class="form-control">
 		        	 <option value="">请选择</option>
-		        	 ${state.ewTypeHtml }
+		        	 <option value="00" selected>进行中</option>
+		        	 <option value="02">待验收</option>
+		        	 <option value="01">结项</option>
+		        	 <option value="03">关闭</option>
 		          </select>
 		      </div>
 		    </div>
@@ -135,16 +143,6 @@
 			      </div>
 		    </div>
 		    
-		     <div class="layui-inline" style="padding-right:55px;">
-		       <label class="layui-form-label">是否有效：</label>
-		       <div class="layui-input-inline">
-		          <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 ${isUseful.ewTypeHtml }
-		          </select>
-		      </div>
-		    </div>
-		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:15px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
@@ -152,7 +150,6 @@
 			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
 			  </div>
 		   </div>
-		   
 	   </div>
 	</form>
 	
@@ -165,6 +162,7 @@
  
 <script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="projectReview">项目审批</a>
   <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="view">查看</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -212,7 +210,7 @@ var col=[
 	    ]
   ]
 //一般直接写在一个js文件中
-var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
+layui.use(['layer', 'form','laydate','table','upload'], function(){
   var layer = layui.layer ,
   	  form = layui.form,
   	  laydate=layui.laydate,
@@ -335,10 +333,67 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    toolbar: '#toolbarDemo',
 	    height:'full-200',
 	    title: '投标数据表',
-	    cols: col,
+	    cols: [
+	    	[
+	    	  
+	  	      {align: 'center', title: '项目信息', colspan: 16},
+	  	      {align: 'center', title: '项目预算', colspan: 6},
+	  	      {align: 'center', title: '上报收入', colspan: 2},
+	  	      {align: 'center',field: 'lastYearRevenue', title: '去年上报的收入', rowspan: 2},
+	  	      {align: 'center',field: 'signContractDate', title: '合同签订日期', rowspan: 2},
+	  	      {align: 'center',field: 'isSignedContract', title: '是否签订', rowspan: 2},
+	  	      {align: 'center',field: 'workLoadConfirm', title: '工作量确认', rowspan: 2},
+	  	      {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
+	   		],
+		    [
+		    	  {type: 'checkbox', fixed: 'left'},
+		  	      {field:'projectId', title:'项目编号', sort: true, width:130},
+		  	      {field:'buildDeptName', title:'实施部门',sort: true, width:130},
+		  	      {field:'buildManagerName', title:'实施负责人' ,sort: true, width:130},
+		  	      {field:'sellDeptName', title:'销售部门', width:130},
+		  	      {field:'sellManagerName', title:'销售负责人', width:130},
+		  	      {field:'createProjectTime', title:'立项时间'},
+		  	      {field:'finishProjectTime', title:'结项时间'},
+		  	      {field:'wbs', title:'WBS编号', width:150},
+		  	      {field:'custName', title:'客户名称', width:150},
+		  	      {field:'projectName', title:'项目名称'},
+		  	      {field:'currentYearFollow', title:'本年关注'},
+		  	      {field:'isContinue', title:'是否延续'},
+		  	      {field:'isSignedContract', title:'是否签订'},
+		  	      {field:'state', title:'状态'},
+		  	      {field:'projectType', title:'项目类型'},
+		  	      
+		    	  {field:'predictContractAmount', title:'合同金额'},
+		    	  {field:'profitRate', title:'利润率'},
+		    	  {field:'profitMount', title:'利润'},
+		    	  {field:'workLoad', title:'工作量'},
+		    	  {field:'currendYearIncomming', title:'本年可报收入'},
+		    	  {field:'currentYearGrossProfit', title:'本年毛利'},
+		    	  
+		    	  {field:'allIncomming', title:'收入合计'},
+		    	  {field:'overFlowReportIncomming', title:'超报收入'},
+		    ]
+	    ],
 	    cellMinWidth:'120',
 	    data:[
-	    	
+	    	{
+	    		projectId:"pro-01",
+	    		buildDeptName:"实施部门",
+	    		custName:'交通银行 ',
+	    		projectType:'整包',
+	    		predictContractAmount:'2000000000',
+	    		profitRate:'12%',
+	    		allIncomming:'120000',
+	    	},
+	    	{
+	    		projectId:"pro-01",
+	    		buildDeptName:"实施部门",
+	    		custName:'交通银行 ',
+	    		projectType:'整包',
+	    		predictContractAmount:'2000000000',
+	    		profitRate:'12%',
+	    		allIncomming:'120000',
+	    	}
 	    	],
 	    page: true
 	  });
@@ -351,7 +406,6 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    if(obj.event === 'del'){
 	      layer.confirm('确认删除行么', function(index){
 	        obj.del();
-	        del(data.projectId)
 	        layer.close(index);
 	        table.reload('customer-table',{
 	        	
@@ -363,12 +417,9 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    }else if(obj.event === "view"){
 	    	// 查看
 	    	showFromTable('view',data.projectId);
-	    }else if(obj.event == "tenderReview"){
+	    }else if(obj.event == "projectReview"){
 	    	// 评审
-	    	showFromTable('review',data.projectId);
-	    }else if(obj.event == "setMoney"){
-	    	// 评审
-	    	showFromTable('setMoney',data.projectId);
+	    	showFromTable('projectReview',data.projectId);
 	    }
 	  });
 	/*
@@ -385,7 +436,7 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
 		 
 		 $.ajax({
 			  type: 'POST',
-			  url: '/vote/pmprojectinfo/list',
+			  url: '/vote/pmconfirmbid/list',
 			  data: JSON.stringify(newparam),
 			  contentType:'application/json',
 			  success: function(res){
@@ -398,7 +449,22 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	    toolbar: '#toolbarDemo',
 			  	    height:'full-200',
 			  	    title: '投标据表',
-			  	    cols: col,
+			  	    cols: [[
+						  {type: 'checkbox', fixed: 'left'},
+				  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
+				  	      {field:'bidName', title:'投标名称', width:130},
+				  	      {field:'status', title:'评审状态', width:130},
+				  	      {field:'bidFirstPrice', title:'投标首次报价金额'},
+				  	      {field:'custName', title:'客户名称', width:230},
+				  	      {field:'predictAmount', title:'预估收入金额'},
+				  	      {field:'predictCost', title:'预估成本'},
+				  	      {field:'predictProfitRate', title:'预估利润率'},
+				  	      {field:'predictPeriod', title:'预付期限'},
+				  	      {field:'payDeptName', title:'交付部门'},
+				  	      {field:'sellDeptName', title:'销售部门'},
+				  	      {field:'custManagerName', title:'客户经理'},
+				  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
+			  	    ]],
 			  	    cellMinWidth:'100',
 			  	    data:testData,
 			  	    page: true
@@ -431,6 +497,10 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
 		}else if(isEdit == "view"){
 			var url='view?act=view&id='+id;
 	    	var	title="查看项目信息";
+		}else if(isEdit == "projectReview"){
+			var url='review?act=projectReview&id='+id;
+	    	var	title="项目立项审批";
+	    	_width="400px";
 		}
 		$.openWindow({
 	  		url:url,
@@ -439,62 +509,9 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	})
 		
 	}
-	var that =this
-	rendertable(that)
 	
 });
 var testData=[];
-
-function rendertable(that){
-	var queryParams=$("#project-index-form").serializeObject();
-	 var newparam = {}
-	 for(var o in queryParams){
-		 if(queryParams[o]){
-			 newparam[o] = queryParams[o]
-		 }
-	 }
-	$.ajax({
-			  type: 'POST',
-			  url: '/vote/pmprojectinfo/list',
-			  data: JSON.stringify(newparam),
-			  contentType:'application/json',
-			  success: function(res){
-
-				 testData=res.page
-				 that.table.render({
-			  	  	id:"customer-table",
-			  	    elem: '#projectIndexTable',
-			  	    //url:'custom.json',
-			  	    toolbar: '#toolbarDemo',
-			  	    height:'full-200',
-			  	    title: '投标据表',
-			  	    cols: col,
-			  	    cellMinWidth:'100',
-			  	    data:testData,
-			  	    page: true
-			  	  	});
-			  
-			  },
-			  dataType: "json"
-			})
-}
-
-function del(id){
-	var par = {projectId:id,isDelete:'01'}
-	$.ajax({
-		  type: 'POST',
-		  url: '/vote/pmprojectinfo/update',
-		  data: JSON.stringify(par),
-		  contentType:'application/json',
-		  success: function(res){
-
-			  rendertable( lay)
-		  
-		  },
-		  dataType: "json"
-		})
-}
-
 </script>
 </body>
 </html>

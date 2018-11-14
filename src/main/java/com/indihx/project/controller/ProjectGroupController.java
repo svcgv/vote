@@ -30,76 +30,64 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.indihx.AbstractBaseController;
+import com.indihx.PmCustomerInfo.entity.PmCustomerGroupEntity;
+import com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity;
+import com.indihx.PmCustomerInfo.service.PmCustomerGroupRelationService;
+import com.indihx.PmCustomerInfo.service.PmCustomerGroupService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.system.service.impl.ParamsInfoServiceimpl;
 
-/**
- * 年度预算
- * */
 
 @Controller
 @RequestMapping("/project")
-public class YearBudgetController extends AbstractBaseController{
+public class ProjectGroupController extends AbstractBaseController{
 	@Autowired
 	private ParamsInfoServiceimpl infoservice;
+
+	@Autowired
+	PmCustomerGroupService pmCustomerGroupService;
 	
-	@RequestMapping("/yearBudget/index")
+	@Autowired
+	PmCustomerGroupRelationService pmCustomerGroupRelationService;
+	
+	@RequestMapping("/projectGroup/index")
 	public ModelAndView addCustomView() {
 		
 		ModelAndView view = new ModelAndView();
-		
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
-		
-		view.setViewName("/project/yearBudget/index");
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
+	
+		view.setViewName("/project/projectGroup/index");
 		return view;
 	}
-	// 新form
-	@RequestMapping(value="/yearBudget/form2",method=RequestMethod.GET)
+	@RequestMapping(value="/projectGroup/form",method=RequestMethod.GET)
 	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
-		
 		view.addObject("act",act);
-		view.addObject("id",id);
+		if(id !=null && !"".equals(id)) {
+			view.addObject("id",id);
+		}
 		
-		view.setViewName("/project/yearBudget/form2");
-		return view;
-	}
-	// form
-	@RequestMapping(value="/yearBudget/form",method=RequestMethod.GET)
-	public ModelAndView formFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
-		ModelAndView view = new ModelAndView();
-		
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
-		
-		view.addObject("act",act);
-		view.addObject("id",id);
-		
-		view.setViewName("/project/yearBudget/form");
-		return view;
-	}
-	@RequestMapping(value="/yearBudget/edit",method=RequestMethod.GET)
-	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
-		ModelAndView view = new ModelAndView();
-		
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
-		
-		view.addObject("act",act);
-		view.addObject("id",id);
-		
-		view.setViewName("/project/yearBudget/edit");
+		view.setViewName("/project/projectGroup/form");
 		return view;
 	}
 	
-	@RequestMapping(value="/yearBudget/view",method=RequestMethod.GET)
+	@RequestMapping(value="/projectGroup/edit",method=RequestMethod.GET)
+	public ModelAndView formGroupFormView() {
+		ModelAndView view = new ModelAndView();
+		
+		
+		//编辑时为已存的值
+		view.addObject("chosedProject","");
+		
+		view.setViewName("/project/projectGroup/edit");
+		return view;
+	}
+	@RequestMapping(value="/projectGroup/view",method=RequestMethod.GET)
 	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
 		
@@ -109,35 +97,36 @@ public class YearBudgetController extends AbstractBaseController{
 		view.addObject("act",act);
 		view.addObject("id",id);
 		
-		view.setViewName("/project/yearBudget/view");
+		view.setViewName("/project/projectGroup/view");
 		return view;
 	}
-	// 客户
-	@RequestMapping(value="/yearBudget/customer",method=RequestMethod.GET)
-	public ModelAndView customerFormView(@RequestParam("act") String act) {
+	// 机构
+	@RequestMapping(value="/projectGroup/org",method=RequestMethod.GET)
+	public ModelAndView orgFormView(@RequestParam("act") String act) {
 		ModelAndView view = new ModelAndView();
 		view.addObject("act",act);
-		view.setViewName("/project/yearBudget/customer");
-		return view;
-	}
-	// wbs
-	@RequestMapping(value="/yearBudget/wbs",method=RequestMethod.GET)
-	public ModelAndView wbsFormView(@RequestParam("act") String act,@RequestParam("index") String index,@RequestParam("YIndex") String YIndex) {
 		
-		ModelAndView view = new ModelAndView();
-		view.addObject("act",act);
-		view.addObject("index",index);
-		view.addObject("YIndex",YIndex);
-		view.setViewName("/project/yearBudget/wbs");
+		view.setViewName("/project/projectGroup/org");
 		return view;
 	}
-	// product
-	@RequestMapping(value="/yearBudget/product",method=RequestMethod.GET)
-	public ModelAndView productFormView(@RequestParam("act") String act) {
+			
+	   // 用户
+	@RequestMapping(value="/projectGroup/user",method=RequestMethod.GET)
+	public ModelAndView userFormView(@RequestParam("act") String act) {
 		ModelAndView view = new ModelAndView();
 		view.addObject("act",act);
-		view.setViewName("/project/yearBudget/product");
+		view.setViewName("/project/project/user");
 		return view;
 	}
+	//项目
+	@RequestMapping(value="/projectGroup/project",method=RequestMethod.GET)
+	public ModelAndView reviewFormView(@RequestParam("act") String act) {
+		ModelAndView view = new ModelAndView();
+		view.addObject("act",act);
+		view.setViewName("/project/projectGroup/project");
+		return view;
+	}
+		
+	
 	
 }

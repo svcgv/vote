@@ -71,7 +71,6 @@ public class TenderReviewController extends AbstractBaseController{
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
-		
 		view.setViewName("/project/tenderReview/index");
 		return view;
 	}

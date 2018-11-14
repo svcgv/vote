@@ -191,6 +191,11 @@ public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 
 	private double taxRate;
 
+	/**
+	 * 投标编号
+	 */
+	private String bidCode;
+
 	public String getCurrency() {
 		return currency;
 	}
@@ -675,5 +680,13 @@ public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 	 */
 	public String getIsDelete() {
 		return isDelete;
+	}
+
+	public String getBidCode() {
+		return bidCode;
+	}
+
+	public void setBidCode(String bidCode) {
+		this.bidCode = bidCode;
 	}
 }

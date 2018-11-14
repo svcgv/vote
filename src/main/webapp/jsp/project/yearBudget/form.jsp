@@ -336,7 +336,7 @@ var table2=null;
 	});
 	$("#budget-addForm-hook #WBSQuery-hook").click(function(){
 		 $.openWindow({
-		  		url:'wbs?act=addCust',
+		  		url:'wbs?act=addCust&index=0',
 		  		title:"选择WBS编号",
 		  		width:"700"
 		 });

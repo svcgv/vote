@@ -215,9 +215,22 @@
 		B.USR_NAME
 		FROM
 		PM_SALE_MEMBER_INFO A
-		LEFT JOIN USR_INFO B ON A .MENBER_USR_ID = B.USR_ID
+		LEFT JOIN USR_INFO B ON A
+		.MENBER_USR_ID = B.USR_ID
 		WHERE
 		A.GROUP_CODE=#{groupCode}
 	</select>
 
+	<!-- 通过rolecode和机构id查用户 -->
+	<select id="queryUserByRoleCodeAndOrgNo" resultMap="usrInfoMap">
+		SELECT
+			*
+		FROM
+		usr_info A
+		LEFT JOIN usr_role b ON A .usr_id = b.usr_id
+		LEFT JOIN ROLE c ON b.role_id = c.role_id
+		WHERE
+		org_no = #{orgNo}
+		AND c.role_code = #{roleCode}
+	</select>
 </mapper>

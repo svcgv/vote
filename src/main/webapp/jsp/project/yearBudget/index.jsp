@@ -11,7 +11,7 @@
 	<form class="layui-form" id="tender-index-form" method="POST" action="">
 	   <div class="layui-form-item">
 	   
-		  	<div class="layui-inline">
+		  	<div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">是否新客户：</label>
 		       <div class="layui-input-inline">
 		          <select name="isNewCustomer" lay-verify="required" lay-filter="isNewCustomer" class="form-control">
@@ -24,10 +24,12 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="custName"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="custName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		         <input type="hidden" name="custId" />
 		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="customerNameQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
 		    </div>
-	    	<div class="layui-inline">
+	    	<div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">是否新项目：</label>
 		       <div class="layui-input-inline">
 		          <select name="isNewProject" lay-verify="required" id="isNewProject-hook" lay-filter="" class="form-control">
@@ -41,11 +43,13 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">项目名称：</label>
 		      <div class="layui-input-inline">
-		       <input type="text" name="predictCost"  autocomplete="off" class="layui-input form-control">
+		       	<input type="text" name="projectName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+		       	 <input type="hidden" name="wbsCode" />
 		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="projectNameQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
 		    </div>
 		    
-		     <div class="layui-inline">
+		     <div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">项目类型：</label>
 		       <div class="layui-input-inline">
 		          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
@@ -57,7 +61,7 @@
 		      </div>
 		    </div>
 		    
-		     <div class="layui-inline">
+		     <div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">税种：</label>
 		       <div class="layui-input-inline">
 		          <select name="isNewProject" lay-verify="required" lay-filter="" class="form-control">
@@ -80,6 +84,7 @@
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook2"  style="margin-right:15px;"><i class="layui-icon"></i>新增old</button>
 			  </div>
 		   </div>
 		   
@@ -233,11 +238,11 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
 				  	      {field:'bidName', title:'投标名称', width:130},
 				  	      {field:'status', title:'评审状态', width:130},
-				  	      {field:'bidFirstPrice', title:'投标首次报价金额'},
+				  	      {field:'bidFirstPrice', title:'首次报价（元）'},
 				  	      {field:'custName', title:'客户名称', width:230},
-				  	      {field:'predictAmount', title:'预估收入金额'},
-				  	      {field:'predictCost', title:'预估成本'},
-				  	      {field:'predictProfitRate', title:'预估利润率'},
+				  	      {field:'predictAmount', title:'预估收入（元）'},
+				  	      {field:'predictCost', title:'预估成本（元）'},
+				  	      {field:'predictProfitRate', title:'预估利润率（%）'},
 				  	      {field:'predictPeriod', title:'预估期限'},
 				  	      {field:'payDeptName', title:'交付部门'},
 				  	      {field:'sellDeptName', title:'销售部门'},
@@ -252,11 +257,34 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			});
 		
 	}); 
-	
+	$(".budget-info-wrapper #projectNameQuery-hook").click(function(){
+		// 共用 wbs controller
+		var _YIndex=0;
+		var _index=0;
+		 $.openWindow({
+		  		url:'wbs?act=indexSearch&index='+_index+'&YIndex='+_YIndex,
+		  		title:"选择项目名称",
+		  		width:"700"
+		 });
+	})
+	$(".budget-info-wrapper #customerNameQuery-hook").click(function(){
+		 $.openWindow({
+		  		url:'customer?act=indexSearch',
+		  		title:"选择项目名称",
+		  		width:"700"
+		 });
+	})
 	/*
 	* 新增
 	*/
 	$(".budget-info-wrapper #add-hook").click(function(){
+		$.openWindow({
+	  		url:'form2?act=add&id=',
+	  		title:"新增预算",
+	  		width:"95%"
+	  	})
+	});
+	$(".budget-info-wrapper #add-hook2").click(function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
 	  		title:"新增预算",

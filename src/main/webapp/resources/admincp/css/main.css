@@ -1,3 +1,31 @@
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal!important;
+  word-break: keep-all !important;
+  _width: 100%;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  display: inline-table;
+  zoom:1;
+}
+* html .clearfix {
+  height: 1%;
+}
+.clearfix {
+  display: block;
+}
 .form-control-boxShadow {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075)!important;
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075)!important;
