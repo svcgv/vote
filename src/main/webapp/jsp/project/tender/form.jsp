@@ -33,17 +33,7 @@
 		         <input type="number" name="firstBidAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
-		     <div class="layui-inline">
-		      <label class="layui-form-label">客户名称：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
-		         <input type="text" style='display:none' name="custId">
-		         <input type="text" style='display:none' name="custSapCode">
-		      </div>
-		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
-		    </div>
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">预估收入（元）：</label>
 		       <div class="layui-input-inline">
@@ -90,7 +80,7 @@
 		          <input type="text" style='display:none' name="constructionDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    
@@ -111,7 +101,7 @@
 		          <input type="text" style='display:none' name="sellDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		     
@@ -122,7 +112,17 @@
 		          <input type="text" style='display:none' name="sellDeptManagerId">
 		      </div>
 		     </div> 
-		    
+		     <div class="layui-inline">
+		      <label class="layui-form-label">客户名称：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+		         <input type="text" style='display:none' name="custId">
+		         <input type="text" style='display:none' name="custSapCode">
+		      </div>
+		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		       </div>
+		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
