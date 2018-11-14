@@ -62,9 +62,10 @@ public class QueryUsrInfoController {
      * @throws NoSuchFieldException 
      * @throws IllegalAccessException 
      * @throws InstantiationException 
+     * param{orgNo:,roleCode:''}
      */
     @RequestMapping(value="/queryUserByRoleCodeAndOrgNo",method=RequestMethod.POST)
-	public @ResponseBody Map<String,Object> queryUserByRoleCodeAndOrgNo(Map<String, Object> param) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public @ResponseBody Map<String,Object> queryUserByRoleCodeAndOrgNo(@RequestBody Map<String, Object> param,HttpSession session) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		// TODO Auto-generated method stub
     	List<Map<String, Object>> res = usrInfoService.queryUserByRoleCodeAndOrgNo(param);
     	
@@ -73,7 +74,8 @@ public class QueryUsrInfoController {
     		return R.error();
     	}
     	for(int i =0;i<res.size();i++) {
-    		list.add(BeanUtils.Map2Bean(res.get(i), QueryUsrInfoEntity.class));
+    		Map<String,Object> map = res.get(i);
+    		list.add(BeanUtils.Map2Bean(map, QueryUsrInfoEntity.class));
     	}
     	
 		return R.ok().put("page", list);

@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class BeanUtils {
 	 public static <T> T Map2Bean(Map<String,Object>map,Class<T> Bean) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException{
 		T a =  Bean.newInstance();
+	
 		for (String key : map.keySet()) { 
 			StringBuffer str = new StringBuffer(key);
 			Field field = Bean.getClass().getDeclaredField(camel(str).toString());

@@ -72,6 +72,7 @@ $(".org-wrapper #org-add-hook").click(function(){
 			layer.msg("请选择机构")
 		})
 	}else{
+		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,roleCode)
 		var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
 		 // 保存到已选机构中
 		 	if(act == "index"){
@@ -81,9 +82,13 @@ $(".org-wrapper #org-add-hook").click(function(){
 		 		$("#tender-index-form input[name='payDeptName']").val(getCheckedOrg.name);
 				$("#tender-index-form input[name='payDeptId']").val(getCheckedOrg.orgId);
 		 	}else if(act =="add"){
+		 		//销售部门
+		 			queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"SELL_DEPT_MANAGER")
 		 		$("#tender-addForm-hook input[name='sellDeptName']").val(getCheckedOrg.name);
 				$("#tender-addForm-hook input[name='sellDeptId']").val(getCheckedOrg.orgId);
 		 	}else if(act == "addPay"){
+		 		//选择交付部门
+		 			queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"CONSTRUCTION_DEPT_MANAGER")
 		 		$("#tender-addForm-hook input[name='constructionDeptName']").val(getCheckedOrg.name);
 				$("#tender-addForm-hook input[name='constructionDeptId']").val(getCheckedOrg.orgId);
 		 	}
@@ -94,30 +99,18 @@ $(".org-wrapper #org-add-hook").click(function(){
 	
 	
 });
+
+
+
 var act="${act}";// 区分是index页 form页 赋值问题
 var roleCode="${roleCode}"
-function zTreeOnSaveEvent(event, treeId, treeNode) {
+	//通过orgId和roleCode查人，并反显
+function zTreeOnSaveEvent () {
 	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
 	//若roleCode存在，则向后台查一把，根据act返现再页面上
-	if(roleCode){
-		var param = {}
-		param.orgNo=getCheckedOrg.orgId
-		param.roleCode=roleCode
-		$.ajax({
-			  type: 'POST',
-			  url: '/vote/queryusrinfo/queryUserByRoleCodeAndOrgNo',
-			  data: JSON.stringify(param),
-			  contentType:'application/json',
-			  success: function(res){
-			      console.log(res)
-			      if(res.page){
-			    	  
-			      }
-		      },
-			  dataType: "json"
-			})
-	}
- // 保存到已选机构中
+	
+
+	 // 保存到已选机构中
  	if(act == "index"){
 		$("#tender-index-form input[name='sellDeptName']").val(getCheckedOrg.name);
 		$("#tender-index-form input[name='sellDeptId']").val(getCheckedOrg.orgId);
@@ -132,9 +125,33 @@ function zTreeOnSaveEvent(event, treeId, treeNode) {
 		$("#tender-addForm-hook input[name='payDeptId']").val(getCheckedOrg.orgId);
  	}
 		win.close();
+
 };
 
 
+function queryUserByRoleCodeOrgNo(orgNo,roleCode){
+	console.log(orgNo,roleCode)
+	//若roleCode存在，则向后台查一把，根据act返现再页面上
+	if(roleCode){
+		var param = {}
+		param.orgNo=orgNo
+		param.roleCode=roleCode
+		console.log('param',param)
+		$.ajax({
+			  type: 'POST',
+			  url: '/vote/queryusrinfo/queryUserByRoleCodeAndOrgNo',
+			  data: JSON.stringify(param),
+			  contentType:'application/json',
+			  success: function(res){
+			      console.log(res)
+			      if(res.page){
+			    	  
+			      }
+		      },
+			  dataType: "json"
+			})
+	}
+}
 //关闭
 $(".org-wrapper #org-close-hook").click(function(){
 	win.close();

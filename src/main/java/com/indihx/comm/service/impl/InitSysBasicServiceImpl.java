@@ -106,7 +106,7 @@ public class InitSysBasicServiceImpl extends AbstractBaseService implements IIni
 			logger.info("--->0.0 开始清理用户Session");
 			UsrInfo infoVo = new UsrInfo();
 			infoVo.setUsrSta("0");
-			userMapper.clearUserSession(infoVo);
+			//userMapper.clearUserSession(infoVo);
 			logger.info("--->0.0 清理用户Session完毕");
 		} catch (Exception e) {
 			throw new BusinessException("清理用户session失败："+ExceptionUtil.getErrorMsg(e));
