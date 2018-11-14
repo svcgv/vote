@@ -55,7 +55,6 @@ public class ConstantStatic {
 			return createHtmlByCode(codeNo);
 		}
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("<option value='' >--请选择--</option>");
 		for (CodeData codeData : list) {
 			buffer.append("<option value='"+codeData.getCodeKey()+"' ");
 			if(!StringUtils.isEmpty(codeKey)&&codeData.getCodeKey().equals(codeKey))

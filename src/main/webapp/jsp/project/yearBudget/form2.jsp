@@ -62,7 +62,9 @@
 .project-list .copyAddItem{
 	display:none;
 }
-
+.layui-table tbody tr:hover{
+	background:#fff;
+}
 </style>
 <div id="budget-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
@@ -169,26 +171,22 @@
 			      <td>
 			      	<div class="project-list">
 			      		<div class="layui-input-inline productItem" style="">
-			      			<span class="layui-badge layui-bg-gray">列表1</span>
-			      			<span class="layui-badge layui-bg-gray">列表1</span>
-			      			<span class="layui-badge layui-bg-gray">列表1</span>
-			      			<span class="layui-badge layui-bg-gray">列表1</span>
-			      			<span class="layui-badge layui-bg-gray">列表1</span>
-			      			<span class="layui-badge layui-bg-gray">列表1</span>
-			      			<span class="layui-badge layui-bg-gray">列表1</span>
-			      			<span class="layui-badge layui-bg-gray">列表1</span>
-			      			<span class="layui-badge layui-bg-gray">列表1</span>
+			      			<span class="layui-badge layui-bg-gray" productid="0">列表1</span>
+			      			<span class="layui-badge layui-bg-gray" productid="01">列表1</span>
+			      			<span class="layui-badge layui-bg-gray" productid="02">列表1</span>
+			      			
 			      		</div>
 			      		<div class="layui-input-inline productItem" style="">
-			      			<span class="layui-badge layui-bg-gray">列表2</span>
-			      			<span class="layui-badge layui-bg-gray">列表2</span>
-			      			<span class="layui-badge layui-bg-gray">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
 			      		</div>
 			      		<div class="layui-input-inline productItem copyAddItem" style="">
 			      			<div class="layui-input-inline">
 				      			<input name="productList" type="text" class="layui-input form-control">
 			      			</div>
-			      			<button type="button"  class="layui-btn layui-btn-sm" id="productQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
+			      			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
 			      		</div>
 			      	</div>
 			      </td>
@@ -535,13 +533,13 @@
 			      			<div class="layui-input-inline">
 				      			<input name="productList" type="text" class="layui-input form-control">
 			      			</div>
-			      			<button type="button"  class="layui-btn layui-btn-sm" id="productQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
+			      			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook"  style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
 			      		</div>
 			      		<div class="layui-input-inline productItem copyAddItem" style="">
 			      			<div class="layui-input-inline">
 				      			<input name="productList" type="text" class="layui-input form-control">
 			      			</div>
-			      			<button type="button"  class="layui-btn layui-btn-sm" id="productQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
+			      			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook"  style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
 			      		</div>
 			      	</div>
 			      </td>
@@ -868,6 +866,8 @@ var table2=null;
 	*	
 	*/
 	$("#budget-addForm-hook").on("click",".addProjectQuery-hook",function(){
+		$(this).attr("disabled","disabled");
+		var num=$(this).parents("td").next("td").find(".project-list .item").length;
 		var thisTr=$(this).parents("tr");
 		var _this=this;
 		var win=$(this).getWindow();
@@ -877,78 +877,12 @@ var table2=null;
 				var _copyHtml = copyItem.clone(true).prop("outerHTML");;
 				_copyHtml =$(_copyHtml).removeClass("copyAddItem");
 				copyItem.before(_copyHtml);
-				 form.render();
-				win.resize();
 			}
-			
 		});
+		win.resize();
+		form.render();
+		$(this).removeAttr("disabled");
 	});
-	
-  form.on('select(isNewCustomer-form)', function(data){
-	  if(data.value == "01"){
-		  var select= 'dd[lay-value=01]';
-		  $('#budget-addForm-hook #isNewProject-hook').siblings("div.layui-form-select").find('dl').find(select).click();
-		  // 隐藏客户选择按钮
-		  $("#budget-addForm-hook .showCustomer-hook").hide();
-		  // 客户输入框 不可写 清除已选
-		  $("#budget-addForm-hook input[name='custName']").removeAttr("readonly",true).removeClass("disabledColor");
-		  $("#budget-addForm-hook input[name='custName']").val("");
-		  $("#budget-addForm-hook input[name='custId']").val("");
-		  // 隐藏 WBS 选择按钮
-		  $("#budget-addForm-hook .showWBS-hook").hide();
-		  $("#budget-addForm-hook input[name='wbsCode']").removeAttr("readonly",true).removeClass("disabledColor");
-		  $("#budget-addForm-hook input[name='wbsCode']").val("");
-		  // 项目名称
-		  $("#budget-addForm-hook input[name='projectName']").removeAttr("readonly",true).removeClass("disabledColor");
-		  $("#budget-addForm-hook input[name='projectName']").val("");
-		  
-	  }else{
-		  // customer
-		  $("#budget-addForm-hook .showCustomer-hook").show();
-		  $("#budget-addForm-hook input[name='custName']").val('').attr("readonly",true).addClass("disabledColor");
-		  // wbs
-		  $("#budget-addForm-hook .showWBS-hook").show();
-		  $("#budget-addForm-hook input[name='wbsCode']").attr("readonly",true).addClass("disabledColor");
-		  // 项目名称
-		  $("#budget-addForm-hook input[name='projectName']").attr("readonly",true).addClass("disabledColor");
-		  
-		  
-	  }
-	  // 客户收入汇总（Clients Summary）table重绘
-	  table2.reload('custRevSummaryTableID',{
-			data:[{'custCode':'','custName':'','totalRev':'0'}]
-		})
-  
-  });
-
-   /*
-   *  项目类型选择产品，则产品名称列提供产品信息清单供选择
-   */
-  form.on('select(projectType-filter)', function(data){
-	  if(data.value == "02"){ // 产品字典
-		  var select= 'dd[lay-value=02]';
-			// 显示产品选择按钮
-		  $("#budget-addForm-hook .product-hook").show();
-		  $("#budget-addForm-hook textarea[name='productList']").hide();
-		  $("#budget-addForm-hook #chosedProduct-hook").show();
-		  
-	  }else{
-		  $("#budget-addForm-hook .product-hook").hide();
-		  $("#budget-addForm-hook textarea[name='productList']").show();
-		  $("#budget-addForm-hook #chosedProduct-hook").html("").hide();
-	  }
-  });
-  
-  //  手动填写客户名称时 对应 table2 reload
-	$("#budget-addForm-hook input[name='custName']").blur(function(){
-		var _custName=$.trim($(this).val())
-		if(_custName != ""){
-			table2.reload('custRevSummaryTableID',{
-				data:[{'custCode':'','custName':_custName,'totalRev':'0'}]
-			})
-		}
-	})
-  
   	// 项目名称
 	$("#budget-addForm-hook").on("click","#projectNameQuery-hook",function(){
 		// 当前按钮坐标
@@ -972,37 +906,40 @@ var table2=null;
 		  		width:"700"
 		 });
 	});
-  // 监听手书情况
-  $("#budget-addForm-hook").on("keyup","input[name='wbsCode']",function(){
-	 // 清空当前行项目名称
-	 var _index=$(this).parents(".item").index();
-	 $(this).parents("td").next("td").find(".item").eq(_index).find("input[name='projectName']").val("")
+  // 删除当前行
+  $("#budget-addForm-hook").on("click",".newProjectDelete-hook",function(){
+		// 当前按钮坐标
+		var _YIndex=$(this).parents("tr").index();
+		var _index=$(this).parents(".item").index();
+		console.log(_YIndex,_index)
+		var thisTr=$(this).parents("tr");
+		var _this=this;
+		var win=$(this).getWindow();
+		thisTr.children("td").each(function(){
+			$(this).find(".item").eq(_index).remove();
+			$(this).find(".productItem").eq(_index).remove();
+		});
+		win.resize();
+		
   });
-  $("#budget-addForm-hook").on("keyup","input[name='projectName']",function(){
-	 // 清空项目名称
-	  var _index=$(this).parents(".item").index();
-	 $(this).parents("td").prev("td").find(".item").eq(_index).find("input[name='wbsCode']").val("")
+  // 保存当前行
+  $("#budget-addForm-hook").on("click",".newProjectSave-hook",function(){
+	  
   });
-  
-  
 	// 选择产品
-	$("#budget-addForm-hook #productQuery-hook").click(function(){
-		 $.openWindow({
-		  		url:'product?act=addCust',
+  $("#budget-addForm-hook").on("click",".productQuery-hook",function(){
+	// 当前按钮坐标
+		var _YIndex=$(this).parents("tr").index();
+		var _index=$(this).parents(".productItem").index();
+		 console.log(_YIndex,_index);
+		  $.openWindow({
+		  		url:'product?act=formProduct&index='+_index+'&YIndex='+_YIndex,
 		  		title:"选择产品",
 		  		width:"700"
 		 });
-	});
-	// 查看产品
-	$("#budget-addForm-hook #productView-hook").click(function(){
-		 $.openWindow({
-		  		url:'product?act=viewProduct',
-		  		title:"查看产品",
-		  		width:"700"
-		 });
-	});
-	
-		
+  });
+  
+
 	  table2.render({
 		  elem: '#custRevSummary',
 		  id:"custRevSummaryTableID",
