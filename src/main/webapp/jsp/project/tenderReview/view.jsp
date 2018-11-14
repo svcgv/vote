@@ -155,27 +155,40 @@
 	       <!-- 未评审时不显示评审记录 -->
 	        <div class="layui-inline">
 	       		 <label class="layui-form-label">评审记录：</label>
-	       		 <div class="layui-input-block" style="margin-left:160px;">
-			     	<c:forEach items="${reviewHis}" var="app">
-						
-					<div><span>${app.modifyTime} </span> 
-			     	<span>销售部门：</span>
-			     	<strong style="font-weight:bold;">${app.reviewUserName}</strong> 
-			     	<span style="margin-left:10px;">评审结果：</span>
-			     	<strong style="font-weight:bold;color:red;">${app.result}</strong> 
-			     	<span style="margin-left:10px;">评审意见：</span>
-			     	<span style="margin-left:10px;">${app.commentDetail} </span>
-			     	</div>
-
-
-					</c:forEach>
-							
-			     	
-			    </div>
+	       		 
+	       		 <div class="layui-upload-list">
+				    <table class="layui-table">
+				      <thead>
+				        <tr><th>评审人</th>
+				        <th>评审结果</th>
+				        <th>评审意见</th>
+				        <th>评审时间</th>
+				        
+				      </tr></thead>
+				      <tbody id="wosFileList">
+				      	
+				      	
+				      	
+				      	
+				      	<c:forEach items="${reviewHis}" var="app">
+							<tr class="edit-wosUploaded">
+						      	<td>${app.reviewUserName }</td>
+						      	<td>${app.result}</td>
+						      <td>${app.commentDetail}</td>
+						      <td>${app.modifyTime}</td>
+						      
+					      	</tr>
+						</c:forEach>
+				      </tbody>
+				    </table>
+				  </div>
+				  
+				  
 	       </div>
 		     
 		     
 		  </div>
+		  <div class='tender-review-wrapper'>
 		 <form class="layui-form" action="" lay-filter="form-detail"> 
 		 <div class="layui-inline">
 	      <label class="layui-form-label" >评审理由：</label>
@@ -207,7 +220,7 @@
 	    
 	    
 	  </div>
-	</form>
+	</form></div>
 	<div class="layui-layer-btn layui-layer-btn-c">
 		<a class="layui-layer-btn1" id="tender-accessReview">通过</a>
 		<a class="layui-layer-btn1" id="tender_returnReview">退回</a>

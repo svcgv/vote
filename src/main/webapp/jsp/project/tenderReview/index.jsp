@@ -176,7 +176,28 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	  {type: 'checkbox', fixed: 'left'},
 	  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
 	  	      {field:'bidName', title:'投标名称', width:130},
-	  	      {field:'status', title:'评审状态', width:130},
+		  	    {field:'status', title: '评审状态', width: 200
+		      	      ,templet: function(d){
+		      	    	if(d.status=='00'){
+		      	        	return '已录入'
+		      	        }
+		      	    	if(d.status=='01'){
+		      	        	return '交付部门负责人评审'
+		      	        }
+		      	    	if(d.status=='02'){
+		      	        	return '销售部门负责人评审'
+		      	        }
+		      	    	if(d.status=='03'){
+		      	        	return '技术总监评审'
+		      	        }
+		      	    	if(d.status=='04'){
+		      	        	return '评审完成'
+		      	        }
+		      	    	else{
+		      	    		return '数据待完善'
+		      	    	}
+		      	      },rowspan: 2
+		      	    },
 	  	      {field:'firstBidAmount', title:'首次报价（元）', width:150},
 	  	      {field:'custCnName', title:'客户', width:130},
 	  	      {field:'predictAmount', title:'预估收入（元）', width:150},
