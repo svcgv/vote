@@ -122,11 +122,12 @@ public class YearBudgetController extends AbstractBaseController{
 	}
 	// wbs
 	@RequestMapping(value="/yearBudget/wbs",method=RequestMethod.GET)
-	public ModelAndView wbsFormView(@RequestParam("act") String act,@RequestParam("index") String index) {
+	public ModelAndView wbsFormView(@RequestParam("act") String act,@RequestParam("index") String index,@RequestParam("YIndex") String YIndex) {
 		
 		ModelAndView view = new ModelAndView();
 		view.addObject("act",act);
 		view.addObject("index",index);
+		view.addObject("YIndex",YIndex);
 		view.setViewName("/project/yearBudget/wbs");
 		return view;
 	}

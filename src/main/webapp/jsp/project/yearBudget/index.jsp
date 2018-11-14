@@ -11,7 +11,7 @@
 	<form class="layui-form" id="tender-index-form" method="POST" action="">
 	   <div class="layui-form-item">
 	   
-		  	<div class="layui-inline">
+		  	<div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">是否新客户：</label>
 		       <div class="layui-input-inline">
 		          <select name="isNewCustomer" lay-verify="required" lay-filter="isNewCustomer" class="form-control">
@@ -24,10 +24,12 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="custName"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="custName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		         <input type="hidden" name="custId" />
 		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="customerNameQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
 		    </div>
-	    	<div class="layui-inline">
+	    	<div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">是否新项目：</label>
 		       <div class="layui-input-inline">
 		          <select name="isNewProject" lay-verify="required" id="isNewProject-hook" lay-filter="" class="form-control">
@@ -41,11 +43,13 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">项目名称：</label>
 		      <div class="layui-input-inline">
-		       <input type="text" name="predictCost"  autocomplete="off" class="layui-input form-control">
+		       	<input type="text" name="projectName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+		       	 <input type="hidden" name="wbsCode" />
 		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="projectNameQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
 		    </div>
 		    
-		     <div class="layui-inline">
+		     <div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">项目类型：</label>
 		       <div class="layui-input-inline">
 		          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
@@ -57,7 +61,7 @@
 		      </div>
 		    </div>
 		    
-		     <div class="layui-inline">
+		     <div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">税种：</label>
 		       <div class="layui-input-inline">
 		          <select name="isNewProject" lay-verify="required" lay-filter="" class="form-control">
@@ -253,7 +257,23 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			});
 		
 	}); 
-	
+	$(".budget-info-wrapper #projectNameQuery-hook").click(function(){
+		// 共用 wbs controller
+		var _YIndex=0;
+		var _index=0;
+		 $.openWindow({
+		  		url:'wbs?act=indexSearch&index='+_index+'&YIndex='+_YIndex,
+		  		title:"选择项目名称",
+		  		width:"700"
+		 });
+	})
+	$(".budget-info-wrapper #customerNameQuery-hook").click(function(){
+		 $.openWindow({
+		  		url:'customer?act=indexSearch',
+		  		title:"选择项目名称",
+		  		width:"700"
+		 });
+	})
 	/*
 	* 新增
 	*/
@@ -261,7 +281,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:'form2?act=add&id=',
 	  		title:"新增预算",
-	  		width:"90%"
+	  		width:"95%"
 	  	})
 	});
 	$(".budget-info-wrapper #add-hook2").click(function(){
