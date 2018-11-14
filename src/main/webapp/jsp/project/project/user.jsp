@@ -113,6 +113,22 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			 	}else if(act =="reviewSell"){// 投标 评审
 			 		//$("#review-query-form input[name='sellDeptName']").val(userName);
 					//$("#review-query-form input[name='sellDeptId']").val(userId);
+			 	}else if(act == "projectManager"){
+					// index
+					$("#project-index-form input[name='projectManagerName']").val(userName);
+					$("#project-index-form input[name='projectManagerId']").val(userId);
+			 	}else if(act =="custManager"){ 
+			 		// index
+			 		$("#project-index-form input[name='custManagerName']").val(userName);
+					$("#project-index-form input[name='custManagerId']").val(userId);
+			 	}else if(act =="projectManagerForm"){
+			 		// form
+			 		$("#project-form-hook input[name='projectManagerName']").val(userName);
+					$("#project-form-hook input[name='projectManagerId']").val(userId);
+			 	}else if(act =="custManagerForm"){ 
+			 		// form
+			 		$("#project-form-hook input[name='custManagerName']").val(userName);
+					$("#project-form-hook input[name='custManagerId']").val(userId);
 			 	}
 			}
 		});

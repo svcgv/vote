@@ -62,6 +62,15 @@
 			      <button type="button"  class="layui-btn layui-btn-sm" id="buildManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
+		    <div class="layui-inline">
+			      <label class="layui-form-label">项目经理：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="projectManagerName"  readonly='true' autocomplete="off" class="layui-input form-control">
+			         <input type="text" style='display:none' name="projectManagerId" />
+			      </div>
+			      <button type="button"  class="layui-btn layui-btn-sm" id="projectManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		    
 		     <div class="layui-inline">
 			      <label class="layui-form-label">销售部门：</label>
 			      <div class="layui-input-inline">
@@ -78,6 +87,15 @@
 		         <input type="text" style='display:none' name="sellManagerId" />
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="sellManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		    
+		     <div class="layui-inline">
+		      <label class="layui-form-label">客户经理：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="custManagerName"  readonly='true' autocomplete="off" class="layui-input form-control">
+		         <input type="text" style='display:none' name="custManagerId" />
+		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="custManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
 		    <div class="layui-inline" style="padding-right:55px;">
@@ -109,7 +127,7 @@
 		      </div>
 		    </div>
 		     <div class="layui-inline" style="padding-right:55px;">
-		       <label class="layui-form-label">状态：</label>
+		       <label class="layui-form-label">项目状态：</label>
 		       <div class="layui-input-inline">
 		          <select name="state" lay-verify="required" lay-filter="" class="form-control">
 		        	 <option value="">请选择</option>
@@ -118,6 +136,15 @@
 		        	 <option value="01">结项</option>
 		        	 <option value="03">关闭</option>
 		          </select>
+		      </div>
+		    </div>
+		    
+		    <div class="layui-inline" style="padding-right:55px;">
+		       <label class="layui-form-label">审批状态：</label>
+		       <div class="layui-input-inline">
+		          <select name="approveState" lay-verify="required" lay-filter="" class="form-control">
+		        	 <option value="">请选择</option>
+		        </select>
 		      </div>
 		    </div>
 		    
@@ -133,6 +160,24 @@
 			       <div class="layui-input-inline">
 			          <input type="text" name="finishProjectTime"  readonly='true' id="finishProjectTime2-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
 			      </div>
+		    </div>
+		    
+		    <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">是否重点项目：</label>
+		       <div class="layui-input-inline">
+		          <select name="currentYearFollow" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		        	 <option value="">请选择</option>
+		          </select>
+		      </div>
+		    </div>
+		    
+		    <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">所属项目群：</label>
+		       <div class="layui-input-inline">
+		          <select name="belongProjectGroup" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		        	 <option value="">请选择</option>
+		          </select>
+		      </div>
 		    </div>
 		  </div>
 		  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
@@ -358,68 +403,7 @@
 				   	 </div>
 				  </li>
 				</ul> 
-		   </div>	
-		   
-		   	
-		   <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-		 	 <legend style="font-weight:bold;">上报收入</legend>
-		  </fieldset>
-		  
-		  <div class="layui-form-item" >
-		  		<div class="layui-inline" style="margin-right:64px;">
-			      <label class="layui-form-label">收入合计：</label>
-			       <div class="layui-input-inline">
-			         <input type="text" name="allIncomming"  autocomplete="off" class="layui-input form-control">
-			      </div>
-			    </div>
-		  		<div class="layui-inline" >
-			      <label class="layui-form-label">超报收入：</label>
-			       <div class="layui-input-inline">
-			         <input type="text" name="overFlowReportIncomming"  autocomplete="off" class="layui-input form-control">
-			      </div>
-			    </div>
-		  </div>
-		  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-		 	 <legend style="font-weight:bold;">其他</legend>
-		  </fieldset>
-		  <div class="layui-form-item" >
-		  		<div class="layui-inline" style="margin-right:64px;">
-			      <label class="layui-form-label">去年上报的收入：</label>
-			       <div class="layui-input-inline">
-			         <input type="text" name="lastYearRevenue"  autocomplete="off" class="layui-input form-control">
-			      </div>
-			    </div>
-		  		<div class="layui-inline" style="margin-right:64px;">
-			      <label class="layui-form-label">合同签订日期：</label>
-			       <div class="layui-input-inline">
-			         <input type="text" name="signContractDate" id="signContractDate-form"  autocomplete="off" class="layui-input form-control hasDatepicker">
-			      </div>
-			    </div>
-			    <div class="layui-inline" style="margin-right:64px;">
-		      	   <label class="layui-form-label">是否签订：</label>
-			       <div class="layui-input-inline">
-				        <select name="isSignedContract" lay-verify="required" lay-filter="" class="form-control">
-				        	 <option value="">请选择</option>
-				        	 <option value="01" selected>是</option>
-				        	 <option value="02">否</option>
-			          	</select>
-			      </div>
-			    </div>
-			    <div class="layui-inline" style="margin-right:64px;">
-		      	   <label class="layui-form-label">工作量确认：</label>
-			       <div class="layui-input-inline">
-				        <select name="workLoadConfirm" lay-verify="required" lay-filter="" class="form-control">
-				        	 <option value="">请选择</option>
-				        	 <option value="01" selected>半年确认</option>
-				        	 <option value="02">季度确认</option>
-				        	 <option value="03">每月确认</option>
-			          	</select>
-			      </div>
-			    </div>
-		  </div>
-		   
-		   
-		   
+		   </div>	   
 		   
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
@@ -439,52 +423,52 @@ $(function(){
 		   laydate.render({
 				    elem: "#createProjectTime2-hook",
 				    theme: 'molv',
-				    type: 'datetime'
+				    type: 'date'
 			 });
 			laydate.render({
 				    elem: "#finishProjectTime2-hook",
 				    theme: 'molv',
-				    type: 'datetime'
+				    type: 'date'
 			 });
 			laydate.render({
 			    elem: "#signContractDate-form",
 			    theme: 'molv',
-			    type: 'datetime'
+			    type: 'date'
 		 	});
 			laydate.render({
 			    elem: "#requirement-datepick-hook",
 			    theme: 'molv',
-			    type: 'datetime'
+			    type: 'date'
 		 	});
 			laydate.render({
 			    elem: "#design-datepick-hook",
 			    theme: 'molv',
-			    type: 'datetime'
+			    type: 'date'
 		 	});
 			laydate.render({
 			    elem: "#devlopment-datepick-hook",
 			    theme: 'molv',
-			    type: 'datetime'
+			    type: 'date'
 		 	});
 			laydate.render({
 			    elem: "#test-datepick-hook",
 			    theme: 'molv',
-			    type: 'datetime'
+			    type: 'date'
 		 	});
 			laydate.render({
 			    elem: "#online-datepick-hook",
 			    theme: 'molv',
-			    type: 'datetime'
+			    type: 'date'
 		 	});
 			laydate.render({
 			    elem: "#check-datepick-hook",
 			    theme: 'molv',
-			    type: 'datetime'
+			    type: 'date'
 		 	});
 			laydate.render({
 			    elem: "#production-datepick-hook",
 			    theme: 'molv',
-			    type: 'datetime'
+			    type: 'date'
 		 	});
 	
 	// form 表单手动渲染
@@ -535,6 +519,17 @@ $(function(){
 		  		width:"700"
 		 });
 	  });
+	  
+	  
+	  // 选择项目经理
+	  $("#project-edit-hook #projectManagerNameQuery-hook").click(function(){
+		  $.openWindow({
+		  		url:'user?act=projectManagerForm',
+		  		title:"项目经理",
+		  		width:"700"
+		 });
+	  });
+	  
 	  // 选择销售部门
 	  $("#project-edit-hook #sellDeptNameQuery-hook").click(function(){
 		  $.openWindow({
@@ -549,6 +544,15 @@ $(function(){
 		  	$.openWindow({
 		  		url:'user?act=sellManagerForm',
 		  		title:"选择销售负责人",
+		  		width:"700"
+		 	 });
+		});
+	  
+	  // 选择客户经理
+	  $("#project-edit-hook #custManagerNameQuery-hook").on("click",function(){
+		  	$.openWindow({
+		  		url:'user?act=custManagerForm',
+		  		title:"选择客户经理",
 		  		width:"700"
 		 	 });
 		});

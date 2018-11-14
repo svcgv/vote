@@ -29,6 +29,15 @@
 			      <button type="button"  class="layui-btn layui-btn-sm" id="buildManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
+		    <div class="layui-inline">
+			      <label class="layui-form-label">项目经理：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="projectManagerName" readonly="true" autocomplete="off" class="layui-input form-control">
+			         <input type="text" style='display:none' name="projectManagerId" />
+			      </div>
+			      <button type="button"  class="layui-btn layui-btn-sm" id="projectManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		    
 		     <div class="layui-inline">
 			      <label class="layui-form-label">销售部门：</label>
 			      <div class="layui-input-inline">
@@ -45,6 +54,15 @@
 		         <input type="text" style='display:none' name="sellManagerId" />
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="sellManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		    
+		   <div class="layui-inline">
+		      <label class="layui-form-label">客户经理：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="custManagerName" readonly="true" autocomplete="off" class="layui-input form-control">
+		         <input type="text" style='display:none' name="custManagerId" />
+		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="custManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
 		    <div class="layui-inline" style="padding-right:55px;">
@@ -80,7 +98,7 @@
 		      </div>
 		    </div>
 		     <div class="layui-inline" style="padding-right:55px;">
-		       <label class="layui-form-label">状态：</label>
+		       <label class="layui-form-label">项目状态：</label>
 		       <div class="layui-input-inline">
 		          <select name="state" lay-verify="required" lay-filter="" class="form-control">
 		        	 <option value="">请选择</option>
@@ -89,17 +107,31 @@
 		      </div>
 		    </div>
 		    
-		     <div class="layui-inline" style="padding-right:55px;">
-		       <label class="layui-form-label">立项时间：</label>
+		    <div class="layui-inline" style="padding-right:55px;">
+		       <label class="layui-form-label">立项时间(开始时间)：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="createProjectTime" id="createProjectTime-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
+		          <input type="text" name="createProjectStartTime" id="createProjectStartTime-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 		    
-		     <div class="layui-inline" style="padding-right:55px;">
-			      <label class="layui-form-label">结项时间：</label>
+		        <div class="layui-inline" style="padding-right:55px;">
+		       <label class="layui-form-label">立项时间(结束时间)：</label>
+		       <div class="layui-input-inline">
+		          <input type="text" name="createProjectEndTime" id="createProjectEndTime-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
+		      </div>
+		    </div>
+		    
+		    <div class="layui-inline" style="padding-right:55px;">
+			      <label class="layui-form-label">结项时间(开始时间)：</label>
 			       <div class="layui-input-inline">
-			          <input type="text" name="finishProjectTime" id="finishProjectTime-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
+			          <input type="text" name="finishProjectStartTime" id="finishProjectStartTime-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
+			      </div>
+		    </div>
+		    
+		    <div class="layui-inline" style="padding-right:55px;">
+			      <label class="layui-form-label">结项时间(结束时间)：</label>
+			       <div class="layui-input-inline">
+			          <input type="text" name="finishProjectEndTime" id="finishProjectEndTime-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
 			      </div>
 		    </div>
 		    
@@ -143,34 +175,31 @@ var col=[
   	  
 	      {align: 'center', title: '项目信息', colspan: 16},
 	      {align: 'center', title: '项目预算', colspan: 6},
-	      
 	      {align: 'center', title: '上报收入', colspan: 2},
-	      {align: 'center',field: 'lastYearRevenue', title: '去年上报的收入', rowspan: 2},
+	      {align: 'center',field: 'lastYearRevenue', title: '历年收入', rowspan: 2},
 	      {align: 'center',field: 'signContractDate', title: '合同签订日期', rowspan: 2},
 	      {align: 'center',field: 'isSignedContract', title: '是否签订', rowspan: 2},
 	      {align: 'center',field: 'workLoadConfirm', title: '工作量确认', rowspan: 2},
-	      
 	      {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
 	      
  		],
 	    [
 	    	  {type: 'checkbox', fixed: 'left'},
-	  	      {field:'projectCode', title:'项目编号', sort: true, width:130},
+	 	      {field:'wbs', title:'WBS编号', width:150},
+	  	      {field:'projectName', title:'项目名称'},
+	  	      {field:'custName', title:'客户名称', width:150},
 	  	      {field:'buildDeptName', title:'实施部门',sort: true, width:130},
 	  	      {field:'buildManagerName', title:'实施负责人' ,sort: true, width:130},
+	  	      {field:'projectManagerName', title:'项目经理' ,sort: true, width:130},
 	  	      {field:'sellDeptName', title:'销售部门', width:130},
 	  	      {field:'sellManagerName', title:'销售负责人', width:130},
+	  	      {field:'custManagerName', title:'客户经理', width:130},
 	  	      {field:'createProjectTime', title:'立项时间'},
 	  	      {field:'finishProjectTime', title:'结项时间'},
-	  	      {field:'wbs', title:'WBS编号', width:150},
-	  	      {field:'custName', title:'客户名称', width:150},
-	  	      {field:'projectName', title:'项目名称'},
-	  	      {field:'currentYearFollow', title:'本年关注'},
-	  	      {field:'isContinue', title:'是否延续'},
+	  	      {field:'currentYearFollow', title:'是否重点项目'},
 	  	      {field:'isSignedContract', title:'是否签订'},
-	  	      {field:'state', title:'状态'},
+	  	      {field:'state', title:'项目状态'},
 	  	      {field:'projectType', title:'项目类型'},
-	  	      
 	    	  {field:'predictContractAmount', title:'合同金额'},
 	    	  {field:'profitRate', title:'利润率'},
 	    	  {field:'profitMount', title:'利润'},
@@ -179,7 +208,6 @@ var col=[
 	    	  {field:'currentYearGrossProfit', title:'本年毛利'},
 	    	  
 	    	  {field:'allIncomming', title:'收入合计'},
-	    	  {field:'overFlowReportIncomming', title:'超报收入'},
 	    	  
 	    ]
   ]
@@ -194,15 +222,29 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
   
   //日期
    laydate.render({
-		    elem: "#createProjectTime-hook",
+		    elem: "#createProjectStartTime-hook",
 		    theme: 'molv',
-		    type: 'datetime'
+		    type: 'date'
 	 });
+  
+   laydate.render({
+	    elem: "#createProjectEndTime-hook",
+	    theme: 'molv',
+	    type: 'date'
+});
+
 	laydate.render({
-		    elem: "#finishProjectTime-hook",
+		    elem: "#finishProjectStartTime-hook",
 		    theme: 'molv',
-		    type: 'datetime'
+		    type: 'date'
 	 });
+	
+	laydate.render({
+	    elem: "#finishProjectEndTime-hook",
+	    theme: 'molv',
+	    type: 'date'
+ });
+
   //选择实施部门
   $(".project-info-wrapper #buildDeptNameQuery-hook").click(function(){
 	  $.openWindow({
@@ -220,6 +262,15 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  		width:"700"
 	 });
   });
+  // 选择项目经理
+  $(".project-info-wrapper #projectManagerNameQuery-hook").click(function(){
+	  $.openWindow({
+	  		url:'user?act=projectManager',
+	  		title:"选择项目经理",
+	  		width:"700"
+	 });
+  });
+  
   // 选择销售部门
   $(".project-info-wrapper #sellDeptNameQuery-hook").click(function(){
 	  $.openWindow({
@@ -234,6 +285,15 @@ var lay = layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	$.openWindow({
 	  		url:'user?act=sellManager',
 	  		title:"选择销售负责人",
+	  		width:"700"
+	 	 });
+	});
+  
+  // 选择客户经理
+  $(".project-info-wrapper #custManagerNameQuery-hook").on("click",function(){
+	  	$.openWindow({
+	  		url:'user?act=custManager',
+	  		title:"选择客户经理",
 	  		width:"700"
 	 	 });
 	});

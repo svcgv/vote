@@ -148,15 +148,20 @@
 			<if test="technicalDirectorId != null and technicalDirectorId!=''">
 				TECHNICAL_DIRECTOR_ID = #{technicalDirectorId} AND
 			</if>
-			<if
-				test="technicalDirectorName != null and technicalDirectorName!=''">
+			<if test="technicalDirectorName != null and technicalDirectorName!=''">
 				TECHNICAL_DIRECTOR_NAME = #{technicalDirectorName} AND
 			</if>
-			<if test="createProjectTime != null and createProjectTime!=''">
-				CREATE_PROJECT_TIME = #{createProjectTime} AND
+			<if test="createProjectStartTime != null and createProjectStartTime!=''">
+				CREATE_PROJECT_TIME <![CDATA[>=]]>  #{createProjectStartTime} AND
 			</if>
-			<if test="finishProjectTime != null and finishProjectTime!=''">
-				FINISH_PROJECT_TIME = #{finishProjectTime} AND
+			<if test="createProjectEndTime != null and createProjectEndTime!=''">
+				CREATE_PROJECT_TIME <![CDATA[<=]]>  #{createProjectEndTime} AND
+			</if>
+			<if test="finishProjectStartTime != null and finishProjectStartTime!=''">
+				FINISH_PROJECT_TIME <![CDATA[>=]]>  #{finishProjectStartTime} AND
+			</if>
+			<if test="finishProjectEndTime != null and finishProjectEndTime!=''">
+				FINISH_PROJECT_TIME <![CDATA[<=]]>  #{finishProjectEndTime} AND
 			</if>
 			<if test="wbs != null and wbs!=''">
 				WBS = #{wbs} AND
@@ -365,7 +370,7 @@
 			</if>
 			<if test="modifier != null and modifier!=''">
 				MODIFIER =
-				#{modifier}
+				#{modifier} AND
 			</if>
 			<if test="sumAllCost != null and sumAllCost!=''">
 				SUM_ALL_COST =

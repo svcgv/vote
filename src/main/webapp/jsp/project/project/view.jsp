@@ -58,6 +58,14 @@
 			         <input readonly='true'type="text" style='display:none' name="buildManagerId" />
 			      </div>
 			  </div>
+			  
+			  <div class="layui-inline">
+			      <label class="layui-form-label">项目经理：</label>
+			       <div class="layui-input-inline">
+			         <input readonly='true' type="text" name="projectManagerName"  readonly='true' autocomplete="off" class="layui-input form-control">
+			         <input readonly='true' type="text" style='display:none' name="projectManagerId" />
+			      </div>
+		    </div>
 		    
 		     <div class="layui-inline"style="margin-right:64px;">
 			      <label class="layui-form-label">销售部门：</label>
@@ -72,6 +80,14 @@
 		       <div class="layui-input-inline">
 		         <input readonly='true'type="text" name="sellManagerName"  readonly='true' autocomplete="off" class="layui-input form-control">
 		         <input readonly='true'type="text" style='display:none' name="sellManagerId" />
+		      </div>
+		    </div>
+		    
+		     <div class="layui-inline">
+		      <label class="layui-form-label">客户经理：</label>
+		       <div class="layui-input-inline">
+		         <input readonly='true' type="text" name="custManagerName"  readonly='true' autocomplete="off" class="layui-input form-control">
+		         <input readonly='true' type="text" style='display:none' name="custManagerId" />
 		      </div>
 		    </div>
 		    
@@ -103,7 +119,7 @@
 		      </div>
 		    </div>
 		     <div class="layui-inline" style="padding-right:55px;">
-		       <label class="layui-form-label">状态：</label>
+		       <label class="layui-form-label">项目状态：</label>
 		       <div class="layui-input-inline">
 		          <select disabled="disabled" name="state" lay-verify="required" lay-filter="" class="form-control">
 		        	 <option value="">请选择</option>
@@ -112,6 +128,15 @@
 		        	 <option value="01">结项</option>
 		        	 <option value="03">关闭</option>
 		          </select>
+		      </div>
+		    </div>
+		    
+		      <div class="layui-inline" style="padding-right:55px;">
+		       <label class="layui-form-label">审批状态：</label>
+		       <div class="layui-input-inline">
+		          <select disabled="disabled" name="approveState" lay-verify="required" lay-filter="" class="form-control">
+		        	 <option value="">请选择</option>
+		        </select>
 		      </div>
 		    </div>
 		    
@@ -127,6 +152,24 @@
 			       <div class="layui-input-inline">
 			          <input readonly='true'type="text" name="finishProjectTime"  readonly='true' id="finishProjectTime2-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
 			      </div>
+		    </div>
+		    
+		   <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">是否重点项目：</label>
+		       <div class="layui-input-inline">
+		          <select disabled="disabled"  name="currentYearFollow" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		        	 <option value="">请选择</option>
+		          </select>
+		      </div>
+		    </div>
+		    
+		    <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">所属项目群：</label>
+		       <div class="layui-input-inline">
+		          <select  disabled="disabled"   name="belongProjectGroup" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		        	 <option value="">请选择</option>
+		          </select>
+		      </div>
 		    </div>
 		  </div>
 		  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
