@@ -70,7 +70,10 @@ $(function(){
 			        		chosedProject.splice(k,1)
 			        	}
 			        }
-			        console.log(chosedProject,'exit')
+			        console.log(chosedProject,'exit');
+                      chosedLayTable.reload('table-chosedProject',{
+                          data:chosedProject
+                      })
 			        layer.close(index);
 			        
 			      });

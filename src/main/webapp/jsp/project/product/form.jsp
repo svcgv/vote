@@ -70,15 +70,16 @@
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">项目引用：</label>
-	           <div class="layui-input-inline" id="chosed-project-hook" style="border:#e6e6e6 solid 1px;height:60px;overflow-y:auto;width:320px;">
-		       </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
-		    </div>
-		    
-	       <div class="layui-inline">
+		      <label class="layui-form-label">项目引用列表：</label>
+				 <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
+					 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+				 </div>
+	           <%--<div class="layui-input-inline" id="chosed-project-hook" style="border:#e6e6e6 solid 1px;height:60px;overflow-y:auto;width:320px;">--%>
+			 <%--</div>--%>
+			 </div>
+			  <table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
+
+			  <div class="layui-inline">
 	       		 <label class="layui-form-label">备注：</label>
 	       		 <div class="layui-input-block" style="margin-left:130px;width:323px;">
 			      <textarea name="remark"  class="layui-textarea form-control"></textarea>
@@ -93,13 +94,20 @@
     	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
     </div>
 </div>
+<script type="text/html" id="barFormDemo">
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 <script>
+    var chosedProject=[];
+    console.log(chosedProject);
+    var chosedLayTable=null;
 $(function(){
-	layui.use(['layer', 'form','laydate'], function(){
+	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
-	  	  laydate=layui.laydate
-		
+	  	  laydate=layui.laydate;
+
+        chosedLayTable=layui.table;
 		 //日期
 	  laydate.render({
 		    elem: "#startSaleDate2",
@@ -109,6 +117,47 @@ $(function(){
 		
 	// form 表单手动渲染
 	  form.render();
+
+        //table render
+        chosedLayTable.render({
+            id:"table-chosedProject",
+            elem: '#projectTable-chosed',
+            height:'350',
+            title: '项目群数据信息',
+            cols: [[
+                {field:'projectId', title:'项目编号', templet:function(d){
+                    var jsonStr = JSON.stringify(d);
+                    return '<div class="jsonData" dataStr='+jsonStr+'>'+d.projectId+'</div>'
+                } },
+                {field:'projectName', title:'项目名称'},
+                {fixed: 'right', title:'操作', toolbar: '#barFormDemo', width:100}
+            ]],
+            cellMinWidth:'90',
+            data:chosedProject,
+            page: true
+        });
+
+        chosedLayTable.on('tool(tableFilter)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('确认删除行么', function(index){
+                    obj.del();
+                    console.log(data,chosedProject)
+                    // 删除
+                    for(var k in chosedProject){
+                        if(data.projectId == chosedProject[k].projectId ){
+                            chosedProject.splice(k,1)
+                        }
+                    }
+                    console.log(chosedProject,'exit');
+                    chosedLayTable.reload('table-chosedProject',{
+                        data:chosedProject
+                    })
+                    layer.close(index);
+
+                });
+            }
+        });
 
 	  //自动填充小数点
         $(document).on('change', '#productSuggestPrice', function(data) {
@@ -154,26 +203,25 @@ $(function(){
 				return false;
 			}
 			
-			var getChosedCustomer=$("#product-addForm-hook #chosed-project-hook");
 			var ret=[];
-			getChosedCustomer.children(".customer-list").each(function(){
-				var sapCode2=$(this).children(".customerItem").attr("projectId");
-				ret.push(sapCode2)
-			});
-			
+            for(var i=0;i<chosedProject.length;i++ ){
+                ret.push(chosedProject[i].projectId)
+            }
+//			getChosedCustomer.children(".customer-list").each(function(){
+//				var sapCode2=$(this).children(".customerItem").attr("projectId");
+//				ret.push(sapCode2)
+//			});
+
 			var formDatas=$("#product-addForm-hook form").serializeObject();
-			
-			
-			 
-			 var newparam = {}
-	 		 for(var o in formDatas){
-	 			 if(formDatas[o]){
-	 				 newparam[o] = formDatas[o]
-	 			 }
-	 		 }
-			 
-			 
-			formDatas=$.extend({},true,formDatas,{projectIds:ret.join(",")});
+            formDatas=$.extend({},true,formDatas,{projectIds:ret.join(",")});
+            var newparam = {}
+            for(var o in formDatas){
+                 if(formDatas[o]){
+                     newparam[o] = formDatas[o]
+                 }
+             }
+
+
 			$.ajax({
 				type:'POST',
 				 contentType:'application/json',
