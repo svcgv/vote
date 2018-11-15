@@ -105,7 +105,7 @@
 		     <div class="layui-inline" style="padding-right:55px;">
 		       <label class="layui-form-label">项目状态：</label>
 		       <div class="layui-input-inline">
-		          <select name="projectState" lay-verify="required" lay-filter="" class="form-control">
+		          <select name="projectStatus" lay-verify="required" lay-filter="" class="form-control">
 		        	 <option value="">请选择</option>
 		        	 <option value="00" selected>进行中</option>
 		        	 <option value="02">待验收</option>
@@ -194,7 +194,7 @@ var col=[
 	  	      {field:'custManagerName', title:'客户经理', width:130},
 	  	      {field:'createProjectTime', title:'立项时间'},
 	  	      {field:'finishProjectTime', title:'结项时间'},
-	  	      {field:'projectState', title:'项目状态'},
+	  	      {field:'projectStatus', title:'项目状态'},
 	  	      {field:'projectType', title:'项目类型'},
 	  	      {field:'isImportant', title:'是否重点项目'},
 	    	  {field:'predictContractAmount', title:'合同金额'},

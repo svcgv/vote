@@ -145,6 +145,8 @@
 		       <div class="layui-input-inline">
 		          <select name="isImportant" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
 		        	 <option value="">请选择</option>
+		        	 <option value="00">是</option>
+		        	 <option value="01">否</option>
 		          </select>
 		      </div>
 		    </div>

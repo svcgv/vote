@@ -24,6 +24,7 @@ public class PmProjectInfoServiceImpl implements PmProjectInfoService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmProjectInfoEntity entity){
 		entity.setIsDelete("00");
+		entity.setProjectStatus("00");
 		entity.setProjectCode(RandomUtil.getCodeByType(type));
    		pmProjectInfoMapper.insert(entity);
    	}

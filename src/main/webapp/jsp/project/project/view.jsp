@@ -121,7 +121,7 @@
 		     <div class="layui-inline" style="padding-right:55px;">
 		       <label class="layui-form-label">项目状态：</label>
 		       <div class="layui-input-inline">
-		          <select disabled="disabled" name="projectState" lay-verify="required" lay-filter="" class="form-control">
+		          <select disabled="disabled" name="projectStatus" lay-verify="required" lay-filter="" class="form-control">
 		        	 <option value="">请选择</option>
 		        	 <option value="00" selected>进行中</option>
 		        	 <option value="02">待验收</option>
@@ -130,12 +130,20 @@
 		          </select>
 		      </div>
 		    </div>
-		    
+		  
 		      <div class="layui-inline" style="padding-right:55px;">
 		       <label class="layui-form-label">审批状态：</label>
 		       <div class="layui-input-inline">
-		          <select disabled="disabled" name="approveState" lay-verify="required" lay-filter="" class="form-control">
+		          <select disabled="disabled" name="approveStatus" lay-verify="required" lay-filter="" class="form-control">
 		        	 <option value="">请选择</option>
+		        	 <option value="00">待申请</option>
+		        	 <option value="01">待实施审批</option>
+		        	 <option value="02">实施审批退回</option>
+		        	 <option value="03">待销售审批</option>
+		        	 <option value="04">销售审批退回</option>
+		        	 <option value="05">待技术总监审批</option>
+		        	 <option value="06">技术总监退回</option>
+		        	 <option value="07">审批通过</option>
 		        </select>
 		      </div>
 		    </div>
@@ -157,8 +165,10 @@
 		   <div class="layui-inline" style="margin-right:64px;">
 		       <label class="layui-form-label">是否重点项目：</label>
 		       <div class="layui-input-inline">
-		          <select disabled="disabled"  name="currentYearFollow" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		          <select disabled="disabled"  name="isImportant" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
 		        	 <option value="">请选择</option>
+		        	 <option value="00">是</option>
+		        	 <option value="01">否</option>
 		          </select>
 		      </div>
 		    </div>
