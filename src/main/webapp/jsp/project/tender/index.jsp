@@ -2,22 +2,21 @@
 <%@ include file="/resources/admincp/layouts/main.jsp"%>
 <body>
 <style>
-.layui-form-label{width:100px!important;}
+.layui-form-label{width:80px!important;}
 </style>
 <div class="tender-info-wrapper">
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 	  <legend>投标管理</legend>
 	</fieldset>
 	<form class="layui-form" id="tender-index-form" method="POST" action="">
-	   <div class="layui-form-item">
-	   
-		  	<div class="layui-inline">
+	   <div class="layui-form-item" style="margin-bottom:0px;">
+		  	<div class="layui-inline" style="margin-right:40px;">
 		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
-		   <div class="layui-inline">
+		   <div class="layui-inline" style="margin-right:38px;">
 			   <label class="layui-form-label">投标编号：</label>
 			   <div class="layui-input-inline">
 				   <input type="text" name="bidCode"  autocomplete="off" class="layui-input form-control">
@@ -30,9 +29,8 @@
 				   <input type="text" style='display:none' name="custId">
 				   <input type="text" style='display:none' name="custSapCode">
 			   </div>
-			   <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-				   <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-			   </div>
+			   <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
+		   </div>
 		   </div>
 		    <!-- 
 		    <div class="layui-inline">
@@ -63,22 +61,25 @@
 		      </div>
 		    </div>
 		     -->
-		    <div class="layui-inline">
+	    <div class="layui-form-item" style="margin-bottom:0px;">
+		    <div class="layui-inline" style="margin-right: 0px;">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="payDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="payDeptId">
 		      </div>
-	      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+	      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
-		     <div class="layui-inline">
+		    
+		     <div class="layui-inline" style="margin-right:0px;">
 		      <label class="layui-form-label">销售部门：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="sellDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="sellDeptId">
 		      </div>
-	      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+	      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
+		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
@@ -110,7 +111,7 @@
 		   <%--</div>--%>
 		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
-			   <div class="layui-btn-container" style="margin-left:25px;">
+			   <div class="layui-btn-container" style="margin-left:43px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
