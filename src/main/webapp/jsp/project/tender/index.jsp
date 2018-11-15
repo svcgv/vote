@@ -182,7 +182,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   // 选择人员
   $(".tender-info-wrapper #userQuery-hook").on("click",function(){
 	  	$.openWindow({
-	  		url:'user?act=index',
+	  		url:'user?act=index&orgNo=&roleCode=',
 	  		title:"选择客户经理",
 	  		width:"700"
 	 	 });

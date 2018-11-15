@@ -1,5 +1,6 @@
 package com.indihx.baseTableUtil.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -24,5 +25,7 @@ public interface QueryUsrInfoMapper{
 	 * @return
 	 */
 	public List<QueryUsrInfoEntity> queryUserByRoleCodeAndOrgNo(Map<String,Object> param);
+	
+	public List<QueryUsrInfoEntity> queryUserByRoleCodeUnderOrgNo(List<BigDecimal> list);
 	
 }

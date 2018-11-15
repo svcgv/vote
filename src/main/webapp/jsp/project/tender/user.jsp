@@ -82,6 +82,8 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	
 	// 保存 事件
 	var act="${act}";// 区分是index页 form页 赋值问题
+	var orgNo="${orgNo}";
+	var roleCode="${roleCode}";
 	var win=$(".tender-form-wrapper").getWindow();
   	var getExitUser=$("#chosed-user-hook");
 	$(".tender-form-wrapper").on("click","#save-hook",function(){
@@ -136,10 +138,19 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	* 客户查询按钮
 	*/
 	$("#user-query-form #userQuery").click(function(){
+		var par = getParam()
+		var url1='/vote/queryusrinfo/queryUserByRoleCodeUnderOrgNo'
+		var url2='/vote/queryusrinfo/list'
+		if(orgNo){
+			par.orgNo=orgNo
+		}
+		if(roleCode){
+			par.roleCode=roleCode
+		}
 		$.ajax({
 			  type: 'POST',
-			  url: '/vote/queryusrinfo/list',
-			  data: JSON.stringify(getParam()),
+			  url: orgNo?url1:url2,
+			  data: JSON.stringify(par),
 			  contentType:'application/json',
 			  success: function(res){
 			      console.log(res)

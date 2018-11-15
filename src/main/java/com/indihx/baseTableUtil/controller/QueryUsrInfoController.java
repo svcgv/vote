@@ -2,6 +2,7 @@ package com.indihx.baseTableUtil.controller;
 
 
 import java.util.Map;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
 import com.indihx.baseTableUtil.entity.QueryUsrInfoEntity;
 import com.indihx.baseTableUtil.service.QueryUsrInfoService;
+import com.indihx.baseTableUtil.service.impl.QueryOrgInfoServiceImpl;
 import com.indihx.comm.InitSysConstants;
 
 /**
@@ -34,7 +36,8 @@ import com.indihx.comm.InitSysConstants;
 public class QueryUsrInfoController {
     @Autowired
     private QueryUsrInfoService usrInfoService;
-
+    @Autowired
+    private QueryOrgInfoServiceImpl queryOrgInfoServiceImpl;
     /**
      * 列表
      */
@@ -80,4 +83,37 @@ public class QueryUsrInfoController {
     	*/
 		return R.ok().put("page", res);
 	}
+    
+    /**
+     * 查机构下的所有用户
+     * @param param
+     * @param session
+     * @return
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws NoSuchFieldException
+     * @throws SecurityException
+     */
+    @RequestMapping(value="/queryUserByRoleCodeUnderOrgNo",method=RequestMethod.POST)
+ 	public @ResponseBody Map<String,Object> queryUserByRoleCodeUnderOrgNo(@RequestBody Map<String, Object> param,HttpSession session) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException {
+ 		BigDecimal bd = new BigDecimal( Integer.parseInt(param.get("orgNo").toString()));
+    	if(bd==null) {
+    		return R.error("请选择机构");
+    	}
+    	List<Map<String,Object>> children = queryOrgInfoServiceImpl.queryAllChildrenOrgList(bd);
+    	List<BigDecimal> list = new ArrayList<BigDecimal>();
+    	list.add(bd);
+    	if(children!=null && !children.isEmpty()) {
+    		for(int i = 0;i<children.size();i++) {
+    			Map<String,Object> map = children.get(i);
+    			list.add(new BigDecimal( Integer.parseInt(map.get("orgId").toString())));
+    		}
+    	}
+     	List<QueryUsrInfoEntity> res = usrInfoService.queryUserByRoleCodeUnderOrgNo(list);
+     	
+     	
+ 		return R.ok().put("page", res);
+ 	}
+    
+    
 }

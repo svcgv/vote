@@ -255,4 +255,22 @@
 		org_no = #{orgNo}
 		AND c.role_code = #{roleCode}
 	</select>
+	
+	<select id="queryUserByRoleCodeUnderOrgNo" resultMap="usrInfoMap"  parameterType="java.util.List">
+		SELECT
+			*
+		FROM
+		usr_info A
+		LEFT JOIN usr_role b ON A .usr_id = b.usr_id
+		LEFT JOIN ROLE c ON b.role_id = c.role_id
+		WHERE
+		org_no in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+                #{item}       
+        </foreach> 
+        <if test="roleCode != null and roleCode!=''">
+				AND c.role_code = #{roleCode}
+		</if>	
+	</select>
+	
 </mapper>

@@ -3,6 +3,7 @@ package com.indihx.baseTableUtil.service.impl;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
@@ -79,4 +80,25 @@ public class QueryOrgInfoServiceImpl implements QueryOrgInfoService {
 		return false;
 	}
 	
+	/**
+	 * 查询所有子机构，以列表的形式返回
+	 */
+	public List<Map<String,Object>> queryAllChildrenOrgList(BigDecimal orgNo) {
+		List<Map<String,Object>> arrList = new ArrayList<>();
+		
+		pushChildrenToList(arrList,orgNo);
+		return arrList;
+	}
+	
+	public void pushChildrenToList(List<Map<String,Object>> arrList,BigDecimal orgNo) {
+		List<Map<String, Object>> list = queryChildrenOrg(orgNo);
+		if(assertNull(list)) {
+			int i = list.size();
+			for(int o=0;o<i;o++) {
+				Map<String, Object> parent = list.get(o);
+				pushChildrenToList(arrList,new BigDecimal( Integer.parseInt(parent.get("orgId").toString())));
+				arrList.add(parent);
+			}
+		}
+	}
 }
