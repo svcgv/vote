@@ -5,6 +5,7 @@ package com.indihx.PmProjectGroupInfo.entity;
 import com.indihx.BaseEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -24,6 +25,8 @@ private long projectGroupId;
 	/**
 	 * 
 	 */
+
+private List<String> projectIds;
 
 private long projectId;
 	/**
@@ -97,14 +100,14 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setProjectId(long projectId) {
-		this.projectId = projectId;
+	public void setprojectIds(List<String> projectIds) {
+		this.projectIds = projectIds;
 	}
 	/**
 	 * 获取：
 	 */
-	public long getProjectId() {
-		return projectId;
+	public List<String> getProjectIds() {
+		return projectIds;
 	}
 	/**
 	 * 设置：
@@ -237,5 +240,11 @@ private String isDelete;
 	 */
 	public String getIsDelete() {
 		return isDelete;
+	}
+	public long getProjectId() {
+		return projectId;
+	}
+	public void setProjectId(long projectId) {
+		this.projectId = projectId;
 	}
 }

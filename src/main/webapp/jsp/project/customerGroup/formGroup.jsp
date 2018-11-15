@@ -44,45 +44,134 @@
 <script type="text/javascript">
     $(function () {
 
-        var testData = []
+        var testData = [];
 //一般直接写在一个js文件中
         layui.use(['layer', 'form', 'laydate', 'table'], function () {
             var layer = layui.layer,
                 form = layui.form,
                 tableGroup = layui.table;
             var queryParams = $("#formGroup-query-form").serializeObject();
+            var newParams={"queryStr":JSON.stringify(queryParams)};
+            $.ajax({
+             type: 'POST',
+             url: '/vote/pmcustomerinfo/list',
+             data: JSON.stringify(newParams),
+             contentType:'application/json',
+             success: function(res){
+             testData=res.page;
+             tableGroup.render({
+             elem: '#customTable',
+             height:'250',
+             cols: [[
+             {type: 'checkbox' },
+                 {field: 'sapCode', title: 'sap编号',sort:true,templet:function(d){
+                     var jsonStr = JSON.stringify({"sapCode":d.sapCode,"custCnName":d.custCnName});
+                     return '<div class="jsonData" dataStr='+jsonStr+'>'+d.sapCode+'</div>'
+                 } },
+             {field:'custCnName', title:'客户名称'},
+             ]],
+             cellMinWidth:'90',
+             data:testData,
+             page: true
+             });},
+             dataType: "json"
+             });
             // table render
-            tableGroup.render({
-                elem: '#customTable',
-                id: 'customerGroup-table',
-                url: '/vote/pmcustomerinfo/list',
-                method: 'post',
-                where: {
-                    queryStr: JSON.stringify(queryParams)
-                },
-                contentType: 'application/json',
-                response: {
-                    dataName: 'page'
-                },
-                height: '250',
-                width: "690",
-                title: '客户数据表',
-                cols: [[
-                    {type: 'checkbox'},
-                    {field: 'sapCode', title: '客户SAP编号', sort: true},
-                    {field: 'custCnName', title: '客户名称'}
+//            tableGroup.render({
+//                elem: '#customTable',
+//                id: 'customerGroup-table',
+//                url: '/vote/pmcustomerinfo/list',
+//                method: 'post',
+//                where: {
+//                    queryStr: JSON.stringify(queryParams)
+//                },
+//                contentType: 'application/json',
+//                response: {
+//                    dataName: 'page'
+//                },
+//                height: '250',
+//                width: "690",
+//                title: '客户数据表',
+//                cols: [[
+//                    {type: 'checkbox'},
+//                    {field: 'sapCode', title: '客户SAP编号', sort: true},
+//                    {field: 'custCnName', title: '客户名称'}
+//
+//                ]],
+//                page: true
+//            });
 
-                ]],
-                page: true
+            //复选框选中监听,将选中的id 设置到缓存数组,或者删除缓存数组
+            var ids=[];
+            tableGroup.on('checkbox(custom)', function (obj) {
+                var tempArray=[];
+                var count=0;
+                var tempId;
+                $(".customGroup-form-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
+                    var dataStr=$(this).children("td").eq(1).find(".jsonData").attr("dataStr");
+                    var chk=$(this).find(".laytable-cell-checkbox");
+                    var obj=JSON.parse(dataStr);
+                    var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
+                    if(!isChecked){
+                        count=count+1;
+                        tempId=obj.sapCode;
+                    }
+                    tempArray.push(obj)
+                })
+                console.log(obj,'click');
+                console.log(obj.checked,'是否选中');
+                if(obj.checked==true){
+                    if(obj.type=='one' && count!=0){// 选中一个
+                        ids.push(obj.data.sapCode);
+                        console.log(ids);
+                    }else{ // 全选
+                        for(var i=0;i<tempArray.length;i++){
+                            if($.inArray(tempArray[i].sapCode, ids) == -1) {
+                                ids.push(tempArray[i].sapCode);
+                            }
+                        }
+                        console.log(ids);
+                    }
+                }else{
+                    if(obj.type=='one'){ // 取消选中的
+                        if(count==1){
+                            for(var i=0;i<ids.length;i++){
+                                if(ids[i]==tempId){
+                                    ids.remove(i);
+                                }
+                            }
+                        }else{
+                            for(var i=0;i<ids.length;i++){
+                                if(ids[i]==obj.data.sapCode){
+                                    ids.remove(i);
+                                }
+                            }
+                        }
+                        console.log(ids);
+                    }else{// 取消全选
+                        //这方法也能返回数组下标
+                        //i = $.inArray(tempArray[j].projectId, ids);
+                            for(var j=0;j<tempArray.length;j++){
+                                if($.inArray(tempArray[j].sapCode, ids) != -1){
+                                    ids.remove($.inArray(tempArray[j].sapCode, ids));
+                                }
+                            }
+                        console.log(ids);
+                    }
+                }
             });
-
-            /**
-             * chechbox 点击事件
-             */
-            $(".customGroup-form-wrapper").on("click", ".layui-table-body table.layui-table tbody .laytable-cell-checkbox i", function () {
-                var isChecked = $(this).parent(".layui-form-checkbox").hasClass("layui-form-checked");
-                console.log($(this), isChecked)
-            })
+            Array.prototype.remove=function(dx)
+            {
+                if(isNaN(dx)||dx>this.length){return false;}
+                for(var i=0,n=0;i<this.length;i++)
+                {
+                    if(this[i]!=this[dx])
+                    {
+                        this[n++]=this[i]
+                    }
+                }
+                this.length-=1
+            }
 
             // 保存 事件
             var act = "${act}";
@@ -90,65 +179,33 @@
             var getExitCustomer = $("#form-customer-hook #chosed-customer-hook");
             var getExittable = $("#form-customer-hook #customInnerTable");
             $(".customGroup-form-wrapper").on("click", "#save-hook", function () {
-                var ret = [];
-                var data2 = [];
-                var data = [];
-                getExitCustomer.children(".customer-list").each(function () {
-                    var sapCode2 = $(this).children(".customerItem").val();
-                    var name = $(this).children(".customerItem2").val();
-                    var object = {"sapCode": sapCode2, "custCnName": name};
-                    data.push(object);
-                    ret.push(sapCode2)
-                });
-                //遍历之前新增的数据
-//                $(".formDetail-wrapper .layui-table-body table.layui-table tbody tr").each(function () {
-//                    var sapCode = $(this).children("td").eq(0).text();
-//                    var name = $(this).children("td").eq(1).text();
-//                    if (name != "") {
-//                        var object = {"sapCode": sapCode, "custCnName": name};
-//                        data.push(object);
-//                        data2.push(sapCode);
-//                    }
-//                });
-
-
                 // 遍历选中的CheckBox
-                $(".customGroup-form-wrapper .layui-table-body table.layui-table tbody tr").each(function () {
-                    var chk = $(this).find(".laytable-cell-checkbox");
-                    var isChecked = chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
-                    if (isChecked) {
-                        var sapCode = $(this).children("td").eq(1).text();
-                        var name = $(this).children("td").eq(2).text();
-                        var object = {"sapCode": sapCode, "custCnName": name};
-                        // 遍历不存在的插入
-                        if ($.inArray(sapCode, ret) == -1) {
-                            data.push(object);
-                            var _html = '<div class="customer-list">'
-                                +'<input type="hidden" class="customerItem" value="' + sapCode + '"/>'
-                            +'<input type="hidden" class="customerItem2" value="' + name + '"/>' +
-                                '</div>';
-                            getExitCustomer.append(_html);
+                var tempArray=[];
+                for(var i=0;i<ids.length;i++){
+                    for(var j=0;j<testData.length;j++){
+                        if(ids[i]==testData[j].sapCode){
+                            tempArray.push(testData[j]);
                         }
-
-
                     }
+                }
+                for(var k=0;k<tempArray.length;k++){
+                    var flag= true;
+                    for(var j in chosedProject){
+                        var proId=chosedProject[j].sapCode;
+                        if(tempArray[k].sapCode == proId){
+                            flag= false;
+                            continue;
+                        }
+                    }
+                    if(flag){
+                        chosedProject.push(tempArray[k]);
+                    }
+
+                }
+                console.log(chosedProject);
+                chosedLayTable.reload('table-chosedProject',{
+                    data:chosedProject
                 });
-                tableGroup.render({
-                    elem: '#customInnerTable',
-                    id: 'customerInner-table',
-                    height: '250',
-                    width: "690",
-                    title: '客户数据表',
-                    cols: [[
-                        {field: 'sapCode', title: 'sap编号', sort: true},
-                        {field: 'custCnName', title: '客户名称'},
-                        {fixed: 'right', title: '操作', toolbar: '#addBarDemo', width: 80}
-                    ]],
-                    data: data,
-                    page: true
-                });
-                //location.reload();
-                //tableGroup.reload('customerInner-table');
                 win.close();
             });
 
@@ -165,56 +222,37 @@
 
                 var queryParams = $("#formGroup-query-form").serializeObject();
                 console.log(queryParams)
-
-                var newparam = {}
-                for (var o in queryParams) {
-                    if (queryParams[o]) {
-                        newparam[o] = queryParams[o]
-                    }
-                }
-
-                tableGroup.reload('customerGroup-table', {
+                var newParams={"queryStr":JSON.stringify(queryParams)};
+//                var newparam = {}
+//                for (var o in queryParams) {
+//                    if (queryParams[o]) {
+//                        newparam[o] = queryParams[o]
+//                    }
+//                }
+                $.ajax({
+                    type: 'POST',
                     url: '/vote/pmcustomerinfo/list',
-                    page: {
-                        curr: 1 //从第一页开始
-                    },
-                    method: 'post',
-                    where: {
-                        queryStr: JSON.stringify(newparam)
-                    },
-                    contentType: 'application/json',
-                    response: {
-                        dataName: 'page'
-                    },
-                    done: function (res) {
-                        console.log(res)
-                    }
-
-                })
-
-                /*$.ajax({
-                 type: 'POST',
-                 url: '/vote/pmcustomerinfo/list',
-                 data: JSON.stringify(newparam),
-                 contentType:'application/json',
-                 success: function(res){
-                 console.log(res)
-                 testData=res.page
-                 tableGroup.render({
-                 elem: '#customTable',
-                 height:'250',
-                 cols: [[
-                 {type: 'checkbox' },
-                 {field:'sapCode', title:'sap编号', sort: true},
-                 {field:'custCnName', title:'客户名称'},
-                 ]],
-                 cellMinWidth:'90',
-
-                 data:testData,
-                 page: true
-                 });},
-                 dataType: "json"
-                 });*/
+                    data: JSON.stringify(newParams),
+                    contentType:'application/json',
+                    success: function(res){
+                        testData=res.page;
+                        tableGroup.render({
+                            elem: '#customTable',
+                            height:'250',
+                            cols: [[
+                                {type: 'checkbox' },
+                                {field: 'sapCode', title: 'sap编号',sort:true,templet:function(d){
+                                    var jsonStr = JSON.stringify({"sapCode":d.sapCode,"custCnName":d.custCnName});
+                                    return '<div class="jsonData" dataStr='+jsonStr+'>'+d.sapCode+'</div>'
+                                } },
+                                {field:'custCnName', title:'客户名称'},
+                            ]],
+                            cellMinWidth:'90',
+                            data:testData,
+                            page: true
+                        });},
+                    dataType: "json"
+                });
             });
 
         });

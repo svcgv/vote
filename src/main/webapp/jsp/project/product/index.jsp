@@ -177,9 +177,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
                   value=(parseInt(value*100)/100).toFixed(2);
 				  return value
               }},
-            {field: 'jan', title: 'Jan',templet:function(d)
-			{ var num=typeof d.jan =="undefined" ? '':d.jan;
-	  	return '<input value="'+num+'" class="layui-input layui-table-iptMoney"/>'}},
 	  	      {field:'developmentDeptName', title:'研发部门名称', width:230},
 	  	      {field:'developmentManagerName', title:'研发负责人名称'},
 	  	      {field:'startSaleDate', title:'开始销售日期'},

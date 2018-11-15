@@ -60,6 +60,9 @@ public class PmProjectGroupInfoController {
     @RequestMapping(value="/save",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> save(@RequestBody PmProjectGroupInfoEntity pmProjectGroupInfo,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
+    	pmProjectGroupInfo.setGroupCreateTime(DateUtil.getDateTime());
+    	pmProjectGroupInfo.setGroupCreatorId(usesr.getUsrId());
+    	pmProjectGroupInfo.setGroupCreatorName(usesr.getUsrName());
     	pmProjectGroupInfo.setCreatorId(usesr.getUsrId());
     	pmProjectGroupInfo.setCreateTime(DateUtil.getDateTime());
         pmProjectGroupInfoService.insert(pmProjectGroupInfo);
