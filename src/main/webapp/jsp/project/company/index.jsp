@@ -2,15 +2,15 @@
 <%@ include file="/resources/admincp/layouts/main.jsp"%>
 <body>
 <style>
-.layui-form-label{width:100px!important;}
+.layui-form-label{width:130px!important;}
 </style>
 <div class="custom-info-wrapper">
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 	  <legend>公司实体管理</legend>
 	</fieldset>
 	<form class="layui-form" id="customer-query-form" method="POST" action="/vote/bmcustomerinfo/list">
-	   <div class="layui-form-item">
 	   
+	   	<div class="layui-form-item" style="margin-bottom:0px;">
 		  	<div class="layui-inline">
 		      <label class="layui-form-label">公司实体名称：</label>
 		       <div class="layui-input-inline">
@@ -23,31 +23,7 @@
 				   <input type="text" name="companyCode"  autocomplete="off" class="layui-input form-control">
 			   </div>
 		   </div>
-		    
-		    <%--<div class="layui-inline">--%>
-		      <%--<label class="layui-form-label">公司地址：</label>--%>
-		       <%--<div class="layui-input-inline">--%>
-		         <%--<input type="text" name="companyAddress"  autocomplete="off" class="layui-input form-control">--%>
-		      <%--</div>--%>
-		    <%--</div>--%>
-		    
-		   
-		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">创建时间(开始)：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="startTime" id="startTime" autocomplete="off" class="layui-input form-control">
-		      </div>
-		    </div>
-		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">创建时间(结束)：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="endTime" id="endTime"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		    </div>
-		  
-		      <div class="layui-inline">
 		      <label class="layui-form-label">是否有效：</label>
 		      <div class="layui-input-inline">
 		        <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
@@ -55,12 +31,33 @@
 		        </select>
 		      </div>
 		    </div>
+		    <%--<div class="layui-inline">--%>
+		      <%--<label class="layui-form-label">公司地址：</label>--%>
+		       <%--<div class="layui-input-inline">--%>
+		         <%--<input type="text" name="companyAddress"  autocomplete="off" class="layui-input form-control">--%>
+		      <%--</div>--%>
+		    <%--</div>--%>
+		   </div> 
+		   
+		   <div class="layui-form-item" style="margin-bottom:0px;">
+		     <div class="layui-inline">
+		      <label class="layui-form-label">创建时间(开始)：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="startTime" id="startTime" autocomplete="off" class="layui-input form-control hasDatepicker">
+		      </div>
+		    </div>
+		    
+		    <div class="layui-inline">
+		      <label class="layui-form-label">创建时间(结束)：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="endTime" id="endTime"  autocomplete="off" class="layui-input form-control hasDatepicker">
+		      </div>
+		    </div>
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:15px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="customAdd"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
-			     
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="customAdd"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
 			  </div>
 		   </div>
 	   </div>
@@ -91,13 +88,11 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   //日期
 	  laydate.render({
 		    elem: "#startTime",
-		    theme: 'molv',
-		    type: 'datetime'
+		    theme: 'molv'
 	 });
 	 laydate.render({
 		    elem: "#endTime",
-		    theme: 'molv',
-		    type: 'datetime'
+		    theme: 'molv'
 	 });
 
 	 var queryParams=$("#customer-query-form").serializeObject();
@@ -274,7 +269,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  title: title,
 			  closeBtn: 0, //显示关闭按钮
 			  shade: 0.3,
-			  area: ["800px","450px"],
+			  area: ["800px","300px"],
 			  anim: 2,
 			  maxmin: true,
 			  shadeClose: true, //点击遮罩关闭
