@@ -133,9 +133,12 @@ public class YearBudgetController extends AbstractBaseController{
 	}
 	// product
 	@RequestMapping(value="/yearBudget/product",method=RequestMethod.GET)
-	public ModelAndView productFormView(@RequestParam("act") String act) {
+	public ModelAndView productFormView(@RequestParam("act") String act,@RequestParam("index") String index,@RequestParam("YIndex") String YIndex) {
 		ModelAndView view = new ModelAndView();
 		view.addObject("act",act);
+		view.addObject("index",index);
+		view.addObject("YIndex",YIndex);
+		
 		view.setViewName("/project/yearBudget/product");
 		return view;
 	}

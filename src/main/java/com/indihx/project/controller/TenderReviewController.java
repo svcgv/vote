@@ -115,7 +115,18 @@ public class TenderReviewController extends AbstractBaseController{
 		param.put("uploadType", "00");
 		List<PmFileEntity> fileList = pmFileService.queryList(param);
 		
+		map.put("foreignId", id);
+		map.put("isDelete", "00");
 		
+		List<PmReviewInfoEntity> list = pmReviewInfoService.queryList(map);
+		map.put("isDelete", "01");
+		
+		if(list.isEmpty()) {
+			view.addObject("reviewId",0);
+		}
+		else {
+			view.addObject("reviewId",list.get(0).getReviewId());
+		}
 		List<PmReviewInfoEntity> list2 = pmReviewInfoService.queryList(map);
 		view.addObject("reviewHis",list2);
 		view.addObject("act",act);

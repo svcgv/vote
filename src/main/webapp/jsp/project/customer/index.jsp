@@ -157,7 +157,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
     	this.data={fileCode:'cust'}
     }
     ,done: function(res){
-      console.log(res)
       testData=res.list
       table.render({
   	  	id:"customer-table",
@@ -255,10 +254,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		 test_button.style.opacity=0
 		 layer.msg("保存成功",{icon:1});
 	});
-	  
+
   // table render
   var queryParams=$("#customer-query-form").serializeObject();
-  var newParam = {}
+  var newParam = {};
   for(var i in queryParams){
 	  if(queryParams[i]){
 		  newParam[i] = queryParams[i]
@@ -502,6 +501,13 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  yes: function(index, layero){
 				  // 保存按钮
 				  var formData = layer.getChildFrame('body', index).find("form").serializeObject();
+                  var newParam2 = {};
+                  for(var i in formData){
+                      if(formData[i]){
+                          newParam2[i] = formData[i]
+                      }
+                  }
+                  formData = newParam2
 				  $.ajax({
 					  type:"POST",
 					  url:ajaxurl,

@@ -33,17 +33,7 @@
 		         <input type="number" name="firstBidAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
-		     <div class="layui-inline">
-		      <label class="layui-form-label">客户名称：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
-		         <input type="text" style='display:none' name="custId">
-		         <input type="text" style='display:none' name="custSapCode">
-		      </div>
-		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
-		    </div>
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">预估收入（元）：</label>
 		       <div class="layui-input-inline">
@@ -90,7 +80,7 @@
 		          <input type="text" style='display:none' name="constructionDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		    
@@ -111,7 +101,7 @@
 		          <input type="text" style='display:none' name="sellDeptId">
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		     
@@ -122,7 +112,17 @@
 		          <input type="text" style='display:none' name="sellDeptManagerId">
 		      </div>
 		     </div> 
-		    
+		     <div class="layui-inline">
+		      <label class="layui-form-label">客户名称：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+		         <input type="text" style='display:none' name="custId">
+		         <input type="text" style='display:none' name="custSapCode">
+		      </div>
+		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		       </div>
+		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
@@ -169,6 +169,7 @@
 				        <th>大小</th>
 				        <th>状态</th>
 				        <th>操作</th>
+				        <th>文件类型</th>
 				      </tr></thead>
 				      <tbody id="wosFileList"></tbody>
 				    </table>
@@ -249,6 +250,7 @@ $(function(){
   ,uploadListIns = upload.render({
 	  before:function(obj){
 	    	this.data={uploadType:'00'}
+	    	console.log(this)
 	    },
     elem: '#wosUploads'
     ,url: '/vote/pmfile/upload'
@@ -268,8 +270,17 @@ $(function(){
             ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
             ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
           ,'</td>'
+          ,'<td>'
+            ,' <div class="layui-input-inline">'
+           	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+	          ,'<option value="">请选择</option>'
+	        	,'<option value="01" selected>项目</option>'
+	        	,'<option value="02">产品</option>'
+	        	,'<option value="03" >人力</option>'
+	        	,'</select>'
+  				,'</div>'
+          ,'</td>'
         ,'</tr>'].join(''));
-        
         //单个重传
         tr.find('.demo-reload').on('click', function(){
           obj.upload(index, file);
@@ -283,6 +294,9 @@ $(function(){
         });
         
         demoListView.append(tr);
+        setTimeout(function(){
+	        form.render();
+        },400)
       });
     }
     ,done: function(res, index, upload){
@@ -293,6 +307,7 @@ $(function(){
         tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
         tds.eq(3).html(''); //清空操作
         return delete this.files[index]; //删除文件队列已经上传成功的文件
+        
       }
       this.error(index, upload);
     }
@@ -326,6 +341,7 @@ $(function(){
   
   	//查询交付部门
   $("#tender-addForm-hook #payOrgQuery-hook").click(function(){
+	  console.log('asdasd')
 	  $.openWindow({
 	  		url:'org?act=addPay',
 	  		title:"选择交付部门",
@@ -333,7 +349,7 @@ $(function(){
 	 });
 	  
   });
-	
+/* 	
   	//查询交付部门负责人
   $("#tender-addForm-hook #payOrgMangerQuery-hook").click(function(){
 	  $.openWindow({
@@ -342,9 +358,9 @@ $(function(){
 	  		width:"700"
 	 });
 	  
-});
+}); */
   
-  	//查询销售部门负责人
+/*   	//查询销售部门负责人
   $("#tender-addForm-hook #userManagerQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'user?act=addSaleDept',
@@ -352,7 +368,7 @@ $(function(){
 	  		width:"700"
 	 });
 	  
-});
+}); */
   
 	 // 选择机构
   $("#tender-addForm-hook #orgQuery-hook").click(function(){

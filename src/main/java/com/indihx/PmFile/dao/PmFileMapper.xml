@@ -4,8 +4,7 @@
 <mapper namespace="com.indihx.PmFile.dao.PmFileMapper">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-	<resultMap type="com.indihx.PmFile.entity.PmFileEntity"
-		id="pmFileMap">
+	<resultMap type="com.indihx.PmFile.entity.PmFileEntity" id="pmFileMap">
 		<result property="fileId" column="FILE_ID" />
 		<result property="fileUploadName" column="FILE_UPLOAD_NAME" />
 		<result property="filePath" column="FILE_PATH" />
@@ -20,6 +19,8 @@
 		<result property="modifier" column="MODIFIER" />
 		<result property="modifyTime" column="MODIFY_TIME" />
 		<result property="isDelete" column="IS_DELETE" />
+		<result property="fileBusinessType" column="FILE_BUSINESS_TYPE" />
+		<result property="usrName" column="USR_NAME" />
 	</resultMap>
 
 	<select id="queryObject" resultMap="pmFileMap">
@@ -30,7 +31,8 @@
 	<select id="queryList" resultMap="pmFileMap">
 		select
 		*
-		from pm_file
+		from pm_file A
+		LEFT JOIN USR_INFO B ON A.CREATOR_ID  = B.USR_ID
 		<trim prefix="WHERE" prefixOverrides="AND|OR"
 			suffixOverrides="AND|OR">
 			<if test="fileId != null and fileId!=''">
@@ -81,19 +83,27 @@
 				MODIFY_TIME =
 				#{modifyTime} AND
 			</if>
+			<if test="fileBusinessType != null and fileBusinessType !=''">
+				FILE_BUSINESS_TYPE =
+				#{fileBusinessType} AND
+			</if>
 			<if test="isDelete != null and isDelete!=''">
 				IS_DELETE =
 				#{isDelete}
 			</if>
 		</trim>
+		
 	</select>
 
 	<select id="queryTotal" resultType="int">
 		select count(*) from pm_file
 	</select>
 
-	<insert id="insert" parameterType="com.indihx.PmFile.entity.PmFileEntity"  useGeneratedKeys="true" keyProperty="fileId">
-		<selectKey keyProperty="fileId" order="BEFORE" resultType="java.lang.Long">
+	<insert id="insert"
+		parameterType="com.indihx.PmFile.entity.PmFileEntity"
+		useGeneratedKeys="true" keyProperty="fileId">
+		<selectKey keyProperty="fileId" order="BEFORE"
+			resultType="java.lang.Long">
 			select PmFile_SEQ.nextval as fileId from DUAL
 		</selectKey>
 		insert into pm_file
@@ -146,6 +156,9 @@
 		<if test="modifyTime != null and modifyTime!=''">
 			,MODIFY_TIME
 		</if>
+		<if test="fileBusinessType != null and fileBusinessType !=''">
+			,FILE_BUSINESS_TYPE
+		</if>
 		,IS_DELETE
 
 		)
@@ -187,6 +200,9 @@
 		</if>
 		<if test="modifyTime != null and modifyTime!=''">
 			,#{modifyTime}
+		</if>
+		<if test="fileBusinessType != null and fileBusinessType !=''">
+			,#{fileBusinessType}
 		</if>
 		,'00'
 		)

@@ -17,6 +17,7 @@ public interface PmCustomerGroupRelationMapper{
 	public PmCustomerGroupRelationEntity queryObject(long id);
 	public void insert(PmCustomerGroupRelationEntity entity);
 	public void update(PmCustomerGroupRelationEntity entity);
+	public void updateByCustId(PmCustomerGroupRelationEntity entity);
 	public void delete(long custGroupRelationId);
 	public List<PmCustomerGroupRelationEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();

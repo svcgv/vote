@@ -28,6 +28,28 @@
 		<result property="strRemark" column="STR_REMARK" />
 	</resultMap>
 
+	<resultMap
+			type="java.util.Map"
+			id="usrResMap">
+			<result property="usrId" column="USR_ID" />
+			<result property="usrNo" column="USR_NO" />
+			<result property="usrName" column="USR_NAME" />
+			<result property="sex" column="SEX" />
+			<result property="passWord" column="PASS_WORD" />
+			<result property="birthDate" column="BIRTH_DATE" />
+			<result property="mblNo" column="MBL_NO" />
+			<result property="email" column="EMAIL" />
+			<result property="operUsr" column="OPER_USR" />
+			<result property="usrSta" column="USR_STA" />
+			<result property="tmSmp" column="TM_SMP" />
+			<result property="orgNo" column="ORG_NO" />
+			<result property="orgType" column="ORG_TYPE" />
+			<result property="licenceCode" column="LICENCE_CODE" />
+			<result property="certId" column="CERT_ID" />
+			<result property="sessionId" column="SESSION_ID" />
+			<result property="lastActiveTime" column="LAST_ACTIVE_TIME" />
+			<result property="strRemark" column="STR_REMARK" />
+		</resultMap>
 	<select id="queryObject" resultMap="usrInfoMap">
 		select
 		USR_ID,

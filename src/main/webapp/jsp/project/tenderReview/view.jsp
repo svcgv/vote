@@ -18,7 +18,7 @@
 }
 </style>
 <div id="tender-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
-	<form class="layui-form" action="" lay-filter="form-detail">
+	
 		  <div class="layui-form-item">
 		    <div class="layui-inline">
 		      <label class="layui-form-label">项目名称：</label>
@@ -122,7 +122,9 @@
 				      <thead>
 				        <tr><th>文件名</th>
 				        <th>大小</th>
-				        <th>状态</th>
+				        <th>上传人</th>
+				        <th>上传时间</th>
+				        
 				        <th></th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
@@ -134,7 +136,9 @@
 							<tr class="edit-wosUploaded">
 						      	<td>${app.fileUploadName }</td>
 						      	<td>${app.fileSize}</td>
-						      	<td>已上传</td>
+						      <td>${app.usrName}</td>
+						      <td>${app.createTime}</td>
+						      
 						      	<td><a href="${app.filePath}" download='${app.fileUploadName }'>下载</a></td>
 					      	</tr>
 						</c:forEach>
@@ -151,38 +155,85 @@
 	       <!-- 未评审时不显示评审记录 -->
 	        <div class="layui-inline">
 	       		 <label class="layui-form-label">评审记录：</label>
-	       		 <div class="layui-input-block" style="margin-left:160px;">
-			     	<c:forEach items="${reviewHis}" var="app">
-						
-					<div><span>${app.modifyTime} </span> 
-			     	<span>销售部门：</span>
-			     	<strong style="font-weight:bold;">${app.reviewUserName}</strong> 
-			     	<span style="margin-left:10px;">评审结果：</span>
-			     	<strong style="font-weight:bold;color:red;">${app.result}</strong> 
-			     	<span style="margin-left:10px;">评审意见：</span>
-			     	<span style="margin-left:10px;">${app.commentDetail} </span>
-			     	</div>
-
-
-					</c:forEach>
-							
-			     	
-			    </div>
+	       		 
+	       		 <div class="layui-upload-list">
+				    <table class="layui-table">
+				      <thead>
+				        <tr><th>评审人</th>
+				        <th>评审结果</th>
+				        <th>评审意见</th>
+				        <th>评审时间</th>
+				        
+				      </tr></thead>
+				      <tbody id="wosFileList">
+				      	
+				      	
+				      	
+				      	
+				      	<c:forEach items="${reviewHis}" var="app">
+							<tr class="edit-wosUploaded">
+						      	<td>${app.reviewUserName }</td>
+						      	<td>${app.result}</td>
+						      <td>${app.commentDetail}</td>
+						      <td>${app.modifyTime}</td>
+						      
+					      	</tr>
+						</c:forEach>
+				      </tbody>
+				    </table>
+				  </div>
+				  
+				  
 	       </div>
 		     
 		     
 		  </div>
-	</form>
+		  <div class='tender-review-wrapper'>
+		 <form class="layui-form" action="" lay-filter="form-detail"> 
+		 <div class="layui-inline">
+	      <label class="layui-form-label" >评审理由：</label>
+	       <div class="layui-input-inline">
+	        	<textarea name="commentDetail" placeholder="请输入评审理由" class="layui-textarea"></textarea>
+	      </div>
+	    </div>
+		  
+	  <div class="layui-form-item">
+	  	<div class="layui-inline">
+	      <div class="layui-input-inline">
+	         <input type="text" style='display:none' name="reviewId" name="selfName" readonly="readonly" value="${userName }"  autocomplete="off" class="layui-input form-control disabledColor">
+	         <input type="text" style='display:none' name="reviewId" value="${reviewId }">
+	         <input type="text" style='display:none' name="reviewType" value="00">
+	       </div>
+ 	 	</div>
+	  	
+	  <!-- 	<div class="layui-inline">
+	      <label class="layui-form-label" >评审意见：</label>
+	       <div class="layui-input-inline">
+	        <select name="result" lay-verify="required"> 数据字典
+		        <option value="">请选择</option>
+		        <option value="00" selected>同意</option>
+		        <option value="01">不同意</option>
+		      </select>
+	      </div>
+	    </div> -->
+	    
+	    
+	    
+	  </div>
+	</form></div>
 	<div class="layui-layer-btn layui-layer-btn-c">
+		<a class="layui-layer-btn1" id="tender-accessReview">通过</a>
+		<a class="layui-layer-btn1" id="tender_returnReview">退回</a>
     	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
     </div>
 </div>
 <script>
 $(function(){
-	layui.use(['layer', 'form','laydate'], function(){
+	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
-	  	  laydate=layui.laydate
+	  	  laydate=layui.laydate,
+	  	table=layui.table;
 		
 		 //日期
 	  laydate.render({
@@ -196,6 +247,39 @@ $(function(){
 		 	$("#tender-addForm-hook label[name='"+property+"']").text(pmConfirmBid[property]);
 
 		 }
+		 
+		  
+			// 保存 事件
+			var act="${act}";// 区分是index页 form页 赋值问题
+			var win=$(".tender-review-wrapper").getWindow();
+			$(".formDetail-wrapper").on("click","#tender-accessReview",function(){
+				
+				submit('00')
+			})
+			$(".formDetail-wrapper").on("click","#tender_returnReview",function(){
+				submit('01')
+			})
+			
+		function submit(result){
+				
+				var formDatas=$(".tender-review-wrapper form").serializeObject();
+				formDatas.result=result
+				$.ajax({
+					type:'POST',
+					url:'/vote/pmreviewinfo/submit',
+					 data: JSON.stringify(formDatas), 
+					 contentType:'application/json',
+					 dataType: "json",
+					success:function(res){
+						layer.msg("评审成功",{icon:1});
+						win.close();
+					},
+					error:function(){
+						layer.msg("评审失败",{icon:5});
+						win.close();
+					}
+				})
+			}
 		
 	// form 表单手动渲染
 	  form.render();

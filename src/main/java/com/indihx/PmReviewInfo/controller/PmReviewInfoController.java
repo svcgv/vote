@@ -132,7 +132,8 @@ public class PmReviewInfoController {
     	 PmReviewInfoEntity reviewEntity = new PmReviewInfoEntity();
          //获取当前数据库的审批数据
     	 PmReviewInfoEntity base = pmReviewInfoService.queryObject(pmReviewInfo.getReviewId());
-    	 base.setResult(pmReviewInfo.getResult());
+    	 String result = pmReviewInfo.getResult();
+    	 base.setResult(result);
     	 if(pmReviewInfo.getCommentDetail()!=null) {
     		 base.setCommentDetail(pmReviewInfo.getCommentDetail());
     	 }

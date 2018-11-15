@@ -26,7 +26,7 @@
                 <label class="layui-form-label">创建时间(开始)：</label>
                 <div class="layui-input-inline">
                     <input type="text" name="createTimeStart" id="createTimeStart" autocomplete="off"
-                           class="layui-input form-control">
+                           class="layui-input form-control hasDatepicker">
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                 <label class="layui-form-label">创建时间(结束)：</label>
                 <div class="layui-input-inline">
                     <input type="text" name="createTimeEnd" id="createTimeEnd" autocomplete="off"
-                           class="layui-input form-control">
+                           class="layui-input form-control hasDatepicker">
                 </div>
             </div>
             <div class="layui-inline">
@@ -87,13 +87,11 @@
         //日期
         laydate.render({
             elem: '#createTimeStart',
-            theme: 'molv',
-            type: 'datetime'
+            theme: 'molv'
         });
         laydate.render({
             elem: '#createTimeEnd',
-            theme: 'molv',
-            type: 'datetime'
+            theme: 'molv'
         });
 
         //指定允许上传的文件类型

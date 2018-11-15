@@ -32,6 +32,7 @@
 <script type="text/javascript">
 // 全局变量 已选的项目  新增时为空  编辑时为后台传入的数据 "${chosedProject}"
 var chosedProject=[];
+console.log(chosedProject);
 var chosedLayTable=null;
 $(function(){
 	layui.use(['layer', 'form','table'], function(){
