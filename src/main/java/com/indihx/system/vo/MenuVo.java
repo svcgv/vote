@@ -22,6 +22,8 @@ public class MenuVo extends BaseVo {
 	private String menuName;
 
 	private String parentId;
+	
+	private String parentName;
 
 	private String menuUrl;
 
@@ -203,6 +205,14 @@ public class MenuVo extends BaseVo {
 
 	public void setTmSmp(String tmSmp) {
 		this.tmSmp = tmSmp;
+	}
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
 	}
 
 

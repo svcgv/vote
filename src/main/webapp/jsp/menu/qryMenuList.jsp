@@ -16,6 +16,12 @@
 			url : "${ctx }/menu/ajaxQryMenuInfo"
 		});
 	}
+	//重置
+	function reset() {
+		 $("#exampleInputEmail1").val("");
+		 $("#menuLevel").val("");
+		 
+	}
 
 	function updMenu() {
 		 var obj = selectRow("menuIdArray");
@@ -84,6 +90,10 @@
 								onclick="qryList()">
 								<i class="icon-search"></i>查询
 							</button>
+							<button type="button" class="btn btn-primary "
+								onclick="reset()">
+								<i class="icon-remove"></i>重置
+							</button>
 						</div>
 					</div>
 				</form>
@@ -112,7 +122,8 @@
 							<th target_data="count">序号</th>
 							<th target_data="menuId">菜单ID</th>
 							<th target_data="menuName">菜单名称</th>
-							<th target_data="parentId">父菜单</th>
+							<th target_data="parentId">父菜单ID</th>
+							<th target_data="parentName">父菜单名称</th
 							<th target_data="menuUrl">菜单地址</th>
 							<th target_data="sortNum">顺序编号</th>
 							<th target_data="codeVal">菜单级别</th>
@@ -131,6 +142,7 @@
 								<td class="center" >${menuinfo.menuId }</td>
 								<td class="center" >${menuinfo.menuName }</td>
 								<td class="center" >${menuinfo.parentId}</td>
+								<td class="center" >${menuinfo.parentName}</td>
 								<td class="center" >${menuinfo.menuUrl}</td>
 								<td align="center" >${menuinfo.sortNum}</td>
 								<td align="center" >${menuinfo.codeVal}</td>

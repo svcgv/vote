@@ -47,13 +47,17 @@ function show1(){
 	
 }
 function openAdd() {
-	var orgType =$("#orgType").val();
+	var orgType ="pay";
 	$.indi.openPopup({title: '    ',area : ['520px' , '500px'],isDate:false,url: '${ctx }/org/queryAddPara?orgType='+orgType});
 }
 function save() {
 	$('#i-form').validate({
 		rules:{
 			orgName:{
+				required: true
+			},parentOrgName:{
+				required: true
+			},parentOrgNo:{
 				required: true
 			},addres:{
 				required: true
@@ -106,28 +110,45 @@ function save() {
 							placeholder="机构名称" id="orgName" name="orgName" />
 					</div>
 				</div>
-				<div class="form-group">
+				
+				
+			<div class="form-group">
 					<label class=" col-xs-4 control-label text-right">机构类型</label>
 					<div class=" col-xs-6">
-						<select class="col-md-8 form-control" name="orgType" id="orgType" onchange="show1();" >
+						<select class="col-md-8 form-control" name="orgType" id="orgType"  >
 							${codeData.ewTypeHtml }
 							</select>
 					</div>
 				</div>
-				<div class="form-group" id="hidden5">
-					<label class=" col-xs-4 control-label text-right" id="hidden1">所属区（市/县）</label>
-					<label class=" col-xs-4 control-label text-right" id="hidden2">所属街道</label>
-					<label class=" col-xs-4 control-label text-right" id="hidden3">上级机构名称</label>
+		    
+		    <div class="form-group" >
+					<label class=" col-xs-4 control-label text-right" >上级机构</label>
 					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11 " id="jdmc" disabled="disabled"/>
+						<input type="text" class="form-control col-xs-11 "
+							placeholder="上级机构" id="parentOrgName" name=""parentOrgName"" />
+							   <input type="hidden" name="parentOrgNo" id = "parentOrgNo"/>
 					</div>
-					<span id="hidden4">
 					<button type="button" class="btn btn-primary" onclick="openAdd()">
-						<i class="icon-plus-sign"></i> 选择</button></span>
-					<input type="hidden" class="form-control col-xs-11 "
-							placeholder="上级机构名称" id="parentOrgNo" name="parentOrgNo"/>
-				<input type="hidden" id="parentOrgName" name="parentOrgName"/>
+		     	<i class="icon-plus-sign"></i> 选择</button>
 				</div>
+		    
+				
+<!-- 				<div class="form-group" id="hidden5"> -->
+<!-- 					<label class=" col-xs-4 control-label text-right" id="hidden1">所属区（市/县）</label> -->
+<!-- 					<label class=" col-xs-4 control-label text-right" id="hidden2">所属街道</label> -->
+<!-- 					<label class=" col-xs-4 control-label text-right" id="hidden3">上级机构名称</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 						<input type="text" class="form-control col-xs-11 " id="jdmc" disabled="disabled"/> -->
+<!-- 					</div> -->
+<!-- 					<span id="hidden4"> -->
+<!-- 					<button type="button" class="btn btn-primary" onclick="openAdd()"> -->
+<!-- 						<i class="icon-plus-sign"></i> 选择</button></span> -->
+<!-- 					<input type="hidden" class="form-control col-xs-11 " -->
+<!-- 							placeholder="上级机构名称" id="parentOrgNo" name="parentOrgNo"/> -->
+<!-- 				<input type="hidden" id="parentOrgName" name="parentOrgName"/> -->
+<!-- 				</div> -->
+
+
 				<div class="form-group" >
 					<label class=" col-xs-4 control-label text-right" >联系人</label>
 					<div class=" col-xs-6">

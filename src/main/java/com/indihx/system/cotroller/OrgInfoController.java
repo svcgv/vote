@@ -128,19 +128,10 @@ public class OrgInfoController  extends AbstractBaseController{
 	@RequestMapping(value="/queryAddPara",method=RequestMethod.GET)
 	public ModelAndView queryAddPara(@RequestParam("orgType") String orgType){
 		ModelAndView view = new ModelAndView();
-		if("02".equals(orgType)){
+		
 			HpbInfoVo hpbVo = new  HpbInfoVo();
-			Map<String,Object> map=infoService.qryParentOrgInfo(hpbVo);
-			view.addObject("listInfo",map.get("listInfo"));
-			view.addObject("pageInfo",map.get("pageInfo"));
-			view.setViewName("/org/queryHpbAddPara");
-		}if("03".equals(orgType)){
-			StreetInfoVo streetVo = new StreetInfoVo();
-			Map<String,Object> map=infoService.qryParentOrgStreetInfo(streetVo);
-			view.addObject("listInfo",map.get("listInfo"));
-			view.addObject("pageInfo",map.get("pageInfo"));
-			view.setViewName("/org/queryStreetAddPara");
-		}
+			view.setViewName("/org/org");	
+		
 		view.addObject("orgType",orgType);
 		return view;
 	}

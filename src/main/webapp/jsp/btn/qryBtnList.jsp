@@ -16,10 +16,16 @@
 			url : "${ctx }/btn/ajaxQryBtnInfo.do"
 		});
 	}
+	//重置
+	function reset() {
+		 
+		 $("#exampleInputEmail1").val("");
+		 $("#i-btnPage").val("");
+	}
 
 	function updBtnInfo() {
 		 var obj = selectRow("btnIdArray");
-		if ( obj.size != 1) {
+		if ( obj.size != 1) {	
 			layer.alert("请选择一条记录进行修改！",{icon:0});
 			return;
 		}
@@ -79,6 +85,10 @@
 						<div class="col-md-2">
 							<button type="button" class="btn btn-primary " onclick="qryList()">
 								<i class="icon-search"></i>查询
+							</button>
+							<button type="button" class="btn btn-primary "
+								onclick="reset()">
+								<i class="icon-remove"></i>重置
 							</button>
 						</div>
 					</div>
