@@ -229,7 +229,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	      {field:'custGroupName', title:'客户群名称'},
 			  	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
 			  	      {field:'custType', title:'客户类型'},
-			  	      {field:'location', title:'地址'},
+			  	      {field:'address', title:'地址'},
 			  	      {field:'cashManagementGroup', title:'现金管理组'},
 			  	      {field:'payCondition', title:'付款条件'},
 			  	      {field:'tradeCode', title:'行业代码'},
@@ -267,7 +267,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   table.render({
 	  	id:"customer-table",
 	    elem: '#customTable',
-	    url:'/vote/pmcustomerinfo/list',
+	    url:'/vote/pmcustomerinfo/listAll',
 	    method:'post',
 		where:{
 			queryStr:JSON.stringify(queryParams)
@@ -292,7 +292,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
             {field:'companyCode', title:'公司代码'},
   	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
   	      {field:'custType', title:'客户类型'},
-  	      {field:'location', title:'地址'},
+  	      {field:'address', title:'地址'},
   	      {field:'cashManagementGroup', title:'现金管理组'},
   	      {field:'payCondition', title:'付款条件'},
   	      {field:'tradeCode', title:'行业代码'},
@@ -374,7 +374,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		  }
 		  queryParams = newParam
 		 table.reload('customer-table',{
-				url:'/vote/pmcustomerinfo/list',
+				url:'/vote/pmcustomerinfo/listAll',
 				page:{
 					curr:1 //从第一页开始
 				},

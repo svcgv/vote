@@ -48,13 +48,27 @@ public class PmCustomerInfoController {
     public @ResponseBody
     ResponseData list(@RequestBody Map<String, Object> params, HttpSession session){
     	String str = (String) params.get("queryStr");
-//        int page = params.get("page")==null?null:(int)params.get("page");
-//        int pageSize = (int) params.get("limit");
     	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
 //		List<PmCustomerInfoEntity> pmCustomerInfo = pmCustomerInfoService.queryList(maps);
 //        R.ok().put("page", pmCustomerInfo);
 //        R.ok().put("count", pmCustomerInfoService.queryTotal());
         return new ResponseData(pmCustomerInfoService.queryList(maps,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
+    }
+
+    /**
+     * 列表
+     */
+    @RequestMapping(value="/listAll",method=RequestMethod.POST)
+    public @ResponseBody
+    ResponseData listAll(@RequestBody Map<String, Object> params, HttpSession session){
+        String str = (String) params.get("queryStr");
+//        int page = params.get("page")==null?null:(int)params.get("page");
+//        int pageSize = (int) params.get("limit");
+        Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
+//		List<PmCustomerInfoEntity> pmCustomerInfo = pmCustomerInfoService.queryList(maps);
+//        R.ok().put("page", pmCustomerInfo);
+//        R.ok().put("count", pmCustomerInfoService.queryTotal());
+        return new ResponseData(pmCustomerInfoService.queryListAll(maps,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
     }
 
 

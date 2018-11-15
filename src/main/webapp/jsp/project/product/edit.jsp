@@ -29,7 +29,7 @@
 		      </div>
 		    </div>
 		     <div class="layui-inline">
-		      <label class="layui-form-label">指导销售价：</label>
+		      <label class="layui-form-label">指导销售价(元)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="productSuggestPrice"  value="${product.productSuggestPrice}"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -56,7 +56,7 @@
 		          <input type="text" style='display:none' name="developmentDeptId" value="${product.developmentDeptId}"  >
 		      </div>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>部门</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
 		     <div class="layui-inline">
@@ -65,23 +65,21 @@
 		          <input type="text" name="developmentManagerName"  value="${product.developmentManagerName}"   readonly="readonly" autocomplete="off" class="layui-input form-control">
 		          <input type="text" style='display:none' name="developmentManagerId" value="${product.developmentManagerId}"  >
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>人员</button>
-		       </div>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">项目引用：</label>
-	           <div class="layui-input-inline" id="chosed-project-hook" style="border:#e6e6e6 solid 1px;height:60px;overflow-y:auto;width:320px;">
-		     	 <span class="customer-list">
-		    		<span class="customerItem" projectId="123">交行项目</span>
-		    		<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>
-		    	</span>
-		       </div>
+		      <label class="layui-form-label">项目引用列表：</label>
+	           <%--<div class="layui-input-inline" id="chosed-project-hook" style="border:#e6e6e6 solid 1px;height:60px;overflow-y:auto;width:320px;">--%>
+		     	 <%--<span class="customer-list">--%>
+		    		<%--<span class="customerItem" projectId="123">交行项目</span>--%>
+		    		<%--<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>--%>
+		    	<%--</span>--%>
+		       <%--</div>--%>
 		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>项目</button>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		       </div>
 		    </div>
+			  <table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
 		    
 	       <div class="layui-inline">
 	       		 <label class="layui-form-label">备注：</label>
@@ -99,12 +97,16 @@
     </div>
 </div>
 <script>
+    var chosedProject=[];
+    console.log(chosedProject);
+    var chosedLayTable=null;
 $(function(){
-	layui.use(['layer', 'form','laydate'], function(){
+	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
-	  	  laydate=layui.laydate
-		
+	  	  laydate=layui.laydate;
+
+        chosedLayTable=layui.table;
 		 //日期
 	  laydate.render({
 		    elem: "#startSaleDate2",

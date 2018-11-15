@@ -38,6 +38,8 @@
 		<result property="modifier" column="MODIFIER" />
 		<result property="modifyTime" column="MODIFY_TIME" />
 		<result property="isDelete" column="IS_DELETE" />
+		<result property="custGroupId" column="CUST_GROUP_ID" />
+		<result property="custGroupName" column="CUST_GROUP_NAME" />
 	</resultMap>
 
 	<select id="queryObject" resultMap="pmCustomerInfoMap">
@@ -149,6 +151,117 @@
 			</if>
 			<if test="isDelete != null  and isDelete!=''">
 				IS_DELETE = '00'
+			</if>
+		</trim>
+	</select>
+	<select id="queryListAll" resultMap="pmCustomerInfoMap">
+		select
+		A.*,C.CUST_GROUP_ID,C.CUST_GROUP_NAME
+		FROM
+		pm_customer_info A
+		LEFT JOIN PM_CUSTOMER_GROUP_RELATION B ON A.CUST_ID=B.CUST_ID
+		LEFT JOIN PM_CUSTOMER_GROUP C ON B.CUST_GROUP_ID=C.CUST_GROUP_ID
+		<trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+			<if test="custId != null and   custId!=''">
+				A.CUST_ID = #{custId} AND
+			</if>
+			<if test="custCnName != null  and custCnName!=''">
+				A.CUST_CN_NAME like concat(concat('%',#{custCnName}),'%') AND
+			</if>
+			<if test="custCode != null and custCode!=''">
+				A.CUST_CODE = #{custCode} AND
+			</if>
+			<if test="country != null and country!=''">
+				A.COUNTRY = #{country} AND
+			</if>
+			<if test="sapCode != null  and sapCode!=''">
+				A.SAP_CODE  like concat(concat('%',#{sapCode}),'%')  AND
+			</if>
+			<if test="enName != null  and enName!=''">
+				A.EN_NAME = #{enName} AND
+			</if>
+			<if test="custPatTaxesCode != null and custPatTaxesCode!=''">
+				A.CUST_PAT_TAXES_CODE = #{custPatTaxesCode} AND
+			</if>
+			<if test="custType != null  and custType!=''">
+				A.CUST_TYPE = #{custType} AND
+			</if>
+			<if test="address != null  and address!=''">
+				A.ADDRESS = #{address} AND
+			</if>
+			<if test="cashManagementGroup != null and cashManagementGroup!=''">
+				A.CASH_MANAGEMENT_GROUP = #{cashManagementGroup} AND
+			</if>
+			<if test="payCondition != null  and payCondition!=''">
+				A.PAY_CONDITION = #{payCondition} AND
+			</if>
+			<if test="tradeCode != null  and tradeCode!=''">
+				A.TRADE_CODE = #{tradeCode} AND
+			</if>
+			<if test="regionalMarket != null  and regionalMarket!=''">
+				A.REGIONAL_MARKET = #{regionalMarket} AND
+			</if>
+			<if test="mainBusiness != null  and mainBusiness!=''">
+				A.MAIN_BUSINESS = #{mainBusiness} AND
+			</if>
+			<if test="area != null  and area!=''">
+				A.AREA = #{area} AND
+			</if>
+			<if test="custTrade != null  and custTrade!=''">
+				A.CUST_TRADE = #{custTrade} AND
+			</if>
+			<if test="payCycle != null  and payCycle!=''">
+				A.PAY_CYCLE = #{payCycle} AND
+			</if>
+			<if test="isUseful != null  and isUseful!=''">
+				A.IS_USEFUL = #{isUseful} AND
+			</if>
+			<if test="groupCompany != null  and groupCompany!=''">
+				A.GROUP_COMPANY = #{groupCompany} AND
+			</if>
+			<if test="bgVisiable != null  and bgVisiable!=''">
+				A.BG_VISIABLE = #{bgVisiable} AND
+			</if>
+			<if test="companyCode != null  and companyCode!=''">
+				A.COMPANY_CODE  like concat(concat('%',#{companyCode}),'%') AND
+			</if>
+			<if test="companyFuncCode != null and companyFuncCode!=''">
+				A.COMPANY_FUNC_CODE = #{companyFuncCode} AND
+			</if>
+			<!-- 开始时间 -->
+			<if test="createTimeStart != null and createTimeStart!=''">
+				A.CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
+			</if>
+			<!-- 结束时间 -->
+			<if test="createTimeEnd != null  and createTimeEnd!=''">
+				A.CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
+			</if>
+
+			<if test="addUserId != null and addUserId!=''">
+				A.ADD_USER_ID = #{addUserId} AND
+			</if>
+			<if test="addTime != null and addTime!=''">
+				A.ADD_TIME = #{addTime} AND
+			</if>
+			<if test="modifier != null and modifier!=''">
+				A.MODIFIER = #{modifier} AND
+			</if>
+			<!-- 开始时间 -->
+			<if test="modifyTimeStart != null  and modifyTime!=''">
+				A.MODIFY_TIME <![CDATA[>=]]> #{modifyTimeStart} AND
+			</if>
+			<!-- 结束时间 -->
+			<if test="modifyTimeEnd != null  and modifyTimeEnd !=''">
+				A.MODIFY_TIME <![CDATA[<=]]> #{modifyTimeEnd} AND
+			</if>
+			<if test="custGroupId != null and custGroupId!=''">
+				A.CUST_GROUP_ID = #{custGroupId} AND
+			</if>
+			<if test="custGroupName != null and custGroupName!=''">
+				A.CUST_GROUP_NAME = #{custGroupName} AND
+			</if>
+			<if test="isDelete != null  and isDelete!=''">
+				A.IS_DELETE = '00'
 			</if>
 		</trim>
 	</select>

@@ -88,7 +88,7 @@ $(".org-wrapper #org-add-hook").click(function(){
 				$("#tender-addForm-hook input[name='sellDeptId']").val(getCheckedOrg.orgId);
 		 	}else if(act == "addPay"){
 		 		//选择交付部门
-		 			queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"CONSTRUCTION_DEPT_MANAGER")
+		 			queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"MAIN_MANAGER")
 		 		$("#tender-addForm-hook input[name='constructionDeptName']").val(getCheckedOrg.name);
 				$("#tender-addForm-hook input[name='constructionDeptId']").val(getCheckedOrg.orgId);
 		 	}
@@ -104,6 +104,9 @@ $(".org-wrapper #org-add-hook").click(function(){
 
 var act="${act}";// 区分是index页 form页 赋值问题
 var roleCode="${roleCode}"
+console.log("roleCode:"+roleCode);
+console.log("${roleCode}");
+
 	//通过orgId和roleCode查人，并反显
 function zTreeOnSaveEvent () {
 	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
