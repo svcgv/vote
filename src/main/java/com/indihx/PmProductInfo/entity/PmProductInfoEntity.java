@@ -5,6 +5,8 @@ package com.indihx.PmProductInfo.entity;
 import com.indihx.BaseEntity;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+
 /**
  * 
  * 
@@ -96,6 +98,10 @@ private String modifyTime;
 
 private String isDelete;
 
+	/**
+	 * 中间参数，非表字段
+	 */
+	private List<Long> projectIds;
 	/**
 	 * 设置：
 	 */
@@ -287,5 +293,13 @@ private String isDelete;
 	 */
 	public String getIsDelete() {
 		return isDelete;
+	}
+
+	public List<Long> getProjectIds() {
+		return projectIds;
+	}
+
+	public void setProjectIds(List<Long> projectIds) {
+		this.projectIds = projectIds;
 	}
 }

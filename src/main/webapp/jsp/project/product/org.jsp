@@ -53,6 +53,9 @@ $(document).ready(function(){
 		  success: function(res){
 		      console.log(res)
 		      zNodes=[res.Tree]
+		      if(zNodes.length >0 ){
+		    	  zNodes[0].open=true;
+		      }
 		      $.fn.zTree.init($("#treeOrg"), setting, zNodes);
 	      },
 		  dataType: "json"
@@ -72,10 +75,12 @@ $(".org-wrapper #org-add-hook").click(function(){
 		var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
 		 // 保存到已选机构中
 		 	if(act == "index"){
+		 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"MAIN_MANAGER")
 				$("#product-index-form input[name='developmentDeptName']").val(getCheckedOrg.name);
 				$("#product-index-form input[name='developmentDeptId']").val(getCheckedOrg.orgId);
 		 		
 		 	}else if(act =="add"){
+		 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"MAIN_MANAGER")
 		 		$("#product-addForm-hook input[name='developmentDeptName']").val(getCheckedOrg.name);
 				$("#product-addForm-hook input[name='developmentDeptId']").val(getCheckedOrg.orgId);
 		 	}
@@ -88,17 +93,47 @@ function zTreeOnSaveEvent(event, treeId, treeNode) {
 	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
  // 保存到已选机构中
  	if(act == "index"){
+ 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"MAIN_MANAGER")
 		$("#product-index-form input[name='developmentDeptName']").val(getCheckedOrg.name);
 		$("#product-index-form input[name='developmentDeptId']").val(getCheckedOrg.orgId);
  		
  	}else if(act =="add"){
+ 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"MAIN_MANAGER")
  		$("#product-addForm-hook input[name='developmentDeptName']").val(getCheckedOrg.name);
 		$("#product-addForm-hook input[name='developmentDeptId']").val(getCheckedOrg.orgId);
  	}
 		win.close();
 };
 
-
+function queryUserByRoleCodeOrgNo(orgNo,roleCode){
+	console.log(orgNo,roleCode)
+	//若roleCode存在，则向后台查一把，根据act返现再页面上
+	if(roleCode){
+		var param = {}
+		param.orgNo=orgNo
+		param.roleCode=roleCode
+		console.log('param',param)
+		$.ajax({
+			  type: 'POST',
+			  url: '/vote/queryusrinfo/queryUserByRoleCodeAndOrgNo',
+			  data: JSON.stringify(param),
+			  contentType:'application/json',
+			  success: function(res){
+				  console.log('asdas',act)
+			      console.log(res)
+			      if(res.page){
+			    	  if(act =="index"){ // 交付部门负责人页面
+					 		$("#product-index-form input[name='developmentManagerName']").val(res.page[0].usrName);
+							$("#product-index-form input[name='developmentManagerId']").val(res.page[0].usrId);
+					 	}else if(act =="add"){ //销售部门负责人 页面
+					 		$("#product-addForm-hook input[name='developmentManagerName']").val(res.page[0].usrName);
+							$("#product-addForm-hook input[name='developmentManagerId']").val(res.page[0].usrId);
+			      }
+		      }},
+			  dataType: "json"
+			})
+	}
+}
 //关闭
 $(".org-wrapper #org-close-hook").click(function(){
 	win.close();

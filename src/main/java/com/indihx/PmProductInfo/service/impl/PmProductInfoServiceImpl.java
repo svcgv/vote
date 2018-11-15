@@ -1,5 +1,8 @@
 package com.indihx.PmProductInfo.service.impl;
 
+import com.indihx.PmProductProjectRelation.entity.PmProductProjectRelationEntity;
+import com.indihx.PmProjectInfo.dao.PmProjectInfoMapper;
+import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.List;
@@ -15,7 +18,8 @@ import com.indihx.PmProductInfo.service.PmProductInfoService;
 public class PmProductInfoServiceImpl implements PmProductInfoService {
 	@Resource
    	PmProductInfoMapper pmProductInfoMapper;
-   	
+	@Resource
+	PmProjectInfoMapper pmProjectInfoMapper;
    
    	public PmProductInfoEntity queryObject(long id){
    		return pmProductInfoMapper.queryObject(id);
@@ -23,6 +27,17 @@ public class PmProductInfoServiceImpl implements PmProductInfoService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmProductInfoEntity entity){
    		pmProductInfoMapper.insert(entity);
+		for(Long projectId:entity.getProjectIds()) {
+			PmProductProjectRelationEntity RelationEntity = new PmProductProjectRelationEntity();
+			PmProjectInfoEntity projectEntity = pmProjectInfoMapper.queryObject(projectId);
+//			RelationEntity.setCustCode(projectEntity.getCustSapCode());
+//			RelationEntity.setCustGroupId(custGroupId);
+//			RelationEntity.setCustCnName(customEntity.getCustCnName());
+//			RelationEntity.setCustId(customEntity.getCustId());
+//   			RelationEntity.set
+//			pmCustomerGroupRelationMapper.insert(RelationEntity);
+		}
+
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmProductInfoEntity entity){

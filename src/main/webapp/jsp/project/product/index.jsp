@@ -66,9 +66,6 @@
 		          <input type="text" name="developmentManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control">
 		          <input type="text" style='display:none' name="developmentManagerId">
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
 		    </div>
 		    
 		     <div class="layui-inline">
