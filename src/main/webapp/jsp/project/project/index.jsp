@@ -105,7 +105,7 @@
 		     <div class="layui-inline" style="padding-right:55px;">
 		       <label class="layui-form-label">项目状态：</label>
 		       <div class="layui-input-inline">
-		          <select name="state" lay-verify="required" lay-filter="" class="form-control">
+		          <select name="projectStatus" lay-verify="required" lay-filter="" class="form-control">
 		        	 <option value="">请选择</option>
 		        	 <option value="00" selected>进行中</option>
 		        	 <option value="02">待验收</option>
@@ -194,17 +194,14 @@ var col=[
 	  	      {field:'custManagerName', title:'客户经理', width:130},
 	  	      {field:'createProjectTime', title:'立项时间'},
 	  	      {field:'finishProjectTime', title:'结项时间'},
-	  	      {field:'currentYearFollow', title:'是否重点项目'},
-	  	      {field:'isSignedContract', title:'是否签订'},
-	  	      {field:'state', title:'项目状态'},
+	  	      {field:'projectStatus', title:'项目状态'},
 	  	      {field:'projectType', title:'项目类型'},
+	  	      {field:'isImportant', title:'是否重点项目'},
 	    	  {field:'predictContractAmount', title:'合同金额'},
-	    	  {field:'profitRate', title:'利润率'},
-	    	  {field:'profitMount', title:'利润'},
-	    	  {field:'workLoad', title:'工作量'},
-	    	  {field:'currendYearIncomming', title:'本年可报收入'},
-	    	  {field:'currentYearGrossProfit', title:'本年毛利'},
-	    	  
+	    	  {field:'predictProfitRate', title:'预估利润率'},
+	    	  {field:'predictProfitMount', title:'预估利润'},
+	    	  {field:'predictWorkload', title:'预估工作量'},
+	    	  {field:'yearSalary', title:'预估当年收入'},
 	    	  {field:'allIncomming', title:'收入合计'},
 	    	  
 	    ]
@@ -328,54 +325,14 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   // table render
   table.render({
 	  	id:"customer-table",
-	    elem: '#projectIndexTable',
-	    //url:'custom.json',
+	  elem: '#projectIndexTable',
+	    url:'custom.json',
 	    toolbar: '#toolbarDemo',
 	    height:'full-200',
 	    title: '投标数据表',
-	    cols: [
-	    	[
-	    	  
-	  	      {align: 'center', title: '项目信息', colspan: 16},
-	  	      {align: 'center', title: '项目预算', colspan: 6},
-	  	      {align: 'center', title: '上报收入', colspan: 2},
-	  	      {align: 'center',field: 'lastYearRevenue', title: '去年上报的收入', rowspan: 2},
-	  	      {align: 'center',field: 'signContractDate', title: '合同签订日期', rowspan: 2},
-	  	      {align: 'center',field: 'isSignedContract', title: '是否签订', rowspan: 2},
-	  	      {align: 'center',field: 'workLoadConfirm', title: '工作量确认', rowspan: 2},
-	  	      {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
-	   		],
-		    [
-		    	  {type: 'checkbox', fixed: 'left'},
-		  	      {field:'projectId', title:'项目编号', sort: true, width:130},
-		  	      {field:'buildDeptName', title:'实施部门',sort: true, width:130},
-		  	      {field:'buildManagerName', title:'实施负责人' ,sort: true, width:130},
-		  	      {field:'sellDeptName', title:'销售部门', width:130},
-		  	      {field:'sellManagerName', title:'销售负责人', width:130},
-		  	      {field:'createProjectTime', title:'立项时间'},
-		  	      {field:'finishProjectTime', title:'结项时间'},
-		  	      {field:'wbs', title:'WBS编号', width:150},
-		  	      {field:'custName', title:'客户名称', width:150},
-		  	      {field:'projectName', title:'项目名称'},
-		  	      {field:'currentYearFollow', title:'本年关注'},
-		  	      {field:'isContinue', title:'是否延续'},
-		  	      {field:'isSignedContract', title:'是否签订'},
-		  	      {field:'state', title:'状态'},
-		  	      {field:'projectType', title:'项目类型'},
-		  	      
-		    	  {field:'predictContractAmount', title:'合同金额'},
-		    	  {field:'profitRate', title:'利润率'},
-		    	  {field:'profitMount', title:'利润'},
-		    	  {field:'workLoad', title:'工作量'},
-		    	  {field:'currendYearIncomming', title:'本年可报收入'},
-		    	  {field:'currentYearGrossProfit', title:'本年毛利'},
-		    	  
-		    	  {field:'allIncomming', title:'收入合计'},
-		    	  {field:'overFlowReportIncomming', title:'超报收入'},
-		    ]
-	    ],
-	    cellMinWidth:'120',
-	    data:[
+	  cols: col,
+	   cellMinWidth:'120',
+	   data:[
 	    	{
 	    		projectId:"pro-01",
 	    		buildDeptName:"实施部门",
@@ -395,8 +352,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    		allIncomming:'120000',
 	    	}
 	    	],
-	    page: true
-	  });
+	   page: true
+	 });
 
 	/*
 	*监听每行编辑删除事件
@@ -436,7 +393,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		 
 		 $.ajax({
 			  type: 'POST',
-			  url: '/vote/pmconfirmbid/list',
+			  url: '/vote/pmprojectinfo/list',
 			  data: JSON.stringify(newparam),
 			  contentType:'application/json',
 			  success: function(res){
@@ -449,22 +406,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	    toolbar: '#toolbarDemo',
 			  	    height:'full-200',
 			  	    title: '投标据表',
-			  	    cols: [[
-						  {type: 'checkbox', fixed: 'left'},
-				  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
-				  	      {field:'bidName', title:'投标名称', width:130},
-				  	      {field:'status', title:'评审状态', width:130},
-				  	      {field:'bidFirstPrice', title:'投标首次报价金额'},
-				  	      {field:'custName', title:'客户名称', width:230},
-				  	      {field:'predictAmount', title:'预估收入金额'},
-				  	      {field:'predictCost', title:'预估成本'},
-				  	      {field:'predictProfitRate', title:'预估利润率'},
-				  	      {field:'predictPeriod', title:'预付期限'},
-				  	      {field:'payDeptName', title:'交付部门'},
-				  	      {field:'sellDeptName', title:'销售部门'},
-				  	      {field:'custManagerName', title:'客户经理'},
-				  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
-			  	    ]],
+			  	    cols: col	,
 			  	    cellMinWidth:'100',
 			  	    data:testData,
 			  	    page: true
