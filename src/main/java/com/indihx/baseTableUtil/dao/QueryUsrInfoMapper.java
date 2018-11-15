@@ -23,6 +23,6 @@ public interface QueryUsrInfoMapper{
 	 * @param param{orgNo:,roleCode:''}
 	 * @return
 	 */
-	public List<Map<String,Object>> queryUserByRoleCodeAndOrgNo(Map<String,Object> param);
+	public List<QueryUsrInfoEntity> queryUserByRoleCodeAndOrgNo(Map<String,Object> param);
 	
 }

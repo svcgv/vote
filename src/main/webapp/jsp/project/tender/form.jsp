@@ -341,6 +341,7 @@ $(function(){
   
   	//查询交付部门
   $("#tender-addForm-hook #payOrgQuery-hook").click(function(){
+	  console.log('asdasd')
 	  $.openWindow({
 	  		url:'org?act=addPay',
 	  		title:"选择交付部门",
@@ -348,7 +349,7 @@ $(function(){
 	 });
 	  
   });
-	
+/* 	
   	//查询交付部门负责人
   $("#tender-addForm-hook #payOrgMangerQuery-hook").click(function(){
 	  $.openWindow({
@@ -357,9 +358,9 @@ $(function(){
 	  		width:"700"
 	 });
 	  
-});
+}); */
   
-  	//查询销售部门负责人
+/*   	//查询销售部门负责人
   $("#tender-addForm-hook #userManagerQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'user?act=addSaleDept',
@@ -367,7 +368,7 @@ $(function(){
 	  		width:"700"
 	 });
 	  
-});
+}); */
   
 	 // 选择机构
   $("#tender-addForm-hook #orgQuery-hook").click(function(){

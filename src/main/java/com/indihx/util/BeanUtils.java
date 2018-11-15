@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.indihx.system.entity.UsrInfo;
+
 public class BeanUtils {
 	 public static <T> T Map2Bean(Map<String,Object>map,Class<T> Bean) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException{
 		T a =  Bean.newInstance();
@@ -81,6 +83,12 @@ public class BeanUtils {
 			return underline(sb);
 		}
 
+		public static void main(String[] args) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("USR_NAME", "eeeee");
+			UsrInfo a=BeanUtils.Map2Bean(map, UsrInfo.class);
+			System.out.println(a.getUsrName());
+		}
 	 
 }
 

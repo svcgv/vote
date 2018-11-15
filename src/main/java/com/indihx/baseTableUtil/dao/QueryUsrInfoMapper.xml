@@ -244,7 +244,7 @@
 	</select>
 
 	<!-- 通过rolecode和机构id查用户 -->
-	<select id="queryUserByRoleCodeAndOrgNo" resultMap="java.util.Map">
+	<select id="queryUserByRoleCodeAndOrgNo" resultMap="usrInfoMap">
 		SELECT
 			*
 		FROM

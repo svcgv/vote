@@ -37,7 +37,7 @@ public class QueryUsrInfoServiceImpl implements QueryUsrInfoService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryUserByRoleCodeAndOrgNo(Map<String, Object> param) {
+	public List<QueryUsrInfoEntity> queryUserByRoleCodeAndOrgNo(Map<String, Object> param) {
 		// TODO Auto-generated method stub
 		return queryUsrInfoMapper.queryUserByRoleCodeAndOrgNo(param);
 	}

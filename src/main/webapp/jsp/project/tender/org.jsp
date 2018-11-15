@@ -143,11 +143,17 @@ function queryUserByRoleCodeOrgNo(orgNo,roleCode){
 			  data: JSON.stringify(param),
 			  contentType:'application/json',
 			  success: function(res){
+				  console.log('asdas',act)
 			      console.log(res)
 			      if(res.page){
-			    	  
+			    	  if(act =="addPay"){ // 交付部门负责人页面
+					 		$("#tender-addForm-hook input[name='constructionDeptManagerName']").val(res.page[0].usrName);
+							$("#tender-addForm-hook input[name='constructionDeptManagerId']").val(res.page[0].usrId);
+					 	}else if(act =="add"){ //销售部门负责人 页面
+					 		$("#tender-addForm-hook input[name='sellDeptManagerName']").val(res.page[0].usrName);
+							$("#tender-addForm-hook input[name='sellDeptManagerId']").val(res.page[0].usrId);
 			      }
-		      },
+		      }},
 			  dataType: "json"
 			})
 	}
