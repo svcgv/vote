@@ -163,7 +163,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		 
 		 $.ajax({
 			  type: 'POST',
-			  url: '',
+			  url: '/vote/pmprojectgroupinfo/list',
 			  data: JSON.stringify(newparam),
 			  contentType:'application/json',
 			  success: function(res){

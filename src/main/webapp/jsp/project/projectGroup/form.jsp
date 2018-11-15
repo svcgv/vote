@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="cm" uri="http://www.custom.com/01"%>
-<div class="projectGroup-form-wrapper" style="margin-top:10px;">
+<div id="form-project-hook" class="projectGroup-form-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
 		<div class="layui-form-item">
 		    <div class="layui-inline">
@@ -92,9 +92,43 @@ $(function(){
 		});
 		// 保存
 		$(".projectGroup-form-wrapper").on("click","#projectGroup-add-hook",function(){
-			// 遍历选中的CheckBox
-			console.log(chosedProject,'form table中数据');
-			win.close();
+			
+			var projectGroupName = $("#form-project-hook input[name='projectGroupName']").val();
+			  
+			 if ($.trim(projectGroupName) == '') {
+                  layer.msg("请输入项目群名称");
+                  return false;
+              }
+			 
+			 if (chosedProject.length == 0){
+				 layer.msg("请添加项目");
+              	 return false; 
+			 }
+			 
+			 var ret = [];
+             for(var i=0;i<chosedProject.length;i++ ){
+                 ret.push(chosedProject[i].projectId)
+             }
+             var data = {projectGroupName: projectGroupName, projectIds: ret};
+             $.ajax({
+                 type: 'POST',
+                 url: '/vote/pmprojectgroupinfo/save',
+                 data: JSON.stringify(data),
+                 contentType: 'application/json',
+                 success: function (res) {
+                     // table.reload('customer-table');
+                     location.reload();
+                     layer.msg("新增成功", {icon: 1});
+                     win.close();
+                 },
+                 error: function () {
+                     layer.msg("新增失败", {icon: 5});
+                     win.close();
+                 },
+                 dataType: "json"
+             })
+
+             return false;
 		});
 	
 	});

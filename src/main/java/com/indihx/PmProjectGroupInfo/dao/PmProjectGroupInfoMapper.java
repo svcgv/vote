@@ -18,4 +18,5 @@ public interface PmProjectGroupInfoMapper{
 	public void delete(long projectGroupId);
 	public List<PmProjectGroupInfoEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
+	public long queryMaxId();
 }
