@@ -1,5 +1,6 @@
 package com.indihx.PmProductInfo.service.impl;
 
+import com.indihx.PmProductProjectRelation.dao.PmProductProjectRelationMapper;
 import com.indihx.PmProductProjectRelation.entity.PmProductProjectRelationEntity;
 import com.indihx.PmProjectInfo.dao.PmProjectInfoMapper;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
@@ -20,6 +21,8 @@ public class PmProductInfoServiceImpl implements PmProductInfoService {
    	PmProductInfoMapper pmProductInfoMapper;
 	@Resource
 	PmProjectInfoMapper pmProjectInfoMapper;
+	@Resource
+	PmProductProjectRelationMapper pmProductProjectRelationMapper;
    
    	public PmProductInfoEntity queryObject(long id){
    		return pmProductInfoMapper.queryObject(id);
@@ -30,6 +33,15 @@ public class PmProductInfoServiceImpl implements PmProductInfoService {
 		for(Long projectId:entity.getProjectIds()) {
 			PmProductProjectRelationEntity RelationEntity = new PmProductProjectRelationEntity();
 			PmProjectInfoEntity projectEntity = pmProjectInfoMapper.queryObject(projectId);
+//			RelationEntity.setCustCode(projectEntity);
+			RelationEntity.setCustName(projectEntity.getCustName());
+			RelationEntity.setCustSapCode(projectEntity.getCustSapCode());
+			RelationEntity.setProductId(entity.getProductId());
+			RelationEntity.setProductName(entity.getProductName());
+			RelationEntity.setProjectId(projectId);
+			RelationEntity.setProjectName(projectEntity.getProjectName());
+			pmProductProjectRelationMapper.insert(RelationEntity);
+//			RelationEntity.setProductGroupId();
 //			RelationEntity.setCustCode(projectEntity.getCustSapCode());
 //			RelationEntity.setCustGroupId(custGroupId);
 //			RelationEntity.setCustCnName(customEntity.getCustCnName());

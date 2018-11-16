@@ -43,7 +43,6 @@
 
 <script type="text/javascript">
     $(function () {
-
         var testData = [];
 //一般直接写在一个js文件中
         layui.use(['layer', 'form', 'laydate', 'table'], function () {

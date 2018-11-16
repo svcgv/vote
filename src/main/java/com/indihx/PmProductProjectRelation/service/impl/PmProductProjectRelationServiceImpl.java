@@ -33,6 +33,10 @@ public class PmProductProjectRelationServiceImpl implements PmProductProjectRela
    		pmProductProjectRelationMapper.delete( productRelationId);
    	}
 
+	public void deleteByProductId(long productId){
+		pmProductProjectRelationMapper.deleteByProductId( productId);
+	}
+
 	public int queryTotal(){
    		return pmProductProjectRelationMapper.queryTotal();
    	}
