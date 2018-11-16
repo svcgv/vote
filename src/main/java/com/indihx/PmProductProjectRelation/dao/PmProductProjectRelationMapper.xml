@@ -21,6 +21,7 @@
         <result property="modifier" column="MODIFIER"/>
         <result property="modifyTime" column="MODIFY_TIME"/>
         <result property="isDelete" column="IS_DELETE"/>
+		<result property="wbs" column="WBS"/>
     </resultMap>
 
 	<select id="queryObject" resultMap="pmProductProjectRelationMap">
@@ -28,42 +29,42 @@
 	</select>
 
 	<select id="queryList" resultMap="pmProductProjectRelationMap">
-		select 
-		*
-		 from pm_product_project_relation
+		select
+		A.*,wbs
+		from pm_product_project_relation A left JOIN pm_project_info B ON A.PROJECT_ID=B.PROJECT_ID
 		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
 						<if test="productRelationId != null and productRelationId!=''"  >
-				PRODUCT_RELATION_ID = #{productRelationId} AND 			</if>
+							A.PRODUCT_RELATION_ID = #{productRelationId} AND 			</if>
 						<if test="productName != null and productName!=''"  >
-				PRODUCT_NAME = #{productName} AND 			</if>
+							A.PRODUCT_NAME = #{productName} AND 			</if>
 						<if test="productId != null and productId!=''"  >
-				PRODUCT_ID = #{productId} AND 			</if>
+							A.PRODUCT_ID = #{productId} AND 			</if>
 						<if test="productGroupId != null and productGroupId!=''"  >
-				PRODUCT_GROUP_ID = #{productGroupId} AND 			</if>
+							A.PRODUCT_GROUP_ID = #{productGroupId} AND 			</if>
 						<if test="projectId != null and projectId!=''"  >
-				PROJECT_ID = #{projectId} AND 			</if>
+							A.PROJECT_ID = #{projectId} AND 			</if>
 						<if test="buildDeptName != null and buildDeptName!=''"  >
-				BUILD_DEPT_NAME = #{buildDeptName} AND 			</if>
+							A.BUILD_DEPT_NAME = #{buildDeptName} AND 			</if>
 						<if test="custName != null and custName!=''"  >
-				CUST_NAME = #{custName} AND 			</if>
+							A.CUST_NAME = #{custName} AND 			</if>
 						<if test="custCode != null and custCode!=''"  >
-				CUST_CODE = #{custCode} AND 			</if>
+							A.CUST_CODE = #{custCode} AND 			</if>
 						<if test="custSapCode != null and custSapCode!=''"  >
-				CUST_SAP_CODE = #{custSapCode} AND 			</if>
+							A.CUST_SAP_CODE = #{custSapCode} AND 			</if>
 						<if test="projectName != null and projectName!=''"  >
-				PROJECT_NAME = #{projectName} AND 			</if>
+							A.PROJECT_NAME = #{projectName} AND 			</if>
 						<if test="remark != null and remark!=''"  >
-				REMARK = #{remark} AND 			</if>
+							A.REMARK = #{remark} AND 			</if>
 						<if test="creatorId != null and creatorId!=''"  >
-				CREATOR_ID = #{creatorId} AND 			</if>
+							A.CREATOR_ID = #{creatorId} AND 			</if>
 						<if test="createTime != null and createTime!=''"  >
-				CREATE_TIME = #{createTime} AND 			</if>
+							A.CREATE_TIME = #{createTime} AND 			</if>
 						<if test="modifier != null and modifier!=''"  >
-				MODIFIER = #{modifier} AND 			</if>
+							A.MODIFIER = #{modifier} AND 			</if>
 						<if test="modifyTime != null and modifyTime!=''"  >
-				MODIFY_TIME = #{modifyTime} AND 			</if>
+							A.MODIFY_TIME = #{modifyTime} AND 			</if>
 						<if test="isDelete != null and isDelete!=''"  >
-				IS_DELETE = #{isDelete}			</if>
+							A.IS_DELETE = #{isDelete}			</if>
 					</trim> 
 	</select>
 	
@@ -130,11 +131,8 @@
 			<if test="modifyTime != null and modifyTime!=''">
 				,MODIFY_TIME	
 			</if>
-		
-			<if test="isDelete != null and isDelete!=''">
-				,IS_DELETE	
-			</if>
-		
+				,IS_DELETE
+
 		)
 		values
 		(
@@ -181,9 +179,7 @@
 		<if test="modifyTime != null and modifyTime!=''">
 			,#{modifyTime}
 		</if>
-		<if test="isDelete != null and isDelete!=''">
-			,#{isDelete}
-		</if>
+			,'00'
 		)
 	</insert>
 	 
@@ -226,6 +222,10 @@
 	
 	<delete id="delete">
 		delete from pm_product_project_relation where PRODUCT_RELATION_ID = #{value}
+	</delete>
+
+	<delete id="deleteByProductId">
+		delete from pm_product_project_relation where PRODUCT_ID = #{value}
 	</delete>
 	
 

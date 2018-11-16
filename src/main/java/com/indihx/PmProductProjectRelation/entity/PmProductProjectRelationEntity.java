@@ -98,6 +98,11 @@ private String modifyTime;
 private String isDelete;
 
 	/**
+	 * 项目编号
+	 */
+	private String wbs;
+
+	/**
 	 * 设置：
 	 */
 	public void setProductRelationId(long productRelationId) {
@@ -288,5 +293,13 @@ private String isDelete;
 	 */
 	public String getIsDelete() {
 		return isDelete;
+	}
+
+	public String getWbs() {
+		return wbs;
+	}
+
+	public void setWbs(String wbs) {
+		this.wbs = wbs;
 	}
 }
