@@ -1,5 +1,6 @@
 package com.indihx.PmProjectInfo.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.List;
@@ -47,4 +48,13 @@ public class PmProjectInfoServiceImpl implements PmProjectInfoService {
    		}
    		return pmProjectInfoMapper.queryList(entity);
    	}
+	public List<PmProjectInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize){
+		if(pageNum != null && pageSize != null) {
+			PageHelper.startPage(pageNum, pageSize);
+		}
+		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
+			entity.put("isDelete", "00");
+		}
+		return pmProjectInfoMapper.queryList(entity);
+	}
 }

@@ -118,11 +118,7 @@
 		       <label class="layui-form-label">项目类型：</label>
 		       <div class="layui-input-inline">
 		          <select name="projectType" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00" selected>整包项目</option>
-		        	 <option value="01">人力项目</option>
-		        	 <option value="02">订单项目</option>
-		        	 <option value="03">内部研发项目</option>
+		        	  ${projectType.ewTypeHtml}
 		          </select>
 		      </div>
 		    </div>
@@ -130,11 +126,7 @@
 		       <label class="layui-form-label">项目状态：</label>
 		       <div class="layui-input-inline">
 		          <select name="projectStatus" lay-verify="required" lay-filter="" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00" selected>进行中</option>
-		        	 <option value="02">待验收</option>
-		        	 <option value="01">结项</option>
-		        	 <option value="03">关闭</option>
+		        	 ${projectStatus.ewTypeHtml}
 		          </select>
 		      </div>
 		    </div>
@@ -143,15 +135,7 @@
 		       <label class="layui-form-label">审批状态：</label>
 		       <div class="layui-input-inline">
 		          <select name="approveStatus" lay-verify="required" lay-filter="" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00">待申请</option>
-		        	 <option value="01">待实施审批</option>
-		        	 <option value="02">实施审批退回</option>
-		        	 <option value="03">待销售审批</option>
-		        	 <option value="04">销售审批退回</option>
-		        	 <option value="05">待技术总监审批</option>
-		        	 <option value="06">技术总监退回</option>
-		        	 <option value="07">审批通过</option>
+		        	 ${approveStatus.ewTypeHtml}
 		        </select>
 		      </div>
 		    </div>
@@ -174,9 +158,7 @@
 		       <label class="layui-form-label">是否重点项目：</label>
 		       <div class="layui-input-inline">
 		          <select name="isImportant" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00">是</option>
-		        	 <option value="01">否</option>
+		        	 ${isImportant.ewTypeHtml}
 		          </select>
 		      </div>
 		    </div>
@@ -504,7 +486,7 @@ $(function(){
 	  //选择投标
 	  $("#project-edit-hook #bidNameQuery-hook").click(function(){
 		  $.openWindow({
-		  		url:'tender?act=tenderForm',
+		  		url:'tender?act=tenderEdit',
 		  		title:"选择投标",
 		  		width:"700"
 		 });
@@ -525,7 +507,7 @@ $(function(){
 	//选择实施部门
 	  $("#project-edit-hook #buildDeptNameQuery-hook").click(function(){
 		  $.openWindow({
-		  		url:'org?act=buildDeptForm',
+		  		url:'org?act=buildDeptEdit',
 		  		title:"选择实施部门",
 		  		width:"400"
 		 });
@@ -534,7 +516,7 @@ $(function(){
 	  // 选择实施负责人
 	  $("#project-edit-hook #buildManagerNameQuery-hook").click(function(){
 		  $.openWindow({
-		  		url:'user?act=buildManagerForm',
+		  		url:'user?act=buildManagerEdit',
 		  		title:"选择实施负责人",
 		  		width:"700"
 		 });
@@ -544,7 +526,7 @@ $(function(){
 	  // 选择项目经理
 	  $("#project-edit-hook #projectManagerNameQuery-hook").click(function(){
 		  $.openWindow({
-		  		url:'user?act=projectManagerForm',
+		  		url:'user?act=projectManagerEdit',
 		  		title:"项目经理",
 		  		width:"700"
 		 });
@@ -553,7 +535,7 @@ $(function(){
 	  // 选择销售部门
 	  $("#project-edit-hook #sellDeptNameQuery-hook").click(function(){
 		  $.openWindow({
-		  		url:'org?act=sellDeptForm',
+		  		url:'org?act=sellDeptEdit',
 		  		title:"选择销售部门",
 		  		width:"400"
 		 });
@@ -562,7 +544,7 @@ $(function(){
 	  // 选择销售负责人
 	  $("#project-edit-hook #sellManagerNameQuery-hook").on("click",function(){
 		  	$.openWindow({
-		  		url:'user?act=sellManagerForm',
+		  		url:'user?act=sellManagerEdit',
 		  		title:"选择销售负责人",
 		  		width:"700"
 		 	 });
@@ -571,7 +553,7 @@ $(function(){
 	  // 选择客户经理
 	  $("#project-edit-hook #custManagerNameQuery-hook").on("click",function(){
 		  	$.openWindow({
-		  		url:'user?act=custManagerForm',
+		  		url:'user?act=custManagerEdit',
 		  		title:"选择客户经理",
 		  		width:"700"
 		 	 });
@@ -580,7 +562,7 @@ $(function(){
 	  // 选择WBS编号
 	  $("#project-edit-hook #wbsQuery-hook").on("click",function(){
 		  	$.openWindow({
-		  		url:'project?act=wbsForm',
+		  		url:'project?act=wbsEdit',
 		  		title:"选择WBS编号",
 		  		width:"700"
 		 	 });
@@ -588,7 +570,7 @@ $(function(){
 	  // 选择客户名称
 	  $("#project-edit-hook #custNameQuery-hook").on("click",function(){
 		  	$.openWindow({
-		  		url:'customer?act=custForm',
+		  		url:'customer?act=custEdit',
 		  		title:"选择客户名称",
 		  		width:"700"
 		 	 });

@@ -51,29 +51,139 @@ $(".org-wrapper #org-add-hook").click(function(){
 	
 });
 var act="${act}";// 区分是index页 form页 赋值问题
+
 function zTreeOnSaveEvent(event, treeId, treeNode) {
 	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
  // 保存到已选机构中
  	if(act == "buildDept"){
+ 		//实施部门
+		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"BUILD_DEPT_NAME")
  		// index
 		$("#project-index-form input[name='buildDeptName']").val(getCheckedOrg.name);
 		$("#project-index-form input[name='buildDeptId']").val(getCheckedOrg.orgId);
  	}else if(act == "sellDept"){
+ 		
+ 		//销售部门
+		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"SELL_DEPT_MANAGER")
  		// index
  		$("#project-index-form input[name='sellDeptName']").val(getCheckedOrg.name);
 		$("#project-index-form input[name='sellDeptId']").val(getCheckedOrg.orgId);
  	}else if(act == "buildDeptForm"){
+ 		
+ 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"BUILD_DEPT_NAME")
+ 		queryProfitInfo(getCheckedOrg.orgId)
  		// form
  		$("#project-form-hook  input[name='buildDeptName']").val(getCheckedOrg.name);
 		$("#project-form-hook  input[name='buildDeptId']").val(getCheckedOrg.orgId);
  	}else if(act == "sellDeptForm"){
+ 		
+ 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"SELL_DEPT_MANAGER")
  		// form
  		$("#project-form-hook  input[name='sellDeptName']").val(getCheckedOrg.name);
 		$("#project-form-hook  input[name='sellDeptId']").val(getCheckedOrg.orgId);
+ 	}else if(act == "buildDeptEdit"){
+ 	// edit
+ 			queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"BUILD_DEPT_NAME")
+ 			queryProfitInfo(getCheckedOrg.orgId)
+ 		$("#project-edit-hook  input[name='buildDeptName']").val(getCheckedOrg.name);
+		$("#project-edit-hook  input[name='buildDeptId']").val(getCheckedOrg.orgId);
+ 	}else if(act == "sellDeptEdit"){
+ 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"SELL_DEPT_MANAGER")
+ 		$("#project-edit-hook  input[name='sellDeptName']").val(getCheckedOrg.name);
+		$("#project-edit-hook  input[name='sellDeptId']").val(getCheckedOrg.orgId);
  	}
+ 
+ 	
 		win.close();
 };
 
+function queryProfitInfo(orgId){
+	
+	var param = {}
+	param.orgId=orgId
+	$.ajax({
+		  type: 'POST',
+		url: '/vote/pmprojectinfo/queryProfitInfo',
+		 data: JSON.stringify(param),
+		 contentType:'application/json',
+		success:function(res){
+		      if(res.profitInfo.length>0){
+		    	  if(act == "buildDeptForm"){
+			      	$("#project-form-hook input[name='profitCode']").val(res.profitInfo.profitId);
+			      }else if(act == "buildDeptEdit"){
+			      	$("#project-edit-hook  input[name='profitCode']").val(res.profitInfo.profitId);
+			      }
+		      }
+		},
+		 dataType: "json"
+		
+	})
+}
+
+function queryUserByRoleCodeOrgNo(orgNo,roleCode){
+	console.log(orgNo,roleCode)
+	//若roleCode存在，则向后台查一把，根据act返现再页面上
+	if(roleCode){
+		var param = {}
+		param.orgNo=orgNo
+		param.roleCode=roleCode
+		console.log('param',param)
+		$.ajax({
+			  type: 'POST',
+			  url: '/vote/queryusrinfo/queryUserByRoleCodeAndOrgNo',
+			  data: JSON.stringify(param),
+			  contentType:'application/json',
+			  success: function(res){
+				  console.log('asdas',act)
+			      console.log(res)
+			      if(res.page.length>0){
+			    	  if(act =="buildDept"){ // 实施负责人
+					 		$("#project-index-form input[name='buildManagerName']").val(res.page[0].usrName);
+							$("#project-index-form input[name='buildManagerId']").val(res.page[0].usrId);
+					  }else if(act =="sellDept"){ //销售负责人
+					 		$("#project-index-form  input[name='sellManagerName']").val(res.page[0].usrName);
+							$("#project-index-form  input[name='sellManagerId']").val(res.page[0].usrId);
+			      	 }else if(act == "buildDeptForm"){
+			      		$("#project-form-hook input[name='buildManagerName']").val(res.page[0].usrName);
+						$("#project-form-hook input[name='buildManagerId']").val(res.page[0].usrId);
+			      	 }else if(act == "sellDeptForm"){
+			      		$("#project-form-hook input[name='sellManagerName']").val(res.page[0].usrName);
+						$("#project-form-hook input[name='sellManagerId']").val(res.page[0].usrId);
+			      	 }else if(act == "buildDeptEdit"){
+			      	 	// edit
+			      		$("#project-edit-hook  input[name='buildManagerName']").val(res.page[0].usrName);
+			     		$("#project-edit-hook  input[name='buildManagerId']").val(res.page[0].usrId);
+			      	}else if(act == "sellDeptEdit"){
+			      		$("#project-edit-hook  input[name='sellManagerName']").val(res.page[0].usrName);
+			     		$("#project-edit-hook  input[name='sellManagerId']").val(res.page[0].usrId);
+			      	}
+		      }
+			      else{
+			    	  if(act =="buildDept"){ // 实施负责人
+					 		$("#project-index-form  input[name='buildManagerName']").val('');
+							$("#project-index-form  input[name='buildManagerId']").val('');
+					 	}else if(act =="sellDept"){ //销售负责人
+					 		$("#project-index-form  input[name='sellManagerName']").val('');
+							$("#project-index-form  input[name='sellManagerId']").val('');
+			      		}else if(act == "buildDeptForm"){
+				      		$("#project-form-hook input[name='buildManagerName']").val('');
+							$("#project-form-hook input[name='buildManagerId']").val('');
+				      	 }else if(act == "sellDeptForm"){
+				      		$("#project-form-hook input[name='sellManagerName']").val('');
+							$("#project-form-hook input[name='sellManagerId']").val('');
+				      	 }else if(act == "buildDeptEdit"){
+					      	 	// edit
+					      		$("#project-edit-hook  input[name='buildManagerName']").val('');
+					     		$("#project-edit-hook  input[name='buildManagerId']").val('');
+					      	}else if(act == "sellDeptEdit"){
+					      		$("#project-edit-hook  input[name='sellManagerName']").val('');
+					     		$("#project-edit-hook  input[name='sellManagerId']").val('');
+					      	}
+			      }},
+			  dataType: "json"
+			})
+	}
+}
 
 //关闭
 $(".org-wrapper #org-close-hook").click(function(){

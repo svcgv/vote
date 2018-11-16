@@ -71,7 +71,11 @@
 		select count(*) from pm_product_info 
 	</select>
 	 
-	<insert id="insert" parameterType="com.indihx.PmProductInfo.entity.PmProductInfoEntity">
+	<insert id="insert" useGeneratedKeys="true"  keyProperty="productId" parameterType="com.indihx.PmProductInfo.entity.PmProductInfoEntity">
+		<selectKey keyProperty="productId" order="BEFORE"
+				   resultType="java.lang.Long">
+			select PmProductInfo_SEQ.nextval as productId from DUAL
+		</selectKey>
 		insert into pm_product_info
 		(
 		PRODUCT_ID
@@ -135,7 +139,7 @@
 		)
 		values
 		(
-		PmProductInfo_SEQ.nextval
+		#{productId}
 		<if test="productCode != null and productCode!=''">
 			,#{productCode}
 		</if>

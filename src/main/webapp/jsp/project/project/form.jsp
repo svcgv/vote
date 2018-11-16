@@ -117,11 +117,7 @@
 		       <label class="layui-form-label">项目类型：</label>
 		       <div class="layui-input-inline">
 		          <select name="projectType" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00" selected>整包项目</option>
-		        	 <option value="01">人力项目</option>
-		        	 <option value="02">订单项目</option>
-		        	 <option value="03">内部研发项目</option>
+		        	    ${projectType.ewTypeHtml}
 		          </select>
 		      </div>
 		    </div>
@@ -144,9 +140,7 @@
 		       <label class="layui-form-label">是否重点项目：</label>
 		       <div class="layui-input-inline">
 		          <select name="isImportant" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00">是</option>
-		        	 <option value="01">否</option>
+		        	 ${isImportant.ewTypeHtml}
 		          </select>
 		      </div>
 		    </div>

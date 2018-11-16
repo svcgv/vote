@@ -129,7 +129,21 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			 		// form
 			 		$("#project-form-hook input[name='custManagerName']").val(userName);
 					$("#project-form-hook input[name='custManagerId']").val(userId);
+			 	}else if(act =="buildManagerEdit"){ 
+			 		$("#project-edit-hook input[name='buildManagerName']").val(userName);
+					$("#project-edit-hook input[name='buildManagerId']").val(userId);
+			 	}else if(act =="projectManagerEdit"){ 
+			 		$("#project-edit-hook input[name='projectManagerName']").val(userName);
+					$("#project-edit-hook input[name='projectManagerId']").val(userId);
+			 	}else if(act =="sellManagerEdit"){ 
+			 		$("#project-edit-hook input[name='sellManagerName']").val(userName);
+					$("#project-edit-hook input[name='sellManagerId']").val(userId);
+			 	}else if(act =="custManagerEdit"){ 
+			 		$("#project-edit-hook input[name='custManagerName']").val(userName);
+					$("#project-edit-hook input[name='custManagerId']").val(userId);
 			 	}
+				
+				
 			}
 		});
 		

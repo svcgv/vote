@@ -15,7 +15,7 @@
 		      <label class="layui-form-label">实施部门：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="buildDeptName"  autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="buildDeptId" />
+		         <input type="text" style='display:none' name="buildDeptId" />
 		      </div>
 		         <button type="button"  class="layui-btn layui-btn-sm" id="buildDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -24,7 +24,7 @@
 			      <label class="layui-form-label">实施负责人：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="buildManagerName"  autocomplete="off" class="layui-input form-control">
-			         <input type="hidden" name="buildManagerId" />
+			         <input type="text" style='display:none'  name="buildManagerId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="buildManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -42,7 +42,7 @@
 			      <label class="layui-form-label">销售部门：</label>
 			      <div class="layui-input-inline">
 				       <input type="text" name="sellDeptName"  autocomplete="off" class="layui-input form-control">
-				       <inpu type="hidden" name="sellDeptId" />
+				       <input type="text" style='display:none'  name="sellDeptId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="sellDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -51,7 +51,7 @@
 		      <label class="layui-form-label">销售负责人：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="sellManagerName"  autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="sellManagerId" />
+		         <input type="text" style='display:none'  name="sellManagerId" />
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="sellManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -85,7 +85,7 @@
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="custName" autocomplete="off" class="layui-input form-control">
-		         <input type="hidden" name="custId" />     
+		         <input type="text" style='display:none'  name="custId" />     
 		      </div>
 	      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -94,11 +94,7 @@
 		       <label class="layui-form-label">项目类型：</label>
 		       <div class="layui-input-inline">
 		          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00" selected>整包项目</option>
-		        	 <option value="01">人力项目</option>
-		        	 <option value="02">订单项目</option>
-		        	 <option value="03">内部研发项目</option>
+		        	      ${projectType.ewTypeHtml}
 		          </select>
 		      </div>
 		    </div>
@@ -106,11 +102,7 @@
 		       <label class="layui-form-label">项目状态：</label>
 		       <div class="layui-input-inline">
 		          <select name="projectStatus" lay-verify="required" lay-filter="" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00" selected>进行中</option>
-		        	 <option value="02">待验收</option>
-		        	 <option value="01">结项</option>
-		        	 <option value="03">关闭</option>
+		      		 	 ${projectStatus.ewTypeHtml}
 		          </select>
 		      </div>
 		    </div>
@@ -363,10 +355,21 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    if(obj.event === 'del'){
 	      layer.confirm('确认删除行么', function(index){
 	        obj.del();
-	        layer.close(index);
-	        table.reload('customer-table',{
-	        	
-	        });
+	        var param = {}
+            param.isDelete = '01'
+            param.projectId = data.projectId
+            $.ajax({
+                type: 'POST',
+                url: '/vote/pmprojectinfo/update',
+                data: JSON.stringify(param),
+                contentType: 'application/json',
+                success: function (res) {
+                    console.log(res)
+                },
+                dataType: "json"
+            })
+
+            layer.close(index);
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑

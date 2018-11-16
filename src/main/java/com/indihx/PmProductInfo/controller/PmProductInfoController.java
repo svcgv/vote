@@ -3,9 +3,16 @@ package com.indihx.PmProductInfo.controller;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import java.util.List;
+
+import com.indihx.PmProductProjectRelation.dao.PmProductProjectRelationMapper;
+import com.indihx.PmProductProjectRelation.entity.PmProductProjectRelationEntity;
+import com.indihx.PmProductProjectRelation.service.PmProductProjectRelationService;
+import com.indihx.PmProjectInfo.dao.PmProjectInfoMapper;
+import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +43,12 @@ public class PmProductInfoController {
     @Autowired
     private PmProductInfoService pmProductInfoService;
 
+    @Autowired
+    private PmProductProjectRelationService pmProductProjectRelationService;
+    @Resource
+    PmProjectInfoMapper pmProjectInfoMapper;
+    @Resource
+    PmProductProjectRelationMapper pmProductProjectRelationMapper;
     /**
      * 列表
      */
@@ -88,6 +101,27 @@ public class PmProductInfoController {
     @RequestMapping(value="/delete",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> delete(@RequestBody long productId,HttpSession session){
         pmProductInfoService.delete(productId);
+        return R.ok();
+    }
+
+    @RequestMapping(value="/changeRelation",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> changeRelation(@RequestBody  PmProductInfoEntity pmProductInfo,HttpSession session){
+        UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
+        pmProductInfo.setModifier(user.getUsrId());
+        pmProductInfo.setModifyTime(DateUtil.getDateTime());
+        pmProductInfoService.update(pmProductInfo);
+        pmProductProjectRelationService.deleteByProductId(pmProductInfo.getProductId());
+            for(Long projectId:pmProductInfo.getProjectIds()) {
+                PmProductProjectRelationEntity RelationEntity = new PmProductProjectRelationEntity();
+                PmProjectInfoEntity projectEntity = pmProjectInfoMapper.queryObject(projectId);
+                RelationEntity.setCustName(projectEntity.getCustName());
+                RelationEntity.setCustSapCode(projectEntity.getCustSapCode());
+                RelationEntity.setProductId(pmProductInfo.getProductId());
+                RelationEntity.setProductName(pmProductInfo.getProductName());
+                RelationEntity.setProjectId(projectId);
+                RelationEntity.setProjectName(projectEntity.getProjectName());
+                pmProductProjectRelationMapper.insert(RelationEntity);
+            }
         return R.ok();
     }
 
