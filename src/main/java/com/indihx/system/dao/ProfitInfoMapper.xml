@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.indihx.system.dao.CostInfoMapper">
+<mapper namespace="com.indihx.system.dao.ProfitInfoMapper">
   <!-- 支持缓存配置(必须配置否则缓存无效) -->
   <cache type="com.indihx.cache.RedisCache" />
   <resultMap id="BaseResultMap" type="com.indihx.system.entity.ProfitInfo">
