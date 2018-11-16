@@ -121,10 +121,6 @@
 				        <th></th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
-				      	
-				      	
-				      	
-				      	
 				      	<c:forEach items="${fileList}" var="app">
 							<tr class="edit-wosUploaded">
 						      	<td>${app.fileUploadName }</td>
@@ -158,8 +154,50 @@
 			     
 			     
 		  </div>
-		  
-		  <div class='tender-review-wrapper'>
+		    
+	  <div class="tenderCheckBoxList">
+	  	<div class="layui-inline">
+	      <div class="layui-input-inline">
+	     	 <div>
+		      <label>
+		         <input type="checkbox" id='a'>
+		         	工作范围清晰
+	          </label>
+	          </div>
+	          <div>
+	          <label>
+		         <input type="checkbox" id='b'>
+		         	技术方案合理
+	          </label>
+	          </div>
+	          <div>
+	   		  <label>
+		         <input type="checkbox" id='c'>
+		        	 资源满足
+	          </label>
+	          </div>
+	          <div>
+	          <label>
+		         <input type="checkbox" id='d'>
+		         	付款条件合理
+	          </label>
+	          </div>
+	          <div>
+	          <label>
+		         <input type="checkbox" id='e'>
+		         	实施周期合理
+	          </label>
+	          </div>
+	          <div>
+	          <label>
+		         <input type="checkbox" id='f'>
+		         	利润率达标
+	          </label>
+	          </div>
+	       </div>
+ 	 	</div>
+ 	 	
+		<div class='tender-review-wrapper'>
 		 <form class="layui-form" action="" lay-filter="form-detail"> 
 		 <div class="layui-inline">
 	      <label class="layui-form-label" >评审理由：</label>
@@ -200,6 +238,25 @@
 </div>
 <script>
 var reviewHis = ${reviewHis}
+var checkList=['a','b','c','d','e','f']
+
+
+function getChecked(){
+	for(var i=0;i<checkList.length;i++){
+		var boole = document.getElementById(checkList[i])['checked']
+		if(!boole){
+			return false
+		}
+	}
+	return true
+}
+function checkListDisableAndCheckedTrue(){
+	for(var i=0;i<checkList.length;i++){
+		changeValueById(checkList[i],'disabled',true)
+		changeValueById(checkList[i],'checked',true)
+		
+	}
+}
 $(function(){
 	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
@@ -244,6 +301,9 @@ $(function(){
 	  	    page: false
 	  	  	})
 		 var pmConfirmBid = JSON.parse('${pmConfirmBid}');
+	  if(pmConfirmBid.status!='01'){
+		  checkListDisableAndCheckedTrue()
+	  }
 		 console.log(pmConfirmBid);
 		 for (var property in pmConfirmBid) {
 		 	$("#tender-addForm-hook label[name='"+property+"']").text(pmConfirmBid[property]);
@@ -266,6 +326,13 @@ $(function(){
 			
 		function submit(result){
 				
+				 if(pmConfirmBid.status=='01'){
+					  if(!getChecked()){
+						  layer.msg("请确认所有检查项通过后再次点击通过按钮",{icon:3});
+						  return
+					  }
+				  }
+				
 				var formDatas=$(".tender-review-wrapper form").serializeObject();
 				formDatas.result=result
 				$.ajax({
@@ -277,6 +344,7 @@ $(function(){
 					success:function(res){
 						layer.msg("评审成功",{icon:1});
 						win.close();
+						location.reload()
 					},
 					error:function(){
 						layer.msg("评审失败",{icon:5});
@@ -296,4 +364,7 @@ $(function(){
 	})
 });
 
+function changeValueById(id ,key,value){
+	document.getElementById(id)[key]=value
+}
 </script>
