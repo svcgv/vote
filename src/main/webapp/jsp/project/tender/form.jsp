@@ -112,6 +112,29 @@
 		          <input type="text" style='display:none' name="sellDeptManagerId">
 		      </div>
 		     </div> 
+		     
+	      <div  class="layui-inline">
+		    <label class="layui-form-label">项目经理：</label>
+		       <div class="layui-input-inline">
+		          <input type="text" name="projectManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="text" style='display:none' name="projectManagerId">
+		      </div>
+		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-projectManager" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		       </div>
+		     </div> 
+		     
+		      <div class="layui-inline">
+		      <label class="layui-form-label">技术总监：</label>
+		       <div class="layui-input-inline">
+		          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="text" style='display:none' name="technicalDirectorId">
+		      </div>
+		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		       </div>
+		    </div>
+		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
@@ -134,16 +157,7 @@
 		       </div>
 		    </div>
 		    
-		    <div class="layui-inline">
-		      <label class="layui-form-label">技术总监：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="technicalDirectorId">
-		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
-		    </div>
+		   
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
@@ -332,15 +346,28 @@ $(function(){
   //查询技术总监
   $("#tender-addForm-hook #techQuery-hook").click(function(){
 	  $.openWindow({
-	  		url:'user?act=addtech',
+	  		url:'user?act=addtech&orgNo=&roleCode=',
 	  		title:"选择技术总监",
 	  		width:"700"
 	 });
 	  
 });
   
+  //选择项目经理
+  $("#techQuery-projectManager").click(function(){
+	  $.openWindow({
+	  		url:'user?act=addProManager&orgNo=&roleCode=PROJECT_MANGER',
+	  		title:"选择项目经理",
+	  		width:"700"
+	 });
+	  
+});
+  
+ 
+  
   	//查询交付部门
   $("#tender-addForm-hook #payOrgQuery-hook").click(function(){
+	  console.log('asdasd')
 	  $.openWindow({
 	  		url:'org?act=addPay',
 	  		title:"选择交付部门",
@@ -348,7 +375,7 @@ $(function(){
 	 });
 	  
   });
-	
+/* 	
   	//查询交付部门负责人
   $("#tender-addForm-hook #payOrgMangerQuery-hook").click(function(){
 	  $.openWindow({
@@ -357,9 +384,9 @@ $(function(){
 	  		width:"700"
 	 });
 	  
-});
+}); */
   
-  	//查询销售部门负责人
+/*   	//查询销售部门负责人
   $("#tender-addForm-hook #userManagerQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'user?act=addSaleDept',
@@ -367,7 +394,7 @@ $(function(){
 	  		width:"700"
 	 });
 	  
-});
+}); */
   
 	 // 选择机构
   $("#tender-addForm-hook #orgQuery-hook").click(function(){
@@ -382,7 +409,7 @@ $(function(){
   // 选择人员
   $("#tender-addForm-hook #userQuery-hook").off("click").on("click",function(){
 	  	$.openWindow({
-	  		url:'user?act=add',
+	  		url:'user?act=add&orgNo=&roleCode=',
 	  		title:"选择客户经理",
 	  		width:"700"
 	 	 });

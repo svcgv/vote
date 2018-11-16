@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  * @author hb
  * @email hb1230123@hotmail.com
- * @date 2018-11-09 10:04:00
+ * @date 2018-11-15 11:02:44
  */
 public class PmProjectInfoEntity extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +21,9 @@ public class PmProjectInfoEntity extends BaseEntity implements Serializable {
 	 */
 
 private long projectId;
+	/**
+	 * 
+	 */
 
 private String projectCode;
 	/**
@@ -97,7 +100,7 @@ private String custName;
 	 * 
 	 */
 
-private String custSapCode;
+private long custSapCode;
 	/**
 	 * 
 	 */
@@ -318,8 +321,6 @@ private long businessTripCost;
 	 */
 
 private long otherCost;
-
-private long sumAllCost;
 	/**
 	 * 
 	 */
@@ -370,6 +371,71 @@ private String modifyTime;
 	 */
 
 private long modifier;
+	/**
+	 * 
+	 */
+
+private long bidId;
+	/**
+	 * 
+	 */
+
+private String bidName;
+	/**
+	 * 
+	 */
+
+private long projectManagerId;
+	/**
+	 * 
+	 */
+
+private String projectManagerName;
+	/**
+	 * 
+	 */
+
+private long custManagerId;
+	/**
+	 * 
+	 */
+
+private String custManagerName;
+	/**
+	 * 
+	 */
+
+private long belongProjectGroupId;
+	/**
+	 * 
+	 */
+
+private String belongProjectGroupName;
+	/**
+	 * 
+	 */
+
+private String approveStatus;
+	/**
+	 * 
+	 */
+
+private long predictProfitMount;
+	/**
+	 * 
+	 */
+
+private long taxRate;
+	/**
+	 * 
+	 */
+
+private long budgetWithTax;
+	/**
+	 * 
+	 */
+
+private long budgetNoTax;
 
 	/**
 	 * 设置：
@@ -382,6 +448,18 @@ private long modifier;
 	 */
 	public long getProjectId() {
 		return projectId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getProjectCode() {
+		return projectCode;
 	}
 	/**
 	 * 设置：
@@ -554,13 +632,13 @@ private long modifier;
 	/**
 	 * 设置：
 	 */
-	public void setCustSapCode(String custSapCode) {
+	public void setCustSapCode(long custSapCode) {
 		this.custSapCode = custSapCode;
 	}
 	/**
 	 * 获取：
 	 */
-	public String getCustSapCode() {
+	public long getCustSapCode() {
 		return custSapCode;
 	}
 	/**
@@ -1211,18 +1289,160 @@ private long modifier;
 	public long getModifier() {
 		return modifier;
 	}
-	public long getSumAllCost() {
-		return sumAllCost;
+	/**
+	 * 设置：
+	 */
+	public void setBidId(long bidId) {
+		this.bidId = bidId;
 	}
-	public void setSumAllCost(long sumAllCost) {
-		this.sumAllCost = sumAllCost;
+	/**
+	 * 获取：
+	 */
+	public long getBidId() {
+		return bidId;
 	}
-	public String getProjectCode() {
-		return projectCode;
+	/**
+	 * 设置：
+	 */
+	public void setBidName(String bidName) {
+		this.bidName = bidName;
 	}
-	public void setProjectCode(String projectCode) {
-		this.projectCode = projectCode;
+	/**
+	 * 获取：
+	 */
+	public String getBidName() {
+		return bidName;
 	}
-	
-	
+	/**
+	 * 设置：
+	 */
+	public void setProjectManagerId(long projectManagerId) {
+		this.projectManagerId = projectManagerId;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getProjectManagerId() {
+		return projectManagerId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setProjectManagerName(String projectManagerName) {
+		this.projectManagerName = projectManagerName;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getProjectManagerName() {
+		return projectManagerName;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setCustManagerId(long custManagerId) {
+		this.custManagerId = custManagerId;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getCustManagerId() {
+		return custManagerId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setCustManagerName(String custManagerName) {
+		this.custManagerName = custManagerName;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getCustManagerName() {
+		return custManagerName;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setBelongProjectGroupId(long belongProjectGroupId) {
+		this.belongProjectGroupId = belongProjectGroupId;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getBelongProjectGroupId() {
+		return belongProjectGroupId;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setBelongProjectGroupName(String belongProjectGroupName) {
+		this.belongProjectGroupName = belongProjectGroupName;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getBelongProjectGroupName() {
+		return belongProjectGroupName;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setApproveStatus(String approveStatus) {
+		this.approveStatus = approveStatus;
+	}
+	/**
+	 * 获取：
+	 */
+	public String getApproveStatus() {
+		return approveStatus;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setPredictProfitMount(long predictProfitMount) {
+		this.predictProfitMount = predictProfitMount;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getPredictProfitMount() {
+		return predictProfitMount;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setTaxRate(long taxRate) {
+		this.taxRate = taxRate;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getTaxRate() {
+		return taxRate;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setBudgetWithTax(long budgetWithTax) {
+		this.budgetWithTax = budgetWithTax;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getBudgetWithTax() {
+		return budgetWithTax;
+	}
+	/**
+	 * 设置：
+	 */
+	public void setBudgetNoTax(long budgetNoTax) {
+		this.budgetNoTax = budgetNoTax;
+	}
+	/**
+	 * 获取：
+	 */
+	public long getBudgetNoTax() {
+		return budgetNoTax;
+	}
 }

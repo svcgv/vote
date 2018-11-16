@@ -183,7 +183,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   // 选择人员
   $(".tender-info-wrapper #userQuery-hook").on("click",function(){
 	  	$.openWindow({
-	  		url:'user?act=index',
+	  		url:'user?act=index&orgNo=&roleCode=',
 	  		title:"选择客户经理",
 	  		width:"700"
 	 	 });
@@ -300,7 +300,26 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
                 contentType:'application/json',
                 data: JSON.stringify(data),
                 success:function(res){
+                	if(res.code!=0){
+                		 layer.msg(res.msg,{icon:3});
+                		 return
+                	}
                     layer.msg("发起评审成功",{icon:1});
+                    table.reload('customer-table',{
+        				url:'/vote/pmconfirmbid/list',
+        				page:{
+        					curr:1 //从第一页开始
+        				},
+        			    method:'post',
+        				where:{
+        					queryStr:JSON.stringify(getParam())
+        				},
+        				contentType: 'application/json',
+        			    response: {
+        			    	dataName: 'page'
+        			    }
+
+        			})
                 },
                 error:function(){
                     layer.msg("发起评审失败",{icon:5});

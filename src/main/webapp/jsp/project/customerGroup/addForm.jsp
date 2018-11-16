@@ -55,12 +55,15 @@
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
+    var chosedProject=[];
+    console.log(chosedProject);
+    var chosedLayTable=null;
     $(function () {
         layui.use(['layer', 'form', 'table'], function () {
             var layer = layui.layer,
-                form = layui.form,
-                table = layui.table;
+                form = layui.form;
 
+                chosedLayTable = layui.table;
             var getChosedCustomer = $("#form-customer-hook #chosed-customer-hook");
             var data = [];
             getChosedCustomer.children(".customer-list").each(function () {
@@ -69,14 +72,17 @@
             });
 
             //table render
-            table.render({
+            chosedLayTable.render({
                 elem: '#customInnerTable',
-                id: 'customerInner-table',
+                id: 'table-chosedProject',
                 height: '250',
                 width: "690",
                 title: '客户数据表',
                 cols: [[
-                    {field: 'sapCode', title: 'sap编号', sort: true},
+                    {field: 'sapCode', title: 'sap编号',templet:function(d){
+                        var jsonStr = JSON.stringify({"sapCode":d.sapCode,"custCnName":d.custCnName});
+                return '<div class="jsonData" dataStr='+jsonStr+'>'+d.sapCode+'</div>'
+            } },
                     {field: 'custCnName', title: '客户名称'},
                     {fixed: 'right', title: '操作', toolbar: '#addBarDemo', width: 80}
                 ]],
@@ -87,12 +93,24 @@
             /*
              *监听每行编辑删除事件
              */
-            table.on('tool(custom)', function (obj) {
+            chosedLayTable.on('tool(custom)', function (obj) {
                 var data = obj.data;
-                if (obj.event === 'del') {
-                    layer.confirm('确认删除行么', function (index) {
+                if(obj.event === 'del'){
+                    layer.confirm('确认删除行么', function(index){
                         obj.del();
+                        console.log(data,chosedProject)
+                        // 删除
+                        for(var k in chosedProject){
+                            if(data.sapCode == chosedProject[k].sapCode ){
+                                chosedProject.splice(k,1)
+                            }
+                        }
+                        console.log(chosedProject,'exit');
+                        chosedLayTable.reload('table-chosedProject',{
+                            data:chosedProject
+                        })
                         layer.close(index);
+
                     });
                 }
             });
@@ -107,16 +125,18 @@
             });
             // 清空客户
             $("#removeCustomer-hook").on("click", function () {
-                console.log(layui.table.cache.customerInner-table);
-                table.render({
+                chosedProject=[];
+                chosedLayTable.render({
                     elem: '#customInnerTable',
-                    id: 'customerInner-table',
+                    id: 'table-chosedProject',
                     height: '250',
                     width: "690",
                     title: '客户数据表',
-                    toolbar: '#toolAddBarDemo',
                     cols: [[
-                        {field: 'sapCode', title: 'sap编号', sort: true},
+                        {field: 'sapCode', title: 'sap编号',templet:function(d){
+                            var jsonStr = JSON.stringify({"sapCode":d.sapCode,"custCnName":d.custCnName});
+                            return '<div class="jsonData" dataStr='+jsonStr+'>'+d.sapCode+'</div>'
+                        } },
                         {field: 'custCnName', title: '客户名称'},
                         {fixed: 'right', title: '操作', toolbar: '#addBarDemo', width: 80}
                     ]],
@@ -136,10 +156,13 @@
 
                 var getChosedCustomer = $("#form-customer-hook #chosed-customer-hook");
                 var ret = [];
-			getChosedCustomer.children(".customer-list").each(function(){
-				var sapCode2=$(this).children(".customerItem").val();
-				ret.push(sapCode2)
-			});
+                for(var i=0;i<chosedProject.length;i++ ){
+                    ret.push(chosedProject[i].sapCode)
+                }
+//			getChosedCustomer.children(".customer-list").each(function(){
+//				var sapCode2=$(this).children(".customerItem").val();
+//				ret.push(sapCode2)
+//			});
 
 //                $(".formDetail-wrapper .layui-table-body table.layui-table tbody tr").each(function () {
 //                    var sapCode = $(this).children("td").eq(0).text();

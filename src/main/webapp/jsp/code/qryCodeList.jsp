@@ -17,6 +17,12 @@
 			url : "${ctx }/code/ajaxQryCodeData"
 		});
 	}
+	//重置
+	function reset() {
+		 
+		 $("#i-codeKey").val("");
+		 $("#exampleInputEmail1").val("");
+	}
 
 	function updCodeData() {
 		 var obj = selectRow("codeNoArray");
@@ -84,6 +90,10 @@
 						<div class="col-md-2">
 							<button type="button" class="btn btn-primary " onclick="qryList()">
 								<i class="icon-search"></i>查询
+							</button>
+							<button type="button" class="btn btn-primary "
+								onclick="reset()">
+								<i class="icon-remove"></i>重置
 							</button>
 						</div>
 					</div>

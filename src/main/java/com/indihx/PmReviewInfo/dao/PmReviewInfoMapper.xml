@@ -71,6 +71,8 @@
 		<result property="paymentPoint" column="PAYMENT_POINT" />
 		 <result property="createTime" column="CREATE_TIME"/>
 		  <result property="modifyTime" column="MODIFY_TIME"/>
+		   <result property="bidCode" column="BID_CODE"/>
+		  
 	</resultMap>
 	<select id="queryObject" resultMap="pmReviewInfoMap">
 		select * from pm_review_info
@@ -262,7 +264,8 @@
 			B.CONSTRUCTION_DEPT_MANAGER_ID,
 			B.STATUS,
 			B.IS_WORK_AREA_EXPLICIT,
-			B.IS_CHECKED
+			B.IS_CHECKED,
+			B.BID_CODE
 		FROM
 		PM_REVIEW_INFO A
 		LEFT JOIN

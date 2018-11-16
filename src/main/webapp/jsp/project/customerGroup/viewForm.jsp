@@ -70,7 +70,7 @@
                         title: '客户数据表',
                         cols: [[
                             {field: 'sapCode', title: 'sap编号', sort: true},
-                            {field: 'custCnName', title: '客户名称'},
+                            {field: 'custCnName', title: '客户名称'}
                         ]],
                         data: res.page,
                         page: true

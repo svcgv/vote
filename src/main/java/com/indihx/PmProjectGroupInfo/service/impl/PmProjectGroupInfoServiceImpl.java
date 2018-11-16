@@ -6,15 +6,24 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity;
+import com.indihx.PmCustomerInfo.entity.PmCustomerInfoEntity;
 import com.indihx.PmProjectGroupInfo.dao.PmProjectGroupInfoMapper;
 import com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity;
 import com.indihx.PmProjectGroupInfo.service.PmProjectGroupInfoService;
+import com.indihx.PmProjectGroupRelationInfo.dao.PmProjectGroupRelationInfoMapper;
+import com.indihx.PmProjectGroupRelationInfo.entity.PmProjectGroupRelationInfoEntity;
+import com.indihx.comm.util.DateUtil;
+import com.indihx.comm.util.RandomUtil;
 
 
 @Service("pmProjectGroupInfoService")
 public class PmProjectGroupInfoServiceImpl implements PmProjectGroupInfoService {
 	@Resource
    	PmProjectGroupInfoMapper pmProjectGroupInfoMapper;
+	@Resource
+	PmProjectGroupRelationInfoMapper pmProjectGroupRelationInfoMapper;
    	
    
    	public PmProjectGroupInfoEntity queryObject(long id){
@@ -22,7 +31,18 @@ public class PmProjectGroupInfoServiceImpl implements PmProjectGroupInfoService 
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmProjectGroupInfoEntity entity){
-   		pmProjectGroupInfoMapper.insert(entity);
+		
+		entity.setIsDelete("00");
+		pmProjectGroupInfoMapper.insert(entity);
+   		for(String projectId:entity.getProjectIds()) {
+   			PmProjectGroupRelationInfoEntity pmProjectGroupRelationInfoEntity = new PmProjectGroupRelationInfoEntity();
+   			pmProjectGroupRelationInfoEntity.setProjectGroupId(pmProjectGroupInfoMapper.queryMaxId());
+   			pmProjectGroupRelationInfoEntity.setProjectId(Long.valueOf(projectId));
+   			pmProjectGroupRelationInfoEntity.setCreatorId(entity.getCreatorId());
+   			pmProjectGroupRelationInfoEntity.setCreateTime(DateUtil.getDateTime());
+   			pmProjectGroupRelationInfoEntity.setIsDelete("00");
+   			pmProjectGroupRelationInfoMapper.insert(pmProjectGroupRelationInfoEntity);
+   		}
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmProjectGroupInfoEntity entity){

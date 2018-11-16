@@ -15,7 +15,14 @@
 		$.indi.loadTableByQry({
 			url : "${ctx }/org/qryOrginfoList"
 		});
-	}//修改
+	}
+	//重置
+	function reset() {
+		 
+		 $("#i-usrName").val("");
+		 $("#orgType").val("");
+	}
+	//修改
 	function updUsr() {
 		var obj1 = selectRow("orgIdArray");
 		var obj = selectRow("orgStatus");
@@ -169,6 +176,10 @@
 							<button type="button" class="btn btn-primary "
 								onclick="qryList_01()">
 								<i class="icon-search"></i>查询
+							</button>
+							<button type="button" class="btn btn-primary "
+								onclick="reset()">
+								<i class="icon-remove"></i>重置
 							</button>
 						</div>
 					</div>

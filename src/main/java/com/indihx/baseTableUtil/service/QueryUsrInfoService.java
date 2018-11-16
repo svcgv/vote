@@ -1,5 +1,6 @@
 package com.indihx.baseTableUtil.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,9 @@ public interface QueryUsrInfoService {
 
 	public List<QueryUsrInfoEntity> queryBySaleGroupCode(String code);
 	
-	public List<Map<String,Object>> queryUserByRoleCodeAndOrgNo(Map<String,Object> param);
+	public List<QueryUsrInfoEntity> queryUserByRoleCodeAndOrgNo(Map<String,Object> param);
+	
+	public List<QueryUsrInfoEntity> queryUserByRoleCodeUnderOrgNo(Map<String,Object> list);
+	
 }
 

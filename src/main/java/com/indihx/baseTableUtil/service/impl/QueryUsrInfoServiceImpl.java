@@ -2,6 +2,7 @@ package com.indihx.baseTableUtil.service.impl;
 
 import org.springframework.stereotype.Service;
 import java.util.Map;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.annotation.Resource;
 import com.indihx.baseTableUtil.dao.QueryUsrInfoMapper;
@@ -32,13 +33,19 @@ public class QueryUsrInfoServiceImpl implements QueryUsrInfoService {
 
 	@Override
 	public List<QueryUsrInfoEntity> queryBySaleGroupCode(String code) {
-		// TODO Auto-generated method stub
+	
 		return queryUsrInfoMapper.queryBySaleGroupCode(code);
 	}
 
 	@Override
-	public List<Map<String, Object>> queryUserByRoleCodeAndOrgNo(Map<String, Object> param) {
-		// TODO Auto-generated method stub
+	public List<QueryUsrInfoEntity> queryUserByRoleCodeAndOrgNo(Map<String, Object> param) {
+		
 		return queryUsrInfoMapper.queryUserByRoleCodeAndOrgNo(param);
+	}
+
+	@Override
+	public List<QueryUsrInfoEntity> queryUserByRoleCodeUnderOrgNo(Map<String,Object> list) {
+		
+		return queryUsrInfoMapper.queryUserByRoleCodeUnderOrgNo(list);
 	}
 }

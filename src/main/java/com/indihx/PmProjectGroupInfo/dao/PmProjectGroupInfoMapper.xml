@@ -20,6 +20,10 @@
         <result property="isDelete" column="IS_DELETE"/>
     </resultMap>
 
+	<select id="queryMaxId"  resultType="long">
+			select max(PROJECT_GROUP_ID) from pm_project_group_info
+	</select>
+
 	<select id="queryObject" resultMap="pmProjectGroupInfoMap">
 		select * from pm_project_group_info where PROJECT_GROUP_ID = #{value}
 	</select>

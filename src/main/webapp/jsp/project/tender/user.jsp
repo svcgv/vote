@@ -38,6 +38,8 @@
 </div>
 
 <script type="text/javascript">
+var url1='/vote/queryusrinfo/queryUserByRoleCodeUnderOrgNo'
+	var url2='/vote/queryusrinfo/list'
 $(function(){
 	function getParam(){
 		var queryParams=$("#user-query-form").serializeObject();
@@ -54,15 +56,22 @@ layui.use(['layer', 'form','laydate','table'], function(){
   var layer = layui.layer ,
   	  form = layui.form,
   	  table=layui.table;
-	  
+  var par = getParam()
+  if(orgNo){
+		par.orgNo=orgNo
+	}
+	if(roleCode){
+		par.roleCode=roleCode
+	}
+		  
   // table render
   table.render({
 	    elem: '#userTable',
 	    id:'user-table',
-	    url:'/vote/queryusrinfo/list',
+	    url: orgNo?url1:url2,
 	    method:'post',
 		where:{
-			queryStr:JSON.stringify(getParam())
+			queryStr:JSON.stringify(par)
 		},
 		contentType: 'application/json',
 	    response: {
@@ -82,6 +91,8 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	
 	// 保存 事件
 	var act="${act}";// 区分是index页 form页 赋值问题
+	var orgNo="${orgNo}";
+	var roleCode="${roleCode}";
 	var win=$(".tender-form-wrapper").getWindow();
   	var getExitUser=$("#chosed-user-hook");
 	$(".tender-form-wrapper").on("click","#save-hook",function(){
@@ -110,6 +121,9 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			 	}else if(act =="addDept"){ // 交付部门负责人页面
 			 		$("#tender-addForm-hook input[name='constructionDeptManagerName']").val(userName);
 					$("#tender-addForm-hook input[name='constructionDeptManagerId']").val(userId);
+			 	}else if(act =="addProManager"){// 项目经理
+			 		$("#tender-addForm-hook input[name='projectManagerName']").val(userName);
+					$("#tender-addForm-hook input[name='projectManagerId']").val(userId);
 			 	}else if(act =="addSaleDept"){ //销售部门负责人 页面
 			 		$("#tender-addForm-hook input[name='sellDeptManagerName']").val(userName);
 					$("#tender-addForm-hook input[name='sellDeptManagerId']").val(userId);
@@ -120,6 +134,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			 		$("#review-query-form input[name='sellDeptName']").val(userName);
 					$("#review-query-form input[name='sellDeptId']").val(userId);
 			 	}
+				
 			}
 		});
 		
@@ -136,10 +151,18 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	* 客户查询按钮
 	*/
 	$("#user-query-form #userQuery").click(function(){
+		var par = getParam()
+		
+		if(orgNo){
+			par.orgNo=orgNo
+		}
+		if(roleCode){
+			par.roleCode=roleCode
+		}
 		$.ajax({
 			  type: 'POST',
-			  url: '/vote/queryusrinfo/list',
-			  data: JSON.stringify(getParam()),
+			  url: orgNo?url1:url2,
+			  data: JSON.stringify(par),
 			  contentType:'application/json',
 			  success: function(res){
 			      console.log(res)

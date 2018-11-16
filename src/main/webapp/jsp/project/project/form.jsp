@@ -39,7 +39,7 @@
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name=projectName  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="projectName"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
@@ -143,8 +143,10 @@
 		   	<div class="layui-inline" style="margin-right:64px;">
 		       <label class="layui-form-label">是否重点项目：</label>
 		       <div class="layui-input-inline">
-		          <select name="currentYearFollow" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		          <select name="isImportant" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
 		        	 <option value="">请选择</option>
+		        	 <option value="00">是</option>
+		        	 <option value="01">否</option>
 		          </select>
 		      </div>
 		    </div>
@@ -191,7 +193,7 @@
 		    </div>
 		    
 		    <div class="layui-inline" style="margin-right:64px;">
-		      <label class="layui-form-label">预估税后收入(元)：</label>
+		      <label class="layui-form-label">预估利润(不含税)(元)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="netSalary"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -212,9 +214,9 @@
 		    </div>
 		    
 		    <div class="layui-inline" style="margin-right:64px;">
-		      <label class="layui-form-label">预估利润(元)：</label>
+		      <label class="layui-form-label">预估利润(含税)(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="profitMount"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="predictProfitMount"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		     
@@ -244,14 +246,14 @@
 		    <div class="layui-inline" style="margin-right:64px;">
 				 <label class="layui-form-label">人力费用(元)：</label>
 				    <div class="layui-input-inline">
-				      <input type="text" name="workLoad"  autocomplete="off" class="layui-input form-control">
+				      <input type="text" name="employeeCost"  autocomplete="off" class="layui-input form-control">
 				    </div>
 			</div>
 				    
 				    	    <div class="layui-inline" style="margin-right:64px;">
 				      <label class="layui-form-label">差旅费用(元)：</label>
 				       <div class="layui-input-inline">
-				         <input type="text" name="currendYearIncomming"  autocomplete="off" class="layui-input form-control">
+				         <input type="text" name="businessTripCost"  autocomplete="off" class="layui-input form-control">
 				      </div>
 				    </div>
 		    
@@ -259,7 +261,7 @@
 		        <div class="layui-inline"  style="margin-right:64px;">
 				      <label class="layui-form-label">其他费用(元)：</label>
 				       <div class="layui-input-inline">
-				         <input type="text" name="currentYearGrossProfit"  autocomplete="off" class="layui-input form-control">
+				         <input type="text" name="otherCost"  autocomplete="off" class="layui-input form-control">
 				      </div>
 				    </div>
 				    

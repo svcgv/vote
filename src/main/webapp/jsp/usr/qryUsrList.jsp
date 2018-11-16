@@ -33,6 +33,12 @@
 			url : "${ctx }/usr/ajaxQryUsrInfo"
 		});
 	}
+	//重置
+	function reset() {
+		 $("#i-usrName").val("");
+		 $("#orgType").val("");
+		 $("#exampleInputEmail1").val("");
+	}
 
 	function updUsr() {
 		var obj1 = selectRow("usrIdArray");
@@ -102,11 +108,11 @@
 				return;
 			}
 		 if ( obj.val=="正常使用") {
-				layer.alert("该机构已经启用！",{icon:0});
+				layer.alert("该用户已经启用！",{icon:0});
 				return;
 			}
 		 if ( obj.val=="已注销") {
-				layer.alert("该机构已经被注销,无法进行此操作！",{icon:0});
+				layer.alert("该用户已经被注销,无法进行此操作！",{icon:0});
 				return;
 			}
 		 $("#usrId").val(obj1.val);
@@ -191,6 +197,10 @@
 								onclick="qryList_01()">
 								<i class="icon-search"></i> 查询
 							</button>
+							<button type="button" class="btn btn-primary "
+								onclick="reset()">
+								<i class="icon-remove"></i>重置
+							</button>
 						</div>
 					</div>
 				</form>
@@ -208,11 +218,11 @@
 						<i class="icon-unlock"></i> 启用
 					</button>
 					<button type="button" class="btn btn-primary" onclick="closeSta()">
-						<i class="icon-lock"></i> 关闭
+						<i class="icon-lock"></i> 禁用
 					</button>
-					<button type="button" class="btn btn-primary" onclick="shuxing()">
-						设置菜单
-					</button>
+<!-- 					<button type="button" class="btn btn-primary" onclick="shuxing()"> -->
+<!-- 						设置菜单 -->
+<!-- 					</button> -->
 					<button type="button" class="btn btn-primary" onclick="setRole()">
 						 设置角色
 					</button>

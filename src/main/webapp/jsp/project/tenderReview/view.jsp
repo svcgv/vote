@@ -108,13 +108,6 @@
 		           <label name="paymentPoint"  class="layui-form-label"></label>
 		      </div>
 		    </div>
-	      <div class="layui-inline">
-	       		 <label class="layui-form-label" style="width:170px!important;">工作任务及范围是否清晰：</label>
-	       		 <div class="layui-input-inline">
-	       		 	<!-- open 是开启 close 是关闭 (关闭时  设置 file-hook style="display:none;")    对应 isWorkAreaExplicit 数据字典 -->
-			       <label name='isWorkAreaExplicit' class="layui-form-label"></label>
-			    </div>
-	       </div>
 	       <div class="file-hook" style="width:95%;margin:0 auto;">
 	          <!-- 反写已上传的数据 -->
 		      <div class="layui-upload-list">
@@ -157,37 +150,15 @@
 	       		 <label class="layui-form-label">评审记录：</label>
 	       		 
 	       		 <div class="layui-upload-list">
-				    <table class="layui-table">
-				      <thead>
-				        <tr><th>评审人</th>
-				        <th>评审结果</th>
-				        <th>评审意见</th>
-				        <th>评审时间</th>
-				        
-				      </tr></thead>
-				      <tbody id="wosFileList">
-				      	
-				      	
-				      	
-				      	
-				      	<c:forEach items="${reviewHis}" var="app">
-							<tr class="edit-wosUploaded">
-						      	<td>${app.reviewUserName }</td>
-						      	<td>${app.result}</td>
-						      <td>${app.commentDetail}</td>
-						      <td>${app.modifyTime}</td>
-						      
-					      	</tr>
-						</c:forEach>
-				      </tbody>
-				    </table>
+				   
 				  </div>
-				  
+				   <table class="layui-table" id='reviewHisTable'></table>
 				  
 	       </div>
-		     
-		     
+			     
+			     
 		  </div>
+		  
 		  <div class='tender-review-wrapper'>
 		 <form class="layui-form" action="" lay-filter="form-detail"> 
 		 <div class="layui-inline">
@@ -228,6 +199,7 @@
     </div>
 </div>
 <script>
+var reviewHis = ${reviewHis}
 $(function(){
 	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
@@ -241,6 +213,36 @@ $(function(){
 		    theme: 'molv',
 		    type: 'datetime'
 	 });
+	  table.render({
+	  	  	id:"reviewHisTable",
+	  	    elem: '#reviewHisTable',
+	  	    //url:'custom.json',
+	  	    height:'120',
+	  	    width:'100%',
+	  	    title: '评审历史纪录',
+	  	    cols: [[
+		  	      {field:'reviewUserName', title:'评审人', width:130},
+		  	     
+		  	    {field:'result', title: '评审结果', width: 120
+		      	      ,templet: function(d){
+		      	    	if(d.result=='00'){
+		      	        	return '同意'
+		      	        }
+		      	    	if(d.result=='01'){
+		      	        	return '退回'
+		      	        }
+		      	    	else{
+		      	    		return '数据待完善'
+		      	    	}
+		      	      },rowspan: 2
+		      	    },
+		  	      {field:'commentDetail', title:'评审意见', width:200},
+		  	      {field:'modifyTime', title:'评审时间', width:150,sort:true}
+	  	    ]],
+	  	    cellMinWidth:'100',
+	  	    data:reviewHis,
+	  	    page: false
+	  	  	})
 		 var pmConfirmBid = JSON.parse('${pmConfirmBid}');
 		 console.log(pmConfirmBid);
 		 for (var property in pmConfirmBid) {
@@ -255,9 +257,11 @@ $(function(){
 			$(".formDetail-wrapper").on("click","#tender-accessReview",function(){
 				
 				submit('00')
+				showFromTable()
 			})
 			$(".formDetail-wrapper").on("click","#tender_returnReview",function(){
 				submit('01')
+				showFromTable()
 			})
 			
 		function submit(result){

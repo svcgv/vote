@@ -152,12 +152,11 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
                }else{// 取消全选
 				   //这方法也能返回数组下标
                    //i = $.inArray(tempArray[j].projectId, ids);
-                   for(var i=0;i<ids.length;i++){
-                       for(var j=0;j<tempArray.length;j++){
-                           if(ids[i]==tempArray[j].projectId){
-                              ids.remove(i);
-                          }
+                   for(var j=0;j<tempArray.length;j++){
+                       if($.inArray(tempArray[j].projectId, ids) != -1){
+                           ids.remove($.inArray(tempArray[j].projectId, ids));
                        }
+
                    }
                    console.log(ids);
                }
@@ -182,30 +181,55 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 	var win=$(".projectGroup-project-wrapper").getWindow();
 	$(".projectGroup-project-wrapper").on("click","#save-hook",function(){
 		// 遍历选中的CheckBox
-		$(".projectGroup-project-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
-            console.log(ids);
-			var chk=$(this).find(".laytable-cell-checkbox");
-			var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
-			if(isChecked){
-				var dataStr=$(this).children("td").eq(1).find(".jsonData").attr("dataStr");
-				var obj=JSON.parse(dataStr);
-				// 去重 已选的项目
-				var flag= true;
-				for(var i in chosedProject){
-					var proId=chosedProject[i].projectId;
-					if(obj.projectId == proId){
-						flag= false;
-						continue;
-					}
-				}
-				if(flag){
-					chosedProject.push({
-						"projectId":obj.projectId,
-						"projectName":obj.projectName
-					});
-				}
-			}
-		});
+        var tempArray=[];
+        for(var i=0;i<ids.length;i++){
+            for(var j=0;j<testData.length;j++){
+                if(ids[i]==testData[j].projectId){
+                    tempArray.push(testData[j]);
+                }
+            }
+        }
+        for(var k=0;k<tempArray.length;k++){
+            var flag= true;
+            for(var j in chosedProject){
+                var proId=chosedProject[j].projectId;
+                if(tempArray[k].projectId == proId){
+                    flag= false;
+                    continue;
+                }
+            }
+            if(flag){
+                chosedProject.push(tempArray[k]);
+            }
+
+        }
+
+
+
+//		$(".projectGroup-project-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
+//            console.log(ids);
+//			var chk=$(this).find(".laytable-cell-checkbox");
+//			var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
+//			if(isChecked){
+//				var dataStr=$(this).children("td").eq(1).find(".jsonData").attr("dataStr");
+//				var obj=JSON.parse(dataStr);
+//				// 去重 已选的项目
+//				var flag= true;
+//				for(var i in chosedProject){
+//					var proId=chosedProject[i].projectId;
+//					if(obj.projectId == proId){
+//						flag= false;
+//						continue;
+//					}
+//				}
+//				if(flag){
+//					chosedProject.push({
+//						"projectId":obj.projectId,
+//						"projectName":obj.projectName
+//					});
+//				}
+//			}
+//		});
 		console.log(chosedProject)
 		chosedLayTable.reload('table-chosedProject',{
 					data:chosedProject

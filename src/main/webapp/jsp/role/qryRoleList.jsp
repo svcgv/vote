@@ -23,6 +23,13 @@
 			url : "${ctx}/role/ajaxQryRoleInfo"
 		});
 	}
+	//重置
+	function reset() {
+		 
+		 $("#roleName").val("");
+		 $("#tmSmp").val("");
+	}
+	
 	function updPara() {
 		var obj = selectRow("RoleIdArray");
 		if (obj.size != 1) {
@@ -137,6 +144,10 @@
 							<button type="button" class="btn btn-primary "
 								onclick="qryList_01()">
 								<i class="icon-search"></i>查询
+							</button>
+							<button type="button" class="btn btn-primary "
+								onclick="reset()">
+								<i class="icon-remove"></i>重置
 							</button>
 						</div>
 					</div>

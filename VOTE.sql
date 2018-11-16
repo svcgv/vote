@@ -1386,6 +1386,8 @@ CREATE TABLE "VOTE"."PM_CONFIRM_BID" (
 "SELL_DEPT_NAME" VARCHAR2(128 BYTE) NULL ,
 "CUST_MANAGER_ID" NUMBER(10) NULL ,
 "CUST_MANAGER_NAME" VARCHAR2(64 BYTE) NULL ,
+"PROJECT_MANAGER_ID"	NUMBER(10,0) NULL ,
+"PROJECT_MANAGER_NAME"	VARCHAR2(32 BYTE) NULL,
 "TECHNICAL_DIRECTOR_ID" NUMBER(10) NULL ,
 "TECHNICAL_DIRECTOR_NAME" VARCHAR2(256 BYTE) NULL ,
 "SELL_DEPT_MANAGER_NAME" VARCHAR2(256 BYTE) NULL ,
@@ -2221,18 +2223,19 @@ COMMENT ON COLUMN "VOTE"."ROLE"."TM_SMP" IS '创建时间';
 -- ----------------------------
 -- Records of ROLE
 -- ----------------------------
-INSERT INTO "VOTE"."ROLE" VALUES ('33', '销售部负责人', '销售部负责人', '20181103', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('31', '总经理', '总经理室', '20181103', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('999', '系统管理员', '系统管理员', '20180101', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('32', '实施管理部负责人', '实施管理部负责人', '20181103', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('34', '交付部负责人', ' 交付部负责人', '20181103', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('35', '后台管理部负责人', '后台管理部负责人', '20181103', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('36', '交付部经理', '交付部经理', '20181103', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('37', '客户经理', '客户经理', '20181105', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('38', '普通用户', '普通用户', '20181103', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('51', '项目经理', '项目经理', '20181105', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('52', '销售部助理', '销售部助理', '20181105', null);
-INSERT INTO "VOTE"."ROLE" VALUES ('53', '后台管理部助理', '后台管理部助理', '20181105', null);
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (33,'销售部负责人','销售部负责人','20181103','SELL_DEPT_MANAGER');
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (31,'总经理','总经理室','20181103','MAIN_MANAGER');
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (999,'系统管理员','系统管理员','20180101','ADMINISTRATOR');
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (32,'实施管理部负责人','实施管理部负责人','20181103','BUILD_DEPT_NAME');
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (34,'交付部负责人',' 交付部负责人','20181103','CONSTRUCTION_DEPT_MANAGER');
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (35,'后台管理部负责人','后台管理部负责人','20181103','BACK_MANAGER');
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (36,'交付部经理','交付部经理','20181103',null);
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (37,'客户经理','客户经理','20181105',null);
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (38,'普通用户','普通用户','20181103',null);
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (51,'项目经理','项目经理','20181105','PROJECT_MANGER');
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (52,'销售部助理','销售部助理','20181105',null);
+Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (53,'后台管理部助理','后台管理部助理','20181105',null);
+
 
 -- ----------------------------
 -- Table structure for ROLE_MENU

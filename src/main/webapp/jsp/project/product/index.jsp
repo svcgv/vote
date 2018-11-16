@@ -66,9 +66,6 @@
 		          <input type="text" name="developmentManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control">
 		          <input type="text" style='display:none' name="developmentManagerId">
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
 		    </div>
 		    
 		     <div class="layui-inline">
@@ -177,9 +174,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
                   value=(parseInt(value*100)/100).toFixed(2);
 				  return value
               }},
-            {field: 'jan', title: 'Jan',templet:function(d)
-			{ var num=typeof d.jan =="undefined" ? '':d.jan;
-	  	return '<input value="'+num+'" class="layui-input layui-table-iptMoney"/>'}},
 	  	      {field:'developmentDeptName', title:'研发部门名称', width:230},
 	  	      {field:'developmentManagerName', title:'研发负责人名称'},
 	  	      {field:'startSaleDate', title:'开始销售日期'},

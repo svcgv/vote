@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.indihx.AbstractBaseController;
 import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
@@ -127,8 +128,10 @@ public class TenderReviewController extends AbstractBaseController{
 		else {
 			view.addObject("reviewId",list.get(0).getReviewId());
 		}
+		
 		List<PmReviewInfoEntity> list2 = pmReviewInfoService.queryList(map);
-		view.addObject("reviewHis",list2);
+		
+		view.addObject("reviewHis",JSON.toJSONString(list2));
 		view.addObject("act",act);
 		view.addObject("id",id);
 		view.addObject("fileList",fileList);

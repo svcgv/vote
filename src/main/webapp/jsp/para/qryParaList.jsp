@@ -20,6 +20,13 @@
 			url :"${ctx}/para/ajaxQryParaInfo"
 		});
 	}
+	//重置
+	function reset() {
+		 
+		 $("#paramsName").val("");
+		 $("#paramsType").val("");
+	}
+	
 	function updPara() {
 		var obj = selectRow("ParaIdArray");
 		if ( obj.size != 1) {
@@ -87,6 +94,10 @@
 							<button type="button" class="btn btn-primary "
 								onclick="qryList_01()">
 								<i class="icon-search"></i>查询
+							</button>
+							<button type="button" class="btn btn-primary "
+								onclick="reset()">
+								<i class="icon-remove"></i>重置
 							</button>
 						</div>
 					</div>
