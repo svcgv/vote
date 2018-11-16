@@ -2,28 +2,48 @@
 <%@ include file="/resources/admincp/layouts/main.jsp"%>
 <body>
 <style>
-.layui-form-label{width:80px!important;}
+.layui-form-label{width:120px!important;}
 </style>
-<div class="tender-info-wrapper">
+<div class="contract-info-wrapper">
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-	  <legend>投标管理</legend>
+	  <legend>合同管理</legend>
 	</fieldset>
-	<form class="layui-form" id="tender-index-form" method="POST" action="">
+	<form class="layui-form" id="contract-index-form" method="POST" action="">
 	   <div class="layui-form-item" style="margin-bottom:0px;">
-		  	<div class="layui-inline" style="margin-right:40px;">
-		      <label class="layui-form-label">项目名称：</label>
+		  	<div class="layui-inline" style="margin-right:49px;">
+		      <label class="layui-form-label">年份：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
+		         <select name="year">
+		         	<option>请选择</option>
+		         	<option value="2018" selected>2018年</option>
+		         	<option value="2017">2017年</option>
+		         	<option value="2016">2016年</option>
+		         	<option value="2015">2015年</option>
+		         	<option value="2014">2014年</option>
+		         	<option value="2013">2013年</option>
+		         </select>
 		      </div>
 		    </div>
-		   <div class="layui-inline" style="margin-right:38px;">
-			   <label class="layui-form-label">投标编号：</label>
-			   <div class="layui-input-inline">
-				   <input type="text" name="bidCode"  autocomplete="off" class="layui-input form-control">
-			   </div>
+		    
+		     <div class="layui-inline" >
+		      <label class="layui-form-label">合同名称：</label>
+		       <div class="layui-input-inline">
+		          <input type="text" name="contractName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="hidden" name="contractId">
+		      </div>
+		      <button type="button"  class="layui-btn layui-btn-sm" id="contractNameQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		    
+		   <div class="layui-inline">
+			   <label class="layui-form-label">销售部门：</label>
+			    <div class="layui-input-inline">
+		          <input type="text" name="payDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="text" style='display:none' name="payDeptId">
+		      </div>
+	      	  <button type="button"  class="layui-btn layui-btn-sm" id="payDeptNameQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		   </div>
 		   <div class="layui-inline">
-			   <label class="layui-form-label">客户名称：</label>
+			   <label class="layui-form-label">客户经理：</label>
 			   <div class="layui-input-inline">
 				   <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
 				   <input type="text" style='display:none' name="custId">
@@ -31,86 +51,37 @@
 			   </div>
 			   <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		   </div>
-		   </div>
-		    <!-- 
-		    <div class="layui-inline">
-		      <label class="layui-form-label">预估合同金额：</label>
+		   
+		    <div class="layui-inline" style="margin-right: 49px;">
+		      <label class="layui-form-label">OA流程编号：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="predictAmount"  autocomplete="off" class="layui-input form-control">
+		          <input type="text" name="OAFlow"  autocomplete="off" class="layui-input form-control">
 		      </div>
-		    </div>
-		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">预估成本：</label>
-		      <div class="layui-input-inline">
-		       <input type="text" name="predictCost"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		    </div>
-		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">预估利润率：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="predictProfitRate"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		    </div>
-		    
-		    <div class="layui-inline">
-		      <label class="layui-form-label">预估期限：</label>
-		       <div class="layui-input-inline">
-	         		<input type="text" name="predictPeriod" id="predictPeriodDate" autocomplete="off" class="layui-input form-control hasDatepicker">
-		      </div>
-		    </div>
-		     -->
-	    <div class="layui-form-item" style="margin-bottom:0px;">
-		    <div class="layui-inline" style="margin-right: 0px;">
-		      <label class="layui-form-label">交付部门：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="payDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="payDeptId">
-		      </div>
-	      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
 		     <div class="layui-inline" style="margin-right:0px;">
-		      <label class="layui-form-label">销售部门：</label>
+		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="sellDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="sellDeptId">
+		          <input type="text" name="customerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="text" style='display:none' name="customerId">
 		      </div>
-	      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
+	      	 <button type="button"  class="layui-btn layui-btn-sm" id="customerQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
-		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">客户经理：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="custManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="custManagerId">
-		      </div>
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
-
-		   <div class="layui-inline">
-			   <label class="layui-form-label">评审状态：</label>
-			   <div class="layui-input-inline">
-				   <select name="status" lay-verify="required" lay-filter="" class="form-control">
-					   ${status.ewTypeHtml }
-				   </select>
-			   </div>
-		   </div>
-		   <%--<div class="layui-inline">--%>
-			   <%--<label class="layui-form-label">预估开始期限：</label>--%>
-			   <%--<div class="layui-input-inline">--%>
-				   <%--<input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">--%>
-			   <%--</div>--%>
-		   <%--</div>--%>
-		   <%--<div class="layui-inline">--%>
-			   <%--<label class="layui-form-label">预估结束期限：</label>--%>
-			   <%--<div class="layui-input-inline">--%>
-				   <%--<input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">--%>
-			   <%--</div>--%>
-		   <%--</div>--%>
-		    
-	 	   <div class="layui-inline" style="vertical-align: top;">
+		    <div class="layui-form-item" style="margin-bottom:0px;">
+			     <div class="layui-inline" style="margin-right:48px;">
+			      <label class="layui-form-label">创建时间(开始)：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="startTime" id="startTime" autocomplete="off" class="layui-input form-control hasDatepicker">
+			      </div>
+			    </div>
+			    <div class="layui-inline">
+			      <label class="layui-form-label">创建时间(结束)：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="endTime" id="endTime"  autocomplete="off" class="layui-input form-control hasDatepicker">
+			      </div>
+			    </div>
+	 	   	<div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:43px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
@@ -128,7 +99,6 @@
  
 <script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="tenderReview">提交评审</a>
   <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="view">查看</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -143,16 +113,18 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   	  table=layui.table,
   	  upload=layui.upload;
   
-  
   //日期
 	  laydate.render({
-		    elem: "#predictPeriodDate",
-		    theme: 'molv',
-		    type: 'datetime'
+	    elem: "#startTime",
+	    theme: 'molv'
+	 });
+	 laydate.render({
+	    elem: "#endTime",
+	    theme: 'molv'
 	 });
   
 	  function getParam(){
-			var queryParams=$("#tender-index-form").serializeObject();
+			var queryParams=$("#contract-index-form").serializeObject();
 			 var newParam = {}
 			  for(var i in queryParams){
 				  if(queryParams[i]){
@@ -162,7 +134,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  return newParam
 		}
   // 选择机构
-  $(".tender-info-wrapper #orgQuery-hook").click(function(){
+  $(".contract-info-wrapper #payDeptNameQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'org?act=index',
 	  		title:"选择销售部门",
@@ -170,20 +142,20 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	 });
 	  
   });
-  $(".tender-info-wrapper #payOrgQuery-hook").click(function(){
+  $(".contract-info-wrapper #customerQuery-hook").click(function(){
 	  $.openWindow({
-	  		url:'org?act=pay',
-	  		title:"选择交付部门",
-	  		width:"400"
+	  		url:'customer?act=index',
+	  		title:"选择客户名称",
+	  		width:"750"
 	 });
 	  
   });
   
   
   // 选择人员
-  $(".tender-info-wrapper #userQuery-hook").on("click",function(){
+  $(".contract-info-wrapper #custNameQuery-hook").on("click",function(){
 	  	$.openWindow({
-	  		url:'user?act=index&orgNo=&roleCode=',
+	  		url:'user?act=index',
 	  		title:"选择客户经理",
 	  		width:"700"
 	 	 });
@@ -300,26 +272,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
                 contentType:'application/json',
                 data: JSON.stringify(data),
                 success:function(res){
-                	if(res.code!=0){
-                		 layer.msg(res.msg,{icon:3});
-                		 return
-                	}
                     layer.msg("发起评审成功",{icon:1});
-                    table.reload('customer-table',{
-        				url:'/vote/pmconfirmbid/list',
-        				page:{
-        					curr:1 //从第一页开始
-        				},
-        			    method:'post',
-        				where:{
-        					queryStr:JSON.stringify(getParam())
-        				},
-        				contentType: 'application/json',
-        			    response: {
-        			    	dataName: 'page'
-        			    }
-
-        			})
                 },
                 error:function(){
                     layer.msg("发起评审失败",{icon:5});
@@ -358,7 +311,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	/*
 	* 新增
 	*/
-	$(".tender-info-wrapper #add-hook").click(function(){
+	$(".contract-info-wrapper #add-hook").click(function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
 	  		title:"新增投标",
