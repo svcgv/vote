@@ -18,9 +18,10 @@ public class CostInfoServiceImpl implements ICostInfoService{
 	private CostInfoMapper mapper;
 
 	@Override
-	public List<CostInfo> qryBtnInfoListByOrgId(Long orgId) {
-		
+	public List<CostInfo> qryCostInfoListByOrgId(Long orgId) {
 		return mapper.queryCostInfoListByOrgId(orgId);
 	}
+
+	
 
 }
