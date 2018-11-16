@@ -42,7 +42,7 @@
  	 	<%--</div>--%>
  	 	<div class="layui-inline">
 	       <label class="layui-form-label">备注：</label>
-			<div class="layui-input-inline" style="width:323px;">
+			<div class="layui-input-inline" style="width:564px;">
 				<textarea name="remark"  class="layui-textarea form-control"></textarea>
  	 	</div>
  	 	
