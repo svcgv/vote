@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
-.tender-cust-wrapper .layui-form-label{width:70px!important;}
+.contract-cust-wrapper .layui-form-label{width:100px!important;}
 </style>
-<div style="margin-top:10px;" class="tender-cust-wrapper">
+<div style="margin-top:10px;" class="contract-cust-wrapper">
 	<form class="layui-form" id="customer-query-form" action="">
 	  <div class="layui-form-item">
 	  	<div class="layui-inline">
@@ -70,31 +70,38 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	      }}
 	    ]],
 	    page: true
-	  })
+	  });
+	
 	
 	// 保存 事件
 	var act="${act}";// 区分是index页 form页 赋值问题
-	var win=$(".tender-cust-wrapper").getWindow();
-	$(".tender-cust-wrapper").on("click","#save-hook",function(){
+	var win=$(".contract-cust-wrapper").getWindow();
+  	var getExitUser=$("#chosed-user-hook");
+	$(".contract-cust-wrapper").on("click","#save-hook",function(){
+		var ret=[];
+		getExitUser.children(".customer-list").each(function(){
+			var sapCode2=$(this).children(".customerItem").attr("custId");
+			ret.push(sapCode2)
+		});
 		// 遍历选中的radio
-		$(".tender-cust-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
+		$(".contract-cust-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
 			var chk=$(this).find(".laytable-cell-radio");
 			var isChecked=chk.find(".layui-form-radio").hasClass("layui-form-radioed");
 			if(isChecked){
-				var custId=$(this).children("td").eq(1).text();
-				var custName=$(this).children("td").eq(2).text();
-				if(act == "cust"){
-					$(".project-info-wrapper input[name='custName']").val(custName);
-					$(".project-info-wrapper input[name='custSapCode']").val(custId);
-			 	}else if(act == "custForm"){
-					$("#project-form-hook input[name='custName']").val(custName);
-					$("#project-form-hook input[name='custSapCode']").val(custId);
-			 	}else if(act == "custEdit"){
-			 		$("#project-edit-hook input[name='custName']").val(custName);
-					$("#project-edit-hook input[name='custSapCode']").val(custId);
+				var sapCode=$(this).children("td").eq(1).text();
+				var custId=$(this).children("td").eq(2).children("div").children("div").attr("data-id")
+				var custCnName=$(this).children("td").eq(2).text();
+		 		console.log(custCnName);
+		 		console.log(sapCode);
+		 		console.log(custId);
+				if(act == "index"){
+					$("#contract-index-form input[name='customerName']").val(custCnName);
+					$("#contract-index-form input[name='customerId']").val(custId);
+			 	}else if(act =="addCust"){ //编辑 修改 页面
+			 		///$("#tender-addForm-hook input[name='custCnName']").val(custCnName);
+			 		//$("#tender-addForm-hook input[name='custSapCode']").val(sapCode);
+					//$("#tender-addForm-hook input[name='custId']").val(custId);
 			 	}
-				
-				
 			}
 		});
 		
@@ -102,12 +109,11 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	});
 	
 	// 关闭按钮
-	var win=$(".tender-cust-wrapper").getWindow();
-	$(".tender-cust-wrapper").on("click","#close-hook",function(){
+	var win=$(".contract-cust-wrapper").getWindow();
+	$(".contract-cust-wrapper").on("click","#close-hook",function(){
 		win.close();
 	});
 	
-
 	/*
 	* 客户查询按钮
 	*/
@@ -139,7 +145,6 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			
 		}) 
 	});
-	
 	
 });
 	

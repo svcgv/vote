@@ -19,7 +19,7 @@
 		      <label class="layui-form-label">产品代码：</label>
 		      <div class="layui-input-inline">
 		         <input type="text" name="productCode" value="${product.productCode}" autocomplete="off" class="layui-input form-control">
-		         <input type="text" style='display:none' name="productId" autocomplete="off" value="${product.productId}" class="layui-input form-control">
+		         <input type="text" style='display:none' id="productId" name="productId" autocomplete="off" value="${product.productId}" class="layui-input form-control">
 		      </div>
 		    </div>
 		    <div class="layui-inline">
@@ -31,7 +31,7 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">指导销售价(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="productSuggestPrice"  value="${product.productSuggestPrice}"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" id="productSuggestPrice" name="productSuggestPrice"  value="${product.productSuggestPrice}"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline">
@@ -96,11 +96,16 @@
     	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
     </div>
 </div>
+<script type="text/html" id="barFormDemo">
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 <script>
     var chosedProject=[];
+    var productId = '';
     console.log(chosedProject);
     var chosedLayTable=null;
 $(function(){
+    productId = $('#productId')[0].value;
 	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
@@ -113,10 +118,69 @@ $(function(){
 		    theme: 'molv',
 		    type: 'datetime'
 	 });
-		
+        //自动填充小数点
+        $('#productSuggestPrice').val((parseInt($('#productSuggestPrice').val()*100)/100).toFixed(2));
 	// form 表单手动渲染
-	  form.render()		 
-	 // 选择机构
+	  form.render();
+        var param = {"productId": productId};
+        $.ajax({
+            type: 'POST',
+            url: '/vote/pmproductprojectrelation/list',
+            data: JSON.stringify(param),
+            contentType: 'application/json',
+            success: function (res) {
+                chosedProject=res.page;
+                chosedLayTable.render({
+                    id:"table-chosedProject",
+                    elem: '#projectTable-chosed',
+                    height:'350',
+                    title: '项目群数据信息',
+                    cols: [[
+                        {field:'wbs', title:'项目编号', templet:function(d){
+                            var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
+                            return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
+                        } },
+                        {field:'projectName', title:'项目名称'},
+                        {fixed: 'right', title:'操作', toolbar: '#barFormDemo', width:100}
+                    ]],
+                    cellMinWidth:'90',
+                    data:chosedProject,
+                    page: true
+                });
+            },
+            dataType: "json"
+        });
+
+        chosedLayTable.on('tool(tableFilter)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('确认删除行么', function(index){
+                    obj.del();
+                    console.log(data,chosedProject)
+                    // 删除
+                    for(var k in chosedProject){
+                        if(data.projectId == chosedProject[k].projectId ){
+                            chosedProject.splice(k,1)
+                        }
+                    }
+                    console.log(chosedProject,'exit');
+                    chosedLayTable.reload('table-chosedProject',{
+                        data:chosedProject
+                    })
+                    layer.close(index);
+
+                });
+            }
+        });
+
+        //自动填充小数点
+        $(document).on('change', '#productSuggestPrice', function(data) {
+            var value=(parseInt($(this).val()*100)/100).toFixed(2);
+            $(this).val(value);
+        });
+
+
+        // 选择机构
   $("#product-addForm-hook #orgQuery-hook").click(function(){
 	  $.openWindow({
 	  		url:'org?act=add',
@@ -155,16 +219,15 @@ $(function(){
 			
 			var getChosedCustomer=$("#product-addForm-hook #chosed-project-hook");
 			var ret=[];
-			getChosedCustomer.children(".customer-list").each(function(){
-				var sapCode2=$(this).children(".customerItem").attr("projectId");
-				ret.push(sapCode2)
-			});
-			
+            for(var i=0;i<chosedProject.length;i++ ){
+                ret.push(chosedProject[i].projectId)
+            }
+
 			var formDatas=$("#product-addForm-hook form").serializeObject();
-			formDatas=$.extend({},true,formDatas,{projectIds:ret.join(",")});
+			formDatas=$.extend({},true,formDatas,{projectIds:ret});
 			$.ajax({
 				type:'POST',
-				url:'/vote/pmproductinfo/update',
+				url:'/vote/pmproductinfo/changeRelation',
 				data:JSON.stringify(formDatas),
 				contentType:'application/json',
 				success:function(res){

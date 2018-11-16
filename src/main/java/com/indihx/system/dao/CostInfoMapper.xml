@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.indihx.system.dao.CostInfoMapper">
+  <!-- 支持缓存配置(必须配置否则缓存无效) -->
+  <cache type="com.indihx.cache.RedisCache" />
+  <resultMap id="BaseResultMap" type="com.indihx.system.entity.CostInfo">
+    
+    <result column="COST_ID" jdbcType="VARCHAR" property="btnName" />
+    <result column="ORG_ID" jdbcType="DECIMAL" property="btnName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    COST_ID, ORG_ID
+  </sql>
+  
+  <select id="queryCostInfoListByOrgId" resultMap="BaseResultMap" >
+  	select a.*,b.org_name
+    from cost_info a 
+    left join org_info b on a.org_id =b.org_id
+  	 <where>
+  		<if test="org_id != null and btnName !=0 ">
+  			 a.org_id = = #{org_id,jdbcType=DECIMAL}
+  		</if>
+  		
+  	</where> 
+  		
+  </select>
+ 
+</mapper>

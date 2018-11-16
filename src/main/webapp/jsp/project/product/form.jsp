@@ -122,9 +122,9 @@ $(function(){
             height:'350',
             title: '项目群数据信息',
             cols: [[
-                {field:'projectId', title:'项目编号', templet:function(d){
-                    var jsonStr = JSON.stringify(d);
-                    return '<div class="jsonData" dataStr='+jsonStr+'>'+d.projectId+'</div>'
+                {field:'wbs', title:'项目编号', templet:function(d){
+                    var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
+                    return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
                 } },
                 {field:'projectName', title:'项目名称'},
                 {fixed: 'right', title:'操作', toolbar: '#barFormDemo', width:100}

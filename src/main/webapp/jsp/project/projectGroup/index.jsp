@@ -130,10 +130,22 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    if(obj.event === 'del'){
 	      layer.confirm('确认删除行么', function(index){
 	        obj.del();
-	        layer.close(index);
-	        table.reload('customer-table',{
-	        	
-	        });
+	        var param = {}
+            param.isDelete = '01'
+            param.projectGroupId = data.projectGroupId
+            $.ajax({
+                type: 'POST',
+                url: '/vote/pmprojectgroupinfo/update',
+                data: JSON.stringify(param),
+                contentType: 'application/json',
+                success: function (res) {
+                    console.log(res)
+                },
+                dataType: "json"
+            })
+
+            layer.close(index);
+	   
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
