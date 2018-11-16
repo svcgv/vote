@@ -65,7 +65,7 @@
 		          <input type="text" name="customerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="customerId">
 		      </div>
-	      	 <button type="button"  class="layui-btn layui-btn-sm" id="customerQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
+	      	  <button type="button"  class="layui-btn layui-btn-sm" id="customerQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    </div>
 		    <div class="layui-form-item" style="margin-bottom:0px;">
@@ -90,7 +90,7 @@
 		   </div>
 	   </div>
 	</form>
-	<table class="layui-hide" id="productTable" lay-filter="custom"></table>
+	<table class="layui-hide" id="contractTable" lay-filter="contract"></table>
 	
  </div>
 <script type="text/html" id="toolbarDemo">
@@ -166,8 +166,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   // table render
   table.render({
 	  	id:"customer-table",
-	    elem: '#productTable',
-	    url:'/vote/pmconfirmbid/list',
+	    elem: '#contractTable',
+	    //url:'/vote/pmconfirmbid/list',
 	    method:'post',
 		where:{
 			queryStr:JSON.stringify(getParam())
@@ -178,46 +178,26 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    },
 	    toolbar: '#toolbarDemo',
 	    height:'full-200',
-	    title: '投标数据表',
+	    title: '合同数据表',
 	    cols: [[
-	    	  {type: 'checkbox', fixed: 'left'},
-	  	      {field:'bidCode', title:'投标编号',fixed: 'left', sort: true, width:130},
-            {field:'status', title: '评审状态', width: 200
-      	      ,templet: function(d){
-      	    	if(d.status=='00'){
-      	        	return '已录入'
-      	        }
-      	    	if(d.status=='01'){
-      	        	return '交付部门负责人评审'
-      	        }
-      	    	if(d.status=='02'){
-      	        	return '销售部门负责人评审'
-      	        }
-      	    	if(d.status=='03'){
-      	        	return '技术总监评审'
-      	        }
-      	    	if(d.status=='04'){
-      	        	return '评审完成'
-      	        }
-      	    	else{
-      	    		return '数据待完善'
-      	    	}
-      	      },rowspan: 2
-      	    },
-            {field:'bidName', title:'项目名称', width:130},
-            {field:'custCnName', title:'客户名称', width:130},
-            {field:'constructionDeptName', title:'交付部门'},
+	    	{type: 'checkbox', fixed: 'left'},
+	  	    {field:'contractCode', title:'合同编号',fixed: 'left', sort: true, width:130},
+            {field:'contractName', title: '合同名称', width: 200},
+            {field:'contractAmount', title:'合同金额', width:130},
+            {field:'yearNumer', title:'年份', width:120},
+            {field:'taxRate', title:'税率', width:130},
+            {field:'afterTaxContractAmount', title:'税后合同金额'},
+            {field:'signContractDate', title:'签订日期'},
+            {field:'contractStartTime', title:'合同开始日期'},
+            {field:'contractEndTime', title:'合同结束日期', width:150},
+            {field:'isAgree', title:'是否科委认定', width:150},
             {field:'sellDeptName', title:'销售部门'},
             {field:'custManagerName', title:'客户经理'},
-            {field:'firstBidAmount', title:'首次报价（元）', width:150},
-            {field:'predictAmount', title:'预估收入（元）', width:150},
-            {field:'predictCost', title:'预估成本（元）', width:120},
-            {field:'predictProfitRate', title:'预估利润率（%）'},
-            {field:'taxRate', title:'税率（%）'},
-            {field:'predictPeriodStart', title:'项目开始时间'},
-            {field:'predictPeriodEnd', title:'项目结束时间'},
-            {field:'paymentPoint', title:'付款点'},
-	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
+            {field:'oaFlowCode', title:'OA流程编号'},
+            {field:'companyCode', title:'公司代码'},
+            {field:'custSapCode', title:'客户SAP编号'},
+            {field:'custName', title:'客户名称'},
+	  	    {fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
 	    ]],
 	    cellMinWidth:'90',
 	    page: true
@@ -226,18 +206,14 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	/*
 	*监听每行编辑删除事件
 	*/
-	  table.on('tool(custom)', function(obj){
+	  table.on('tool(contract)', function(obj){
 	    var data = obj.data;
 	    if(obj.event === 'del'){
-	    	if(data.status != '00'){
-	    		layer.msg("当前已发起过评审，不可删除",{icon:5});
-	    		return
-	    	}
 	      layer.confirm('确认删除行么', function(index){
 	    	  $.ajax({
 				  type:"POST",
-				  url:"/vote/pmconfirmbid/update",
-				  data:JSON.stringify({'bidId':data.bidId,'isDelete':'01'}),
+				  //url:"/vote/pmconfirmbid/update",
+				  //data:JSON.stringify({'bidId':data.bidId,'isDelete':'01'}),
 				  contentType:'application/json',
 				  success:function(data){
 					  table.reload('customer-table');
@@ -245,44 +221,14 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  }); 
 	        obj.del();
 	        layer.close(index);
-	        table.reload('customer-table',{
-	        	
-	        });
+	        table.reload('customer-table',{});
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
-	    	if(data.status != '00'){
-	    		layer.msg("投标正在评审中，请勿修改",{icon:5});
-	    		return
-	    	}
-	    	showFromTable('edit',data.bidId);
+	    	showFromTable('edit',data.contractId);
 	    }else if(obj.event === "view"){
 	    	// 查看
-	    	showFromTable('view',data.bidId);
-	    }else if(obj.event == "tenderReview"){
-	    	// 评审
-	    	if(data.status!=='00'){
-	    		layer.msg("当前已发起过评审，请勿重复发起",{icon:5});
-	    		return;
-	    	}
-			console.log(data);
-            $.ajax({
-                type:'POST',
-                url:'/vote/pmconfirmbid/submit',
-                contentType:'application/json',
-                data: JSON.stringify(data),
-                success:function(res){
-                    layer.msg("发起评审成功",{icon:1});
-                },
-                error:function(){
-                    layer.msg("发起评审失败",{icon:5});
-                },
-                dataType: "json"
-            });
-            
-	    }else if(obj.event == "setMoney"){
-	    	// 评审
-	    	showFromTable('setMoney',data.bidId);
+	    	showFromTable('view',data.contractId);
 	    }
 	  });
 	/*
@@ -314,8 +260,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	$(".contract-info-wrapper #add-hook").click(function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
-	  		title:"新增投标",
-	  		width:"1000"
+	  		title:"新增合同",
+	  		width:"95%"
 	  	})
 	});
 	
@@ -323,17 +269,13 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 查看和修改 form 表单
 	*/
 	function showFromTable(isEdit,id){
-		var _width=800;
+		var _width='95%';
 		if(isEdit == "edit"){
 			var url='edit?act=edit&id='+id;
-			var title="修改投标信息";
+			var title="修改合同信息";
 		}else if(isEdit == "view"){
 			var url='view?act=view&id='+id;
-	    	var	title="查看投标信息";
-		}else if(isEdit == "review"){
-			var url='review?act=review&id='+id;
-	    	var	title="投标评审";
-	    	_width=650;
+	    	var	title="查看合同信息";
 		}
 		
 		$.openWindow({

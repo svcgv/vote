@@ -101,8 +101,9 @@ layui.use(['layer', 'form','laydate','table'], function(){
 					$("#contract-index-form input[name='custCnName']").val(userName);
 					$("#contract-index-form input[name='custId']").val(userId);
 			 		
-			 	}else if(act =="add"){ //编辑 修改 页面
-			 		
+			 	}else if(act =="form"){ //编辑 修改 页面
+			 		$("#contract-addForm-hook input[name='custCnName']").val(userName);
+					$("#contract-addForm-hook input[name='custId']").val(userId);
 			 	}
 			}
 		});

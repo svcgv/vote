@@ -106,7 +106,11 @@ function zTreeOnSaveEvent(event, treeId, treeNode) {
  	if(act == "index"){
  		$("#contract-index-form input[name='payDeptName']").val(getCheckedOrg.name);
 		$("#contract-index-form input[name='payDeptId']").val(getCheckedOrg.orgId);
+ 	}else if(act == "form"){
+ 		$("#contract-addForm-hook input[name='sellDeptName']").val(getCheckedOrg.name);
+		$("#contract-addForm-hook input[name='sellDeptId']").val(getCheckedOrg.orgId);
  	}
+ 
 		win.close();
 };
 
