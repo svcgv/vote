@@ -31,9 +31,8 @@ public class ProjectController extends AbstractBaseController {
 
         ModelAndView view = new ModelAndView();
 
-        view.addObject("isUseful", infoservice.qryInfoByCode("IS_USEFUL", "00"));
-        view.addObject("state", infoservice.qryInfoByCode("PROJECT_STATUS", "00"));
-        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE", "00"));
+        view.addObject("projectStatus", infoservice.qryInfoByCode("PROJECT_STATUS"));
+        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE"));
 
         view.setViewName("/project/project/index");
         return view;
@@ -41,12 +40,12 @@ public class ProjectController extends AbstractBaseController {
 
     @RequestMapping(value = "/project/form", method = RequestMethod.GET)
     public ModelAndView customFormView(@RequestParam("act") String act, @RequestParam("id") String id) {
-        ModelAndView view = new ModelAndView();
-
-        view.addObject("isUseful", infoservice.qryInfoByCode("IS_USEFUL"));
-        view.addObject("productType", infoservice.qryInfoByCode("PRODUCT_TYPE"));
-
-        view.addObject("projectType", "00");
+        
+    	ModelAndView view = new ModelAndView();
+    	
+        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE"));
+        view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT"));
+   
         view.addObject("act", act);
         view.addObject("id", id);
 
@@ -58,9 +57,12 @@ public class ProjectController extends AbstractBaseController {
     public ModelAndView editFormView(@RequestParam("act") String act, @RequestParam("id") String id) {
         ModelAndView view = new ModelAndView();
 
-        view.addObject("isUseful", infoservice.qryInfoByCode("IS_USEFUL"));
-        view.addObject("productType", infoservice.qryInfoByCode("PRODUCT_TYPE", "01"));
         PmProjectInfoEntity entity = pmProjectInfoServiceImpl.queryObject(Long.parseLong(id));
+        
+        view.addObject("projectStatus", infoservice.qryInfoByCode("PROJECT_STATUS",entity.getProjectStatus()));
+        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE",entity.getProjectType()));
+        view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT",entity.getIsImportant()));
+        view.addObject("approveStatus", infoservice.qryInfoByCode("APPROVE_STATUS",entity.getApproveStatus()));
         view.addObject("act", act);
         view.addObject("id", id);
         view.addObject("formObj", JSON.toJSONString(entity));

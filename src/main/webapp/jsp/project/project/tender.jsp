@@ -121,6 +121,30 @@ layui.use(['layer', 'form','laydate','table'], function(){
 					$("#project-form-hook input[name='predictContractAmount']").val(obj.predictAmount);
 					$("#project-form-hook input[name='profitMount']").val(obj.predictProfitRate);
 			 		
+			 	}else if(act == "tenderEdit"){
+			 	// 给form 表单反写值
+					//投标名称
+					$("#project-edit-hook input[name='bidName']").val(obj.bidName);
+					$("#project-edit-hook input[name='bidId']").val(obj.bidId);
+					
+					$("#project-edit-hook input[name='custName']").val(obj.custCnName);
+					$("#project-edit-hook input[name='custId']").val(obj.custId);
+					
+					$("#project-edit-hook input[name='buildDeptName']").val(obj.constructionDeptName);
+					$("#project-edit-hook input[name='buildDeptId']").val(obj.constructionDeptId);
+					
+					$("#project-edit-hook input[name='buildManagerName']").val(obj.constructionDeptManagerName);
+					$("#project-edit-hook input[name='buildManagerId']").val(obj.constructionDeptManagerId);
+					
+					$("#project-edit-hook input[name='sellDeptName']").val(obj.sellDeptName);
+					$("#project-edit-hook input[name='sellDeptId']").val(obj.sellDeptId);
+					
+					$("#project-edit-hook input[name='sellManagerName']").val(obj.sellDeptManagerName);
+					$("#project-edit-hook input[name='sellManagerId']").val(obj.sellDeptManagerId);
+					
+					// 投标里的字段 和项目里的 请确认  我不是很清楚 反写的可能有误
+					$("#project-edit-hook input[name='predictContractAmount']").val(obj.predictAmount);
+					$("#project-edit-hook input[name='profitMount']").val(obj.predictProfitRate);
 			 	}
 			}
 		});

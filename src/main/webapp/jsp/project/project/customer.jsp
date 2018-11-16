@@ -89,7 +89,12 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			 	}else if(act == "custForm"){
 					$("#project-form-hook input[name='custName']").val(custName);
 					$("#project-form-hook input[name='custSapCode']").val(custId);
+			 	}else if(act == "custEdit"){
+			 		$("#project-edit-hook input[name='custName']").val(custName);
+					$("#project-edit-hook input[name='custSapCode']").val(custId);
 			 	}
+				
+				
 			}
 		});
 		
