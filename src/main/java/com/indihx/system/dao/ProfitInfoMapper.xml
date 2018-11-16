@@ -12,7 +12,7 @@
     PROFIT_ID, ORG_ID
   </sql>
   
-  <select id="qryProFitInfoAll" resultMap="BaseResultMap" >
+  <select id="queryProfitInfoByOrgId" resultMap="BaseResultMap" >
   	select a.*,b.org_name
     from profit_info a 
     left join org_info b on a.org_id =b.org_id
