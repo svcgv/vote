@@ -44,7 +44,7 @@ public class QueryUsrInfoServiceImpl implements QueryUsrInfoService {
 	}
 
 	@Override
-	public List<QueryUsrInfoEntity> queryUserByRoleCodeUnderOrgNo(List<BigDecimal> list) {
+	public List<QueryUsrInfoEntity> queryUserByRoleCodeUnderOrgNo(Map<String,Object> list) {
 		
 		return queryUsrInfoMapper.queryUserByRoleCodeUnderOrgNo(list);
 	}

@@ -157,10 +157,7 @@
 	       <!-- 未评审时不显示评审记录 -->
 	        <div class="layui-inline">
 	       		 <label class="layui-form-label">评审记录：</label>
-	       		 <div class="layui-input-block" style="margin-left:160px;">
-			     	<div><span>2018-12-28 12:20:22</span> <span>交付部门：</span><strong style="font-weight:bold;">史定波</strong> <span style="margin-left:10px;">评审意见：</span><strong style="font-weight:bold;color:red;">通过</strong> <span style="margin-left:10px;">评审理由：开发难度低</span></div>
-			     	<div><span>2018-12-28 12:20:22</span> <span>销售部门：</span><strong style="font-weight:bold;">史定波</strong> <span style="margin-left:10px;">评审意见：</span><strong style="font-weight:bold;color:red;">不通过</strong> <span style="margin-left:10px;">评审理由：不合理</span></div>
-			    </div>
+	       		  <table class="layui-table" id='reviewViewHisTable'></table>
 	       </div>
 		     
 		     
@@ -171,12 +168,13 @@
     </div>
 </div>
 <script>
+var reviewHis = ${reviewHis}
 $(function(){
-	layui.use(['layer', 'form','laydate'], function(){
+	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
-	  	  laydate=layui.laydate
-		
+	  	  laydate=layui.laydate,
+	  	 table=layui.table;
 		 //日期
 	  laydate.render({
 		    elem: "#predictPeriodDate2",
@@ -196,6 +194,37 @@ $(function(){
 			$(this).getWindow().close();
 			return false;
 		})
+		
+		table.render({
+	  	  	id:"reviewViewHisTable",
+	  	    elem: '#reviewViewHisTable',
+	  	    //url:'custom.json',
+	  	    height:'120',
+	  	    width:'100%',
+	  	    title: '评审历史纪录',
+	  	    cols: [[
+		  	      {field:'reviewUserName', title:'评审人', width:130},
+		  	     
+		  	    {field:'result', title: '评审结果', width: 120
+		      	      ,templet: function(d){
+		      	    	if(d.result=='00'){
+		      	        	return '同意'
+		      	        }
+		      	    	if(d.result=='01'){
+		      	        	return '退回'
+		      	        }
+		      	    	else{
+		      	    		return '数据待完善'
+		      	    	}
+		      	      },rowspan: 2
+		      	    },
+		  	      {field:'commentDetail', title:'评审意见', width:200},
+		  	      {field:'modifyTime', title:'评审时间', width:150,sort:true}
+	  	    ]],
+	  	    cellMinWidth:'100',
+	  	    data:reviewHis,
+	  	    page: false
+	  	  	})
 	
 	})
 });

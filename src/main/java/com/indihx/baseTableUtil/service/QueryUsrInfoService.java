@@ -22,7 +22,7 @@ public interface QueryUsrInfoService {
 	
 	public List<QueryUsrInfoEntity> queryUserByRoleCodeAndOrgNo(Map<String,Object> param);
 	
-	public List<QueryUsrInfoEntity> queryUserByRoleCodeUnderOrgNo(List<BigDecimal> list);
+	public List<QueryUsrInfoEntity> queryUserByRoleCodeUnderOrgNo(Map<String,Object> list);
 	
 }
 

@@ -256,7 +256,7 @@
 		AND c.role_code = #{roleCode}
 	</select>
 	
-	<select id="queryUserByRoleCodeUnderOrgNo" resultMap="usrInfoMap"  parameterType="java.util.List">
+	<select id="queryUserByRoleCodeUnderOrgNo" resultMap="usrInfoMap"  parameterType="java.util.Map">
 		SELECT
 			*
 		FROM
@@ -265,7 +265,7 @@
 		LEFT JOIN ROLE c ON b.role_id = c.role_id
 		WHERE
 		org_no in
-		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+		<foreach collection="orgList" index="index" item="item" open="(" separator="," close=")">
                 #{item}       
         </foreach> 
         <if test="roleCode != null and roleCode!=''">

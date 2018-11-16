@@ -4,6 +4,7 @@ package com.indihx.baseTableUtil.controller;
 import java.util.Map;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,12 @@ public class QueryUsrInfoController {
     			list.add(new BigDecimal( Integer.parseInt(map.get("orgId").toString())));
     		}
     	}
-     	List<QueryUsrInfoEntity> res = usrInfoService.queryUserByRoleCodeUnderOrgNo(list);
+    	Map<String,Object> queryParam = new HashMap<String,Object>();
+    	queryParam.put("orgList", list);
+    	if(param.get("roleCode")!=null) {
+    		queryParam.put("roleCode", param.get("roleCode"));
+    	}
+     	List<QueryUsrInfoEntity> res = usrInfoService.queryUserByRoleCodeUnderOrgNo(queryParam);
      	
      	
  		return R.ok().put("page", res);

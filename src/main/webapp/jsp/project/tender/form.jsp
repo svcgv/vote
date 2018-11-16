@@ -353,10 +353,10 @@ $(function(){
 	  
 });
   
-  //查询技术总监
+  //选择项目经理
   $("#techQuery-projectManager").click(function(){
 	  $.openWindow({
-	  		url:'user?act=addProManager&orgNo=10&roleCode=PROJECT_MANGER',
+	  		url:'user?act=addProManager&orgNo=&roleCode=PROJECT_MANGER',
 	  		title:"选择项目经理",
 	  		width:"700"
 	 });

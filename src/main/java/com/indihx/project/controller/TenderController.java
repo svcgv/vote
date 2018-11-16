@@ -35,6 +35,8 @@ import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
 import com.indihx.PmFile.entity.PmFileEntity;
 import com.indihx.PmFile.service.PmFileService;
+import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
+import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
@@ -54,7 +56,8 @@ public class TenderController extends AbstractBaseController{
     private PmConfirmBidService pmConfirmBidService;
     @Autowired
     private PmFileService pmFileService;
-	
+    @Autowired
+    private PmReviewInfoService pmReviewInfoService;
 	@RequestMapping("/tender/index")
 	public ModelAndView addCustomView() {
 		
@@ -112,6 +115,13 @@ public class TenderController extends AbstractBaseController{
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
 		
+		Map<String ,Object> map = new HashMap<String,Object>();
+		map.put("reviewType", "00");
+		map.put("isDelete", "01");
+		map.put("foreignId", id);
+		
+		List<PmReviewInfoEntity> list2 = pmReviewInfoService.queryList(map);
+		view.addObject("reviewHis",JSON.toJSONString(list2));
 		view.addObject("act",act);
 		view.addObject("id",id);
 		

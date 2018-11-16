@@ -88,7 +88,7 @@ $(".org-wrapper #org-add-hook").click(function(){
 				$("#tender-addForm-hook input[name='sellDeptId']").val(getCheckedOrg.orgId);
 		 	}else if(act == "addPay"){
 		 		//选择交付部门
-		 			queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"MAIN_MANAGER")
+		 			queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"CONSTRUCTION_DEPT_MANAGER")
 		 		$("#tender-addForm-hook input[name='constructionDeptName']").val(getCheckedOrg.name);
 				$("#tender-addForm-hook input[name='constructionDeptId']").val(getCheckedOrg.orgId);
 		 	}
@@ -148,7 +148,7 @@ function queryUserByRoleCodeOrgNo(orgNo,roleCode){
 			  success: function(res){
 				  console.log('asdas',act)
 			      console.log(res)
-			      if(res.page){
+			      if(res.page.length>0){
 			    	  if(act =="addPay"){ // 交付部门负责人页面
 					 		$("#tender-addForm-hook input[name='constructionDeptManagerName']").val(res.page[0].usrName);
 							$("#tender-addForm-hook input[name='constructionDeptManagerId']").val(res.page[0].usrId);
@@ -156,7 +156,16 @@ function queryUserByRoleCodeOrgNo(orgNo,roleCode){
 					 		$("#tender-addForm-hook input[name='sellDeptManagerName']").val(res.page[0].usrName);
 							$("#tender-addForm-hook input[name='sellDeptManagerId']").val(res.page[0].usrId);
 			      }
-		      }},
+		      }
+			      else{
+			    	  if(act =="addPay"){ // 交付部门负责人页面
+					 		$("#tender-addForm-hook input[name='constructionDeptManagerName']").val('');
+							$("#tender-addForm-hook input[name='constructionDeptManagerId']").val('');
+					 	}else if(act =="add"){ //销售部门负责人 页面
+					 		$("#tender-addForm-hook input[name='sellDeptManagerName']").val('');
+							$("#tender-addForm-hook input[name='sellDeptManagerId']").val('');
+			      		}
+			      }},
 			  dataType: "json"
 			})
 	}

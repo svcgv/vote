@@ -113,6 +113,17 @@
 		          <input type="text" style='display:none' name="sellDeptManagerId">
 		      </div>
 		     </div> 
+		     <div  class="layui-inline">
+		    <label class="layui-form-label">项目经理：</label>
+		       <div class="layui-input-inline">
+		          <input type="text" name="projectManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="text" style='display:none' name="projectManagerId">
+		      </div>
+		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-projectManager" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+		       </div>
+		     </div> 
+		     
 		     <div class="layui-inline">
 		      <label class="layui-form-label">客户经理：</label>
 		       <div class="layui-input-inline">
@@ -301,8 +312,16 @@ $(function(){
   //查询技术总监
   $("#tender-addForm-hook #techQuery-hook").click(function(){
 	  $.openWindow({
-	  		url:'user?act=addtech',
+	  		url:'user?act=addtech&orgNo=&roleCode=',
 	  		title:"选择技术总监",
+	  		width:"700"
+	 });
+	  
+});
+  $("#techQuery-projectManager").click(function(){
+	  $.openWindow({
+	  		url:'user?act=addProManager&orgNo=&roleCode=PROJECT_MANGER',
+	  		title:"选择项目经理",
 	  		width:"700"
 	 });
 	  
@@ -370,7 +389,7 @@ $(function(){
   // 选择人员
   $("#tender-addForm-hook #userQuery-hook").off("click").on("click",function(){
 	  	$.openWindow({
-	  		url:'user?act=add',
+	  		url:'user?act=add&orgNo=&roleCode=',
 	  		title:"选择客户经理",
 	  		width:"700"
 	 	 });
