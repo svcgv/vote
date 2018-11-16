@@ -4,6 +4,9 @@ package com.indihx.PmProjectInfo.controller;
 import java.util.Map;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+
+import com.alibaba.fastjson.JSON;
+import com.indihx.comm.util.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,10 +43,11 @@ public class PmProjectInfoController {
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
-
-		List<PmProjectInfoEntity> pmProjectInfo = pmProjectInfoService.queryList(params);
-        return R.ok().put("page", pmProjectInfo);
+    public @ResponseBody
+    ResponseData list(@RequestBody Map<String, Object> params, HttpSession session){
+        String str = (String) params.get("queryStr");
+        Map<String,Object> maps = (Map<String,Object>) JSON.parse(str);
+        return new ResponseData(pmProjectInfoService.queryList(maps,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
     }
 
 

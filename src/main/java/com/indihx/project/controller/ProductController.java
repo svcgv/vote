@@ -80,8 +80,7 @@ public class ProductController extends AbstractBaseController{
 		ModelAndView view = new ModelAndView();
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		
-		
+
 		PmProductInfoEntity entity = pmProductInfoService.queryObject(id);
 		view.addObject("product",entity);
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE",entity.getProductType()));

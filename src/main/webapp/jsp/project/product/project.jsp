@@ -8,7 +8,7 @@
 			<div class="layui-inline">
 				<label class="layui-form-label">项目编号：</label>
 				<div class="layui-input-inline">
-					<input type="text" name="projectId"  autocomplete="off" class="layui-input form-control">
+					<input type="text" name="wbs"  autocomplete="off" class="layui-input form-control">
 				</div>
 			</div>
 
@@ -39,32 +39,7 @@
 
 <script type="text/javascript">
     $(function(){
-        var testData=[
-            {"projectId":"1000","projectName":"雪松-软件研发外包战略供应商招标"},
-            {"projectId":"1001","projectName":"深圳数位传媒科技有限公司IT人力外包"},
-            {"projectId":"10102","projectName":"信贷及相关系统技术服务项目"},
-            {"projectId":"10023","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"10as03","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"10AS03","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"10ASDA03","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"10ASA03","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"10SD03","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"10ASDSA03","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"10ASD03","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"100ASAS3","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"10AAASA03","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"1ZXC00ZX3","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"100AWQWEQ3","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"100AA3","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"10ASDASD03","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"100ASDASD3","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"100ADQEQW3","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"100QEQE3","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"10ASADAAD03","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"AQQQQ","projectName":"新华保险人力外包服务项目"},
-            {"projectId":"WEQWEQSDSDDS","projectName":"新华保险人力外包服务项目"},
-
-        ]
+        var testData=[]
 //一般直接写在一个js文件中
         layui.use(['layer', 'form','laydate','table','laypage'], function(){
             var layer = layui.layer ,
@@ -73,34 +48,34 @@
             var laypage = layui.laypage;
 
             var queryParams=$("#project-query-form").serializeObject();
-            // table render
-            table.render({
-                elem: '#projectTable-all',
-                // url:'/vote/pmcustomerinfo/list',
-                height:'260',
-                width:"690",
-                title: '项目表信息',
-                response: {
-                    dataName: 'page'
-                },
-                where:{
-                    queryStr:JSON.stringify(queryParams)
-                },
-                method:'POST',
-                contentType: 'application/json',
-                cols: [[
-                    {type: 'checkbox' },
-                    {field:'projectId', title:'项目编号', templet:function(d){
-                        var jsonStr = JSON.stringify(d);
-                        return '<div class="jsonData" dataStr='+jsonStr+'>'+d.projectId+'</div>'
-                    } },
-                    {field:'projectName', title:'项目名称'}
-                ]],
-                data:testData,
-                page: true,
-                done:function(res,curr,count){
-                }
+            var newParams={"queryStr":JSON.stringify(queryParams)};
+            $.ajax({
+                type: 'POST',
+                url: '/vote/pmprojectinfo/list',
+                data: JSON.stringify(newParams),
+                contentType:'application/json',
+                success: function(res){
+                    testData=res.page;
+                    table.render({
+                        elem: '#projectTable-all',
+                        height:'260',
+                        width:"690",
+                        title: '项目表信息',
+                        cols: [[
+                            {type: 'checkbox' },
+                            {field:'wbs', title:'项目编号', templet:function(d){
+                                var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
+                                return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
+                            } },
+                            {field:'projectName', title:'项目名称'}
+                        ]],
+                        cellMinWidth:'90',
+                        data:testData,
+                        page: true
+                    });},
+                dataType: "json"
             });
+            // table render
 
             //复选框选中监听,将选中的id 设置到缓存数组,或者删除缓存数组
             var ids=[];
@@ -248,22 +223,34 @@
 			 */
             $("#project-query-form #userQuery").click(function(){
 
-                var queryParams=$("#project-query-form").serialize();
-                console.log(queryParams)
-                table.reload('customerGroup-table',{
-                    url:'form',
-                    page:{
-                        curr:1 //从第一页开始
-                    },
-                    method:'post',
-                    where:{
-                        queryStr:queryParams
-                    },
-                    done:function(res){
-                        console.log(res)
-                    }
-
-                })
+                var queryParams=$("#project-query-form").serializeObject();
+                var newParams={"queryStr":JSON.stringify(queryParams)};
+                $.ajax({
+                    type: 'POST',
+                    url: '/vote/pmprojectinfo/list',
+                    data: JSON.stringify(newParams),
+                    contentType:'application/json',
+                    success: function(res){
+                        testData=res.page;
+                        table.render({
+                            elem: '#projectTable-all',
+                            height:'260',
+                            width:"690",
+                            title: '项目表信息',
+                            cols: [[
+                                {type: 'checkbox' },
+                                {field:'wbs', title:'项目编号', templet:function(d){
+                                    var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
+                                    return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
+                                } },
+                                {field:'projectName', title:'项目名称'}
+                            ]],
+                            cellMinWidth:'90',
+                            data:testData,
+                            page: true
+                        });},
+                    dataType: "json"
+                });
             });
 
         });

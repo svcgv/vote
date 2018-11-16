@@ -16,6 +16,7 @@ public interface PmProjectInfoService {
 	public void update(PmProjectInfoEntity entity);
 	public void delete(long projectId);
 	public List<PmProjectInfoEntity> queryList(Map<String, Object> entity);
+	public List<PmProjectInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize);
 	public int queryTotal();
    
 }

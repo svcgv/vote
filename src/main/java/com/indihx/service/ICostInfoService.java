@@ -16,6 +16,6 @@ public interface ICostInfoService {
 	
 	
 	
-	public List<CostInfo> qryBtnInfoListByOrgId(Long orgId);
+	public List<CostInfo> qryCostInfoListByOrgId(Long orgId);
 
 }
