@@ -11,7 +11,7 @@ Target Server Type    : ORACLE
 Target Server Version : 110200
 File Encoding         : 65001
 
-Date: 2018-11-09 10:07:13
+Date: 2018-11-16 21:50:42
 */
 
 
@@ -883,6 +883,8 @@ COMMENT ON COLUMN "VOTE"."CODE_DATA"."TM_SMP" IS '创建时间';
 -- ----------------------------
 -- Records of CODE_DATA
 -- ----------------------------
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('PROJECT_STATUS', 'PROJECT_STATUS', '项目状态', '00', '进行中', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('PROJECT_TYPE', 'PROJECT_TYPE', '项目类型', '00', '整包项目', null);
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('CreditInfoFrom', 'CreditInfoFrom', '不良信息来源', '07', '其他渠道', '2018-03-14');
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('CreditInfoFrom', 'CreditInfoFrom', '不良信息来源', '06', '街道办事处提出的记分建议', '2018-03-14');
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('APP_TYPE', 'APP_TYPE', '流程类型', 'CREDITRECORDBL', '不良信息建档流程', '2018-03-27');
@@ -1013,6 +1015,28 @@ INSERT INTO "VOTE"."CODE_DATA" VALUES ('CreditInfoFrom', 'CreditInfoFrom', '不�
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('CreditInfoFrom', 'CreditInfoFrom', '不良信息来源', '02', '日常巡查及监督检查', '2018-03-14');
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('CreditInfoFrom', 'CreditInfoFrom', '不良信息来源', '03', '投诉信访', '2018-03-12');
 INSERT INTO "VOTE"."CODE_DATA" VALUES ('CreditInfoFrom', 'CreditInfoFrom', '不良信息来源', '04', '媒体曝光', '2018-03-12');
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('BID_STATUS', 'BID_STATUS', '投标状态', '00', '待发起评审', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('PROJECT_TYPE', 'PROJECT_TYPE', '项目类型', '01', '人力项目', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('PROJECT_TYPE', 'PROJECT_TYPE', '项目类型', '02', '订单项目', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('PROJECT_TYPE', 'PROJECT_TYPE', '项目类型', '03', '内部研发项目', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('PROJECT_STATUS', 'PROJECT_STATUS', '项目状态', '01', '结项', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('PROJECT_STATUS', 'PROJECT_STATUS', '项目状态', '02', '待验收', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('PROJECT_STATUS', 'PROJECT_STATUS', '项目状态', '03', '关闭', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('IS_IMPORTANT', 'IS_IMPORTANT', '是否重点项目', '00', '是', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('IS_IMPORTANT', 'IS_IMPORTANT', '是否重点项目', '01', '否', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('APPROVE_STATUS', 'APPROVE_STATUS', '审批状态', '00', '待申请', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('APPROVE_STATUS', 'APPROVE_STATUS', '审批状态', '01', '待实施审批', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('APPROVE_STATUS', 'APPROVE_STATUS', '审批状态', '02', '实施审批退回', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('APPROVE_STATUS', 'APPROVE_STATUS', '审批状态', '03', '待销售审批', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('APPROVE_STATUS', 'APPROVE_STATUS', '审批状态', '04', '销售审批退回', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('APPROVE_STATUS', 'APPROVE_STATUS', '审批状态', '05', '待技术总监审批', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('APPROVE_STATUS', 'APPROVE_STATUS', '审批状态', '06', '技术总监退回', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('APPROVE_STATUS', 'APPROVE_STATUS', '审批状态', '07', '审批通过', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('FILE_BUSINESS_TYPE', 'FILE_BUSINESS_TYPE', '文件业务类型', '00', '招标文件', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('FILE_BUSINESS_TYPE', 'FILE_BUSINESS_TYPE', '文件业务类型', '01', '客户需求文件', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('FILE_BUSINESS_TYPE', 'FILE_BUSINESS_TYPE', '文件业务类型', '02', '内部评审文件', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('TRADE_CODE', 'TRADE_CODE', '行业代码', '00', '金融', null);
+INSERT INTO "VOTE"."CODE_DATA" VALUES ('REGIONAL_MARKET', 'REGIONAL_MARKET', '地区市场', '00', '中国', null);
 
 -- ----------------------------
 -- Table structure for EXCEL_CELL
@@ -1089,6 +1113,8 @@ INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('62', '11', null, null, '0', '0', null, 
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('65', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('110', '11', null, null, '0', '0', null, null, null, '00');
 INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('181', '11', null, null, '0', '0', null, null, null, '00');
+INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('201', '11', null, null, '0', '0', null, null, null, '00');
+INSERT INTO "VOTE"."EXCEL_CELL" VALUES ('221', '11', null, null, '0', '0', null, null, null, '00');
 
 -- ----------------------------
 -- Table structure for EXCEL_FILE
@@ -1243,6 +1269,8 @@ INSERT INTO "VOTE"."MENU_INFO" VALUES ('1023', '投票管理', '1000', '/result/
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1028', '投标管理', '1026', '/project/tender/index', '1000', '2', '20181104', 'icon-list', '3', null, null);
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1124', '投标评审管理', '1026', '/project/tenderReview/index', '1000', '2', '20181104', 'icon-list', null, null, null);
 INSERT INTO "VOTE"."MENU_INFO" VALUES ('1144', '审批', '1026', '/project/tenderReview/index', '1000', '2', '20181108', 'icon-list', '8', null, null);
+INSERT INTO "VOTE"."MENU_INFO" VALUES ('1164', '项目', '1026', '/project/project/index', '1000', '2', '20181113', 'icon-list', '11', null, null);
+INSERT INTO "VOTE"."MENU_INFO" VALUES ('1165', '项目群', '1026', '/project/projectGroup/index', '1000', '2', '20181115', 'icon-list', '7', null, null);
 
 -- ----------------------------
 -- Table structure for ORG_INFO
@@ -1351,7 +1379,8 @@ CREATE TABLE "VOTE"."PM_COMPANY_INFO" (
 "CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
 "MODIFIER" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("COMPANY_CODE")
 )
 LOGGING
 NOCOMPRESS
@@ -1386,8 +1415,6 @@ CREATE TABLE "VOTE"."PM_CONFIRM_BID" (
 "SELL_DEPT_NAME" VARCHAR2(128 BYTE) NULL ,
 "CUST_MANAGER_ID" NUMBER(10) NULL ,
 "CUST_MANAGER_NAME" VARCHAR2(64 BYTE) NULL ,
-"PROJECT_MANAGER_ID"	NUMBER(10,0) NULL ,
-"PROJECT_MANAGER_NAME"	VARCHAR2(32 BYTE) NULL,
 "TECHNICAL_DIRECTOR_ID" NUMBER(10) NULL ,
 "TECHNICAL_DIRECTOR_NAME" VARCHAR2(256 BYTE) NULL ,
 "SELL_DEPT_MANAGER_NAME" VARCHAR2(256 BYTE) NULL ,
@@ -1404,7 +1431,12 @@ CREATE TABLE "VOTE"."PM_CONFIRM_BID" (
 "MODIFIER" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
 "IS_DELETE" CHAR(2 BYTE) NULL ,
-"PREDICT_PERIOD_START" VARCHAR2(32 BYTE) NULL 
+"PREDICT_PERIOD_START" VARCHAR2(32 BYTE) NULL ,
+"TAX_RATE" NUMBER(10,2) NULL ,
+"BID_CODE" VARCHAR2(32 BYTE) NULL ,
+"PROJECT_MANAGER_NAME" VARCHAR2(64 BYTE) NULL ,
+"PROJECT_MANAGER_ID" NUMBER(10) NULL ,
+PRIMARY KEY ("BID_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1415,14 +1447,19 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_CONFIRM_BID
 -- ----------------------------
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('3', 'asd', '1', '2', '3', '4', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'asdasda', 'dasd', '22', '20181108230353', null, null, '00', null);
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('1', '名称', '1', '1', '2', '3', null, '390', '中广核新能源投资（深圳）有限公司北京分公司', '1000001264', '2', '销售中心', '5', '管理中心', '1000', '系统管理员', '1000', '系统管理员', '系统管理员_TEST2', '22', 'PMS_管理员（娄）', '41', null, null, null, null, 'ddddddddd', '1000', '20181108220614', null, null, '00', null);
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('6', 'asda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'das', null, '1000', '20181108232325', null, null, '00', null);
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('7', 'asdas', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1000', '20181108232456', null, null, '00', null);
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('8', 'asdasd', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1000', '20181108232557', null, null, '00', null);
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('2', 'asda', '1', '3', '2', '4', null, null, null, null, '5', '管理中心', '2', '销售中心', '41', 'PMS_管理员（娄）', '22', '系统管理员_TEST2', '系统管理员', '1000', '系统管理员', '1000', null, null, null, 'ddd', 'dasdasda', '1000', '20181108230208', null, null, '00', null);
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('9', 'asdasda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '22', '20181108232839', null, null, '00', null);
-INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('10', 'asda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '22', '20181108233633', null, null, '00', null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('3', 'asd', '1', '2', '3', '4', null, null, null, null, null, null, null, null, null, null, '1000', '系统管理员', '系统管理员', '1000', '系统管理员', '1000', null, '00', null, 'asdasda', 'dasd', '22', '20181108230353', '1000', '20181113151622', '00', null, null, null, null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('1', '名称', '1', '1', '2', '3', null, '390', '中广核新能源投资（深圳）有限公司北京分公司', '1000001264', '2', '销售中心', '5', '管理中心', '1000', '系统管理员', '1000', '系统管理员', '系统管理员', '1000', '系统管理员', '1000', '02', '00', null, null, 'ddddddddd', '1000', '20181108220614', '1000', '20181113153342', '00', null, null, null, null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('6', 'asda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'das', null, '1000', '20181108232325', null, null, '00', null, null, null, null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('7', 'asdas', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1000', '20181108232456', null, null, '00', null, null, null, null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('8', 'asdasd', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1000', '20181108232557', null, null, '00', null, null, null, null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('2', 'asda', '1', '3', '2', '4', null, null, null, null, '5', '管理中心', '2', '销售中心', '41', 'PMS_管理员（娄）', '22', '系统管理员_TEST2', '系统管理员', '1000', '系统管理员', '1000', null, null, null, 'ddd', 'dasdasda', '1000', '20181108230208', null, null, '00', null, null, null, null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('9', 'asdasda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '22', '20181108232839', null, null, '00', null, null, null, null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('10', 'asda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '22', '20181108233633', null, null, '00', null, null, null, null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('23', 'dddd', '12', '23', '34', '56', '2018-11-30 00:00:00', '360', '中远集装箱运输有限公司/中远海运集装箱运输有限公司', '1000000275', '1000', '金融政府事业群', '1000', '金融政府事业群', '22', '系统管理员_TEST2', '22', '系统管理员_TEST2', '系统管理员', '1000', '系统管理员', '1000', '01', '01', null, 'dsada', 'dasdasdasa', '1000', '20181116210309', '1000', '20181116211504', '00', '2018-11-16 00:00:00', '67', 'TB201811163734', null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('24', 'ddsssss', '12', '34', '56', '78', '2018-11-30 00:00:00', '361', '河南省伟信招标管理咨询有限公司', '1000001635', '1000', '金融政府事业群', '1000', '金融政府事业群', '41', 'PMS_管理员（娄）', '1000', '系统管理员', '系统管理员', '1000', '系统管理员', '1000', '01', '01', null, 'dasdas', 'dsadasd', '1000', '20181116210801', '1000', '20181116211516', '00', '2018-11-16 00:00:00', '910', 'TB201811168426', null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('25', '萨达', null, null, null, null, null, '359', '上海润之信息科技有限公司', '1000000777', '1000', '金融政府事业群', '1000', '金融政府事业群', '1000', '系统管理员', '41', 'PMS_管理员（娄）', '系统管理员', '1000', '系统管理员', '1000', '00', '01', null, '大苏打撒旦', null, '1000', '20181116211647', '1000', '20181116211840', '00', null, null, 'TB201811169630', null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('26', 'ddd', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '00', '01', null, 'dsad', 'dasda', '1000', '20181116213215', null, null, '00', null, null, 'TB201811167436', null, null);
+INSERT INTO "VOTE"."PM_CONFIRM_BID" VALUES ('27', 'asda', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '00', '01', null, 'asdas', null, '1000', '20181116214248', null, null, '00', null, null, 'TB201811160833', null, null);
 
 -- ----------------------------
 -- Table structure for PM_CUSTOMER_GROUP
@@ -1436,7 +1473,8 @@ CREATE TABLE "VOTE"."PM_CUSTOMER_GROUP" (
 "CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
 "MODIFIER" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("CUST_GROUP_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1449,13 +1487,14 @@ NOCACHE
 -- ----------------------------
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811039615', 'asdas', '系统管理员', '1000', null, '1000', null, '01');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811039721', 'testGrouptttt', '系统管理员', '1000', null, '1000', null, '01');
-INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811034593', '敖德萨', '系统管理员', '1000', null, '1000', null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811034593', '敖德萨', '系统管理员', '1000', null, '1000', null, '01');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811036859', '2313', '系统管理员', '1000', null, '1000', null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811033643', '123-----;"', '系统管理员', '1000', null, '1000', null, '01');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('KH201811050204', '客户群', '系统管理员_TEST2', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811034512', 'ssss', '系统管理员', '1000', null, '22', null, '01');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811038225', 'aasda', '系统管理员', '1000', null, '1000', null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('201811032744', '客户群名称', '系统管理员_TEST2', '22', null, '22', null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP" VALUES ('KHQ201811136750', 'q', '系统管理员', '1000', null, null, null, '00');
 
 -- ----------------------------
 -- Table structure for PM_CUSTOMER_GROUP_RELATION
@@ -1466,7 +1505,8 @@ CREATE TABLE "VOTE"."PM_CUSTOMER_GROUP_RELATION" (
 "CUST_GROUP_ID" VARCHAR2(16 BYTE) NULL ,
 "CUST_ID" NUMBER(10) NULL ,
 "CUST_CN_NAME" VARCHAR2(256 BYTE) NULL ,
-"SAP_CODE" VARCHAR2(128 BYTE) NULL 
+"SAP_CODE" VARCHAR2(128 BYTE) NULL ,
+PRIMARY KEY ("CUST_GROUP_RELATION_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1557,6 +1597,16 @@ INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('162', '201811032744', '
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('163', '201811032744', '392', '中国农业银行股份有限公司嘉兴南湖支行', '1000001247');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('81', '201811038225', '391', '长城（天津）股权投资基金管理有限责任公司', '1000001257');
 INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('82', '201811038225', '392', '中国农业银行股份有限公司嘉兴南湖支行', '1000001247');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('241', 'KHQ201811136750', '358', '博易数通（徐州）信息技术有限公司', '1000001229');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('242', 'KHQ201811136750', '359', '上海润之信息科技有限公司', '1000000777');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('243', 'KHQ201811136750', '360', '中远集装箱运输有限公司/中远海运集装箱运输有限公司', '1000000275');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('244', 'KHQ201811136750', '361', '河南省伟信招标管理咨询有限公司', '1000001635');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('245', 'KHQ201811136750', '362', '天津港保税区世纪龙科技发展有限公司', '1000001625');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('246', 'KHQ201811136750', '363', '水利部新疆维吾尔自治区水利水电勘测设计研究院伊犁招标代理中心', '1000001618');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('247', 'KHQ201811136750', '364', '兴业银行股份有限公司信用卡中心', '1000001612');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('248', 'KHQ201811136750', '365', '中国工商银行股份有限公司嘉善支行', '1000001585');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('249', 'KHQ201811136750', '366', '中科军信股份有限公司', '1000001569');
+INSERT INTO "VOTE"."PM_CUSTOMER_GROUP_RELATION" VALUES ('250', 'KHQ201811136750', '367', '中国建设银行股份有限公司南通分行', '1000001565');
 
 -- ----------------------------
 -- Table structure for PM_CUSTOMER_INFO
@@ -1590,7 +1640,8 @@ CREATE TABLE "VOTE"."PM_CUSTOMER_INFO" (
 "ADD_TIME" VARCHAR2(256 BYTE) NULL ,
 "MODIFIER" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("CUST_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1601,6 +1652,34 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_CUSTOMER_INFO
 -- ----------------------------
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('358', '博易数通（徐州）信息技术有限公司', null, null, '1000001229', null, '91320311MA1P108K1X', null, null, null, '60天之内 到期净值', '高科技', null, null, null, null, null, '有效', '博易数通（徐州）信息技术有限公司', '金融解决方案业务部', '1004', null, '2018-03-20 12:52:04', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('359', '上海润之信息科技有限公司', null, null, '1000000777', null, '91310114093801885G', null, null, null, '45天之内 到期净值', '高科技', null, null, null, null, null, '有效', '上海润之信息科技有限公司', '金融解决方案业务部', '1005', null, '2018-03-20 12:52:04', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('360', '中远集装箱运输有限公司/中远海运集装箱运输有限公司', null, null, '1000000275', null, '913100001322933273', null, '上海市东大名路378号', null, '立即应付的 到期净值', null, null, null, null, null, null, '有效', '中远集装箱运输有限公司', '金融解决方案业务部', '1005', null, '2018-03-20 12:52:04', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('361', '河南省伟信招标管理咨询有限公司', null, '中国', '1000001635', null, '91410100728642639T', 'Paper', '郑州市郑东新区正光路22号行署国际广场E座8楼801室', '主营业务客户', null, '商业和零售', '中国', '招标代理', '郑州', '中介服务(人才/商标专利)', '月结(30天)结算周期', '有效', '河南省伟信招标管理咨询有限公司', '金融解决方案业务部', null, null, '2018-03-09 11:38:50', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('362', '天津港保税区世纪龙科技发展有限公司', null, '中国', '1000001625', null, '9112011671824774XD', 'Paper', '天津自贸试验区(空港经济区)中环西路与西二道交口丽港大厦3-1020室', '主营业务客户', null, '商业和零售', '中国', '招标代理', '天津', '中介服务(人才/商标专利)', '月结(30天)结算周期', '有效', '天津港保税区世纪龙科技发展有限公司', '金融解决方案业务部', null, null, '2018-03-01 10:21:04', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('363', '水利部新疆维吾尔自治区水利水电勘测设计研究院伊犁招标代理中心', null, '中国', '1000001618', null, '91654002072216943J', 'Paper', '新疆伊犁州霍尔果斯配套区珠海路开建大厦1204室', '主营业务客户', null, '商业和零售', '中国', '招标代理', '山南地区新疆', '中介服务(人才/商标专利)', '月结(30天)结算周期', '有效', '水利部新疆维吾尔自治区水利水电勘测设计研究院伊犁招标代理中心', '金融解决方案业务部', null, null, '2018-02-27 09:54:07', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('364', '兴业银行股份有限公司信用卡中心', null, '中国', '1000001612', null, '91310115676249009H', 'Copper', '上海市浦东新区来安路500号', '主营业务客户', null, '金融', '中国', '办理本外币信用卡的发卡业务，办理信用卡项下的本外币贷款、结算、汇款、结汇、外汇兑换业务，代理国内外各类银行卡的收单业务，代理国外金融业务和国际组织信用卡的发卡、付款及资金清算业务，代理其他银行或机构信用卡发卡、收单业务的运营服务，代理信用卡项下的代收代付、代售、资信调查、咨询服务、见证业务，代理信用卡项下的理财服务', '上海', '金融', '季结（90天）结算周期', '有效', '兴业银行股份有限公司', '金融解决方案业务部', null, null, '2018-02-23 14:03:33', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('365', '中国工商银行股份有限公司嘉善支行', null, '中国', '1000001585', null, '91330421846594789R', 'Blank', '嘉善县魏塘街道解放东路8号', '主营业务客户', null, '金融', '中国', '金融业-银行', '嘉兴', '金融业(投资/保险/证/银行/基金)', '月结(30天)结算周期', '有效', '中国工商银行', '金融解决方案业务部', null, null, '2018-01-22 16:07:51', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('366', '中科军信股份有限公司', null, '中国', '1000001569', null, '91110108633625457Q', 'Blank', '北京市密云区经济开发区兴盛南路8号开发区办公楼501室-1958', '主营业务客户', null, '互联网和电商', '中国', '技术开发、技术转让、技术推广、技术服务、技术咨询；技术进出口', '北京', '互联网', '季结（90天）结算周期', '有效', '中科军信股份有限公司', '金融解决方案业务部', null, null, '2018-01-15 16:45:53', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('367', '中国建设银行股份有限公司南通分行', null, '中国', '1000001565', null, '913206008383001893', 'Paper', '南通市姚港路1号', '主营业务客户', null, '金融', '中国', '金融，银行', '上海', '金融业(投资/保险/证/银行/基金)', '月结(30天)结算周期', '有效', '中国建设银行', '金融解决方案业务部', null, null, '2018-01-12 11:08:10', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('368', '上海临泰企业服务有限公司', null, '中国', '1000001536', null, '913101046915914270', 'Blank', '上海市徐汇区龙吴路1500号2幢A312室', '主营业务客户', null, '商业和零售', '中国', '计算机软件服务，数据处理及相关技术业务处理服务，广告设计、制作、代理，利用自有媒体发布广告，企业管理及咨询服务，为企业提供市场营销、管理策划、商务信息咨询服务（不得从事增值电信、金融业务），电子商务（不得从事增值电信、金融业务），电子支付专业领域内的四技服务，展览展示服务，会务服务，票务代理，旅游用品、计算机、软件及辅助设备、电子产品，日用百货销售，佣金代理。', '上海', '服务业', '季结（90天）结算周期', '有效', '上海临泰企业服务有限公司', '金融解决方案业务部', null, null, '2017-12-25 17:39:15', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('369', '中国工商银行股份有限公司青岛市南第四支行', null, '中国', '1000001530', null, '913702022645719583', 'Blank', '青岛市市南区东海中路16号3栋', '主营业务客户', null, '金融', '中国', '代理中国保监会批准的人身保险和财产保险（航意险及其替代产品除外）；金融业务，代理开放式基金业务（保险兼业代理业务许可证,金融机构营业许可证 有效期限以许可证为准）。', '青岛', '金融', '季结（90天）结算周期', '有效', '中国工商银行', '金融解决方案业务部', null, null, '2017-12-21 10:47:08', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('370', '苏州太湖国家旅游度假区房产管理中心', null, '中国', '1000001520', null, '0000003', 'Blank', '苏州市吴中区香山街道后塘路6号', '主营业务客户', null, '政府', '中国', '房产信息，房产管理中心', '苏州', '政府/非营利机构', '月结(30天)结算周期', '有效', '苏州太湖国家旅游度假区房产管理中心', '金融解决方案业务部', null, null, '2017-12-13 17:08:10', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('371', '上海浦东发展银行股份有限公司苏州分行', null, '中国', '1000001519', null, '91320594837756678H', 'Blank', '苏州工业园区钟园路718号', '主营业务客户', null, '金融', '中国', '银行，金融', '上海', '金融业(投资/保险/证/银行/基金)', '月结(30天)结算周期', '有效', '上海浦东发展银行股份有限公司', '金融解决方案业务部', null, null, '2017-12-13 15:53:15', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('372', '中国银行股份有限公司常州分行', null, '中国', '1000001514', null, '91320400837166029B', 'Blank', '常州市和平北路21号', '主营业务客户', null, '金融', '中国', '银行', '常州市', '金融业(投资/保险/证/银行/基金)', '两月结（60天）结算周期', '有效', '中国银行股份有限公司', '金融解决方案业务部', null, null, '2017-12-11 13:51:53', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('373', '北京星际安讯科技有限公司', null, '中国', '1000001501', null, '911101027906714309', 'Blank', '北京市西城区新街口外大街28号B座226号（德胜园区）', '主营业务客户', null, '互联网和电商', '中国', '技术开发、技术服务、技术转让、销售通信设备', '北京', '互联网/电子商务', '季结（90天）结算周期', '有效', '北京星际安讯科技有限公司', '金融解决方案业务部', null, null, '2017-12-05 17:36:38', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('374', '山东超越数控电子股份有限公司', null, '中国', '1000001483', null, '91370000163092376X', 'Blank', '山东省济南市高新区孙村镇科航路2877号', '主营业务客户', null, '通信电信', '中国', '电子产品、机电一体化产品', '济南', '其他', '季结（90天）结算周期', '有效', '山东超越数控电子股份有限公司', '金融解决方案', null, null, '2017-11-21 11:15:43', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('375', '江苏银行股份有限公司南通开发区支行', null, '中国', '1000001479', null, '91320600838333773E', 'Blank', '南通开发区上海路9号', '主营业务客户', null, '金融', '中国', '按中国银行业监督管理委员会南通监管分局核发的金融许可证核定的范围经营', '上海', '金融业(投资/保险/证/银行/基金)', '两月结（60天）结算周期', '有效', '江苏银行股份有限公司', '金融解决方案业务部', null, null, '2017-11-17 13:49:36', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('376', '中国农业银行股份有限公司', null, '中国', '1000001467', 'Agricultural Bank of China', '911100001000054748', 'Paper', '北京市东城区建国门内大街69号', '主营业务客户', '90天之内 到期净值', '金融', '中国', '吸收公众存款；发放短期、中期、长期贷款；办理国内外结算；办理票据承兑与贴现；发行金融债券；代理发行、代理兑付、承销政府债券；买卖政府债券、金融债券；从事同业拆借；买卖、代理买卖外汇；结汇、售汇；从事银行卡业务；提供信用证服务及担保；代理收付款项；提供保管箱服务；代理资金清算；各类汇兑业务；代理政策性银行、外国政府和国际金融机构贷款业务；贷款承诺；组织或参加银团贷款；外汇存款；外汇贷款；外汇汇款；外汇借款；发行、代理发行、买卖或代理买卖股票以外的外币有价证券；外汇票据承兑和贴现；自营、代客外汇买卖；外币兑换；外汇担保；资信调查、咨询、见证业务；企业、个人财务顾问服务；证券公司客户交易结算资金存管业务；证券投资基金托管业务；企业年金托管业务；产业投资基金托管业务', '北京', '金融', '季结（90天）结算周期', '有效', '中国农业银行股份有限公司', '金融解决方案业务部', '1004', null, '2017-11-13 17:13:30', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('377', '国家邮政局邮政业安全中心', null, '中国', '1000001451', null, '110108717839655', 'Blank', '北京市海淀区挂甲屯5号院', '主营业务客户', null, '金融', '中国', '承担邮政业安全和应急管理体系的日常维护和运行等', '北京', '金融', '季结（90天）结算周期', '有效', '国家邮政局邮政业安全中心', '金融解决方案业务部', null, null, '2017-10-27 14:47:53', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('378', '常熟市信息化发展有限公司', null, '中国', '1000001448', null, '91320581063223332P', 'Blank', '常熟市海虞北路51号', '主营业务客户', null, '高科技', '中国', '信息化项目投资建设、信息化项目运行服务、智能化电子产品销售。（依法须经批准的项目，经相关部门批准后方可开展经营活动）', '常熟', '高科技', '两月结（60天）结算周期', '有效', '常熟市信息化发展有限公司', '金融解决方案业务部', null, null, '2017-10-26 15:43:32', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('379', '上海林享信息科技有限公司', null, '中国', '1000001441', null, '91310114332734588J', 'Blank', '上海市嘉定区福海路1011号3幢B区1552室', '主营业务客户', null, '金融', '中国', '从事计算机软件领域内的技术开发、技术转让、技术服务、技术咨询,计算机系统集成,计算机服务(除互联网上网服务经营场所),设计、制作、代理各类广告,企业管理,企业管理咨询,企业营销策划,商务咨询,展览展示服务,会务服务,票务代理,电子商务(不得从事增值电信、金融业务),电子产品、日用百货、计算机、软件及辅助设备(除计算机信息系统安全专用产品)的销售,接受金融机构委托从事金融信息技术外包,接受金融机构委托从事金融业务流程外包,接受金融机构委托从事金融知识流程外包。', '上海', '金融', '季结（90天）结算周期', '有效', '上海林享信息科技有限公司', '金融解决方案业务部', null, null, '2017-10-24 10:18:38', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('380', '华夏银行股份有限公司苏州分行', null, '中国', '1000001439', null, '9132059483775172XY', 'Blank', '苏州工业园区星海街188号', '主营业务客户', null, '金融', '中国', '金融，银行', '苏州', '金融', '月结(30天)结算周期', '有效', '华夏银行股份有限公司苏州分行', '金融解决方案业务部', null, null, '2017-10-20 15:26:52', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('381', '雪松控股集团有限公司', null, '中国', '1000001429', null, '91440101347466547J', 'Silver', '广州市中新广州知识城凤凰三路17号自编五栋487室', '主营业务客户', null, '金融', '中国', '投资管理服务;资产管理（不含许可审批项目）;企业管理服务（涉及许可经营项目的除外）;企业总部管理;(依法须经批准的项目，经相关部门批准后方可开展经营活动)', '广州', '金融', '月结(30天)结算周期', '有效', '雪松控股集团有限公司', '金融解决方案业务部', null, null, '2017-10-16 13:47:43', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('382', '青岛市国土资源和房屋管理局', null, '中国', '1000001428', null, '97', 'Blank', '青岛市南区巫峡路6号', '主营业务客户', null, '政府', '中国', '承担规范国土资源和房屋管理秩序的责任；承担保护与合理利用土地资源、矿产资源等自然资源的责任；承担全市耕地保护的责任，确保规划确定的耕地保有量和基本农田面积不减少；承担呈报国务院和省政府、市政府审批的各类用地的审核、报批工作；承担及时准确提供全市土地利用各种数据的责任；承担节约集约利用土地资源的责任；承担呈报省政府、市政府审批的改制企事业单位国有土地资产的处置等等。', '青岛', '其他', '季结（90天）结算周期', '有效', '青岛市国土资源和房屋管理局', '金融解决方案业务部', null, null, '2017-10-16 13:44:46', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('383', '青岛市房地产资源信息服务有限公司', null, '中国', '1000001421', null, '91370213095094053C', 'Blank', '青岛市市南区瞿塘峡路20号', '主营业务客户', null, '政府', '中国', '计算机系统服务；数据处理；计算机维修；基础软件服务；应用软件服务；记录媒介的复制；计算机、软件及辅助设备批发、零售；地理信息系统工程技术开发、技术服务；房地产中介服务；会议及展览服务。', '青岛', '其他', '季结（90天）结算周期', '有效', '青岛市房地产信息与交易资金监管中心', '金融解决方案业务部', null, null, '2017-09-29 10:53:09', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('384', '大丰银行股份有限公司', null, '中国', '1000001414', 'Tai Fung Bank', '791', 'Blank', '澳门宋玉生广场418号大丰银行总行大厦', '主营业务客户', null, '金融', '中国', '各项存款、放款、押汇以外，近年并积极发展新业务品种，配合新科技，务求与时代并进。', '澳门', '金融', '季结（90天）结算周期', '有效', '大丰银行股份有限公司', '金融解决方案业务部', null, null, '2017-09-25 09:59:43', '22', null, null, null, '00');
+INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('385', '江苏银行股份有限公司南通分行', null, '中国', '1000001366', null, '9132060025183486XC', 'Blank', '南通市南大街300号', '主营业务客户', null, '金融', '中国', '金融，银行', '南通市', '金融', '两月结（60天）结算周期', '有效', '江苏银行股份有限公司', '金融解决方案业务部', null, null, '2017-09-05 11:24:16', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('1', '123', 'dasdasd', 'dawqd', '15165asdsap', 'dasdas', null, null, null, 'dasda', null, 'dasda', null, null, null, null, '01', null, null, null, null, null, null, null, null, '1000', null, '01');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('43', null, null, null, 'dsddd', 'ddd', null, null, null, null, null, null, null, null, null, null, '01', null, null, null, null, null, null, '1000', '02-NOV-18', '1000', null, '01');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('390', '中广核新能源投资（深圳）有限公司北京分公司', null, '中国', '1000001264', null, '91110106MA001XEB1L', 'Silver', '北京市丰台区南四环西路188号十二区2号楼6层', '主营业务客户', '30天之内 到期净值', '能源', '中国', '是一家电源种类和地理分布多元化的亚洲独立发电商，我们的资产组合包括位于中国及韩国的风力、太阳能、燃气、燃煤、燃油、水力、热电联产及燃料电池发电项目以及一个蒸汽项目。', '北京', '能源', '月结(30天)结算周期', '有效', '中广核集团', '金融解决方案业务部', '1004', null, '2017-06-23 17:16:03', '22', null, null, null, '00');
@@ -1647,34 +1726,6 @@ INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('354', '深圳数位传媒科技�
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('355', '嘉善县住房和城乡规划建设局', null, '中国', '1000001674', null, '56567', 'Paper', '浙江省嘉兴市嘉善县解放西路68号', '主营业务客户', null, '政府', '中国', '房屋维护等', '嘉兴', '政府/非营利机构', '月结(30天)结算周期', '有效', '嘉善县住房和城乡规划建设局', '金融解决方案业务部', null, null, '2018-04-09 14:02:24', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('356', '江苏华凌科技咨询有限公司', null, '中国', '1000001657', null, '9132061130222988XG', 'Paper', '南通市港闸区江海大道639号1幢', '主营业务客户', '60天之内 到期净值', '商业和零售', '中国', '招标代理', '南通市', '中介服务(人才/商标专利)', '两月结（60天）结算周期', '有效', '江苏华凌科技咨询有限公司', '金融解决方案业务部', '1070 1005', null, '2018-03-27 09:53:23', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('357', '上海东方投资监理有限公司', null, '中国', '1000001647', null, '91310106132265406N', 'Paper', '上海市闵行区秀文路898号4号楼3楼', '主营业务客户', null, '商业和零售', '中国', '招标代理', '上海', '中介服务(人才/商标专利)', '两月结（60天）结算周期', '有效', '上海东方投资监理有限公司', '金融解决方案业务部', null, null, '2018-03-26 09:26:29', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('358', '博易数通（徐州）信息技术有限公司', null, null, '1000001229', null, '91320311MA1P108K1X', null, null, null, '60天之内 到期净值', '高科技', null, null, null, null, null, '有效', '博易数通（徐州）信息技术有限公司', '金融解决方案业务部', '1004', null, '2018-03-20 12:52:04', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('359', '上海润之信息科技有限公司', null, null, '1000000777', null, '91310114093801885G', null, null, null, '45天之内 到期净值', '高科技', null, null, null, null, null, '有效', '上海润之信息科技有限公司', '金融解决方案业务部', '1005', null, '2018-03-20 12:52:04', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('360', '中远集装箱运输有限公司/中远海运集装箱运输有限公司', null, null, '1000000275', null, '913100001322933273', null, '上海市东大名路378号', null, '立即应付的 到期净值', null, null, null, null, null, null, '有效', '中远集装箱运输有限公司', '金融解决方案业务部', '1005', null, '2018-03-20 12:52:04', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('361', '河南省伟信招标管理咨询有限公司', null, '中国', '1000001635', null, '91410100728642639T', 'Paper', '郑州市郑东新区正光路22号行署国际广场E座8楼801室', '主营业务客户', null, '商业和零售', '中国', '招标代理', '郑州', '中介服务(人才/商标专利)', '月结(30天)结算周期', '有效', '河南省伟信招标管理咨询有限公司', '金融解决方案业务部', null, null, '2018-03-09 11:38:50', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('362', '天津港保税区世纪龙科技发展有限公司', null, '中国', '1000001625', null, '9112011671824774XD', 'Paper', '天津自贸试验区(空港经济区)中环西路与西二道交口丽港大厦3-1020室', '主营业务客户', null, '商业和零售', '中国', '招标代理', '天津', '中介服务(人才/商标专利)', '月结(30天)结算周期', '有效', '天津港保税区世纪龙科技发展有限公司', '金融解决方案业务部', null, null, '2018-03-01 10:21:04', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('363', '水利部新疆维吾尔自治区水利水电勘测设计研究院伊犁招标代理中心', null, '中国', '1000001618', null, '91654002072216943J', 'Paper', '新疆伊犁州霍尔果斯配套区珠海路开建大厦1204室', '主营业务客户', null, '商业和零售', '中国', '招标代理', '山南地区新疆', '中介服务(人才/商标专利)', '月结(30天)结算周期', '有效', '水利部新疆维吾尔自治区水利水电勘测设计研究院伊犁招标代理中心', '金融解决方案业务部', null, null, '2018-02-27 09:54:07', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('364', '兴业银行股份有限公司信用卡中心', null, '中国', '1000001612', null, '91310115676249009H', 'Copper', '上海市浦东新区来安路500号', '主营业务客户', null, '金融', '中国', '办理本外币信用卡的发卡业务，办理信用卡项下的本外币贷款、结算、汇款、结汇、外汇兑换业务，代理国内外各类银行卡的收单业务，代理国外金融业务和国际组织信用卡的发卡、付款及资金清算业务，代理其他银行或机构信用卡发卡、收单业务的运营服务，代理信用卡项下的代收代付、代售、资信调查、咨询服务、见证业务，代理信用卡项下的理财服务', '上海', '金融', '季结（90天）结算周期', '有效', '兴业银行股份有限公司', '金融解决方案业务部', null, null, '2018-02-23 14:03:33', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('365', '中国工商银行股份有限公司嘉善支行', null, '中国', '1000001585', null, '91330421846594789R', 'Blank', '嘉善县魏塘街道解放东路8号', '主营业务客户', null, '金融', '中国', '金融业-银行', '嘉兴', '金融业(投资/保险/证/银行/基金)', '月结(30天)结算周期', '有效', '中国工商银行', '金融解决方案业务部', null, null, '2018-01-22 16:07:51', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('366', '中科军信股份有限公司', null, '中国', '1000001569', null, '91110108633625457Q', 'Blank', '北京市密云区经济开发区兴盛南路8号开发区办公楼501室-1958', '主营业务客户', null, '互联网和电商', '中国', '技术开发、技术转让、技术推广、技术服务、技术咨询；技术进出口', '北京', '互联网', '季结（90天）结算周期', '有效', '中科军信股份有限公司', '金融解决方案业务部', null, null, '2018-01-15 16:45:53', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('367', '中国建设银行股份有限公司南通分行', null, '中国', '1000001565', null, '913206008383001893', 'Paper', '南通市姚港路1号', '主营业务客户', null, '金融', '中国', '金融，银行', '上海', '金融业(投资/保险/证/银行/基金)', '月结(30天)结算周期', '有效', '中国建设银行', '金融解决方案业务部', null, null, '2018-01-12 11:08:10', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('368', '上海临泰企业服务有限公司', null, '中国', '1000001536', null, '913101046915914270', 'Blank', '上海市徐汇区龙吴路1500号2幢A312室', '主营业务客户', null, '商业和零售', '中国', '计算机软件服务，数据处理及相关技术业务处理服务，广告设计、制作、代理，利用自有媒体发布广告，企业管理及咨询服务，为企业提供市场营销、管理策划、商务信息咨询服务（不得从事增值电信、金融业务），电子商务（不得从事增值电信、金融业务），电子支付专业领域内的四技服务，展览展示服务，会务服务，票务代理，旅游用品、计算机、软件及辅助设备、电子产品，日用百货销售，佣金代理。', '上海', '服务业', '季结（90天）结算周期', '有效', '上海临泰企业服务有限公司', '金融解决方案业务部', null, null, '2017-12-25 17:39:15', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('369', '中国工商银行股份有限公司青岛市南第四支行', null, '中国', '1000001530', null, '913702022645719583', 'Blank', '青岛市市南区东海中路16号3栋', '主营业务客户', null, '金融', '中国', '代理中国保监会批准的人身保险和财产保险（航意险及其替代产品除外）；金融业务，代理开放式基金业务（保险兼业代理业务许可证,金融机构营业许可证 有效期限以许可证为准）。', '青岛', '金融', '季结（90天）结算周期', '有效', '中国工商银行', '金融解决方案业务部', null, null, '2017-12-21 10:47:08', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('370', '苏州太湖国家旅游度假区房产管理中心', null, '中国', '1000001520', null, '0000003', 'Blank', '苏州市吴中区香山街道后塘路6号', '主营业务客户', null, '政府', '中国', '房产信息，房产管理中心', '苏州', '政府/非营利机构', '月结(30天)结算周期', '有效', '苏州太湖国家旅游度假区房产管理中心', '金融解决方案业务部', null, null, '2017-12-13 17:08:10', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('371', '上海浦东发展银行股份有限公司苏州分行', null, '中国', '1000001519', null, '91320594837756678H', 'Blank', '苏州工业园区钟园路718号', '主营业务客户', null, '金融', '中国', '银行，金融', '上海', '金融业(投资/保险/证/银行/基金)', '月结(30天)结算周期', '有效', '上海浦东发展银行股份有限公司', '金融解决方案业务部', null, null, '2017-12-13 15:53:15', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('372', '中国银行股份有限公司常州分行', null, '中国', '1000001514', null, '91320400837166029B', 'Blank', '常州市和平北路21号', '主营业务客户', null, '金融', '中国', '银行', '常州市', '金融业(投资/保险/证/银行/基金)', '两月结（60天）结算周期', '有效', '中国银行股份有限公司', '金融解决方案业务部', null, null, '2017-12-11 13:51:53', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('373', '北京星际安讯科技有限公司', null, '中国', '1000001501', null, '911101027906714309', 'Blank', '北京市西城区新街口外大街28号B座226号（德胜园区）', '主营业务客户', null, '互联网和电商', '中国', '技术开发、技术服务、技术转让、销售通信设备', '北京', '互联网/电子商务', '季结（90天）结算周期', '有效', '北京星际安讯科技有限公司', '金融解决方案业务部', null, null, '2017-12-05 17:36:38', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('374', '山东超越数控电子股份有限公司', null, '中国', '1000001483', null, '91370000163092376X', 'Blank', '山东省济南市高新区孙村镇科航路2877号', '主营业务客户', null, '通信电信', '中国', '电子产品、机电一体化产品', '济南', '其他', '季结（90天）结算周期', '有效', '山东超越数控电子股份有限公司', '金融解决方案', null, null, '2017-11-21 11:15:43', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('375', '江苏银行股份有限公司南通开发区支行', null, '中国', '1000001479', null, '91320600838333773E', 'Blank', '南通开发区上海路9号', '主营业务客户', null, '金融', '中国', '按中国银行业监督管理委员会南通监管分局核发的金融许可证核定的范围经营', '上海', '金融业(投资/保险/证/银行/基金)', '两月结（60天）结算周期', '有效', '江苏银行股份有限公司', '金融解决方案业务部', null, null, '2017-11-17 13:49:36', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('376', '中国农业银行股份有限公司', null, '中国', '1000001467', 'Agricultural Bank of China', '911100001000054748', 'Paper', '北京市东城区建国门内大街69号', '主营业务客户', '90天之内 到期净值', '金融', '中国', '吸收公众存款；发放短期、中期、长期贷款；办理国内外结算；办理票据承兑与贴现；发行金融债券；代理发行、代理兑付、承销政府债券；买卖政府债券、金融债券；从事同业拆借；买卖、代理买卖外汇；结汇、售汇；从事银行卡业务；提供信用证服务及担保；代理收付款项；提供保管箱服务；代理资金清算；各类汇兑业务；代理政策性银行、外国政府和国际金融机构贷款业务；贷款承诺；组织或参加银团贷款；外汇存款；外汇贷款；外汇汇款；外汇借款；发行、代理发行、买卖或代理买卖股票以外的外币有价证券；外汇票据承兑和贴现；自营、代客外汇买卖；外币兑换；外汇担保；资信调查、咨询、见证业务；企业、个人财务顾问服务；证券公司客户交易结算资金存管业务；证券投资基金托管业务；企业年金托管业务；产业投资基金托管业务', '北京', '金融', '季结（90天）结算周期', '有效', '中国农业银行股份有限公司', '金融解决方案业务部', '1004', null, '2017-11-13 17:13:30', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('377', '国家邮政局邮政业安全中心', null, '中国', '1000001451', null, '110108717839655', 'Blank', '北京市海淀区挂甲屯5号院', '主营业务客户', null, '金融', '中国', '承担邮政业安全和应急管理体系的日常维护和运行等', '北京', '金融', '季结（90天）结算周期', '有效', '国家邮政局邮政业安全中心', '金融解决方案业务部', null, null, '2017-10-27 14:47:53', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('378', '常熟市信息化发展有限公司', null, '中国', '1000001448', null, '91320581063223332P', 'Blank', '常熟市海虞北路51号', '主营业务客户', null, '高科技', '中国', '信息化项目投资建设、信息化项目运行服务、智能化电子产品销售。（依法须经批准的项目，经相关部门批准后方可开展经营活动）', '常熟', '高科技', '两月结（60天）结算周期', '有效', '常熟市信息化发展有限公司', '金融解决方案业务部', null, null, '2017-10-26 15:43:32', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('379', '上海林享信息科技有限公司', null, '中国', '1000001441', null, '91310114332734588J', 'Blank', '上海市嘉定区福海路1011号3幢B区1552室', '主营业务客户', null, '金融', '中国', '从事计算机软件领域内的技术开发、技术转让、技术服务、技术咨询,计算机系统集成,计算机服务(除互联网上网服务经营场所),设计、制作、代理各类广告,企业管理,企业管理咨询,企业营销策划,商务咨询,展览展示服务,会务服务,票务代理,电子商务(不得从事增值电信、金融业务),电子产品、日用百货、计算机、软件及辅助设备(除计算机信息系统安全专用产品)的销售,接受金融机构委托从事金融信息技术外包,接受金融机构委托从事金融业务流程外包,接受金融机构委托从事金融知识流程外包。', '上海', '金融', '季结（90天）结算周期', '有效', '上海林享信息科技有限公司', '金融解决方案业务部', null, null, '2017-10-24 10:18:38', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('380', '华夏银行股份有限公司苏州分行', null, '中国', '1000001439', null, '9132059483775172XY', 'Blank', '苏州工业园区星海街188号', '主营业务客户', null, '金融', '中国', '金融，银行', '苏州', '金融', '月结(30天)结算周期', '有效', '华夏银行股份有限公司苏州分行', '金融解决方案业务部', null, null, '2017-10-20 15:26:52', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('381', '雪松控股集团有限公司', null, '中国', '1000001429', null, '91440101347466547J', 'Silver', '广州市中新广州知识城凤凰三路17号自编五栋487室', '主营业务客户', null, '金融', '中国', '投资管理服务;资产管理（不含许可审批项目）;企业管理服务（涉及许可经营项目的除外）;企业总部管理;(依法须经批准的项目，经相关部门批准后方可开展经营活动)', '广州', '金融', '月结(30天)结算周期', '有效', '雪松控股集团有限公司', '金融解决方案业务部', null, null, '2017-10-16 13:47:43', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('382', '青岛市国土资源和房屋管理局', null, '中国', '1000001428', null, '97', 'Blank', '青岛市南区巫峡路6号', '主营业务客户', null, '政府', '中国', '承担规范国土资源和房屋管理秩序的责任；承担保护与合理利用土地资源、矿产资源等自然资源的责任；承担全市耕地保护的责任，确保规划确定的耕地保有量和基本农田面积不减少；承担呈报国务院和省政府、市政府审批的各类用地的审核、报批工作；承担及时准确提供全市土地利用各种数据的责任；承担节约集约利用土地资源的责任；承担呈报省政府、市政府审批的改制企事业单位国有土地资产的处置等等。', '青岛', '其他', '季结（90天）结算周期', '有效', '青岛市国土资源和房屋管理局', '金融解决方案业务部', null, null, '2017-10-16 13:44:46', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('383', '青岛市房地产资源信息服务有限公司', null, '中国', '1000001421', null, '91370213095094053C', 'Blank', '青岛市市南区瞿塘峡路20号', '主营业务客户', null, '政府', '中国', '计算机系统服务；数据处理；计算机维修；基础软件服务；应用软件服务；记录媒介的复制；计算机、软件及辅助设备批发、零售；地理信息系统工程技术开发、技术服务；房地产中介服务；会议及展览服务。', '青岛', '其他', '季结（90天）结算周期', '有效', '青岛市房地产信息与交易资金监管中心', '金融解决方案业务部', null, null, '2017-09-29 10:53:09', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('384', '大丰银行股份有限公司', null, '中国', '1000001414', 'Tai Fung Bank', '791', 'Blank', '澳门宋玉生广场418号大丰银行总行大厦', '主营业务客户', null, '金融', '中国', '各项存款、放款、押汇以外，近年并积极发展新业务品种，配合新科技，务求与时代并进。', '澳门', '金融', '季结（90天）结算周期', '有效', '大丰银行股份有限公司', '金融解决方案业务部', null, null, '2017-09-25 09:59:43', '22', null, null, null, '00');
-INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('385', '江苏银行股份有限公司南通分行', null, '中国', '1000001366', null, '9132060025183486XC', 'Blank', '南通市南大街300号', '主营业务客户', null, '金融', '中国', '金融，银行', '南通市', '金融', '两月结（60天）结算周期', '有效', '江苏银行股份有限公司', '金融解决方案业务部', null, null, '2017-09-05 11:24:16', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('386', '天津银行股份有限公司第一中心支行', null, '中国', '1000001332', null, '911201018031628630', 'Blank', '天津市和平区西康路2号康宁大厦A座', '主营业务客户', null, '金融', '中国', '办理人民币存款、贷款、结算业务；办理票据贴现；代理发行金融债券；代理发行、代理兑付、销售政府债券；买卖政府债券；代理收付款项及保险兼业代理；办理外币储蓄、外币兑换业务；其总行在中国银行业监督管理委员会批准的业务范围内授权的业务；经中国银行业监督管理委员会批准的其它业务。', '天津', '金融', '季结（90天）结算周期', '有效', '未维护', '金融解决方案业务部', null, null, '2017-08-08 09:38:55', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('387', '上海市闵行区七宝镇房管办事处', null, '中国', '1000001328', null, '12345', 'Blank', '吴宝路35号2楼', '主营业务客户', null, '政府', '中国', '房管办事处', '上海', '政府/非营利机构', '月结(30天)结算周期', '有效', '上海市物业管理事务中心', '金融解决方案业务部', null, null, '2017-08-03 17:09:00', '22', null, null, null, '00');
 INSERT INTO "VOTE"."PM_CUSTOMER_INFO" VALUES ('388', '深圳前海星概念信息技术有限公司', null, '中国', '1000001306', null, '91440300MA5DQOPX98', 'Blank', '深圳市前海深港合作区前海一路1号A栋201室', '主营业务客户', null, '金融', '中国', '领先的信息显示产品及行业解决方案提供商，以面向全球提供领先的信息显示产品，专业的行业解决方案以及优质的品牌服务，', '深圳', '金融', '季结（90天）结算周期', '有效', '深圳前海星概念信息技术有限公司', '金融解决方案业务部', null, null, '2017-07-25 15:10:38', '22', null, null, null, '00');
@@ -1698,7 +1749,9 @@ CREATE TABLE "VOTE"."PM_FILE" (
 "CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
 "MODIFIER" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+"FILE_BUSINESS_TYPE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("FILE_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1709,21 +1762,42 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_FILE
 -- ----------------------------
-INSERT INTO "VOTE"."PM_FILE" VALUES ('1', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxfNoB', null, null, null, '1', null, null, '1000', '20181108222815', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('9', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxDpoA', null, '00', '18922', null, null, null, '22', '20181108230251', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('10', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsx4I9n', null, '00', '13130', null, null, null, '22', '20181108231407', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('11', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsx9tND', null, '00', '135932', null, null, null, '22', '20181108231520', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('12', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsx2FCr', null, '00', '18922', null, null, null, '22', '20181108231827', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('13', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsxxFlv', null, '00', '13130', null, null, null, '22', '20181108232106', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('14', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsxJh57', null, '00', '135932', null, null, null, '1000', '20181108232320', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('15', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxuBwi', null, '00', '18922', null, null, null, '1000', '20181108232417', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('16', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsxF22o', null, '00', '135932', null, null, null, '1000', '20181108232552', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('6', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsxp8FF', null, '00', '13130', null, null, null, '1000', '20181108225920', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('7', 'R00-项目基本信息表（1-9事业部）.xls', 'D://upload/20181108/R00-项目基本信息表（1-9事业部）.xlscqGB', null, '00', '499200', null, null, null, '1000', '20181108225920', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('17', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsxghj3', null, '00', '135932', null, null, null, '22', '20181108232838', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('5', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsxCN7N', null, '00', '13130', null, null, null, '1000', '20181108224919', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('8', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsx9FI4', null, '00', '135932', null, null, null, '22', '20181108230251', null, null, '00');
-INSERT INTO "VOTE"."PM_FILE" VALUES ('18', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsx8jye', null, '00', '13130', '10', null, null, '22', '20181108233627', null, null, '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('41', 'Catch2D64(10-16-(10-17-17-37-23).jpg', 'D://upload/20181116/utrLCatch2D64(10-16-(10-17-17-37-23).jpg', null, '00', '483036', null, null, null, '1000', '20181116194438', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('42', 'Java数据结构和算法.pdf', 'D://upload/20181116/vMykJava数据结构和算法.pdf', null, '00', '27141643', null, null, null, '1000', '20181116194439', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('47', 'a.html', 'D://upload/20181116/NuFga.html', null, '00', '466', null, null, null, '1000', '20181116202626', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('43', 'a.html', 'D://upload/20181116/wBFwa.html', null, '00', '466', null, null, null, '1000', '20181116195956', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('44', 'VOTE.sql', 'D://upload/20181116/440cVOTE.sql', null, '00', '283777', null, null, null, '1000', '20181116195956', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('1', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxfNoB', null, null, null, '1', null, null, '1000', '20181108222815', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('9', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxDpoA', null, '00', '18922', null, null, null, '22', '20181108230251', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('10', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsx4I9n', null, '00', '13130', null, null, null, '22', '20181108231407', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('11', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsx9tND', null, '00', '135932', null, null, null, '22', '20181108231520', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('12', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsx2FCr', null, '00', '18922', null, null, null, '22', '20181108231827', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('13', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsxxFlv', null, '00', '13130', null, null, null, '22', '20181108232106', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('14', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsxJh57', null, '00', '135932', null, null, null, '1000', '20181108232320', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('15', '副本金融业务部利润中心和成本中心结构-整理.xlsx', 'D://upload/20181108/副本金融业务部利润中心和成本中心结构-整理.xlsxuBwi', null, '00', '18922', null, null, null, '1000', '20181108232417', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('16', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsxF22o', null, '00', '135932', null, null, null, '1000', '20181108232552', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('6', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsxp8FF', null, '00', '13130', null, null, null, '1000', '20181108225920', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('7', 'R00-项目基本信息表（1-9事业部）.xls', 'D://upload/20181108/R00-项目基本信息表（1-9事业部）.xlscqGB', null, '00', '499200', null, null, null, '1000', '20181108225920', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('17', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsxghj3', null, '00', '135932', null, null, null, '22', '20181108232838', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('5', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsxCN7N', null, '00', '13130', null, null, null, '1000', '20181108224919', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('8', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181108/副本WBS增量表（2018年）.xlsx9FI4', null, '00', '135932', null, null, null, '22', '20181108230251', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('18', '副本金融SAP编码-BMO提供.xlsx', 'D://upload/20181108/副本金融SAP编码-BMO提供.xlsx8jye', null, '00', '13130', '10', null, null, '22', '20181108233627', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('45', 'Catch2D64(10-16-(10-17-17-37-23).jpg', 'D://upload/20181116/iP53Catch2D64(10-16-(10-17-17-37-23).jpg', null, '00', '483036', null, null, null, '1000', '20181116200832', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('46', 'a.html', 'D://upload/20181116/4qHwa.html', null, '00', '466', null, null, null, '1000', '20181116200900', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('21', '副本WBS增量表（2018年）.xlsx', 'D://upload/20181113/xiuo副本WBS增量表（2018年）.xlsx', null, '00', '135932', null, null, null, '1000', '20181113151032', null, null, '00', null);
+INSERT INTO "VOTE"."PM_FILE" VALUES ('50', 'calendar.png', 'D://upload/20181116/AJFqcalendar.png', null, '00', '4140', null, null, null, '1000', '20181116205036', null, null, '00', '01');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('51', 'sequence.txt', 'D://upload/20181116/aNonsequence.txt', null, '00', '1394', null, null, null, '1000', '20181116210124', null, null, '00', '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('52', 'FlashFXP.exe', 'D://upload/20181116/i8NGFlashFXP.exe', null, '00', '8925504', null, null, null, '1000', '20181116210124', null, null, '00', '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('53', 'calendar.png', 'D://upload/20181116/D7i6calendar.png', null, '00', '4140', null, null, null, '1000', '20181116210307', null, null, '00', '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('54', 'Catch2D64(10-16-(10-17-17-37-23).jpg', 'D://upload/20181116/oq5rCatch2D64(10-16-(10-17-17-37-23).jpg', null, '00', '483036', '23', null, null, '1000', '20181116210307', null, null, '00', '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('55', 'a.html', 'D://upload/20181116/n73aa.html', null, '00', '466', '24', null, null, '1000', '20181116210758', null, null, '00', '01');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('56', '项目管理系统-实施计划20181113(1).xlsx', 'D://upload/20181116/uwB3项目管理系统-实施计划20181113(1).xlsx', null, '00', '50754', '24', null, null, '1000', '20181116210758', null, null, '00', '01');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('57', 'calendar.png', 'D://upload/20181116/8Mjzcalendar.png', null, '00', '4140', '25', null, null, '1000', '20181116211644', null, null, '00', '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('58', 'FlashFXP.exe', 'D://upload/20181116/vo5aFlashFXP.exe', null, '00', '8925504', '25', null, null, '1000', '20181116211645', null, null, '00', '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('60', 'a.html', 'D://upload/20181116/34HLa.html', null, '00', '466', null, null, null, '1000', '20181116212837', null, null, '00', '01');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('61', '项目预算图片.docx', 'D://upload/20181116/vKej项目预算图片.docx', null, '00', '1141600', '26', null, null, '1000', '20181116213208', null, null, '00', '01');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('62', 'FlashFXP.exe', 'D://upload/20181116/ngeHFlashFXP.exe', null, '00', '8925504', '26', null, null, '1000', '20181116213208', null, null, '00', '00');
+INSERT INTO "VOTE"."PM_FILE" VALUES ('59', '账户.txt', 'D://upload/20181116/nrhd账户.txt', null, '00', '189', null, null, null, '1000', '20181116212837', null, null, '00', '01');
 
 -- ----------------------------
 -- Table structure for PM_PAYMENT_POINT
@@ -1743,7 +1817,8 @@ CREATE TABLE "VOTE"."PM_PAYMENT_POINT" (
 "CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
 "MODIFIER" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("PAYMENT_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1775,7 +1850,8 @@ CREATE TABLE "VOTE"."PM_PRODUCT_INFO" (
 "CREATE_TIME" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
 "MODIFIER" NUMBER(10) DEFAULT NULL  NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
-"IS_DELETE" CHAR(2 BYTE) DEFAULT NULL  NULL 
+"IS_DELETE" CHAR(2 BYTE) DEFAULT NULL  NULL ,
+PRIMARY KEY ("PRODUCT_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1810,7 +1886,8 @@ CREATE TABLE "VOTE"."PM_PRODUCT_PROJECT_RELATION" (
 "CREATE_TIME" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
 "MODIFIER" NUMBER(10) DEFAULT NULL  NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) DEFAULT NULL  NULL ,
-"IS_DELETE" CHAR(2 BYTE) DEFAULT NULL  NULL 
+"IS_DELETE" CHAR(2 BYTE) DEFAULT NULL  NULL ,
+PRIMARY KEY ("PRODUCT_RELATION_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1839,7 +1916,8 @@ CREATE TABLE "VOTE"."PM_PROJECT_GROUP_INFO" (
 "GROUP_STATUS" CHAR(2 BYTE) NULL ,
 "MODIFIER" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("PROJECT_GROUP_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1850,6 +1928,10 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_PROJECT_GROUP_INFO
 -- ----------------------------
+INSERT INTO "VOTE"."PM_PROJECT_GROUP_INFO" VALUES ('3', null, null, '11', null, null, '1000', '系统管理员', '20181116161559', null, null, null, '00');
+INSERT INTO "VOTE"."PM_PROJECT_GROUP_INFO" VALUES ('1', null, null, 'test', null, null, '1000', '系统管理员', '20181115181700', null, '1000', '20181116171227', '01');
+INSERT INTO "VOTE"."PM_PROJECT_GROUP_INFO" VALUES ('2', null, null, 'test', null, null, '1000', '系统管理员', '20181115181700', null, null, null, '00');
+INSERT INTO "VOTE"."PM_PROJECT_GROUP_INFO" VALUES ('4', null, null, '111', null, null, '1000', '系统管理员', '20181116171238', null, null, null, '00');
 
 -- ----------------------------
 -- Table structure for PM_PROJECT_GROUP_RELATION_INFO
@@ -1864,7 +1946,8 @@ CREATE TABLE "VOTE"."PM_PROJECT_GROUP_RELATION_INFO" (
 "CREATOR" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
 "MODIFIER" NUMBER(10) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("RELATIONSHIP")
 )
 LOGGING
 NOCOMPRESS
@@ -1875,6 +1958,9 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_PROJECT_GROUP_RELATION_INFO
 -- ----------------------------
+INSERT INTO "VOTE"."PM_PROJECT_GROUP_RELATION_INFO" VALUES ('2', '3', null, '23', '20181116161559', null, null, null, '00');
+INSERT INTO "VOTE"."PM_PROJECT_GROUP_RELATION_INFO" VALUES ('1', '1', null, '1000', '20181115181700', null, null, null, '00');
+INSERT INTO "VOTE"."PM_PROJECT_GROUP_RELATION_INFO" VALUES ('3', '4', null, '22', '20181116171238', null, null, null, '00');
 
 -- ----------------------------
 -- Table structure for PM_PROJECT_INCOMMING_INFO
@@ -1890,7 +1976,8 @@ CREATE TABLE "VOTE"."PM_PROJECT_INCOMMING_INFO" (
 "CREATOR" NUMBER(10) NULL ,
 "CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
 "RECEIVABLES" CHAR(2 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("RECEIVE_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1977,7 +2064,21 @@ CREATE TABLE "VOTE"."PM_PROJECT_INFO" (
 "CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
 "CREATOR" NUMBER(10) NULL ,
 "MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
-"MODIFIER" NUMBER(10) NULL 
+"MODIFIER" NUMBER(10) NULL ,
+"BID_ID" NUMBER(10) NULL ,
+"BID_NAME" VARCHAR2(256 BYTE) NULL ,
+"PROJECT_MANAGER_ID" NUMBER(10) NULL ,
+"PROJECT_MANAGER_NAME" VARCHAR2(256 BYTE) NULL ,
+"CUST_MANAGER_ID" NUMBER(10) NULL ,
+"CUST_MANAGER_NAME" VARCHAR2(256 BYTE) NULL ,
+"BELONG_PROJECT_GROUP_ID" NUMBER(10) NULL ,
+"BELONG_PROJECT_GROUP_NAME" VARCHAR2(256 BYTE) NULL ,
+"APPROVE_STATUS" CHAR(2 BYTE) NULL ,
+"PREDICT_PROFIT_MOUNT" NUMBER(10,2) NULL ,
+"TAX_RATE" NUMBER(10,4) NULL ,
+"BUDGET_WITH_TAX" NUMBER(10,2) NULL ,
+"BUDGET_NO_TAX" NUMBER(10,2) NULL ,
+PRIMARY KEY ("PROJECT_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -1988,6 +2089,14 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_PROJECT_INFO
 -- ----------------------------
+INSERT INTO "VOTE"."PM_PROJECT_INFO" VALUES ('23', 'XM201811150271', '管理中心', '5', '系统管理员', '1000', '销售中心', null, '系统管理员', '1000', null, null, '2018-11-12', '2018-11-23', '1', '天津港保税区世纪龙科技发展有限公司', '1000001625', '1', null, null, null, null, '00', '11', null, '1', null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '00', null, null, null, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', null, null, null, '00', '20181115134912', null, null, null, '7', 'asdas', '1000', '系统管理员', '1000', '系统管理员', null, null, null, '1', '1', '1', '1');
+INSERT INTO "VOTE"."PM_PROJECT_INFO" VALUES ('24', 'XM201811155954', '管理中心', '5', '系统管理员', '1000', '销售中心', null, '系统管理员', '1000', null, null, '2018-10-31', '2018-11-29', '1', '河南省伟信招标管理咨询有限公司', '1000001635', '1', null, null, null, null, '00', '1', null, '1', null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '00', null, null, null, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', null, null, null, '00', '20181115135501', null, null, null, '6', 'asda', '1000', '系统管理员', '1000', '系统管理员', null, null, null, '1', '1', '1', '1');
+INSERT INTO "VOTE"."PM_PROJECT_INFO" VALUES ('22', 'XM201811157912', '销售中心', '2', '系统管理员', '1000', '管理中心', null, '系统管理员', '1000', null, null, '2018-11-07', '2018-11-08', '1', '中广核新能源投资（深圳）有限公司北京分公司', null, '1', null, null, null, null, '00', '1', null, '1', null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', null, null, null, '00', '20181115112006', null, null, null, '1', '名称', '41', 'PMS_管理员（娄）', '1000', '系统管理员', null, null, null, '1', '1', '1', '1');
+INSERT INTO "VOTE"."PM_PROJECT_INFO" VALUES ('26', 'XM201811158019', '1', null, '1', null, '1', null, '1', null, null, null, '2018-11-15', '2018-11-29', '1', '1', null, '1', '00', null, '00', null, '00', '1', null, '1', null, '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '00', null, null, null, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', null, null, null, '01', '20181115140314', null, '20181116162611', '1000', '10', '1', null, '1', null, '1', null, null, '00', '1', '1', '1', '1');
+INSERT INTO "VOTE"."PM_PROJECT_INFO" VALUES ('1', 'XM201811113694', '销售中心', '2', 'PMS_管理员（娄）', '41', '管理中心', null, '系统管理员_TEST2', '22', null, null, '2018-11-01 00:00:00', '2018-11-30 00:00:00', 'wbsss', '中广核新能源投资（深圳）有限公司北京分公司', null, 'sadasdadsadddddd', null, null, null, '00', '00', '1', null, null, null, null, null, '3', null, null, null, null, null, '2018-11-29 00:00:00', '01', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '01', '20181111214415', null, '20181111225021', '1000', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO "VOTE"."PM_PROJECT_INFO" VALUES ('2', 'XM201811126751', '管理中心', '5', null, null, null, null, null, null, null, null, '2018-11-06 00:00:00', '2018-11-08 00:00:00', null, null, null, 'kmlm', null, null, null, '00', '00', null, null, null, null, null, null, null, null, null, null, null, null, null, '01', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '01', '20181112104820', null, '20181114095702', '1000', null, null, null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO "VOTE"."PM_PROJECT_INFO" VALUES ('25', 'XM201811150524', '管理中心', '5', 'PMS_管理员（娄）', '41', '管理中心', null, '系统管理员', '1000', null, null, '2018-11-13', '2018-11-23', '1', '中远集装箱运输有限公司/中远海运集装箱运输有限公司', '1000000275', '1', null, null, null, null, '00', '1', null, '1', null, '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '00', null, null, null, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', null, null, null, '00', '20181115135935', null, null, null, '6', 'asda', '1000', '系统管理员', '1000', '系统管理员', null, null, null, '1', '1', '1', '1');
+INSERT INTO "VOTE"."PM_PROJECT_INFO" VALUES ('21', 'XM201811149976', '管理中心', '5', '系统管理员', '1000', '销售中心', null, '系统管理员', '1000', null, null, '2018-11-14', '2018-11-14', '1', '上海润之信息科技有限公司', '1000000777', '1', null, null, null, '00', '00', '1', null, null, null, '1', '1', '1', '1', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '1', null, null, '1', '1', null, null, '1', '1', null, null, null, '1', '1', null, null, null, '00', '20181114104032', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for PM_PROJECT_MILESTONE_INFO
@@ -2003,7 +2112,8 @@ CREATE TABLE "VOTE"."PM_PROJECT_MILESTONE_INFO" (
 "FINISH_STATUS" CHAR(2 BYTE) NULL ,
 "CREATOR_ID" NUMBER(16) NULL ,
 "CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("MILESTONE_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -2030,7 +2140,8 @@ CREATE TABLE "VOTE"."PM_PROJECT_PROBLEM" (
 "CREATOR_NAME" VARCHAR2(256 BYTE) NULL ,
 "CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
 "PROBLEM_STATUS" CHAR(2 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("PROBLEM_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -2056,7 +2167,8 @@ CREATE TABLE "VOTE"."PM_REVIEW_COMMENT_INFO" (
 "WROTEN_USER_NAME" VARCHAR2(64 BYTE) NULL ,
 "COMMENT_DETAIL" VARCHAR2(1024 BYTE) NULL ,
 "WRITE_TIME" VARCHAR2(32 BYTE) NULL ,
-"IS_DELETE" CHAR(2 BYTE) NULL 
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+PRIMARY KEY ("COMMENT_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -2073,17 +2185,19 @@ NOCACHE
 -- ----------------------------
 DROP TABLE "VOTE"."PM_REVIEW_INFO";
 CREATE TABLE "VOTE"."PM_REVIEW_INFO" (
-"REVIEW_ID" NUMBER(10,0) NOT NULL ENABLE, 
-	"FOREIGN_ID" NUMBER(10,0), 
-	"FOREIGN_CODE" VARCHAR2(32 BYTE), 
-	"REVIEW_TYPE" CHAR(2 BYTE), 
-	"REVIEW_USER_NAME" VARCHAR2(64 BYTE), 
-	"REVIEW_USER_CODE" NUMBER(10,0), 
-	"RESULT" CHAR(2 BYTE), 
-	"IS_DELETE" CHAR(2 BYTE), 
-	"COMMENT_DETAIL" VARCHAR2(1024 BYTE), 
-	"MODIFY_TIME" VARCHAR2(32 BYTE), 
-	 PRIMARY KEY ("REVIEW_ID")
+"REVIEW_ID" NUMBER(10,0) NOT NULL ,
+"FOREIGN_ID" NUMBER(10,0) NULL ,
+"FOREIGN_CODE" VARCHAR2(32 BYTE) NULL ,
+"REVIEW_TYPE" CHAR(2 BYTE) NULL ,
+"REVIEW_USER_NAME" VARCHAR2(64 BYTE) NULL ,
+"REVIEW_USER_CODE" NUMBER(10) NULL ,
+"RESULT" CHAR(2 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+"CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
+"CREATOR" NUMBER(10) NULL ,
+"COMMENT_DETAIL" VARCHAR2(1024 BYTE) NULL ,
+PRIMARY KEY ("REVIEW_ID")
 )
 LOGGING
 NOCOMPRESS
@@ -2094,6 +2208,11 @@ NOCACHE
 -- ----------------------------
 -- Records of PM_REVIEW_INFO
 -- ----------------------------
+INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('1', '1', null, '00', '系统管理员', '1000', '00', '01', '20181113153342', '20181113153431', null, 'DDDD');
+INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('2', '1', null, '00', '系统管理员', '1000', '00', '01', '20181113153431', '20181113153437', null, 'ASDAD');
+INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('3', '1', null, '00', '系统管理员', '1000', null, '00', '20181113153437', null, null, null);
+INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('21', '23', null, '00', '系统管理员', '1000', null, '00', null, null, null, null);
+INSERT INTO "VOTE"."PM_REVIEW_INFO" VALUES ('22', '24', null, '00', '系统管理员', '1000', null, '00', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for PM_SALE_GROUP_INFO
@@ -2223,19 +2342,18 @@ COMMENT ON COLUMN "VOTE"."ROLE"."TM_SMP" IS '创建时间';
 -- ----------------------------
 -- Records of ROLE
 -- ----------------------------
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (33,'销售部负责人','销售部负责人','20181103','SELL_DEPT_MANAGER');
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (31,'总经理','总经理室','20181103','MAIN_MANAGER');
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (999,'系统管理员','系统管理员','20180101','ADMINISTRATOR');
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (32,'实施管理部负责人','实施管理部负责人','20181103','BUILD_DEPT_NAME');
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (34,'交付部负责人',' 交付部负责人','20181103','CONSTRUCTION_DEPT_MANAGER');
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (35,'后台管理部负责人','后台管理部负责人','20181103','BACK_MANAGER');
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (36,'交付部经理','交付部经理','20181103',null);
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (37,'客户经理','客户经理','20181105',null);
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (38,'普通用户','普通用户','20181103',null);
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (51,'项目经理','项目经理','20181105','PROJECT_MANGER');
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (52,'销售部助理','销售部助理','20181105',null);
-Insert into VOTE.ROLE (ROLE_ID,ROLE_NAME,ROLE_RMK,TM_SMP,ROLE_CODE) values (53,'后台管理部助理','后台管理部助理','20181105',null);
-
+INSERT INTO "VOTE"."ROLE" VALUES ('33', '销售部负责人', '销售部负责人', '20181103', 'SELL_DEPT_MANAGER');
+INSERT INTO "VOTE"."ROLE" VALUES ('31', '总经理', '总经理室', '20181103', 'MAIN_MANAGER');
+INSERT INTO "VOTE"."ROLE" VALUES ('999', '系统管理员', '系统管理员', '20180101', 'ADMINISTRATOR');
+INSERT INTO "VOTE"."ROLE" VALUES ('32', '实施管理部负责人', '实施管理部负责人', '20181103', 'BUILD_DEPT_NAME');
+INSERT INTO "VOTE"."ROLE" VALUES ('34', '交付部负责人', ' 交付部负责人', '20181103', 'CONSTRUCTION_DEPT_MANAGER');
+INSERT INTO "VOTE"."ROLE" VALUES ('35', '后台管理部负责人', '后台管理部负责人', '20181103', 'BACK_MANAGER');
+INSERT INTO "VOTE"."ROLE" VALUES ('36', '交付部经理', '交付部经理', '20181103', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('37', '客户经理', '客户经理', '20181105', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('38', '普通用户', '普通用户', '20181103', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('51', '项目经理', '项目经理', '20181105', 'PROJECT_MANGER');
+INSERT INTO "VOTE"."ROLE" VALUES ('52', '销售部助理', '销售部助理', '20181105', null);
+INSERT INTO "VOTE"."ROLE" VALUES ('53', '后台管理部助理', '后台管理部助理', '20181105', null);
 
 -- ----------------------------
 -- Table structure for ROLE_MENU
@@ -2295,24 +2413,24 @@ INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1044', '20181104');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1087', '20181104');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1028', '20181104');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '1124', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100001', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100004', '20181115');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100001', '20181104');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('999', '100002', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100002', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100004', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100008', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100007', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100003', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100005', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1026', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1085', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1064', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1084', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1066', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1044', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1087', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1028', '20181104');
-INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1124', '20181104');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100008', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100007', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100003', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100005', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1026', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1085', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1064', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1084', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1066', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1044', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1087', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1028', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1124', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1144', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1164', '20181115');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '100004', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '100008', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '100007', '20181102');
@@ -2333,6 +2451,9 @@ INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '1087', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '1028', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '100001', '20181102');
 INSERT INTO "VOTE"."ROLE_MENU" VALUES ('1', '100002', '20181102');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '1165', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100001', '20181115');
+INSERT INTO "VOTE"."ROLE_MENU" VALUES ('38', '100002', '20181115');
 
 -- ----------------------------
 -- Table structure for TABLE_HEADER_INFO
@@ -2432,7 +2553,7 @@ COMMENT ON COLUMN "VOTE"."USR_INFO"."STR_REMARK" IS '备注';
 -- Records of USR_INFO
 -- ----------------------------
 INSERT INTO "VOTE"."USR_INFO" VALUES ('41', null, 'PMS_管理员（娄）', '1', '111111', '2018-11-03', '13711111111', 'mailwork_sh@163.com', '22', '0', '20181103', null, '01', '111111111111111', '111111111111111', null, null, '111111');
-INSERT INTO "VOTE"."USR_INFO" VALUES ('1000', 'Aoot', '系统管理员', '0', '111111', '20170523', '111111', '11111', null, '1', '20170217', '1000', '01', null, null, '32E4A61D6DBAA140BF88987681C1507C', '20181109095423534', null);
+INSERT INTO "VOTE"."USR_INFO" VALUES ('1000', 'Aoot', '系统管理员', '0', '111111', '20170523', '111111', '11111', null, '1', '20170217', '1000', '01', null, null, 'A3D700CD9D2E71892266C17FD7FCB586', '20181116214249038', null);
 INSERT INTO "VOTE"."USR_INFO" VALUES ('22', null, '系统管理员_TEST2', '1', '111111', '2018-10-12', '13666666666', '35q13w5eq@qq.com', '22', '0', '20181103', '1000', '01', '3123123', '420123123123123', null, '20181108233633063', 'asda');
 
 -- ----------------------------
@@ -2480,10 +2601,15 @@ COMMENT ON COLUMN "VOTE"."USR_ROLE"."TM_SMP" IS '创建时间';
 -- ----------------------------
 -- Records of USR_ROLE
 -- ----------------------------
+INSERT INTO "VOTE"."USR_ROLE" VALUES ('1000', '52', '20181116110726');
+INSERT INTO "VOTE"."USR_ROLE" VALUES ('1000', '51', '20181116110726');
+INSERT INTO "VOTE"."USR_ROLE" VALUES ('1000', '38', '20181116110726');
+INSERT INTO "VOTE"."USR_ROLE" VALUES ('1000', '34', '20181116110726');
+INSERT INTO "VOTE"."USR_ROLE" VALUES ('1000', '33', '20181116110726');
+INSERT INTO "VOTE"."USR_ROLE" VALUES ('1000', '32', '20181116110726');
 INSERT INTO "VOTE"."USR_ROLE" VALUES ('2', '1', '20180731150933');
 INSERT INTO "VOTE"."USR_ROLE" VALUES ('13', '1', '20180813165527');
 INSERT INTO "VOTE"."USR_ROLE" VALUES ('22', '1', '20181031001453');
-INSERT INTO "VOTE"."USR_ROLE" VALUES ('1000', '38', '20181108215604');
 
 -- ----------------------------
 -- Table structure for VOTE_APPLY_INFO
@@ -3554,7 +3680,7 @@ CREATE SEQUENCE "VOTE"."EXCEL_ID"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 201
+ START WITH 241
  CACHE 20;
 
 -- ----------------------------
@@ -3609,7 +3735,7 @@ CREATE SEQUENCE "VOTE"."MENUIDSEQUENCE"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 999999999999999999999999999
- START WITH 1164
+ START WITH 1184
  CACHE 20;
 
 -- ----------------------------
@@ -3642,7 +3768,7 @@ CREATE SEQUENCE "VOTE"."PMCONFIRMBID_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 21
+ START WITH 41
  CACHE 20;
 
 -- ----------------------------
@@ -3664,7 +3790,7 @@ CREATE SEQUENCE "VOTE"."PMCUSTOMERGROUPRELATION_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 241
+ START WITH 261
  CACHE 20;
 
 -- ----------------------------
@@ -3686,7 +3812,7 @@ CREATE SEQUENCE "VOTE"."PMFILE_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 21
+ START WITH 81
  CACHE 20;
 
 -- ----------------------------
@@ -3708,7 +3834,7 @@ CREATE SEQUENCE "VOTE"."PMPROJECTGROUPINFO_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 1
+ START WITH 21
  CACHE 20;
 
 -- ----------------------------
@@ -3719,7 +3845,7 @@ CREATE SEQUENCE "VOTE"."PMPROJECTGROUPRELATIONINFO_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 1
+ START WITH 21
  CACHE 20;
 
 -- ----------------------------
@@ -3741,7 +3867,7 @@ CREATE SEQUENCE "VOTE"."PMPROJECTINFO_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 1
+ START WITH 41
  CACHE 20;
 
 -- ----------------------------
@@ -3774,7 +3900,7 @@ CREATE SEQUENCE "VOTE"."PMREVIEWINFO_SEQ"
  INCREMENT BY 1
  MINVALUE 1
  MAXVALUE 9999999999999999999999999999
- START WITH 1
+ START WITH 41
  CACHE 20;
 
 -- ----------------------------
@@ -3872,6 +3998,8 @@ CREATE SEQUENCE "VOTE"."WS_ID_SEQ"
 -- ----------------------------
 -- Checks structure for table ACT_EVT_LOG
 -- ----------------------------
+ALTER TABLE "VOTE"."ACT_EVT_LOG" ADD CHECK ("LOG_NR_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_EVT_LOG" ADD CHECK ("TIME_STAMP_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_EVT_LOG" ADD CHECK ("TIME_STAMP_" IS NOT NULL);
 
 -- ----------------------------
@@ -3891,6 +4019,7 @@ VISIBLE;
 -- Checks structure for table ACT_GE_BYTEARRAY
 -- ----------------------------
 ALTER TABLE "VOTE"."ACT_GE_BYTEARRAY" ADD CHECK (GENERATED_ IN (1,0));
+ALTER TABLE "VOTE"."ACT_GE_BYTEARRAY" ADD CHECK (GENERATED_ IN (1,0));
 
 -- ----------------------------
 -- Primary Key structure for table ACT_GE_BYTEARRAY
@@ -3900,6 +4029,11 @@ ALTER TABLE "VOTE"."ACT_GE_BYTEARRAY" ADD PRIMARY KEY ("ID_");
 -- ----------------------------
 -- Indexes structure for table ACT_GE_PROPERTY
 -- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table ACT_GE_PROPERTY
+-- ----------------------------
+ALTER TABLE "VOTE"."ACT_GE_PROPERTY" ADD CHECK ("NAME_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_GE_PROPERTY
@@ -3936,6 +4070,13 @@ ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("EXECUTION_ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("ACT_ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("ACT_TYPE_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("START_TIME_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("PROC_DEF_ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("PROC_INST_ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("EXECUTION_ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("ACT_ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("ACT_TYPE_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD CHECK ("START_TIME_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_HI_ACTINST
@@ -3950,6 +4091,7 @@ ALTER TABLE "VOTE"."ACT_HI_ACTINST" ADD PRIMARY KEY ("ID_");
 -- Checks structure for table ACT_HI_ATTACHMENT
 -- ----------------------------
 ALTER TABLE "VOTE"."ACT_HI_ATTACHMENT" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_ATTACHMENT" ADD CHECK ("ID_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_HI_ATTACHMENT
@@ -3963,6 +4105,8 @@ ALTER TABLE "VOTE"."ACT_HI_ATTACHMENT" ADD PRIMARY KEY ("ID_");
 -- ----------------------------
 -- Checks structure for table ACT_HI_COMMENT
 -- ----------------------------
+ALTER TABLE "VOTE"."ACT_HI_COMMENT" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_COMMENT" ADD CHECK ("TIME_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_COMMENT" ADD CHECK ("ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_COMMENT" ADD CHECK ("TIME_" IS NOT NULL);
 
@@ -4002,6 +4146,10 @@ ALTER TABLE "VOTE"."ACT_HI_DETAIL" ADD CHECK ("ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_DETAIL" ADD CHECK ("TYPE_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_DETAIL" ADD CHECK ("NAME_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_DETAIL" ADD CHECK ("TIME_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_DETAIL" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_DETAIL" ADD CHECK ("TYPE_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_DETAIL" ADD CHECK ("NAME_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_DETAIL" ADD CHECK ("TIME_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_HI_DETAIL
@@ -4023,6 +4171,11 @@ CREATE INDEX "VOTE"."ACT_IDX_HI_IDENT_LNK_USER"
 ON "VOTE"."ACT_HI_IDENTITYLINK" ("USER_ID_" ASC)
 LOGGING
 VISIBLE;
+
+-- ----------------------------
+-- Checks structure for table ACT_HI_IDENTITYLINK
+-- ----------------------------
+ALTER TABLE "VOTE"."ACT_HI_IDENTITYLINK" ADD CHECK ("ID_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_HI_IDENTITYLINK
@@ -4053,6 +4206,10 @@ ALTER TABLE "VOTE"."ACT_HI_PROCINST" ADD CHECK ("ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_PROCINST" ADD CHECK ("PROC_INST_ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_PROCINST" ADD CHECK ("PROC_DEF_ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_PROCINST" ADD CHECK ("START_TIME_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_PROCINST" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_PROCINST" ADD CHECK ("PROC_INST_ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_PROCINST" ADD CHECK ("PROC_DEF_ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_PROCINST" ADD CHECK ("START_TIME_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_HI_PROCINST
@@ -4070,6 +4227,8 @@ VISIBLE;
 -- ----------------------------
 -- Checks structure for table ACT_HI_TASKINST
 -- ----------------------------
+ALTER TABLE "VOTE"."ACT_HI_TASKINST" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_TASKINST" ADD CHECK ("START_TIME_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_TASKINST" ADD CHECK ("ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_TASKINST" ADD CHECK ("START_TIME_" IS NOT NULL);
 
@@ -4099,6 +4258,8 @@ VISIBLE;
 -- ----------------------------
 ALTER TABLE "VOTE"."ACT_HI_VARINST" ADD CHECK ("ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_HI_VARINST" ADD CHECK ("NAME_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_VARINST" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_HI_VARINST" ADD CHECK ("NAME_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_HI_VARINST
@@ -4119,6 +4280,11 @@ ALTER TABLE "VOTE"."ACT_ID_GROUP" ADD PRIMARY KEY ("ID_");
 -- ----------------------------
 
 -- ----------------------------
+-- Checks structure for table ACT_ID_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."ACT_ID_INFO" ADD CHECK ("ID_" IS NOT NULL);
+
+-- ----------------------------
 -- Primary Key structure for table ACT_ID_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."ACT_ID_INFO" ADD PRIMARY KEY ("ID_");
@@ -4136,6 +4302,12 @@ LOGGING
 VISIBLE;
 
 -- ----------------------------
+-- Checks structure for table ACT_ID_MEMBERSHIP
+-- ----------------------------
+ALTER TABLE "VOTE"."ACT_ID_MEMBERSHIP" ADD CHECK ("USER_ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_ID_MEMBERSHIP" ADD CHECK ("GROUP_ID_" IS NOT NULL);
+
+-- ----------------------------
 -- Primary Key structure for table ACT_ID_MEMBERSHIP
 -- ----------------------------
 ALTER TABLE "VOTE"."ACT_ID_MEMBERSHIP" ADD PRIMARY KEY ("USER_ID_", "GROUP_ID_");
@@ -4143,6 +4315,11 @@ ALTER TABLE "VOTE"."ACT_ID_MEMBERSHIP" ADD PRIMARY KEY ("USER_ID_", "GROUP_ID_")
 -- ----------------------------
 -- Indexes structure for table ACT_ID_USER
 -- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table ACT_ID_USER
+-- ----------------------------
+ALTER TABLE "VOTE"."ACT_ID_USER" ADD CHECK ("ID_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_ID_USER
@@ -4169,6 +4346,8 @@ ALTER TABLE "VOTE"."ACT_PROCDEF_INFO" ADD UNIQUE ("PROC_DEF_ID_");
 -- ----------------------------
 -- Checks structure for table ACT_PROCDEF_INFO
 -- ----------------------------
+ALTER TABLE "VOTE"."ACT_PROCDEF_INFO" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_PROCDEF_INFO" ADD CHECK ("PROC_DEF_ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_PROCDEF_INFO" ADD CHECK ("ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_PROCDEF_INFO" ADD CHECK ("PROC_DEF_ID_" IS NOT NULL);
 
@@ -4206,6 +4385,7 @@ VISIBLE;
 -- Checks structure for table ACT_RE_MODEL
 -- ----------------------------
 ALTER TABLE "VOTE"."ACT_RE_MODEL" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_RE_MODEL" ADD CHECK ("ID_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_RE_MODEL
@@ -4224,6 +4404,11 @@ ALTER TABLE "VOTE"."ACT_RE_PROCDEF" ADD UNIQUE ("KEY_", "VERSION_", "TENANT_ID_"
 -- ----------------------------
 -- Checks structure for table ACT_RE_PROCDEF
 -- ----------------------------
+ALTER TABLE "VOTE"."ACT_RE_PROCDEF" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_RE_PROCDEF" ADD CHECK ("KEY_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_RE_PROCDEF" ADD CHECK ("VERSION_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_RE_PROCDEF" ADD CHECK (HAS_START_FORM_KEY_ IN (1,0));
+ALTER TABLE "VOTE"."ACT_RE_PROCDEF" ADD CHECK (HAS_GRAPHICAL_NOTATION_ IN (1,0));
 ALTER TABLE "VOTE"."ACT_RE_PROCDEF" ADD CHECK ("ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_RE_PROCDEF" ADD CHECK ("KEY_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_RE_PROCDEF" ADD CHECK ("VERSION_" IS NOT NULL);
@@ -4250,6 +4435,9 @@ VISIBLE;
 -- ----------------------------
 -- Checks structure for table ACT_RU_EVENT_SUBSCR
 -- ----------------------------
+ALTER TABLE "VOTE"."ACT_RU_EVENT_SUBSCR" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_RU_EVENT_SUBSCR" ADD CHECK ("EVENT_TYPE_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_RU_EVENT_SUBSCR" ADD CHECK ("CREATED_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_RU_EVENT_SUBSCR" ADD CHECK ("ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_RU_EVENT_SUBSCR" ADD CHECK ("EVENT_TYPE_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_RU_EVENT_SUBSCR" ADD CHECK ("CREATED_" IS NOT NULL);
@@ -4290,6 +4478,10 @@ ALTER TABLE "VOTE"."ACT_RU_EXECUTION" ADD CHECK (IS_ACTIVE_ IN (1,0));
 ALTER TABLE "VOTE"."ACT_RU_EXECUTION" ADD CHECK (IS_CONCURRENT_ IN (1,0));
 ALTER TABLE "VOTE"."ACT_RU_EXECUTION" ADD CHECK (IS_SCOPE_ IN (1,0));
 ALTER TABLE "VOTE"."ACT_RU_EXECUTION" ADD CHECK (IS_EVENT_SCOPE_ IN (1,0));
+ALTER TABLE "VOTE"."ACT_RU_EXECUTION" ADD CHECK (IS_ACTIVE_ IN (1,0));
+ALTER TABLE "VOTE"."ACT_RU_EXECUTION" ADD CHECK (IS_CONCURRENT_ IN (1,0));
+ALTER TABLE "VOTE"."ACT_RU_EXECUTION" ADD CHECK (IS_SCOPE_ IN (1,0));
+ALTER TABLE "VOTE"."ACT_RU_EXECUTION" ADD CHECK (IS_EVENT_SCOPE_ IN (1,0));
 
 -- ----------------------------
 -- Primary Key structure for table ACT_RU_EXECUTION
@@ -4321,6 +4513,11 @@ LOGGING
 VISIBLE;
 
 -- ----------------------------
+-- Checks structure for table ACT_RU_IDENTITYLINK
+-- ----------------------------
+ALTER TABLE "VOTE"."ACT_RU_IDENTITYLINK" ADD CHECK ("ID_" IS NOT NULL);
+
+-- ----------------------------
 -- Primary Key structure for table ACT_RU_IDENTITYLINK
 -- ----------------------------
 ALTER TABLE "VOTE"."ACT_RU_IDENTITYLINK" ADD PRIMARY KEY ("ID_");
@@ -4336,6 +4533,8 @@ VISIBLE;
 -- ----------------------------
 -- Checks structure for table ACT_RU_JOB
 -- ----------------------------
+ALTER TABLE "VOTE"."ACT_RU_JOB" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_RU_JOB" ADD CHECK ("TYPE_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_RU_JOB" ADD CHECK ("ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_RU_JOB" ADD CHECK ("TYPE_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_RU_JOB" ADD CHECK (EXCLUSIVE_ IN (1,0));
@@ -4364,6 +4563,11 @@ CREATE INDEX "VOTE"."ACT_IDX_TASK_PROCINST"
 ON "VOTE"."ACT_RU_TASK" ("PROC_INST_ID_" ASC)
 LOGGING
 VISIBLE;
+
+-- ----------------------------
+-- Checks structure for table ACT_RU_TASK
+-- ----------------------------
+ALTER TABLE "VOTE"."ACT_RU_TASK" ADD CHECK ("ID_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_RU_TASK
@@ -4396,6 +4600,9 @@ VISIBLE;
 ALTER TABLE "VOTE"."ACT_RU_VARIABLE" ADD CHECK ("ID_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_RU_VARIABLE" ADD CHECK ("TYPE_" IS NOT NULL);
 ALTER TABLE "VOTE"."ACT_RU_VARIABLE" ADD CHECK ("NAME_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_RU_VARIABLE" ADD CHECK ("ID_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_RU_VARIABLE" ADD CHECK ("TYPE_" IS NOT NULL);
+ALTER TABLE "VOTE"."ACT_RU_VARIABLE" ADD CHECK ("NAME_" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ACT_RU_VARIABLE
@@ -4409,6 +4616,7 @@ ALTER TABLE "VOTE"."ACT_RU_VARIABLE" ADD PRIMARY KEY ("ID_");
 -- ----------------------------
 -- Checks structure for table APPLICATION
 -- ----------------------------
+ALTER TABLE "VOTE"."APPLICATION" ADD CHECK ("APP_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."APPLICATION" ADD CHECK ("APP_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -4425,6 +4633,8 @@ ALTER TABLE "VOTE"."APPLICATION" ADD PRIMARY KEY ("APP_ID");
 -- ----------------------------
 ALTER TABLE "VOTE"."APPLICATION_IEDA" ADD CHECK ("IDEA_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."APPLICATION_IEDA" ADD CHECK ("APP_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."APPLICATION_IEDA" ADD CHECK ("IDEA_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."APPLICATION_IEDA" ADD CHECK ("APP_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table APPLICATION_IEDA
@@ -4439,6 +4649,7 @@ ALTER TABLE "VOTE"."APPLICATION_IEDA" ADD PRIMARY KEY ("IDEA_ID");
 -- Checks structure for table BASE_ORG_REL
 -- ----------------------------
 ALTER TABLE "VOTE"."BASE_ORG_REL" ADD CHECK ("REL_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."BASE_ORG_REL" ADD CHECK ("REL_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table BASE_ORG_REL
@@ -4452,6 +4663,7 @@ ALTER TABLE "VOTE"."BASE_ORG_REL" ADD PRIMARY KEY ("REL_ID");
 -- ----------------------------
 -- Checks structure for table BTN_INFO
 -- ----------------------------
+ALTER TABLE "VOTE"."BTN_INFO" ADD CHECK ("BTN_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."BTN_INFO" ADD CHECK ("BTN_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -4468,6 +4680,8 @@ ALTER TABLE "VOTE"."BTN_INFO" ADD PRIMARY KEY ("BTN_ID");
 -- ----------------------------
 ALTER TABLE "VOTE"."BTN_ROLE" ADD CHECK ("BTN_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."BTN_ROLE" ADD CHECK ("ROLE_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."BTN_ROLE" ADD CHECK ("BTN_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."BTN_ROLE" ADD CHECK ("ROLE_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table BTN_ROLE
@@ -4481,6 +4695,8 @@ ALTER TABLE "VOTE"."BTN_ROLE" ADD PRIMARY KEY ("BTN_ID", "ROLE_ID");
 -- ----------------------------
 -- Checks structure for table BTN_USR
 -- ----------------------------
+ALTER TABLE "VOTE"."BTN_USR" ADD CHECK ("BTN_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."BTN_USR" ADD CHECK ("USR_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."BTN_USR" ADD CHECK ("BTN_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."BTN_USR" ADD CHECK ("USR_ID" IS NOT NULL);
 
@@ -4500,6 +4716,8 @@ ALTER TABLE "VOTE"."CODE_DATA" ADD CHECK ("CODE_NO" IS NOT NULL);
 ALTER TABLE "VOTE"."CODE_DATA" ADD CHECK ("CODE_KEY" IS NOT NULL);
 ALTER TABLE "VOTE"."CODE_DATA" ADD CHECK ("CODE_NO" IS NOT NULL);
 ALTER TABLE "VOTE"."CODE_DATA" ADD CHECK ("CODE_KEY" IS NOT NULL);
+ALTER TABLE "VOTE"."CODE_DATA" ADD CHECK ("CODE_NO" IS NOT NULL);
+ALTER TABLE "VOTE"."CODE_DATA" ADD CHECK ("CODE_KEY" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table CODE_DATA
@@ -4513,6 +4731,7 @@ ALTER TABLE "VOTE"."CODE_DATA" ADD PRIMARY KEY ("CODE_NO", "CODE_KEY");
 -- ----------------------------
 -- Checks structure for table EXCEL_CELL
 -- ----------------------------
+ALTER TABLE "VOTE"."EXCEL_CELL" ADD CHECK ("EXCEL_CELL_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."EXCEL_CELL" ADD CHECK ("EXCEL_CELL_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."EXCEL_CELL" ADD CHECK ("EXCEL_CELL_ID" IS NOT NULL);
 
@@ -4530,6 +4749,7 @@ ALTER TABLE "VOTE"."EXCEL_CELL" ADD PRIMARY KEY ("EXCEL_CELL_ID");
 -- ----------------------------
 ALTER TABLE "VOTE"."EXCEL_FILE" ADD CHECK ("EXCEL_FILE_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."EXCEL_FILE" ADD CHECK ("EXCEL_FILE_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."EXCEL_FILE" ADD CHECK ("EXCEL_FILE_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table EXCEL_FILE
@@ -4543,6 +4763,7 @@ ALTER TABLE "VOTE"."EXCEL_FILE" ADD PRIMARY KEY ("EXCEL_FILE_ID");
 -- ----------------------------
 -- Checks structure for table EXCEL_SHEET
 -- ----------------------------
+ALTER TABLE "VOTE"."EXCEL_SHEET" ADD CHECK ("EXCEL_SHEET_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."EXCEL_SHEET" ADD CHECK ("EXCEL_SHEET_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."EXCEL_SHEET" ADD CHECK ("EXCEL_SHEET_ID" IS NOT NULL);
 
@@ -4561,6 +4782,9 @@ ALTER TABLE "VOTE"."EXCEL_SHEET" ADD PRIMARY KEY ("EXCEL_SHEET_ID");
 ALTER TABLE "VOTE"."FILE_TYPE_CFG" ADD CHECK ("ID" IS NOT NULL);
 ALTER TABLE "VOTE"."FILE_TYPE_CFG" ADD CHECK ("TRAN_TYPE" IS NOT NULL);
 ALTER TABLE "VOTE"."FILE_TYPE_CFG" ADD CHECK ("FILE_TYPE" IS NOT NULL);
+ALTER TABLE "VOTE"."FILE_TYPE_CFG" ADD CHECK ("ID" IS NOT NULL);
+ALTER TABLE "VOTE"."FILE_TYPE_CFG" ADD CHECK ("TRAN_TYPE" IS NOT NULL);
+ALTER TABLE "VOTE"."FILE_TYPE_CFG" ADD CHECK ("FILE_TYPE" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table FILE_TYPE_CFG
@@ -4575,6 +4799,7 @@ ALTER TABLE "VOTE"."FILE_TYPE_CFG" ADD PRIMARY KEY ("ID");
 -- Checks structure for table FILE_UPLOAD
 -- ----------------------------
 ALTER TABLE "VOTE"."FILE_UPLOAD" ADD CHECK ("FILE_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."FILE_UPLOAD" ADD CHECK ("FILE_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table FILE_UPLOAD
@@ -4588,6 +4813,7 @@ ALTER TABLE "VOTE"."FILE_UPLOAD" ADD PRIMARY KEY ("FILE_ID");
 -- ----------------------------
 -- Checks structure for table MENU_INFO
 -- ----------------------------
+ALTER TABLE "VOTE"."MENU_INFO" ADD CHECK ("MENU_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."MENU_INFO" ADD CHECK ("MENU_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -4606,6 +4832,10 @@ ALTER TABLE "VOTE"."ORG_INFO" ADD CHECK ("ORG_NO" IS NOT NULL);
 ALTER TABLE "VOTE"."ORG_INFO" ADD CHECK ("ORG_NAME" IS NOT NULL);
 ALTER TABLE "VOTE"."ORG_INFO" ADD CHECK ("ORG_TYPE" IS NOT NULL);
 ALTER TABLE "VOTE"."ORG_INFO" ADD CHECK ("ORG_STATUS" IS NOT NULL);
+ALTER TABLE "VOTE"."ORG_INFO" ADD CHECK ("ORG_NO" IS NOT NULL);
+ALTER TABLE "VOTE"."ORG_INFO" ADD CHECK ("ORG_NAME" IS NOT NULL);
+ALTER TABLE "VOTE"."ORG_INFO" ADD CHECK ("ORG_TYPE" IS NOT NULL);
+ALTER TABLE "VOTE"."ORG_INFO" ADD CHECK ("ORG_STATUS" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ORG_INFO
@@ -4619,6 +4849,7 @@ ALTER TABLE "VOTE"."ORG_INFO" ADD PRIMARY KEY ("ORG_NO");
 -- ----------------------------
 -- Checks structure for table PARAMS_INFO
 -- ----------------------------
+ALTER TABLE "VOTE"."PARAMS_INFO" ADD CHECK ("PARAMS_NO" IS NOT NULL);
 ALTER TABLE "VOTE"."PARAMS_INFO" ADD CHECK ("PARAMS_NO" IS NOT NULL);
 
 -- ----------------------------
@@ -4635,6 +4866,8 @@ ALTER TABLE "VOTE"."PARAMS_INFO" ADD PRIMARY KEY ("PARAMS_NO");
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_COMPANY_INFO" ADD CHECK ("COMPANY_CODE" IS NOT NULL);
 ALTER TABLE "VOTE"."PM_COMPANY_INFO" ADD CHECK ("COMPANY_NAME" IS NOT NULL);
+ALTER TABLE "VOTE"."PM_COMPANY_INFO" ADD CHECK ("COMPANY_CODE" IS NOT NULL);
+ALTER TABLE "VOTE"."PM_COMPANY_INFO" ADD CHECK ("COMPANY_NAME" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table PM_COMPANY_INFO
@@ -4644,6 +4877,11 @@ ALTER TABLE "VOTE"."PM_COMPANY_INFO" ADD PRIMARY KEY ("COMPANY_CODE");
 -- ----------------------------
 -- Indexes structure for table PM_CONFIRM_BID
 -- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table PM_CONFIRM_BID
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_CONFIRM_BID" ADD CHECK ("BID_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table PM_CONFIRM_BID
@@ -4657,6 +4895,7 @@ ALTER TABLE "VOTE"."PM_CONFIRM_BID" ADD PRIMARY KEY ("BID_ID");
 -- ----------------------------
 -- Checks structure for table PM_CUSTOMER_GROUP
 -- ----------------------------
+ALTER TABLE "VOTE"."PM_CUSTOMER_GROUP" ADD CHECK ("CUST_GROUP_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."PM_CUSTOMER_GROUP" ADD CHECK ("CUST_GROUP_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."PM_CUSTOMER_GROUP" ADD CHECK ("CUST_GROUP_ID" IS NOT NULL);
 
@@ -4674,6 +4913,7 @@ ALTER TABLE "VOTE"."PM_CUSTOMER_GROUP" ADD PRIMARY KEY ("CUST_GROUP_ID");
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_CUSTOMER_GROUP_RELATION" ADD CHECK ("CUST_GROUP_RELATION_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."PM_CUSTOMER_GROUP_RELATION" ADD CHECK ("CUST_GROUP_RELATION_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."PM_CUSTOMER_GROUP_RELATION" ADD CHECK ("CUST_GROUP_RELATION_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table PM_CUSTOMER_GROUP_RELATION
@@ -4685,10 +4925,16 @@ ALTER TABLE "VOTE"."PM_CUSTOMER_GROUP_RELATION" ADD PRIMARY KEY ("CUST_GROUP_REL
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_CUSTOMER_INFO" ADD CHECK ("CUST_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."PM_CUSTOMER_INFO" ADD CHECK ("CUST_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."PM_CUSTOMER_INFO" ADD CHECK ("CUST_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Indexes structure for table PM_FILE
 -- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table PM_FILE
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_FILE" ADD CHECK ("FILE_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table PM_FILE
@@ -4698,6 +4944,11 @@ ALTER TABLE "VOTE"."PM_FILE" ADD PRIMARY KEY ("FILE_ID");
 -- ----------------------------
 -- Indexes structure for table PM_PAYMENT_POINT
 -- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table PM_PAYMENT_POINT
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PAYMENT_POINT" ADD CHECK ("PAYMENT_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table PM_PAYMENT_POINT
@@ -4711,6 +4962,7 @@ ALTER TABLE "VOTE"."PM_PAYMENT_POINT" ADD PRIMARY KEY ("PAYMENT_ID");
 -- ----------------------------
 -- Checks structure for table PM_PRODUCT_INFO
 -- ----------------------------
+ALTER TABLE "VOTE"."PM_PRODUCT_INFO" ADD CHECK ("PRODUCT_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."PM_PRODUCT_INFO" ADD CHECK ("PRODUCT_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -4726,6 +4978,7 @@ ALTER TABLE "VOTE"."PM_PRODUCT_INFO" ADD PRIMARY KEY ("PRODUCT_ID");
 -- Checks structure for table PM_PRODUCT_PROJECT_RELATION
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_PRODUCT_PROJECT_RELATION" ADD CHECK ("PRODUCT_RELATION_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."PM_PRODUCT_PROJECT_RELATION" ADD CHECK ("PRODUCT_RELATION_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table PM_PRODUCT_PROJECT_RELATION
@@ -4737,6 +4990,11 @@ ALTER TABLE "VOTE"."PM_PRODUCT_PROJECT_RELATION" ADD PRIMARY KEY ("PRODUCT_RELAT
 -- ----------------------------
 
 -- ----------------------------
+-- Checks structure for table PM_PROJECT_GROUP_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_GROUP_INFO" ADD CHECK ("PROJECT_GROUP_ID" IS NOT NULL);
+
+-- ----------------------------
 -- Primary Key structure for table PM_PROJECT_GROUP_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_PROJECT_GROUP_INFO" ADD PRIMARY KEY ("PROJECT_GROUP_ID");
@@ -4744,6 +5002,11 @@ ALTER TABLE "VOTE"."PM_PROJECT_GROUP_INFO" ADD PRIMARY KEY ("PROJECT_GROUP_ID");
 -- ----------------------------
 -- Indexes structure for table PM_PROJECT_GROUP_RELATION_INFO
 -- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table PM_PROJECT_GROUP_RELATION_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_GROUP_RELATION_INFO" ADD CHECK ("RELATIONSHIP" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table PM_PROJECT_GROUP_RELATION_INFO
@@ -4755,22 +5018,28 @@ ALTER TABLE "VOTE"."PM_PROJECT_GROUP_RELATION_INFO" ADD PRIMARY KEY ("RELATIONSH
 -- ----------------------------
 
 -- ----------------------------
+-- Checks structure for table PM_PROJECT_INCOMMING_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_INCOMMING_INFO" ADD CHECK ("RECEIVE_ID" IS NOT NULL);
+
+-- ----------------------------
 -- Primary Key structure for table PM_PROJECT_INCOMMING_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_PROJECT_INCOMMING_INFO" ADD PRIMARY KEY ("RECEIVE_ID");
 
 -- ----------------------------
--- Indexes structure for table PM_PROJECT_INFO
+-- Checks structure for table PM_PROJECT_INFO
 -- ----------------------------
-
--- ----------------------------
--- Primary Key structure for table PM_PROJECT_INFO
--- ----------------------------
-ALTER TABLE "VOTE"."PM_PROJECT_INFO" ADD PRIMARY KEY ("PROJECT_ID");
+ALTER TABLE "VOTE"."PM_PROJECT_INFO" ADD CHECK ("PROJECT_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Indexes structure for table PM_PROJECT_MILESTONE_INFO
 -- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table PM_PROJECT_MILESTONE_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_MILESTONE_INFO" ADD CHECK ("MILESTONE_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table PM_PROJECT_MILESTONE_INFO
@@ -4782,6 +5051,11 @@ ALTER TABLE "VOTE"."PM_PROJECT_MILESTONE_INFO" ADD PRIMARY KEY ("MILESTONE_ID");
 -- ----------------------------
 
 -- ----------------------------
+-- Checks structure for table PM_PROJECT_PROBLEM
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_PROJECT_PROBLEM" ADD CHECK ("PROBLEM_ID" IS NOT NULL);
+
+-- ----------------------------
 -- Primary Key structure for table PM_PROJECT_PROBLEM
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_PROJECT_PROBLEM" ADD PRIMARY KEY ("PROBLEM_ID");
@@ -4789,6 +5063,11 @@ ALTER TABLE "VOTE"."PM_PROJECT_PROBLEM" ADD PRIMARY KEY ("PROBLEM_ID");
 -- ----------------------------
 -- Indexes structure for table PM_REVIEW_COMMENT_INFO
 -- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table PM_REVIEW_COMMENT_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_REVIEW_COMMENT_INFO" ADD CHECK ("COMMENT_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table PM_REVIEW_COMMENT_INFO
@@ -4800,6 +5079,11 @@ ALTER TABLE "VOTE"."PM_REVIEW_COMMENT_INFO" ADD PRIMARY KEY ("COMMENT_ID");
 -- ----------------------------
 
 -- ----------------------------
+-- Checks structure for table PM_REVIEW_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_REVIEW_INFO" ADD CHECK ("REVIEW_ID" IS NOT NULL);
+
+-- ----------------------------
 -- Primary Key structure for table PM_REVIEW_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."PM_REVIEW_INFO" ADD PRIMARY KEY ("REVIEW_ID");
@@ -4807,6 +5091,7 @@ ALTER TABLE "VOTE"."PM_REVIEW_INFO" ADD PRIMARY KEY ("REVIEW_ID");
 -- ----------------------------
 -- Checks structure for table PM_SALE_GROUP_INFO
 -- ----------------------------
+ALTER TABLE "VOTE"."PM_SALE_GROUP_INFO" ADD CHECK ("GROUP_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."PM_SALE_GROUP_INFO" ADD CHECK ("GROUP_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -4816,6 +5101,8 @@ ALTER TABLE "VOTE"."PM_SALE_GROUP_INFO" ADD CHECK ("GROUP_ID" IS NOT NULL);
 -- ----------------------------
 -- Checks structure for table PM_SALE_MEMBER_INFO
 -- ----------------------------
+ALTER TABLE "VOTE"."PM_SALE_MEMBER_INFO" ADD CHECK ("MENBER_USR_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."PM_SALE_MEMBER_INFO" ADD CHECK ("GROUP_CODE" IS NOT NULL);
 ALTER TABLE "VOTE"."PM_SALE_MEMBER_INFO" ADD CHECK ("MENBER_USR_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."PM_SALE_MEMBER_INFO" ADD CHECK ("GROUP_CODE" IS NOT NULL);
 
@@ -4832,6 +5119,7 @@ ALTER TABLE "VOTE"."PM_SALE_MEMBER_INFO" ADD PRIMARY KEY ("MENBER_USR_ID", "GROU
 -- Checks structure for table REVIEW_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."REVIEW_INFO" ADD CHECK ("REVIEW_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."REVIEW_INFO" ADD CHECK ("REVIEW_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table REVIEW_INFO
@@ -4845,6 +5133,7 @@ ALTER TABLE "VOTE"."REVIEW_INFO" ADD PRIMARY KEY ("REVIEW_ID");
 -- ----------------------------
 -- Checks structure for table ROLE
 -- ----------------------------
+ALTER TABLE "VOTE"."ROLE" ADD CHECK ("ROLE_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."ROLE" ADD CHECK ("ROLE_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -4861,6 +5150,8 @@ ALTER TABLE "VOTE"."ROLE" ADD PRIMARY KEY ("ROLE_ID");
 -- ----------------------------
 ALTER TABLE "VOTE"."ROLE_MENU" ADD CHECK ("ROLE_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."ROLE_MENU" ADD CHECK ("MENU_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."ROLE_MENU" ADD CHECK ("ROLE_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."ROLE_MENU" ADD CHECK ("MENU_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table ROLE_MENU
@@ -4874,6 +5165,7 @@ ALTER TABLE "VOTE"."ROLE_MENU" ADD PRIMARY KEY ("ROLE_ID", "MENU_ID");
 -- ----------------------------
 -- Checks structure for table TABLE_HEADER_INFO
 -- ----------------------------
+ALTER TABLE "VOTE"."TABLE_HEADER_INFO" ADD CHECK ("TABLE_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."TABLE_HEADER_INFO" ADD CHECK ("TABLE_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -4889,6 +5181,7 @@ ALTER TABLE "VOTE"."TABLE_HEADER_INFO" ADD PRIMARY KEY ("TABLE_ID");
 -- Checks structure for table TABLE_TITLE_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."TABLE_TITLE_INFO" ADD CHECK ("HEAD_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."TABLE_TITLE_INFO" ADD CHECK ("HEAD_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table TABLE_TITLE_INFO
@@ -4902,6 +5195,9 @@ ALTER TABLE "VOTE"."TABLE_TITLE_INFO" ADD PRIMARY KEY ("HEAD_ID");
 -- ----------------------------
 -- Checks structure for table USR_INFO
 -- ----------------------------
+ALTER TABLE "VOTE"."USR_INFO" ADD CHECK ("USR_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."USR_INFO" ADD CHECK ("USR_NAME" IS NOT NULL);
+ALTER TABLE "VOTE"."USR_INFO" ADD CHECK ("PASS_WORD" IS NOT NULL);
 ALTER TABLE "VOTE"."USR_INFO" ADD CHECK ("USR_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."USR_INFO" ADD CHECK ("USR_NAME" IS NOT NULL);
 ALTER TABLE "VOTE"."USR_INFO" ADD CHECK ("PASS_WORD" IS NOT NULL);
@@ -4920,6 +5216,8 @@ ALTER TABLE "VOTE"."USR_INFO" ADD PRIMARY KEY ("USR_ID");
 -- ----------------------------
 ALTER TABLE "VOTE"."USR_MENU" ADD CHECK ("USR_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."USR_MENU" ADD CHECK ("MENU_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."USR_MENU" ADD CHECK ("USR_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."USR_MENU" ADD CHECK ("MENU_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table USR_MENU
@@ -4933,6 +5231,8 @@ ALTER TABLE "VOTE"."USR_MENU" ADD PRIMARY KEY ("USR_ID", "MENU_ID");
 -- ----------------------------
 -- Checks structure for table USR_ROLE
 -- ----------------------------
+ALTER TABLE "VOTE"."USR_ROLE" ADD CHECK ("USR_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."USR_ROLE" ADD CHECK ("ROLE_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."USR_ROLE" ADD CHECK ("USR_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."USR_ROLE" ADD CHECK ("ROLE_ID" IS NOT NULL);
 
@@ -4957,6 +5257,7 @@ VISIBLE;
 -- Checks structure for table VOTE_APPLY_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."VOTE_APPLY_INFO" ADD CHECK ("APPLY_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."VOTE_APPLY_INFO" ADD CHECK ("APPLY_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table VOTE_APPLY_INFO
@@ -4970,6 +5271,7 @@ ALTER TABLE "VOTE"."VOTE_APPLY_INFO" ADD PRIMARY KEY ("APPLY_ID");
 -- ----------------------------
 -- Checks structure for table VOTE_FILE_SIGN
 -- ----------------------------
+ALTER TABLE "VOTE"."VOTE_FILE_SIGN" ADD CHECK ("SIGN_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."VOTE_FILE_SIGN" ADD CHECK ("SIGN_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -4989,6 +5291,7 @@ VISIBLE;
 -- Checks structure for table VOTE_HOUSE_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."VOTE_HOUSE_INFO" ADD CHECK ("INFO_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."VOTE_HOUSE_INFO" ADD CHECK ("INFO_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table VOTE_HOUSE_INFO
@@ -5002,6 +5305,7 @@ ALTER TABLE "VOTE"."VOTE_HOUSE_INFO" ADD PRIMARY KEY ("INFO_ID");
 -- ----------------------------
 -- Checks structure for table VOTE_OWNER_HISTORY
 -- ----------------------------
+ALTER TABLE "VOTE"."VOTE_OWNER_HISTORY" ADD CHECK ("RECORD_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."VOTE_OWNER_HISTORY" ADD CHECK ("RECORD_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -5021,6 +5325,7 @@ VISIBLE;
 -- Checks structure for table VOTE_RESULT_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."VOTE_RESULT_INFO" ADD CHECK ("RESULT_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."VOTE_RESULT_INFO" ADD CHECK ("RESULT_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table VOTE_RESULT_INFO
@@ -5034,6 +5339,7 @@ ALTER TABLE "VOTE"."VOTE_RESULT_INFO" ADD PRIMARY KEY ("RESULT_ID");
 -- ----------------------------
 -- Checks structure for table VOTE_RESULT_SUM
 -- ----------------------------
+ALTER TABLE "VOTE"."VOTE_RESULT_SUM" ADD CHECK ("TOPIC_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."VOTE_RESULT_SUM" ADD CHECK ("TOPIC_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -5050,6 +5356,8 @@ ALTER TABLE "VOTE"."VOTE_RESULT_SUM" ADD PRIMARY KEY ("TOPIC_ID");
 -- ----------------------------
 ALTER TABLE "VOTE"."VOTE_SCOPE_INFO" ADD CHECK ("TOPIC_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."VOTE_SCOPE_INFO" ADD CHECK ("INFO_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."VOTE_SCOPE_INFO" ADD CHECK ("TOPIC_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."VOTE_SCOPE_INFO" ADD CHECK ("INFO_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table VOTE_SCOPE_INFO
@@ -5063,6 +5371,7 @@ ALTER TABLE "VOTE"."VOTE_SCOPE_INFO" ADD PRIMARY KEY ("INFO_ID", "TOPIC_ID");
 -- ----------------------------
 -- Checks structure for table VOTE_SECT_INFO
 -- ----------------------------
+ALTER TABLE "VOTE"."VOTE_SECT_INFO" ADD CHECK ("SECT_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."VOTE_SECT_INFO" ADD CHECK ("SECT_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -5078,6 +5387,7 @@ ALTER TABLE "VOTE"."VOTE_SECT_INFO" ADD PRIMARY KEY ("SECT_ID");
 -- Checks structure for table VOTE_TOPIC_INFO
 -- ----------------------------
 ALTER TABLE "VOTE"."VOTE_TOPIC_INFO" ADD CHECK ("TOPIC_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."VOTE_TOPIC_INFO" ADD CHECK ("TOPIC_ID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table VOTE_TOPIC_INFO
@@ -5091,6 +5401,7 @@ ALTER TABLE "VOTE"."VOTE_TOPIC_INFO" ADD PRIMARY KEY ("TOPIC_ID");
 -- ----------------------------
 -- Checks structure for table VOTE_WORKSPACE
 -- ----------------------------
+ALTER TABLE "VOTE"."VOTE_WORKSPACE" ADD CHECK ("WS_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."VOTE_WORKSPACE" ADD CHECK ("WS_ID" IS NOT NULL);
 
 -- ----------------------------
@@ -5106,6 +5417,7 @@ ALTER TABLE "VOTE"."VOTE_WORKSPACE" ADD PRIMARY KEY ("WS_ID");
 -- Checks structure for table WY_AGENT
 -- ----------------------------
 ALTER TABLE "VOTE"."WY_AGENT" ADD CHECK ("AGEID" IS NOT NULL);
+ALTER TABLE "VOTE"."WY_AGENT" ADD CHECK ("AGEID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table WY_AGENT
@@ -5119,6 +5431,7 @@ ALTER TABLE "VOTE"."WY_AGENT" ADD PRIMARY KEY ("AGEID");
 -- ----------------------------
 -- Checks structure for table WY_GLC
 -- ----------------------------
+ALTER TABLE "VOTE"."WY_GLC" ADD CHECK ("GLCID" IS NOT NULL);
 ALTER TABLE "VOTE"."WY_GLC" ADD CHECK ("GLCID" IS NOT NULL);
 
 -- ----------------------------
@@ -5134,6 +5447,7 @@ ALTER TABLE "VOTE"."WY_GLC" ADD PRIMARY KEY ("GLCID");
 -- Checks structure for table WY_HOC_STAFF
 -- ----------------------------
 ALTER TABLE "VOTE"."WY_HOC_STAFF" ADD CHECK ("YWHRYID" IS NOT NULL);
+ALTER TABLE "VOTE"."WY_HOC_STAFF" ADD CHECK ("YWHRYID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table WY_HOC_STAFF
@@ -5147,6 +5461,7 @@ ALTER TABLE "VOTE"."WY_HOC_STAFF" ADD PRIMARY KEY ("YWHRYID");
 -- ----------------------------
 -- Checks structure for table WY_HPB
 -- ----------------------------
+ALTER TABLE "VOTE"."WY_HPB" ADD CHECK ("HPBID" IS NOT NULL);
 ALTER TABLE "VOTE"."WY_HPB" ADD CHECK ("HPBID" IS NOT NULL);
 
 -- ----------------------------
@@ -5162,6 +5477,7 @@ ALTER TABLE "VOTE"."WY_HPB" ADD PRIMARY KEY ("HPBID");
 -- Checks structure for table WY_JD
 -- ----------------------------
 ALTER TABLE "VOTE"."WY_JD" ADD CHECK ("JDID" IS NOT NULL);
+ALTER TABLE "VOTE"."WY_JD" ADD CHECK ("JDID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table WY_JD
@@ -5176,6 +5492,7 @@ ALTER TABLE "VOTE"."WY_JD" ADD PRIMARY KEY ("JDID");
 -- Checks structure for table WY_KFS
 -- ----------------------------
 ALTER TABLE "VOTE"."WY_KFS" ADD CHECK ("KFSID" IS NOT NULL);
+ALTER TABLE "VOTE"."WY_KFS" ADD CHECK ("KFSID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table WY_KFS
@@ -5189,6 +5506,7 @@ ALTER TABLE "VOTE"."WY_KFS" ADD PRIMARY KEY ("KFSID");
 -- ----------------------------
 -- Checks structure for table WY_SECT
 -- ----------------------------
+ALTER TABLE "VOTE"."WY_SECT" ADD CHECK ("XMID" IS NOT NULL);
 ALTER TABLE "VOTE"."WY_SECT" ADD CHECK ("XMID" IS NOT NULL);
 
 -- ----------------------------
@@ -5205,6 +5523,8 @@ ALTER TABLE "VOTE"."WY_SECT" ADD PRIMARY KEY ("XMID");
 -- ----------------------------
 ALTER TABLE "VOTE"."WY_SECT_HIS" ADD CHECK ("TASK_ID" IS NOT NULL);
 ALTER TABLE "VOTE"."WY_SECT_HIS" ADD CHECK ("XMID" IS NOT NULL);
+ALTER TABLE "VOTE"."WY_SECT_HIS" ADD CHECK ("TASK_ID" IS NOT NULL);
+ALTER TABLE "VOTE"."WY_SECT_HIS" ADD CHECK ("XMID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table WY_SECT_HIS
@@ -5218,6 +5538,7 @@ ALTER TABLE "VOTE"."WY_SECT_HIS" ADD PRIMARY KEY ("TASK_ID", "XMID");
 -- ----------------------------
 -- Checks structure for table WY_SECT_TEMP
 -- ----------------------------
+ALTER TABLE "VOTE"."WY_SECT_TEMP" ADD CHECK ("XMID" IS NOT NULL);
 ALTER TABLE "VOTE"."WY_SECT_TEMP" ADD CHECK ("XMID" IS NOT NULL);
 
 -- ----------------------------
@@ -5233,6 +5554,7 @@ ALTER TABLE "VOTE"."WY_SECT_TEMP" ADD PRIMARY KEY ("XMID");
 -- Checks structure for table WY_SQ
 -- ----------------------------
 ALTER TABLE "VOTE"."WY_SQ" ADD CHECK ("SQID" IS NOT NULL);
+ALTER TABLE "VOTE"."WY_SQ" ADD CHECK ("SQID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table WY_SQ
@@ -5246,6 +5568,7 @@ ALTER TABLE "VOTE"."WY_SQ" ADD PRIMARY KEY ("SQID");
 -- ----------------------------
 -- Checks structure for table WY_WYGS
 -- ----------------------------
+ALTER TABLE "VOTE"."WY_WYGS" ADD CHECK ("WYGSID" IS NOT NULL);
 ALTER TABLE "VOTE"."WY_WYGS" ADD CHECK ("WYGSID" IS NOT NULL);
 
 -- ----------------------------
@@ -5261,6 +5584,7 @@ ALTER TABLE "VOTE"."WY_WYGS" ADD PRIMARY KEY ("WYGSID");
 -- Checks structure for table WY_WYGS_STAFF
 -- ----------------------------
 ALTER TABLE "VOTE"."WY_WYGS_STAFF" ADD CHECK ("GSRYID" IS NOT NULL);
+ALTER TABLE "VOTE"."WY_WYGS_STAFF" ADD CHECK ("GSRYID" IS NOT NULL);
 
 -- ----------------------------
 -- Primary Key structure for table WY_WYGS_STAFF
@@ -5274,6 +5598,7 @@ ALTER TABLE "VOTE"."WY_WYGS_STAFF" ADD PRIMARY KEY ("GSRYID");
 -- ----------------------------
 -- Checks structure for table WY_YWH
 -- ----------------------------
+ALTER TABLE "VOTE"."WY_YWH" ADD CHECK ("YWHID" IS NOT NULL);
 ALTER TABLE "VOTE"."WY_YWH" ADD CHECK ("YWHID" IS NOT NULL);
 
 -- ----------------------------

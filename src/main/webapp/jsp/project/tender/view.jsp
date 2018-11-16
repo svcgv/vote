@@ -135,6 +135,8 @@
 				        <tr><th>文件名</th>
 				        <th>大小</th>
 				        <th>状态</th>
+				        <th>下载</th>
+				        <th>文件类型</th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
 				      <c:forEach items="${file}" var="fileInfo" >
@@ -142,6 +144,18 @@
 					      	<td>${fileInfo.fileUploadName}</td>
 					      	<td>${fileInfo.fileSize}</td>
 					      	<td>已上传</td>
+					      	<td><a href='${fileInfo.filePath}' download="${fileInfo.fileUploadName}">下载</a></td>
+					      	<td>
+					      		<c:if test="${fileInfo.fileBusinessType=='00' }">
+									招标文件
+								</c:if>
+								<c:if test="${fileInfo.fileBusinessType=='01' }">
+									客户需求文件
+								</c:if>
+								<c:if test="${fileInfo.fileBusinessType=='02' }">
+									内部评审文件
+								</c:if>
+							</td>
 				      	</tr>
 				      	</c:forEach>
 				      </tbody>
