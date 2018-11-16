@@ -71,6 +71,7 @@ function zTreeOnSaveEvent(event, treeId, treeNode) {
  	}else if(act == "buildDeptForm"){
  		
  		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"BUILD_DEPT_NAME")
+ 		queryProfitInfo(getCheckedOrg.orgId)
  		// form
  		$("#project-form-hook  input[name='buildDeptName']").val(getCheckedOrg.name);
 		$("#project-form-hook  input[name='buildDeptId']").val(getCheckedOrg.orgId);
@@ -83,6 +84,7 @@ function zTreeOnSaveEvent(event, treeId, treeNode) {
  	}else if(act == "buildDeptEdit"){
  	// edit
  			queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"BUILD_DEPT_NAME")
+ 			queryProfitInfo(getCheckedOrg.orgId)
  		$("#project-edit-hook  input[name='buildDeptName']").val(getCheckedOrg.name);
 		$("#project-edit-hook  input[name='buildDeptId']").val(getCheckedOrg.orgId);
  	}else if(act == "sellDeptEdit"){
@@ -95,6 +97,28 @@ function zTreeOnSaveEvent(event, treeId, treeNode) {
 		win.close();
 };
 
+function queryProfitInfo(orgId){
+	
+	var param = {}
+	param.orgId=orgId
+	$.ajax({
+		  type: 'POST',
+		url: '/vote/pmprojectinfo/queryProfitInfo',
+		 data: JSON.stringify(param),
+		 contentType:'application/json',
+		success:function(res){
+		      if(res.profitInfo.length>0){
+		    	  if(act == "buildDeptForm"){
+			      	$("#project-form-hook input[name='profitCode']").val(res.profitInfo.profitId);
+			      }else if(act == "buildDeptEdit"){
+			      	$("#project-edit-hook  input[name='profitCode']").val(res.profitInfo.profitId);
+			      }
+		      }
+		},
+		 dataType: "json"
+		
+	})
+}
 
 function queryUserByRoleCodeOrgNo(orgNo,roleCode){
 	console.log(orgNo,roleCode)

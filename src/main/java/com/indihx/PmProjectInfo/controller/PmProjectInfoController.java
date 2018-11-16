@@ -5,21 +5,21 @@ import java.util.Map;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
+
+import com.indihx.system.entity.ProfitInfo;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.UserUtil;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectInfo.service.PmProjectInfoService;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
-import com.indihx.comm.util.PageUtils;
-import com.indihx.comm.InitSysConstants;
+import com.indihx.service.IProfitInfoService;
 
 /**
  * 
@@ -32,6 +32,9 @@ import com.indihx.comm.InitSysConstants;
 public class PmProjectInfoController {
     @Autowired
     private PmProjectInfoService pmProjectInfoService;
+    
+    @Autowired
+    private IProfitInfoService IProfitInfoService;
 
     /**
      * 列表
@@ -53,7 +56,12 @@ public class PmProjectInfoController {
 		PmProjectInfoEntity entity = pmProjectInfoService.queryObject(projectId);
         return R.ok().put("pmProjectInfo", entity);
     }
-
+    
+    @RequestMapping(value="/queryProfitInfo",method=RequestMethod.POST)
+    public @ResponseBody  Map<String,Object>  queryProfitInfo(@RequestBody Map<String, Object> param ,HttpSession session){
+    	ProfitInfo entity = IProfitInfoService.queryProfitInfoByOrgId(Long.valueOf(param.get("orgId").toString()));
+    	return R.ok().put("profitInfo", entity);
+    }
     /**
      * 保存
      */
