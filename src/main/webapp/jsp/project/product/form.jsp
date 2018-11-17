@@ -28,7 +28,7 @@
 		      </div>
 		    </div>
 		     <div class="layui-inline">
-		      <label class="layui-form-label">指导销售价(元)：</label>
+		      <label class="layui-form-label" style="width:120px!important;">指导销售价(元)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" id="productSuggestPrice" name="productSuggestPrice"  autocomplete="off"  class="layui-input form-control">
 		      </div>

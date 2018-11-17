@@ -6,7 +6,7 @@
         <legend>客户群管理</legend>
     </fieldset>
     <form class="layui-form" id="index-query-form" action="">
-        <div class="layui-form-item">
+        <div class="layui-form-item" style="margin-bottom:0px;">
             <div class="layui-inline">
                 <label class="layui-form-label">客户群编号：</label>
                 <div class="layui-input-inline">
@@ -20,24 +20,7 @@
                     <input type="text" name="custGroupName" autocomplete="off" class="layui-input form-control">
                 </div>
             </div>
-
-
-            <div class="layui-inline">
-                <label class="layui-form-label">创建时间(开始)：</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="createTimeStart" id="createTimeStart" autocomplete="off"
-                           class="layui-input form-control hasDatepicker">
-                </div>
-            </div>
-
-            <div class="layui-inline">
-                <label class="layui-form-label">创建时间(结束)：</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="createTimeEnd" id="createTimeEnd" autocomplete="off"
-                           class="layui-input form-control hasDatepicker">
-                </div>
-            </div>
-            <div class="layui-inline">
+           <div class="layui-inline">
                 <label class="layui-form-label">是否有效：</label>
                 <div class="layui-input-inline">
                     <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
@@ -45,7 +28,22 @@
                     </select>
                 </div>
             </div>
-
+		</div>
+		<div class="layui-form-item" style="margin-bottom:0px;">
+            <div class="layui-inline">
+                <label class="layui-form-label">创建时间(开始)：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="createTimeStart" id="createTimeStart" autocomplete="off"
+                           class="layui-input form-control hasDatepicker">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">创建时间(结束)：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="createTimeEnd" id="createTimeEnd" autocomplete="off"
+                           class="layui-input form-control hasDatepicker">
+                </div>
+            </div>
             <div class="layui-inline" style="vertical-align: top;">
                 <div class="layui-btn-container" style="margin-left:15px;">
                     <button type="button" class="layui-btn layui-btn-sm" id="query-hook" style="margin-right:15px;"><i
@@ -60,7 +58,6 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </form>
 
