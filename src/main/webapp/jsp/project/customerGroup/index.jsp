@@ -134,7 +134,13 @@
                 {field: 'createTime', title: '创建时间'},
 
                 {field: 'modifyTime', title: '修改时间'},
-                {field: 'isDelete', title: '是否有效'},
+                {field: 'isDelete', title: '是否有效',templet:function(d){
+                	if(d.isDelete == "00"){
+                		return "有效";
+                	}else{
+                		return "无效";
+                	}
+                }},
                 {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 180}
             ]],
             cellMinWidth: '90',
