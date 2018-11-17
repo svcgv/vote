@@ -1,0 +1,66 @@
+/*
+Navicat Oracle Data Transfer
+Oracle Client Version : 10.2.0.5.0
+
+Source Server         : test
+Source Server Version : 110200
+Source Host           : localhost:1521
+Source Schema         : VOTE
+
+Target Server Type    : ORACLE
+Target Server Version : 110200
+File Encoding         : 65001
+
+Date: 2018-11-17 11:11:45
+*/
+
+
+-- ----------------------------
+-- Table structure for PM_CONTRACT_INFO
+-- ----------------------------
+DROP TABLE "VOTE"."PM_CONTRACT_INFO";
+CREATE TABLE "VOTE"."PM_CONTRACT_INFO" (
+"CONTRACT_ID" NUMBER(10) NOT NULL ,
+"CONTRACT_CODE" VARCHAR2(32 BYTE) NULL ,
+"CONTRACT_NAME" VARCHAR2(32 BYTE) NULL ,
+"CONTRACT_AMOUNT" VARCHAR2(256 BYTE) NULL ,
+"TAX_RATE" NUMBER(10,2) NULL ,
+"AFTER_TAX_CONTRACT_AMOUNT" NUMBER(10,2) NULL ,
+"CONTRACT_START_TIME" VARCHAR2(32 BYTE) NULL ,
+"CONTRACT_END_TIME" VARCHAR2(32 BYTE) NULL ,
+"SIGN_CONTRACT_DATE" VARCHAR2(32 BYTE) NULL ,
+"IS_AGREE" CHAR(2 BYTE) NULL ,
+"YEAR_NUMER" VARCHAR2(32 BYTE) NULL ,
+"SELL_DEPT_NAME" VARCHAR2(256 BYTE) NULL ,
+"CUST_MANAGER_NAME" VARCHAR2(256 BYTE) NULL ,
+"OA_FLOW_CODE" VARCHAR2(256 BYTE) NULL ,
+"COMPANY_CODE" VARCHAR2(256 BYTE) NULL ,
+"CUST_ID" NUMBER(10) NULL ,
+"CUST_SAP_CODE" VARCHAR2(256 BYTE) NULL ,
+"CUST_NAME" VARCHAR2(256 BYTE) NULL ,
+"REMARK" VARCHAR2(256 BYTE) NULL ,
+"IS_DELETE" CHAR(2 BYTE) NULL ,
+"CREATE_TIME" VARCHAR2(32 BYTE) NULL ,
+"CREATOR" NUMBER(10) NULL ,
+"MODIFY_TIME" VARCHAR2(32 BYTE) NULL ,
+"MODIFIER" NUMBER(10) NULL 
+)
+LOGGING
+NOCOMPRESS
+NOCACHE
+
+;
+
+-- ----------------------------
+-- Indexes structure for table PM_CONTRACT_INFO
+-- ----------------------------
+
+-- ----------------------------
+-- Checks structure for table PM_CONTRACT_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_CONTRACT_INFO" ADD CHECK ("CONTRACT_ID" IS NOT NULL);
+
+-- ----------------------------
+-- Primary Key structure for table PM_CONTRACT_INFO
+-- ----------------------------
+ALTER TABLE "VOTE"."PM_CONTRACT_INFO" ADD PRIMARY KEY ("CONTRACT_ID");
