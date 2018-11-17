@@ -97,10 +97,9 @@ layui.use(['layer', 'form','laydate','table'], function(){
 				if(act == "index"){
 					$("#contract-index-form input[name='customerName']").val(custCnName);
 					$("#contract-index-form input[name='customerId']").val(custId);
-			 	}else if(act =="addCust"){ //编辑 修改 页面
-			 		///$("#tender-addForm-hook input[name='custCnName']").val(custCnName);
-			 		//$("#tender-addForm-hook input[name='custSapCode']").val(sapCode);
-					//$("#tender-addForm-hook input[name='custId']").val(custId);
+			 	}else if(act =="form"){ //编辑 修改 页面
+			 		 $("#contract-addForm-hook input[name='customerName']").val(custCnName);
+			 		 $("#contract-addForm-hook input[name='customerId']").val(custCnName);
 			 	}
 			}
 		});

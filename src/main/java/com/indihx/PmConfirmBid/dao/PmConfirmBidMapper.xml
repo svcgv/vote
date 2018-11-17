@@ -55,8 +55,9 @@
 		<result property="currency" column="CURRENCY" />
 		<result property="taxRate" column="TAX_RATE" />
 		<result property="bidCode" column="BID_CODE" />
-
-
+		
+		<result property="projectManagerId" column="PROJECT_MANAGER_ID" />
+		<result property="projectManagerName" column="PROJECT_MANAGER_NAME" />
 	</resultMap>
 
 	<select id="queryObject" resultMap="pmConfirmBidMap">
@@ -341,6 +342,13 @@
 		<if test="taxRate != null and taxRate!=''">
 			,TAX_RATE
 		</if>
+		<if test="projectManagerId != null and projectManagerId!=''">
+			,PROJECT_MANAGER_ID
+		</if>
+		<if test="projectManagerName != null and projectManagerName!=''">
+			,PROJECT_MANAGER_NAME
+		</if>
+		
 		,IS_DELETE
 
 		)
@@ -449,6 +457,13 @@
 		<if test="taxRate != null and taxRate!=''">
 			,#{taxRate}
 		</if>
+		<if test="projectManagerId != null and projectManagerId!=''">
+			,#{projectManagerId}
+		</if>
+		<if test="projectManagerName != null and projectManagerName!=''">
+			,#{projectManagerName}
+		</if>
+			
 		,'00'
 		)
 	</insert>
@@ -525,7 +540,12 @@
 			
 			<if test="taxRate != null and taxRate!=''">TAX_RATE = #{taxRate},</if>
 			
+			<if test="projectManagerId != null and projectManagerId!=''">PROJECT_MANAGER_ID = #{projectManagerId},</if>
+			
+			<if test="projectManagerName != null and projectManagerName!=''">PROJECT_MANAGER_NAME = #{projectManagerName},</if>
+			
 			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
+			
 		</set>
 		where BID_ID = #{bidId}
 	</update>
