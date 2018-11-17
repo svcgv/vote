@@ -148,7 +148,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  laydate.render({
 		    elem: "#predictPeriodDate",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
   
 	  function getParam(){

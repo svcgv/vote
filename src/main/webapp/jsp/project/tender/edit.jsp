@@ -205,12 +205,12 @@ $(function(){
 	  laydate.render({
 		    elem: "#predictPeriodStartDate-edit",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
 	  laydate.render({
 		    elem: "#predictPeriodEndDate-edit",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
 	 //var pmConfirmBid='${pmConfirmBid}';
 	 var pmConfirmBid = JSON.parse('${pmConfirmBid}');
@@ -286,6 +286,7 @@ $(function(){
         });
         
         demoListView.append(tr);
+        form.render();
       });
     }
     ,done: function(res, index, upload){

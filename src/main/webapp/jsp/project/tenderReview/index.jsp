@@ -110,12 +110,12 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  laydate.render({
 		    elem: "#predictPeriodStartDate-edit",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
     laydate.render({
         elem: "#predictPeriodEndDate-edit",
         theme: 'molv',
-        type: 'datetime'
+        
     });
     
     function getParam(){
