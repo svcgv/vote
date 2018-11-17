@@ -114,7 +114,7 @@ $(document).ready(function() {
 						pageNum : "${pageInfo.pageNum}",
 						pageSize : "${pageInfo.pageSize}",
 						pages : "${pageInfo.pages}",
-						url : "${ctx }/btnRole/ajaxQryBtnInfo.do"
+						url : "${ctx }/btn/ajaxQryBtnInfo.do"
 					}
 					$.indi.loadPages(pages);
 				</script>
