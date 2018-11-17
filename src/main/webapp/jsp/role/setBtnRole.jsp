@@ -121,13 +121,17 @@ $(document).ready(function() {
 					
 					var checkedRet=[];
 					$(".table-role-hook tbody").on("click",".j-checkbox",function(){
+						var roleId=$(this).next("input").val();
 						if($(this).is(":checked")){
-							var roleId=$(this).next("input").val();
 							checkedRet.push(roleId);
 							$.unique(checkedRet);
+						}else{
+							var index=$.inArray(roleId,checkedRet);
+							if(index > -1){
+								checkedRet.splice(index,1)
+							}
 						}
 					})
-					
 				</script>
 				</div>
 				<div class="row" align="center">
