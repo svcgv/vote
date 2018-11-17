@@ -17,8 +17,8 @@
     from profit_info a 
     left join org_info b on a.org_id =b.org_id
   	 <where>
-  		<if test="org_id != null and btnName !=0 ">
-  			 a.org_id = = #{org_id,jdbcType=DECIMAL}
+  		<if test="orgId != null and btnName !=0 ">
+  			 a.org_id = = #{orgId,jdbcType=DECIMAL}
   		</if>
   		
   	</where> 
