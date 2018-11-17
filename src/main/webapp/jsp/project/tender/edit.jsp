@@ -151,16 +151,20 @@
 		      </div>
 		    </div>
 	      
-	       <div class="file-hook" style="width:95%;margin:0 auto;">
+	       <div class="file-hook" style="width:95%;margin:60px 20px;">
 		      <div class="layui-upload">
+		      <div style="display:inline-block;width:100%;text-align:right">
 			  	<button type="button" class="layui-btn" id="wosUploads"><i class="layui-icon"></i>选择文件</button> 
-				  <div class="layui-upload-list">
+				<button type="button" class="layui-btn" id="wosListAction">开始上传</button>
+			  </div>
+			  	  <div class="layui-upload-list">
 				    <table class="layui-table">
 				      <thead>
 				        <tr><th>文件名</th>
 				        <th>大小</th>
 				        <th>状态</th>
 				        <th>操作</th>
+				        <th>文件类型</th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
 				      <!-- 反写已上传的数据 -->
@@ -170,13 +174,23 @@
 					      	<td>${fileInfo.fileSize}</td>
 					      	<td>已上传</td>
 					      	<td><a href='${fileInfo.filePath}' download="${fileInfo.fileUploadName}">下载</a></td>
+					      	<td>
+					      		<c:if test="${fileInfo.fileBusinessType=='00' }">
+									招标文件
+								</c:if>
+								<c:if test="${fileInfo.fileBusinessType=='01' }">
+									客户需求文件
+								</c:if>
+								<c:if test="${fileInfo.fileBusinessType=='02' }">
+									内部评审文件
+								</c:if>
+							</td>
 				      	</tr>
 				      	</c:forEach>
 				      </tbody>
 				    </table>
 				  </div>
-			  	<button type="button" class="layui-btn" id="wosListAction">开始上传</button>
-			 </div> 
+			   </div> 
 		  </div>
 	       <div class="layui-inline">
 	       		 <label class="layui-form-label">备注：</label>
@@ -205,12 +219,12 @@ $(function(){
 	  laydate.render({
 		    elem: "#predictPeriodStartDate-edit",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
 	  laydate.render({
 		    elem: "#predictPeriodEndDate-edit",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
 	 //var pmConfirmBid='${pmConfirmBid}';
 	 var pmConfirmBid = JSON.parse('${pmConfirmBid}');
@@ -263,15 +277,25 @@ $(function(){
       var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
       //读取本地文件
       obj.preview(function(index, file, result){
-        var tr = $(['<tr id="upload-'+ index +'">'
-          ,'<td>'+ file.name +'</td>'
-          ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
-          ,'<td>等待上传</td>'
-          ,'<td>'
-            ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
-            ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
-          ,'</td>'
-        ,'</tr>'].join(''));
+    	  var tr = $(['<tr id="upload-'+ index +'">'
+              ,'<td>'+ file.name +'</td>'
+              ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+              ,'<td>等待上传</td>'
+              ,'<td>'
+                ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+              ,'</td>'
+              ,'<td>'
+                ,' <div class="layui-input-inline">'
+               	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+    	          ,'<option value="">请选择</option>'
+    	        	,'<option value="00" selected>招标文件</option>'
+    	        	,'<option value="01">客户需求文件</option>'
+    	        	,'<option value="02" >内部评审文件</option>'
+    	        	,'</select>'
+      				,'</div>'
+              ,'</td>'
+            ,'</tr>'].join(''));
         
         //单个重传
         tr.find('.demo-reload').on('click', function(){
@@ -286,6 +310,7 @@ $(function(){
         });
         
         demoListView.append(tr);
+        form.render();
       });
     }
     ,done: function(res, index, upload){

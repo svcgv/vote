@@ -118,6 +118,7 @@
 				        <th>上传人</th>
 				        <th>上传时间</th>
 				        
+				        <th>文件类型</th>
 				        <th></th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
@@ -128,8 +129,19 @@
 						      <td>${app.usrName}</td>
 						      <td>${app.createTime}</td>
 						      
-						      	<td><a href="${app.filePath}" download='${app.fileUploadName }'>下载</a></td>
-					      	</tr>
+						      <td>
+					      		<c:if test="${app.fileBusinessType=='00' }">
+									招标文件
+								</c:if>
+								<c:if test="${app.fileBusinessType=='01' }">
+									客户需求文件
+								</c:if>
+								<c:if test="${app.fileBusinessType=='02' }">
+									内部评审文件
+								</c:if>
+							</td>
+							<td><a href="${app.filePath}" download='${app.fileUploadName }'>下载</a></td>
+						     </tr>
 						</c:forEach>
 				      </tbody>
 				    </table>
@@ -268,7 +280,7 @@ $(function(){
 	  laydate.render({
 		    elem: "#predictPeriodDate2",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
 	  table.render({
 	  	  	id:"reviewHisTable",

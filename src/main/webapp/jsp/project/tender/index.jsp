@@ -148,7 +148,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  laydate.render({
 		    elem: "#predictPeriodDate",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
   
 	  function getParam(){
@@ -370,7 +370,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 查看和修改 form 表单
 	*/
 	function showFromTable(isEdit,id){
-		var _width=800;
+		var _width=1000;
 		if(isEdit == "edit"){
 			var url='edit?act=edit&id='+id;
 			var title="修改投标信息";

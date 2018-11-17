@@ -167,6 +167,26 @@ public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 	/**
 	 * 
 	 */
+	private long projectManagerId;
+	private String projectManagerName;
+	
+	
+
+	public long getProjectManagerId() {
+		return projectManagerId;
+	}
+
+	public void setProjectManagerId(long projectManagerId) {
+		this.projectManagerId = projectManagerId;
+	}
+
+	public String getProjectManagerName() {
+		return projectManagerName;
+	}
+
+	public void setProjectManagerName(String projectManagerName) {
+		this.projectManagerName = projectManagerName;
+	}
 
 	private String createTime;
 	/**

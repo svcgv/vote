@@ -25,6 +25,8 @@ import org.springframework.stereotype.Controller;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.FileUtils;
 import com.indihx.util.UserUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.indihx.PmFile.entity.PmFileEntity;
 import com.indihx.PmFile.service.PmFileService;
 import com.indihx.comm.util.R;
@@ -99,8 +101,11 @@ public class PmFileController {
     }
     
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> pmFileUpload(@RequestParam("file") MultipartFile[] myfiles,@RequestParam("uploadType") String uploadType, HttpSession session) throws IOException{
+	public @ResponseBody Map<String, Object> pmFileUpload(@RequestParam("file") MultipartFile[] myfiles,@RequestParam("uploadType") String uploadType,@RequestParam("fileTypes") String fileTypes, HttpSession session) throws IOException{
     	UsrInfo usesr = UserUtil.getUser(session);
+    	if(fileTypes==null||"".equals(fileTypes)) {
+    		return R.error("请上传文件描述");
+    	}
     	List<Long> idList = new ArrayList<Long>();
     	PmFileEntity pmFile=new PmFileEntity();
     	pmFile.setCreatorId(usesr.getUsrId());
@@ -108,11 +113,20 @@ public class PmFileController {
     	pmFile.setUploadType(uploadType);
     	for(int i=0;i<myfiles.length;i++) {
     		pmFile.setFileSize(myfiles[i].getSize());
+    		List<Object> list = JSONObject.parseArray(fileTypes);
     		
     		pmFile.setFilePath(FileUtils.writeFile(myfiles[i]));;
     		pmFile.setFileUploadName(myfiles[i].getOriginalFilename());
+    		for(int o = 0;o<list.size();o++) {
+    			Map<String,Object> map = (Map<String, Object>) list.get(o);
+    			if(pmFile.getFileUploadName().equals(map.get("fileName"))) {
+    				pmFile.setFileBusinessType((String)map.get("fileType"));
+    			}
+    		}
     		pmFileService.insert(pmFile);
     		long id = pmFile.getFileId();
+    		
+    		
     		idList.add(id);
     	}
     	

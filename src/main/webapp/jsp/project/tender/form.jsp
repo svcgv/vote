@@ -173,9 +173,12 @@
 			        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="是|否">
 			    </div>
 	       </div> -->
-	       <div class="file-hook" style="width:95%;margin:0 auto;">
+	       <div class="file-hook" style="width:95%;margin:80px 10px;">
 		      <div class="layui-upload">
+		      <div style="display:inline-block;width:100%;text-align:right">
 			  	<button type="button" class="layui-btn" id="wosUploads"><i class="layui-icon"></i>选择文件</button> 
+			  	<button type="button" class="layui-btn" id="wosListAction">开始上传</button>
+		  	  </div>
 				  <div class="layui-upload-list">
 				    <table class="layui-table">
 				      <thead>
@@ -188,7 +191,6 @@
 				      <tbody id="wosFileList"></tbody>
 				    </table>
 				  </div>
-			  	<button type="button" class="layui-btn" id="wosListAction">开始上传</button>
 			 </div> 
 		  </div>
 		   
@@ -219,12 +221,12 @@ $(function(){
 	  laydate.render({
 		    elem: "#predictPeriodStartDate-edit",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
         laydate.render({
             elem: "#predictPeriodEndDate-edit",
             theme: 'molv',
-            type: 'datetime'
+            
         });
 		
 		function getParam(){
@@ -258,13 +260,26 @@ $(function(){
    		 $("#tender-addForm-hook .file-hook").hide();
    	 }
   });
+  function getFileTableParams(){
+	  var files=[]
+	  var tbody = document.getElementById('wosFileList')
+	  if(tbody.children){
+		  for(var i = 0;i<tbody.children.length;i++){
+			  var item={}
+			  item.fileName = tbody.children[i].children[0].innerText
+			  item.fileType = tbody.children[i].children[4].children[0].children[0].value
+			  files.push(item)
+		  }
+	  }
+	  return files;
+  }
   
 //多文件上传
   var demoListView = $('#wosFileList')
   ,uploadListIns = upload.render({
 	  before:function(obj){
-	    	this.data={uploadType:'00'}
-	    	console.log(this)
+	    	this.data={uploadType:'00',fileTypes:JSON.stringify(getFileTableParams())}
+	    	console.log('before',obj)
 	    },
     elem: '#wosUploads'
     ,url: '/vote/pmfile/upload'
@@ -273,6 +288,7 @@ $(function(){
     ,auto: false
     ,bindAction: '#wosListAction'
     ,choose: function(obj){   
+    	console.log('choose',obj)
       var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
       //读取本地文件
       obj.preview(function(index, file, result){
@@ -288,9 +304,9 @@ $(function(){
             ,' <div class="layui-input-inline">'
            	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
 	          ,'<option value="">请选择</option>'
-	        	,'<option value="01" selected>项目</option>'
-	        	,'<option value="02">产品</option>'
-	        	,'<option value="03" >人力</option>'
+	        	,'<option value="00" selected>招标文件</option>'
+	        	,'<option value="01">客户需求文件</option>'
+	        	,'<option value="02" >内部评审文件</option>'
 	        	,'</select>'
   				,'</div>'
           ,'</td>'
@@ -315,7 +331,7 @@ $(function(){
     }
     ,done: function(res, index, upload){
       if(res.code == 0){ //上传成功
-    	  fileIds = res.fileIds
+    	  fileIds.push(res.fileIds)
         var tr = demoListView.find('tr#upload-'+ index)
         ,tds = tr.children();
         tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
