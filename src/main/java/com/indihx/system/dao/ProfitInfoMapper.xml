@@ -5,8 +5,8 @@
   <cache type="com.indihx.cache.RedisCache" />
   <resultMap id="BaseResultMap" type="com.indihx.system.entity.ProfitInfo">
     
-    <result column="PROFIT_ID" jdbcType="VARCHAR" property="btnName" />
-    <result column="ORG_ID" jdbcType="DECIMAL" property="btnName" />
+    <result column="PROFIT_ID" jdbcType="VARCHAR" property="profitId" />
+    <result column="ORG_ID" jdbcType="DECIMAL" property="orgId" />
   </resultMap>
   <sql id="Base_Column_List">
     PROFIT_ID, ORG_ID
