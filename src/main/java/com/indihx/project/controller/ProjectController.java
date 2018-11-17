@@ -106,6 +106,17 @@ public class ProjectController extends AbstractBaseController {
         view.setViewName("/project/project/customer");
         return view;
     }
+    
+    
+    // 客户
+    @RequestMapping(value = "/project/costCode", method = RequestMethod.GET)
+    public ModelAndView costCodeFormView(@RequestParam("act") String act,@RequestParam("orgId") String orgId) {
+        ModelAndView view = new ModelAndView();
+        view.addObject("act", act);
+        view.addObject("orgId", orgId);
+        view.setViewName("/project/project/costCode");
+        return view;
+    }
 
     // 立项审批
     @RequestMapping(value = "/project/review", method = RequestMethod.GET)
