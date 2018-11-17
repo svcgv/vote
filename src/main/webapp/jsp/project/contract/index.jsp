@@ -29,7 +29,7 @@
 		      <label class="layui-form-label">合同名称：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="contractName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="hidden" name="contractId">
+		          <input type="hidden" name="contractCode">
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="contractNameQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -200,7 +200,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	    {fixed: 'right', title:'操作', toolbar: '#barDemo', width:250}
 	    ]],
 	    cellMinWidth:'90',
-	    page: true
+	    page: true,
+	    data:[{
+	    	contractCode:"123"
+	    }]
 	  });
 
 	/*
@@ -225,10 +228,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
-	    	showFromTable('edit',data.contractId);
+	    	showFromTable('edit',data.contractCode);
 	    }else if(obj.event === "view"){
 	    	// 查看
-	    	showFromTable('view',data.contractId);
+	    	showFromTable('view',data.contractCode);
 	    }
 	  });
 	/*

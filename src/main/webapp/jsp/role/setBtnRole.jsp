@@ -70,7 +70,7 @@ $(document).ready(function() {
 			<div class="row">
 				<div class="col-md-12">
 				<table
-					class="table table-bordered table-striped table-hover with-check table-paging">
+					class="table table-bordered table-striped table-hover with-check table-paging table-role-hook">
 					<thead>
 						<tr>
 							<th target_data="checkbox"><i class="icon-resize-vertical"></i>
@@ -88,7 +88,7 @@ $(document).ready(function() {
 						<c:forEach items="${listInfo}" var="btninfo" varStatus="btnSta">
 							<tr>
 									<!-- 主键 -->
-								<td ><input type="checkbox" 
+								<td><input type="checkbox" class="j-checkbox"
 								<c:if test="${btninfo.btnId eq btninfo.roleBtnId}" >
 								checked="checked"
 								</c:if>
@@ -115,8 +115,23 @@ $(document).ready(function() {
 						pageSize : "${pageInfo.pageSize}",
 						pages : "${pageInfo.pages}",
 						url : "${ctx }/btn/ajaxQryBtnInfo.do"
+						
 					}
 					$.indi.loadPages(pages);
+					
+					var checkedRet=[];
+					$(".table-role-hook tbody").on("click",".j-checkbox",function(){
+						var roleId=$(this).next("input").val();
+						if($(this).is(":checked")){
+							checkedRet.push(roleId);
+							$.unique(checkedRet);
+						}else{
+							var index=$.inArray(roleId,checkedRet);
+							if(index > -1){
+								checkedRet.splice(index,1)
+							}
+						}
+					})
 				</script>
 				</div>
 				<div class="row" align="center">
