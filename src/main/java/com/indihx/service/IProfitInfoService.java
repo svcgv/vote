@@ -1,5 +1,7 @@
 package com.indihx.service;
 
+import java.util.Map;
+
 import com.indihx.system.entity.ProfitInfo;
 
 /***
@@ -12,7 +14,7 @@ import com.indihx.system.entity.ProfitInfo;
 public interface IProfitInfoService {
 
 	
-	ProfitInfo queryProfitInfoByOrgId(Long orgId);
+	Map<String, Object> queryProfitInfoByOrgId(Long orgId);
 	
 	
 }
