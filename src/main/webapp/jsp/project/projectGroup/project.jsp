@@ -156,6 +156,7 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 	var win=$(".projectGroup-project-wrapper").getWindow();
 	$(".projectGroup-project-wrapper").on("click","#save-hook",function(){
 		// 遍历选中的CheckBox
+		console.log(testData)
         var tempArray=[];
         for(var i=0;i<ids.length;i++){
             for(var j=0;j<testData.length;j++){
@@ -164,6 +165,8 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
                 }
             }
         }
+        
+        console.log(tempArray)
         for(var k=0;k<tempArray.length;k++){
             var flag= true;
             for(var j in chosedProject){
@@ -223,48 +226,37 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 	*/
 	$("#project-query-form #userQuery").click(function(){
 		
-		var queryParams=$("#project-query-form").serialize();
-		console.log(queryParams)
+		
+		 var queryParams=$("#project-query-form").serializeObject();
 		 var newparam = {}
-		 for(var o in queryParams){
-			 if(queryParams[o]){
-				 newparam[o] = queryParams[o]
-			 }
-		 }
+ 		 for(var o in queryParams){
+ 			 if(queryParams[o]){
+ 				 newparam[o] = queryParams[o]
+ 			 }
+ 		 }
 		 
-		   $.ajax({
-               type: 'POST',
-               url: '/vote/pmprojectinfo/list',
-               data: JSON.stringify(newparam),
-               contentType:'application/json',
-               success: function(res){
-                   testData=res.page;
-                   table.render({
-                       elem: '#projectTable-all',
-                       height:'250',
-                       cols: [[
-                 	      {type: 'checkbox' },
-                 	      {field:'projectId', title:'项目编号', templet:function(d){
-                 	    	  var jsonStr = JSON.stringify(d);
-                 	    	  return '<div class="jsonData" dataStr='+jsonStr+'>'+d.projectId+'</div>'
-                 	      } },
-                 	      {field:'projectName', title:'项目名称'}
-                 	    ]],
-                       cellMinWidth:'90',
-                       data:testData,
-                       page: true
-                   });},
-               dataType: "json"
-           });
+			table.reload('projectTable-all',{
+				 url: '/vote/pmprojectinfo/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+				 method:'post',
+					where:{
+						queryStr:JSON.stringify(newparam)
+					},
+					contentType: 'application/json',
+				    response: {
+				    	dataName: 'page'
+				    },
+					done:function(res){
+						console.log(res)
+						testData = res.page;
+					}
+			})
 	});
 	
 });
 	
 });
 
-
-
 </script>
-
-
-

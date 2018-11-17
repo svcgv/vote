@@ -154,41 +154,22 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
  			 }
  		 }
 		 
-		 $.ajax({
-			  type: 'POST',
-			  url: '/vote/pmprojectgroupinfo/list',
-			  data: JSON.stringify(newparam),
-			  contentType:'application/json',
-			  success: function(res){
-
-				 testData=res.page
-			      table.render({
-			  	  	id:"customer-table",
-			  	    elem: '#projectGroupIndexTable',
-			  	    //url:'custom.json',
-			  	    toolbar: '#toolbarDemo',
-			  	    height:'full-200',
-			  	    title: '项目群数据表',
-			  	    cols: [[
-						  {type: 'checkbox', fixed: 'left'},
-				  	      {field:'projectGroupId', title:'项目群编号', width:130},
-				  	      {field:'projectGroupName', title:'项目群名称', width:130},
-				  	      {field:'groupCreatorName', title:'项目群创建人' },
-				  	      {field:'groupCreateTime', title:'项目群创建时间' },
-				  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
-			  	    ]],
-			  	    cellMinWidth:'100',
-			  	    data:testData,
-			  	    page: true
-			  	  	});
-			  
-			  },
-			  dataType: "json"
-			})
-			
-			
-			
-			
+		 
+			table.reload('customer-table',{
+				 url: '/vote/pmprojectgroupinfo/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+				 method:'post',
+					where:JSON.stringify(newparam),
+					contentType: 'application/json',
+				    response: {
+				    	dataName: 'page'
+				    },
+					done:function(res){
+						console.log(res)
+					}
+			})	
 		
 	}); 
 	

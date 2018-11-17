@@ -91,7 +91,7 @@ $(function(){
 		$(".projectGroup-form-wrapper").on("click","#projectGroup-add-hook",function(){
 			
 			var projectGroupName = $("#form-project-hook input[name='projectGroupName']").val();
-			  
+			
 			 if ($.trim(projectGroupName) == '') {
                   layer.msg("请输入项目群名称");
                   return false;
@@ -113,8 +113,6 @@ $(function(){
                  data: JSON.stringify(data),
                  contentType: 'application/json',
                  success: function (res) {
-                     // table.reload('customer-table');
-                     location.reload();
                      layer.msg("新增成功", {icon: 1});
                      win.close();
                  },

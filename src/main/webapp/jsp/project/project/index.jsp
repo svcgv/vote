@@ -376,29 +376,22 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
  			 }
  		 }
 		 
-		 $.ajax({
-			  type: 'POST',
-			  url: '/vote/pmprojectinfo/list',
-			  data: JSON.stringify(newparam),
-			  contentType:'application/json',
-			  success: function(res){
-
-				 testData=res.page
-			      table.render({
-			  	  	id:"customer-table",
-			  	    elem: '#projectIndexTable',
-			  	    //url:'custom.json',
-			  	    toolbar: '#toolbarDemo',
-			  	    height:'full-200',
-			  	    title: '投标据表',
-			  	    cols: col	,
-			  	    cellMinWidth:'100',
-			  	    data:testData,
-			  	    page: true
-			  	  	});
-			  
-			  },
-			  dataType: "json"
+			table.reload('customer-table',{
+				 url: '/vote/pmprojectinfo/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+				 method:'post',
+					where:{
+						queryStr:JSON.stringify(newparam)
+					},
+					contentType: 'application/json',
+				    response: {
+				    	dataName: 'page'
+				    },
+					done:function(res){
+						console.log(res)
+					}
 			})
 	}); 
 	

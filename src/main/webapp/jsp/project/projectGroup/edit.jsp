@@ -105,8 +105,8 @@ layui.use(['layer', 'form','table'], function(){
 		// 保存
 		$(".projectGroup-form-wrapper").on("click","#projectGroup-add-hook",function(){
 			
-			var projectGroupName = $("#form-edit-hook input[name='projectGroupName']").val();
-			  
+			var projectGroupName = $("#edit-project-hook input[name='projectGroupName']").val();
+
 			 if ($.trim(projectGroupName) == '') {
                   layer.msg("请输入项目群名称");
                   return false;
@@ -128,8 +128,6 @@ layui.use(['layer', 'form','table'], function(){
                  data: JSON.stringify(data),
                  contentType: 'application/json',
                  success: function (res) {
-                     // table.reload('customer-table');
-                     location.reload();
                      layer.msg("新增成功", {icon: 1});
                      win.close();
                  },
