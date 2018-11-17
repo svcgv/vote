@@ -95,11 +95,13 @@ layui.use(['layer', 'form','laydate','table'], function(){
 		 		console.log(sapCode);
 		 		console.log(custId);
 				if(act == "index"){
-					$("#contract-index-form input[name='customerName']").val(custCnName);
-					$("#contract-index-form input[name='customerId']").val(custId);
+					$("#contract-index-form input[name='custName']").val(custCnName);
+					$("#contract-index-form input[name='custId']").val(custId);
+                    $("#contract-index-form input[name='custSapCode']").val(sapCode);
 			 	}else if(act =="form"){ //编辑 修改 页面
-			 		 $("#contract-addForm-hook input[name='customerName']").val(custCnName);
-			 		 $("#contract-addForm-hook input[name='customerId']").val(custCnName);
+                    $("#contract-addForm-hook input[name='custName']").val(custCnName);
+                    $("#contract-addForm-hook input[name='custId']").val(custId);
+                    $("#contract-addForm-hook input[name='custSapCode']").val(sapCode);
 			 	}
 			}
 		});
