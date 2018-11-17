@@ -221,12 +221,12 @@ $(function(){
 	  laydate.render({
 		    elem: "#predictPeriodStartDate-edit",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
         laydate.render({
             elem: "#predictPeriodEndDate-edit",
             theme: 'molv',
-            type: 'datetime'
+            
         });
 		
 		function getParam(){

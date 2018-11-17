@@ -280,7 +280,7 @@ $(function(){
 	  laydate.render({
 		    elem: "#predictPeriodDate2",
 		    theme: 'molv',
-		    type: 'datetime'
+		    
 	 });
 	  table.render({
 	  	  	id:"reviewHisTable",
