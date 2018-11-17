@@ -181,6 +181,22 @@ $(function(){
 		 
 	// form 表单手动渲染
 	  form.render();
+        //输入值变更
+        $(document).on('change', '#contract-addForm-hook input[name="contractAmount"]', function(data) {
+            var amount = $("#contract-addForm-hook input[name='contractAmount']").val();
+            var tax = $("#contract-addForm-hook input[name='taxRate']").val();
+            var afterAmount = amount*(1-tax/100);
+            $("#contract-addForm-hook input[name='afterTaxContractAmount']").val(afterAmount);
+        });
+        //输入值变更
+        $(document).on('change', '#contract-addForm-hook input[name="taxRate"]', function(data) {
+            var amount = $("#contract-addForm-hook input[name='contractAmount']").val();
+            var tax = $("#contract-addForm-hook input[name='taxRate']").val();
+            var afterAmount = amount*(1-tax/100);
+            $("#contract-addForm-hook input[name='afterTaxContractAmount']").val(afterAmount);
+        });
+
+
 	  $("#contract-addForm-hook #payDeptNameQuery-form").click(function(){
 		  $.openWindow({
 		  		url:'org?act=form',

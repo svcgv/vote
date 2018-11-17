@@ -210,18 +210,18 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    var data = obj.data;
 	    if(obj.event === 'del'){
 	      layer.confirm('确认删除行么', function(index){
-	    	  $.ajax({
-				  type:"POST",
-				  //url:"/vote/pmconfirmbid/update",
-				  //data:JSON.stringify({'bidId':data.bidId,'isDelete':'01'}),
-				  contentType:'application/json',
-				  success:function(data){
-					  table.reload('customer-table');
-				  }
-			  }); 
-	        obj.del();
+              $.ajax({
+                  type:"POST",
+                  url:"/vote/pmcontractinfo/update",
+                  data:JSON.stringify({'contractId':data.contractId,'isDelete':'01'}),
+                  contentType:'application/json',
+                  success:function(data){
+                      table.reload('customer-table');
+                  }
+              });
+              obj.del();
 	        layer.close(index);
-	        table.reload('customer-table',{});
+//	        table.reload('customer-table',{});
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
@@ -237,7 +237,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	 $("#customQuery").click(function(){
 		 console.log("test");
 		 table.reload('customer-table',{
-				url:'/vote/pmconfirmbid/list',
+				url:'/vote/pmcontractinfo/list',
 				page:{
 					curr:1 //从第一页开始
 				},

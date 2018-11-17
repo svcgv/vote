@@ -24,6 +24,7 @@
 		      <label class="layui-form-label">合同编号：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="contractCode"  autocomplete="off" class="layui-input form-control">
+				   <input type="text" style='display:none' name="contractId" autocomplete="off" value="1" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
@@ -51,7 +52,7 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label" style="width:140px!important;">税后合同金额（元）：</label>
 		       <div class="layui-input-inline">
-		         <input type="number" name="afterTaxContractAmount"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="afterTaxContractAmount" readonly autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 			  
@@ -78,24 +79,24 @@
 		      <div class="layui-inline">
 			   <label class="layui-form-label" style="width:80px!important;">客户经理：</label>
 			   <div class="layui-input-inline">
-				   <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
-				   <input type="text" style='display:none' name="custId">
-				   <input type="text" style='display:none' name="custSapCode">
+				   <input type="text" name="custManagerName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+				   <input type="text" style='display:none' name="custManagerId">
 			   </div>
 			   <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-form"><i class="layui-icon layui-icon-search"></i></button>
 		   </div>
 		    <div class="layui-inline" style="margin-right:0px;">
 		       <label class="layui-form-label" style="width:80px!important;">客户名称：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="customerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="customerId">
+		          <input type="text" name="custName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+				   <input type="text" style='display:none' name="custId">
+				   <input type="text" style='display:none' name="custSapCode">
 		      </div>
 	      	  <button type="button"  class="layui-btn layui-btn-sm" id="customerQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    <div class="layui-inline" style="margin-right: 0px;">
 		      <label class="layui-form-label" style="width:110px!important;">OA流程编号：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="OAFlow"  autocomplete="off" class="layui-input form-control">
+		          <input type="text" name="oaFlowCode"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    <div class="layui-inline" style="">
@@ -126,6 +127,12 @@
 					  <input type="text" name="signContractDate" id="signContractDate-form" autocomplete="off" class="layui-input form-control hasDatepicker">
 				  </div>
 			  </div>
+			 <div class="layui-inline">
+				 <label class="layui-form-label">备注：</label>
+				 <div class="layui-input-inline" style="width:323px;">
+					 <textarea name="remark"  class="layui-textarea form-control"></textarea>
+				 </div>
+			 </div>
 	     </div>
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
@@ -153,6 +160,15 @@ $(function(){
             elem: "#signContractDate-form",
             theme: 'molv'
         });
+
+        var pmContract = JSON.parse('${pmContract}');
+        console.log(pmContract);
+        for (var property in pmContract) {
+            $("#contract-addForm-hook input[name='"+property+"']").val(pmContract[property]);
+            if(property=='remark'){
+                $("#contract-addForm-hook textarea[name='"+property+"']").val(pmContract[property]);
+            }
+        }
 		
 		function getParam(){
 			var queryParams=$("#contract-addForm-hook form").serializeObject();
@@ -176,6 +192,22 @@ $(function(){
 		 
 	// form 表单手动渲染
 	  form.render();
+
+        //输入值变更
+        $(document).on('change', '#contract-addForm-hook input[name="contractAmount"]', function(data) {
+            var amount = $("#contract-addForm-hook input[name='contractAmount']").val();
+			var tax = $("#contract-addForm-hook input[name='taxRate']").val();
+			var afterAmount = amount*(1-tax/100);
+            $("#contract-addForm-hook input[name='afterTaxContractAmount']").val(afterAmount);
+        });
+        //输入值变更
+        $(document).on('change', '#contract-addForm-hook input[name="taxRate"]', function(data) {
+            var amount = $("#contract-addForm-hook input[name='contractAmount']").val();
+            var tax = $("#contract-addForm-hook input[name='taxRate']").val();
+            var afterAmount = amount*(1-tax/100);
+            $("#contract-addForm-hook input[name='afterTaxContractAmount']").val(afterAmount);
+        });
+
 	  $("#contract-addForm-hook #payDeptNameQuery-form").click(function(){
 		  $.openWindow({
 		  		url:'org?act=form',
@@ -203,17 +235,17 @@ $(function(){
 		var win=$("#contract-addForm-hook").getWindow();
 		// 保存
 		$("#contract-addForm-hook #contract-add-hook").click(function(){
-			
-			var customerGroupName=$("#contract-addForm-hook input[name='bidName']").val();
+
+            var customerGroupName=$("#contract-addForm-hook input[name='contractName']").val();
 			if($.trim(customerGroupName) ==''){
-				layer.msg("请输入项目名称");
+				layer.msg("请输入合同名称");
 				return false;
 			}
 			
 			
 			$.ajax({
 				type:'POST',
-				url:'/vote/pmconfirmbid/save',
+				url:'/vote/pmcontractinfo/update',
 				contentType:'application/json',
 				data: JSON.stringify(getParam()),
 				success:function(res){

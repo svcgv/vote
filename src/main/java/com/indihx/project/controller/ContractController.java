@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.indihx.PmContractInfo.entity.PmContractInfoEntity;
+import com.indihx.PmContractInfo.service.PmContractInfoService;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -54,6 +56,8 @@ public class ContractController extends AbstractBaseController{
     private PmConfirmBidService pmConfirmBidService;
     @Autowired
     private PmFileService pmFileService;
+	@Autowired
+	private PmContractInfoService pmContractInfoService;
 	
 	@RequestMapping("/contract/index")
 	public ModelAndView addCustomView() {
@@ -83,12 +87,8 @@ public class ContractController extends AbstractBaseController{
 	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
 		ModelAndView view = new ModelAndView();
 		
-		PmConfirmBidEntity entity = pmConfirmBidService.queryObject(id);
-		Map<String,Object> maps = new HashMap<String,Object>();
-		maps.put("foreignId", id);
-		maps.put("isDelete", "00");
-		view.addObject("file",pmFileService.queryList(maps));
-		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
+		PmContractInfoEntity entity = pmContractInfoService.queryObject(id);
+		view.addObject("pmContract",JSON.toJSONString(entity));
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
 		
@@ -101,14 +101,9 @@ public class ContractController extends AbstractBaseController{
 	@RequestMapping(value="/contract/view",method=RequestMethod.GET)
 	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
 		ModelAndView view = new ModelAndView();
-		
-		PmConfirmBidEntity entity = pmConfirmBidService.queryObject(id);
-		Map<String,Object> maps = new HashMap<String,Object>();
-		maps.put("foreignId", id);
-		maps.put("isDelete", "00");
-		List<PmFileEntity> pmFiles = pmFileService.queryList(maps);
-		view.addObject("file",pmFiles);
-		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
+
+		PmContractInfoEntity entity = pmContractInfoService.queryObject(id);
+		view.addObject("pmContract",JSON.toJSONString(entity));
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
 		
