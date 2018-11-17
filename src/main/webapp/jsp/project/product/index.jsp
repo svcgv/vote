@@ -2,7 +2,7 @@
 <%@ include file="/resources/admincp/layouts/main.jsp"%>
 <body>
 <style>
-.layui-form-label{width:100px!important;}
+.layui-form-label{width:100px!important;padding:8px 5px;}
 </style>
 <div class="product-info-wrapper">
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
@@ -34,7 +34,7 @@
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">指导销售价(元)：</label>
+		      <label class="layui-form-label" style="width:110px!important;">指导销售价(元)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="productSuggestPrice"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -51,15 +51,13 @@
 		    <%--</div>--%>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">研发部门：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="developmentDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
-		          <input type="text" style='display:none' name="developmentDeptId">
-		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
-		    </div>
+		      	<label class="layui-form-label">研发部门：</label>
+			       <div class="layui-input-inline">
+			          <input type="text" name="developmentDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
+			          <input type="text" style='display:none' name="developmentDeptId">
+			       </div>
+	      	 	<button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+	        </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">研发负责人：</label>
 		       <div class="layui-input-inline">
