@@ -1,7 +1,8 @@
 package com.indihx.service;
 
 import java.util.List;
-import java.util.Map;
+
+import com.indihx.system.entity.CostInfo;
 
 
 
@@ -14,11 +15,6 @@ import java.util.Map;
  */
 public interface ICostInfoService {
 	
-	
-	
-	
-	//public List<CostInfo> qryCostInfoListByOrgId(Long orgId);
-	
-	public List<Map<String,Object>> qryCostInfoListByOrgId(Long orgId);
+	public List<CostInfo> qryCostInfoListByOrgId(Long orgId);
 
 }
