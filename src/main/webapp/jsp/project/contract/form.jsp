@@ -16,6 +16,9 @@
 	position:relative;
 	top:1px;
 }
+.layui-table tbody tr:hover{
+	background:#fff;
+}
 </style>
 <div id="contract-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
@@ -78,24 +81,24 @@
 		      <div class="layui-inline">
 			   <label class="layui-form-label" style="width:80px!important;">客户经理：</label>
 			   <div class="layui-input-inline">
-				   <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
-				   <input type="text" style='display:none' name="custId">
-				   <input type="text" style='display:none' name="custSapCode">
+				   <input type="text" name="custManagerName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+				   <input type="text" style='display:none' name="custManagerId">
 			   </div>
 			   <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-form"><i class="layui-icon layui-icon-search"></i></button>
 		   </div>
 		    <div class="layui-inline" style="margin-right:0px;">
 		       <label class="layui-form-label" style="width:80px!important;">客户名称：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="customerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="customerId">
+		          <input type="text" name="custName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="text" style='display:none' name="custId">
+				   <input type="text" style='display:none' name="custSapCode">
 		      </div>
 	      	  <button type="button"  class="layui-btn layui-btn-sm" id="customerQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    <div class="layui-inline" style="margin-right: 0px;">
 		      <label class="layui-form-label" style="width:110px!important;">OA流程编号：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="OAFlow"  autocomplete="off" class="layui-input form-control">
+		          <input type="text" name="oaFlowCode"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    <div class="layui-inline" style="">
@@ -126,7 +129,64 @@
 					  <input type="text" name="signContractDate" id="signContractDate-form" autocomplete="off" class="layui-input form-control hasDatepicker">
 				  </div>
 			  </div>
+			 <div class="layui-inline">
+				 <label class="layui-form-label">备注：</label>
+				 <div class="layui-input-inline" style="width:323px;">
+					 <textarea name="remark"  class="layui-textarea form-control"></textarea>
+				 </div>
+			 </div>
 	     </div>
+      <div class="layui-form-item" style="margin-bottom:0px;">
+      	<div class="layui-inline" style="width:98%;">
+		      <label class="layui-form-label">收款点信息：</label>
+		       <div class="layui-input-inline">
+	         	<button type="button"  class="layui-btn layui-btn-sm" id="addPayList-form" ><i class="layui-icon"></i>新增收款点</button>
+		      </div>
+	    </div>
+      </div>
+      <table class="layui-table palyListTable" style="width:95%;margin-left:10px;;" >
+	      <thead>
+	        <tr>
+	        	<th style="white-space: nowrap;">序号</th>
+		        <th>收款日期</th>
+		        <th>收款金额</th>
+		        <th>收款比例（%）</th>
+		        <th>收款要求</th>
+		        <th>收款编号</th>
+	      	</tr>
+	      </thead>
+		      <tbody class="payList">
+		     	  <tr class="listTmpl" style="display:none;">
+		        	 <th class="paySortNum">1</th>
+			         <th>
+			        	<div class="layui-input-inline">
+			        		<input type="text" name="paymentDate" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
+				      	</div>
+				     </th>
+			        <th>
+			        	<div class="layui-input-inline">
+					         <input type="number" name="paymentAmount"  autocomplete="off" class="layui-input form-control">
+				      	</div>
+				     </th>
+				     <th>
+			        	<div class="layui-input-inline">
+					         <input type="number" name="paymentRate" style="width:90px;" autocomplete="off" class="layui-input form-control">
+				      	</div>
+				     </th>
+				     <th>
+			        	<div class="layui-input-inline">
+					         <input type="text" name="payRequirement" style="min-width:250px;" autocomplete="off" class="layui-input form-control">
+				      	</div>
+				     </th>
+				     <th>
+			        	<div class="layui-input-inline">
+					         <input type="text" name="payWbsCode" autocomplete="off" class="layui-input form-control">
+				      	</div>
+				     </th>
+		      	 </tr>
+		     	
+		      </tbody>
+		</table>
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
     	<a class="layui-layer-btn0" id="contract-add-hook" style="background:#009688;border-color:#009688;">保存</a>
@@ -152,26 +212,42 @@ $(function(){
             elem: "#signContractDate-form",
             theme: 'molv'
         });
-		
-		function getParam(){
-			var queryParams=$("#contract-addForm-hook form").serializeObject();
-			 var newParam = {}
-			  for(var i in queryParams){
-				  if(queryParams[i]){
-					  newParam[i] = queryParams[i]
-				  }
-			  }
-			 if(fileIds){
-				 newParam.fileIds=fileIds.join(',')
-			 }
-			 if(queryParams.open=='on'){
-				 newParam.isWorkAreaExplicit='00'
-			 }
-			 else{
-				 newParam.isWorkAreaExplicit='01'
-			 }
-			  return newParam
-		}
+        // 绑定日历组件
+        $(".palyListTable").on("mousedown",".paymentDate-hook",function(){
+        	var _this=this;
+        	 laydate.render({
+                 elem: _this,
+                 theme: 'molv',
+                 type: 'month'
+             });
+        })
+		// 新增付款点
+        $("#contract-addForm-hook #addPayList-form").click(function(){
+        	var tmpl=$(".palyListTable .listTmpl").clone(true);
+        	var num =$(".payList tr:not('.listTmpl')").length;
+        		$(tmpl).removeClass("listTmpl").show().find(".paySortNum").text(num+1);
+        	$(".palyListTable .payList").append(tmpl);
+        	win.resize();
+        	
+        })
+        // 比例金额互换
+         $("#contract-addForm-hook .palyListTable").on("keyup","input[name='paymentAmount']",function(){
+       	  		var _account=$(this).val();
+       	  		console.log(_account)
+       	  		if(_account !=''){
+       	  			 var max=100000;
+       	  			 var rate=_account/max;
+       	  			$(this).parents("th").next("th").find("input[name='paymentRate']").val(rate.toFixed(2));
+       	  		}
+         });
+         $("#contract-addForm-hook .palyListTable").on("keyup","input[name='paymentRate']",function(){
+       	  		var rate=$(this).val();
+       	  		if(rate !=''){
+       	  			 var max=100000;
+       	  			 var account=rate * max;
+       	  			$(this).parents("th").prev("th").find("input[name='paymentAmount']").val(account.toFixed(2));
+       	  		}
+         });
 		 
 	// form 表单手动渲染
 	  form.render();
@@ -198,21 +274,39 @@ $(function(){
 		  		width:"700"
 		 	 });
 		});
-	  
+	  function getParam(){
+			var queryParams=$("#contract-addForm-hook form").serializeObject();
+			 var newParam = {}
+			  for(var i in queryParams){
+				  if(queryParams[i]){
+					  newParam[i] = queryParams[i]
+				  }
+			  }
+			 if(fileIds){
+				 newParam.fileIds=fileIds.join(',')
+			 }
+			 if(queryParams.open=='on'){
+				 newParam.isWorkAreaExplicit='00'
+			 }
+			 else{
+				 newParam.isWorkAreaExplicit='01'
+			 }
+			  return newParam
+		}
 		var win=$("#contract-addForm-hook").getWindow();
 		// 保存
 		$("#contract-addForm-hook #contract-add-hook").click(function(){
 			
-			var customerGroupName=$("#contract-addForm-hook input[name='bidName']").val();
+			var customerGroupName=$("#contract-addForm-hook input[name='contractName']").val();
 			if($.trim(customerGroupName) ==''){
-				layer.msg("请输入项目名称");
+				layer.msg("请输入合同名称");
 				return false;
 			}
 			
 			
 			$.ajax({
 				type:'POST',
-				url:'/vote/pmconfirmbid/save',
+				url:'/vote/pmcontractinfo/save',
 				contentType:'application/json',
 				data: JSON.stringify(getParam()),
 				success:function(res){

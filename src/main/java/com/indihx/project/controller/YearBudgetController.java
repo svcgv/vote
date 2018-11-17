@@ -142,5 +142,19 @@ public class YearBudgetController extends AbstractBaseController{
 		view.setViewName("/project/yearBudget/product");
 		return view;
 	}
+	// trTmpl 根据 客户ID 和客户名称 查 项目 。。。。
+	@RequestMapping(value="/yearBudget/trTempl",method=RequestMethod.GET)
+	public ModelAndView trTemplFormView(@RequestParam("custName") String custName,@RequestParam("custId") String custId) {
+		ModelAndView view = new ModelAndView();
+		view.addObject("custName",custName);
+		view.addObject("custId",custId);
+		
+		view.setViewName("/project/yearBudget/trTempl");
+		return view;
+	}
+	
+	
+	
+	
 	
 }

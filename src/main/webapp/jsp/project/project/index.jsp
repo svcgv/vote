@@ -160,6 +160,8 @@
 </script>
 
 <script type="text/javascript">
+
+var testData=[];
 var col=[
 	[
   	  
@@ -318,32 +320,12 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   table.render({
 	  	id:"customer-table",
 	  elem: '#projectIndexTable',
-	    url:'custom.json',
 	    toolbar: '#toolbarDemo',
 	    height:'full-200',
 	    title: '投标数据表',
 	  cols: col,
 	   cellMinWidth:'120',
-	   data:[
-	    	{
-	    		projectId:"pro-01",
-	    		buildDeptName:"实施部门",
-	    		custName:'交通银行 ',
-	    		projectType:'整包',
-	    		predictContractAmount:'2000000000',
-	    		profitRate:'12%',
-	    		allIncomming:'120000',
-	    	},
-	    	{
-	    		projectId:"pro-01",
-	    		buildDeptName:"实施部门",
-	    		custName:'交通银行 ',
-	    		projectType:'整包',
-	    		predictContractAmount:'2000000000',
-	    		profitRate:'12%',
-	    		allIncomming:'120000',
-	    	}
-	    	],
+	   data:testData,
 	   page: true
 	 });
 
@@ -456,7 +438,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	}
 	
 });
-var testData=[];
+
 </script>
 </body>
 </html>

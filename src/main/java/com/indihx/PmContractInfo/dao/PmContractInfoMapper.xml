@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmContractInfo.dao.PmContractInfoMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmContractInfo.entity.PmContractInfoEntity" id="pmContractInfoMap">
+        <result property="contractId" column="CONTRACT_ID"/>
+        <result property="contractCode" column="CONTRACT_CODE"/>
+        <result property="contractName" column="CONTRACT_NAME"/>
+        <result property="contractAmount" column="CONTRACT_AMOUNT"/>
+        <result property="taxRate" column="TAX_RATE"/>
+        <result property="afterTaxContractAmount" column="AFTER_TAX_CONTRACT_AMOUNT"/>
+        <result property="contractStartTime" column="CONTRACT_START_TIME"/>
+        <result property="contractEndTime" column="CONTRACT_END_TIME"/>
+        <result property="signContractDate" column="SIGN_CONTRACT_DATE"/>
+        <result property="isAgree" column="IS_AGREE"/>
+        <result property="yearNumer" column="YEAR_NUMER"/>
+		<result property="sellDeptId" column="SELL_DEPT_ID" />
+        <result property="sellDeptName" column="SELL_DEPT_NAME"/>
+		<result property="custManagerId" column="CUST_MANAGER_ID" />
+        <result property="custManagerName" column="CUST_MANAGER_NAME"/>
+        <result property="oaFlowCode" column="OA_FLOW_CODE"/>
+        <result property="companyCode" column="COMPANY_CODE"/>
+        <result property="custId" column="CUST_ID"/>
+        <result property="custSapCode" column="CUST_SAP_CODE"/>
+        <result property="custName" column="CUST_NAME"/>
+        <result property="remark" column="REMARK"/>
+        <result property="isDelete" column="IS_DELETE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="creatorId" column="CREATOR_ID"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="modifier" column="MODIFIER"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmContractInfoMap">
+		select * from PM_CONTRACT_INFO where CONTRACT_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmContractInfoMap">
+		select 
+		*
+		 from PM_CONTRACT_INFO
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="contractId != null and contractId!=''"  >
+				CONTRACT_ID = #{contractId} AND 			</if>
+						<if test="contractCode != null and contractCode!=''"  >
+				CONTRACT_CODE = #{contractCode} AND 			</if>
+						<if test="contractName != null and contractName!=''"  >
+				CONTRACT_NAME = #{contractName} AND 			</if>
+						<if test="contractAmount != null and contractAmount!=''"  >
+				CONTRACT_AMOUNT = #{contractAmount} AND 			</if>
+						<if test="taxRate != null and taxRate!=''"  >
+				TAX_RATE = #{taxRate} AND 			</if>
+						<if test="afterTaxContractAmount != null and afterTaxContractAmount!=''"  >
+				AFTER_TAX_CONTRACT_AMOUNT = #{afterTaxContractAmount} AND 			</if>
+						<if test="contractStartTime != null and contractStartTime!=''"  >
+				CONTRACT_START_TIME = #{contractStartTime} AND 			</if>
+						<if test="contractEndTime != null and contractEndTime!=''"  >
+				CONTRACT_END_TIME = #{contractEndTime} AND 			</if>
+						<if test="signContractDate != null and signContractDate!=''"  >
+				SIGN_CONTRACT_DATE = #{signContractDate} AND 			</if>
+						<if test="isAgree != null and isAgree!=''"  >
+				IS_AGREE = #{isAgree} AND 			</if>
+			 <if test="sellDeptId != null and sellDeptId!=''">
+				 SELL_DEPT_ID =
+				 #{sellDeptId} AND
+			 </if>
+			 <if test="custManagerId != null and custManagerId!=''">
+				 CUST_MANAGER_ID = #{custManagerId} AND
+			 </if>
+						<if test="yearNumer != null and yearNumer!=''"  >
+				YEAR_NUMER = #{yearNumer} AND 			</if>
+						<if test="sellDeptName != null and sellDeptName!=''"  >
+				SELL_DEPT_NAME = #{sellDeptName} AND 			</if>
+						<if test="custManagerName != null and custManagerName!=''"  >
+				CUST_MANAGER_NAME = #{custManagerName} AND 			</if>
+						<if test="oaFlowCode != null and oaFlowCode!=''"  >
+				OA_FLOW_CODE = #{oaFlowCode} AND 			</if>
+						<if test="companyCode != null and companyCode!=''"  >
+				COMPANY_CODE = #{companyCode} AND 			</if>
+						<if test="custId != null and custId!=''"  >
+				CUST_ID = #{custId} AND 			</if>
+						<if test="custSapCode != null and custSapCode!=''"  >
+				CUST_SAP_CODE = #{custSapCode} AND 			</if>
+						<if test="custName != null and custName!=''"  >
+				CUST_NAME = #{custName} AND 			</if>
+						<if test="remark != null and remark!=''"  >
+				REMARK = #{remark} AND 			</if>
+						<if test="isDelete != null and isDelete!=''"  >
+				IS_DELETE = #{isDelete} AND 			</if>
+						<if test="createTime != null and createTime!=''"  >
+				CREATE_TIME = #{createTime} AND 			</if>
+						<if test="creatorId != null and creatorId!=''"  >
+				CREATOR_ID = #{creatorId} AND 			</if>
+						<if test="modifyTime != null and modifyTime!=''"  >
+				MODIFY_TIME = #{modifyTime} AND 			</if>
+						<if test="modifier != null and modifier!=''"  >
+				MODIFIER = #{modifier}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from PM_CONTRACT_INFO 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmContractInfo.entity.PmContractInfoEntity">
+		insert into PM_CONTRACT_INFO
+		(
+		CONTRACT_ID
+			<if test="contractCode != null and contractCode!=''">
+				,CONTRACT_CODE	
+			</if>
+		
+			<if test="contractName != null and contractName!=''">
+				,CONTRACT_NAME	
+			</if>
+		
+			<if test="contractAmount != null and contractAmount!=''">
+				,CONTRACT_AMOUNT	
+			</if>
+		
+			<if test="taxRate != null and taxRate!=''">
+				,TAX_RATE	
+			</if>
+		
+			<if test="afterTaxContractAmount != null and afterTaxContractAmount!=''">
+				,AFTER_TAX_CONTRACT_AMOUNT	
+			</if>
+		
+			<if test="contractStartTime != null and contractStartTime!=''">
+				,CONTRACT_START_TIME	
+			</if>
+		
+			<if test="contractEndTime != null and contractEndTime!=''">
+				,CONTRACT_END_TIME	
+			</if>
+		
+			<if test="signContractDate != null and signContractDate!=''">
+				,SIGN_CONTRACT_DATE	
+			</if>
+		
+			<if test="isAgree != null and isAgree!=''">
+				,IS_AGREE	
+			</if>
+		
+			<if test="yearNumer != null and yearNumer!=''">
+				,YEAR_NUMER	
+			</if>
+		
+			<if test="sellDeptName != null and sellDeptName!=''">
+				,SELL_DEPT_NAME	
+			</if>
+		
+			<if test="custManagerName != null and custManagerName!=''">
+				,CUST_MANAGER_NAME	
+			</if>
+		
+			<if test="oaFlowCode != null and oaFlowCode!=''">
+				,OA_FLOW_CODE	
+			</if>
+		
+			<if test="companyCode != null and companyCode!=''">
+				,COMPANY_CODE	
+			</if>
+		
+			<if test="custId != null and custId!=''">
+				,CUST_ID	
+			</if>
+		
+			<if test="custSapCode != null and custSapCode!=''">
+				,CUST_SAP_CODE	
+			</if>
+		
+			<if test="custName != null and custName!=''">
+				,CUST_NAME	
+			</if>
+		
+			<if test="remark != null and remark!=''">
+				,REMARK	
+			</if>
+		
+				,IS_DELETE
+
+			<if test="createTime != null and createTime!=''">
+				,CREATE_TIME	
+			</if>
+		
+			<if test="creatorId != null and creatorId!=''">
+				,CREATOR_ID
+			</if>
+		
+			<if test="modifyTime != null and modifyTime!=''">
+				,MODIFY_TIME	
+			</if>
+		
+			<if test="modifier != null and modifier!=''">
+				,MODIFIER	
+			</if>
+		<if test="sellDeptId != null and sellDeptId!=''">
+			,SELL_DEPT_ID
+		</if>
+		<if test="custManagerId != null and custManagerId!=''">
+			,CUST_MANAGER_ID
+		</if>
+		)
+		values
+		(
+		PmContractInfo_SEQ.nextval
+		<if test="contractCode != null and contractCode!=''">
+			,#{contractCode}
+		</if>
+		<if test="contractName != null and contractName!=''">
+			,#{contractName}
+		</if>
+		<if test="contractAmount != null and contractAmount!=''">
+			,#{contractAmount}
+		</if>
+		<if test="taxRate != null and taxRate!=''">
+			,#{taxRate}
+		</if>
+		<if test="afterTaxContractAmount != null and afterTaxContractAmount!=''">
+			,#{afterTaxContractAmount}
+		</if>
+		<if test="contractStartTime != null and contractStartTime!=''">
+			,#{contractStartTime}
+		</if>
+		<if test="contractEndTime != null and contractEndTime!=''">
+			,#{contractEndTime}
+		</if>
+		<if test="signContractDate != null and signContractDate!=''">
+			,#{signContractDate}
+		</if>
+		<if test="isAgree != null and isAgree!=''">
+			,#{isAgree}
+		</if>
+		<if test="yearNumer != null and yearNumer!=''">
+			,#{yearNumer}
+		</if>
+		<if test="sellDeptName != null and sellDeptName!=''">
+			,#{sellDeptName}
+		</if>
+		<if test="custManagerName != null and custManagerName!=''">
+			,#{custManagerName}
+		</if>
+		<if test="oaFlowCode != null and oaFlowCode!=''">
+			,#{oaFlowCode}
+		</if>
+		<if test="companyCode != null and companyCode!=''">
+			,#{companyCode}
+		</if>
+		<if test="custId != null and custId!=''">
+			,#{custId}
+		</if>
+		<if test="custSapCode != null and custSapCode!=''">
+			,#{custSapCode}
+		</if>
+		<if test="custName != null and custName!=''">
+			,#{custName}
+		</if>
+		<if test="remark != null and remark!=''">
+			,#{remark}
+		</if>
+			,'00'
+		<if test="createTime != null and createTime!=''">
+			,#{createTime}
+		</if>
+		<if test="creatorId != null and creatorId!=''">
+			,#{creatorId}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+			,#{modifyTime}
+		</if>
+		<if test="modifier != null and modifier!=''">
+			,#{modifier}
+		</if>
+		<if test="sellDeptId != null and sellDeptId!=''">
+			,#{sellDeptId}
+		</if>
+		<if test="custManagerId != null and custManagerId!=''">
+			,#{custManagerId}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmContractInfo.entity.PmContractInfoEntity">
+		update PM_CONTRACT_INFO 
+		<set>
+			<if test="contractCode != null and contractCode!=''">CONTRACT_CODE = #{contractCode}, </if>
+
+			<if test="contractName != null and contractName!=''">CONTRACT_NAME = #{contractName}, </if>
+
+			<if test="contractAmount != null and contractAmount!=''">CONTRACT_AMOUNT = #{contractAmount}, </if>
+
+			<if test="taxRate != null and taxRate!=''">TAX_RATE = #{taxRate}, </if>
+
+			<if test="afterTaxContractAmount != null and afterTaxContractAmount!=''">AFTER_TAX_CONTRACT_AMOUNT = #{afterTaxContractAmount}, </if>
+
+			<if test="contractStartTime != null and contractStartTime!=''">CONTRACT_START_TIME = #{contractStartTime}, </if>
+
+			<if test="contractEndTime != null and contractEndTime!=''">CONTRACT_END_TIME = #{contractEndTime}, </if>
+
+			<if test="signContractDate != null and signContractDate!=''">SIGN_CONTRACT_DATE = #{signContractDate}, </if>
+
+			<if test="isAgree != null and isAgree!=''">IS_AGREE = #{isAgree}, </if>
+
+			<if test="yearNumer != null and yearNumer!=''">YEAR_NUMER = #{yearNumer}, </if>
+
+			<if test="sellDeptName != null and sellDeptName!=''">SELL_DEPT_NAME = #{sellDeptName}, </if>
+
+			<if test="custManagerName != null and custManagerName!=''">CUST_MANAGER_NAME = #{custManagerName}, </if>
+
+			<if test="oaFlowCode != null and oaFlowCode!=''">OA_FLOW_CODE = #{oaFlowCode}, </if>
+
+			<if test="companyCode != null and companyCode!=''">COMPANY_CODE = #{companyCode}, </if>
+
+			<if test="custId != null and custId!=''">CUST_ID = #{custId}, </if>
+
+			<if test="custSapCode != null and custSapCode!=''">CUST_SAP_CODE = #{custSapCode}, </if>
+
+			<if test="custName != null and custName!=''">CUST_NAME = #{custName}, </if>
+
+			<if test="remark != null and remark!=''">REMARK = #{remark}, </if>
+
+			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}, </if>
+
+			<if test="createTime != null and createTime!=''">CREATE_TIME = #{createTime}, </if>
+
+			<if test="creatorId != null and creatorId!=''">CREATOR_ID = #{creatorId}, </if>
+
+			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime}, </if>
+
+			<if test="modifier != null and modifier!=''">MODIFIER = #{modifier}</if>
+
+		</set>
+		where CONTRACT_ID = #{contractId}
+	</update>
+	
+	<delete id="delete">
+		delete from PM_CONTRACT_INFO where CONTRACT_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

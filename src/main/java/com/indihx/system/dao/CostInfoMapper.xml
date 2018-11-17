@@ -4,21 +4,17 @@
   <!-- 支持缓存配置(必须配置否则缓存无效) -->
   <cache type="com.indihx.cache.RedisCache" />
   <resultMap id="BaseResultMap" type="com.indihx.system.entity.CostInfo">
-    
-    <result column="COST_ID" jdbcType="VARCHAR" property="btnName" />
-    <result column="ORG_ID" jdbcType="DECIMAL" property="btnName" />
+    <result column="COST_ID" property="costId" />
+    <result column="ORG_ID" property="orgId" />
   </resultMap>
-  <sql id="Base_Column_List">
-    COST_ID, ORG_ID
-  </sql>
-  
+
   <select id="queryCostInfoListByOrgId" resultMap="BaseResultMap" >
   	select a.*,b.org_name
     from cost_info a 
-    left join org_info b on a.org_id =b.org_id
+    left join org_info b on a.org_id =b.org_no
   	 <where>
-  		<if test="orgId != null and btnName !=0 ">
-  			 a.org_id = = #{orgId,jdbcType=DECIMAL}
+  		<if test="orgId != null and orgId !=0 ">
+  			 a.org_id = #{orgId}
   		</if>
   		
   	</where> 

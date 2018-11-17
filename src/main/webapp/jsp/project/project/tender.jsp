@@ -8,14 +8,14 @@
 	  	<div class="layui-inline">
 	       <label class="layui-form-label">投标编号：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="usrId"  autocomplete="off" class="layui-input form-control">
+	         <input type="text" name="bidId"  autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
 	  	
 	  	<div class="layui-inline">
 	      <label class="layui-form-label" >投标项目名称：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="usrName"  autocomplete="off" class="layui-input form-control" >
+	         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control" >
 	      </div>
 	    </div>
 	    
@@ -39,30 +39,21 @@
 
 <script type="text/javascript">
 $(function(){
-	function getParam(){
-		var queryParams=$("#user-query-form").serializeObject();
-		 var newParam = {}
-		  for(var i in queryParams){
-			  if(queryParams[i]){
-				  newParam[i] = queryParams[i]
-			  }
-		  }
-		  return newParam
-	}
+	
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table'], function(){
   var layer = layui.layer ,
   	  form = layui.form,
   	  table=layui.table;
-	  
+  var queryParams=$("#user-query-form").serializeObject();	  
   // table render
   table.render({
 	    elem: '#tenderTable',
-	    id:'user-table',
+	    id:'tenderTable',
 	    url:'/vote/pmconfirmbid/list',
 	    method:'post',
 		where:{
-			queryStr:JSON.stringify(getParam())
+			queryStr:JSON.stringify(queryParams)
 		},
 		contentType: 'application/json',
 	    response: {
@@ -70,7 +61,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    },
 	    height:'260',
 	    width:"690",
-	    title: '用数据表',
+	    title: '投标数据表',
 	    cols: [[
 	      {type: 'radio'},
 	      {field:'bidId', title:'投标编号', width:130,templet:function(d){
@@ -162,34 +153,30 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	* 客户查询按钮
 	*/
 	$("#user-query-form #userQuery").click(function(){
-		$.ajax({
-			  type: 'POST',
-			  url: '/vote/queryusrinfo/list',
-			  data: JSON.stringify(getParam()),
-			  contentType:'application/json',
-			  success: function(res){
-			      console.log(res)
-			      testData=res.page
-
-			      table.render({
-			  	    elem: '#tenderTable',
-			  	    //url:'custom.json',
-			  	    height:'260',
-			  	    width:"690",
-				    title: '用户数据表',
-				    cols: [[
-				      {type: 'radio' },
-				      {field:'usrId', title:'用户ID', sort: true},
-				      {field:'usrName', title:'用户名'}
-				    ]],
-			  	    data:testData,
-			  	    page: true
-			  	  });
-			      
-			      
-			      
-			      ;},
-			  dataType: "json"
+		  var queryParams=$("#user-query-form").serializeObject();	 
+		  var newparam = {}
+			 for(var o in queryParams){
+				 if(queryParams[o]){
+					 newparam[o] = queryParams[o]
+				 }
+			 }
+			console.log(queryParams)
+			table.reload('tenderTable',{
+				 url: '/vote/pmconfirmbid/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+				 method:'post',
+					where:{
+						queryStr:JSON.stringify(newparam)
+					},
+					contentType: 'application/json',
+				    response: {
+				    	dataName: 'page'
+				    },
+					done:function(res){
+						console.log(res)
+					}
 			})
 	});
 	

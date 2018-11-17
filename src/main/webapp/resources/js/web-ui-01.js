@@ -4,7 +4,10 @@ function selectRow(_str) {
 	var keyId = ""; // 选择的用户
 	$("tr td :checkbox:checked").each(function() {
 		if (this.checked) {
-			keyId = keyId + $(this).siblings("#" + _str).val() + ",";
+			var idStr=typeof $(this).siblings("#" + _str).val()!="undefined" ? $(this).siblings("#" + _str).val() :"";
+			if(idStr !=""){
+				keyId = keyId + idStr + ",";
+			}
 		}
 	});
 	obj.size = $("tr td :checkbox:checked").length; // 记录条数
@@ -63,14 +66,14 @@ function initTable(tableId,single){
 				closeMode : false
 			// 返回成功是否关闭弹出框
 			}
-			console.log(opt.data);
+			//console.log(opt.data);
 			var unid = layer.load();
 			var params = $.extend(intiParams, opt);
 			// 表单检查
 			if (params.isFrom) {
 				if (params.form == null || params.form == "") {
 					params.form = $("form:first"); // 获取第一个表单里面的元素提交
-					console.log(params.data);
+					//console.log(params.data);
 					if (params.form == null || params.form == ""
 							|| params.form.length == 0) {
 						if (top.location != self.location) {
@@ -303,9 +306,9 @@ function initTable(tableId,single){
 			
 			var obj = selectRow("_tab_info_id");
 			
-			if (obj.val.length != 0){
+			if ( obj.val !="" &&obj.val.split(",").length != 0 && obj.size){
 				var infoId = $("#infoId").val();
-				console.log("hello: "+infoId);
+				//console.log("hello: "+infoId);
 				if (infoId.length != 0){
 					arr = JSON.parse(infoId);	
 				}	
@@ -318,7 +321,6 @@ function initTable(tableId,single){
 				}*/
 				$("#infoId").val(JSON.stringify(arr));
 			}
-			
 			$.indi.ajaxSubmit({
 				url : opt.url,
 				//data: opt.data,
@@ -354,17 +356,27 @@ function initTable(tableId,single){
 				if (typeof pageInfo != "undefined") {
 					cnt = (pageInfo.pageNum - 1) * pageInfo.pageSize;
 				}
+				
+				
 				var tbody = $('.table thead tr:eq(0)').children();
 				for (var i = 0; i < list.length; i++) {
 					html += "<tr>";
 					var isSelect = list[i]["isSelect"];
+					// 角色管理 按钮 设置全局变量
+					if(typeof checkedRet!="undefined" && checkedRet.length){
+							if($.inArray(list[i].btnId,checkedRet) > -1){
+								var isSelect="Y";
+							}else{
+								var isSelect = list[i]["isSelect"];
+							}
+					}
 					for (var j = 0; j < tbody.length; j++) {
 						var node = tbody[j];
 						var target_data = $(node).attr('target_data');
 						if (target_data == 'checkbox') {
 							var _tdList = $(node).children();
 							html += '<td target_data="' + target_data
-									+ '"><input type="checkbox"';
+									+ '"><input type="checkbox" class="j-checkbox"';
 							if (isSelect == 'Y') {
 								html += 'checked="checked"';
 							}

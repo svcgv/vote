@@ -99,26 +99,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'120',
-	    data:[
-				{
-					projectGroupId:"001",
-					projectGroupName:"项目群一",
-					groupCreatorName:"陈军",
-					groupCreateTime:"2018-11-11"
-				},
-				{
-					projectGroupId:"002",
-					projectGroupName:"项目群一",
-					groupCreatorName:"陈军",
-					groupCreateTime:"2018-11-11"
-				},
-				{
-					projectGroupId:"003",
-					projectGroupName:"项目群一",
-					groupCreatorName:"陈军",
-					groupCreateTime:"2018-11-11"
-				},
-	    	],
+	    data:testData,
 	    page: true
 	  });
 
@@ -149,16 +130,16 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
-	    	showFromTable('edit',data.bidId);
+	    	showFromTable('edit',data.projectGroupId);
 	    }else if(obj.event === "view"){
 	    	// 查看
-	    	showFromTable('view',data.bidId);
+	    	showFromTable('view',data.projectGroupId);
 	    }else if(obj.event == "projectReview"){
 	    	// 评审
-	    	showFromTable('review',data.bidId);
+	    	showFromTable('review',data.projectGroupId);
 	    }else if(obj.event == "setMoney"){
 	    	// 评审
-	    	showFromTable('setMoney',data.bidId);
+	    	showFromTable('setMoney',data.projectGroupId);
 	    }
 	  });
 	/*

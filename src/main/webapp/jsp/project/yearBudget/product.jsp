@@ -127,7 +127,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	var YIndex ="${YIndex}";
 	var win=$(".budget-cust-wrapper").getWindow();
 	// 获取 form页 当前所有已选的产品
-		var target=$(".budget-wrapper").find("tbody tr").eq(YIndex).find(".project-list").eq(3).children(".productItem");
+		var target=$(".budget-wrapper").find("tbody tr").eq(YIndex).find(".project-list").eq(3).children(".productItem").eq(index);
 		var oldProducts= target.find("button.productQuery-hook").nextAll(".layui-badge");
 		var oldRet=[];
 		for(var i=0;i<oldProducts.length;i++){
@@ -152,7 +152,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 				//第4列 产品列表
 				console.log(YIndex,index,'index')
 				
-				target.eq(index).append(_html);
+				target.append(_html);
 			}
 		win.close();
 	});
