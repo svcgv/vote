@@ -1,5 +1,8 @@
 package com.indihx.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +17,15 @@ public class ProfitInfoServiceImpl implements IProfitInfoService{
 	private ProfitInfoMapper mapper;
 	
 	@Override
-	public ProfitInfo queryProfitInfoByOrgId(Long orgId) {
+	public Map<String, Object> queryProfitInfoByOrgId(Long orgId) {
 		
-		return mapper.queryProfitInfoByOrgId(orgId);
+		ProfitInfo info = mapper.queryProfitInfoByOrgId(orgId);
+		Map<String, Object> map = new HashMap<>();
+		map.put("PROFIT_ID", info.getProfitId());
+		map.put("ORG_ID", info.getOrgId());
+		map.put("ORG_NAME", info.getOrgName());
+		
+		return map;
 	}
 
 }
