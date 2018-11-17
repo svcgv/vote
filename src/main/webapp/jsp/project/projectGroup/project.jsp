@@ -39,32 +39,7 @@
 
 <script type="text/javascript">
 $(function(){
-	var testData=[
-			  		{"projectId":"1000","projectName":"雪松-软件研发外包战略供应商招标"},
-					{"projectId":"1001","projectName":"深圳数位传媒科技有限公司IT人力外包"},
-					{"projectId":"10102","projectName":"信贷及相关系统技术服务项目"},
-					{"projectId":"10023","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10as03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10AS03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASDA03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASA03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10SD03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASDSA03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASD03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100ASAS3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10AAASA03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"1ZXC00ZX3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100AWQWEQ3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100AA3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASDASD03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100ASDASD3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100ADQEQW3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100QEQE3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASADAAD03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"AQQQQ","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"WEQWEQSDSDDS","projectName":"新华保险人力外包服务项目"},
-					
-				]
+	var testData=[]
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table','laypage'], function(){
   var layer = layui.layer ,
