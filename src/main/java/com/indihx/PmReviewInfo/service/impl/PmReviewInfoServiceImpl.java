@@ -48,7 +48,7 @@ public class PmReviewInfoServiceImpl implements PmReviewInfoService {
    		return pmReviewInfoMapper.queryList(entity);
    	}
 	@Override
-	public List<Map<String, Object>> selectBidReview(PmReviewInfoEntity entity) {
+	public List<Map<String, Object>> selectBidReview(Map<String,Object> entity) {
 		// TODO Auto-generated method stub
 		return pmReviewInfoMapper.selectBidReview(entity);
 	}
