@@ -98,18 +98,23 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			if(isChecked){
 				var custId=$(this).children("td").eq(1).text();
 				var custName=$(this).children("td").eq(2).text();
-				 if(act =="addCust"){ //编辑 修改 页面
-			 		$("#budget-addForm-hook input[name='custName']").val(custName);
-					$("#budget-addForm-hook input[name='custId']").val(custId);
-					
-					// 设置form.jsp里 客户收入汇总（Clients Summary）数据值
-					customerData=[{'custCode':custId,'custName':custName,'totalRev':'0'}];
-					table2.reload('custRevSummaryTableID',{
-						data:customerData
-					})
-			 	}else if(act == "indexSearch"){
+				 if(act == "indexSearch"){
 			 		$(".budget-info-wrapper input[name='custName']").val(custName);
 					$(".budget-info-wrapper input[name='custId']").val(custId);
+			 	}else if(act == "choseOldCustomer"){
+			 		$.ajax({
+						type:"GET",
+						url:"trTempl",
+						data:{
+							custName:custName,
+							custId:custId
+						},
+						success:function(html){
+							var win2=$(".budget-wrapper").getWindow();
+							$(".budget-wrapper tbody").append(html);
+							win2.resize();
+						}
+					})
 			 	}
 			}
 		});

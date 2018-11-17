@@ -177,6 +177,8 @@
 		       <div class="layui-input-inline">
 		         <input type="text" name="costCode"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      
+		      <button type="button"  class="layui-btn layui-btn-sm" id="costCodeQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
 		    <div class="layui-inline" style="margin-right:64px;">
@@ -543,7 +545,22 @@ $(function(){
 		  		width:"700"
 		 	 });
 		});
-	
+		//选择成本中心编号
+	   $("#project-form-hook #costCodeQuery-hook").on("click",function(){
+		   
+		   var buildDeptId = $("#project-form-hook input[name='buildDeptId']").val();
+		   
+			if($.trim(buildDeptId) ==''){
+				layer.msg("请选择实施部门");
+				return false;
+			}
+		   
+			$.openWindow({
+				url:'costCode?act=costCodeForm&orgId='+buildDeptId,
+		  		title:"选择成本中心编号",
+		  		width:"700"
+		 	 });
+		});
 	
 	
 	var win=$("#project-form-hook").getWindow();

@@ -65,9 +65,16 @@
 .layui-table tbody tr:hover{
 	background:#fff;
 }
+.layui-btn-sm{
+	font-size:14px;
+}
 </style>
 <div id="budget-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
+	 	<div class="layui-inline" style="margin-left:10px;">
+	      <button type="button"  class="layui-btn layui-btn-sm" id="customerQuery-form" ><i class="layui-icon"></i>添加老客户</button>
+	      <button type="button"  class="layui-btn layui-btn-sm" id="addCustomer-form" ><i class="layui-icon"></i>新增新客户</button>
+	    </div>
 		<div class="budget-wrapper">
 			<table class="layui-table">
 			  <colgroup>
@@ -77,29 +84,44 @@
 			  </colgroup>
 			  <thead>
 			    <tr>
-			      <th>客户</th>
-			      <th>WBS</th>
-			      <th>项目名称</th>
-			      <th>项目类型</th>
-			      <td>产品列表</td>
-			      <td>收入来源(Revenue source)</td>
-			      <td>公司实体(Entity)</td>
-			      <td>合同编码(Contract)</td>
-			      <td>PO#/SOW#</td>
-			      <td>客户经理(Owner)</td>
-			      <td>税种</td>
-			      <td>Rev Recognition Method</td>
-			      <td>区域(Region)</td>
-			      <td>结算币种(Currency)</td>
-			      <td>税率(%)</td>
-			      <td>毛利率(%)</td>
-			      <td>合同金额</td>
-			      <td>历年已上报收入合计</td>
-			      <td>当年已上报收入合计</td>
-			      <td>剩余收入</td>
-			      <td>税后(Total Rev)</td>
-			      <td>操作</td>
-			    </tr> 
+			      <th rowspan="2">客户</th>
+			      <th rowspan="2">WBS</th>
+			      <th rowspan="2">项目名称</th>
+			      <th rowspan="2">项目类型</th>
+			      <td rowspan="2">产品列表</td>
+			      <td rowspan="2">收入来源(Revenue source)</td>
+			      <td rowspan="2">公司实体(Entity)</td>
+			      <td rowspan="2">合同编码(Contract)</td>
+			      <td rowspan="2">PO#/SOW#</td>
+			      <td rowspan="2">客户经理(Owner)</td>
+			      <td rowspan="2">税种</td>
+			      <td rowspan="2">Rev Recognition Method</td>
+			      <td rowspan="2">区域(Region)</td>
+			      <td rowspan="2">结算币种(Currency)</td>
+			      <td rowspan="2">税率(%)</td>
+			      <td rowspan="2">毛利率(%)</td>
+			      <td rowspan="2">合同金额</td>
+			      <td rowspan="2">历年已上报收入合计</td>
+			      <td rowspan="2">当年已上报收入合计</td>
+			      <td rowspan="2">剩余收入</td>
+			      <td rowspan="2">税后(Total Rev)</td>
+			      <td colspan="12">Revenue</td>
+			      <td rowspan="2">操作</td>
+			    </tr>
+			    <tr>
+			    	<td>Jan</td>
+			    	<td>Feb</td>
+			    	<td>Mar</td>
+			    	<td>Apr</td>
+			    	<td>May</td>
+			    	<td>Jun</td>
+			    	<td>Jul</td>
+			    	<td>Aug</td>
+			    	<td>Sep</td>
+			    	<td>Oct</td>
+			    	<td>Nov</td>
+			    	<td>Dec</td>
+			    </tr>
 			  </thead>
 			  <tbody>
 			  <!-- 
@@ -449,6 +471,188 @@
 			      		</div>
 			      	</div>
 			      </td>
+			      <!-- 12 revenue -->
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="jan" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="feb" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="mar" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="apr" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="may" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="jun" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="jul" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="aug" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="sep" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="oct" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="nov" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>798865651</span>
+			      		</div>
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<span>12</span>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="dec" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      
 			      <td>
 			      	<div class="project-list" style="width:150px;">
 			      		<div class="layui-input-inline item" style="margin:5px;">
@@ -466,7 +670,7 @@
 			    </tr>
 			   
 			   <!-- 新增客户  -->
-			    <tr>
+			    <tr style="display:none;" class="trTmpl">
 			      <td>
 			      	<div class="layui-inline" style="min-width:250px;">
 			      		<div class="layui-input-inline">
@@ -806,6 +1010,175 @@
 			      		</div>
 			      	</div>
 			      </td>
+			       <!-- 12 revenue -->
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<div class="layui-input-inline">
+						     	<input type="text" name="jan" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="jan" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="feb" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="feb" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="mar" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="mar" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="apr" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="apr" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<div class="layui-input-inline">
+						     	<input type="text" name="may" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="may" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="jun" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="jun" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			<div class="layui-input-inline">
+						     	<input type="text" name="jul" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="jul" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="aug" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="aug" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="sep" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="sep" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="oct" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="oct" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="nov" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="nov" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
+			      <td>
+			      	<div class="project-list">
+			      		<div class="layui-input-inline item" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="dec" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+			      			 <div class="layui-input-inline">
+						     	<input type="text" name="dec" class="layui-input form-control" />
+					      	 </div>
+			      		</div>
+			      	</div>
+			      </td>
 			      <td>
 			      	<div class="project-list" style="width:150px;">
 			      		<div class="layui-input-inline item" style="margin:5px;">
@@ -830,7 +1203,7 @@
 	 
 	 
 	 
-	 <table id="custRevSummary2" lay-filter="calcRev"></table>
+	<table id="custRevSummary2" lay-filter="calcRev"></table>
 	<div class="layui-layer-btn layui-layer-btn-c">
     	<a class="layui-layer-btn0" id="customGroup-add-hook" style="background:#009688;border-color:#009688;">提交</a>
     	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
@@ -865,6 +1238,37 @@ var table2=null;
 	*   提供已有客户可选择，若系新客户，则不选，手工输入客户名称
 	*	
 	*/
+	// 新增老客户
+    $("#budget-addForm-hook #customerQuery-form").click(function(){
+		  $.openWindow({
+		  		url:'customer?act=choseOldCustomer',
+		  		title:"选择客户名称",
+		  		width:"750"
+		 });
+    });
+	// 手书时去掉 custId
+	$("#budget-addForm-hook input[name=custName]").keyup(function(){
+		$("#budget-addForm-hook input[name=custId]").val("")
+	});
+	// 新增新客户
+	$("#budget-addForm-hook #addCustomer-form").click(function(){
+		$.ajax({
+			type:"GET",
+			url:"trTempl",
+			data:{
+				custName:"",
+				custId:""
+			},
+			success:function(html){
+				$(".budget-wrapper tbody").append(html);
+				win.resize();
+			}
+		})
+		
+		
+	});
+	
+	
 	$("#budget-addForm-hook").on("click",".addProjectQuery-hook",function(){
 		$(this).attr("disabled","disabled");
 		var num=$(this).parents("td").next("td").find(".project-list .item").length;
