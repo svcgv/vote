@@ -37,8 +37,8 @@
 		   <div class="layui-inline">
 			   <label class="layui-form-label">销售部门：</label>
 			    <div class="layui-input-inline">
-		          <input type="text" name="payDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="payDeptId">
+		          <input type="text" name="sellDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="text" style='display:none' name="sellDeptId">
 		      </div>
 	      	  <button type="button"  class="layui-btn layui-btn-sm" id="payDeptNameQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		   </div>
@@ -55,15 +55,15 @@
 		    <div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">OA流程编号：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="OAFlow"  autocomplete="off" class="layui-input form-control">
+		          <input type="text" name="oaFlowCode"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline" style="margin-right:0px;">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="customerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="customerId">
+		          <input type="text" name="custName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+		          <input type="text" style='display:none' name="custId">
 		      </div>
 	      	  <button type="button"  class="layui-btn layui-btn-sm" id="customerQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -167,7 +167,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   table.render({
 	  	id:"customer-table",
 	    elem: '#contractTable',
-	    //url:'/vote/pmconfirmbid/list',
+	    url:'/vote/pmcontractinfo/list',
 	    method:'post',
 		where:{
 			queryStr:JSON.stringify(getParam())

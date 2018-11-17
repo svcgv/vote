@@ -98,12 +98,12 @@ layui.use(['layer', 'form','laydate','table'], function(){
 				var userId=$(this).children("td").eq(1).text();
 				var userName=$(this).children("td").eq(2).text();
 				if(act == "index"){
-					$("#contract-index-form input[name='custCnName']").val(userName);
-					$("#contract-index-form input[name='custId']").val(userId);
+					$("#contract-index-form input[name='custManagerName']").val(userName);
+					$("#contract-index-form input[name='custManagerId']").val(userId);
 			 		
 			 	}else if(act =="form"){ //编辑 修改 页面
-			 		$("#contract-addForm-hook input[name='custCnName']").val(userName);
-					$("#contract-addForm-hook input[name='custId']").val(userId);
+			 		$("#contract-addForm-hook input[name='custManagerName']").val(userName);
+					$("#contract-addForm-hook input[name='custManagerId']").val(userId);
 			 	}
 			}
 		});
