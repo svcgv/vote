@@ -15,6 +15,7 @@ public interface PmPaymentPointService {
 	public void insert(PmPaymentPointEntity entity);
 	public void update(PmPaymentPointEntity entity);
 	public void delete(long paymentId);
+	public void deleteByForeignId(long paymentForeignId);
 	public List<PmPaymentPointEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
    

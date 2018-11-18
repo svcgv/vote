@@ -210,14 +210,10 @@
                                     data: JSON.stringify(dataparam),
                                     contentType: 'application/json',
                                     success: function (res) {
-                                        console.log(res)
-                                        layer
-                                            .msg(
-                                                "修改成功",
-                                                {
-                                                    icon: 1
-                                                });
-                                        win.close();
+                                        layer.msg("修改成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
+                                            win.close();
+                                            location.reload();
+                                        });
                                     },
                                     error: function () {
                                         layer
