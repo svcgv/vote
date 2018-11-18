@@ -62,7 +62,7 @@
 		     <div class="layui-inline">
 			      <label class="layui-form-label">税后合同金额（元）：</label>
 			       <div class="layui-input-inline">
-			         <input type="number" name="afterTaxContractAmount"  autocomplete="off" class="layui-input form-control">
+			         <input type="number" name="afterTaxContractAmount" readonly autocomplete="off" class="layui-input form-control">
 			      </div>
 		       	  <span class="f-placeholder"></span>
 		    </div>
