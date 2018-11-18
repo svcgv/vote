@@ -74,6 +74,10 @@ public class UsrInfoServiceImpl  extends AbstractBaseService implements IUsrInfo
 	private UsrRoleMapper usrRoleMappeer;  //用户角色
 	@Resource
 	private RoleInfoServiceImpl roleInfoService;  //角色
+	
+	@Resource
+	private OrgInfoServiceImpl orgInfoService; //机构
+	
 	@Resource
 	private MenuInfoMapper menuMapper; //菜单
 	@Resource
@@ -111,6 +115,9 @@ public class UsrInfoServiceImpl  extends AbstractBaseService implements IUsrInfo
 	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public boolean addUsrInfo(UserInfoVo infoVo) {
+		
+		final OrgInfoVo info = orgInfoService.qryOrginfoList(infoVo.getOrgNo());
+		
 		UsrInfo usrInfo = new UsrInfo();
 		EntityVoConverter.Convert(infoVo, usrInfo);
 		String usrId = mapper.getUserId();
@@ -121,7 +128,8 @@ public class UsrInfoServiceImpl  extends AbstractBaseService implements IUsrInfo
 		usrInfo.setUsrName(usrInfo.getUsrName());
 		usrInfo.setMblNo(usrInfo.getMblNo());
 		usrInfo.setEmail(usrInfo.getEmail());
-		usrInfo.setOrgType(usrInfo.getOrgType());
+		//usrInfo.setOrgType(usrInfo.getOrgType());
+		usrInfo.setOrgType(info.getOrgType());
 		usrInfo.setOrgNo(usrInfo.getOrgNo());
 		usrInfo.setOperUsr(infoVo.getOperUsr());
 		usrInfo.setSex(usrInfo.getSex());
@@ -151,6 +159,8 @@ public class UsrInfoServiceImpl  extends AbstractBaseService implements IUsrInfo
 	@Override
 	public boolean updUserInfoById(UserInfoVo infoVo) {
 		try {
+			
+			final OrgInfoVo info = orgInfoService.qryOrginfoList(infoVo.getOrgNo());
 			Assert.hasText(infoVo.getUsrId(), "用户Id不能为空!");
 			UsrInfo usrInfo = new UsrInfo();
 			EntityVoConverter.Convert(infoVo, usrInfo);
@@ -159,6 +169,7 @@ public class UsrInfoServiceImpl  extends AbstractBaseService implements IUsrInfo
 			usrInfo.setTmSmp(DateUtil.getSysDate());
 			usrInfo.setPassWord(ObjectUtil.isEmpty(infoVo.getPassWord())?"111111":infoVo.getPassWord());
 			usrInfo.setUsrName(usrInfo.getUsrName());
+			usrInfo.setOrgType(info.getOrgType());
 			usrInfo.setEmail(usrInfo.getEmail());
 			usrInfo.setMblNo(usrInfo.getMblNo());
 			usrInfo.setOrgNo(usrInfo.getOrgNo());
@@ -469,6 +480,9 @@ public class UsrInfoServiceImpl  extends AbstractBaseService implements IUsrInfo
 	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public boolean addSetUserSave(UserInfoVo infoVo, String pk_id, String pk_table) {
+		
+		final OrgInfoVo info = orgInfoService.qryOrginfoList(infoVo.getOrgNo());
+		
 		UsrInfo usrInfo = new UsrInfo();
 		EntityVoConverter.Convert(infoVo, usrInfo);
 		String usrId = mapper.getUserId();
@@ -479,7 +493,7 @@ public class UsrInfoServiceImpl  extends AbstractBaseService implements IUsrInfo
 		usrInfo.setUsrName(usrInfo.getUsrName());
 		usrInfo.setMblNo(usrInfo.getMblNo());
 		usrInfo.setEmail(usrInfo.getEmail());
-		usrInfo.setOrgType(usrInfo.getOrgType());
+		usrInfo.setOrgType(info.getOrgType());
 		usrInfo.setOrgNo(infoVo.getOrgNo());
 		usrInfo.setOperUsr(infoVo.getOperUsr());
 		usrInfo.setSex(usrInfo.getSex());

@@ -35,6 +35,21 @@
 		}});
 		return flag;
 	} 
+	 
+	 
+	 function openMenu() {
+			
+			$.indi.openPopup({
+				title : '菜单',
+				area : [ '550px', '400px' ],
+				isDate:false,
+				url : '${ctx }/menu/qryMenu'
+			});
+			
+// 			$.indi.openPopup({title: '    ',
+// 				area : ['520px' , '500px'],isDate:false,url: '${ctx }/org/queryAddPara?type='+type});
+
+		}
 	
 </script>
 </head>
@@ -71,7 +86,10 @@
 					<div class=" col-xs-6">
 						<input type="text" class="form-control col-xs-11 "
 							placeholder="按钮所属页面" id="btnPage" name="btnPage" required/>
+						<input type="hidden" name="menuId" id = "menuId"/>
 					</div>
+					<button type="button" class="btn btn-primary" onclick="openMenu()">
+		     	<i class="icon-plus-sign"></i> 选择</button>
 				</div>
 				
 				

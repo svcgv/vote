@@ -4,6 +4,7 @@ package com.indihx.PmPaymentPoint.entity;
 
 import com.indihx.BaseEntity;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ public class PmPaymentPointEntity extends BaseEntity implements Serializable {
 	 * 
 	 */
 
-private long paymentId;
+private String paymentId;
 	/**
 	 * 
 	 */
@@ -50,12 +51,12 @@ private long paymentTerm;
 	 * 
 	 */
 
-private long paymentRate;
+private BigDecimal paymentRate;
 	/**
 	 * 
 	 */
 
-private long paymentAmount;
+private BigDecimal paymentAmount;
 	/**
 	 * 
 	 */
@@ -90,13 +91,13 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setPaymentId(long paymentId) {
+	public void setPaymentId(String paymentId) {
 		this.paymentId = paymentId;
 	}
 	/**
 	 * 获取：
 	 */
-	public long getPaymentId() {
+	public String getPaymentId() {
 		return paymentId;
 	}
 	/**
@@ -162,25 +163,25 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setPaymentRate(long paymentRate) {
+	public void setPaymentRate(BigDecimal paymentRate) {
 		this.paymentRate = paymentRate;
 	}
 	/**
 	 * 获取：
 	 */
-	public long getPaymentRate() {
+	public BigDecimal getPaymentRate() {
 		return paymentRate;
 	}
 	/**
 	 * 设置：
 	 */
-	public void setPaymentAmount(long paymentAmount) {
+	public void setPaymentAmount(BigDecimal paymentAmount) {
 		this.paymentAmount = paymentAmount;
 	}
 	/**
 	 * 获取：
 	 */
-	public long getPaymentAmount() {
+	public BigDecimal getPaymentAmount() {
 		return paymentAmount;
 	}
 	/**

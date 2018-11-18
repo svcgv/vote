@@ -94,13 +94,16 @@
 					</div>
 				</form>
 				<div class="col-md-12">
-					<button type="button" class="btn btn-primary" onclick="openAdd()">
+					<button type="button" class="btn btn-primary"  onclick="openAdd()">
+					<!-- power="2018111621"  按钮菜单只分配给系统管理员   -->
 						<i class="icon-plus-sign"></i> 新增
 					</button>
 					<button type="button" class="btn btn-primary" onclick="updBtnInfo()">
+					<!-- power="2018111622"  -->
 						<i class="icon-edit"></i> 修改
 					</button>
-					<button type="button" class="btn btn-primary" onclick="delBtnInfo()">
+					<button type="button" class="btn btn-primary"  onclick="delBtnInfo()">
+					<!-- power="2018111623"  -->
 						<i class="icon-trash"></i> 删除
 					</button>
 				</div>

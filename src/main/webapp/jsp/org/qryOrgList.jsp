@@ -7,7 +7,7 @@
   var orgIdList = ""; //选择的用户
 	//页面加载时初始化页面数据
 	function openAdd() {
-		$.indi.openPopup({title: '机构新增',area : ['850px' , '580px'],url: '${ctx }/org/openAddOrg'});
+		$.indi.openPopup({title: '机构新增',area : ['550px' , '400px'],url: '${ctx }/org/openAddOrg'});
 		//关闭模拟框
 	}
 	//查询
@@ -51,7 +51,7 @@
 			orgType='99';
 		}
 		var url = '${ctx }/org/qryRoleInfoById?orgType='+orgType+'&&orgNo='+obj1.val;
-		$.indi.openPopup({title: '机构修改',isDate:false,area : ['550px','600px'],url: url});
+		$.indi.openPopup({title: '机构修改',isDate:false,area : ['550px','400px'],url: url});
 	}
 	//删除
 	function deleUsr() {
@@ -185,19 +185,21 @@
 					</div>
 				</form>
 				<div class="col-md-12">
-					<button type="button" class="btn btn-primary" onclick="openAdd()">
+					
+					
+					<button type="button" class="btn btn-primary"   onclick="openAdd()"> 
 						<i class="icon-plus-sign"></i> 新增
 					</button>
-					<button type="button" class="btn btn-primary" onclick="updUsr()">
+					<button type="button" class="btn btn-primary"  onclick="updUsr()">
 						<i class="icon-edit"></i> 修改
 					</button>
-					<button type="button" class="btn btn-primary" onclick="deleUsr()">
+					<button type="button" class="btn btn-primary"  onclick="deleUsr()">
 						<i class="icon ion-close-circled"></i> 注销
 					</button>
-					<button type="button" class="btn btn-primary" onclick="openSta()">
+					<button type="button" class="btn btn-primary"  onclick="openSta()">
 						<i class="icon-unlock"></i> 启用
 					</button>
-					<button type="button" class="btn btn-primary" onclick="closeSta()">
+					<button type="button" class="btn btn-primary"  onclick="closeSta()">
 						<i class="icon-lock"></i> 关闭
 					</button>
 				</div>

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.StringUtil;
 import com.indihx.AbstractBaseController;
+import com.indihx.datamng.vo.HpbInfoVo;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.system.service.impl.UsrInfoServiceImpl;
 import com.indihx.system.vo.OrgInfoVo;
@@ -79,6 +80,23 @@ public class UsrInfoController extends AbstractBaseController {
 		view.setViewName("/usr/addUsrInfo");
 		return view;
 	}
+	
+	
+	/**
+	 * 打开机构信息新增选择所属机构页面
+	 * @return
+	 */
+	@RequestMapping(value="/queryAddPara",method=RequestMethod.GET)
+	public ModelAndView queryAddPara(@RequestParam("type") String type){
+		ModelAndView view = new ModelAndView();
+		
+			HpbInfoVo hpbVo = new  HpbInfoVo();
+			view.setViewName("/usr/org");	
+		
+		view.addObject("type",type);
+		return view;
+	}
+	
 	/***
 	 * 用户信息保存
 	 * @param usrInfo

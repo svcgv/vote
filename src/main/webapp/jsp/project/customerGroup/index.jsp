@@ -130,9 +130,7 @@
                 {field: 'custGroupId', title: '客户群编号', fixed: 'left', width: 110, sort: true},
                 {field: 'custGroupName', title: '客户群名称', width: 230},
                 {field: 'creator', title: '创建人', width: 90},
-                {field: 'creatorId', title: '创建人编号', width: 100},
                 {field: 'createTime', title: '创建时间'},
-
                 {field: 'modifyTime', title: '修改时间'},
                 {field: 'isDelete', title: '是否有效',templet:function(d){
                 	if(d.isDelete == "00"){

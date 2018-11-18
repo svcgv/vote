@@ -3,8 +3,11 @@ package com.indihx.PmContractInfo.entity;
 
 
 import com.indihx.BaseEntity;
+import com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * ${comments}
@@ -123,6 +126,7 @@ private String isDelete;
 	/**
 	 * $column.comments
 	 */
+	private List<PmPaymentPointEntity> paymentPoint;
 
 
 	public long getContractId() {
@@ -299,5 +303,13 @@ private String isDelete;
 
 	public void setSellDeptId(long sellDeptId) {
 		this.sellDeptId = sellDeptId;
+	}
+
+	public List<PmPaymentPointEntity> getPaymentPoint() {
+		return paymentPoint;
+	}
+
+	public void setPaymentPoint(List<PmPaymentPointEntity> paymentPoint) {
+		this.paymentPoint = paymentPoint;
 	}
 }

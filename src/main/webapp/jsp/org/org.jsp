@@ -56,7 +56,7 @@ function save() {
 	
 	
 };
-var act="${act}";// 区分是index页 form页 赋值问题
+var act="${type}";// 区分是index页 form页 赋值问题
 function zTreeOnSaveEvent(event, treeId, treeNode) {
 	
 	var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
@@ -67,9 +67,15 @@ function zTreeOnSaveEvent(event, treeId, treeNode) {
       var  parentName = getCheckedOrg.name;
       var parentId =getCheckedOrg.orgId;
  		// index
- 		$('#parentOrgName', window.parent.document).val(parentName);
- 		$('#parentOrgNo', window.parent.document).val(parentId);
- 	
+ 		if(act == "add"){
+		 		$('#parentOrgName', window.parent.document).val(parentName);
+		 		$('#parentOrgNo', window.parent.document).val(parentId);
+ 		}
+ 		if(act == "user"){
+	 	 		$('#orgName', window.parent.document).val(parentName);
+	 	 		$('#orgNo', window.parent.document).val(parentId);
+ 	 		}
+ 	 		
 		$.indi.closePopup();
 };
 

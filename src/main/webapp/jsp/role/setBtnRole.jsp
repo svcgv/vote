@@ -19,7 +19,8 @@ $(document).ready(function() {
 
 	//保存角色
 	function saveBtnRole() {
-		var objRow = selectRow("btnIdArray");
+		var objRow = checkedRet;
+		console.log(checkedRet)
 		$("#_btnId").val(objRow.val);
 		$.indi.ajaxSubmit({
 			url : "${ctx}/btnRole/addSave.do",
@@ -120,12 +121,15 @@ $(document).ready(function() {
 					$.indi.loadPages(pages);
 					
 					var checkedRet=[];
+					
 					$(".table-role-hook tbody").on("click",".j-checkbox",function(){
 						var roleId=$(this).next("input").val();
 						if($(this).is(":checked")){
+							console.log(checkedRet)
 							checkedRet.push(roleId);
 							$.unique(checkedRet);
 						}else{
+							console.log(checkedRet)
 							var index=$.inArray(roleId,checkedRet);
 							if(index > -1){
 								checkedRet.splice(index,1)
