@@ -2,8 +2,13 @@ package com.indihx.PmFile.controller;
 
 
 import java.util.Map;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,6 +18,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -143,17 +150,39 @@ public class PmFileController {
 		//设置文件的MIME类型
 		//response.setContentType(getServletContext().getMimeType(name));
 		//设置响应头文件，标识为文件下载类型，并附上文件的名称
+		byte[] data = getBytes(path) ;
+		response.reset();  
 		response.setHeader("Content-Disposition", "attachment;filename="+name);
-	
-		//对文件进行读取和存贮
-		InputStream is = new FileInputStream(path);
-		OutputStream os = response.getOutputStream();
-		byte[] flush = new byte[1024];
-		int len = 0;
-		while((len = is.read(flush))!=-1){
-			os.write(flush,0,len);
-			os.flush();
-		}
-		is.close();
+        response.addHeader("Content-Length", "" + data.length);  
+        response.setContentType("application/octet-stream; charset=UTF-8"); 
+        IOUtils.write(data, response.getOutputStream());  
     }
+    
+    public static byte[] getBytes(String filePath){
+        File file = new File(filePath);
+        ByteArrayOutputStream out = null;
+        try {
+            FileInputStream in = new FileInputStream(file);
+            out = new ByteArrayOutputStream();
+            byte[] b = new byte[1024];
+            int i = 0;
+            while ((i = in.read(b)) != -1) {
+
+            out.write(b, 0, b.length);
+            }
+            out.close();
+            in.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        byte[] s = out.toByteArray();
+        return s;
+
+    }
+    
+        
 }
