@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.indihx.PmYearBudgetProduct.dao.PmYearBudgetProductMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.indihx.PmYearBudgetProduct.entity.PmYearBudgetProductEntity" id="pmYearBudgetProductMap">
+        <result property="paymentId" column="PAYMENT_ID"/>
+        <result property="productId" column="PRODUCT_ID"/>
+        <result property="yearBudgetCode" column="YEAR_BUDGET_CODE"/>
+    </resultMap>
+
+	<select id="queryObject" resultMap="pmYearBudgetProductMap">
+		select * from PM_YEAR_BUDGET_PRODUCT where PAYMENT_ID = #{value}
+	</select>
+
+	<select id="queryList" resultMap="pmYearBudgetProductMap">
+		select 
+		*
+		 from PM_YEAR_BUDGET_PRODUCT
+		 <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+						<if test="paymentId != null and paymentId!=''"  >
+				PAYMENT_ID = #{paymentId} AND 			</if>
+						<if test="productId != null and productId!=''"  >
+				PRODUCT_ID = #{productId} AND 			</if>
+						<if test="yearBudgetCode != null and yearBudgetCode!=''"  >
+				YEAR_BUDGET_CODE = #{yearBudgetCode}			</if>
+					</trim> 
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from PM_YEAR_BUDGET_PRODUCT 
+	</select>
+	 
+	<insert id="insert" parameterType="com.indihx.PmYearBudgetProduct.entity.PmYearBudgetProductEntity">
+		insert into PM_YEAR_BUDGET_PRODUCT
+		(
+		PAYMENT_ID
+			<if test="productId != null and productId!=''">
+				,PRODUCT_ID	
+			</if>
+		
+			<if test="yearBudgetCode != null and yearBudgetCode!=''">
+				,YEAR_BUDGET_CODE	
+			</if>
+		
+		)
+		values
+		(
+		PmYearBudgetProduct_SEQ.nextval
+		<if test="productId != null and productId!=''">
+			,#{productId}
+		</if>
+		<if test="yearBudgetCode != null and yearBudgetCode!=''">
+			,#{yearBudgetCode}
+		</if>
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.indihx.PmYearBudgetProduct.entity.PmYearBudgetProductEntity">
+		update PM_YEAR_BUDGET_PRODUCT 
+		<set>
+			<if test="productId != null and productId!=''">PRODUCT_ID = #{productId}, </if>
+
+			<if test="yearBudgetCode != null and yearBudgetCode!=''">YEAR_BUDGET_CODE = #{yearBudgetCode}</if>
+
+		</set>
+		where PAYMENT_ID = #{paymentId}
+	</update>
+	
+	<delete id="delete">
+		delete from PM_YEAR_BUDGET_PRODUCT where PAYMENT_ID = #{value}
+	</delete>
+	
+
+
+</mapper>

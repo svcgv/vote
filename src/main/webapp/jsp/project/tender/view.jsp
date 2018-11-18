@@ -155,7 +155,7 @@
 								</c:if>
 							</td>
 					      	<td>已上传</td>
-					      	<td><a href='${fileInfo.filePath}' download="${fileInfo.fileUploadName}">下载</a></td>
+					      	<td><a href="/vote/pmfile/download?id=${app.fileId}">下载</a></td>
 					      	
 				      	</tr>
 				      	</c:forEach>

@@ -43,7 +43,18 @@ public class PmContractInfoServiceImpl implements PmContractInfoService {
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmContractInfoEntity entity){
-   		pmContractInfoMapper.update(entity);
+		pmContractInfoMapper.update(entity);
+		pmPaymentPointMapper.deleteByForeignId(entity.getContractId());
+		List<PmPaymentPointEntity> paymentPointEntityList= entity.getPaymentPoint();
+		if(paymentPointEntityList !=null) {
+			for (PmPaymentPointEntity paymentPointEntity :paymentPointEntityList){
+				paymentPointEntity.setPaymentForeignId(entity.getContractId());
+				paymentPointEntity.setPaymentType("00");
+				String payId = paymentPointEntity.getPaymentId()+"_"+ RandomUtil.generateString(4);
+				paymentPointEntity.setPaymentId(payId);
+				pmPaymentPointMapper.insert(paymentPointEntity);
+			}
+		}
    	}
 
 	public void delete(long contractId){

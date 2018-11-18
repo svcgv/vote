@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
-
+#product-addForm-hook{
+	margin:10px;
+}
+#product-addForm-hook .layui-form-label {
+    width: 120px!important;
+}
+#product-addForm-hook  .layui-table-box{
+	margin-left:10px;
+}
 .formDetail-wrapper .customer-list{
 	word-wrap:normal;
 	word-break:keep-all;
@@ -82,8 +90,8 @@
 			  <table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
 		    
 	       <div class="layui-inline">
-	       		 <label class="layui-form-label">备注：</label>
-	       		 <div class="layui-input-block" style="margin-left:130px;width:323px;">
+	       		 <label class="layui-form-label" style="width:80px!important;">备注：</label>
+	       		 <div class="layui-input-block" style="margin-left:90px;width:410px;">
 			      <textarea name="remark"   class="layui-textarea form-control">${product.remark}</textarea>
 			    </div>
 	       </div>
@@ -134,6 +142,7 @@ $(function(){
                     id:"table-chosedProject",
                     elem: '#projectTable-chosed',
                     height:'350',
+                    width:"700",
                     title: '项目群数据信息',
                     cols: [[
                         {field:'wbs', title:'项目编号', templet:function(d){
@@ -231,9 +240,10 @@ $(function(){
 				data:JSON.stringify(formDatas),
 				contentType:'application/json',
 				success:function(res){
-					location.reload();
-					layer.msg("修改成功",{icon:1});
-					win.close();
+					layer.msg("修改成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
+						win.close();
+						location.reload();
+					});
 				},
 				error:function(){
 					layer.msg("修改失败",{icon:5});

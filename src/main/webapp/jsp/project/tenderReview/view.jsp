@@ -140,7 +140,7 @@
 									内部评审文件
 								</c:if>
 							</td>
-							<td><a href="${app.filePath}" download='${app.fileUploadName }'>下载</a></td>
+							<td><a href="/vote/pmfile/download?id=${app.fileId}">下载</a></td>
 						     </tr>
 						</c:forEach>
 				      </tbody>

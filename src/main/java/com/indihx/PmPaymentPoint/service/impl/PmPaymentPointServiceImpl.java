@@ -32,6 +32,9 @@ public class PmPaymentPointServiceImpl implements PmPaymentPointService {
 	public void delete(long paymentId){
    		pmPaymentPointMapper.delete( paymentId);
    	}
+	public void deleteByForeignId(long paymentForeignId){
+   		pmPaymentPointMapper.deleteByForeignId( paymentForeignId);
+   	}
 
 	public int queryTotal(){
    		return pmPaymentPointMapper.queryTotal();

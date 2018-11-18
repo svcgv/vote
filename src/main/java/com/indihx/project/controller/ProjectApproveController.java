@@ -12,10 +12,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.indihx.PmContractInfo.entity.PmContractInfoEntity;
-import com.indihx.PmContractInfo.service.PmContractInfoService;
-import com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity;
-import com.indihx.PmPaymentPoint.service.PmPaymentPointService;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -34,138 +30,130 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.indihx.AbstractBaseController;
 import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
 import com.indihx.PmFile.entity.PmFileEntity;
 import com.indihx.PmFile.service.PmFileService;
+import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
+import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.system.service.impl.ParamsInfoServiceimpl;
+import com.indihx.util.UserUtil;
 
 /**
- * 合同管理
+ *  立项审批
  * */
 
 @Controller
 @RequestMapping("/project")
-public class ContractController extends AbstractBaseController{
+public class ProjectApproveController extends AbstractBaseController{
 	@Autowired
 	private ParamsInfoServiceimpl infoservice;
-    @Autowired
-    private PmPaymentPointService pmPaymentPointService;
 	@Autowired
-	private PmContractInfoService pmContractInfoService;
+    private PmConfirmBidService pmConfirmBidService;
 	
-	@RequestMapping("/contract/index")
+	@Autowired
+    private PmReviewInfoService pmReviewInfoService;
+	
+	@Autowired
+    private PmFileService pmFileService;
+
+	
+	
+	@RequestMapping("/projectApprove/index")
 	public ModelAndView addCustomView() {
 		
 		ModelAndView view = new ModelAndView();
 		
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
+		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","01"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
-		view.addObject("status",infoservice.qryInfoByCode("BID_STATUS"));
-		view.setViewName("/project/contract/index");
+		view.setViewName("/project/projectApprove/index");
 		return view;
 	}
-	@RequestMapping(value="/contract/form",method=RequestMethod.GET)
+	@RequestMapping(value="/projectApprove/form",method=RequestMethod.GET)
 	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
 		
 		view.addObject("act",act);
 		view.addObject("id",id);
 		
-		view.setViewName("/project/contract/form");
+		view.setViewName("/project/projectApprove/form");
 		return view;
 	}
-	@RequestMapping(value="/contract/edit",method=RequestMethod.GET)
-	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
+	@RequestMapping(value="/projectApprove/edit",method=RequestMethod.GET)
+	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
 		
-		PmContractInfoEntity entity = pmContractInfoService.queryObject(id);
-		view.addObject("pmContract",JSON.toJSONString(entity));
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
-		Map<String,Object> payMap = new HashMap<String, Object>();
-		payMap.put("paymentForeignId", id);
-		List<PmPaymentPointEntity> pmPaymentPoints = pmPaymentPointService.queryList(payMap);
-		view.addObject("pmPaymentPoints",pmPaymentPoints);
-
-
+		
 		view.addObject("act",act);
 		view.addObject("id",id);
 		
-		view.setViewName("/project/contract/edit");
+		view.setViewName("/project/projectApprove/edit");
 		return view;
 	}
-	@RequestMapping(value="/contract/view",method=RequestMethod.GET)
+	@RequestMapping(value="/projectApprove/view",method=RequestMethod.GET)
 	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
 		ModelAndView view = new ModelAndView();
-
-		PmContractInfoEntity entity = pmContractInfoService.queryObject(id);
-		view.addObject("pmContract",JSON.toJSONString(entity));
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
-		Map<String,Object> payMap = new HashMap<String, Object>();
-		payMap.put("paymentForeignId", id);
-		List<PmPaymentPointEntity> pmPaymentPoints = pmPaymentPointService.queryList(payMap);
-		view.addObject("pmPaymentPoints",pmPaymentPoints);
+		
 		view.addObject("act",act);
 		view.addObject("id",id);
 		
-		view.setViewName("/project/contract/view");
+		view.setViewName("/project/projectApprove/view");
 		return view;
 	}
 	
 	// 机构
-		@RequestMapping(value="/contract/org",method=RequestMethod.GET)
+		@RequestMapping(value="/projectApprove/org",method=RequestMethod.GET)
 		public ModelAndView orgFormView(@RequestParam("act") String act) {
 			ModelAndView view = new ModelAndView();
 			view.addObject("act",act);
 			
-			view.setViewName("/project/contract/org");
+			view.setViewName("/project/projectApprove/org");
 			return view;
 		}
 		
 		// 用户
-		@RequestMapping(value="/contract/user",method=RequestMethod.GET)
+		@RequestMapping(value="/projectApprove/user",method=RequestMethod.GET)
 		public ModelAndView userFormView(@RequestParam("act") String act) {
 			ModelAndView view = new ModelAndView();
 			view.addObject("act",act);
-			view.setViewName("/project/contract/user");
+			view.setViewName("/project/projectApprove/user");
 			return view;
 		}
 		// 评审
-		@RequestMapping(value="/contract/review",method=RequestMethod.GET)
-		public ModelAndView reviewFormView(@RequestParam("act") String act) {
+		@RequestMapping(value="/projectApprove/review",method=RequestMethod.GET)
+		public ModelAndView reviewFormView(@RequestParam("act") String act,@RequestParam("id")long id,HttpSession session){
+	    	UsrInfo usesr = UserUtil.getUser(session);
 			ModelAndView view = new ModelAndView();
+			
 			view.addObject("act",act);
-			view.setViewName("/project/contract/review");
+			
+			view.addObject("userName",usesr.getUsrName());
+			view.setViewName("/project/projectApprove/review");
 			return view;
 		}
-		
 		// 客户
-		@RequestMapping(value="/contract/customer",method=RequestMethod.GET)
+		@RequestMapping(value="/projectApprove/customer",method=RequestMethod.GET)
 		public ModelAndView customerFormView(@RequestParam("act") String act) {
 			ModelAndView view = new ModelAndView();
 			view.addObject("act",act);
-			view.setViewName("/project/contract/customer");
+			view.setViewName("/project/projectApprove/customer");
 			return view;
 		}
-
-	// 用户
-	@RequestMapping(value="/contract/project",method=RequestMethod.GET)
-	public ModelAndView projectFormView() {
-		ModelAndView view = new ModelAndView();
-
-		view.setViewName("/project/contract/project");
-		return view;
-	}
-	
-	
+		// 项目
+		@RequestMapping(value="/projectApprove/project",method=RequestMethod.GET)
+		public ModelAndView projectFormView(@RequestParam("act") String act) {
+			ModelAndView view = new ModelAndView();
+			view.addObject("act",act);
+			view.setViewName("/project/projectApprove/project");
+			return view;
+		}
 }

@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
-
+#product-addForm-hook {
+	margin:10px;
+}
+#product-addForm-hook .layui-form-label {
+    width: 120px!important;
+}
 .formDetail-wrapper .customer-list{
 	word-wrap:normal;
 	word-break:keep-all;
@@ -28,7 +33,7 @@
 		      </div>
 		    </div>
 		     <div class="layui-inline">
-		      <label class="layui-form-label" style="width:120px!important;">指导销售价(元)：</label>
+		      <label class="layui-form-label" >指导销售价(元)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" id="productSuggestPrice" name="productSuggestPrice"  autocomplete="off"  class="layui-input form-control">
 		      </div>
@@ -71,14 +76,12 @@
 				 <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 					 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 				 </div>
-	           <%--<div class="layui-input-inline" id="chosed-project-hook" style="border:#e6e6e6 solid 1px;height:60px;overflow-y:auto;width:320px;">--%>
-			 <%--</div>--%>
 			 </div>
 			  <table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
 
 			  <div class="layui-inline">
-	       		 <label class="layui-form-label">备注：</label>
-	       		 <div class="layui-input-block" style="margin-left:130px;width:323px;">
+	       		 <label class="layui-form-label" style="width:80px!important;">备注：</label>
+	       		 <div class="layui-input-block" style="margin-left:90px;width:410px;">
 			      <textarea name="remark"  class="layui-textarea form-control"></textarea>
 			    </div>
 	       </div>
@@ -108,8 +111,7 @@ $(function(){
 		 //日期
 	  laydate.render({
 		    elem: "#startSaleDate2",
-		    theme: 'molv',
-		    type: 'datetime'
+		    theme: 'molv'
 	 });
 		
 	// form 表单手动渲染
@@ -120,6 +122,7 @@ $(function(){
             id:"table-chosedProject",
             elem: '#projectTable-chosed',
             height:'350',
+            width:"700",
             title: '项目群数据信息',
             cols: [[
                 {field:'wbs', title:'项目编号', templet:function(d){
@@ -222,9 +225,10 @@ $(function(){
 				url:'/vote/pmproductinfo/save',
 				data: JSON.stringify(newparam),
 				success:function(res){
-					layer.msg("新增成功",{icon:1});
-					location.reload();
-					win.close();
+					layer.msg("新增成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
+						location.reload();
+						win.close();
+					});
 				},
 				error:function(){
 					layer.msg("新增失败",{icon:5});
