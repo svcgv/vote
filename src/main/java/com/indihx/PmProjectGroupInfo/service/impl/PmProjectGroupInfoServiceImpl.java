@@ -36,7 +36,7 @@ public class PmProjectGroupInfoServiceImpl implements PmProjectGroupInfoService 
 		pmProjectGroupInfoMapper.insert(entity);
    		for(String projectId:entity.getProjectIds()) {
    			PmProjectGroupRelationInfoEntity pmProjectGroupRelationInfoEntity = new PmProjectGroupRelationInfoEntity();
-   			pmProjectGroupRelationInfoEntity.setProjectGroupId(pmProjectGroupInfoMapper.queryMaxId());
+   			pmProjectGroupRelationInfoEntity.setProjectGroupId(entity.getProjectGroupId());
    			pmProjectGroupRelationInfoEntity.setProjectId(Long.valueOf(projectId));
    			pmProjectGroupRelationInfoEntity.setCreatorId(entity.getCreatorId());
    			pmProjectGroupRelationInfoEntity.setCreateTime(DateUtil.getDateTime());

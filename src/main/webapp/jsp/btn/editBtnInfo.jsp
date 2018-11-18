@@ -65,7 +65,7 @@
 					<label class=" col-xs-4 control-label text-right">按钮所属页面</label>
 					<div class=" col-xs-6">
 						<input type="text" class="form-control col-xs-11 "
-							placeholder="按钮所属页面" id="btnPage" name="btnPage" required/>
+							placeholder="按钮所属页面" id="btnPage" name="btnPage" readonly="readonly" value="${btn.btnPage }" required/>
 						<input type="hidden" name="menuId" id = "menuId"/>
 					</div>
 					<button type="button" class="btn btn-primary" onclick="openMenu()">

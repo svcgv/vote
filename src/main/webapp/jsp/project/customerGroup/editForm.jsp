@@ -59,7 +59,9 @@
             <%--</c:forEach>--%>
             <%--</div>--%>
             <%--</div>--%>
-            <table class="layui-hide" id="customInnerTable" lay-filter="custom" style="overflow:hidden;"></table>
+           <div style="width:670px;margin-left:10px;">
+	            <table class="layui-hide" id="customInnerTable" lay-filter="custom" style="overflow:hidden;"></table>
+           </div>
         </div>
     </form>
     <div class="layui-layer-btn layui-layer-btn-c">
@@ -107,7 +109,6 @@
                                 elem: '#customInnerTable',
                                 id: 'table-chosedProject',
                                 height: '250',
-                                width: "690",
                                 title: '客户数据表',
                                 cols: [[
                                     {field: 'sapCode', title: 'sap编号',templet:function(d){

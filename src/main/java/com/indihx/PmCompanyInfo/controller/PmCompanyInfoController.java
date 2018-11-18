@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import java.util.Date;
 import java.util.List;
+
+import com.indihx.comm.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,7 +56,7 @@ public class PmCompanyInfoController {
      * 信息
      */
     @RequestMapping(value="/info",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> info(@RequestParam("companyCode") String companyCode,HttpSession session){
+    public @ResponseBody Map<String,Object> info(@RequestParam("companyCode") long companyCode,HttpSession session){
         
 		PmCompanyInfoEntity entity = pmCompanyInfoService.queryObject(companyCode);
         return R.ok().put("pmCompanyInfo", entity);
@@ -67,6 +69,7 @@ public class PmCompanyInfoController {
     public @ResponseBody Map<String,Object> save(@RequestBody PmCompanyInfoEntity pmCompanyInfo,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmCompanyInfo.setCreatorId(usesr.getUsrId());
+        pmCompanyInfo.setCreateTime(DateUtil.formatFromDB(DateUtil.getSysDate()));
         pmCompanyInfoService.insert(pmCompanyInfo);
 
         return R.ok();
@@ -79,6 +82,7 @@ public class PmCompanyInfoController {
     public @ResponseBody Map<String,Object> update(@RequestBody PmCompanyInfoEntity pmCompanyInfo,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmCompanyInfo.setModifier(usesr.getUsrId());
+        pmCompanyInfo.setModifyTime(DateUtil.formatFromDB(DateUtil.getSysDate()));
         pmCompanyInfoService.update(pmCompanyInfo);//全部更新
         
         return R.ok();
@@ -88,8 +92,8 @@ public class PmCompanyInfoController {
      * 删除
      */
     @RequestMapping(value="/delete",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> delete(@RequestBody String companyCode,HttpSession session){
-        pmCompanyInfoService.delete(companyCode);
+    public @ResponseBody Map<String,Object> delete(@RequestBody long companyId,HttpSession session){
+        pmCompanyInfoService.delete(companyId);
 
         return R.ok();
     }

@@ -1,10 +1,17 @@
 package com.indihx.PmContractInfo.service.impl;
 
+import com.indihx.PmContractProjectRelation.dao.PmContractProjectRelationMapper;
+import com.indihx.PmContractProjectRelation.entity.PmContractProjectRelationEntity;
 import com.indihx.PmPaymentPoint.dao.PmPaymentPointMapper;
 import com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity;
+import com.indihx.PmProjectInfo.dao.PmProjectInfoMapper;
+import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.RandomUtil;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 import java.util.List;
 import javax.annotation.Resource;
@@ -21,21 +28,33 @@ public class PmContractInfoServiceImpl implements PmContractInfoService {
    	PmContractInfoMapper pmContractInfoMapper;
 	@Resource
 	PmPaymentPointMapper pmPaymentPointMapper;
+	@Resource
+	PmContractProjectRelationMapper pmContractProjectRelationMapper;
+	@Resource
+	PmProjectInfoMapper pmProjectInfoMapper;
    
    	public PmContractInfoEntity queryObject(long id){
    		return pmContractInfoMapper.queryObject(id);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmContractInfoEntity entity){
-
    		pmContractInfoMapper.insert(entity);
+		for(Long projectId:entity.getProjectIds()) {
+			PmContractProjectRelationEntity relationEntity = new PmContractProjectRelationEntity();
+			PmProjectInfoEntity projectEntity = pmProjectInfoMapper.queryObject(projectId);
+			relationEntity.setWbs(projectEntity.getWbs());
+			relationEntity.setContractId(entity.getContractId());
+			relationEntity.setProjectId(projectId);
+			pmContractProjectRelationMapper.insert(relationEntity);
+		}
    		List<PmPaymentPointEntity> paymentPointEntityList= entity.getPaymentPoint();
    		if(paymentPointEntityList !=null) {
    	   		for (PmPaymentPointEntity paymentPointEntity :paymentPointEntityList){
    				paymentPointEntity.setPaymentForeignId(entity.getContractId());
    				paymentPointEntity.setPaymentType("00");
-   				String payId = paymentPointEntity.getPaymentId()+"_"+ RandomUtil.generateString(4);
-   				paymentPointEntity.setPaymentId(payId);
+				BigDecimal bigNumber100 = BigDecimal.valueOf(100);
+				BigDecimal taxRate = paymentPointEntity.getPaymentAmount().divide(entity.getContractAmount(),3, RoundingMode.FLOOR).multiply(bigNumber100);
+				paymentPointEntity.setPaymentRate(taxRate);
    				pmPaymentPointMapper.insert(paymentPointEntity);
    			}
    		}
@@ -44,14 +63,24 @@ public class PmContractInfoServiceImpl implements PmContractInfoService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmContractInfoEntity entity){
 		pmContractInfoMapper.update(entity);
+		pmContractProjectRelationMapper.deleteByContractId(entity.getContractId());
+		for(Long projectId:entity.getProjectIds()) {
+			PmContractProjectRelationEntity relationEntity = new PmContractProjectRelationEntity();
+			PmProjectInfoEntity projectEntity = pmProjectInfoMapper.queryObject(projectId);
+			relationEntity.setWbs(projectEntity.getWbs());
+			relationEntity.setContractId(entity.getContractId());
+			relationEntity.setProjectId(projectId);
+			pmContractProjectRelationMapper.insert(relationEntity);
+		}
 		pmPaymentPointMapper.deleteByForeignId(entity.getContractId());
 		List<PmPaymentPointEntity> paymentPointEntityList= entity.getPaymentPoint();
 		if(paymentPointEntityList !=null) {
 			for (PmPaymentPointEntity paymentPointEntity :paymentPointEntityList){
 				paymentPointEntity.setPaymentForeignId(entity.getContractId());
 				paymentPointEntity.setPaymentType("00");
-				String payId = paymentPointEntity.getPaymentId()+"_"+ RandomUtil.generateString(4);
-				paymentPointEntity.setPaymentId(payId);
+				BigDecimal bigNumber100 = BigDecimal.valueOf(100);
+				BigDecimal taxRate = paymentPointEntity.getPaymentAmount().divide(entity.getContractAmount(),3, RoundingMode.FLOOR).multiply(bigNumber100);
+				paymentPointEntity.setPaymentRate(taxRate);
 				pmPaymentPointMapper.insert(paymentPointEntity);
 			}
 		}

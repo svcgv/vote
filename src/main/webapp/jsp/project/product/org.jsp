@@ -121,7 +121,7 @@ function queryUserByRoleCodeOrgNo(orgNo,roleCode){
 			  success: function(res){
 				  console.log('asdas',act)
 			      console.log(res)
-			      if(res.page){
+			      if(res.page.length){
 			    	  if(act =="index"){ // 交付部门负责人页面
 					 		$("#product-index-form input[name='developmentManagerName']").val(res.page[0].usrName);
 							$("#product-index-form input[name='developmentManagerId']").val(res.page[0].usrId);

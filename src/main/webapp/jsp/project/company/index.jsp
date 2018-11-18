@@ -41,14 +41,14 @@
 		   
 		   <div class="layui-form-item" style="margin-bottom:0px;">
 		     <div class="layui-inline">
-		      <label class="layui-form-label">创建时间(开始)：</label>
+		      <label class="layui-form-label">创建日期(开始)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="startTime" id="startTime" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">创建时间(结束)：</label>
+		      <label class="layui-form-label">创建日期(结束)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="endTime" id="endTime"  autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
@@ -109,11 +109,11 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    height:'full-250',
 	    title: '公司数据表',
 	    cols: [[
-	    	 //{type: 'checkbox', fixed: 'left'},
-	  	      {field:'companyCode', title:'公司实体编号',fixed: 'left', width:150, sort: true},
-	  	      {field:'companyName', title:'公司实体名称', width:230},
-	  	      {field:'isDelete', title:'是否有效', width:180},
-	  	      {field:'createTime', title:'创建时间', width:230},
+	    	   {type: 'checkbox', fixed: 'left'},
+	  	      {field:'companyCode', title:'公司实体编号', sort: true},
+	  	      {field:'companyName', title:'公司实体名称'},
+	  	      {field:'isDelete', title:'是否有效'},
+	  	      {field:'createTime', title:'创建日期'},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    response: {
@@ -154,7 +154,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	  $.ajax({
 				  type:"POST",
 				  url:"/vote/pmcompanyinfo/update",
-				  data:JSON.stringify({'companyCode':data.companyCode,'isDelete':'01'}),
+				  data:JSON.stringify({'companyId':data.companyId,'isDelete':'01'}),
 				  contentType:'application/json',
 				  success:function(data){
 					 
@@ -175,10 +175,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
-	    	showFromTable('edit',data.companyCode);
+	    	showFromTable('edit',data.companyId);
 	    }else if(obj.event === "view"){
 	    	// 查看
-	    	showFromTable('view',data.companyCode);
+	    	showFromTable('view',data.companyId);
 	    }
 	  });
 	/*

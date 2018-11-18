@@ -101,7 +101,7 @@
 					<button type="button" class="btn btn-primary"  onclick="openAdd()">
 						<i class="icon-plus-sign"></i> 新增
 					</button>
-					<button type="button" class="btn btn-primary"  onclick="updMenu()">
+					<button type="button" class="btn btn-primary" onclick="updMenu()">
 						<i class="icon-edit"></i> 修改
 					</button>
 					<button type="button" class="btn btn-primary"  onclick="deleMenu()">

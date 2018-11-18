@@ -137,13 +137,13 @@
 				FINISH_PROJECT_TIME <![CDATA[<=]]>  #{finishProjectEndTime} AND
 			</if>
 						<if test="wbs != null and wbs!=''"  >
-				WBS = #{wbs} AND 			</if>
+				WBS like concat(concat('%',#{wbs}),'%') AND 			</if>
 						<if test="custName != null and custName!=''"  >
 				CUST_NAME = #{custName} AND 			</if>
 						<if test="custSapCode != null and custSapCode!=''"  >
 				CUST_SAP_CODE = #{custSapCode} AND 			</if>
 						<if test="projectName != null and projectName!=''"  >
-				PROJECT_NAME = #{projectName} AND 			</if>
+				PROJECT_NAME like concat(concat('%',#{projectName}),'%') AND 			</if>
 						<if test="currentYearFollow != null and currentYearFollow!=''"  >
 				CURRENT_YEAR_FOLLOW = #{currentYearFollow} AND 			</if>
 						<if test="isContinue != null and isContinue!=''"  >
@@ -283,7 +283,12 @@
 		select count(*) from pm_project_info 
 	</select>
 	 
-	<insert id="insert" parameterType="com.indihx.PmProjectInfo.entity.PmProjectInfoEntity">
+	<insert id="insert" parameterType="com.indihx.PmProjectInfo.entity.PmProjectInfoEntity"
+			useGeneratedKeys="true" keyProperty="projectId">
+	
+		<selectKey keyProperty="projectId" order="BEFORE" resultType="java.lang.Long">
+			select PmProjectInfo_SEQ.nextval as projectId from DUAL
+		</selectKey>
 		insert into pm_project_info
 		(
 		PROJECT_ID
@@ -622,7 +627,7 @@
 		)
 		values
 		(
-		PmProjectInfo_SEQ.nextval
+			#{projectId}
 		<if test="projectCode != null and projectCode!=''">
 			,#{projectCode}
 		</if>

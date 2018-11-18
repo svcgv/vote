@@ -29,7 +29,7 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">产品名称：</label>
 		      <div class="layui-input-inline">
-		         <input type="text" name="productName" autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="productName" autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline">
@@ -59,35 +59,37 @@
 		         <input type="text" name="developmentDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
 		          <input type="text" style='display:none' name="developmentDeptId">
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
 		    </div>
-		     <div class="layui-inline">
+		     <div class="layui-inline" style="vertical-align: top;">
 		      <label class="layui-form-label">研发负责人：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="developmentManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control">
 		          <input type="text" style='display:none' name="developmentManagerId">
 		      </div>
 		    </div>
-		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">项目引用列表：</label>
-				 <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-					 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-				 </div>
-			 </div>
-			  <table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
-
 			  <div class="layui-inline">
-	       		 <label class="layui-form-label" style="width:80px!important;">备注：</label>
-	       		 <div class="layui-input-block" style="margin-left:90px;width:410px;">
+	       		 <label class="layui-form-label" >备注：</label>
+	       		 <div class="layui-input-inline" style="width:350px;">
 			      <textarea name="remark"  class="layui-textarea form-control"></textarea>
 			    </div>
-	       </div>
-		     
-		     
+	        </div>
 		  </div>
+
+	     <div class="layui-form-item clearfix" style="margin-bottom:0px;margin-left:10px;">
+			<div style="float:left;width: 140px;">
+				<p class="layui-form-label">项目引用列表：</p>
+				<div>
+					<button type="button"   class="layui-btn " id="projectQuery-hook" style="margin-right:15px;padding:0 9px;height:32px;line-height:32px;"><i class="layui-icon"></i>项目引用</button>
+				</div>
+			</div>
+			<div style="float:left;width:900px;">
+				<table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
+			</div>
+	    </div>
+
+		     
+		     
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
     	<a class="layui-layer-btn0" id="customGroup-add-hook" style="background:#009688;border-color:#009688;">保存</a>
@@ -121,9 +123,8 @@ $(function(){
         chosedLayTable.render({
             id:"table-chosedProject",
             elem: '#projectTable-chosed',
-            height:'350',
-            width:"700",
-            title: '项目群数据信息',
+            height:'250',
+            title: '产品数据信息',
             cols: [[
                 {field:'wbs', title:'项目编号', templet:function(d){
                     var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});

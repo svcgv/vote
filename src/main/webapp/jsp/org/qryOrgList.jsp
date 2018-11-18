@@ -132,12 +132,12 @@
 		 $("#orgNo").val(obj1.val);
 		 $.indi.ajaxSubmit({url:'${ctx }/org/closeStaOrgInfo',success:function(data){
 				if(data.status == true){
-					layer.alert('关闭成功！',{icon: 1}, function(index){
+					layer.alert('禁用成功！',{icon: 1}, function(index){
 						layer.close(index);
 						qryList_01();
 					});  
 				}else{
-					layer.alert('关闭失败！',{icon: 2});
+					layer.alert('禁用失败！',{icon: 2});
 				}
 			}});
 	}
@@ -200,7 +200,7 @@
 						<i class="icon-unlock"></i> 启用
 					</button>
 					<button type="button" class="btn btn-primary"  onclick="closeSta()">
-						<i class="icon-lock"></i> 关闭
+						<i class="icon-lock"></i> 禁用
 					</button>
 				</div>
 			</div>
@@ -220,8 +220,6 @@
 							<th target_data="orgName">机构名称</th>
 							<th target_data="orgType">机构类型</th>
 							<th target_data="parentOrgName">上级机构名称</th>
-							<th target_data="linkMan">联系人</th>
-							<th target_data="telNo">联系电话</th>
 							<th target_data="orgStatus">状态</th>
 						</tr>
 					</thead>
@@ -240,8 +238,6 @@
 								<td class="center" >${orginfo.orgName }</td>
 								<td class="center" >${orginfo.orgType}</td>
 								<td class="center" >${orginfo.parentOrgName}</td>
-								<td class="center" >${orginfo.linkMan}</td>
-								<td class="center">${orginfo.telNo}</td>
 								<td class="center">${orginfo.orgStatus}</td>
 							</tr>
 						</c:forEach>

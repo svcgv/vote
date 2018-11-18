@@ -79,6 +79,9 @@
 	width:120px;
 	text-align: left;
 }
+.layui-textarea{
+	min-height:80px;
+}
 .layui-btn-container .layui-btn{
 	margin-bottom:0px;
 	padding:0 10px;
@@ -134,7 +137,6 @@ input.disabledColor{
 }
 /*占位符*/
 .f-placeholder{
-    margin-right: 15px;
     height: 30px;
     line-height: 30px;
     padding: 0 10px;

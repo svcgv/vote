@@ -16,6 +16,7 @@ public interface PmContractProjectRelationService {
 	public void update(PmContractProjectRelationEntity entity);
 	public void delete(long contractProjectRelationId);
 	public List<PmContractProjectRelationEntity> queryList(Map<String, Object> entity);
+	public List<PmContractProjectRelationEntity> queryListProject(Map<String, Object> entity);
 	public int queryTotal();
    
 }

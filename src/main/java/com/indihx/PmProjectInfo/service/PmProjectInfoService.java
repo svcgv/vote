@@ -12,7 +12,7 @@ import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
  */
 public interface PmProjectInfoService {
 	public PmProjectInfoEntity queryObject(long id);
-	public void insert(PmProjectInfoEntity entity);
+	public long insert(PmProjectInfoEntity entity);
 	public void update(PmProjectInfoEntity entity);
 	public void delete(long projectId);
 	public List<PmProjectInfoEntity> queryList(Map<String, Object> entity);

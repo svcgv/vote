@@ -18,7 +18,7 @@ public class PmCompanyInfoEntity extends BaseEntity implements Serializable {
 	/**
 	 * 
 	 */
-
+	private long companyId;
 private String companyCode;
 	/**
 	 * 
@@ -168,5 +168,13 @@ private String isDelete;
 	 */
 	public String getIsDelete() {
 		return isDelete;
+	}
+
+	public long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		this.companyId = companyId;
 	}
 }

@@ -101,8 +101,8 @@
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:43px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
 			  </div>
 		   </div>
 	   </div>
@@ -193,7 +193,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	dataName: 'page'
 	    },
 	    toolbar: '#toolbarDemo',
-	    height:'full-200',
+	    height:'full-250',
 	    title: '投标数据表',
 	    cols: [[
 	    	  {type: 'checkbox', fixed: 'left'},
@@ -354,7 +354,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
 	  		title:"新增投标",
-	  		width:"1000"
+	  		width:"100%"
 	  	})
 	});
 	
@@ -362,7 +362,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 查看和修改 form 表单
 	*/
 	function showFromTable(isEdit,id){
-		var _width=1000;
+		var _width='100%';
 		if(isEdit == "edit"){
 			var url='edit?act=edit&id='+id;
 			var title="修改投标信息";

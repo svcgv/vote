@@ -17,22 +17,34 @@
 	//保存角色
 	function selectMenu() {
 		
+	//	console.log(checkedRet,selectName,selectName[checkedRet[0]]);
+		var obj = selectRow("menuIdArray");
+		console.log(checkedMenuRet.length);
+		if(checkedMenuRet.length !=1){
+			layer.alert("请选择一条记录进行操作！",{icon:0});
+			return
+		}
 		
-		var menuId = selectRow("menuIdArray");
-		var menuName = selectRow("menuNameArray");
+		var menuId = checkedMenuRet[0];
+		//console.log(menuId);
+		var menuName = selectName[checkedMenuRet[0]];
 		
+		//menuName
+		
+	//	console.log(menuName);
 		 
 	 		// index
 // 	 		$('#btnPage', window.parent.document).val(menuIdArray.val);
 // 	 		$('#btnPageId', window.parent.document).val(menuIdArray.val);
 	 	
-	 		 window.parent.$("#btnPage").val(menuName.val)
-			 window.parent.$("#menuId").val(menuId.val)
+	 		 window.parent.$("#btnPage").val(menuName)
+			 window.parent.$("#menuId").val(menuId)
 	 		
 			$.indi.closePopup();
 		
 		
 	}
+	
 	
 	
 </script>
@@ -81,7 +93,7 @@
 			<div class="row">
 				<div class="col-md-12">
 				<table
-					class="table table-bordered table-striped table-hover with-check table-paging">
+					class="table table-bordered table-striped table-hover with-check table-paging table-role-hook">
 					<thead>
 						<tr>
 							<th target_data="checkbox"><i class="icon-resize-vertical"></i>
@@ -95,11 +107,11 @@
 						<c:forEach items="${listInfo}" var="menuinfo" varStatus="menuSta">
 							<tr>
 									<!-- 主键 -->
-								<td ><input type="checkbox" 
+								<td ><input type="checkbox" class="j-checkbox"
 								
 								/> 
 								    <input type="hidden" id="menuIdArray" target_data="menuId" value="${menuinfo.menuId }">
-								    <input type="hidden" id="menuNameArray" target_data="menuId" value="${menuinfo.menuName }">
+								    <input type="hidden" id="menuNameArray" class="j-menuName" target_data="menuId" value="${menuinfo.menuName }">
 								</td>	
 									
 								<td class="center" >${menuinfo.menuId }</td>
@@ -119,6 +131,26 @@
 						url : "${ctx }/menu/ajaxQryMenuInfo.do"
 					}
 					$.indi.loadPages(pages);
+					var checkedMenuRet = [];
+					var selectName=[];
+					var  rowCount = 0;
+					$(".table-role-hook tbody").on("click",".j-checkbox",function(){
+						var roleId=$(this).next("input").val();
+						var roleName=$(this).parent("td").find(".j-menuName").val();
+						//console.log(roleId);
+						if($(this).is(":checked")){
+							rowCount=rowCount+1;
+							checkedMenuRet.push(roleId);
+							selectName[roleId]=roleName;
+							
+						}else{
+							
+							var index=$.inArray(roleId,checkedMenuRet);
+							if(index > -1){
+								checkedMenuRet.splice(index,1)
+							}
+						}
+					})
 				</script>
 				</div>
 				

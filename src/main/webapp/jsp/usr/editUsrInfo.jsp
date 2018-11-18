@@ -51,15 +51,15 @@ $(document).ready(function(){
 	 var str = '';
 	 
 	 // 验证身份证
-	 if(($.trim($('#certId').val()).length == 0) || ($.trim($('#certId').val()).length>18)||($.trim($('#certId').val()).length<15)) { 
-	  str += '身份证号为15~18位!\n';
-	  $('#certId').focus();
-	 } else {
-	  if(isCardNo($.trim($('#certId').val())) == false) {
-	   str += '身份证号码输入错误!\n';
-	   $('#certId').focus();
-	  }
-	 }
+// 	 if(($.trim($('#certId').val()).length == 0) || ($.trim($('#certId').val()).length>18)||($.trim($('#certId').val()).length<15)) { 
+// 	  str += '身份证号为15~18位!\n';
+// 	  $('#certId').focus();
+// 	 } else {
+// 	  if(isCardNo($.trim($('#certId').val())) == false) {
+// 	   str += '身份证号码输入错误!\n';
+// 	   $('#certId').focus();
+// 	  }
+// 	 }
 	 
 	 // 如果没有错误则提交
 	 if(str != '') {
@@ -77,6 +77,12 @@ $(document).ready(function(){
 				}
 			});
 	 }
+	}
+	
+	
+	function openAdd() {
+		var type ="user";
+		$.indi.openPopup({title: '    ',area : ['520px' , '500px'],isDate:false,url: '${ctx }/usr/queryAddPara?type='+type});
 	}
 </script>
 </head>
@@ -125,63 +131,75 @@ $(document).ready(function(){
 							</c:forEach>
 							<input type="hidden" id="roleId" name="roleId" value="">
 					</div> --%>
-					<div class="form-group">
-						<label class=" col-md-4 control-label text-right">机构类型</label>
-						<div class="col-md-5">
-							<select class="form-control" required id="orgType"
-								disabled="disabled"> ${cm:createHtmlByCodem('ORG_TYPE',usrInfo.orgType) }
-							</select>
-						</div>
+					
+					<div class="form-group" >
+					<label class=" col-xs-4 control-label text-right" >所属机构</label>
+					<div class=" col-xs-5">
+						<input type="text" class="form-control col-xs-11 " value="${orgName.orgName }" readonly="readonly"
+							placeholder="所属机构" id="orgName" name="orgName" />
+							   <input type="hidden" name="orgNo" id = "orgNo" value="${usrInfo.orgNo}" />
 					</div>
-					<div class="form-group">
-						<label class=" col-md-4 control-label text-right">所属机构</label>
-						<div class=" col-md-5">
-							<input type="text" class="form-control col-md-11 "
-								placeholder="所属机构" id="_orgName" name="orgName" value="${orgName.orgName }"
-								disabled="disabled" /> 
-								<input type="hidden" name="orgNo"id="_orgNo" />
-								<!-- <input type="hidden" name="orgType"id="orgType" /> -->
-						</div>
+					<button type="button" class="btn btn-primary" onclick="openAdd()">
+		     	<i class="icon-plus-sign"></i> 选择</button>
+		     	</div>
+					
+<!-- 					<div class="form-group"> -->
+<!-- 						<label class=" col-md-4 control-label text-right">机构类型</label> -->
+<!-- 						<div class="col-md-5"> -->
+<!-- 							<select class="form-control" required id="orgType" -->
+<%-- 								disabled="disabled"> ${cm:createHtmlByCodem('ORG_TYPE',usrInfo.orgType) } --%>
+<!-- 							</select> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label class=" col-md-4 control-label text-right">所属机构</label> -->
+<!-- 						<div class=" col-md-5"> -->
+<!-- 							<input type="text" class="form-control col-md-11 " -->
+<%-- 								placeholder="所属机构" id="_orgName" name="orgName" value="${orgName.orgName }" --%>
+<!-- 								disabled="disabled" />  -->
+<!-- 								<input type="hidden" name="orgNo"id="_orgNo" /> -->
+<!-- 								<input type="hidden" name="orgType"id="orgType" /> -->
+<!-- 						</div> -->
 						<!-- <div class=" col-md-1 paddtop5">
 							<a href="javascript:void(0)" onclick="openOrgInfo()">选择</a>
 						</div>  -->
-					</div>
-					<div class="form-group">
-						<label class=" col-md-4 control-label text-right">出生日期</label>
-						<div class=" col-md-5">
-							<input type="text" class="form-control" placeholder="出生日期" 
-							id="birthDate" name="birthDate" onClick="WdatePicker()" value="${usrInfo.birthDate }"/>
-						</div>
-					</div>
-						<div class="form-group">
-						<label class=" col-md-4 control-label text-right">手机号码</label>
-						<div class=" col-md-5">
-							<input type="text" class="form-control col-md-11 "
-								placeholder="手机号码" id="mblNo" name="mblNo" required value="${usrInfo.mblNo }"/>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class=" col-md-4 control-label text-right">证书编号</label>
-						<div class=" col-md-5">
-							<input type="text" class="form-control" placeholder="证书编号" 
-							id="licenceCode" name="licenceCode" value="${usrInfo.licenceCode }"/>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class=" col-md-4 control-label text-right">身份证</label>
-						<div class=" col-md-5">
-							<input type="text" class="form-control col-md-11 " placeholder="省份证" 
-								id="certId" name="certId" required value="${usrInfo.certId }"/>
-						</div>
-					</div>
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label class=" col-md-4 control-label text-right">出生日期</label> -->
+<!-- 						<div class=" col-md-5"> -->
+<!-- 							<input type="text" class="form-control" placeholder="出生日期"  -->
+<%-- 							id="birthDate" name="birthDate" onClick="WdatePicker()" value="${usrInfo.birthDate }"/> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 						<div class="form-group"> -->
+<!-- 						<label class=" col-md-4 control-label text-right">手机号码</label> -->
+<!-- 						<div class=" col-md-5"> -->
+<!-- 							<input type="text" class="form-control col-md-11 " -->
+<%-- 								placeholder="手机号码" id="mblNo" name="mblNo" required value="${usrInfo.mblNo }"/> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label class=" col-md-4 control-label text-right">证书编号</label> -->
+<!-- 						<div class=" col-md-5"> -->
+<!-- 							<input type="text" class="form-control" placeholder="证书编号"  -->
+<%-- 							id="licenceCode" name="licenceCode" value="${usrInfo.licenceCode }"/> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label class=" col-md-4 control-label text-right">身份证</label> -->
+<!-- 						<div class=" col-md-5"> -->
+<!-- 							<input type="text" class="form-control col-md-11 " placeholder="省份证"  -->
+<%-- 								id="certId" name="certId" required value="${usrInfo.certId }"/> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
 
-					<div class="form-group">
-						<label class=" col-md-4 control-label text-right">邮箱 </label>
-						<div class=" col-md-5">
-							<input type="text" class="form-control col-md-11 "
-								placeholder="邮箱 " id="email" name="email" value="${usrInfo.email }"/>
-						</div>
-					</div>
+<!-- 					<div class="form-group"> -->
+<!-- 						<label class=" col-md-4 control-label text-right">邮箱 </label> -->
+<!-- 						<div class=" col-md-5"> -->
+<!-- 							<input type="text" class="form-control col-md-11 " -->
+<%-- 								placeholder="邮箱 " id="email" name="email" value="${usrInfo.email }"/> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<div class="form-group">
 						<label class=" col-md-4 control-label text-right">备注</label>
 						<div class=" col-md-5">
