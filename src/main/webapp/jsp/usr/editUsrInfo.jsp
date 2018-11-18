@@ -135,9 +135,9 @@ $(document).ready(function(){
 					<div class="form-group" >
 					<label class=" col-xs-4 control-label text-right" >所属机构</label>
 					<div class=" col-xs-5">
-						<input type="text" class="form-control col-xs-11 " value="${orgName.orgName }" disabled="false"
+						<input type="text" class="form-control col-xs-11 " value="${orgName.orgName }" readonly="readonly"
 							placeholder="所属机构" id="orgName" name="orgName" />
-							   <input type="hidden" name="orgNo" id = "orgNo"/>
+							   <input type="hidden" name="orgNo" id = "orgNo" value="${usrInfo.orgNo}" />
 					</div>
 					<button type="button" class="btn btn-primary" onclick="openAdd()">
 		     	<i class="icon-plus-sign"></i> 选择</button>

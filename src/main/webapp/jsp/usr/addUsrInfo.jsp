@@ -50,7 +50,13 @@
 // 	   str += '身份证号码输入错误!\n';
 // 	   $('#certId').focus();
 // 	  }
-// 	 }
+// 	   
+     if(($.trim($('#orgNo').val()).length == 0)){
+    	 
+    	 str += '请选择机构';
+     }
+    	 
+     
 	 // 如果没有错误则提交
 	 if(str != '') {
 	  alert(str);
@@ -134,7 +140,7 @@
 					<label class=" col-xs-4 control-label text-right" >所属机构</label>
 					<div class=" col-xs-5">
 						<input type="text" class="form-control col-xs-11 "
-							placeholder="所属机构" id="orgName" name="orgName" disabled="false"/>
+							placeholder="所属机构" id="orgName" name="orgName" readonly="readonly" required/>
 							   <input type="hidden" name="orgNo" id = "orgNo"/>
 					</div>
 					<button type="button" class="btn btn-primary" onclick="openAdd()">
@@ -193,8 +199,10 @@
 					<div class="form-group">
 						<label class=" col-md-4 control-label text-right">备注</label>
 						<div class=" col-md-5">
-							<input type="text" class="form-control col-md-11 " 
-								placeholder="备注" id="strRemark" name="strRemark"  strRemark="true"/>
+						
+						<textarea class="form-control col-xs-11 "
+							placeholder="备注" id="strRemark" name="strRemark" strRemark="true" ></textarea>
+							
 						</div>
 					</div>
 					<div class=" form-group" align="center">

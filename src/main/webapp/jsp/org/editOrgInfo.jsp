@@ -81,8 +81,8 @@ $(document).ready(function(){
 			<div class="form-group" >
 					<label class=" col-xs-4 control-label text-right" >上级机构</label>
 					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11 "
-							placeholder="上级机构" id="parentOrgName" name="parentOrgName" />
+						<input type="text" class="form-control col-xs-11 " readonly="readonly"
+							placeholder="上级机构" id="parentOrgName" name="parentOrgName" value="${orginfo.parentOrgName}" />
 							   <input type="hidden" name="parentOrgNo" id = "parentOrgNo"/>
 					</div>
 					<button type="button" class="btn btn-primary" onclick="openAdd()">

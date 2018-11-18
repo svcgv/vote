@@ -120,7 +120,7 @@
                 $.openWindow({
                     url: 'formGroup?act=add',
                     title: "选择客户",
-                    width: "700"
+                    width: "750"
                 });
             });
             // 清空客户
