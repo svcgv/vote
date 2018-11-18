@@ -19,8 +19,8 @@ $(document).ready(function() {
 
 	//保存角色
 	function saveBtnRole() {
-		var objRow = selectRow("btnIdArray");
-		$("#_btnId").val(objRow.val);
+		var objRow = checkedRet;
+		$("#_btnId").val(checkedRet);
 		$.indi.ajaxSubmit({
 			url : "${ctx}/btnRole/addSave.do",
 			closeMode : true,
@@ -32,6 +32,10 @@ $(document).ready(function() {
 			}
 		});
 	}
+	var checkedRet=[];
+	var btnArr = "${btnArr}";
+	checkedRet = btnArr.split(",");
+	
 	
 	
 </script>
@@ -53,6 +57,7 @@ $(document).ready(function() {
 					<!--角色主键 -->
 					<input type="hidden" name="roleId" id="_roleId">
 					<input type="hidden" name="btnId" id="_btnId">
+					
 					<div class="form-group">
 					<label class="col-xs-2 control-label text-right">按钮名称</label>
 					<div class=" col-xs-4">
@@ -119,13 +124,18 @@ $(document).ready(function() {
 					}
 					$.indi.loadPages(pages);
 					
-					var checkedRet=[];
+					
+					
+					//console.log(checkedRet)
 					$(".table-role-hook tbody").on("click",".j-checkbox",function(){
 						var roleId=$(this).next("input").val();
 						if($(this).is(":checked")){
+							
 							checkedRet.push(roleId);
+							
 							$.unique(checkedRet);
 						}else{
+							
 							var index=$.inArray(roleId,checkedRet);
 							if(index > -1){
 								checkedRet.splice(index,1)

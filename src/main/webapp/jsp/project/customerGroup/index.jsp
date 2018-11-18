@@ -31,14 +31,14 @@
 		</div>
 		<div class="layui-form-item" style="margin-bottom:0px;">
             <div class="layui-inline">
-                <label class="layui-form-label">创建时间(开始)：</label>
+                <label class="layui-form-label">创建日期(开始)：</label>
                 <div class="layui-input-inline">
                     <input type="text" name="createTimeStart" id="createTimeStart" autocomplete="off"
                            class="layui-input form-control hasDatepicker">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">创建时间(结束)：</label>
+                <label class="layui-form-label">创建日期(结束)：</label>
                 <div class="layui-input-inline">
                     <input type="text" name="createTimeEnd" id="createTimeEnd" autocomplete="off"
                            class="layui-input form-control hasDatepicker">
@@ -130,9 +130,7 @@
                 {field: 'custGroupId', title: '客户群编号', fixed: 'left', width: 110, sort: true},
                 {field: 'custGroupName', title: '客户群名称', width: 230},
                 {field: 'creator', title: '创建人', width: 90},
-                {field: 'creatorId', title: '创建人编号', width: 100},
-                {field: 'createTime', title: '创建时间'},
-
+                {field: 'createTime', title: '创建日期'},
                 {field: 'modifyTime', title: '修改时间'},
                 {field: 'isDelete', title: '是否有效',templet:function(d){
                 	if(d.isDelete == "00"){

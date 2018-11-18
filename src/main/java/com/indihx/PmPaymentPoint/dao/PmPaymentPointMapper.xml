@@ -19,6 +19,7 @@
         <result property="modifier" column="MODIFIER"/>
         <result property="modifyTime" column="MODIFY_TIME"/>
         <result property="isDelete" column="IS_DELETE"/>
+        <result property="paymentCode" column="PAYMENT_CODE"/>
     </resultMap>
 
 	<select id="queryObject" resultMap="pmPaymentPointMap">
@@ -58,6 +59,9 @@
 				MODIFY_TIME = #{modifyTime} AND 			</if>
 						<if test="isDelete != null and isDelete!=''"  >
 				IS_DELETE = #{isDelete}			</if>
+			 <if test="paymentCode != null and paymentCode!=''">
+				 PAYMENT_CODE = #{paymentCode} AND
+			 </if>
 					</trim> 
 	</select>
 	
@@ -96,7 +100,9 @@
 			<if test="paymentAmount != null and paymentAmount!=''">
 				,PAYMENT_AMOUNT	
 			</if>
-		
+			<if test="paymentCode != null and paymentCode!=''">
+				,PAYMENT_CODE
+			</if>
 			<if test="remark != null and remark!=''">
 				,REMARK	
 			</if>
@@ -117,10 +123,8 @@
 				,MODIFY_TIME	
 			</if>
 		
-			<if test="isDelete != null and isDelete!=''">
-				,IS_DELETE	
-			</if>
-		
+				,IS_DELETE
+
 		)
 		values
 		(
@@ -146,6 +150,9 @@
 		<if test="paymentAmount != null and paymentAmount!=''">
 			,#{paymentAmount}
 		</if>
+		<if test="paymentCode != null and paymentCode!=''">
+			,#{paymentCode}
+		</if>
 		<if test="remark != null and remark!=''">
 			,#{remark}
 		</if>
@@ -161,9 +168,7 @@
 		<if test="modifyTime != null and modifyTime!=''">
 			,#{modifyTime}
 		</if>
-		<if test="isDelete != null and isDelete!=''">
-			,#{isDelete}
-		</if>
+			,'00'
 		)
 	</insert>
 	 
@@ -203,7 +208,9 @@
 	<delete id="delete">
 		delete from pm_payment_point where PAYMENT_ID = #{value}
 	</delete>
-	
+	<delete id="deleteByForeignId">
+		delete from pm_payment_point where PAYMENT_FOREIGN_ID = #{value}
+	</delete>
 
 
 </mapper>

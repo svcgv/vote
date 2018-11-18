@@ -99,13 +99,13 @@
 					</div>
 				</form>
 				<div class="col-md-12">
-					<button type="button" class="btn btn-primary" onclick="openAdd()">
+					<button type="button" class="btn btn-primary" power="10000501" onclick="openAdd()"> 
 						<i class="icon-plus-sign"></i> 新增
 					</button>
-					<button type="button" class="btn btn-primary" onclick="updCodeData()">
+					<button type="button" class="btn btn-primary" power="10000502" onclick="updCodeData()">
 						<i class="icon-edit"></i> 修改
 					</button>
-					<button type="button" class="btn btn-primary" onclick="delCodeData()">
+					<button type="button" class="btn btn-primary" power="10000503" onclick="delCodeData()">
 						<i class="icon-trash"></i> 删除
 					</button>
 				</div>

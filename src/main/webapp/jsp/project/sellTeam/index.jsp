@@ -2,15 +2,14 @@
 <%@ include file="/resources/admincp/layouts/main.jsp"%>
 <body>
 <style>
-.layui-form-label{width:100px!important;}
+.layui-form-label{width:110px!important;}
 </style>
 <div class="custom-info-wrapper">
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 	  <legend>销售团队管理</legend>
 	</fieldset>
 	<form class="layui-form" id="customer-query-form" method="POST" action="">
-	   <div class="layui-form-item">
-	   
+	   <div class="layui-form-item" style="margin-bottom:0px;">
 		  	<div class="layui-inline">
 		      <label class="layui-form-label">团队名称：</label>
 		       <div class="layui-input-inline">
@@ -24,23 +23,7 @@
 		         <input type="text" name="groupCode"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
-		    
-		    
-		    
-		     <div class="layui-inline">
-		      <label class="layui-form-label">创建时间(开始)：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="createTimeStart" id="startTime" autocomplete="off" class="layui-input form-control">
-		      </div>
-		    </div>
-		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">创建时间(结束)：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="createTimeEnd" id="endTime"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		    </div>
-		   <div class="layui-inline">
 		      <label class="layui-form-label">是否有效：</label>
 		      <div class="layui-input-inline">
 		        <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
@@ -48,13 +31,28 @@
 		        </select>
 		      </div>
 		    </div>
+		   </div>
+		    
+		   <div class="layui-form-item" style="margin-bottom:0px;"> 
+		     <div class="layui-inline">
+		      <label class="layui-form-label">创建日期(开始)：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="createTimeStart" id="startTime" autocomplete="off" class="layui-input form-control hasDatepicker">
+		      </div>
+		    </div>
+		    
+		    <div class="layui-inline">
+		      <label class="layui-form-label">创建日期(结束)：</label>
+		       <div class="layui-input-inline">
+		         <input type="text" name="createTimeEnd" id="endTime"  autocomplete="off" class="layui-input form-control hasDatepicker">
+		      </div>
+		    </div>
 		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:15px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
-			     
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
 			  </div>
 		   </div>
 	   </div>
@@ -118,7 +116,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'groupName', title:'团队名称', width:230},
 	  	      {field:'ownerOrgId', title:'所属机构编号', width:230},
 	  	      {field:'ownerOrgName', title:'所属机构名称', width:230},
-	  	      {field:'createTime', title:'创建时间'},
+	  	      {field:'createTime', title:'创建日期'},
             {field:'isDelete', title:'是否有效'},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],

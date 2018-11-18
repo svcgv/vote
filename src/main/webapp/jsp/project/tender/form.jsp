@@ -25,6 +25,7 @@
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    
 		    <div class="layui-inline">
@@ -32,6 +33,7 @@
 		       <div class="layui-input-inline">
 		         <input type="number" name="firstBidAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    
 		    <div class="layui-inline">
@@ -39,6 +41,7 @@
 		       <div class="layui-input-inline">
 		         <input type="number" name="predictAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    
 		     <div class="layui-inline">
@@ -46,6 +49,7 @@
 		      <div class="layui-input-inline">
 		       <input type="number" name="predictCost"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    
 		     <div class="layui-inline">
@@ -53,12 +57,14 @@
 		       <div class="layui-input-inline">
 		         <input type="number" name="predictProfitRate"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 			  <div class="layui-inline">
 				  <label class="layui-form-label">税率（%）：</label>
 				  <div class="layui-input-inline">
 					  <input type="number" name="taxRate"  autocomplete="off" class="layui-input form-control">
 				  </div>
+				  <span class="f-placeholder"></span>
 			  </div>
 		    
 		     <div class="layui-inline">
@@ -66,12 +72,14 @@
 		       <div class="layui-input-inline">
 	         		<input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 			  <div class="layui-inline">
 				  <label class="layui-form-label">项目结束时间：</label>
 				  <div class="layui-input-inline">
 					  <input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 				  </div>
+				  <span class="f-placeholder"></span>
 			  </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
@@ -79,18 +87,17 @@
 		          <input type="text" name="constructionDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="constructionDeptId">
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
 		    </div>
 		    
 		    		    
 		    <div  class="layui-inline">
-		    <label class="layui-form-label">交付部门负责人：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="constructionDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="constructionDeptManagerId">
-		      </div>
+		    	<label class="layui-form-label">交付部门负责人：</label>
+		         <div class="layui-input-inline">
+			          <input type="text" name="constructionDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+			          <input type="text" style='display:none' name="constructionDeptManagerId">
+		          </div>
+		          <span class="f-placeholder"></span>
 		     </div> 
 		       
 		    
@@ -100,82 +107,74 @@
 		          <input type="text" name="sellDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="sellDeptId">
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
 		    </div>
 		     
 		    <div  class="layui-inline">
-		    <label class="layui-form-label">销售部门负责人：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="sellDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="sellDeptManagerId">
-		      </div>
+		    	<label class="layui-form-label">销售部门负责人：</label>
+			       <div class="layui-input-inline">
+			          <input type="text" name="sellDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+			          <input type="text" style='display:none' name="sellDeptManagerId">
+			      </div>
+			      <span class="f-placeholder"></span>
 		     </div> 
 		     
-	      <div  class="layui-inline">
-		    <label class="layui-form-label">项目经理：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="projectManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="projectManagerId">
-		      </div>
-		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-projectManager" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+	       <div  class="layui-inline">
+		         <label class="layui-form-label">项目经理：</label>
+		         <div class="layui-input-inline">
+			          <input type="text" name="projectManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+			          <input type="text" style='display:none' name="projectManagerId">
+		        </div>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-projectManager" ><i class="layui-icon layui-icon-search"></i></button>
 		     </div> 
 		     
 		      <div class="layui-inline">
-		      <label class="layui-form-label">技术总监：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="technicalDirectorId">
-		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+			      <label class="layui-form-label">技术总监：</label>
+			       <div class="layui-input-inline">
+			          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+			          <input type="text" style='display:none' name="technicalDirectorId">
+			      </div>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">客户名称：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
-		         <input type="text" style='display:none' name="custId">
-		         <input type="text" style='display:none' name="custSapCode">
-		      </div>
-		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
-		    </div>
-		     <div class="layui-inline">
-		      <label class="layui-form-label">客户经理：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="custManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="custManagerId">
-		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+			      <label class="layui-form-label">客户名称：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+			         <input type="text" style='display:none' name="custId">
+			         <input type="text" style='display:none' name="custSapCode">
+			      </div>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
-		   
+		     <div class="layui-inline" style="vertical-align:top;">
+		      	<label class="layui-form-label">客户经理：</label>
+			       <div class="layui-input-inline">
+			          <input type="text" name="custManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+			          <input type="text" style='display:none' name="custManagerId">
+			      </div>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
-		       <div class="layui-input-inline" style="width:363px;height: 50px;">
+		       <div class="layui-input-inline" style="width:230px;">
 				   <textarea name="paymentPoint" rows="2"  placeholder="3/3/3/1,月/季/年" class="layui-textarea form-control"></textarea>
 		      </div>
 		    </div>
 		    
-	      <!-- <div class="layui-inline">
-	       		 <label class="layui-form-label" style="width:170px!important;">工作任务及范围是否清晰：</label>
-	       		 <div class="layui-input-inline">
-	       		 	open 是开启 close 是关闭   对应 isWorkAreaExplicit 数据字典
-			        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="是|否">
+	       <div class="layui-inline">
+	       		 <label class="layui-form-label">备注：</label>
+	       		 <div class="layui-input-inline" style="width:230px;">
+			      <textarea name="remark"  class="layui-textarea form-control"></textarea>
 			    </div>
-	       </div> -->
-	       <div class="file-hook" style="width:95%;margin:80px 10px;">
+	       </div>
+	       
+		 </div>
+		    
+	       <div class="layui-form-item clearfix" style="width:95%;margin:10px 10px;">
 		      <div class="layui-upload">
-		      <div style="display:inline-block;width:100%;text-align:right">
+		      <div style="display:inline-block;width:100%;">
 			  	<button type="button" class="layui-btn" id="wosUploads"><i class="layui-icon"></i>选择文件</button> 
 			  	<button type="button" class="layui-btn" id="wosListAction">开始上传</button>
 		  	  </div>
@@ -184,22 +183,15 @@
 				      <thead>
 				        <tr><th>文件名</th>
 				        <th>大小</th>
-				        <th>状态</th>
-				        <th>操作</th>
 				        <th>文件类型</th>
+				        <th>状态</th>
+				         <th>操作</th>
 				      </tr></thead>
 				      <tbody id="wosFileList"></tbody>
 				    </table>
 				  </div>
 			 </div> 
-		  </div>
 		   
-	       <div class="layui-inline">
-	       		 <label class="layui-form-label">备注：</label>
-	       		 <div class="layui-input-inline" style="width:323px;">
-			      <textarea name="remark"  class="layui-textarea form-control"></textarea>
-			    </div>
-	       </div>
 		     
 		     
 		  </div>
@@ -251,15 +243,6 @@ $(function(){
 		 
 	// form 表单手动渲染
 	  form.render();
-  //监听指定开关
-  form.on('switch(switchTest)', function(data){
-   	 var check= this.checked ? true : false;
-   	 if(check){
-   		 $("#tender-addForm-hook .file-hook").show();
-   	 }else{
-   		 $("#tender-addForm-hook .file-hook").hide();
-   	 }
-  });
   function getFileTableParams(){
 	  var files=[]
 	  var tbody = document.getElementById('wosFileList')
@@ -267,7 +250,7 @@ $(function(){
 		  for(var i = 0;i<tbody.children.length;i++){
 			  var item={}
 			  item.fileName = tbody.children[i].children[0].innerText
-			  item.fileType = tbody.children[i].children[4].children[0].children[0].value
+			  item.fileType = tbody.children[i].children[2].children[0].children[0].value
 			  files.push(item)
 		  }
 	  }
@@ -295,21 +278,23 @@ $(function(){
         var tr = $(['<tr id="upload-'+ index +'">'
           ,'<td>'+ file.name +'</td>'
           ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
-          ,'<td>等待上传</td>'
           ,'<td>'
-            ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
-            ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
-          ,'</td>'
-          ,'<td>'
-            ,' <div class="layui-input-inline">'
-           	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+          ,' <div class="layui-input-inline">'
+         	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
 	          ,'<option value="">请选择</option>'
 	        	,'<option value="00" selected>招标文件</option>'
 	        	,'<option value="01">客户需求文件</option>'
 	        	,'<option value="02" >内部评审文件</option>'
 	        	,'</select>'
-  				,'</div>'
+				,'</div>'
+        ,'</td>'
+
+        ,'<td>等待上传</td>'
+          ,'<td>'
+            ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+            ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
           ,'</td>'
+          
         ,'</tr>'].join(''));
         //单个重传
         tr.find('.demo-reload').on('click', function(){

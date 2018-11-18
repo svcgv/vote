@@ -12,6 +12,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.indihx.PmContractInfo.entity.PmContractInfoEntity;
+import com.indihx.PmContractInfo.service.PmContractInfoService;
+import com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity;
+import com.indihx.PmPaymentPoint.service.PmPaymentPointService;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -50,10 +54,10 @@ import com.indihx.system.service.impl.ParamsInfoServiceimpl;
 public class ContractController extends AbstractBaseController{
 	@Autowired
 	private ParamsInfoServiceimpl infoservice;
-	@Autowired
-    private PmConfirmBidService pmConfirmBidService;
     @Autowired
-    private PmFileService pmFileService;
+    private PmPaymentPointService pmPaymentPointService;
+	@Autowired
+	private PmContractInfoService pmContractInfoService;
 	
 	@RequestMapping("/contract/index")
 	public ModelAndView addCustomView() {
@@ -83,15 +87,16 @@ public class ContractController extends AbstractBaseController{
 	public ModelAndView editFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
 		ModelAndView view = new ModelAndView();
 		
-		PmConfirmBidEntity entity = pmConfirmBidService.queryObject(id);
-		Map<String,Object> maps = new HashMap<String,Object>();
-		maps.put("foreignId", id);
-		maps.put("isDelete", "00");
-		view.addObject("file",pmFileService.queryList(maps));
-		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
+		PmContractInfoEntity entity = pmContractInfoService.queryObject(id);
+		view.addObject("pmContract",JSON.toJSONString(entity));
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
-		
+		Map<String,Object> payMap = new HashMap<String, Object>();
+		payMap.put("paymentForeignId", id);
+		List<PmPaymentPointEntity> pmPaymentPoints = pmPaymentPointService.queryList(payMap);
+		view.addObject("pmPaymentPoints",pmPaymentPoints);
+
+
 		view.addObject("act",act);
 		view.addObject("id",id);
 		
@@ -101,17 +106,15 @@ public class ContractController extends AbstractBaseController{
 	@RequestMapping(value="/contract/view",method=RequestMethod.GET)
 	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") long id) {
 		ModelAndView view = new ModelAndView();
-		
-		PmConfirmBidEntity entity = pmConfirmBidService.queryObject(id);
-		Map<String,Object> maps = new HashMap<String,Object>();
-		maps.put("foreignId", id);
-		maps.put("isDelete", "00");
-		List<PmFileEntity> pmFiles = pmFileService.queryList(maps);
-		view.addObject("file",pmFiles);
-		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
+
+		PmContractInfoEntity entity = pmContractInfoService.queryObject(id);
+		view.addObject("pmContract",JSON.toJSONString(entity));
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
-		
+		Map<String,Object> payMap = new HashMap<String, Object>();
+		payMap.put("paymentForeignId", id);
+		List<PmPaymentPointEntity> pmPaymentPoints = pmPaymentPointService.queryList(payMap);
+		view.addObject("pmPaymentPoints",pmPaymentPoints);
 		view.addObject("act",act);
 		view.addObject("id",id);
 		
@@ -154,8 +157,15 @@ public class ContractController extends AbstractBaseController{
 			view.setViewName("/project/contract/customer");
 			return view;
 		}
-		
-		
+
+	// 用户
+	@RequestMapping(value="/contract/project",method=RequestMethod.GET)
+	public ModelAndView projectFormView() {
+		ModelAndView view = new ModelAndView();
+
+		view.setViewName("/project/contract/project");
+		return view;
+	}
 	
 	
 }

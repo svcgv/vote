@@ -59,7 +59,9 @@
             <%--</c:forEach>--%>
             <%--</div>--%>
             <%--</div>--%>
-            <table class="layui-hide" id="customInnerTable" lay-filter="custom" style="overflow:hidden;"></table>
+           <div style="width:670px;margin-left:10px;">
+	            <table class="layui-hide" id="customInnerTable" lay-filter="custom" style="overflow:hidden;"></table>
+           </div>
         </div>
     </form>
     <div class="layui-layer-btn layui-layer-btn-c">
@@ -107,7 +109,6 @@
                                 elem: '#customInnerTable',
                                 id: 'table-chosedProject',
                                 height: '250',
-                                width: "690",
                                 title: '客户数据表',
                                 cols: [[
                                     {field: 'sapCode', title: 'sap编号',templet:function(d){
@@ -210,19 +211,15 @@
                                     data: JSON.stringify(dataparam),
                                     contentType: 'application/json',
                                     success: function (res) {
-                                        console.log(res)
-                                        layer
-                                            .msg(
-                                                "新增成功",
-                                                {
-                                                    icon: 1
-                                                });
-                                        win.close();
+                                        layer.msg("修改成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
+                                            win.close();
+                                            location.reload();
+                                        });
                                     },
                                     error: function () {
                                         layer
                                             .msg(
-                                                "新增失败",
+                                                "修改失败",
                                                 {
                                                     icon: 5
                                                 });

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import java.util.Date;
 import java.util.List;
+
+import com.indihx.comm.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,6 +82,7 @@ public class PmCustomerGroupController {
         UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
         pmCustomerGroup.setCreatorId(user.getUsrId());
         pmCustomerGroup.setCreator(user.getUsrName());
+        pmCustomerGroup.setCreateTime(DateUtil.formatFromDB(DateUtil.getSysDate()));
         pmCustomerGroupService.insert(pmCustomerGroup);
         return R.ok();
     }
@@ -91,6 +94,7 @@ public class PmCustomerGroupController {
     public @ResponseBody Map<String,Object> update(@RequestBody PmCustomerGroupEntity pmCustomerGroup,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
         pmCustomerGroup.setModifier(user.getUsrId());
+        pmCustomerGroup.setModifyTime(DateUtil.formatFromDB(DateUtil.getSysDate()));
         pmCustomerGroupService.update(pmCustomerGroup);//全部更新
         
         return R.ok();

@@ -79,6 +79,9 @@
 	width:120px;
 	text-align: left;
 }
+.layui-textarea{
+	min-height:80px;
+}
 .layui-btn-container .layui-btn{
 	margin-bottom:0px;
 	padding:0 10px;
@@ -132,7 +135,16 @@ background-color: #009688!important;
 input.disabledColor{	
 	background:#f2f2f2;
 }
-
+/*占位符*/
+.f-placeholder{
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    font-size: 12px;
+    width:19px;
+    display:inline-block;
+    float:left;
+}
 
 
 

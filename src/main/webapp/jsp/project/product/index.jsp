@@ -2,7 +2,7 @@
 <%@ include file="/resources/admincp/layouts/main.jsp"%>
 <body>
 <style>
-.layui-form-label{width:100px!important;padding:8px 5px;}
+.layui-form-label{width:110px!important;padding:8px 5px;}
 </style>
 <div class="product-info-wrapper">
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
@@ -16,6 +16,7 @@
 		       <div class="layui-input-inline">
 		         <input type="text" name="productName"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		       <span class="f-placeholder"></span>
 		    </div>
 
 		   <div class="layui-inline">
@@ -25,6 +26,7 @@
 					   ${productType.ewTypeHtml }
 				   </select>
 			   </div>
+			   <span class="f-placeholder"></span>
 		   </div>
 
 		    <div class="layui-inline">
@@ -32,17 +34,16 @@
 		       <div class="layui-input-inline">
 		         <input type="text" name="productCode"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label" style="width:110px!important;">指导销售价(元)：</label>
+		      <label class="layui-form-label">指导销售价(元)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="productSuggestPrice"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		   
-		    
-
-		    
 		     <%--<div class="layui-inline">--%>
 		      <%--<label class="layui-form-label">开始销售日期：</label>--%>
 		       <%--<div class="layui-input-inline">--%>
@@ -56,7 +57,7 @@
 			          <input type="text" name="developmentDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control">
 			          <input type="text" style='display:none' name="developmentDeptId">
 			       </div>
-	      	 	<button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+	      	 	<button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 	        </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">研发负责人：</label>
@@ -73,13 +74,13 @@
 		        	 ${isUseful.ewTypeHtml }
 		        </select>
 		      </div>
+		       <span class="f-placeholder"></span>
 		    </div>
 		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
-			   <div class="layui-btn-container" style="margin-left:25px;">
+			   <div class="layui-btn-container">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
-			     
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 			  </div>
 		   </div>
@@ -300,7 +301,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
 	  		title:"新增产品信息",
-	  		width:"720"
+	  		width:"90%"
 	  	})
 	});
 	
@@ -318,7 +319,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:url,
 	  		title:title,
-	  		width:"700"
+	  		width:"90%"
 	  	})
 		
 	}

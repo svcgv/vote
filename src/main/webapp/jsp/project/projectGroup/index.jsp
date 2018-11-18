@@ -25,17 +25,17 @@
 		 </div>
 		<div class="layui-form-item">
 		    <div class="layui-inline">
-		      <label class="layui-form-label" >创建时间(开始)：</label>
+		      <label class="layui-form-label" >创建日期(开始)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="groupCreateTimeStart" id="groupCreateTimeStart" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
-		 </div>
-		 <div class="layui-inline">
-			   <label class="layui-form-label">创建时间(结束)：</label>
-			   <div class="layui-input-inline">
-			       <input type="text" name="groupCreateTimeEnd" id="groupCreateTimeEnd"  autocomplete="off" class="layui-input form-control hasDatepicker">
-			    </div>
-		  </div>
+		    </div>
+		    <div class="layui-inline">
+			      <label class="layui-form-label">创建日期(结束)：</label>
+			       <div class="layui-input-inline">
+			         <input type="text" name="groupCreateTimeEnd" id="groupCreateTimeEnd"  autocomplete="off" class="layui-input form-control hasDatepicker">
+			       </div>
+		    </div>
 		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:30px;">
@@ -103,8 +103,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	  {type: 'checkbox', fixed: 'left'},
 	  	      {field:'groupManagerCode', title:'项目群编号', width:130},
 	  	      {field:'projectGroupName', title:'项目群名称', width:130},
-	  	      {field:'groupCreatorName', title:'创建人' },
-	  	      {field:'groupCreateTime', title:'创建日期' },
+	  	      {field:'groupCreatorName', title:'项目群创建人' },
+	  	      {field:'groupCreateTime', title:'项目群创建日期' },
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'120',

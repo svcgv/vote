@@ -37,6 +37,8 @@ private String wbs;
 
 private long projectId;
 
+private String projectName;
+
 	/**
 	 * 设置：${column.comments}
 	 */
@@ -84,5 +86,13 @@ private long projectId;
 	 */
 	public long getProjectId() {
 		return projectId;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 }

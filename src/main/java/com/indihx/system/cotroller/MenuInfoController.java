@@ -41,6 +41,22 @@ public class MenuInfoController extends AbstractBaseController{
 		return view;
 	}
 	
+	/**
+	 * 打开菜单信息新增页面
+	 * @return
+	 */
+	@RequestMapping(value="/qryMenu",method=RequestMethod.GET)
+	public ModelAndView qryMenu(){
+		Map<String, Object> map=menuInfo.qryMenuInfo(new MenuVo());
+		ModelAndView view = new ModelAndView();
+		
+		view.addObject("listInfo",map.get("listInfo"));
+		view.addObject("pageInfo",map.get("pageInfo"));
+		view.setViewName("/btn/qryMenu");
+		return view;
+	}
+	
+	
 	//ajax条件筛选查询
 	@RequestMapping(value="/ajaxQryMenuInfo",method=RequestMethod.POST)
 	@ResponseBody

@@ -43,6 +43,16 @@ public class PmContractProjectRelationController {
         return R.ok().put("page", pmContractProjectRelation);
     }
 
+    /**
+     * 列表
+     */
+    @RequestMapping(value="/listProject",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> listProject(@RequestBody Map<String, Object> params,HttpSession session){
+
+        List<PmContractProjectRelationEntity> pmContractProjectRelation = pmContractProjectRelationService.queryListProject(params);
+        return R.ok().put("page", pmContractProjectRelation);
+    }
+
 
     /**
      * 信息

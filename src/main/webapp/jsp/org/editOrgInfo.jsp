@@ -42,16 +42,6 @@ $(document).ready(function(){
 			rules:{
 				orgName:{
 					required: true
-				},addres:{
-					required: true
-				},telNo:{
-					required: true
-				},linkMan:{
-					required: true
-				},postCode:{
-					required: true
-				},email:{
-					required: true
 				},remark:{
 					required: true
 				}
@@ -72,6 +62,11 @@ $(document).ready(function(){
 	function close_01(){
 		 $.indi.closePopup();
 	}
+	
+	function openAdd() {
+		var type ="add";
+		$.indi.openPopup({title: '    ',area : ['520px' , '500px'],isDate:false,url: '${ctx }/org/queryAddPara?type='+type});
+	}
 </script>
 </head>
 <body class="body-modle">
@@ -81,12 +76,26 @@ $(document).ready(function(){
 		<input type="hidden" id="bbb" value="${hpbName.hpbmc}"/>
 			<form method="post" id="i-form" class="form-horizontal">
 			<input type="hidden" id="orgNo" name="orgNo" value="${orginfo.orgNo }">
+			<input type="hidden" id="orgNo1" name="orgNo1" >
+			
+			<div class="form-group" >
+					<label class=" col-xs-4 control-label text-right" >上级机构</label>
+					<div class=" col-xs-6">
+						<input type="text" class="form-control col-xs-11 " readonly="readonly"
+							placeholder="上级机构" id="parentOrgName" name="parentOrgName" value="${orginfo.parentOrgName}" />
+							   <input type="hidden" name="parentOrgNo" id = "parentOrgNo"/>
+					</div>
+					<button type="button" class="btn btn-primary" onclick="openAdd()">
+		     	<i class="icon-plus-sign"></i> 选择</button>
+				</div>
+			
 				<div class="form-group">
 					<label class=" col-xs-4 control-label text-right">机构名称</label>
 					<div class=" col-xs-6">
 						<input type="text" class="form-control col-xs-11 "
 							placeholder="机构名称" id="orgName" name="orgName" value="${orginfo.orgName }"/>
 					</div>
+				
 				</div>
 					<div class="form-group">
 					<label class=" col-xs-4 control-label text-right">机构类型</label>
@@ -106,44 +115,44 @@ $(document).ready(function(){
 					<div class=" col-xs-6" id="hidden6">
 						<input type="text" class="form-control col-xs-11 " value="${orginfo.parentOrgName}" disabled="disabled"/>
 					</div>
-				<input type="hidden" id="parentOrgNo" value="${orginfo.parentOrgNo}" name="parentOrgNo"/>
-				<input type="hidden" id="parentOrgName" value="${orginfo.parentOrgName}" name="parentOrgName"/>
+<%-- 				<input type="hidden" id="parentOrgNo" value="${orginfo.parentOrgNo}" name="parentOrgNo"/> --%>
+<%-- 				<input type="hidden" id="parentOrgName" value="${orginfo.parentOrgName}" name="parentOrgName"/> --%>
 				</div>
-				<div class="form-group" >
-					<label class=" col-xs-4 control-label text-right" >联系人</label>
-					<div class=" col-xs-6">
-					<input type="text" class="form-control col-xs-11"
-							placeholder="联系人" id="linkMan" name="linkMan" value="${orginfo.linkMan }"/>
-					</div>
-				</div>
-				 <div class="form-group">
-					<label class=" col-xs-4 control-label text-right">地址</label>
-					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11"
-							placeholder="地址" id="addres" name="addres" value="${orginfo.addres }"/>
-					</div>
-				 </div>
-				 <div class="form-group" >
-					<label class=" col-xs-4 control-label text-right" >邮箱地址</label>
-					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11"
-							placeholder="邮箱地址" id="email" name="email" value="${orginfo.email }"/>
-					</div>
-				</div>
-				<div class="form-group" >
-					<label class=" col-xs-4 control-label text-right" >邮政编码</label>
-					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11"
-							placeholder="邮政编码" id="postCode" name="postCode" value="${orginfo.postCode }" />
-					</div>
-				</div>
-				 	 <div class="form-group">
-					<label class=" col-xs-4 control-label text-right">电话号码</label>
-					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11"
-							placeholder="电话号码" id="telNo" name="telNo" value="${orginfo.telNo }" />
-					</div>
-				 </div>
+<!-- 				<div class="form-group" > -->
+<!-- 					<label class=" col-xs-4 control-label text-right" >联系人</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 					<input type="text" class="form-control col-xs-11" -->
+<%-- 							placeholder="联系人" id="linkMan" name="linkMan" value="${orginfo.linkMan }"/> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				 <div class="form-group"> -->
+<!-- 					<label class=" col-xs-4 control-label text-right">地址</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 						<input type="text" class="form-control col-xs-11" -->
+<%-- 							placeholder="地址" id="addres" name="addres" value="${orginfo.addres }"/> --%>
+<!-- 					</div> -->
+<!-- 				 </div> -->
+<!-- 				 <div class="form-group" > -->
+<!-- 					<label class=" col-xs-4 control-label text-right" >邮箱地址</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 						<input type="text" class="form-control col-xs-11" -->
+<%-- 							placeholder="邮箱地址" id="email" name="email" value="${orginfo.email }"/> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group" > -->
+<!-- 					<label class=" col-xs-4 control-label text-right" >邮政编码</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 						<input type="text" class="form-control col-xs-11" -->
+<%-- 							placeholder="邮政编码" id="postCode" name="postCode" value="${orginfo.postCode }" /> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				 	 <div class="form-group"> -->
+<!-- 					<label class=" col-xs-4 control-label text-right">电话号码</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 						<input type="text" class="form-control col-xs-11" -->
+<%-- 							placeholder="电话号码" id="telNo" name="telNo" value="${orginfo.telNo }" /> --%>
+<!-- 					</div> -->
+<!-- 				 </div> -->
 				 <div class="form-group" >
 					<label class=" col-xs-4 control-label text-right" >备注</label>
 					<div class=" col-xs-6">

@@ -4,6 +4,7 @@ package com.indihx.PmPaymentPoint.entity;
 
 import com.indihx.BaseEntity;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -50,12 +51,12 @@ private long paymentTerm;
 	 * 
 	 */
 
-private long paymentRate;
+private BigDecimal paymentRate;
 	/**
 	 * 
 	 */
 
-private long paymentAmount;
+private BigDecimal paymentAmount;
 	/**
 	 * 
 	 */
@@ -86,19 +87,11 @@ private String modifyTime;
 	 */
 
 private String isDelete;
+	/**
+	 * 收款/付款编码
+	 */
+	private String paymentCode;
 
-	/**
-	 * 设置：
-	 */
-	public void setPaymentId(long paymentId) {
-		this.paymentId = paymentId;
-	}
-	/**
-	 * 获取：
-	 */
-	public long getPaymentId() {
-		return paymentId;
-	}
 	/**
 	 * 设置：
 	 */
@@ -162,25 +155,25 @@ private String isDelete;
 	/**
 	 * 设置：
 	 */
-	public void setPaymentRate(long paymentRate) {
+	public void setPaymentRate(BigDecimal paymentRate) {
 		this.paymentRate = paymentRate;
 	}
 	/**
 	 * 获取：
 	 */
-	public long getPaymentRate() {
+	public BigDecimal getPaymentRate() {
 		return paymentRate;
 	}
 	/**
 	 * 设置：
 	 */
-	public void setPaymentAmount(long paymentAmount) {
+	public void setPaymentAmount(BigDecimal paymentAmount) {
 		this.paymentAmount = paymentAmount;
 	}
 	/**
 	 * 获取：
 	 */
-	public long getPaymentAmount() {
+	public BigDecimal getPaymentAmount() {
 		return paymentAmount;
 	}
 	/**
@@ -254,5 +247,17 @@ private String isDelete;
 	 */
 	public String getIsDelete() {
 		return isDelete;
+	}
+
+	public void setPaymentId(long paymentId) {
+		this.paymentId = paymentId;
+	}
+
+	public String getPaymentCode() {
+		return paymentCode;
+	}
+
+	public void setPaymentCode(String paymentCode) {
+		this.paymentCode = paymentCode;
 	}
 }

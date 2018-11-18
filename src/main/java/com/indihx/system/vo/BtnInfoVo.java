@@ -14,7 +14,11 @@ package com.indihx.system.vo;
  * @author 严蒙蒙
  */
 public class BtnInfoVo extends BaseVo{
+
+
     private String btnId;//按钮主键
+
+	private String menuId;//按钮主键
 
     private String btnName;//按钮名称
 
@@ -78,4 +82,12 @@ public class BtnInfoVo extends BaseVo{
    	public void setRoleId(String roleId) {
    		this.roleId = roleId;
    	}
+
+	public String getMenuId() {
+		return menuId;
+	}
+
+	public void setMenuId(String menuId) {
+		this.menuId = menuId;
+	}
 }

@@ -104,7 +104,11 @@
 		select count(*) from PM_CONTRACT_INFO 
 	</select>
 	 
-	<insert id="insert" parameterType="com.indihx.PmContractInfo.entity.PmContractInfoEntity">
+	<insert id="insert" useGeneratedKeys="true"  keyProperty="contractId" parameterType="com.indihx.PmContractInfo.entity.PmContractInfoEntity">
+		<selectKey keyProperty="contractId" order="BEFORE"
+				   resultType="java.lang.Long">
+		select PmContractInfo_SEQ.nextval as contractId from DUAL
+		</selectKey>
 		insert into PM_CONTRACT_INFO
 		(
 		CONTRACT_ID
@@ -206,7 +210,7 @@
 		)
 		values
 		(
-		PmContractInfo_SEQ.nextval
+		#{contractId}
 		<if test="contractCode != null and contractCode!=''">
 			,#{contractCode}
 		</if>

@@ -16,6 +16,9 @@
 	position:relative;
 	top:1px;
 }
+.layui-table tbody tr:hover{
+	background:#fff;
+}
 </style>
 <div id="contract-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
@@ -23,35 +26,35 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">合同编号：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="contractCode"  autocomplete="off" class="layui-input form-control">
+				   <label name="contractCode"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">合同名称：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="contractName"  autocomplete="off" class="layui-input form-control">
+				   <label name="contractName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">合同金额（元）：</label>
 		       <div class="layui-input-inline">
-		         <input type="number" name="contractAmount"  autocomplete="off" class="layui-input form-control">
+				   <label name="contractAmount"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">税率（%）：</label>
 		      <div class="layui-input-inline">
-		       <input type="number" name="taxRate"  autocomplete="off" class="layui-input form-control">
+				  <label name="taxRate"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label" style="width:140px!important;">税后合同金额（元）：</label>
 		       <div class="layui-input-inline">
-		         <input type="number" name="afterTaxContractAmount"  autocomplete="off" class="layui-input form-control">
+				   <label name="afterTaxContractAmount"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 			  
@@ -69,39 +72,32 @@
 		    <div  class="layui-inline">
 		   	   <label class="layui-form-label">销售部门：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="sellDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="sellDeptId">
+				   <label name="sellDeptName"  class="layui-form-label"></label>
 		       </div>
-		       <button type="button"  class="layui-btn layui-btn-sm" id="payDeptNameQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
-		     </div> 
+		     </div>
 		       
 		      <div class="layui-inline">
 			   <label class="layui-form-label" style="width:80px!important;">客户经理：</label>
 			   <div class="layui-input-inline">
-				   <input type="text" name="custCnName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
-				   <input type="text" style='display:none' name="custId">
-				   <input type="text" style='display:none' name="custSapCode">
+				   <label name="custManagerName"  class="layui-form-label"></label>
 			   </div>
-			   <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-form"><i class="layui-icon layui-icon-search"></i></button>
 		   </div>
 		    <div class="layui-inline" style="margin-right:0px;">
 		       <label class="layui-form-label" style="width:80px!important;">客户名称：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="customerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="customerId">
+				   <label name="custName"  class="layui-form-label"></label>
 		      </div>
-	      	  <button type="button"  class="layui-btn layui-btn-sm" id="customerQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    <div class="layui-inline" style="margin-right: 0px;">
 		      <label class="layui-form-label" style="width:110px!important;">OA流程编号：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="OAFlow"  autocomplete="off" class="layui-input form-control">
+				   <label name="oaFlowCode"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline" style="">
 		      <label class="layui-form-label" style="width:80px!important;">公司代码：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="companyCode"  autocomplete="off" class="layui-input form-control">
+				   <label name="companyCode"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    
@@ -110,35 +106,135 @@
 	     	<div class="layui-inline">
 				  <label class="layui-form-label">合同开始日期：</label>
 				  <div class="layui-input-inline">
-					  <input type="text" name="contractStartTime" id="contractStartTime-form"  autocomplete="off" class="layui-input form-control hasDatepicker">
+					  <label name="contractStartTime"  class="layui-form-label"></label>
 				  </div>
 			  </div>
 		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">合同结束日期：</label>
 		       <div class="layui-input-inline">
-	         		<input type="text" name="contractEndTime" id="contractEndTime-form" autocomplete="off" class="layui-input form-control hasDatepicker">
+				   <label name="contractEndTime"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 			  <div class="layui-inline">
 				  <label class="layui-form-label">签订日期：</label>
 				  <div class="layui-input-inline">
-					  <input type="text" name="signContractDate" id="signContractDate-form" autocomplete="off" class="layui-input form-control hasDatepicker">
+					  <label name="signContractDate"  class="layui-form-label"></label>
 				  </div>
 			  </div>
+			 <div class="layui-inline">
+				 <label class="layui-form-label">备注：</label>
+				 <div class="layui-input-inline" style="width:323px;">
+					 <label name="remark"  class="layui-form-label"></label>
+				 </div>
+			 </div>
 	     </div>
+		<div class="layui-form-item" style="margin-bottom:0px;margin-left:10px;">
+			<div style="float:left;width: 140px;">
+				<p class="layui-form-label">项目引用列表：</p>
+			</div>
+			<div style="float:left;width:900px;">
+				<table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
+			</div>
+		</div>
+		<div class="layui-form-item" style="margin-bottom:0px;">
+			<div class="layui-inline" style="width:98%;">
+				<label class="layui-form-label">收款点信息：</label>
+			</div>
+		</div>
+		<table class="layui-table palyListTable" style="width:95%;margin-left:10px;;" >
+			<thead>
+			<tr>
+				<th style="white-space: nowrap;">序号</th>
+				<th>收款编号</th>
+				<th>收款日期</th>
+				<th>收款金额</th>
+				<th>收款比例（%）</th>
+				<th>收款要求</th>
+			</tr>
+			</thead>
+			<tbody class="payList">
+			<c:forEach items="${pmPaymentPoints}" var="app" varStatus="status" >
+			<tr>
+				<th class="paySortNum">${status.count}</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="payWbsCode"  class="layui-form-label">${app.paymentCode}</label>
+					</div>
+				</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="paymentDate"  class="layui-form-label">${app.paymentDate}</label>
+					</div>
+				</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="paymentAmount"  class="layui-form-label">${app.paymentAmount}</label>
+					</div>
+				</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="paymentRate"  class="layui-form-label">${app.paymentRate}</label>
+					</div>
+				</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="payRequirement"  class="layui-form-label">${app.remark}</label>
+					</div>
+				</th>
+			</tr>
+			</c:forEach>
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
-    	<a class="layui-layer-btn0" id="contract-add-hook" style="background:#009688;border-color:#009688;">保存</a>
     	<a class="layui-layer-btn1" id="contract-close-hook">关闭</a>
     </div>
 </div>
 <script>
 $(function(){
-	layui.use(['layer', 'form'], function(){
+	layui.use(['layer', 'form','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form;
-	 	  form.render()
+        table = layui.table;
+        var pmContract = JSON.parse('${pmContract}');
+        for (var property in pmContract) {
+            $("#contract-addForm-hook label[name='"+property+"']").text(pmContract[property]);
+
+        }
+
+        var contractId = ${id};
+        console.log(contractId);
+        var param = {"contractId": contractId};
+        $.ajax({
+            type: 'POST',
+            url: '/vote/pmcontractprojectrelation/listProject',
+            data: JSON.stringify(param),
+            contentType: 'application/json',
+            success: function (res) {
+                table.render({
+                    id:"table-chosedProject",
+                    elem: '#projectTable-chosed',
+                    height:'350',
+                    width:"700",
+                    title: '项目群数据信息',
+                    cols: [[
+                        {field:'wbs', title:'项目编号', templet:function(d){
+                            var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
+                            return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
+                        } },
+                        {field:'projectName', title:'项目名称'}
+                    ]],
+                    cellMinWidth:'90',
+                    data:res.page,
+                    page: true
+                });
+            },
+            dataType: "json"
+        });
+	 	  form.render();
+        $("#contract-addForm-hook #contract-close-hook").click(function(){
+            $(this).getWindow().close();
+            return false;
+        })
 	})
 });	
 </script>

@@ -74,8 +74,8 @@
 		    </div>
 			  <table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
 	       <div class="layui-inline">
-	       		 <label class="layui-form-label">备注：</label>
-	       		 <div class="layui-input-block" style="margin-left:130px;width:323px;">
+	       		 <label class="layui-form-label" style="width:80px!important;">备注：</label>
+	       		 <div class="layui-input-block" style="margin-left:90px;width:410px;">
 			      <textarea name="remark" readonly="readonly" class="layui-textarea form-control">${product.remark}</textarea>
 			    </div>
 	       </div>

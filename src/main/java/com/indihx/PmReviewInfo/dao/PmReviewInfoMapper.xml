@@ -18,7 +18,7 @@
 		<result property="isDelete" column="IS_DELETE" />
 		<result property="commentDetail" column="COMMENT_DETAIL" />
 		<result property="modifyTime" column="MODIFY_TIME" />
-		
+
 	</resultMap>
 
 	<resultMap type="java.util.Map" id="reviewMap">
@@ -69,10 +69,10 @@
 		<result property="isChecked" column="IS_CHECKED" />
 		<result property="remark" column="REMARK" />
 		<result property="paymentPoint" column="PAYMENT_POINT" />
-		 <result property="createTime" column="CREATE_TIME"/>
-		  <result property="modifyTime" column="MODIFY_TIME"/>
-		   <result property="bidCode" column="BID_CODE"/>
-		  
+		<result property="createTime" column="CREATE_TIME" />
+		<result property="modifyTime" column="MODIFY_TIME" />
+		<result property="bidCode" column="BID_CODE" />
+
 	</resultMap>
 	<select id="queryObject" resultMap="pmReviewInfoMap">
 		select * from pm_review_info
@@ -115,14 +115,18 @@
 				#{isDelete}
 			</if>
 			<if test="createTimeStart != null and createTimeStart!=''">
-				CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
+				CREATE_TIME <![CDATA[>=]]>
+				#{createTimeStart} AND
 			</if>
 			<!-- 结束时间 -->
 			<if test="createTimeEnd != null  and createTimeEnd!=''">
-				CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
+				CREATE_TIME <![CDATA[<=]]>
+				#{createTimeEnd} AND
 			</if>
-			<if test="modifyTime != null and modifyTime!=''"  >
-				MODIFY_TIME = #{modifyTime} AND 			</if>
+			<if test="modifyTime != null and modifyTime!=''">
+				MODIFY_TIME =
+				#{modifyTime} AND
+			</if>
 		</trim>
 	</select>
 
@@ -155,13 +159,13 @@
 			,RESULT
 		</if>
 		<if test="createTime != null and createTime!=''">
-				,CREATE_TIME	
+			,CREATE_TIME
 		</if>
 		<if test="commentDetail != null and commentDetail!=''">
-				,COMMENT_DETAIL	
+			,COMMENT_DETAIL
 		</if>
 		<if test="modifyTime != null and modifyTime!=''">
-				,MODIFY_TIME	
+			,MODIFY_TIME
 		</if>
 		,IS_DELETE
 		)
@@ -199,7 +203,8 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.indihx.PmReviewInfo.entity.PmReviewInfoEntity">
+	<update id="update"
+		parameterType="com.indihx.PmReviewInfo.entity.PmReviewInfoEntity">
 		update pm_review_info
 		<set>
 			<if test="foreignId != null and foreignId!=''">FOREIGN_ID = #{foreignId}, </if>
@@ -238,34 +243,34 @@
 
 
 	<select id="selectBidReview" resultMap="reviewMap">
-		SELECT 
-			B.BID_ID,
-			B.BID_NAME,
-			B.FIRST_BID_AMOUNT,
-			B.PREDICT_AMOUNT,
-			B.PREDICT_COST,
-			B.PREDICT_PROFIT_RATE,
-			B.PREDICT_PERIOD_START,
-			B.PREDICT_PERIOD_END,
-			B.CUST_ID,
-			B.CUST_CN_NAME,
-			B.CUST_SAP_CODE,
-			B.CONSTRUCTION_DEPT_ID,
-			B.CONSTRUCTION_DEPT_NAME,
-			B.SELL_DEPT_ID,
-			B.SELL_DEPT_NAME,
-			B.CUST_MANAGER_ID,
-			B.CUST_MANAGER_NAME,
-			B.TECHNICAL_DIRECTOR_ID,
-			B.TECHNICAL_DIRECTOR_NAME,
-			B.SELL_DEPT_MANAGER_NAME,
-			B.SELL_DEPT_MANAGER_ID,
-			B.CONSTRUCTION_DEPT_MANAGER_NAME,
-			B.CONSTRUCTION_DEPT_MANAGER_ID,
-			B.STATUS,
-			B.IS_WORK_AREA_EXPLICIT,
-			B.IS_CHECKED,
-			B.BID_CODE
+		SELECT
+		B.BID_ID,
+		B.BID_NAME,
+		B.FIRST_BID_AMOUNT,
+		B.PREDICT_AMOUNT,
+		B.PREDICT_COST,
+		B.PREDICT_PROFIT_RATE,
+		B.PREDICT_PERIOD_START,
+		B.PREDICT_PERIOD_END,
+		B.CUST_ID,
+		B.CUST_CN_NAME,
+		B.CUST_SAP_CODE,
+		B.CONSTRUCTION_DEPT_ID,
+		B.CONSTRUCTION_DEPT_NAME,
+		B.SELL_DEPT_ID,
+		B.SELL_DEPT_NAME,
+		B.CUST_MANAGER_ID,
+		B.CUST_MANAGER_NAME,
+		B.TECHNICAL_DIRECTOR_ID,
+		B.TECHNICAL_DIRECTOR_NAME,
+		B.SELL_DEPT_MANAGER_NAME,
+		B.SELL_DEPT_MANAGER_ID,
+		B.CONSTRUCTION_DEPT_MANAGER_NAME,
+		B.CONSTRUCTION_DEPT_MANAGER_ID,
+		B.STATUS,
+		B.IS_WORK_AREA_EXPLICIT,
+		B.IS_CHECKED,
+		B.BID_CODE
 		FROM
 		PM_REVIEW_INFO A
 		LEFT JOIN
@@ -277,5 +282,121 @@
 		A.REVIEW_USER_CODE=#{reviewUserCode}
 		AND
 		A.REVIEW_TYPE=#{reviewType}
+		<if test="bidCode != null  and bidCode!=''">
+			AND B.BID_CODE like concat(concat('%',#{bidCode}),'%')         </if>
+		<if test="bidName != null  and bidName!=''">
+			AND B.BID_NAME like concat(concat('%',#{bidName}),'%')         </if>
+		<if test="firstBidAmount != null and firstBidAmount!=''">
+			AND B.FIRST_BID_AMOUNT = #{firstBidAmount}
+		</if>
+		<if test="predictAmount != null  and predictAmount!=''">
+			AND B.PREDICT_AMOUNT like
+			concat(concat('%',#{predictAmount}),'%')         </if>
+		<if test="predictCost != null  and predictCost!=''">
+			AND B.PREDICT_COST like concat(concat('%',#{predictCost}),'%')
+
+		</if>
+		<if test="predictProfitRate != null  and predictProfitRate!=''">
+			AND B.PREDICT_PROFIT_RATE like
+			concat(concat('%',#{predictProfitRate}),'%')         </if>
+		<if test="predictPeriodStart != null and predictPeriodStart!=''">
+			AND B.PREDICT_PERIOD_START = #{predictPeriodStart}
+		</if>
+		<if test="predictPeriodEnd != null and predictPeriodEnd!=''">
+			AND B.PREDICT_PERIOD_END = #{predictPeriodEnd}
+		</if>
+		<if test="custId != null and custId!=''">
+			AND B.CUST_ID = #{custId}
+		</if>
+		<if test="custCnName != null and custCnName!=''">
+			AND B.CUST_CN_NAME =
+			#{custCnName}
+		</if>
+		<if test="custSapCode != null and custSapCode!=''">
+			AND B.CUST_SAP_CODE =
+			#{custSapCode}
+		</if>
+		<if test="constructionDeptId != null and constructionDeptId!=''">
+			AND B.CONSTRUCTION_DEPT_ID = #{constructionDeptId}
+		</if>
+		<if
+			test="constructionDeptName != null and constructionDeptName!=''">
+			AND B.CONSTRUCTION_DEPT_NAME = #{constructionDeptName}
+		</if>
+		<if test="sellDeptId != null and sellDeptId!=''">
+			AND B.SELL_DEPT_ID =
+			#{sellDeptId}
+		</if>
+		<if test="sellDeptName != null and sellDeptName!=''">
+			AND B.SELL_DEPT_NAME = #{sellDeptName}
+		</if>
+		<if test="custManagerId != null and custManagerId!=''">
+			AND B.CUST_MANAGER_ID = #{custManagerId}
+		</if>
+		<if test="custManagerName != null and custManagerName!=''">
+			AND B.CUST_MANAGER_NAME = #{custManagerName}
+		</if>
+		<if test="technicalDirectorId != null and technicalDirectorId!=''">
+			AND B.TECHNICAL_DIRECTOR_ID = #{technicalDirectorId}
+		</if>
+		<if
+			test="technicalDirectorName != null and technicalDirectorName!=''">
+			AND B.TECHNICAL_DIRECTOR_NAME = #{technicalDirectorName}
+		</if>
+		<if test="sellDeptManagerName != null and sellDeptManagerName!=''">
+			AND B.SELL_DEPT_MANAGER_NAME = #{sellDeptManagerName}
+		</if>
+		<if test="sellDeptManagerId != null and sellDeptManagerId!=''">
+			AND B.SELL_DEPT_MANAGER_ID = #{sellDeptManagerId}
+		</if>
+		<if
+			test="constructionDeptManagerName != null and constructionDeptManagerName!=''">
+			AND B.CONSTRUCTION_DEPT_MANAGER_NAME = #{constructionDeptManagerName}
+		</if>
+		<if
+			test="constructionDeptManagerId != null and constructionDeptManagerId!=''">
+			AND B.CONSTRUCTION_DEPT_MANAGER_ID = #{constructionDeptManagerId}
+		</if>
+		<if test="status != null and status!=''">
+			AND B.STATUS = #{status}
+		</if>
+		<if test="isWorkAreaExplicit != null and isWorkAreaExplicit!=''">
+			AND B.IS_WORK_AREA_EXPLICIT = #{isWorkAreaExplicit}
+		</if>
+		<if test="isChecked != null and isChecked!=''">
+			AND B.IS_CHECKED =
+			#{isChecked}
+		</if>
+		<if test="remark != null and remark!=''">
+			AND B.REMARK = #{remark}
+		</if>
+		<if test="paymentPoint != null and paymentPoint!=''">
+			AND B.PAYMENT_POINT = #{paymentPoint}
+		</if>
+		<if test="creatorId != null and creatorId!=''">
+			AND B.CREATOR_ID =
+			#{creatorId}
+		</if>
+		<if test="createTime != null and createTime!=''">
+			AND B.CREATE_TIME =
+			#{createTime}
+		</if>
+		<if test="modifier != null and modifier!=''">
+			AND B.MODIFIER =
+			#{modifier}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''">
+			AND B.MODIFY_TIME =
+			#{modifyTime}
+		</if>
+		<if test="currency != null and currency!=''">
+			AND B.CURRENCY =
+			#{currency}
+		</if>
+		<if test="taxRate != null and taxRate!=''">
+			AND B.TAX_RATE =
+			#{taxRate}
+		</if>
+
 	</select>
 </mapper>

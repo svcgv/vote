@@ -19,13 +19,15 @@
 </style>
 <div id="tender-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
-		  <div class="layui-form-item">
+		  <div class="layui-form-item" >
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">投标名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName" value="das"  autocomplete="off" class="layui-input form-control">
 		         <input type="text" style='display:none' name="bidId" autocomplete="off" value="1" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    
 		    <div class="layui-inline">
@@ -33,7 +35,9 @@
 		       <div class="layui-input-inline">
 		         <input type="number" name="firstBidAmount"  value="sa"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
@@ -41,15 +45,15 @@
 		         <input type="text" style='display:none' name="custId">
 		         <input type="text" style='display:none' name="custSapCode">
 		      </div>
-		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">预估合同金额：</label>
 		       <div class="layui-input-inline">
 		         <input type="number" name="predictAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    
 		     <div class="layui-inline">
@@ -57,6 +61,7 @@
 		      <div class="layui-input-inline">
 		       <input type="number" name="predictCost"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    
 		     <div class="layui-inline">
@@ -64,6 +69,7 @@
 		       <div class="layui-input-inline">
 		         <input type="number" name="predictProfitRate"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    
 		     <div class="layui-inline">
@@ -71,47 +77,50 @@
 		       <div class="layui-input-inline">
 	         		<input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
+		    
 			  <div class="layui-inline">
 				  <label class="layui-form-label">项目结束时间：</label>
 				  <div class="layui-input-inline">
 					  <input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 				  </div>
+				  <span class="f-placeholder"></span>
 			  </div>
+			  
 		    <div class="layui-inline">
 		      <label class="layui-form-label">交付部门：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="constructionDeptName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="constructionDeptId" >
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    <div  class="layui-inline">
-		    <label class="layui-form-label">交付部门负责人：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="constructionDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		          <input type="text" style='display:none' name="constructionDeptManagerId">
-		      </div>
-		      
+		   		 <label class="layui-form-label">交付部门负责人：</label>
+			       <div class="layui-input-inline">
+			          <input type="text" name="constructionDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
+			          <input type="text" style='display:none' name="constructionDeptManagerId">
+			      </div>
+			      <span class="f-placeholder"></span>
 		     </div> 
+		     
 		    <div class="layui-inline">
 		      <label class="layui-form-label">销售部门：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="sellDeptName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="sellDeptId">
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="orgQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
+		    
 		    <div  class="layui-inline">
-		    <label class="layui-form-label">销售部门负责人：</label>
+		    	<label class="layui-form-label">销售部门负责人：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="sellDeptManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="sellDeptManagerId">
 		      </div>
+		      <span class="f-placeholder"></span>
 		     </div> 
 		     <div  class="layui-inline">
 		    <label class="layui-form-label">项目经理：</label>
@@ -119,9 +128,7 @@
 		          <input type="text" name="projectManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="projectManagerId">
 		      </div>
-		      <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-projectManager" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-projectManager"><i class="layui-icon layui-icon-search"></i></button>
 		     </div> 
 		     
 		     <div class="layui-inline">
@@ -130,41 +137,47 @@
 		          <input type="text" name="custManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="custManagerId">
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">技术总监：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="technicalDirectorId">
 		      </div>
-		       <div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
-		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		       </div>
+		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
+		    </div>
+		    
+		     <div class="layui-inline">
+			      <label class="layui-form-label">付款点：</label>
+			       <div class="layui-input-inline" style="width:230px;">
+					   <textarea name="paymentPoint" rows="2"  placeholder="3/3/3/1,月/季/年" class="layui-textarea form-control"></textarea>
+			      </div>
 		    </div>
 		     <div class="layui-inline">
-		      <label class="layui-form-label">付款点：</label>
-		       <div class="layui-input-inline" style="width:363px;height: 50px;">
-				   <textarea name="paymentPoint" rows="2"  placeholder="3/3/3/1,月/季/年" class="layui-textarea form-control"></textarea>
-		      </div>
-		    </div>
+	       		 <label class="layui-form-label">备注：</label>
+	       		 <div class="layui-input-inline" style="width:230px;">
+			      <textarea name="remark"  class="layui-textarea form-control"></textarea>
+			    </div>
+	       </div>
+	    </div>
 	      
-	       <div class="file-hook" style="width:95%;margin:60px 20px;">
-		      <div class="layui-upload">
-		      <div style="display:inline-block;width:100%;text-align:right">
+       <div class="layui-form-item clearfix" style="width:95%;margin:10px 10px;">
+	      <div class="layui-upload">
+		      <div style="display:inline-block;width:100%;">
 			  	<button type="button" class="layui-btn" id="wosUploads"><i class="layui-icon"></i>选择文件</button> 
 				<button type="button" class="layui-btn" id="wosListAction">开始上传</button>
 			  </div>
-			  	  <div class="layui-upload-list">
+			  
+		  	  <div class="layui-upload-list">
 				    <table class="layui-table">
 				      <thead>
 				        <tr><th>文件名</th>
 				        <th>大小</th>
+				        <th>文件类型</th>
 				        <th>状态</th>
 				        <th>操作</th>
-				        <th>文件类型</th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
 				      <!-- 反写已上传的数据 -->
@@ -173,7 +186,7 @@
 					      	<td>${fileInfo.fileUploadName}</td>
 					      	<td>${fileInfo.fileSize}</td>
 					      	<td>已上传</td>
-					      	<td><a href='${fileInfo.filePath}' download="${fileInfo.fileUploadName}">下载</a></td>
+					      	
 					      	<td>
 					      		<c:if test="${fileInfo.fileBusinessType=='00' }">
 									招标文件
@@ -185,6 +198,7 @@
 									内部评审文件
 								</c:if>
 							</td>
+							<td><a href='/vote/pmfile/download?id=${app.fileId}'>下载</a></td>
 				      	</tr>
 				      	</c:forEach>
 				      </tbody>
@@ -192,12 +206,7 @@
 				  </div>
 			   </div> 
 		  </div>
-	       <div class="layui-inline">
-	       		 <label class="layui-form-label">备注：</label>
-	       		 <div class="layui-input-inline" style="width:323px;">
-			      <textarea name="remark"  class="layui-textarea form-control"></textarea>
-			    </div>
-	       </div>
+	       
 		     
 		     
 		  </div>
@@ -230,7 +239,7 @@ $(function(){
 	 var pmConfirmBid = JSON.parse('${pmConfirmBid}');
 	 for (var property in pmConfirmBid) {
 	 	$("#tender-addForm-hook input[name='"+property+"']").val(pmConfirmBid[property]);
-	 	if(property=='remark'){
+	 	if(property=='remark' || property=="paymentPoint"){
 	 		$("#tender-addForm-hook textarea[name='"+property+"']").val(pmConfirmBid[property]);
 	 	}
 	 }
@@ -261,11 +270,30 @@ $(function(){
 	  
   })
   
+  function getFileTableParams(){
+	  var files=[]
+	  var tbody = document.getElementById('wosFileList')
+	  if(tbody.children){
+		  for(var i = 0;i<tbody.children.length;i++){
+			  var item={}
+			  item.fileName = tbody.children[i].children[0].innerText
+			  if(tbody.children[i].children[2].children.length>0){
+				  item.fileType = tbody.children[i].children[2].children[0].children[0].value
+			  }
+			  else{
+				  item.fileType='oldFile'
+			  }
+			  files.push(item)
+		  }
+	  }
+	  return files;
+  }
   
+//多文件上传
  var demoListView = $('#wosFileList')
   ,uploadListIns = upload.render({
 	  before:function(obj){
-	    	this.data={uploadType:'00'}
+	    	this.data={uploadType:'00',fileTypes:JSON.stringify(getFileTableParams())}
 	    },
     elem: '#wosUploads'
     ,url: '/vote/pmfile/upload'
@@ -280,21 +308,22 @@ $(function(){
     	  var tr = $(['<tr id="upload-'+ index +'">'
               ,'<td>'+ file.name +'</td>'
               ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+              ,'<td>'
+              ,' <div class="layui-input-inline">'
+             	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+  	          ,'<option value="">请选择</option>'
+  	        	,'<option value="00" selected>招标文件</option>'
+  	        	,'<option value="01">客户需求文件</option>'
+  	        	,'<option value="02" >内部评审文件</option>'
+  	        	,'</select>'
+    				,'</div>'
+            ,'</td>'
               ,'<td>等待上传</td>'
               ,'<td>'
                 ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
                 ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
               ,'</td>'
-              ,'<td>'
-                ,' <div class="layui-input-inline">'
-               	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
-    	          ,'<option value="">请选择</option>'
-    	        	,'<option value="00" selected>招标文件</option>'
-    	        	,'<option value="01">客户需求文件</option>'
-    	        	,'<option value="02" >内部评审文件</option>'
-    	        	,'</select>'
-      				,'</div>'
-              ,'</td>'
+             
             ,'</tr>'].join(''));
         
         //单个重传
@@ -315,11 +344,11 @@ $(function(){
     }
     ,done: function(res, index, upload){
       if(res.code == 0){ //上传成功
-    	  fileIds = res.fileIds
+    	  fileIds.push(res.fileIds)
         var tr = demoListView.find('tr#upload-'+ index)
         ,tds = tr.children();
-        tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
-        tds.eq(3).html(''); //清空操作
+        tds.eq(3).html('<span style="color: #5FB878;">上传成功</span>');
+        tds.eq(4).html(''); //清空操作
         return delete this.files[index]; //删除文件队列已经上传成功的文件
       }
       this.error(index, upload);
@@ -442,12 +471,7 @@ $(function(){
 				 if(fileIds){
 					 newParam.fileIds=fileIds.join(',')
 				 }
-				 if(queryParams.open=='on'){
-					 newParam.isWorkAreaExplicit='00'
-				 }
-				 else{
-					 newParam.isWorkAreaExplicit='01'
-				 }
+				 console.log('newParam',JSON.stringify(newParam))
 				  return newParam
 			}
 			$.ajax({

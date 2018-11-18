@@ -31,6 +31,9 @@
       <if test="btnId != null">
         BTN_ID,
       </if>
+      <if test="menuId != null">
+        MENU_ID,
+      </if>
       <if test="btnName != null">
         BTN_NAME,
       </if>
@@ -47,6 +50,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="btnId != null">
         #{btnId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null">
+        #{menuId,jdbcType=VARCHAR},
       </if>
       <if test="btnName != null">
         #{btnName,jdbcType=VARCHAR},
@@ -67,6 +73,9 @@
     <set>
       <if test="btnName != null">
         BTN_NAME = #{btnName,jdbcType=VARCHAR},
+      </if>
+       <if test="menuId != null">
+        MENU_ID = #{menuId,jdbcType=VARCHAR},
       </if>
       <if test="btnRmk != null">
         BTN_RMK = #{btnRmk,jdbcType=VARCHAR},
@@ -96,8 +105,14 @@
   </select>
   <select id="qryRoleBtnAll" resultMap="BaseResultMap" parameterType="com.indihx.system.entity.BtnInfo">
   	select info.btn_id,info.btn_name, info.btn_rmk, info.btn_page, info.tm_smp,role.btn_id as roleBtnId
-    from btn_info info left join btn_role role on info.btn_id = role.btn_id and role.role_id=#{roleId,jdbcType=VARCHAR}
+    from btn_info info left join btn_role role on info.btn_id = role.btn_id 
+    left join role_menu menu on info.menu_id = menu.menu_id
+    
   	 <where>
+  	 	<if test="roleId != null and roleId !=''">
+  			 menu.role_id  =#{roleId,jdbcType=VARCHAR}
+  		</if>
+  	 
   		<if test="btnName != null and btnName !=''">
   			 info.btn_name like CONCAT(CONCAT('%',#{btnName}),'%')
   		</if>

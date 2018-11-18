@@ -10,7 +10,7 @@
 	</fieldset>
 	<form class="layui-form" id="contract-index-form" method="POST" action="">
 	   <div class="layui-form-item" style="margin-bottom:0px;">
-		  	<div class="layui-inline" style="margin-right:49px;">
+		  	<div class="layui-inline">
 		      <label class="layui-form-label">年份：</label>
 		       <div class="layui-input-inline">
 		         <select name="year">
@@ -23,6 +23,7 @@
 		         	<option value="2013">2013年</option>
 		         </select>
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    
 		     <div class="layui-inline" >
@@ -52,11 +53,12 @@
 			   <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		   </div>
 		   
-		    <div class="layui-inline" style="margin-right: 49px;">
+		    <div class="layui-inline">
 		      <label class="layui-form-label">OA流程编号：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="oaFlowCode"  autocomplete="off" class="layui-input form-control">
 		      </div>
+		      <span class="f-placeholder"></span>
 		    </div>
 		    
 		     <div class="layui-inline" style="margin-right:0px;">
@@ -70,19 +72,21 @@
 		    </div>
 		    <div class="layui-form-item" style="margin-bottom:0px;">
 			     <div class="layui-inline" style="margin-right:48px;">
-			      <label class="layui-form-label">创建时间(开始)：</label>
+			      <label class="layui-form-label">创建日期(开始)：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="startTime" id="startTime" autocomplete="off" class="layui-input form-control hasDatepicker">
 			      </div>
+			      <span class="f-placeholder"></span>
 			    </div>
 			    <div class="layui-inline">
-			      <label class="layui-form-label">创建时间(结束)：</label>
+			      <label class="layui-form-label">创建日期(结束)：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="endTime" id="endTime"  autocomplete="off" class="layui-input form-control hasDatepicker">
 			      </div>
+			      <span class="f-placeholder"></span>
 			    </div>
 	 	   	<div class="layui-inline" style="vertical-align: top;">
-			   <div class="layui-btn-container" style="margin-left:43px;">
+			   <div class="layui-btn-container" style="margin-left:16px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
@@ -213,25 +217,25 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    var data = obj.data;
 	    if(obj.event === 'del'){
 	      layer.confirm('确认删除行么', function(index){
-	    	  $.ajax({
-				  type:"POST",
-				  //url:"/vote/pmconfirmbid/update",
-				  //data:JSON.stringify({'bidId':data.bidId,'isDelete':'01'}),
-				  contentType:'application/json',
-				  success:function(data){
-					  table.reload('customer-table');
-				  }
-			  }); 
-	        obj.del();
+              $.ajax({
+                  type:"POST",
+                  url:"/vote/pmcontractinfo/update",
+                  data:JSON.stringify({'contractId':data.contractId,'isDelete':'01'}),
+                  contentType:'application/json',
+                  success:function(data){
+                      table.reload('customer-table');
+                  }
+              });
+              obj.del();
 	        layer.close(index);
-	        table.reload('customer-table',{});
+//	        table.reload('customer-table',{});
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
-	    	showFromTable('edit',data.contractCode);
+	    	showFromTable('edit',data.contractId);
 	    }else if(obj.event === "view"){
 	    	// 查看
-	    	showFromTable('view',data.contractCode);
+	    	showFromTable('view',data.contractId);
 	    }
 	  });
 	/*
@@ -240,7 +244,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	 $("#customQuery").click(function(){
 		 console.log("test");
 		 table.reload('customer-table',{
-				url:'/vote/pmconfirmbid/list',
+				url:'/vote/pmcontractinfo/list',
 				page:{
 					curr:1 //从第一页开始
 				},
@@ -264,7 +268,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
 	  		title:"新增合同",
-	  		width:"95%"
+	  		width:"100%"
 	  	})
 	});
 	
@@ -272,7 +276,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 查看和修改 form 表单
 	*/
 	function showFromTable(isEdit,id){
-		var _width='95%';
+		var _width='100%';
 		if(isEdit == "edit"){
 			var url='edit?act=edit&id='+id;
 			var title="修改合同信息";

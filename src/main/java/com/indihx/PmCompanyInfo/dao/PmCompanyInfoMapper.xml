@@ -5,6 +5,7 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity" id="pmCompanyInfoMap">
+        <result property="companyId" column="COMPANY_ID"/>
         <result property="companyCode" column="COMPANY_CODE"/>
         <result property="companyName" column="COMPANY_NAME"/>
         <result property="companyAddress" column="COMPANY_ADDRESS"/>
@@ -17,7 +18,7 @@
     </resultMap>
 
 	<select id="queryObject" resultMap="pmCompanyInfoMap">
-		select * from pm_company_info where COMPANY_CODE = #{value}
+		select * from pm_company_info where COMPANY_ID = #{companyId}
 	</select>
 
 	<select id="queryList" resultMap="pmCompanyInfoMap">
@@ -52,8 +53,9 @@
 	<insert id="insert" parameterType="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity">
 		insert into pm_company_info
 		(
+		COMPANY_ID
 		<if test="companyCode != null and  companyCode !=''" >
-			COMPANY_CODE	
+			,COMPANY_CODE
 		</if>
 		<if test="companyName != null and companyName  !=''">
 			,COMPANY_NAME	
@@ -80,8 +82,9 @@
 		)
 		values
 		(
+		PmCompanyInfo_SEQ.nextval
 		<if test="companyCode != null and  companyCode !=''">
-			#{companyCode}		</if>
+			,#{companyCode}		</if>
 		<if test="companyName != null and  companyName !=''">
 			,#{companyName}		</if>
 		<if test="companyAddress != null and  companyAddress !=''">
@@ -103,6 +106,7 @@
 	<update id="update" parameterType="com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity">
 		update pm_company_info 
 		<set>
+			<if test="companyCode != null and companyCode  !=''">COMPANY_CODE = #{companyCode}, </if>
 			<if test="companyName != null and companyName  !=''">COMPANY_NAME = #{companyName}, </if>
 			<if test="companyAddress != null and  companyAddress !=''">COMPANY_ADDRESS = #{companyAddress}, </if>
 			<if test="remark != null and  remark !=''">REMARK = #{remark}, </if>
@@ -112,11 +116,11 @@
 			<if test="modifyTime != null and modifyTime  !=''">MODIFY_TIME = #{modifyTime}, </if>
 			<if test="isDelete != null and  isDelete !=''">IS_DELETE = #{isDelete}</if>
 		</set>
-		where COMPANY_CODE = #{companyCode}
+		where COMPANY_ID = #{companyId}
 	</update>
 	
 	<delete id="delete">
-		delete from pm_company_info where COMPANY_CODE = #{value}
+		delete from pm_company_info where COMPANY_ID = #{companyId}
 	</delete>
 	
 
