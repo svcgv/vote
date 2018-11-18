@@ -213,7 +213,7 @@
                                         console.log(res)
                                         layer
                                             .msg(
-                                                "新增成功",
+                                                "修改成功",
                                                 {
                                                     icon: 1
                                                 });
@@ -222,7 +222,7 @@
                                     error: function () {
                                         layer
                                             .msg(
-                                                "新增失败",
+                                                "修改失败",
                                                 {
                                                     icon: 5
                                                 });

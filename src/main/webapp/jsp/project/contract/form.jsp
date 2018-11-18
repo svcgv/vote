@@ -292,21 +292,44 @@ $(function(){
 		});
 	  function getParam(){
 			var queryParams=$("#contract-addForm-hook form").serializeObject();
-			 var newParam = {}
+          if(queryParams.payWbsCode){
+              var rets=[];
+              if(!$.isArray(queryParams.payWbsCode)){
+            	  var ret={}
+            	  ret.paymentId=queryParams.payWbsCode;
+            	  ret.paymentAmount=queryParams.paymentAmount;
+            	  ret.paymentDate=queryParams.paymentDate;
+            	  ret.remark=queryParams.payRequirement;
+            	  ret.paymentRate=queryParams.paymentRate;
+                  rets.push(ret);
+              }else{
+                  for(var j=0;j<queryParams.payWbsCode.length;j++){
+                	  var ret={}
+                	  ret.paymentId=queryParams.payWbsCode[j];
+                	  ret.paymentAmount=queryParams.paymentAmount[j];
+                	  ret.paymentDate=queryParams.paymentDate[j];
+                	  ret.remark=queryParams.payRequirement[j];
+                	  ret.paymentRate=queryParams.paymentRate[j];
+                      rets.push(ret);
+                  }
+              }
+
+              delete queryParams.payWbsCode
+              delete queryParams.paymentAmount
+              delete queryParams.paymentDate
+              delete queryParams.payRequirement
+              delete queryParams.paymentRate
+              queryParams=$.extend({},true,queryParams,{paymentPoint:rets});
+          }
+         
+
+          var newParam = {}
 			  for(var i in queryParams){
 				  if(queryParams[i]){
 					  newParam[i] = queryParams[i]
 				  }
 			  }
-			 if(fileIds){
-				 newParam.fileIds=fileIds.join(',')
-			 }
-			 if(queryParams.open=='on'){
-				 newParam.isWorkAreaExplicit='00'
-			 }
-			 else{
-				 newParam.isWorkAreaExplicit='01'
-			 }
+			  console.log(newParam);
 			  return newParam
 		}
 		var win=$("#contract-addForm-hook").getWindow();
@@ -346,5 +369,4 @@ $(function(){
 	
 	})
 });
-var fileIds = []
 </script>

@@ -117,14 +117,12 @@
 				,MODIFY_TIME	
 			</if>
 		
-			<if test="isDelete != null and isDelete!=''">
-				,IS_DELETE	
-			</if>
-		
+				,IS_DELETE
+
 		)
 		values
 		(
-		PmPaymentPoint_SEQ.nextval
+		#{paymentId}
 		<if test="paymentForeignId != null and paymentForeignId!=''">
 			,#{paymentForeignId}
 		</if>
@@ -161,9 +159,7 @@
 		<if test="modifyTime != null and modifyTime!=''">
 			,#{modifyTime}
 		</if>
-		<if test="isDelete != null and isDelete!=''">
-			,#{isDelete}
-		</if>
+			,'00'
 		)
 	</insert>
 	 

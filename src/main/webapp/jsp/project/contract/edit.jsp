@@ -166,22 +166,22 @@
 				     </th>
 			        <th>
 			        	<div class="layui-input-inline">
-					         <input type="number" name="paymentAmount"  autocomplete="off" class="layui-input form-control">
+					         <input type="number" name="paymentAmount" value="32131" autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
 				     <th>
 			        	<div class="layui-input-inline">
-					         <input type="number" name="paymentRate" style="width:90px;" autocomplete="off" class="layui-input form-control">
+					         <input type="number" name="paymentRate" value="1" style="width:90px;" autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
 				     <th>
 			        	<div class="layui-input-inline">
-					         <input type="text" name="payRequirement" style="min-width:250px;" autocomplete="off" class="layui-input form-control">
+					         <input type="text" name="payRequirement" value="321" style="min-width:250px;" autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
 				     <th>
 			        	<div class="layui-input-inline">
-					         <input type="text" name="payWbsCode" autocomplete="off" class="layui-input form-control">
+					         <input type="text" name="payWbsCode" value="qwewq321" autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
 		      	 </tr>
@@ -241,35 +241,6 @@ $(function(){
             elem: "#signContractDate-form",
             theme: 'molv'
         });
-
-        var pmContract = JSON.parse('${pmContract}');
-        console.log(pmContract);
-        for (var property in pmContract) {
-            $("#contract-addForm-hook input[name='"+property+"']").val(pmContract[property]);
-            if(property=='remark'){
-                $("#contract-addForm-hook textarea[name='"+property+"']").val(pmContract[property]);
-            }
-        }
-
-		function getParam(){
-			var queryParams=$("#contract-addForm-hook form").serializeObject();
-			 var newParam = {}
-			  for(var i in queryParams){
-				  if(queryParams[i]){
-					  newParam[i] = queryParams[i]
-				  }
-			  }
-			 if(fileIds){
-				 newParam.fileIds=fileIds.join(',')
-			 }
-			 if(queryParams.open=='on'){
-				 newParam.isWorkAreaExplicit='00'
-			 }
-			 else{
-				 newParam.isWorkAreaExplicit='01'
-			 }
-			  return newParam
-		}
         // 绑定日历组件
         $(".palyListTable").on("mousedown",".paymentDate-hook",function(){
         	var _this=this;
@@ -306,6 +277,34 @@ $(function(){
        	  			$(this).parents("th").prev("th").find("input[name='paymentAmount']").val(account.toFixed(2));
        	  		}
          });
+
+        var pmContract = JSON.parse('${pmContract}');
+        for (var property in pmContract) {
+            $("#contract-addForm-hook input[name='"+property+"']").val(pmContract[property]);
+            if(property=='remark'){
+                $("#contract-addForm-hook textarea[name='"+property+"']").val(pmContract[property]);
+            }
+        }
+
+		function getParam(){
+			var queryParams=$("#contract-addForm-hook form").serializeObject();
+			 var newParam = {}
+			  for(var i in queryParams){
+				  if(queryParams[i]){
+					  newParam[i] = queryParams[i]
+				  }
+			  }
+			 if(fileIds){
+				 newParam.fileIds=fileIds.join(',')
+			 }
+			 if(queryParams.open=='on'){
+				 newParam.isWorkAreaExplicit='00'
+			 }
+			 else{
+				 newParam.isWorkAreaExplicit='01'
+			 }
+			  return newParam
+		}
 
 	// form 表单手动渲染
 	  form.render();
@@ -348,25 +347,7 @@ $(function(){
 		  		width:"700"
 		 	 });
 		});
-	  function getParam(){
-			var queryParams=$("#contract-addForm-hook form").serializeObject();
-			 var newParam = {}
-			  for(var i in queryParams){
-				  if(queryParams[i]){
-					  newParam[i] = queryParams[i]
-				  }
-			  }
-			 if(fileIds){
-				 newParam.fileIds=fileIds.join(',')
-			 }
-			 if(queryParams.open=='on'){
-				 newParam.isWorkAreaExplicit='00'
-			 }
-			 else{
-				 newParam.isWorkAreaExplicit='01'
-			 }
-			  return newParam
-		}
+	  
 		var win=$("#contract-addForm-hook").getWindow();
 		// 保存
 		$("#contract-addForm-hook #contract-add-hook").click(function(){

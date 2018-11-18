@@ -1,5 +1,9 @@
 package com.indihx.PmContractInfo.service.impl;
 
+import com.indihx.PmPaymentPoint.dao.PmPaymentPointMapper;
+import com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity;
+import com.indihx.comm.util.DateUtil;
+import com.indihx.comm.util.RandomUtil;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.List;
@@ -15,14 +19,27 @@ import com.indihx.PmContractInfo.service.PmContractInfoService;
 public class PmContractInfoServiceImpl implements PmContractInfoService {
 	@Resource
    	PmContractInfoMapper pmContractInfoMapper;
-   	
+	@Resource
+	PmPaymentPointMapper pmPaymentPointMapper;
    
    	public PmContractInfoEntity queryObject(long id){
    		return pmContractInfoMapper.queryObject(id);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmContractInfoEntity entity){
+
    		pmContractInfoMapper.insert(entity);
+   		List<PmPaymentPointEntity> paymentPointEntityList= entity.getPaymentPoint();
+   		if(paymentPointEntityList !=null) {
+   	   		for (PmPaymentPointEntity paymentPointEntity :paymentPointEntityList){
+   				paymentPointEntity.setPaymentForeignId(entity.getContractId());
+   				paymentPointEntity.setPaymentType("00");
+   				String payId = paymentPointEntity.getPaymentId()+"_"+ RandomUtil.generateString(4);
+   				paymentPointEntity.setPaymentId(payId);
+   				pmPaymentPointMapper.insert(paymentPointEntity);
+   			}
+   		}
+
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmContractInfoEntity entity){
