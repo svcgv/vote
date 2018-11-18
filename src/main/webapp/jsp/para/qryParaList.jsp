@@ -103,13 +103,13 @@
 					</div>
 				</form>
 				<div class="col-md-12">
-					<button type="button" class="btn btn-primary" onclick="openAdd()">
+					<button type="button" class="btn btn-primary" power="2018111612" onclick="openAdd()">
 						<i class="icon-plus-sign"></i> 新增
 					</button>
-					<button type="button" class="btn btn-primary" onclick="updPara()">
+					<button type="button" class="btn btn-primary" power="2018111613" onclick="updPara()">
 						<i class="icon-edit"></i> 修改
 					</button>
-					<button type="button" class="btn btn-primary" onclick="deleUsr()">
+					<button type="button" class="btn btn-primary" power="2018111614" onclick="deleUsr()">
 						<i class="icon-trash"></i> 删除
 					</button>
 				</div>

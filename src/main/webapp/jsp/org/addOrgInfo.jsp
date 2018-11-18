@@ -47,8 +47,8 @@ function show1(){
 	
 }
 function openAdd() {
-	var orgType ="pay";
-	$.indi.openPopup({title: '    ',area : ['520px' , '500px'],isDate:false,url: '${ctx }/org/queryAddPara?orgType='+orgType});
+	var type ="add";
+	$.indi.openPopup({title: '    ',area : ['520px' , '500px'],isDate:false,url: '${ctx }/org/queryAddPara?type='+type});
 }
 function save() {
 	$('#i-form').validate({
@@ -58,16 +58,6 @@ function save() {
 			},parentOrgName:{
 				required: true
 			},parentOrgNo:{
-				required: true
-			},addres:{
-				required: true
-			},telNo:{
-				required: true
-			},linkMan:{
-				required: true
-			},postCode:{
-				required: true
-			},email:{
 				required: true
 			},remark:{
 				required: true
@@ -125,7 +115,7 @@ function save() {
 					<label class=" col-xs-4 control-label text-right" >上级机构</label>
 					<div class=" col-xs-6">
 						<input type="text" class="form-control col-xs-11 "
-							placeholder="上级机构" id="parentOrgName" name=""parentOrgName"" />
+							placeholder="上级机构" id="parentOrgName" name="parentOrgName" />
 							   <input type="hidden" name="parentOrgNo" id = "parentOrgNo"/>
 					</div>
 					<button type="button" class="btn btn-primary" onclick="openAdd()">
@@ -149,42 +139,42 @@ function save() {
 <!-- 				</div> -->
 
 
-				<div class="form-group" >
-					<label class=" col-xs-4 control-label text-right" >联系人</label>
-					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11 "
-							placeholder="联系人" id="linkMan" name="linkMan" />
-					</div>
-				</div>
-				<div class="form-group" >
-					<label class=" col-xs-4 control-label text-right" >地址</label>
-					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11 "
-							placeholder="地址" id="addres" name="addres" />
-					</div>
-				</div>
-				<div class="form-group" >
-					<label class=" col-xs-4 control-label text-right" >邮箱地址</label>
-					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11 "
-							placeholder="邮箱地址" id="email" name="email" />
-					</div>
-				</div>
-				<div class="form-group" >
-					<label class=" col-xs-4 control-label text-right" >邮政编码</label>
-					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11 "
-							placeholder="邮政编码" id="postCode" name="postCode" />
-					</div>
-				</div>
+<!-- 				<div class="form-group" > -->
+<!-- 					<label class=" col-xs-4 control-label text-right" >联系人</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 						<input type="text" class="form-control col-xs-11 " -->
+<!-- 							placeholder="联系人" id="linkMan" name="linkMan" /> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group" > -->
+<!-- 					<label class=" col-xs-4 control-label text-right" >地址</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 						<input type="text" class="form-control col-xs-11 " -->
+<!-- 							placeholder="地址" id="addres" name="addres" /> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group" > -->
+<!-- 					<label class=" col-xs-4 control-label text-right" >邮箱地址</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 						<input type="text" class="form-control col-xs-11 " -->
+<!-- 							placeholder="邮箱地址" id="email" name="email" /> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group" > -->
+<!-- 					<label class=" col-xs-4 control-label text-right" >邮政编码</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 						<input type="text" class="form-control col-xs-11 " -->
+<!-- 							placeholder="邮政编码" id="postCode" name="postCode" /> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 				
-				<div class="form-group" >
-					<label class=" col-xs-4 control-label text-right" >电话号码</label>
-					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11 "
-							placeholder="电话号码" id="telNo" name="telNo" maxlength="18" minlength="6" />
-					</div>
-				</div>
+<!-- 				<div class="form-group" > -->
+<!-- 					<label class=" col-xs-4 control-label text-right" >电话号码</label> -->
+<!-- 					<div class=" col-xs-6"> -->
+<!-- 						<input type="text" class="form-control col-xs-11 " -->
+<!-- 							placeholder="电话号码" id="telNo" name="telNo" maxlength="18" minlength="6" /> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 				<div class="form-group" >
 					<label class=" col-xs-4 control-label text-right" >备注</label>
 					<div class=" col-xs-6">

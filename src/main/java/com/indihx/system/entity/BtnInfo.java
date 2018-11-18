@@ -18,6 +18,8 @@ import java.io.Serializable;
  */
 public class BtnInfo implements Serializable{
     private String btnId;//按钮主键
+    
+    private String menuId;
 
     private String btnName;//按钮名称
 
@@ -92,4 +94,12 @@ public class BtnInfo implements Serializable{
     public void setTmSmp(String tmSmp) {
         this.tmSmp = tmSmp == null ? null : tmSmp.trim();
     }
+
+	public String getMenuId() {
+		return menuId;
+	}
+
+	public void setMenuId(String menuId) {
+		this.menuId = menuId;
+	}
 }

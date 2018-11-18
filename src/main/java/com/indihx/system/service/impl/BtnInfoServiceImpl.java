@@ -69,7 +69,17 @@ public class BtnInfoServiceImpl extends AbstractBaseService  implements IBtnInfo
 		// 第几页、每页显示条数，是否汇总
 		PageHelper.startPage(btnInfoVo.getPages(), btnInfoVo.getRows(), true);
 		List<BtnInfo> listInfo = btnInfoMapper.qryRoleBtnAll(record);
+		String btnArr = "";
+		for (BtnInfo btnInfo : listInfo) {
+			if(btnInfo.getBtnId().equals(btnInfo.getRoleBtnId())) {
+				btnArr = btnArr+btnInfo.getBtnId()+",";
+			}
+		}
+		btnArr= btnArr.substring(0, btnArr.length()-1);
+		
+		
 		PageInfo pageInfo = new PageInfo(listInfo);
+		map.put("btnArr", btnArr);
 		map.put("listInfo", listInfo);
 		map.put("pageInfo", pageInfo);
 		return map;
