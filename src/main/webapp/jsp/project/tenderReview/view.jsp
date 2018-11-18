@@ -154,7 +154,7 @@
 			    </div>
 	       </div>
 	       <!-- 未评审时不显示评审记录 -->
-	        <div class="layui-inline">
+	        <div class="layui-inline"  style='margin-left:20px'>
 	       		 <label class="layui-form-label">评审记录：</label>
 	       		 
 	       		 <div class="layui-upload-list">
@@ -169,38 +169,38 @@
 		    
 	  <div class="tenderCheckBoxList">
 	  	<div class="layui-inline">
-	      <div class="layui-input-inline">
-	     	 <div>
+	      <div class="layui-input-inline" style='display:flex;flex-wrap:wrap;justify-content:center'>
+	     	 <div style='display:inline-block;width:48%;'>
 		      <label>
 		         <input type="checkbox" id='a'>
 		         	工作范围清晰
 	          </label>
 	          </div>
-	          <div>
+	          <div style='display:inline-block;width:48%'>
 	          <label>
 		         <input type="checkbox" id='b'>
 		         	技术方案合理
 	          </label>
 	          </div>
-	          <div>
+	          <div style='display:inline-block;width:48%'>
 	   		  <label>
 		         <input type="checkbox" id='c'>
 		        	 资源满足
 	          </label>
 	          </div>
-	          <div>
+	          <div style='display:inline-block;width:48%'>
 	          <label>
 		         <input type="checkbox" id='d'>
 		         	付款条件合理
 	          </label>
 	          </div>
-	          <div>
+	          <div style='display:inline-block;width:48%'>
 	          <label>
 		         <input type="checkbox" id='e'>
 		         	实施周期合理
 	          </label>
 	          </div>
-	          <div>
+	          <div style='display:inline-block;width:48%'>
 	          <label>
 		         <input type="checkbox" id='f'>
 		         	利润率达标
@@ -327,7 +327,12 @@ $(function(){
 			var act="${act}";// 区分是index页 form页 赋值问题
 			var win=$(".tender-review-wrapper").getWindow();
 			$(".formDetail-wrapper").on("click","#tender-accessReview",function(){
-				
+				if(pmConfirmBid.status=='01'){
+					  if(!getChecked()){
+						  layer.msg("请确认所有检查项通过后再次点击通过按钮",{icon:3});
+						  return
+					  }
+				  }
 				submit('00')
 				showFromTable()
 			})
@@ -338,12 +343,7 @@ $(function(){
 			
 		function submit(result){
 				
-				 if(pmConfirmBid.status=='01'){
-					  if(!getChecked()){
-						  layer.msg("请确认所有检查项通过后再次点击通过按钮",{icon:3});
-						  return
-					  }
-				  }
+				 
 				
 				var formDatas=$(".tender-review-wrapper form").serializeObject();
 				formDatas.result=result

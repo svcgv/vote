@@ -146,6 +146,17 @@ public class PmConfirmBidController {
     	pmConfirmBid.setModifier(usesr.getUsrId());
     	pmConfirmBid.setModifyTime(DateUtil.getDateTime());
         pmConfirmBidService.update(pmConfirmBid);//全部更新
+        if(pmConfirmBid.getFileIds()!=null && !"".equals(pmConfirmBid.getFileIds())) {
+        	String fileIds = pmConfirmBid.getFileIds();
+        	String[] ids = fileIds.split(",");
+        	PmFileEntity pm = new PmFileEntity();
+        	pm.setForeignId(pmConfirmBid.getBidId());
+        	for(int i=0;i<ids.length;i++) {
+        		pm.setFileId(Long.parseLong(ids[i]));
+        		pmFileService.update(pm);
+        		
+        	}
+        }
         return R.ok();
     }
 

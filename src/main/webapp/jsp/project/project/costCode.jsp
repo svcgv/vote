@@ -60,9 +60,9 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			if(isChecked){
 				var orgId=$(this).children("td").eq(1).text();
 				var orgName=$(this).children("td").eq(2).text();
-			 	if(act =="buildManagerForm"){
+			 	if(act =="costCodeForm"){
 					$("#project-form-hook input[name='costCode']").val(orgId);
-			 	}else if(act =="buildManagerEdit"){ 
+			 	}else if(act =="costCodeEdit"){ 
 					$("#project-edit-hook input[name='costCode']").val(orgId);
 			 	}
 			}

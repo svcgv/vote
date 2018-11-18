@@ -14,8 +14,6 @@
 		     <div class="layui-inline">
 		       <div class="layui-btn-container" style="margin-left:15px;">
 			    <button type="button" class="layui-btn layui-btn-sm" id="addProject-hook"  style="margin-right:15px;"><i class="layui-icon"></i>添加项目</button>
-			     <input type="hidden" id="saveCustomerIds" name="customerIds" />
-			     <input type="hidden" id="saveCustomerNames" name="customerNames" />
 			  </div>
 		    </div>
 	  	</div>
@@ -54,7 +52,6 @@ $(function(){
 			      {field:'projectName', title:'项目名称'},
 			      {fixed: 'right', title:'操作', toolbar: '#barFormDemo', width:100}
 			    ]],
-			    cellMinWidth:'90',
 			    data:chosedProject,
 			    page: true
 			  });
@@ -94,7 +91,7 @@ $(function(){
 		$(".projectGroup-form-wrapper").on("click","#projectGroup-add-hook",function(){
 			
 			var projectGroupName = $("#form-project-hook input[name='projectGroupName']").val();
-			  
+			
 			 if ($.trim(projectGroupName) == '') {
                   layer.msg("请输入项目群名称");
                   return false;
@@ -116,8 +113,6 @@ $(function(){
                  data: JSON.stringify(data),
                  contentType: 'application/json',
                  success: function (res) {
-                     // table.reload('customer-table');
-                     location.reload();
                      layer.msg("新增成功", {icon: 1});
                      win.close();
                  },

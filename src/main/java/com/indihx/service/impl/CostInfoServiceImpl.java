@@ -21,20 +21,14 @@ public class CostInfoServiceImpl implements ICostInfoService{
 	private CostInfoMapper mapper;
 
 	@Override
-	public List<Map<String,Object>> qryCostInfoListByOrgId(Long orgId) {
+	public List<CostInfo> qryCostInfoListByOrgId(Long orgId) {
 		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("orgId", orgId);
 		
-		List<CostInfo> costInfos = mapper.queryCostInfoListByOrgId(orgId); 
-		List<Map<String, Object>> maps = new ArrayList<>();
-		
-		for (CostInfo costInfo :costInfos) {
-			Map<String, Object> map = new HashMap<>();
-			map.put("CONST_ID", costInfo.getCostId());
-			map.put("ORG_ID", costInfo.getOrgId());
-			map.put("ORG_NAME", costInfo.getOrgName());
-			maps.add(map);
-		}
-		return maps;
+		List<CostInfo> costInfos = mapper.queryCostInfoListByOrgId(param); 
+	
+		return costInfos;
 	}
 
 	

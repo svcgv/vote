@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 
 import com.indihx.system.entity.UsrInfo;
+import com.indihx.util.BeanUtils;
 import com.indihx.util.ReviewUtils;
 import com.indihx.util.UserUtil;
 import com.alibaba.fastjson.JSON;
@@ -109,16 +110,21 @@ public class PmReviewInfoController {
 
     /**
      * 获取当前用户的审批列表
+     * @throws SecurityException 
+     * @throws NoSuchFieldException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
      */
     @RequestMapping(value="/selectBidReview",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> selectBidReview(@RequestBody Map<String, Object> params,HttpSession session){
+    public @ResponseBody Map<String,Object> selectBidReview(@RequestBody Map<String, Object> params,HttpSession session) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException{
     	String str = (String) params.get("queryStr");
     	Map<String,Object> par = (Map<String,Object>)JSON.parse(str);
+    	PmReviewInfoEntity entity = BeanUtils.Map2Bean(par, PmReviewInfoEntity.class);
     	UsrInfo usesr = UserUtil.getUser(session);
-    	PmReviewInfoEntity entity = new PmReviewInfoEntity();
-    	entity.setReviewUserCode( usesr.getUsrId());
-    	entity.setReviewType("00");
-		List<Map<String, Object>> pmReviewInfo = pmReviewInfoService.selectBidReview(entity);
+    	par.put("reviewUserCode", usesr.getUsrId());
+    	par.put("reviewType", "00");
+    	
+		List<Map<String, Object>> pmReviewInfo = pmReviewInfoService.selectBidReview(par);
         return R.ok().put("page", pmReviewInfo);
     }
 

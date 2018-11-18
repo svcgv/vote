@@ -184,9 +184,9 @@
 				      <thead>
 				        <tr><th>文件名</th>
 				        <th>大小</th>
-				        <th>状态</th>
-				        <th>操作</th>
 				        <th>文件类型</th>
+				        <th>状态</th>
+				         <th>操作</th>
 				      </tr></thead>
 				      <tbody id="wosFileList"></tbody>
 				    </table>
@@ -267,7 +267,7 @@ $(function(){
 		  for(var i = 0;i<tbody.children.length;i++){
 			  var item={}
 			  item.fileName = tbody.children[i].children[0].innerText
-			  item.fileType = tbody.children[i].children[4].children[0].children[0].value
+			  item.fileType = tbody.children[i].children[2].children[0].children[0].value
 			  files.push(item)
 		  }
 	  }
@@ -295,21 +295,23 @@ $(function(){
         var tr = $(['<tr id="upload-'+ index +'">'
           ,'<td>'+ file.name +'</td>'
           ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
-          ,'<td>等待上传</td>'
           ,'<td>'
-            ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
-            ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
-          ,'</td>'
-          ,'<td>'
-            ,' <div class="layui-input-inline">'
-           	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+          ,' <div class="layui-input-inline">'
+         	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
 	          ,'<option value="">请选择</option>'
 	        	,'<option value="00" selected>招标文件</option>'
 	        	,'<option value="01">客户需求文件</option>'
 	        	,'<option value="02" >内部评审文件</option>'
 	        	,'</select>'
-  				,'</div>'
+				,'</div>'
+        ,'</td>'
+
+        ,'<td>等待上传</td>'
+          ,'<td>'
+            ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+            ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
           ,'</td>'
+          
         ,'</tr>'].join(''));
         //单个重传
         tr.find('.demo-reload').on('click', function(){

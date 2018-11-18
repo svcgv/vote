@@ -34,6 +34,8 @@ import com.indihx.PmCustomerInfo.entity.PmCustomerGroupEntity;
 import com.indihx.PmCustomerInfo.entity.PmCustomerGroupRelationEntity;
 import com.indihx.PmCustomerInfo.service.PmCustomerGroupRelationService;
 import com.indihx.PmCustomerInfo.service.PmCustomerGroupService;
+import com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity;
+import com.indihx.PmProjectGroupInfo.service.PmProjectGroupInfoService;
 import com.indihx.comm.InitSysConstants;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
@@ -48,10 +50,8 @@ public class ProjectGroupController extends AbstractBaseController{
 	private ParamsInfoServiceimpl infoservice;
 
 	@Autowired
-	PmCustomerGroupService pmCustomerGroupService;
+	PmProjectGroupInfoService PmProjectGroupInfoService;
 	
-	@Autowired
-	PmCustomerGroupRelationService pmCustomerGroupRelationService;
 	
 	@RequestMapping("/projectGroup/index")
 	public ModelAndView addCustomView() {
@@ -77,12 +77,12 @@ public class ProjectGroupController extends AbstractBaseController{
 	}
 	
 	@RequestMapping(value="/projectGroup/edit",method=RequestMethod.GET)
-	public ModelAndView formGroupFormView() {
+	public ModelAndView formGroupFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
-		
+		PmProjectGroupInfoEntity pmProjectGroupInfoEntity = PmProjectGroupInfoService.queryObject(Long.valueOf(id));
 		
 		//编辑时为已存的值
-		view.addObject("chosedProject","");
+		view.addObject("pmProjectGroupInfoEntity",pmProjectGroupInfoEntity);
 		
 		view.setViewName("/project/projectGroup/edit");
 		return view;
@@ -91,8 +91,11 @@ public class ProjectGroupController extends AbstractBaseController{
 	public ModelAndView viewFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
 		
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
+		PmProjectGroupInfoEntity pmProjectGroupInfoEntity = PmProjectGroupInfoService.queryObject(Long.valueOf(id));
+		
+		//编辑时为已存的值
+		view.addObject("pmProjectGroupInfoEntity",pmProjectGroupInfoEntity);
+		
 		
 		view.addObject("act",act);
 		view.addObject("id",id);
