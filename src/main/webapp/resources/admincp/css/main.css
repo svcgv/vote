@@ -134,7 +134,6 @@ input.disabledColor{
 }
 /*占位符*/
 .f-placeholder{
-    margin-right: 15px;
     height: 30px;
     line-height: 30px;
     padding: 0 10px;
