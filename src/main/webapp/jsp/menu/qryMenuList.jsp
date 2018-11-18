@@ -98,13 +98,13 @@
 					</div>
 				</form>
 				<div class="col-md-12">
-					<button type="button" class="btn btn-primary" onclick="openAdd()">
+					<button type="button" class="btn btn-primary" power="2018111604" onclick="openAdd()">
 						<i class="icon-plus-sign"></i> 新增
 					</button>
-					<button type="button" class="btn btn-primary" onclick="updMenu()">
+					<button type="button" class="btn btn-primary" power="2018111605" onclick="updMenu()">
 						<i class="icon-edit"></i> 修改
 					</button>
-					<button type="button" class="btn btn-primary" onclick="deleMenu()">
+					<button type="button" class="btn btn-primary" power="2018111606" onclick="deleMenu()">
 						<i class="icon-trash"></i> 删除
 					</button>
 				</div>
@@ -123,7 +123,7 @@
 							<th target_data="menuId">菜单ID</th>
 							<th target_data="menuName">菜单名称</th>
 							<th target_data="parentId">父菜单ID</th>
-							<th target_data="parentName">父菜单名称</th
+							<th target_data="parentName">父菜单名称</th>
 							<th target_data="menuUrl">菜单地址</th>
 							<th target_data="sortNum">顺序编号</th>
 							<th target_data="codeVal">菜单级别</th>

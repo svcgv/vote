@@ -126,13 +126,13 @@ public class OrgInfoController  extends AbstractBaseController{
 	 * @return
 	 */
 	@RequestMapping(value="/queryAddPara",method=RequestMethod.GET)
-	public ModelAndView queryAddPara(@RequestParam("orgType") String orgType){
+	public ModelAndView queryAddPara(@RequestParam("type") String type){
 		ModelAndView view = new ModelAndView();
 		
 			HpbInfoVo hpbVo = new  HpbInfoVo();
 			view.setViewName("/org/org");	
 		
-		view.addObject("orgType",orgType);
+		view.addObject("type",type);
 		return view;
 	}
 	//查询市局信息
