@@ -11,10 +11,24 @@
 	<form class="layui-form" id="project-index-form" method="POST" action="">
 	   <div class="layui-form-item">
 	   
+	    	<div class="layui-inline" style="padding-right:55px;">
+		      <label class="layui-form-label">WBS编号：</label>
+		       <div class="layui-input-inline">
+	         		<input type="text" name="wbs" autocomplete="off" class="layui-input form-control">
+		      </div>
+		    </div>
+		     
+		     <div class="layui-inline">
+		      <label class="layui-form-label">项目名称：</label>
+		       <div class="layui-input-inline">
+		          <input type="text" name="projectName"  autocomplete="off" class="layui-input form-control">
+		      </div>
+		    </div>
+	   
 		  	<div class="layui-inline">
 		      <label class="layui-form-label">实施部门：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="buildDeptName"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="buildDeptName"  readonly="true" autocomplete="off" class="layui-input form-control">
 		         <input type="text" style='display:none' name="buildDeptId" />
 		      </div>
 		         <button type="button"  class="layui-btn layui-btn-sm" id="buildDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -23,7 +37,7 @@
 		    <div class="layui-inline">
 			      <label class="layui-form-label">实施负责人：</label>
 			       <div class="layui-input-inline">
-			         <input type="text" name="buildManagerName"  autocomplete="off" class="layui-input form-control">
+			         <input type="text" name="buildManagerName"  readonly="true" autocomplete="off" class="layui-input form-control">
 			         <input type="text" style='display:none'  name="buildManagerId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="buildManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -41,7 +55,7 @@
 		     <div class="layui-inline">
 			      <label class="layui-form-label">销售部门：</label>
 			      <div class="layui-input-inline">
-				       <input type="text" name="sellDeptName"  autocomplete="off" class="layui-input form-control">
+				       <input type="text" name="sellDeptName"  readonly="true" autocomplete="off" class="layui-input form-control">
 				       <input type="text" style='display:none'  name="sellDeptId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="sellDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -50,7 +64,7 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">销售负责人：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="sellManagerName"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="sellManagerName" readonly="true" autocomplete="off" class="layui-input form-control">
 		         <input type="text" style='display:none'  name="sellManagerId" />
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="sellManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -65,26 +79,10 @@
 		      <button type="button"  class="layui-btn layui-btn-sm" id="custManagerNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
-		    <div class="layui-inline" style="padding-right:55px;">
-		      <label class="layui-form-label">WBS编号：</label>
-		       <div class="layui-input-inline">
-	         		<input type="text" name="wbs" autocomplete="off" class="layui-input form-control">
-		      </div>
-		      <button type="button"  class="layui-btn layui-btn-sm" id="wbsQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		    </div>
-		     
-		     <div class="layui-inline">
-		      <label class="layui-form-label">项目名称：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="projectName"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		      <button type="button"  class="layui-btn layui-btn-sm" id="projectNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
-		    </div>
-		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="custName" autocomplete="off" class="layui-input form-control">
+		          <input type="text" name="custName" readonly="true" autocomplete="off" class="layui-input form-control">
 		         <input type="text" style='display:none'  name="custId" />     
 		      </div>
 	      	 <button type="button"  class="layui-btn layui-btn-sm" id="custNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -110,28 +108,28 @@
 		    <div class="layui-inline" style="padding-right:55px;">
 		       <label class="layui-form-label">立项时间(开始时间)：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="createProjectStartTime" id="createProjectStartTime-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
+		          <input type="text" name="createProjectStartTime" readonly="true" id="createProjectStartTime-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 		    
 		        <div class="layui-inline" style="padding-right:55px;">
 		       <label class="layui-form-label">立项时间(结束时间)：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="createProjectEndTime" id="createProjectEndTime-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
+		          <input type="text" name="createProjectEndTime" readonly="true" id="createProjectEndTime-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline" style="padding-right:55px;">
 			      <label class="layui-form-label">结项时间(开始时间)：</label>
 			       <div class="layui-input-inline">
-			          <input type="text" name="finishProjectStartTime" id="finishProjectStartTime-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
+			          <input type="text" name="finishProjectStartTime" readonly="true" id="finishProjectStartTime-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
 			      </div>
 		    </div>
 		    
 		    <div class="layui-inline" style="padding-right:55px;">
 			      <label class="layui-form-label">结项时间(结束时间)：</label>
 			       <div class="layui-input-inline">
-			          <input type="text" name="finishProjectEndTime" id="finishProjectEndTime-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
+			          <input type="text" name="finishProjectEndTime" readonly="true" id="finishProjectEndTime-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
 			      </div>
 		    </div>
 		    
@@ -167,7 +165,6 @@ var col=[
   	  
 	      {align: 'center', title: '项目信息', colspan: 16},
 	      {align: 'center', title: '项目预算', colspan: 6},
-	      {align: 'center', title: '上报收入', colspan: 2},
 	      {align: 'center',field: 'lastYearRevenue', title: '历年收入', rowspan: 2},
 	      {align: 'center',field: 'signContractDate', title: '合同签订日期', rowspan: 2},
 	      {align: 'center',field: 'isSignedContract', title: '是否签订', rowspan: 2},
@@ -188,9 +185,35 @@ var col=[
 	  	      {field:'custManagerName', title:'客户经理', width:130},
 	  	      {field:'createProjectTime', title:'立项时间'},
 	  	      {field:'finishProjectTime', title:'结项时间'},
-	  	      {field:'projectStatus', title:'项目状态'},
-	  	      {field:'projectType', title:'项目类型'},
-	  	      {field:'isImportant', title:'是否重点项目'},
+	  	      {field:'projectStatus', title:'项目状态',templet:function(d){
+              	if(d.projectStatus == "00"){
+            		return "进行中";
+            	}else if(d.projectStatus == "01"){
+            		return "结项";
+            	}else if(d.projectStatus == "02"){
+            		return "待验收";
+            	}else if(d.projectStatus == "03"){
+            		return "关闭";
+            	}
+            }},
+	  	      {field:'projectType', title:'项目类型',templet:function(d){
+              	if(d.projectType == "00"){
+            		return "整包项目";
+            	}else if(d.projectType == "01"){
+            		return "人力项目";
+            	}else if(d.projectType == "02"){
+            		return "订单项目";
+            	}else if(d.projectType == "03"){
+            		return "内部研发项目";
+            	}
+            }},
+	  	      {field:'isImportant', title:'是否重点项目',templet:function(d){
+              	if(d.isImportant == "00"){
+            		return "是";
+            	}else if(d.isImportant == "01"){
+            		return "否";
+            	}
+            }},
 	    	  {field:'predictContractAmount', title:'合同金额'},
 	    	  {field:'predictProfitRate', title:'预估利润率'},
 	    	  {field:'predictProfitMount', title:'预估利润'},
@@ -314,15 +337,24 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   
   
   
-  
+  var queryParams=$("#project-index-form").serializeObject();
 
   // table render
   table.render({
 	  	id:"customer-table",
 	  elem: '#projectIndexTable',
+	  url: '/vote/pmprojectinfo/list',
+	   method:'post',
+		where:{
+           queryStr: JSON.stringify(queryParams)
+       },
+       contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    toolbar: '#toolbarDemo',
 	    height:'full-200',
-	    title: '投标数据表',
+	    title: '项目数据表',
 	  cols: col,
 	   cellMinWidth:'120',
 	   data:testData,
@@ -369,12 +401,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	*/
 	 $("#customQuery").click(function(){
 		 var queryParams=$("#project-index-form").serializeObject();
-		 var newparam = {}
- 		 for(var o in queryParams){
- 			 if(queryParams[o]){
- 				 newparam[o] = queryParams[o]
- 			 }
- 		 }
 		 
 			table.reload('customer-table',{
 				 url: '/vote/pmprojectinfo/list',
@@ -383,7 +409,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 				},
 				 method:'post',
 					where:{
-						queryStr:JSON.stringify(newparam)
+						queryStr:JSON.stringify(queryParams)
 					},
 					contentType: 'application/json',
 				    response: {

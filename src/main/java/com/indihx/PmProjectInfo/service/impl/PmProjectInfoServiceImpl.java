@@ -23,11 +23,13 @@ public class PmProjectInfoServiceImpl implements PmProjectInfoService {
    		return pmProjectInfoMapper.queryObject(id);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void insert(PmProjectInfoEntity entity){
+	public long insert(PmProjectInfoEntity entity){
 		entity.setIsDelete("00");
 		entity.setProjectStatus("00");
+		entity.setApproveStatus("00");
 		entity.setProjectCode(RandomUtil.getCodeByType(type));
    		pmProjectInfoMapper.insert(entity);
+   		return entity.getProjectId();
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(PmProjectInfoEntity entity){
