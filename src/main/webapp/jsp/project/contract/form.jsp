@@ -369,7 +369,7 @@ $(function(){
               var rets=[];
               if(!$.isArray(queryParams.payWbsCode)){
             	  var ret={}
-            	  ret.paymentId=queryParams.payWbsCode;
+            	  ret.paymentCode=queryParams.payWbsCode;
             	  ret.paymentAmount=queryParams.paymentAmount;
             	  ret.paymentDate=queryParams.paymentDate;
             	  ret.remark=queryParams.payRequirement;
@@ -378,7 +378,7 @@ $(function(){
               }else{
                   for(var j=0;j<queryParams.payWbsCode.length;j++){
                 	  var ret={}
-                	  ret.paymentId=queryParams.payWbsCode[j];
+                	  ret.paymentCode=queryParams.payWbsCode[j];
                 	  ret.paymentAmount=queryParams.paymentAmount[j];
                 	  ret.paymentDate=queryParams.paymentDate[j];
                 	  ret.remark=queryParams.payRequirement[j];

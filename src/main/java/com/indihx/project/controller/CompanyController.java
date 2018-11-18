@@ -58,7 +58,7 @@ public class CompanyController extends AbstractBaseController{
 		return view;
 	}
 	@RequestMapping(value="/company/form",method=RequestMethod.GET)
-	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
+	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") Long id) {
 		ModelAndView view = new ModelAndView();
 		
 //		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
@@ -67,10 +67,10 @@ public class CompanyController extends AbstractBaseController{
 			view.addObject("Company",pmCompanyInfoService.queryObject(id));
 		}
 		view.addObject("act",act);
-		if(id !=null && !"".equals(id)) {
+		if(id !=null) {
 			view.addObject("id",id);
 		}
-		
+
 		view.setViewName("/project/company/form");
 		return view;
 	}
