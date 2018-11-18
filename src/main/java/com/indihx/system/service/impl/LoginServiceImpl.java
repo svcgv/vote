@@ -111,20 +111,20 @@ public class LoginServiceImpl  extends AbstractBaseService implements ILoginServ
 		String id = session.getId();
 		log.info("用户："+usrInfo.getUsrId()+"登入系统,登录session标志："+id);
 		//如果是区局登录,将区域ID设置到session
-		if(usrInfo.getOrgType().equals(InitSysConstants.ORGTYPE_QUJU)){
-			long hpbBaseId =hpbMappeer.getOrgRefHpbId(Long.valueOf(usrInfo.getOrgNo()));
-			usrInfo.setHpbBaseId(ObjectUtil.toString(hpbBaseId));
-		}
-		//如果是街道登录,将街道ID设置到session
-		if(usrInfo.getOrgType().equals(InitSysConstants.ORGTYPE_JIEDAO)){
-			long streetBaseId =streetMappeer.getOrgRefJdId(Long.valueOf(usrInfo.getOrgNo()));
-			usrInfo.setStreetBaseId(ObjectUtil.toString(streetBaseId));
-		}
+//		if(usrInfo.getOrgType().equals(InitSysConstants.ORGTYPE_QUJU)){
+//			long hpbBaseId =hpbMappeer.getOrgRefHpbId(Long.valueOf(usrInfo.getOrgNo()));
+//			usrInfo.setHpbBaseId(ObjectUtil.toString(hpbBaseId));
+//		}
+//		//如果是街道登录,将街道ID设置到session
+//		if(usrInfo.getOrgType().equals(InitSysConstants.ORGTYPE_JIEDAO)){
+//			long streetBaseId =streetMappeer.getOrgRefJdId(Long.valueOf(usrInfo.getOrgNo()));
+//			usrInfo.setStreetBaseId(ObjectUtil.toString(streetBaseId));
+//		}
 		//如果是社区登录,将社区ID设置到session
-		if(usrInfo.getOrgType().equals(InitSysConstants.ORGTYPE_JUWEIHUI)){
-			long sqBaseId =sqMappeer.getOrgRefSqId(Long.valueOf(usrInfo.getOrgNo()));
-			usrInfo.setCommitteeBaseId(ObjectUtil.toString(sqBaseId));
-		}
+//		if(usrInfo.getOrgType().equals(InitSysConstants.ORGTYPE_JUWEIHUI)){
+//			long sqBaseId =sqMappeer.getOrgRefSqId(Long.valueOf(usrInfo.getOrgNo()));
+//			usrInfo.setCommitteeBaseId(ObjectUtil.toString(sqBaseId));
+//		}
 		usrInfo.setSessionId(id);
 		mapper.updateLoginUser(usrInfo);
 		//设置session有效时间8个小时

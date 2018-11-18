@@ -150,12 +150,12 @@
 		 $("#usrId").val(obj1.val);
 		 $.indi.ajaxSubmit({url:'${ctx }/usr/closeStaUsrInfo',success:function(data){
 				if(data.status == true){
-					layer.alert('关闭成功！',{icon: 1}, function(index){
+					layer.alert('禁用成功！',{icon: 1}, function(index){
 						layer.close(index);
 						qryList_01();
 					});  
 				}else{
-					layer.alert('关闭失败！',{icon: 2});
+					layer.alert('禁用失败！',{icon: 2});
 				}
 			}});
 	}
@@ -209,25 +209,25 @@
 					</div>
 				</form>
 				<div class="col-md-12">
-					<button type="button" class="btn btn-primary" onclick="openAdd()">
+					<button type="button" class="btn btn-primary" power ="10000201" onclick="openAdd()">
 						<i class="icon-plus-sign"></i> 新增
 					</button>
-					<button type="button" class="btn btn-primary" onclick="updUsr()">
+					<button type="button" class="btn btn-primary" power ="10000202" onclick="updUsr()">
 						<i class="icon-edit"></i> 修改
 					</button>
-					<button type="button" class="btn btn-primary" onclick="deleUsr()">
+					<button type="button" class="btn btn-primary" power ="10000203" onclick="deleUsr()">
 						<i class="icon ion-close-circled"></i> 注销
 					</button>
-					<button type="button" class="btn btn-primary" onclick="openSta()">
+					<button type="button" class="btn btn-primary" power ="10000204" onclick="openSta()">
 						<i class="icon-unlock"></i> 启用
 					</button>
-					<button type="button" class="btn btn-primary" onclick="closeSta()">
+					<button type="button" class="btn btn-primary" power ="10000205" onclick="closeSta()">
 						<i class="icon-lock"></i> 禁用
 					</button>
 <!-- 					<button type="button" class="btn btn-primary" onclick="shuxing()"> -->
 <!-- 						设置菜单 -->
 <!-- 					</button> -->
-					<button type="button" class="btn btn-primary" onclick="setRole()">
+					<button type="button" class="btn btn-primary"  power ="10000206" onclick="setRole()">
 						 设置角色
 					</button>
 				</div>
