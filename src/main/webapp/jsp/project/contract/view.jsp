@@ -16,6 +16,9 @@
 	position:relative;
 	top:1px;
 }
+.layui-table tbody tr:hover{
+	background:#fff;
+}
 </style>
 <div id="contract-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
@@ -126,6 +129,56 @@
 				 </div>
 			 </div>
 	     </div>
+		<div class="layui-form-item" style="margin-bottom:0px;">
+			<div class="layui-inline" style="width:98%;">
+				<label class="layui-form-label">收款点信息：</label>
+				<div class="layui-input-inline">
+					<button type="button"  class="layui-btn layui-btn-sm" id="addPayList-form" ><i class="layui-icon"></i>新增收款点</button>
+				</div>
+			</div>
+		</div>
+		<table class="layui-table palyListTable" style="width:95%;margin-left:10px;;" >
+			<thead>
+			<tr>
+				<th style="white-space: nowrap;">序号</th>
+				<th>收款日期</th>
+				<th>收款金额</th>
+				<th>收款比例（%）</th>
+				<th>收款要求</th>
+				<th>收款编号</th>
+			</tr>
+			</thead>
+			<tbody class="payList">
+			<c:forEach items="${pmPaymentPoints}" var="app" varStatus="status" >
+			<tr>
+				<th class="paySortNum">${status.count}</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="paymentDate"  class="layui-form-label">${app.paymentDate}</label>
+					</div>
+				</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="paymentAmount"  class="layui-form-label">${app.paymentAmount}</label>
+					</div>
+				</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="paymentRate"  class="layui-form-label">${app.paymentRate}</label>
+					</div>
+				</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="payRequirement"  class="layui-form-label">${app.remark}</label>
+					</div>
+				</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="payWbsCode"  class="layui-form-label">${app.paymentId}</label>
+					</div>
+				</th>
+			</tr>
+			</c:forEach>
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
     	<a class="layui-layer-btn1" id="contract-close-hook">关闭</a>

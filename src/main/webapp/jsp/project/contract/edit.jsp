@@ -149,67 +149,69 @@
 	      <thead>
 	        <tr>
 	        	<th style="white-space: nowrap;">序号</th>
-		        <th>收款日期</th>
-		        <th>收款金额</th>
-		        <th>收款比例（%）</th>
-		        <th>收款要求</th>
-		        <th>收款编号</th>
+				<th>收款编号</th>
+				<th>收款日期</th>
+				<th>收款金额</th>
+				<th>收款比例（%）</th>
+				<th>收款要求</th>
 	      	</tr>
 	      </thead>
 		      <tbody class="payList">
+<c:forEach items="${pmPaymentPoints}" var="app" varStatus="status" >
 		     	 <tr>
-		        	 <th class="paySortNum">1</th>
+		        	 <th class="paySortNum">${status.count}</th>
+					 <th>
+						 <div class="layui-input-inline">
+							 <input type="text" name="payWbsCode" value="${app.paymentId}" autocomplete="off" class="layui-input form-control">
+						 </div>
+					 </th>
 			         <th>
 			        	<div class="layui-input-inline">
-			        		<input type="text" name="paymentDate" value="2018-12" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
+			        		<input type="text" name="paymentDate" value="${app.paymentDate}" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
 				      	</div>
 				     </th>
 			        <th>
 			        	<div class="layui-input-inline">
-					         <input type="number" name="paymentAmount" value="32131" autocomplete="off" class="layui-input form-control">
+					         <input type="number" name="paymentAmount" value="${app.paymentAmount}" autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
 				     <th>
 			        	<div class="layui-input-inline">
-					         <input type="number" name="paymentRate" value="1" style="width:90px;" autocomplete="off" class="layui-input form-control">
+					         <input type="number" name="paymentRate" value="${app.paymentRate}" style="width:90px;" autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
 				     <th>
 			        	<div class="layui-input-inline">
-					         <input type="text" name="payRequirement" value="321" style="min-width:250px;" autocomplete="off" class="layui-input form-control">
-				      	</div>
-				     </th>
-				     <th>
-			        	<div class="layui-input-inline">
-					         <input type="text" name="payWbsCode" value="qwewq321" autocomplete="off" class="layui-input form-control">
+					         <input type="text" name="payRequirement" value="${app.remark}" style="min-width:250px;" autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
 		      	 </tr>
+</c:forEach>
 		     	  <tr class="listTmpl" style="display:none;">
 		        	 <th class="paySortNum">1</th>
-			         <th>
+					  <th>
+						  <div class="layui-input-inline">
+							  <input type="text" name="payWbsCode" autocomplete="off" class="layui-input form-control">
+						  </div>
+					  </th>
+					  <th>
 			        	<div class="layui-input-inline">
 			        		<input type="text" name="paymentDate" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
 				      	</div>
 				     </th>
-			        <th>
+					  <th>
 			        	<div class="layui-input-inline">
 					         <input type="number" name="paymentAmount"  autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
-				     <th>
+					  <th>
 			        	<div class="layui-input-inline">
 					         <input type="number" name="paymentRate" style="width:90px;" autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
-				     <th>
+					  <th>
 			        	<div class="layui-input-inline">
 					         <input type="text" name="payRequirement" style="min-width:250px;" autocomplete="off" class="layui-input form-control">
-				      	</div>
-				     </th>
-				     <th>
-			        	<div class="layui-input-inline">
-					         <input type="text" name="payWbsCode" autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
 		      	 </tr>
@@ -261,18 +263,26 @@ $(function(){
         })
         // 比例金额互换
          $("#contract-addForm-hook .palyListTable").on("keyup","input[name='paymentAmount']",function(){
+             var max=$("#contract-addForm-hook input[name='contractAmount']").val();
+             if($.trim(max) ==''){
+                 layer.msg("请输入合同金额");
+                 return false;
+             }
        	  		var _account=$(this).val();
        	  		console.log(_account)
        	  		if(_account !=''){
-       	  			 var max=100000;
        	  			 var rate=_account/max;
        	  			$(this).parents("th").next("th").find("input[name='paymentRate']").val(rate.toFixed(2));
        	  		}
          });
          $("#contract-addForm-hook .palyListTable").on("keyup","input[name='paymentRate']",function(){
+             var max=$("#contract-addForm-hook input[name='contractAmount']").val();
+             if($.trim(max) ==''){
+                 layer.msg("请输入合同金额");
+                 return false;
+             }
        	  		var rate=$(this).val();
        	  		if(rate !=''){
-       	  			 var max=100000;
        	  			 var account=rate * max;
        	  			$(this).parents("th").prev("th").find("input[name='paymentAmount']").val(account.toFixed(2));
        	  		}

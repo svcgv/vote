@@ -228,10 +228,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
-	    	showFromTable('edit',data.contractCode);
+	    	showFromTable('edit',data.contractId);
 	    }else if(obj.event === "view"){
 	    	// 查看
-	    	showFromTable('view',data.contractCode);
+	    	showFromTable('view',data.contractId);
 	    }
 	  });
 	/*

@@ -300,7 +300,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
 	  		title:"新增产品信息",
-	  		width:"720"
+	  		width:"90%"
 	  	})
 	});
 	
@@ -318,7 +318,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:url,
 	  		title:title,
-	  		width:"700"
+	  		width:"90%"
 	  	})
 		
 	}
