@@ -261,7 +261,7 @@
 				A.CUST_GROUP_NAME = #{custGroupName} AND
 			</if>
 			<if test="isDelete != null  and isDelete!=''">
-				A.IS_DELETE = '00'
+				A.IS_DELETE = #{isDelete}
 			</if>
 		</trim>
 	</select>

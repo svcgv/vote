@@ -136,6 +136,13 @@
 				 </div>
 			 </div>
 	     </div>
+		<div class="layui-inline">
+			<label class="layui-form-label">项目引用列表：</label>
+			<div class="layui-input-inline layui-btn-container" style="margin-left:15px;">
+				<button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+			</div>
+		</div>
+		<table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
       <div class="layui-form-item" style="margin-bottom:0px;">
       	<div class="layui-inline" style="width:98%;">
 		      <label class="layui-form-label">收款点信息：</label>
@@ -148,16 +155,21 @@
 	      <thead>
 	        <tr>
 	        	<th style="white-space: nowrap;">序号</th>
+				<th>收款编号</th>
 		        <th>收款日期</th>
 		        <th>收款金额</th>
 		        <th>收款比例（%）</th>
 		        <th>收款要求</th>
-		        <th>收款编号</th>
 	      	</tr>
 	      </thead>
 		      <tbody class="payList">
 		     	  <tr class="listTmpl" style="display:none;">
 		        	 <th class="paySortNum">1</th>
+					  <th>
+						  <div class="layui-input-inline">
+							  <input type="text" name="payWbsCode" autocomplete="off" class="layui-input form-control">
+						  </div>
+					  </th>
 			         <th>
 			        	<div class="layui-input-inline">
 			        		<input type="text" name="paymentDate" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
@@ -178,11 +190,6 @@
 					         <input type="text" name="payRequirement" style="min-width:250px;" autocomplete="off" class="layui-input form-control">
 				      	</div>
 				     </th>
-				     <th>
-			        	<div class="layui-input-inline">
-					         <input type="text" name="payWbsCode" autocomplete="off" class="layui-input form-control">
-				      	</div>
-				     </th>
 		      	 </tr>
 		     	
 		      </tbody>
@@ -193,12 +200,20 @@
     	<a class="layui-layer-btn1" id="contract-close-hook">关闭</a>
     </div>
 </div>
+<script type="text/html" id="barFormDemo">
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 <script>
+    var chosedProject=[];
+    console.log(chosedProject);
+    var chosedLayTable=null;
 $(function(){
-	layui.use(['layer', 'form','laydate'], function(){
+	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
 	  	  laydate=layui.laydate;
+
+        chosedLayTable=layui.table;
 		 //日期
 		  laydate.render({
 			    elem: "#contractStartTime-form",
@@ -221,6 +236,47 @@ $(function(){
                  type: 'month'
              });
         })
+        //table render
+        chosedLayTable.render({
+            id:"table-chosedProject",
+            elem: '#projectTable-chosed',
+            height:'350',
+            title: '项目群数据信息',
+            cols: [[
+                {field:'wbs', title:'项目编号', templet:function(d){
+                    var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
+                    return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
+                } },
+                {field:'projectName', title:'项目名称'},
+                {fixed: 'right', title:'操作', toolbar: '#barFormDemo', width:100}
+            ]],
+            cellMinWidth:'90',
+            data:chosedProject,
+            page: true
+        });
+        chosedLayTable.on('tool(tableFilter)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('确认删除行么', function(index){
+                    obj.del();
+                    console.log(data,chosedProject)
+                    // 删除
+                    for(var k in chosedProject){
+                        if(data.projectId == chosedProject[k].projectId ){
+                            chosedProject.splice(k,1)
+                        }
+                    }
+                    console.log(chosedProject,'exit');
+                    chosedLayTable.reload('table-chosedProject',{
+                        data:chosedProject
+                    })
+                    layer.close(index);
+
+                });
+            }
+        });
+
+
 		// 新增付款点
         $("#contract-addForm-hook #addPayList-form").click(function(){
         	var tmpl=$(".palyListTable .listTmpl").clone(true);
@@ -232,18 +288,26 @@ $(function(){
         })
         // 比例金额互换
          $("#contract-addForm-hook .palyListTable").on("keyup","input[name='paymentAmount']",function(){
-       	  		var _account=$(this).val();
-       	  		console.log(_account)
-       	  		if(_account !=''){
-       	  			 var max=100000;
+             var max=$("#contract-addForm-hook input[name='contractAmount']").val();
+             if($.trim(max) ==''){
+                 layer.msg("请输入合同金额");
+                 return false;
+             }
+             var _account=$(this).val();
+             console.log(_account)
+             if(_account !=''){
        	  			 var rate=_account/max;
        	  			$(this).parents("th").next("th").find("input[name='paymentRate']").val(rate.toFixed(2));
        	  		}
          });
          $("#contract-addForm-hook .palyListTable").on("keyup","input[name='paymentRate']",function(){
+             var max=$("#contract-addForm-hook input[name='contractAmount']").val();
+             if($.trim(max) ==''){
+                 layer.msg("请输入合同金额");
+                 return false;
+             }
        	  		var rate=$(this).val();
        	  		if(rate !=''){
-       	  			 var max=100000;
        	  			 var account=rate * max;
        	  			$(this).parents("th").prev("th").find("input[name='paymentAmount']").val(account.toFixed(2));
        	  		}
@@ -282,8 +346,17 @@ $(function(){
 		 });
 		  
 	  });
-	  
-	  $("#contract-addForm-hook #custNameQuery-form").on("click",function(){
+
+        // 选择项目
+        $("#contract-addForm-hook #projectQuery-hook").on("click",function(){
+            $.openWindow({
+                url:'project',
+                title:"选择项目",
+                width:"700"
+            });
+        });
+
+        $("#contract-addForm-hook #custNameQuery-form").on("click",function(){
 		  	$.openWindow({
 		  		url:'user?act=form',
 		  		title:"选择客户经理",
@@ -321,8 +394,11 @@ $(function(){
               delete queryParams.paymentRate
               queryParams=$.extend({},true,queryParams,{paymentPoint:rets});
           }
-         
-
+          var projects=[];
+          for(var i=0;i<chosedProject.length;i++ ){
+              projects.push(chosedProject[i].projectId)
+          }
+          queryParams=$.extend({},true,queryParams,{projectIds:projects});
           var newParam = {}
 			  for(var i in queryParams){
 				  if(queryParams[i]){

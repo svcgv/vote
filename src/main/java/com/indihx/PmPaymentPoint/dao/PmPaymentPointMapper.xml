@@ -199,7 +199,9 @@
 	<delete id="delete">
 		delete from pm_payment_point where PAYMENT_ID = #{value}
 	</delete>
-	
+	<delete id="deleteByForeignId">
+		delete from pm_payment_point where PAYMENT_FOREIGN_ID = #{value}
+	</delete>
 
 
 </mapper>
