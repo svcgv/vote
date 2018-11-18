@@ -45,10 +45,20 @@ layui.use(['layer', 'form','laydate','table'], function(){
   	  form = layui.form,
   	  table=layui.table;
 	  
+  
+	var queryParams=$("#project-query-form").serializeObject();
   // table render
   table.render({
 	    elem: '#projectTable',
-	    //url:'custom.json',
+	    url: '/vote/pmprojectinfo/list',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify(queryParams)
+		},
+		contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    height:'260',
 	    width:"690",
 	    title: '项目表信息',
@@ -57,29 +67,6 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	      {field:'projectId', title:'项目编号', sort: true},
 	      {field:'projectName', title:'项目名称'}
 	    ]],
-	    data:[
-		  		{
-		  			"projectId":"1000",
-					"projectName":"雪松-软件研发外包战略供应商招标"
-					
-				},
-				{
-		  			"projectId":"1001",
-					"projectName":"深圳数位传媒科技有限公司IT人力外包"
-					
-				},
-				{
-		  			"projectId":"1002",
-					"projectName":"信贷及相关系统技术服务项目"
-					
-				},
-				{
-		  			"projectId":"1003",
-					"projectName":"新华保险人力外包服务项目"
-					
-				}
-				
-			],
 	    page: true
 	  });
   var act="${act}";
@@ -120,20 +107,29 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	$("#project-query-form #userQuery").click(function(){
 		
 		var queryParams=$("#project-query-form").serialize();
+		 var newparam = {}
+		 for(var o in queryParams){
+			 if(queryParams[o]){
+				 newparam[o] = queryParams[o]
+			 }
+		 }
 		console.log(queryParams)
-		table.reload('customerGroup-table',{
-			url:'form',
+		table.reload('projectTable',{
+			 url: '/vote/pmprojectinfo/list',
 			page:{
 				curr:1 //从第一页开始
 			},
-			method:'post',
-			where:{
-				queryStr:queryParams
-			},
-			done:function(res){
-				console.log(res)
-			}
-			
+			 method:'post',
+				where:{
+					queryStr:JSON.stringify(newparam)
+				},
+				contentType: 'application/json',
+			    response: {
+			    	dataName: 'page'
+			    },
+				done:function(res){
+					console.log(res)
+				}
 		})
 	});
 	

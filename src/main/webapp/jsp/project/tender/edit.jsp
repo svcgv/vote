@@ -19,8 +19,8 @@
 </style>
 <div id="tender-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
-		  <div class="layui-form-item">
-		    <div class="layui-inline">
+		  <div class="layui-form-item" >
+		    <div class="layui-inline" style='margin-right:225px'>
 		      <label class="layui-form-label">投标名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName" value="das"  autocomplete="off" class="layui-input form-control">
@@ -52,7 +52,7 @@
 		      </div>
 		    </div>
 		    
-		     <div class="layui-inline">
+		     <div class="layui-inline" style='margin-right:225px'>
 		      <label class="layui-form-label">预估成本（元）：</label>
 		      <div class="layui-input-inline">
 		       <input type="number" name="predictCost"  autocomplete="off" class="layui-input form-control">
@@ -66,7 +66,7 @@
 		      </div>
 		    </div>
 		    
-		     <div class="layui-inline">
+		     <div class="layui-inline" style='margin-right:225px'>
 		      <label class="layui-form-label">项目开始时间：</label>
 		       <div class="layui-input-inline">
 	         		<input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
@@ -147,7 +147,7 @@
 		     <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
 		       <div class="layui-input-inline" style="width:363px;height: 50px;">
-				   <textarea name="paymentPoint" rows="2"  placeholder="3/3/3/1,月/季/年" class="layui-textarea form-control"></textarea>
+				   <input name="paymentPoint" rows="2"  placeholder="3/3/3/1,月/季/年" class="layui-textarea form-control"/>
 		      </div>
 		    </div>
 	      
@@ -162,9 +162,9 @@
 				      <thead>
 				        <tr><th>文件名</th>
 				        <th>大小</th>
+				        <th>文件类型</th>
 				        <th>状态</th>
 				        <th>操作</th>
-				        <th>文件类型</th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
 				      <!-- 反写已上传的数据 -->
@@ -173,7 +173,7 @@
 					      	<td>${fileInfo.fileUploadName}</td>
 					      	<td>${fileInfo.fileSize}</td>
 					      	<td>已上传</td>
-					      	<td><a href='${fileInfo.filePath}' download="${fileInfo.fileUploadName}">下载</a></td>
+					      	
 					      	<td>
 					      		<c:if test="${fileInfo.fileBusinessType=='00' }">
 									招标文件
@@ -185,6 +185,7 @@
 									内部评审文件
 								</c:if>
 							</td>
+							<td><a href='${fileInfo.filePath}' download="${fileInfo.fileUploadName}">下载</a></td>
 				      	</tr>
 				      	</c:forEach>
 				      </tbody>
@@ -261,11 +262,30 @@ $(function(){
 	  
   })
   
+  function getFileTableParams(){
+	  var files=[]
+	  var tbody = document.getElementById('wosFileList')
+	  if(tbody.children){
+		  for(var i = 0;i<tbody.children.length;i++){
+			  var item={}
+			  item.fileName = tbody.children[i].children[0].innerText
+			  if(tbody.children[i].children[2].children.length>0){
+				  item.fileType = tbody.children[i].children[2].children[0].children[0].value
+			  }
+			  else{
+				  item.fileType='oldFile'
+			  }
+			  files.push(item)
+		  }
+	  }
+	  return files;
+  }
   
+//多文件上传
  var demoListView = $('#wosFileList')
   ,uploadListIns = upload.render({
 	  before:function(obj){
-	    	this.data={uploadType:'00'}
+	    	this.data={uploadType:'00',fileTypes:JSON.stringify(getFileTableParams())}
 	    },
     elem: '#wosUploads'
     ,url: '/vote/pmfile/upload'
@@ -280,21 +300,22 @@ $(function(){
     	  var tr = $(['<tr id="upload-'+ index +'">'
               ,'<td>'+ file.name +'</td>'
               ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+              ,'<td>'
+              ,' <div class="layui-input-inline">'
+             	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+  	          ,'<option value="">请选择</option>'
+  	        	,'<option value="00" selected>招标文件</option>'
+  	        	,'<option value="01">客户需求文件</option>'
+  	        	,'<option value="02" >内部评审文件</option>'
+  	        	,'</select>'
+    				,'</div>'
+            ,'</td>'
               ,'<td>等待上传</td>'
               ,'<td>'
                 ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
                 ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
               ,'</td>'
-              ,'<td>'
-                ,' <div class="layui-input-inline">'
-               	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
-    	          ,'<option value="">请选择</option>'
-    	        	,'<option value="00" selected>招标文件</option>'
-    	        	,'<option value="01">客户需求文件</option>'
-    	        	,'<option value="02" >内部评审文件</option>'
-    	        	,'</select>'
-      				,'</div>'
-              ,'</td>'
+             
             ,'</tr>'].join(''));
         
         //单个重传
@@ -315,11 +336,11 @@ $(function(){
     }
     ,done: function(res, index, upload){
       if(res.code == 0){ //上传成功
-    	  fileIds = res.fileIds
+    	  fileIds.push(res.fileIds)
         var tr = demoListView.find('tr#upload-'+ index)
         ,tds = tr.children();
-        tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
-        tds.eq(3).html(''); //清空操作
+        tds.eq(3).html('<span style="color: #5FB878;">上传成功</span>');
+        tds.eq(4).html(''); //清空操作
         return delete this.files[index]; //删除文件队列已经上传成功的文件
       }
       this.error(index, upload);
@@ -442,12 +463,7 @@ $(function(){
 				 if(fileIds){
 					 newParam.fileIds=fileIds.join(',')
 				 }
-				 if(queryParams.open=='on'){
-					 newParam.isWorkAreaExplicit='00'
-				 }
-				 else{
-					 newParam.isWorkAreaExplicit='01'
-				 }
+				 console.log('newParam',JSON.stringify(newParam))
 				  return newParam
 			}
 			$.ajax({

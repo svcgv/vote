@@ -17,15 +17,11 @@ public class ProfitInfoServiceImpl implements IProfitInfoService{
 	private ProfitInfoMapper mapper;
 	
 	@Override
-	public Map<String, Object> queryProfitInfoByOrgId(Long orgId) {
-		
-		ProfitInfo info = mapper.queryProfitInfoByOrgId(orgId);
-		Map<String, Object> map = new HashMap<>();
-		map.put("PROFIT_ID", info.getProfitId());
-		map.put("ORG_ID", info.getOrgId());
-		map.put("ORG_NAME", info.getOrgName());
-		
-		return map;
+	public ProfitInfo queryProfitInfoByOrgId(Long orgId) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("orgId", orgId);
+		ProfitInfo info = mapper.queryProfitInfoByOrgId(param);
+		return info;
 	}
 
 }

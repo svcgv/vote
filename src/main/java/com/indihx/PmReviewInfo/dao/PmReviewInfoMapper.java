@@ -19,5 +19,5 @@ public interface PmReviewInfoMapper{
 	public List<PmReviewInfoEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
 	public void updateIsDelete(PmReviewInfoEntity entity);
-	public List<Map<String,Object>> selectBidReview(PmReviewInfoEntity entity);
+	public List<Map<String,Object>> selectBidReview(Map<String,Object> entity);
 }

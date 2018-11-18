@@ -39,32 +39,7 @@
 
 <script type="text/javascript">
 $(function(){
-	var testData=[
-			  		{"projectId":"1000","projectName":"雪松-软件研发外包战略供应商招标"},
-					{"projectId":"1001","projectName":"深圳数位传媒科技有限公司IT人力外包"},
-					{"projectId":"10102","projectName":"信贷及相关系统技术服务项目"},
-					{"projectId":"10023","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10as03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10AS03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASDA03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASA03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10SD03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASDSA03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASD03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100ASAS3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10AAASA03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"1ZXC00ZX3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100AWQWEQ3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100AA3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASDASD03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100ASDASD3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100ADQEQW3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"100QEQE3","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"10ASADAAD03","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"AQQQQ","projectName":"新华保险人力外包服务项目"},
-					{"projectId":"WEQWEQSDSDDS","projectName":"新华保险人力外包服务项目"},
-					
-				]
+	var testData=[]
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table','laypage'], function(){
   var layer = layui.layer ,
@@ -181,6 +156,7 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 	var win=$(".projectGroup-project-wrapper").getWindow();
 	$(".projectGroup-project-wrapper").on("click","#save-hook",function(){
 		// 遍历选中的CheckBox
+		console.log(testData)
         var tempArray=[];
         for(var i=0;i<ids.length;i++){
             for(var j=0;j<testData.length;j++){
@@ -189,6 +165,8 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
                 }
             }
         }
+        
+        console.log(tempArray)
         for(var k=0;k<tempArray.length;k++){
             var flag= true;
             for(var j in chosedProject){
@@ -248,48 +226,37 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 	*/
 	$("#project-query-form #userQuery").click(function(){
 		
-		var queryParams=$("#project-query-form").serialize();
-		console.log(queryParams)
+		
+		 var queryParams=$("#project-query-form").serializeObject();
 		 var newparam = {}
-		 for(var o in queryParams){
-			 if(queryParams[o]){
-				 newparam[o] = queryParams[o]
-			 }
-		 }
+ 		 for(var o in queryParams){
+ 			 if(queryParams[o]){
+ 				 newparam[o] = queryParams[o]
+ 			 }
+ 		 }
 		 
-		   $.ajax({
-               type: 'POST',
-               url: '/vote/pmprojectinfo/list',
-               data: JSON.stringify(newparam),
-               contentType:'application/json',
-               success: function(res){
-                   testData=res.page;
-                   table.render({
-                       elem: '#projectTable-all',
-                       height:'250',
-                       cols: [[
-                 	      {type: 'checkbox' },
-                 	      {field:'projectId', title:'项目编号', templet:function(d){
-                 	    	  var jsonStr = JSON.stringify(d);
-                 	    	  return '<div class="jsonData" dataStr='+jsonStr+'>'+d.projectId+'</div>'
-                 	      } },
-                 	      {field:'projectName', title:'项目名称'}
-                 	    ]],
-                       cellMinWidth:'90',
-                       data:testData,
-                       page: true
-                   });},
-               dataType: "json"
-           });
+			table.reload('projectTable-all',{
+				 url: '/vote/pmprojectinfo/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+				 method:'post',
+					where:{
+						queryStr:JSON.stringify(newparam)
+					},
+					contentType: 'application/json',
+				    response: {
+				    	dataName: 'page'
+				    },
+					done:function(res){
+						console.log(res)
+						testData = res.page;
+					}
+			})
 	});
 	
 });
 	
 });
 
-
-
 </script>
-
-
-

@@ -134,17 +134,15 @@
 				      <thead>
 				        <tr><th>文件名</th>
 				        <th>大小</th>
-				        <th>状态</th>
-				        <th>下载</th>
 				        <th>文件类型</th>
+				        <th>状态</th>
+				        <th>操作</th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
 				      <c:forEach items="${file}" var="fileInfo" >
 				      	<tr class="edit-wosUploaded">
 					      	<td>${fileInfo.fileUploadName}</td>
 					      	<td>${fileInfo.fileSize}</td>
-					      	<td>已上传</td>
-					      	<td><a href='${fileInfo.filePath}' download="${fileInfo.fileUploadName}">下载</a></td>
 					      	<td>
 					      		<c:if test="${fileInfo.fileBusinessType=='00' }">
 									招标文件
@@ -156,6 +154,9 @@
 									内部评审文件
 								</c:if>
 							</td>
+					      	<td>已上传</td>
+					      	<td><a href='${fileInfo.filePath}' download="${fileInfo.fileUploadName}">下载</a></td>
+					      	
 				      	</tr>
 				      	</c:forEach>
 				      </tbody>
@@ -169,7 +170,7 @@
 			    </div>
 	       </div>
 	       <!-- 未评审时不显示评审记录 -->
-	        <div class="layui-inline">
+	        <div class="layui-inline" style='margin:40px 30px'>
 	       		 <label class="layui-form-label">评审记录：</label>
 	       		  <table class="layui-table" id='reviewViewHisTable'></table>
 	       </div>
