@@ -129,29 +129,39 @@
 				 </div>
 			 </div>
 	     </div>
+		<div class="layui-form-item" style="margin-bottom:0px;margin-left:10px;">
+			<div style="float:left;width: 140px;">
+				<p class="layui-form-label">项目引用列表：</p>
+			</div>
+			<div style="float:left;width:900px;">
+				<table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
+			</div>
+		</div>
 		<div class="layui-form-item" style="margin-bottom:0px;">
 			<div class="layui-inline" style="width:98%;">
 				<label class="layui-form-label">收款点信息：</label>
-				<div class="layui-input-inline">
-					<button type="button"  class="layui-btn layui-btn-sm" id="addPayList-form" ><i class="layui-icon"></i>新增收款点</button>
-				</div>
 			</div>
 		</div>
 		<table class="layui-table palyListTable" style="width:95%;margin-left:10px;;" >
 			<thead>
 			<tr>
 				<th style="white-space: nowrap;">序号</th>
+				<th>收款编号</th>
 				<th>收款日期</th>
 				<th>收款金额</th>
 				<th>收款比例（%）</th>
 				<th>收款要求</th>
-				<th>收款编号</th>
 			</tr>
 			</thead>
 			<tbody class="payList">
 			<c:forEach items="${pmPaymentPoints}" var="app" varStatus="status" >
 			<tr>
 				<th class="paySortNum">${status.count}</th>
+				<th>
+					<div class="layui-input-inline">
+						<label name="payWbsCode"  class="layui-form-label">${app.paymentCode}</label>
+					</div>
+				</th>
 				<th>
 					<div class="layui-input-inline">
 						<label name="paymentDate"  class="layui-form-label">${app.paymentDate}</label>
@@ -172,11 +182,6 @@
 						<label name="payRequirement"  class="layui-form-label">${app.remark}</label>
 					</div>
 				</th>
-				<th>
-					<div class="layui-input-inline">
-						<label name="payWbsCode"  class="layui-form-label">${app.paymentId}</label>
-					</div>
-				</th>
 			</tr>
 			</c:forEach>
 	</form>
@@ -186,16 +191,45 @@
 </div>
 <script>
 $(function(){
-	layui.use(['layer', 'form'], function(){
+	layui.use(['layer', 'form','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form;
-
+        table = layui.table;
         var pmContract = JSON.parse('${pmContract}');
         for (var property in pmContract) {
             $("#contract-addForm-hook label[name='"+property+"']").text(pmContract[property]);
 
         }
 
+        var contractId = ${id};
+        console.log(contractId);
+        var param = {"contractId": contractId};
+        $.ajax({
+            type: 'POST',
+            url: '/vote/pmcontractprojectrelation/listProject',
+            data: JSON.stringify(param),
+            contentType: 'application/json',
+            success: function (res) {
+                table.render({
+                    id:"table-chosedProject",
+                    elem: '#projectTable-chosed',
+                    height:'350',
+                    width:"700",
+                    title: '项目群数据信息',
+                    cols: [[
+                        {field:'wbs', title:'项目编号', templet:function(d){
+                            var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
+                            return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
+                        } },
+                        {field:'projectName', title:'项目名称'}
+                    ]],
+                    cellMinWidth:'90',
+                    data:res.page,
+                    page: true
+                });
+            },
+            dataType: "json"
+        });
 	 	  form.render();
         $("#contract-addForm-hook #contract-close-hook").click(function(){
             $(this).getWindow().close();

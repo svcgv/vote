@@ -16,6 +16,8 @@ public interface PmContractProjectRelationMapper{
 	public void insert(PmContractProjectRelationEntity entity);
 	public void update(PmContractProjectRelationEntity entity);
 	public void delete(long contractProjectRelationId);
+	public void deleteByContractId(long contractProjectRelationId);
 	public List<PmContractProjectRelationEntity> queryList(Map<String, Object> entity);
+	public List<PmContractProjectRelationEntity> queryListProject(Map<String, Object> entity);
 	public int queryTotal();
 }
