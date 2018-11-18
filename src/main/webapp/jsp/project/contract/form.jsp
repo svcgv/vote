@@ -469,9 +469,10 @@ $(function(){
 				contentType:'application/json',
 				data: JSON.stringify(getParam()),
 				success:function(res){
-                    location.reload();
-					layer.msg("新增成功",{icon:1});
-					win.close();
+					layer.msg("新增成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
+						win.close();
+						location.reload();
+					});
 				},
 				error:function(){
 					layer.msg("新增失败",{icon:5});
