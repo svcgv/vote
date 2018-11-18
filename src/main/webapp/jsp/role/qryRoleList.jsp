@@ -153,7 +153,7 @@
 					</div>
 				</form>
 				<div class="col-md-12">
-					<button type="button" class="btn btn-primary" onclick="openAdd()">
+					<button type="button" class="btn btn-primary" onclick="openAdd()"> 
 						<i class="icon-plus-sign"></i> 新增
 					</button>
 					<button type="button" class="btn btn-primary" onclick="updPara()">
@@ -164,7 +164,7 @@
 					</button>
 					<button type="button" class="btn btn-primary"
 						onclick="assignment()">
-						<i class="icon-plus-sign"></i> 分配权限
+						<i class="icon-plus-sign"></i> 权限分配
 					</button>
 					<button type="button" class="btn btn-primary" onclick="btnassign()">
 						<i class="icon-plus-sign"></i> 按钮分配

@@ -64,6 +64,16 @@ function save() {
 			}
 		}
 	});
+	
+	
+	if(($.trim($('#parentOrgNo').val()).length == 0)){
+   	 
+    	
+   	 
+   	 alert('请选择上级机构');
+  	  	 return false;
+    }
+	
 		var streetId = $("#jdid").val();
 		var hpbId = $("#hpbid").val();
 		var url = "${ctx}/org/addSave?jdid="+streetId+"&&hpbid="+hpbId;
@@ -114,7 +124,7 @@ function save() {
 		    <div class="form-group" >
 					<label class=" col-xs-4 control-label text-right" >上级机构</label>
 					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11 "
+						<input type="text" class="form-control col-xs-11 " readonly="readonly"
 							placeholder="上级机构" id="parentOrgName" name="parentOrgName" />
 							   <input type="hidden" name="parentOrgNo" id = "parentOrgNo"/>
 					</div>
