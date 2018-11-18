@@ -22,6 +22,8 @@
 }
 #contract-addForm-hook  .layui-btn{
 	padding:0 9px;
+	height:32px;
+	line-height:32px;
 }
 </style>
 <div id="contract-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
