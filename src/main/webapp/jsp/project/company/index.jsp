@@ -109,11 +109,11 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    height:'full-250',
 	    title: '公司数据表',
 	    cols: [[
-	    	 //{type: 'checkbox', fixed: 'left'},
-	  	      {field:'companyCode', title:'公司实体编号',fixed: 'left', width:150, sort: true},
-	  	      {field:'companyName', title:'公司实体名称', width:230},
-	  	      {field:'isDelete', title:'是否有效', width:180},
-	  	      {field:'createTime', title:'创建日期', width:230},
+	    	   {type: 'checkbox', fixed: 'left'},
+	  	      {field:'companyCode', title:'公司实体编号', sort: true},
+	  	      {field:'companyName', title:'公司实体名称'},
+	  	      {field:'isDelete', title:'是否有效'},
+	  	      {field:'createTime', title:'创建日期'},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    response: {

@@ -123,9 +123,8 @@ $(function(){
         chosedLayTable.render({
             id:"table-chosedProject",
             elem: '#projectTable-chosed',
-            height:'350',
-            width:"700",
-            title: '项目群数据信息',
+            height:'250',
+            title: '产品数据信息',
             cols: [[
                 {field:'wbs', title:'项目编号', templet:function(d){
                     var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <style>
     .customGroup-form-wrapper .layui-form-label {
-        width: 90px;
+        width: 100px!important;
     }
 </style>
 <div style="margin-top:10px;" class="customGroup-form-wrapper">
@@ -34,7 +34,7 @@
 
         </div>
     </form>
-    <table class="layui-hide" id="customTable" lay-filter="custom" style="overflow:hidden;"></table>
+    <div style="width:650px;margin-left:10px;"><table class="layui-hide" id="customTable" lay-filter="custom" style="overflow:hidden;"></table></div>
     <div class="layui-layer-btn layui-layer-btn-c">
         <a class="layui-layer-btn0" id="save-hook" style="background:#009688;border-color:#009688;">保存</a>
         <a class="layui-layer-btn1" id="close-hook">关闭</a>

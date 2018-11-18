@@ -205,7 +205,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	dataName: 'page'
 	    },
 	    toolbar: '#toolbarDemo',
-	    height:'full-200',
+	    height:'full-250',
 	    title: '投标数据表',
 	    cols: [[
 	    	  {type: 'checkbox', fixed: 'left'},
