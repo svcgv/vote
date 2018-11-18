@@ -1205,15 +1205,70 @@
 	 
 	<table id="custRevSummary2" lay-filter="calcRev"></table>
 	<div class="layui-layer-btn layui-layer-btn-c">
-    	<a class="layui-layer-btn0" id="customGroup-add-hook" style="background:#009688;border-color:#009688;">提交</a>
+    	<a class="layui-layer-btn0" id="customGroup-add-hook" style="background:#009688;border-color:#009688;">保存</a>
     	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
     </div>
+    
+    <table id="budgetTableForm" lay-filter="calcRev" lay-data="{id: 'idTest'}"></table>
+    <a class="layui-layer-btn0" id="getData" style="background:#009688;border-color:#009688;">获取数据</a>
 </div>
+
+<script type="text/html" id="toolbarForm">
+  <div class="layui-btn-container">
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+  </div>
+</script>
 
 <script type="text/html" id="iptMoneyTpl">
   <input class="layui-input layui-table-iptMoney"/>
 </script>
 <script>
+
+var cols=[    {width:'180px',title:'是否新客户', edit:'text', field:'isNewCust'},
+	{width:'180px',title:'客户名称', edit:'text', field:'custName'},
+	{width:'180px',title:'客户SAPCode', edit:'text', field:'sapCode'},
+	{width:'180px',title:'项目名称', edit:'text', field:'projectName'},
+	{width:'180px',title:'项目WBS编号', edit:'text', field:'wbs'},
+	{width:'180px',title:'项目类型', edit:'text', field:'projectType'},
+	{width:'180px',title:'收入来源', edit:'text', field:'revebueSource'},
+	{width:'180px',title:'公司实体名称', edit:'text', field:'companyEntityName'},
+	{width:'180px',title:'公司实体编号', edit:'text', field:'companyCode'},
+	{width:'180px',title:'合同ID', edit:'text', field:'contractId'},
+	{width:'180px',title:'合同编号', edit:'text', field:'contractCode'},
+	{width:'180px',title:'合同名称', edit:'text', field:'contractName'},
+	{width:'180px',title:'采购单', edit:'text', field:'revenueSource'},
+	{width:'180px',title:'客户经理编号', edit:'text', field:'custManagerId'},
+	{width:'180px',title:'客户经理名称', edit:'text', field:'custManagerName'},
+	{width:'180px',title:'税种', edit:'text', field:'taxType'},
+	{width:'180px',title:'收入类型', edit:'text', field:'incommingType'},
+	{width:'180px',title:'国家', edit:'text', field:'region'},
+	{width:'180px',title:'币种', edit:'text', field:'curency'},
+	{width:'180px',title:'毛利率', edit:'text', field:'grossProfitRate'},
+	{width:'180px',title:'预计一月收入', edit:'text', field:'budgetJan'},
+	{width:'180px',title:'预计二月收入', edit:'text', field:'budgetFeb'},
+	{width:'180px',title:'预计三月收入', edit:'text', field:'budgetMar'},
+	{width:'180px',title:'预计四月收入', edit:'text', field:'budgetApr'},
+	{width:'180px',title:'预计五月收入', edit:'text', field:'budgetMay'},
+	{width:'180px',title:'预计六月收入', edit:'text', field:'budgetJun'},
+	{width:'180px',title:'预计七月收入', edit:'text', field:'budgetJul'},
+	{width:'180px',title:'预计八月收入', edit:'text', field:'budgetAug'},
+	{width:'180px',title:'预计九月收入', edit:'text', field:'budgetSep'},
+	{width:'180px',title:'预计十月收入', edit:'text', field:'budgetOct'},
+	{width:'180px',title:'预计十一月收入', edit:'text', field:'budgetNov'},
+	{width:'180px',title:'预计十二月收入', edit:'text', field:'budgetDec'},
+	{width:'180px',title:'收入合计', edit:'text', field:'budgetSum'},
+	{width:'180px',title:'添加人编号', edit:'text', field:'creatorId'},
+	{width:'180px',title:'添加时间', edit:'text', field:'createTime'},
+	{width:'180px',title:'修改人', edit:'text', field:'modifier'},
+	{width:'180px',title:'修改时间', edit:'text', field:'modifyTime'},
+	{width:'180px',title:'是否删除', edit:'text', field:'isDelete'},
+	{width:'180px',title:'备注', edit:'text', field:'remark'},
+	{width:'180px',title:'预算评审状态', edit:'text', field:'reviewStatus'},
+	{width:'180px',title:'预算年份', edit:'text', field:'budgetYear'}]
+	
+	
 //客户收入汇总 初始化值 全局变量
 var customerData=[{'custCode':'','custName':'','totalRev':'0'}];
 var table2=null;
@@ -1458,7 +1513,13 @@ var table2=null;
 			win.close();
 			return false;
 		})
+		
+		
+		
+		
+		
 	
 	})
 
+	
 </script>

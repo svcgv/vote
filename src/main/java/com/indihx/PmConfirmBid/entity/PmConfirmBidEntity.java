@@ -22,7 +22,8 @@ public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 	/**
 	 * 
 	 */
-
+	private long predictProfit;
+	private String predictWorkLoad;
 	private long bidId;
 	/**
 	 * 
@@ -53,7 +54,24 @@ public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 	 * 
 	 */
 
+	
 	private String predictPeriodStart;
+	public long getPredictProfit() {
+		return predictProfit;
+	}
+
+	public void setPredictProfit(long predictProfit) {
+		this.predictProfit = predictProfit;
+	}
+
+	public String getPredictWorkLoad() {
+		return predictWorkLoad;
+	}
+
+	public void setPredictWorkLoad(String predictWorkLoad) {
+		this.predictWorkLoad = predictWorkLoad;
+	}
+
 	/**
 	 * 
 	 */

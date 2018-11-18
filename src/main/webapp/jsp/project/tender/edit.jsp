@@ -21,7 +21,7 @@
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item" >
 		    <div class="layui-inline" style='margin-right:225px'>
-		      <label class="layui-form-label">投标名称：</label>
+		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="bidName" value="das"  autocomplete="off" class="layui-input form-control">
 		         <input type="text" style='display:none' name="bidId" autocomplete="off" value="1" class="layui-input form-control">
@@ -46,7 +46,7 @@
 		       </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估合同金额：</label>
+		      <label class="layui-form-label">预估合同金额（元）：</label>
 		       <div class="layui-input-inline">
 		         <input type="number" name="predictAmount"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -58,7 +58,18 @@
 		       <input type="number" name="predictCost"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
-		    
+		    <div class="layui-inline">
+		      <label class="layui-form-label">预估工作量：</label>
+		      <div class="layui-input-inline">
+		       <input type="number" name="predictWorkLoad"  autocomplete="off" class="layui-input form-control">
+		      </div>
+		    </div>
+		    <div class="layui-inline">
+		      <label class="layui-form-label">预估利润（元）：</label>
+		      <div class="layui-input-inline">
+		       <input type="number" name="predictProfit"  autocomplete="off" class="layui-input form-control">
+		      </div>
+		    </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">预估利润率（%）：</label>
 		       <div class="layui-input-inline">
@@ -67,13 +78,13 @@
 		    </div>
 		    
 		     <div class="layui-inline" style='margin-right:225px'>
-		      <label class="layui-form-label">项目开始时间：</label>
+		      <label class="layui-form-label">项目计划开始日期：</label>
 		       <div class="layui-input-inline">
 	         		<input type="text" name="predictPeriodStart" id="predictPeriodStartDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 			  <div class="layui-inline">
-				  <label class="layui-form-label">项目结束时间：</label>
+				  <label class="layui-form-label">项目计划结束日期：</label>
 				  <div class="layui-input-inline">
 					  <input type="text" name="predictPeriodEnd" id="predictPeriodEndDate-edit" autocomplete="off" class="layui-input form-control hasDatepicker">
 				  </div>
@@ -209,6 +220,20 @@
     </div>
 </div>
 <script>
+function getParam(){
+	var queryParams=$("#tender-addForm-hook form").serializeObject();
+	 var newParam = {}
+	  for(var i in queryParams){
+		  if(queryParams[i]){
+			  newParam[i] = queryParams[i]
+		  }
+	  }
+	 if(fileIds){
+		 newParam.fileIds=fileIds.join(',')
+	 }
+	 console.log('newParam',JSON.stringify(newParam))
+	  return newParam
+}
 $(function(){
 	layui.use(['layer', 'form','laydate','upload'], function(){
 		var layer = layui.layer ,
@@ -365,8 +390,13 @@ $(function(){
 	  
 });
   $("#techQuery-projectManager").click(function(){
+	  var par = getParam()
+	  if(!par.constructionDeptId){
+		  layer.msg("请输入请选择交付部门");
+		  return 
+	  }
 	  $.openWindow({
-	  		url:'user?act=addProManager&orgNo=&roleCode=PROJECT_MANGER',
+	  		url:'user?act=addProManager&orgNo='+par.constructionDeptId+'&roleCode=PROJECT_MANGER',
 	  		title:"选择项目经理",
 	  		width:"700"
 	 });
@@ -446,26 +476,13 @@ $(function(){
 		$("#tender-addForm-hook #customGroup-add-hook").click(function(){
 			var customerGroupName=$("#tender-addForm-hook input[name='bidName']").val();
 			if($.trim(customerGroupName) ==''){
-				layer.msg("请输入投标名称");
+				layer.msg("请输入项目名称");
 				return false;
 			}
 			
 			var formDatas=$("#tender-addForm-hook form").serializeObject();
 			
-			function getParam(){
-				var queryParams=$("#tender-addForm-hook form").serializeObject();
-				 var newParam = {}
-				  for(var i in queryParams){
-					  if(queryParams[i]){
-						  newParam[i] = queryParams[i]
-					  }
-				  }
-				 if(fileIds){
-					 newParam.fileIds=fileIds.join(',')
-				 }
-				 console.log('newParam',JSON.stringify(newParam))
-				  return newParam
-			}
+			
 			$.ajax({
 				type:'POST',
 				url:'/vote/pmconfirmbid/update',

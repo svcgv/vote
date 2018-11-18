@@ -4,6 +4,8 @@ package com.indihx.PmYearBudget.controller;
 import java.util.Map;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,8 @@ import com.indihx.util.BeanUtils;
 import com.indihx.util.UserUtil;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.RandomUtil;
+import com.indihx.excel.service.ExcelFileService;
+import com.indihx.excel.service.ExcelSheetService;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.PmYearBudget.entity.PmYearBudgetEntity;
 import com.indihx.PmYearBudget.service.PmYearBudgetService;
@@ -32,6 +36,9 @@ import com.indihx.comm.InitSysConstants;
 public class PmYearBudgetController {
     @Autowired
     private PmYearBudgetService pmYearBudgetService;
+    
+    @Autowired
+    ExcelFileService excelFileService;
 
     /**
      * 列表
@@ -103,4 +110,24 @@ public class PmYearBudgetController {
         pmYearBudgetService.insertList(listBean);
         return R.ok();
     }
+    
+    /**
+     * 导出excel
+     * @param pmYearBudget
+     * @param session
+     * @return
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws NoSuchFieldException
+     * @throws SecurityException
+     */
+    @RequestMapping(value="/exportExcel",method=RequestMethod.GET)
+    public @ResponseBody Map<String,Object> exportExcel(@RequestBody Map<String,Object> exportParam,HttpSession session) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException{
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	List<PmYearBudgetEntity> list = pmYearBudgetService.queryList(exportParam);
+    	 XSSFWorkbook wb = excelFileService.getExcelByListBeanAndExcelCode(list, "yearBudget","年度预算");
+        return R.ok();
+    }
+    
+    
 }

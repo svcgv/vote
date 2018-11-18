@@ -20,5 +20,6 @@ public interface ExcelCellService{
 
 	public long insert(ExcelCellEntity entity);
 	public List<ExcelCellEntity> queryCellListBySheetId(long id);
+	public List<ExcelCellEntity> queryCellListBySheetId(long id,String fixType);
 }
 
