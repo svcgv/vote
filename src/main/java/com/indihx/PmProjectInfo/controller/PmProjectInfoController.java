@@ -68,16 +68,14 @@ public class PmProjectInfoController {
     
     @RequestMapping(value="/queryProfitInfo",method=RequestMethod.POST)
     public @ResponseBody  Map<String,Object>  queryProfitInfo(@RequestBody Map<String, Object> param ,HttpSession session){
-//    	ProfitInfo entity = profitInfoService.queryProfitInfoByOrgId(Long.valueOf(param.get("orgId").toString()));
-//    	return R.ok().put("profitInfo", entity);
-        return null;
+    	ProfitInfo entity = profitInfoService.queryProfitInfoByOrgId(Long.valueOf(param.get("orgId").toString()));
+    	return R.ok().put("profitInfo", entity);
     }
     
     @RequestMapping(value="/queryCostInfo",method=RequestMethod.POST)
     public @ResponseBody  Map<String,Object>  queryCostInfo(@RequestBody Map<String, Object> param ,HttpSession session){
-//    	List<CostInfo> list = costInfoService.qryCostInfoListByOrgId(Long.valueOf(param.get("orgId").toString()));
-//    	return R.ok().put("page", list);
-        return null;
+    	List<CostInfo> list = costInfoService.qryCostInfoListByOrgId(Long.valueOf(param.get("orgId").toString()));
+    	return R.ok().put("page", list);
     }
     /**
      * 保存
