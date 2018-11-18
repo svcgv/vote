@@ -7,6 +7,10 @@
 
 	function openAdd() {
 		/* $.indi.submit({url: '${ctx }/jsp/usr/addUsrInfo.jsp'}); */
+		
+		
+	//	$.indi.openPopup({title: '按钮新增',area : ['700px' , '500px'],url: '${ctx }/jsp/system/btn/addBtnInfo.jsp'});
+		//$.indi.openPopup({title: '机构新增',area : ['550px' , '400px'],url: '${ctx }/usr/addUsrInfo'});
 		window.location.href="${ctx }/usr/addUsrInfo";
 	}
 

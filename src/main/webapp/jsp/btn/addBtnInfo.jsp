@@ -84,8 +84,8 @@
 				<div class="form-group">
 					<label class=" col-xs-4 control-label text-right">按钮所属页面</label>
 					<div class=" col-xs-6">
-						<input type="text" class="form-control col-xs-11 "
-							placeholder="按钮所属页面" id="btnPage" name="btnPage" required/>
+						<input type="text" class="form-control col-xs-11 " readonly="true"
+							placeholder="按钮所属页面" id="btnPage" name="btnPage"  />
 						<input type="hidden" name="menuId" id = "menuId"/>
 					</div>
 					<button type="button" class="btn btn-primary" onclick="openMenu()">

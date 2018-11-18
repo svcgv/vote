@@ -51,6 +51,7 @@ public class BtnRoleController {
 		ModelAndView view = new ModelAndView();
 		view.addObject("listInfo", map.get("listInfo"));
 		view.addObject("pageInfo",map.get("pageInfo"));
+		view.addObject("btnArr",map.get("btnArr"));
 		view.setViewName("/role/setBtnRole");
 		return view;
 	}

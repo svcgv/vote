@@ -66,16 +66,20 @@ public class BtnInfoServiceImpl extends AbstractBaseService  implements IBtnInfo
 		BtnInfo record = new BtnInfo();
 	    EntityVoConverter.Convert(btnInfoVo, record);
 		Map<String, Object> map = new HashMap<String, Object>();
+		List<BtnInfo> btnArrInfo = btnInfoMapper.qryRoleBtnAll(record);
 		// 第几页、每页显示条数，是否汇总
 		PageHelper.startPage(btnInfoVo.getPages(), btnInfoVo.getRows(), true);
 		List<BtnInfo> listInfo = btnInfoMapper.qryRoleBtnAll(record);
 		String btnArr = "";
-		for (BtnInfo btnInfo : listInfo) {
+		for (BtnInfo btnInfo : btnArrInfo) {
 			if(btnInfo.getBtnId().equals(btnInfo.getRoleBtnId())) {
 				btnArr = btnArr+btnInfo.getBtnId()+",";
 			}
 		}
-		btnArr= btnArr.substring(0, btnArr.length()-1);
+		if(btnArr.length() >0) {
+			
+			btnArr= btnArr.substring(0, btnArr.length()-1);
+		}
 		
 		
 		PageInfo pageInfo = new PageInfo(listInfo);
