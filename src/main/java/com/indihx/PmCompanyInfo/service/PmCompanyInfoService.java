@@ -11,10 +11,10 @@ import com.indihx.PmCompanyInfo.entity.PmCompanyInfoEntity;
  * @date 2018-10-30 18:46:08
  */
 public interface PmCompanyInfoService {
-	public PmCompanyInfoEntity queryObject(String id);
+	public PmCompanyInfoEntity queryObject(long id);
 	public void insert(PmCompanyInfoEntity entity);
 	public void update(PmCompanyInfoEntity entity);
-	public void delete(String companyCode);
+	public void delete(long companyId);
 	public List<PmCompanyInfoEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
    

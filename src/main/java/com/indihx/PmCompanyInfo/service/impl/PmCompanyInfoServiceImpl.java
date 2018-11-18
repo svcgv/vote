@@ -18,7 +18,7 @@ public class PmCompanyInfoServiceImpl implements PmCompanyInfoService {
    	PmCompanyInfoMapper pmCompanyInfoMapper;
    	
    
-   	public PmCompanyInfoEntity queryObject(String id){
+   	public PmCompanyInfoEntity queryObject(long id){
    		return pmCompanyInfoMapper.queryObject(id);
    	}
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -32,8 +32,8 @@ public class PmCompanyInfoServiceImpl implements PmCompanyInfoService {
 	@Transactional(propagation = Propagation.REQUIRED)
 
 
-	public void delete(String companyCode){
-   		pmCompanyInfoMapper.delete( companyCode);
+	public void delete(long companyId){
+   		pmCompanyInfoMapper.delete( companyId);
    	}
 
 	public int queryTotal(){

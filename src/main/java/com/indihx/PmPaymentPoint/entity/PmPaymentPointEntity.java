@@ -21,7 +21,7 @@ public class PmPaymentPointEntity extends BaseEntity implements Serializable {
 	 * 
 	 */
 
-private String paymentId;
+private long paymentId;
 	/**
 	 * 
 	 */
@@ -87,19 +87,11 @@ private String modifyTime;
 	 */
 
 private String isDelete;
+	/**
+	 * 收款/付款编码
+	 */
+	private String paymentCode;
 
-	/**
-	 * 设置：
-	 */
-	public void setPaymentId(String paymentId) {
-		this.paymentId = paymentId;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getPaymentId() {
-		return paymentId;
-	}
 	/**
 	 * 设置：
 	 */
@@ -255,5 +247,17 @@ private String isDelete;
 	 */
 	public String getIsDelete() {
 		return isDelete;
+	}
+
+	public void setPaymentId(long paymentId) {
+		this.paymentId = paymentId;
+	}
+
+	public String getPaymentCode() {
+		return paymentCode;
+	}
+
+	public void setPaymentCode(String paymentCode) {
+		this.paymentCode = paymentCode;
 	}
 }

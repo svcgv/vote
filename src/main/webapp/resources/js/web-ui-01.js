@@ -362,9 +362,18 @@ function initTable(tableId,single){
 				for (var i = 0; i < list.length; i++) {
 					html += "<tr>";
 					var isSelect = list[i]["isSelect"];
+					//console.log(list[i],'list')
 					// 角色管理 按钮 设置全局变量
 					if(typeof checkedRet!="undefined" && checkedRet.length){
 							if($.inArray(list[i].btnId,checkedRet) > -1){
+								var isSelect="Y";
+							}else{
+								var isSelect = list[i]["isSelect"];
+							}
+					}
+					// 角色管理 按钮 设置全局变量
+					if(typeof checkedMenuRet!="undefined" && checkedMenuRet.length){
+							if($.inArray(list[i].menuId,checkedMenuRet) > -1){
 								var isSelect="Y";
 							}else{
 								var isSelect = list[i]["isSelect"];
@@ -392,6 +401,9 @@ function initTable(tableId,single){
 											+ _target_data + '"   ' + 'value="'
 											+ _val + '"> ';
 								}
+							}
+							if(typeof list[i].menuName !="undefined" && list[i].menuName){
+								html+='<input type="hidden" class="j-menuName" value="'+list[i].menuName+'" />'
 							}
 							html += '</td>';
 						} else if (target_data == 'count')

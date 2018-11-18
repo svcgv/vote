@@ -6,6 +6,7 @@ import com.indihx.BaseEntity;
 import com.indihx.PmPaymentPoint.entity.PmPaymentPointEntity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +49,7 @@ private long taxRate;
 	 * $column.comments
 	 */
 
-private long afterTaxContractAmount;
+private BigDecimal afterTaxContractAmount;
 	/**
 	 * $column.comments
 	 */
@@ -128,6 +129,7 @@ private String isDelete;
 	 */
 	private List<PmPaymentPointEntity> paymentPoint;
 
+	private List<Long> projectIds;
 
 	public long getContractId() {
 		return contractId;
@@ -169,11 +171,11 @@ private String isDelete;
 		this.taxRate = taxRate;
 	}
 
-	public long getAfterTaxContractAmount() {
+	public BigDecimal getAfterTaxContractAmount() {
 		return afterTaxContractAmount;
 	}
 
-	public void setAfterTaxContractAmount(long afterTaxContractAmount) {
+	public void setAfterTaxContractAmount(BigDecimal afterTaxContractAmount) {
 		this.afterTaxContractAmount = afterTaxContractAmount;
 	}
 
@@ -311,5 +313,13 @@ private String isDelete;
 
 	public void setPaymentPoint(List<PmPaymentPointEntity> paymentPoint) {
 		this.paymentPoint = paymentPoint;
+	}
+
+	public List<Long> getProjectIds() {
+		return projectIds;
+	}
+
+	public void setProjectIds(List<Long> projectIds) {
+		this.projectIds = projectIds;
 	}
 }
