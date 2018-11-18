@@ -362,7 +362,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:'form?act=add&id=',
 	  		title:"新增投标",
-	  		width:"1000"
+	  		width:"100%"
 	  	})
 	});
 	
@@ -370,7 +370,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 查看和修改 form 表单
 	*/
 	function showFromTable(isEdit,id){
-		var _width=1000;
+		var _width='100%';
 		if(isEdit == "edit"){
 			var url='edit?act=edit&id='+id;
 			var title="修改投标信息";
