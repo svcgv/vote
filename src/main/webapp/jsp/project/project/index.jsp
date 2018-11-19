@@ -268,16 +268,32 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   });
   // 选择实施负责人
   $(".project-info-wrapper #buildManagerNameQuery-hook").click(function(){
+	  
+	  var buildDeptId = $("#project-index-form input[name='buildDeptId']").val();
+	   
+		if($.trim(buildDeptId) ==''){
+			layer.msg("请选择实施部门");
+			return false;
+		}
+	  
 	  $.openWindow({
-	  		url:'user?act=buildManager',
+	  		url:'user?act=buildManager&orgNo='+buildDeptId+'&roleCode=BUILD_DEPT_NAME',
 	  		title:"选择实施负责人",
 	  		width:"700"
 	 });
   });
   // 选择项目经理
   $(".project-info-wrapper #projectManagerNameQuery-hook").click(function(){
+	  
+	  var buildDeptId = $("#project-index-form input[name='buildDeptId']").val();
+	   
+		if($.trim(buildDeptId) ==''){
+			layer.msg("请选择实施部门");
+			return false;
+		}
+	  
 	  $.openWindow({
-	  		url:'user?act=projectManager',
+	  		url:'user?act=projectManager&orgNo='+buildDeptId+'&roleCode=PROJECT_MANGER',
 	  		title:"选择项目经理",
 	  		width:"700"
 	 });
@@ -294,8 +310,16 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   
   // 选择销售负责人
   $(".project-info-wrapper #sellManagerNameQuery-hook").on("click",function(){
+	  
+	  var sellDeptId = $("#project-index-form input[name='sellDeptId']").val();
+	   
+		if($.trim(sellDeptId) ==''){
+			layer.msg("请选择销售部门");
+			return false;
+		}
+	  
 	  	$.openWindow({
-	  		url:'user?act=sellManager',
+	  		url:'user?act=sellManager&orgNo='+sellDeptId+'&roleCode=SELL_DEPT_MANAGER',
 	  		title:"选择销售负责人",
 	  		width:"700"
 	 	 });
@@ -303,8 +327,16 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   
   // 选择客户经理
   $(".project-info-wrapper #custManagerNameQuery-hook").on("click",function(){
+	  
+	  var sellDeptId = $("#project-index-form input[name='sellDeptId']").val();
+	   
+		if($.trim(sellDeptId) ==''){
+			layer.msg("请选择销售部门");
+			return false;
+		}
+	  
 	  	$.openWindow({
-	  		url:'user?act=custManager',
+	  		url:'user?act=custManager&orgNo='+sellDeptId+'&roleCode=',
 	  		title:"选择客户经理",
 	  		width:"700"
 	 	 });

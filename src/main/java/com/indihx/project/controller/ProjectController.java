@@ -160,9 +160,11 @@ public class ProjectController extends AbstractBaseController {
 
     // 用户
     @RequestMapping(value = "/project/user", method = RequestMethod.GET)
-    public ModelAndView userFormView(@RequestParam("act") String act) {
+    public ModelAndView userFormView(@RequestParam("act") String act,@RequestParam("orgNo") String orgNo,@RequestParam("roleCode") String roleCode) {
         ModelAndView view = new ModelAndView();
         view.addObject("act", act);
+		view.addObject("orgNo",orgNo);
+		view.addObject("roleCode",roleCode);
         view.setViewName("/project/project/user");
         return view;
     }

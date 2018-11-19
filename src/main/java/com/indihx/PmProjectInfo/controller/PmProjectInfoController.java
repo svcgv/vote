@@ -2,6 +2,7 @@ package com.indihx.PmProjectInfo.controller;
 
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,8 @@ import com.indihx.system.entity.CostInfo;
 import com.indihx.system.entity.ProfitInfo;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.UserUtil;
+import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
+import com.indihx.PmConfirmBid.service.PmConfirmBidService;
 import com.indihx.PmProjectGroupRelationInfo.entity.PmProjectGroupRelationInfoEntity;
 import com.indihx.PmProjectGroupRelationInfo.service.PmProjectGroupRelationInfoService;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
@@ -50,6 +53,9 @@ public class PmProjectInfoController {
     
     @Autowired
     private ICostInfoService costInfoService;
+    
+    @Autowired
+    private PmConfirmBidService pmConfirmBidService;
 
     /**
      * 列表
@@ -62,6 +68,36 @@ public class PmProjectInfoController {
         return new ResponseData(pmProjectInfoService.queryList(maps,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
     }
 
+    
+    @RequestMapping(value="/listTender",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> listTender(@RequestBody Map<String, Object> params,HttpSession session){
+    	String str = (String) params.get("queryStr");
+    	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
+    	maps.put("status", "04");
+    	maps.put("isDelete", "00");
+		List<PmConfirmBidEntity> confirmList = pmConfirmBidService.queryList(maps);
+		
+		Map<String,Object> entity = new HashMap<String,Object>();
+		entity.put("isDelete", "00");
+		List<PmProjectInfoEntity> projectList = pmProjectInfoService.queryList(entity);
+		
+		List<PmConfirmBidEntity> isRef = new ArrayList<PmConfirmBidEntity>();
+		
+		boolean notexsit = true;
+		
+		for(PmConfirmBidEntity confirm:confirmList) {
+			for(PmProjectInfoEntity project:projectList) {
+				if(confirm.getBidId() == project.getBidId()) {
+					notexsit = false;
+				}
+			}
+			
+			if(notexsit) {
+				isRef.add(confirm);
+			}
+		}
+        return R.ok().put("page", isRef);
+    }
 
     /**
      * 信息

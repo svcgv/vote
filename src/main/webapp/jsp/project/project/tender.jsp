@@ -50,7 +50,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
   table.render({
 	    elem: '#tenderTable',
 	    id:'tenderTable',
-	    url:'/vote/pmconfirmbid/list',
+	    url:'/vote/pmprojectinfo/listTender',
 	    method:'post',
 		where:{
 			queryStr:JSON.stringify(queryParams)
@@ -162,7 +162,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			 }
 			console.log(queryParams)
 			table.reload('tenderTable',{
-				 url: '/vote/pmconfirmbid/list',
+				 url: '/vote/pmprojectinfo/listTender',
 				page:{
 					curr:1 //从第一页开始
 				},
