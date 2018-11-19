@@ -1,6 +1,7 @@
 package com.indihx.excel.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.indihx.excel.entity.ExcelCellEntity;
 
@@ -14,4 +15,5 @@ import com.indihx.excel.entity.ExcelCellEntity;
 public interface ExcelCellMapper{
 	public long insert(ExcelCellEntity entity);
 	public List<ExcelCellEntity> queryCellListBySheetId(long id);
+	public List<ExcelCellEntity> queryCellListBySheetIdAndFixType(Map<String,Object> map);
 }

@@ -40,6 +40,7 @@ import com.indihx.PmConfirmBid.service.PmConfirmBidService;
 import com.indihx.PmFile.entity.PmFileEntity;
 import com.indihx.PmFile.service.PmFileService;
 import com.indihx.comm.InitSysConstants;
+import com.indihx.comm.util.DateUtil;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
 import com.indihx.system.entity.UsrInfo;
@@ -67,6 +68,7 @@ public class ContractController extends AbstractBaseController{
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
 		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
 		view.addObject("status",infoservice.qryInfoByCode("BID_STATUS"));
+
 		view.setViewName("/project/contract/index");
 		return view;
 	}

@@ -11,14 +11,14 @@
 	  	<div class="layui-inline">
 	       <label class="layui-form-label">客户编号：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="custId"  autocomplete="off" class="layui-input form-control">
+	         <input type="text" name="sapCode"  autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
 	  	
 	  	<div class="layui-inline">
 	      <label class="layui-form-label" >客户名称：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="custName"  autocomplete="off" class="layui-input form-control" >
+	         <input type="text" name="custCnName"  autocomplete="off" class="layui-input form-control" >
 	      </div>
 	    </div>
 	    
@@ -47,46 +47,34 @@ layui.use(['layer', 'form','laydate','table'], function(){
   var layer = layui.layer ,
   	  form = layui.form,
   	  table=layui.table;
-	  
-  // table render
+	
+	
   table.render({
 	    elem: '#userTable',
-	    //url:'custom.json',
+	    id:'customerGroup-table',
+	    url:'/vote/pmcustomerinfo/list',
+	    method:'post',
+		where:{
+			queryStr:JSON.stringify({})
+		},
+		contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    height:'260',
 	    width:"690",
 	    title: '客户数据表',
 	    cols: [[
 	      {type: 'radio' },
-	      {field:'custId', title:'客户ID', sort: true},
-	      {field:'custName', title:'客户名称'}
+	      {field:'sapCode', title:'客户SAP编号', sort: true},
+	      {field:'custCnName', title:'客户名称',templet:function(d){
+	    	  return '<div data-id="'+d.custId+'">'+d.custCnName+'</div>'
+	      }}
 	    ]],
-	    data:[
-		  		{
-		  			"custId":"1000",
-					"custName":"方维"
-					
-				},
-				{
-		  			"custId":"1001",
-					"custName":"兴业银行"
-					
-				},
-				{
-		  			"custId":"1002",
-					"custName":"上海分行"
-					
-				},
-				{
-		  			"custId":"1003",
-					"custName":"交通银行"
-					
-				}
-				
-			],
 	    page: true
-	  });
-	
-	
+	  })
+  // table render
+  
 	// 保存 事件
 	var act="${act}";// 区分是index页 form页 赋值问题
 	var win=$(".budget-cust-wrapper").getWindow();
@@ -131,33 +119,42 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	/*
 	* 客户查询按钮
 	*/
-	$("#customer-query-form #userQuery").click(function(){
+	
+$("#customer-query-form #userQuery").click(function(){
 		
-		var queryParams=$("#customer-query-form").serialize();
-		console.log(queryParams)
+		var queryParams=$("#customer-query-form").serializeObject();
+		var newparam = {}
+		 for(var o in queryParams){
+			 if(queryParams[o]){
+				 newparam[o] = queryParams[o]
+			 }
+		 }
 		table.reload('customerGroup-table',{
-			url:'form',
+			url:'/vote/pmcustomerinfo/list',
 			page:{
 				curr:1 //从第一页开始
 			},
-			method:'post',
+		    method:'post',
 			where:{
-				queryStr:queryParams
+				queryStr:JSON.stringify(newparam)
 			},
+			contentType: 'application/json',
+		    response: {
+		    	dataName: 'page'
+		    },
 			done:function(res){
 				console.log(res)
 			}
 			
-		})
+		}) 
 	});
 	
+	
+	
 });
 	
 });
 
 
-
+var testData=[]
 </script>
-
-
-
