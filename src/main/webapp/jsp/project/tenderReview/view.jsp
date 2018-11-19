@@ -40,7 +40,7 @@
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估收入（元）：</label>
+		      <label class="layui-form-label">预估合同金额（元）：</label>
 		       <div class="layui-input-inline">
 		         <label name="predictAmount"  class="layui-form-label"></label>
 		      </div>
@@ -61,13 +61,13 @@
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预付开始期限：</label>
+		      <label class="layui-form-label">项目开始时间：</label>
 		       <div class="layui-input-inline">
 	         	<label name="predictPeriodStart"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预付结束期限：</label>
+		      <label class="layui-form-label">项目结束时间：</label>
 		       <div class="layui-input-inline">
 	         	<label name="predictPeriodEnd"  class="layui-form-label"></label>
 		      </div>
@@ -82,6 +82,12 @@
 		      <label class="layui-form-label">交付部门负责人：</label>
 		       <div class="layui-input-inline">
 		         <label name="constructionDeptManagerName"  class="layui-form-label"></label>
+		      </div>
+		    </div>
+		    <div class="layui-inline">
+		      <label class="layui-form-label">项目经理：</label>
+		       <div class="layui-input-inline">
+		           <label name="projectManagerName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">

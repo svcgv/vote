@@ -20,10 +20,6 @@
         <result property="isDelete" column="IS_DELETE"/>
     </resultMap>
 
-	<select id="queryMaxId"  resultType="long">
-			select max(PROJECT_GROUP_ID) from pm_project_group_info
-	</select>
-
 	<select id="queryObject" resultMap="pmProjectGroupInfoMap">
 		select * from pm_project_group_info where PROJECT_GROUP_ID = #{value}
 	</select>
@@ -40,9 +36,9 @@
 						<if test="wbs != null and wbs!=''"  >
 				WBS = #{wbs} AND 			</if>
 						<if test="projectGroupName != null and projectGroupName!=''"  >
-				PROJECT_GROUP_NAME = #{projectGroupName} AND 			</if>
+				PROJECT_GROUP_NAME like concat(concat('%',#{projectGroupName}),'%') AND 			</if>
 						<if test="groupManagerCode != null and groupManagerCode!=''"  >
-				GROUP_MANAGER_CODE = #{groupManagerCode} AND 			</if>
+				GROUP_MANAGER_CODE like concat(concat('%',#{groupManagerCode}),'%') AND 			</if>
 						<if test="groupManagerId != null and groupManagerId!=''"  >
 				GROUP_MANAGER_ID = #{groupManagerId} AND 			</if>
 						<if test="groupCreatorId != null and groupCreatorId!=''"  >
@@ -72,7 +68,13 @@
 		select count(*) from pm_project_group_info 
 	</select>
 	 
-	<insert id="insert" parameterType="com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity">
+	<insert id="insert" parameterType="com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity"
+			useGeneratedKeys="true" keyProperty="projectGroupId">
+			
+		<selectKey keyProperty="projectGroupId" order="BEFORE"
+			resultType="java.lang.Long">
+			select PmProjectGroupInfo_SEQ.nextval as projectGroupId from DUAL
+		</selectKey>
 		insert into pm_project_group_info
 		(
 		PROJECT_GROUP_ID
@@ -124,7 +126,7 @@
 		)
 		values
 		(
-		PmProjectGroupInfo_SEQ.nextval
+		#{projectGroupId}
 		<if test="projectId != null and projectId!=''">
 			,#{projectId}
 		</if>

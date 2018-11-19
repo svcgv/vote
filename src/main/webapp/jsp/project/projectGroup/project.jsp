@@ -51,18 +51,22 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
   // table render
   table.render({
 	    elem: '#projectTable-all',
-	   // url:'/vote/pmcustomerinfo/list',
+		url: '/vote/pmprojectinfo/list',
+		 method:'post',
+			where:{
+				queryStr:JSON.stringify(queryParams)
+			},
+			contentType: 'application/json',
+		    response: {
+		    	dataName: 'page'
+		    },
+			done:function(res){
+				console.log(res)
+				testData = res.page;
+			},
 	    height:'260',
 	    width:"690",
 	    title: '项目表信息',
-	    response: {
-	    	dataName: 'page'
-	    },
-	    where:{
-			queryStr:JSON.stringify(queryParams)
-		},
-	    method:'POST',
-	    contentType: 'application/json',
 	    cols: [[
 	      {type: 'checkbox' },
 	      {field:'projectId', title:'项目编号', templet:function(d){
@@ -72,9 +76,7 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 	      {field:'projectName', title:'项目名称'}
 	    ]],
 	    data:testData,
-	    page: true,
-	    done:function(res,curr,count){
-	    }
+	    page: true
 	  });
   	
        //复选框选中监听,将选中的id 设置到缓存数组,或者删除缓存数组
@@ -182,32 +184,6 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 
         }
 
-
-
-//		$(".projectGroup-project-wrapper .layui-table-body table.layui-table tbody tr").each(function(){
-//            console.log(ids);
-//			var chk=$(this).find(".laytable-cell-checkbox");
-//			var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
-//			if(isChecked){
-//				var dataStr=$(this).children("td").eq(1).find(".jsonData").attr("dataStr");
-//				var obj=JSON.parse(dataStr);
-//				// 去重 已选的项目
-//				var flag= true;
-//				for(var i in chosedProject){
-//					var proId=chosedProject[i].projectId;
-//					if(obj.projectId == proId){
-//						flag= false;
-//						continue;
-//					}
-//				}
-//				if(flag){
-//					chosedProject.push({
-//						"projectId":obj.projectId,
-//						"projectName":obj.projectName
-//					});
-//				}
-//			}
-//		});
 		console.log(chosedProject)
 		chosedLayTable.reload('table-chosedProject',{
 					data:chosedProject
@@ -228,12 +204,6 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 		
 		
 		 var queryParams=$("#project-query-form").serializeObject();
-		 var newparam = {}
- 		 for(var o in queryParams){
- 			 if(queryParams[o]){
- 				 newparam[o] = queryParams[o]
- 			 }
- 		 }
 		 
 			table.reload('projectTable-all',{
 				 url: '/vote/pmprojectinfo/list',
@@ -242,7 +212,7 @@ layui.use(['layer', 'form','laydate','table','laypage'], function(){
 				},
 				 method:'post',
 					where:{
-						queryStr:JSON.stringify(newparam)
+						queryStr:JSON.stringify(queryParams)
 					},
 					contentType: 'application/json',
 				    response: {

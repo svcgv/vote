@@ -113,6 +113,7 @@ $(function(){
                  data: JSON.stringify(data),
                  contentType: 'application/json',
                  success: function (res) {
+               	  	location.reload();
                      layer.msg("新增成功", {icon: 1});
                      win.close();
                  },

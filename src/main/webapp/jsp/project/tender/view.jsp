@@ -59,6 +59,22 @@
 		      </div>
 		    </div>
 		    
+		    
+		     <div class="layui-inline">
+		      <label class="layui-form-label">预估工作量：</label>
+		      <div class="layui-input-inline">
+		     	 <label name="predictWorkLoad"  class="layui-form-label"></label>
+		      </div>
+		    </div> 
+		    <div class="layui-inline">
+		      <label class="layui-form-label">预估利润（元）：</label>
+		      <div class="layui-input-inline">
+		     	 <label name="predictProfit"  class="layui-form-label"></label>
+		      </div>
+		    </div>
+		    
+		    
+		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">预估利润率（%）：</label>
 		       <div class="layui-input-inline">
@@ -67,13 +83,13 @@
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预付开始期限：</label>
+		      <label class="layui-form-label">项目开始时间：</label>
 		       <div class="layui-input-inline">
 	         	<label name="predictPeriodStart"  class="layui-form-label"></label>
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预付结束期限：</label>
+		      <label class="layui-form-label">项目结束时间：</label>
 		       <div class="layui-input-inline">
 	         	<label name="predictPeriodEnd"  class="layui-form-label"></label>
 		      </div>
@@ -114,6 +130,13 @@
 		           <label name="technicalDirectorName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
+		    
+		    <div class="layui-inline">
+		      <label class="layui-form-label">项目经理：</label>
+		       <div class="layui-input-inline">
+		           <label name="projectManagerName"  class="layui-form-label"></label>
+		      </div>
+		    </div>
 		    <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
 		       <div class="layui-input-inline">
@@ -135,7 +158,10 @@
 				        <tr><th>文件名</th>
 				        <th>大小</th>
 				        <th>文件类型</th>
+				       
 				        <th>状态</th>
+				        <th> 上传人</th>
+				        <th>上传时间</th>
 				        <th>操作</th>
 				      </tr></thead>
 				      <tbody id="wosFileList">
@@ -155,7 +181,9 @@
 								</c:if>
 							</td>
 					      	<td>已上传</td>
-					      	<td><a href="/vote/pmfile/download?id=${app.fileId}">下载</a></td>
+					      	 <td>${fileInfo.usrName}</td>
+						      <td>${fileInfo.createTime}</td>
+					      	<td><a href="/vote/pmfile/download?id=${fileInfo.fileId}">下载</a></td>
 					      	
 				      	</tr>
 				      	</c:forEach>

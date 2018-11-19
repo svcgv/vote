@@ -2,6 +2,7 @@ package com.indihx.PmProjectInfo.controller;
 
 
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,8 @@ import com.indihx.system.entity.CostInfo;
 import com.indihx.system.entity.ProfitInfo;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.UserUtil;
+import com.indihx.PmProjectGroupRelationInfo.entity.PmProjectGroupRelationInfoEntity;
+import com.indihx.PmProjectGroupRelationInfo.service.PmProjectGroupRelationInfoService;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectInfo.service.PmProjectInfoService;
 import com.indihx.comm.util.R;
@@ -35,6 +38,10 @@ import com.indihx.service.IProfitInfoService;
 @Controller
 @RequestMapping("/pmprojectinfo")
 public class PmProjectInfoController {
+	
+	@Autowired
+	private PmProjectGroupRelationInfoService pmProjectGroupRelationInfoService;
+	
     @Autowired
     private PmProjectInfoService pmProjectInfoService;
     
@@ -85,7 +92,23 @@ public class PmProjectInfoController {
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmProjectInfo.setCreatorId(usesr.getUsrId());
     	pmProjectInfo.setCreateTime(DateUtil.getDateTime());
-        pmProjectInfoService.insert(pmProjectInfo);
+        long projectId = pmProjectInfoService.insert(pmProjectInfo);
+        
+        if(pmProjectInfo.getBelongProjectGroupId()>0) {
+        	Map<String, Object> entity = new HashMap<String, Object>();
+        	entity.put("projectId", projectId);
+        	entity.put("projectGroupId", pmProjectInfo.getBelongProjectGroupId());
+        	List<PmProjectGroupRelationInfoEntity> relList = pmProjectGroupRelationInfoService.queryList(entity);
+        	if(relList.size()==0) {
+        		PmProjectGroupRelationInfoEntity pmProjectGroupRelationInfoEntity = new PmProjectGroupRelationInfoEntity();
+        		pmProjectGroupRelationInfoEntity.setProjectGroupId(pmProjectInfo.getBelongProjectGroupId());
+        		pmProjectGroupRelationInfoEntity.setProjectId(projectId);
+        		pmProjectGroupRelationInfoEntity.setIsDelete("00");
+        		pmProjectGroupRelationInfoEntity.setCreatorId(usesr.getUsrId());
+        		pmProjectGroupRelationInfoEntity.setCreateTime(DateUtil.getDateTime());
+        		pmProjectGroupRelationInfoService.insert(pmProjectGroupRelationInfoEntity);
+        	}
+        }
         return R.ok();
     }
 
@@ -94,6 +117,22 @@ public class PmProjectInfoController {
      */
     @RequestMapping(value="/update",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> update(@RequestBody PmProjectInfoEntity pmProjectInfo,HttpSession session){
+    	
+    	PmProjectInfoEntity old = pmProjectInfoService.queryObject(pmProjectInfo.getProjectId());
+    	
+    	Map<String, Object> entity = new HashMap<String, Object>();
+    	entity.put("projectId", old.getProjectId());
+    	entity.put("projectGroupId", old.getBelongProjectGroupId());
+    	List<PmProjectGroupRelationInfoEntity> relList = pmProjectGroupRelationInfoService.queryList(entity);
+    	if(relList.size()>0) {
+    		PmProjectGroupRelationInfoEntity pmProjectGroupRelationInfoEntity = relList.get(0);
+    		
+    		if(pmProjectGroupRelationInfoEntity.getProjectGroupId() != pmProjectInfo.getBelongProjectGroupId()) {
+    			pmProjectGroupRelationInfoEntity.setProjectGroupId(pmProjectInfo.getBelongProjectGroupId());
+    			pmProjectGroupRelationInfoService.update(pmProjectGroupRelationInfoEntity);
+    		}
+    	}
+    	
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmProjectInfo.setModifier(usesr.getUsrId());
     	pmProjectInfo.setModifyTime(DateUtil.getDateTime());

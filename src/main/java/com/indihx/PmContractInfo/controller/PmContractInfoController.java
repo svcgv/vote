@@ -1,6 +1,8 @@
 package com.indihx.PmContractInfo.controller;
 
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -66,6 +68,11 @@ public class PmContractInfoController {
     	pmContractInfo.setCreatorId(usesr.getUsrId());
         pmContractInfo.setYearNumer(DateUtil.getYear(DateUtil.getDateTime()));
     	pmContractInfo.setCreateTime(DateUtil.getDateTime());
+    	BigDecimal bigNumber = BigDecimal.valueOf(1);
+    	BigDecimal bigNumber100 = BigDecimal.valueOf(100);
+    	BigDecimal afterTaxAmount = pmContractInfo.getContractAmount().multiply(bigNumber.subtract
+                (pmContractInfo.getTaxRate().divide(bigNumber100,3,RoundingMode.FLOOR)));
+        pmContractInfo.setAfterTaxContractAmount(afterTaxAmount);
         pmContractInfoService.insert(pmContractInfo);
         return R.ok();
     }
@@ -78,6 +85,11 @@ public class PmContractInfoController {
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmContractInfo.setModifier(usesr.getUsrId());
     	pmContractInfo.setModifyTime(DateUtil.getDateTime());
+        BigDecimal bigNumber = BigDecimal.valueOf(1);
+        BigDecimal bigNumber100 = BigDecimal.valueOf(100);
+        BigDecimal afterTaxAmount = pmContractInfo.getContractAmount().multiply(bigNumber.subtract
+                (pmContractInfo.getTaxRate().divide(bigNumber100,3,RoundingMode.FLOOR)));
+        pmContractInfo.setAfterTaxContractAmount(afterTaxAmount);
         pmContractInfoService.update(pmContractInfo);//全部更新
         return R.ok();
     }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.UserUtil;
+import com.alibaba.fastjson.JSON;
 import com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity;
 import com.indihx.PmProjectGroupInfo.service.PmProjectGroupInfoService;
 import com.indihx.PmProjectGroupRelationInfo.dao.PmProjectGroupRelationInfoMapper;
@@ -25,6 +26,7 @@ import com.indihx.PmProjectGroupRelationInfo.service.PmProjectGroupRelationInfoS
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectInfo.service.PmProjectInfoService;
 import com.indihx.comm.util.R;
+import com.indihx.comm.util.RandomUtil;
 import com.indihx.comm.util.DateUtil;
 
 
@@ -54,8 +56,9 @@ public class PmProjectGroupInfoController {
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
-
-		List<PmProjectGroupInfoEntity> pmProjectGroupInfo = pmProjectGroupInfoService.queryList(params);
+    	String str = (String) params.get("queryStr");
+    	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
+		List<PmProjectGroupInfoEntity> pmProjectGroupInfo = pmProjectGroupInfoService.queryList(maps);
         return R.ok().put("page", pmProjectGroupInfo);
     }
     
@@ -117,11 +120,12 @@ public class PmProjectGroupInfoController {
     @RequestMapping(value="/save",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> save(@RequestBody PmProjectGroupInfoEntity pmProjectGroupInfo,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
-    	pmProjectGroupInfo.setGroupCreateTime(DateUtil.getDateTime());
+    	pmProjectGroupInfo.setGroupCreateTime(DateUtil.formatFromDB(DateUtil.getDateTime().substring(0,8)));
     	pmProjectGroupInfo.setGroupCreatorId(usesr.getUsrId());
     	pmProjectGroupInfo.setGroupCreatorName(usesr.getUsrName());
     	pmProjectGroupInfo.setCreatorId(usesr.getUsrId());
     	pmProjectGroupInfo.setCreateTime(DateUtil.getDateTime());
+    	pmProjectGroupInfo.setGroupManagerCode("XMQ"+DateUtil.getSysDate()+RandomUtil.generateString(4));
         pmProjectGroupInfoService.insert(pmProjectGroupInfo);
         return R.ok();
     }

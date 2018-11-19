@@ -58,6 +58,11 @@
 		
 		<result property="projectManagerId" column="PROJECT_MANAGER_ID" />
 		<result property="projectManagerName" column="PROJECT_MANAGER_NAME" />
+		
+		<result property="predictWorkLoad" column="PREDICT_WORK_LOAD" />
+		<result property="predictProfit" column="PREDICT_PROFIT" />
+		
+		
 	</resultMap>
 
 	<select id="queryObject" resultMap="pmConfirmBidMap">
@@ -348,6 +353,13 @@
 		<if test="projectManagerName != null and projectManagerName!=''">
 			,PROJECT_MANAGER_NAME
 		</if>
+		<if test="predictWorkLoad != null and predictWorkLoad !=''">
+			,PREDICT_WORK_LOAD
+		</if>
+		<if test="predictProfit != null and predictProfit!=''">
+			,PREDICT_PROFIT
+		</if>
+		
 		
 		,IS_DELETE
 
@@ -463,7 +475,12 @@
 		<if test="projectManagerName != null and projectManagerName!=''">
 			,#{projectManagerName}
 		</if>
-			
+		<if test="predictWorkLoad != null and predictWorkLoad !=''">
+			,#{predictWorkLoad}
+		</if>
+		<if test="predictProfit != null and predictProfit!=''">
+			,#{predictProfit}
+		</if>
 		,'00'
 		)
 	</insert>
@@ -543,6 +560,10 @@
 			<if test="projectManagerId != null and projectManagerId!=''">PROJECT_MANAGER_ID = #{projectManagerId},</if>
 			
 			<if test="projectManagerName != null and projectManagerName!=''">PROJECT_MANAGER_NAME = #{projectManagerName},</if>
+			
+			<if test="predictWorkLoad != null and predictWorkLoad !=''">PREDICT_WORK_LOAD = #{predictWorkLoad},</if>
+			
+			<if test="predictProfit != null and predictProfit !=''">PREDICT_PROFIT = #{predictProfit},</if>
 			
 			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete}</if>
 			

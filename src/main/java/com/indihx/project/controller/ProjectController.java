@@ -2,9 +2,19 @@ package com.indihx.project.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.indihx.AbstractBaseController;
+import com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity;
+import com.indihx.PmProjectGroupInfo.service.PmProjectGroupInfoService;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectInfo.service.impl.PmProjectInfoServiceImpl;
+import com.indihx.comm.util.BasicParameterInfo;
+import com.indihx.system.entity.CodeData;
 import com.indihx.system.service.impl.ParamsInfoServiceimpl;
+import com.indihx.util.StringUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +34,9 @@ public class ProjectController extends AbstractBaseController {
 
     @Autowired
     private PmProjectInfoServiceImpl pmProjectInfoServiceImpl;
+    
+    @Autowired
+    private PmProjectGroupInfoService pmProjectGroupInfoService;
 
 
     @RequestMapping("/project/index")
@@ -31,8 +44,8 @@ public class ProjectController extends AbstractBaseController {
 
         ModelAndView view = new ModelAndView();
 
-        view.addObject("projectStatus", infoservice.qryInfoByCode("PROJECT_STATUS"));
-        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE"));
+        view.addObject("projectStatus", infoservice.qryInfoByCode("PROJECT_STATUS","00"));
+        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE","00"));
 
         view.setViewName("/project/project/index");
         return view;
@@ -43,8 +56,22 @@ public class ProjectController extends AbstractBaseController {
         
     	ModelAndView view = new ModelAndView();
     	
-        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE"));
-        view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT"));
+        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE","00"));
+        view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT","00"));
+        
+    	Map<String,Object> maps = new HashMap<String, Object>();
+		maps.put("isDelete", "00");
+		List<PmProjectGroupInfoEntity> pmProjectGroupInfo = pmProjectGroupInfoService.queryList(maps);
+		
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("<option value='' select>--请选择--</option>");
+		for (PmProjectGroupInfoEntity entity : pmProjectGroupInfo) {
+			buffer.append("<option value='"+entity.getProjectGroupId()+"'>"+entity.getProjectGroupName()+"</option>");
+		}
+		Map<String, Object> code = new HashMap<String, Object>();
+		code.put("ewTypeHtml", buffer.toString());
+		
+		view.addObject("projectGroup", code);
    
         view.addObject("act", act);
         view.addObject("id", id);
@@ -63,6 +90,26 @@ public class ProjectController extends AbstractBaseController {
         view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE",entity.getProjectType()));
         view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT",entity.getIsImportant()));
         view.addObject("approveStatus", infoservice.qryInfoByCode("APPROVE_STATUS",entity.getApproveStatus()));
+        
+        Map<String,Object> maps = new HashMap<String, Object>();
+		maps.put("isDelete", "00");
+		List<PmProjectGroupInfoEntity> pmProjectGroupInfo = pmProjectGroupInfoService.queryList(maps);
+        
+        
+        StringBuffer buffer = new StringBuffer();
+		for (PmProjectGroupInfoEntity entity1: pmProjectGroupInfo) {
+			buffer.append("<option value='"+entity1.getProjectGroupId()+"' ");
+			if(entity1.getProjectGroupId()==entity.getBelongProjectGroupId())
+			{
+				buffer.append(" selected='selected' ");
+			}
+			buffer.append(" >"+entity1.getProjectGroupName()+"</option> ");
+		}
+		Map<String, Object> code = new HashMap<String, Object>();
+		code.put("ewTypeHtml", buffer.toString());
+		
+		view.addObject("projectGroup", code);
+        
         view.addObject("act", act);
         view.addObject("id", id);
         view.addObject("formObj", JSON.toJSONString(entity));
@@ -75,15 +122,37 @@ public class ProjectController extends AbstractBaseController {
     public ModelAndView viewFormView(@RequestParam("act") String act, @RequestParam("id") String id) {
         ModelAndView view = new ModelAndView();
 
-        view.addObject("isUseful", infoservice.qryInfoByCode("IS_USEFUL"));
-        view.addObject("productType", infoservice.qryInfoByCode("PRODUCT_TYPE", "01"));
         PmProjectInfoEntity entity = pmProjectInfoServiceImpl.queryObject(Long.parseLong(id));
-
-        view.addObject("formObj", JSON.toJSONString(entity));
+        
+        view.addObject("projectStatus", infoservice.qryInfoByCode("PROJECT_STATUS",entity.getProjectStatus()));
+        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE",entity.getProjectType()));
+        view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT",entity.getIsImportant()));
+        view.addObject("approveStatus", infoservice.qryInfoByCode("APPROVE_STATUS",entity.getApproveStatus()));
+        
+        
+        Map<String,Object> maps = new HashMap<String, Object>();
+		maps.put("isDelete", "00");
+		List<PmProjectGroupInfoEntity> pmProjectGroupInfo = pmProjectGroupInfoService.queryList(maps);
+        
+        
+        StringBuffer buffer = new StringBuffer();
+		for (PmProjectGroupInfoEntity entity1: pmProjectGroupInfo) {
+			buffer.append("<option value='"+entity1.getProjectGroupId()+"' ");
+			if(entity1.getProjectGroupId()==entity.getBelongProjectGroupId())
+			{
+				buffer.append(" selected='selected' ");
+			}
+			buffer.append(" >"+entity1.getProjectGroupName()+"</option> ");
+		}
+		Map<String, Object> code = new HashMap<String, Object>();
+		code.put("ewTypeHtml", buffer.toString());
+		
+		view.addObject("projectGroup", code);
 
         view.addObject("act", act);
         view.addObject("id", id);
-
+        view.addObject("formObj", JSON.toJSONString(entity));
+        
         view.setViewName("/project/project/view");
         return view;
     }

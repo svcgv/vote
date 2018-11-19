@@ -9,6 +9,7 @@
         <result property="contractId" column="CONTRACT_ID"/>
         <result property="wbs" column="WBS"/>
         <result property="projectId" column="PROJECT_ID"/>
+        <result property="projectName" column="PROJECT_NAME"/>
     </resultMap>
 
 	<select id="queryObject" resultMap="pmContractProjectRelationMap">
@@ -29,6 +30,17 @@
 						<if test="projectId != null and projectId!=''"  >
 				PROJECT_ID = #{projectId}			</if>
 					</trim> 
+	</select>
+
+	<select id="queryListProject" resultMap="pmContractProjectRelationMap">
+		SELECT
+		A.*,B.PROJECT_NAME
+		FROM
+		PM_CONTRACT_PROJECT_RELATION A,
+		PM_PROJECT_INFO B
+		WHERE
+		A .PROJECT_ID = B.PROJECT_ID
+		AND		CONTRACT_ID = #{contractId}
 	</select>
 	
  	<select id="queryTotal" resultType="int">
@@ -82,6 +94,10 @@
 	
 	<delete id="delete">
 		delete from PM_CONTRACT_PROJECT_RELATION where CONTRACT_PROJECT_RELATION_ID = #{value}
+	</delete>
+
+	<delete id="deleteByContractId">
+		delete from PM_CONTRACT_PROJECT_RELATION where CONTRACT_ID = #{value}
 	</delete>
 	
 
