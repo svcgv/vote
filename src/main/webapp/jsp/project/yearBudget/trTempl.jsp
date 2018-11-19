@@ -15,11 +15,14 @@
 			<c:if test="${custId !='' }">
 	    		<div class="layui-input-inline">
 				    <label>${custName }</label>
+				    <input type="hidden" name="custId" value="${custId }"/>
+				    <input type="hidden" name="custName" value="${custId }"/>
 			    </div>
 			</c:if>
     	</div>
     	<div>
     		<button type="button"  class="layui-btn layui-btn-sm addProjectQuery-hook" style="vertical-align: top;;margin-top:10px;"><i class="layui-icon"></i>新增项目</button>
+    		<button type="button"  class="layui-btn layui-btn-sm deleteCustomer-hook" style="vertical-align: top;;margin-top:10px;;background-color: #FF5722;"><i class="layui-icon layui-icon-close"></i>删除客户</button>
     	</div>
     </td>
     <td>
@@ -51,41 +54,55 @@
     	<div class="project-list">
     		<div class="layui-input-inline item" style="margin:5px 0;">
     			 <div class="layui-input-inline">
-	          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
-	        	<option value="">请选择</option>
-	        	<option value="01" selected>项目</option>
-	        	<option value="02">产品</option>
-	        	<option value="03" >人力</option>
-			  </select>
-      	</div>
+			          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
+			        	<option value="">请选择</option>
+			        	<option value="01" selected>项目</option>
+			        	<option value="02">产品</option>
+			        	<option value="03" >人力</option>
+					  </select>
+      			</div>
     		</div>
     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
     			 <div class="layui-input-inline">
-	          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
-	        	<option value="">请选择</option>
-	        	<option value="01" selected>项目</option>
-	        	<option value="02">产品</option>
-	        	<option value="03" >人力</option>
-			  </select>
-      	</div>
+		          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
+		        	<option value="">请选择</option>
+		        	<option value="01" selected>项目</option>
+		        	<option value="02">产品</option>
+		        	<option value="03" >人力</option>
+				  </select>
+      			</div>
     		</div>
     	</div>
     </td>
     <td>
     	<div class="project-list">
-    		<div class="layui-input-inline productItem" style="">
+    		<div class="layui-input-inline productItem">
     			<div class="layui-input-inline">
      			<input name="productList" type="text" class="layui-input form-control">
     			</div>
     			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook"  style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
     		</div>
-    		<div class="layui-input-inline productItem copyAddItem" style="">
+    		<div class="layui-input-inline productItem copyAddItem">
     			<div class="layui-input-inline">
      			<input name="productList" type="text" class="layui-input form-control">
     			</div>
     			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook"  style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
     		</div>
     	</div>
+    </td>
+     <td>
+      	<div class="project-list">
+      		<div class="layui-input-inline item" style="margin:5px 0;">
+      			 <div class="layui-input-inline">
+			          <span class="form-control j-budgetYear"></span>
+		      	</div>
+      		</div>
+      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+      			 <div class="layui-input-inline">
+			          <span class="form-control j-budgetYear"></span>
+		      	</div>
+      		</div>
+      	</div>
     </td>
     <td>
     	<div class="project-list">
@@ -520,14 +537,12 @@
     	</div>
     </td>
     <td>
-    	<div class="project-list" style="width:150px;">
+    	<div class="project-list" style="width:90px;">
     		<div class="layui-input-inline item" style="margin:5px;">
-    			 <button type="button"  class="layui-btn layui-btn-sm newProjectSave-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-ok"></i>保存</button>
-      	 <button type="button"  class="layui-btn layui-btn-sm newProjectDelete-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-close"></i>删除</button>
+      	 <button type="button"  class="layui-btn layui-btn-sm newProjectDelete-hook" style="vertical-align: top;background-color: #FF5722;"><i class="layui-icon layui-icon-close"></i>删除</button>
     		</div>
     		<div class="layui-input-inline item copyAddItem" style="margin:5px;">
-	      <button type="button"  class="layui-btn layui-btn-sm newProjectSave-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-ok"></i>保存</button>
-	      <button type="button"  class="layui-btn layui-btn-sm newProjectDelete-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-close"></i>删除</button>
+	      <button type="button"  class="layui-btn layui-btn-sm newProjectDelete-hook" style="vertical-align: top;background-color: #FF5722;"><i class="layui-icon layui-icon-close"></i>删除</button>
     		</div>
     	</div>
     </td>
