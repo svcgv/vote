@@ -876,28 +876,11 @@ layui.use(['layer', 'form','laydate'], function(){
 	$("#budget-addForm-hook #customGroup-add-hook").click(function(){
 		console.log(result,'revenue 表格数据');
 		
-		var customerGroupName=$("#budget-addForm-hook input[name='custName']").val();
-		if($.trim(customerGroupName) ==''){
-			layer.msg("请输入客户名称");
-			return false;
-		}
+		var trs=$(".budget-wrapper tbody tr").each(function(){
+			
+			
+		});
 		
-		var formDatas=$("#budget-addForm-hook form").serializeObject();
-		// 保存产品列表数据
-		var productList=$("#budget-addForm-hook #chosedProduct-hook").children(".customer-list");
-		var productListIds=[];
-		var productListNames=[];
-		if(productList.length > 0){
-			productList.each(function(){
-				var id=$(this).children(".customerItem").attr("productId");
-				var name=$(this).children(".customerItem").text();
-				productListIds.push(id);
-				productListNames.push(name);
-			})
-			// 存到data中
-			formDatas.productListIds = productListIds.join(",");
-			formDatas.productListNames = productListNames.join(",");
-		}
 		
 		
 		// 保存数据 revenue 月账单
