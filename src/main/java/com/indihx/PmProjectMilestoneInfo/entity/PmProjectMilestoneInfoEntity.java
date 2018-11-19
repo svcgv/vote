@@ -46,6 +46,8 @@ private String mileDate;
 	 */
 
 private String mileDescript;
+
+private String mileType;
 	/**
 	 * 
 	 */
@@ -186,5 +188,11 @@ private String isDelete;
 	 */
 	public String getIsDelete() {
 		return isDelete;
+	}
+	public String getMileType() {
+		return mileType;
+	}
+	public void setMileType(String mileType) {
+		this.mileType = mileType;
 	}
 }

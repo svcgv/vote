@@ -437,6 +437,33 @@ private long budgetWithTax;
 
 private long budgetNoTax;
 
+private String requirement;
+
+private String requirementremarks;
+
+private String design;
+
+private String designRemarks;
+
+private String devlopment;
+
+private String devlopmentRemarks;
+
+private String test;
+
+private String testRemarks;
+
+private String online;
+
+private String onlineRemarks;
+
+private String check;
+
+private String checkRemarks;
+
+private String production;
+
+private String productionRemarks;
 	/**
 	 * 设置：
 	 */
@@ -1444,5 +1471,89 @@ private long budgetNoTax;
 	 */
 	public long getBudgetNoTax() {
 		return budgetNoTax;
+	}
+	public String getRequirement() {
+		return requirement;
+	}
+	public void setRequirement(String requirement) {
+		this.requirement = requirement;
+	}
+	public String getRequirementremarks() {
+		return requirementremarks;
+	}
+	public void setRequirementremarks(String requirementremarks) {
+		this.requirementremarks = requirementremarks;
+	}
+	public String getDesign() {
+		return design;
+	}
+	public void setDesign(String design) {
+		this.design = design;
+	}
+	public String getDesignRemarks() {
+		return designRemarks;
+	}
+	public void setDesignRemarks(String designRemarks) {
+		this.designRemarks = designRemarks;
+	}
+	public String getDevlopment() {
+		return devlopment;
+	}
+	public void setDevlopment(String devlopment) {
+		this.devlopment = devlopment;
+	}
+	public String getDevlopmentRemarks() {
+		return devlopmentRemarks;
+	}
+	public void setDevlopmentRemarks(String devlopmentRemarks) {
+		this.devlopmentRemarks = devlopmentRemarks;
+	}
+	public String getTest() {
+		return test;
+	}
+	public void setTest(String test) {
+		this.test = test;
+	}
+	public String getTestRemarks() {
+		return testRemarks;
+	}
+	public void setTestRemarks(String testRemarks) {
+		this.testRemarks = testRemarks;
+	}
+	public String getOnline() {
+		return online;
+	}
+	public void setOnline(String online) {
+		this.online = online;
+	}
+	public String getOnlineRemarks() {
+		return onlineRemarks;
+	}
+	public void setOnlineRemarks(String onlineRemarks) {
+		this.onlineRemarks = onlineRemarks;
+	}
+	public String getCheck() {
+		return check;
+	}
+	public void setCheck(String check) {
+		this.check = check;
+	}
+	public String getCheckRemarks() {
+		return checkRemarks;
+	}
+	public void setCheckRemarks(String checkRemarks) {
+		this.checkRemarks = checkRemarks;
+	}
+	public String getProduction() {
+		return production;
+	}
+	public void setProduction(String production) {
+		this.production = production;
+	}
+	public String getProductionRemarks() {
+		return productionRemarks;
+	}
+	public void setProductionRemarks(String productionRemarks) {
+		this.productionRemarks = productionRemarks;
 	}
 }

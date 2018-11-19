@@ -2,6 +2,8 @@ package com.indihx.PmProjectMilestoneInfo.service;
 
 import java.util.List;
 import java.util.Map;
+
+import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectMilestoneInfo.entity.PmProjectMilestoneInfoEntity;
 /**
  * 
@@ -17,6 +19,8 @@ public interface PmProjectMilestoneInfoService {
 	public void delete(long milestoneId);
 	public List<PmProjectMilestoneInfoEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
+	public void insertList(PmProjectInfoEntity pmProjectInfo, long projectId);
+	public void queryListInfo(PmProjectInfoEntity pmProjectInfo, long projectId);
    
 }
 

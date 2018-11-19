@@ -303,7 +303,7 @@
 		 	 <legend style="font-weight:bold;">合同信息</legend>
 		  </fieldset>
 		   	
-		   <div class="milepost-list-wrapper" <c:if test="${projectType != '00' }"> style="display:none;"</c:if>>
+		   <div class="milepost-list-wrapper" >
 		    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 		 	 <legend style="font-weight:bold;">里程碑</legend>
 		     </fieldset>
@@ -353,7 +353,7 @@
 				   	 <div class="layui-timeline-content layui-text">
 					      <h3 class="layui-timeline-title">测试</h3>
 					      <div class="layui-input-inline">
-					      	<input readonly='true'type="text" name="text" id="test-datepick-hook" class="layui-input form-control hasDatepicker" />
+					      	<input readonly='true'type="text" name="test" id="test-datepick-hook" class="layui-input form-control hasDatepicker" />
 					      </div>
 					      <div class="layui-input-inline">
 					      	<input readonly='true'type="text" name="testRemarks" class="layui-input form-control" />

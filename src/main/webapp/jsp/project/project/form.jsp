@@ -122,7 +122,7 @@
 			      <label class="layui-form-label">销售部门：</label>
 			      <div class="layui-input-inline">
 				       <input type="text" name="sellDeptName"  readonly="true"  autocomplete="off" class="layui-input form-control">
-				       <inpu type="text" style='display:none' name="sellDeptId" />
+				       <input type="text" style='display:none' name="sellDeptId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="sellDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -169,14 +169,14 @@
 		   	 <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">利润中心编号：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="profitCode"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="profitCode"  readonly="true"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		   	 
 	     	<div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">成本中心编号：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="costCode"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="costCode"  readonly="true"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		      
 		      <button type="button"  class="layui-btn layui-btn-sm" id="costCodeQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -220,7 +220,7 @@
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估工作量(人月)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="predictWorkload"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="predictWorkload"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
@@ -260,16 +260,16 @@
 			</div>
 				    
 			<div class="layui-inline"  style="margin-right:64px;">
-			      <label class="layui-form-label">计提-人力：</label>
+			      <label class="layui-form-label">计提-外购人力(元)：</label>
 			       <div class="layui-input-inline">
-			         <input type="text" name="accruedChargesWorkers"  autocomplete="off" class="layui-input form-control">
+			         <input type="number" name="accruedChargesWorkers"  autocomplete="off" class="layui-input form-control">
 			      </div>
 			</div>
 			
 	   		<div class="layui-inline"  style="margin-right:64px;">
-			    <label class="layui-form-label">计提-产品及服务：</label>
+			    <label class="layui-form-label">计提-外购产品及服务(元)：</label>
 			    <div class="layui-input-inline">
-			       <input type="text" name="accruedChargesProducts"  autocomplete="off" class="layui-input form-control">
+			       <input type="number" name="accruedChargesProducts"  autocomplete="off" class="layui-input form-control">
 			    </div>
 			</div>
 				    
@@ -288,7 +288,7 @@
 		    </div>
 		   	</div>
 		   	
-		   <div class="milepost-list-wrapper" <c:if test="${projectType != '00' }"> style="display:none;"</c:if>>
+		   <div class="milepost-list-wrapper" >
 		    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 		 	 <legend style="font-weight:bold;">里程碑</legend>
 		     </fieldset>
@@ -338,7 +338,7 @@
 				   	 <div class="layui-timeline-content layui-text">
 					      <h3 class="layui-timeline-title">测试</h3>
 					      <div class="layui-input-inline">
-					      	<input type="text" name="text" id="test-datepick-hook" class="layui-input form-control hasDatepicker" />
+					      	<input type="text" name="test" id="test-datepick-hook" class="layui-input form-control hasDatepicker" />
 					      </div>
 					      <div class="layui-input-inline">
 					      	<input type="text" name="testRemarks" class="layui-input form-control" />
@@ -482,8 +482,16 @@ $(function(){
 	  });
 	  // 选择实施负责人
 	  $("#project-form-hook #buildManagerNameQuery-hook").click(function(){
+		  
+		   var buildDeptId = $("#project-form-hook input[name='buildDeptId']").val();
+		   
+			if($.trim(buildDeptId) ==''){
+				layer.msg("请选择实施部门");
+				return false;
+			}
+		  
 		  $.openWindow({
-		  		url:'user?act=buildManagerForm',
+		  		url:'user?act=buildManagerForm&orgNo='+buildDeptId+'&roleCode=BUILD_DEPT_NAME',
 		  		title:"选择实施负责人",
 		  		width:"700"
 		 });
@@ -491,8 +499,16 @@ $(function(){
 	  
 	  // 选择项目经理
 	  $("#project-form-hook #projectManagerNameQuery-hook").click(function(){
+		  
+		   var buildDeptId = $("#project-form-hook input[name='buildDeptId']").val();
+		   
+			if($.trim(buildDeptId) ==''){
+				layer.msg("请选择实施部门");
+				return false;
+			}
+		  
 		  $.openWindow({
-		  		url:'user?act=projectManagerForm',
+		  		url:'user?act=projectManagerForm&orgNo='+buildDeptId+'&roleCode=PROJECT_MANGER',
 		  		title:"选择项目经理",
 		  		width:"700"
 		 });
@@ -508,8 +524,16 @@ $(function(){
 	  
 	  // 选择销售负责人
 	  $("#project-form-hook #sellManagerNameQuery-hook").on("click",function(){
+		  
+		  var sellDeptId = $("#project-form-hook input[name='sellDeptId']").val();
+
+			if($.trim(sellDeptId) ==''){
+				layer.msg("请选择销售部门");
+				return false;
+			}
+		  
 		  	$.openWindow({
-		  		url:'user?act=sellManagerForm',
+		  		url:'user?act=sellManagerForm&orgNo='+sellDeptId+'&roleCode=SELL_DEPT_MANAGER',
 		  		title:"选择销售负责人",
 		  		width:"700"
 		 	 });
@@ -517,8 +541,16 @@ $(function(){
 	  
 	  // 选择客户经理
 	  $("#project-form-hook #custManagerNameQuery-hook").on("click",function(){
+		  
+		  var sellDeptId = $("#project-form-hook input[name='sellDeptId']").val();
+		   
+			if($.trim(sellDeptId) ==''){
+				layer.msg("请选择销售部门");
+				return false;
+			}
+		  
 		  	$.openWindow({
-		  		url:'user?act=custManagerForm',
+		  		url:'user?act=custManagerForm&orgNo='+sellDeptId+'&roleCode=',
 		  		title:"选择客户经理",
 		  		width:"700"
 		 	 });
