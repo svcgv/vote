@@ -9,7 +9,8 @@
     		
     		<c:if test="${custId =='' }">
 	    		<div class="layui-input-inline">
-	     			<input type="text" name="newCustomer" placeholder="请输入新客户"  value="${custName }" class="layui-input form-control" />
+	     			<input type="text" name="custName" placeholder="请输入新客户"  value="${custName }" class="layui-input form-control" />
+	    			   <input type="hidden" name="custId" value=""/>
 	    		</div>
 			</c:if>
 			<c:if test="${custId !='' }">
