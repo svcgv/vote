@@ -406,7 +406,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
             param.projectId = data.projectId
             $.ajax({
                 type: 'POST',
-                url: '/vote/pmprojectinfo/update',
+                url: '/vote/pmprojectinfo/updateDelete',
                 data: JSON.stringify(param),
                 contentType: 'application/json',
                 success: function (res) {

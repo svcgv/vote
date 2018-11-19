@@ -71,15 +71,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
   table.render({
 	    elem: '#userTable',
 	    id:'user-table',
-	    url: orgNo?url1:url2,
-	    method:'post',
-		where:{
-			queryStr:JSON.stringify(par)
-		},
-		contentType: 'application/json',
-	    response: {
-	    	dataName: 'page'
-	    },
+	
 	    height:'260',
 	    width:"690",
 	    title: '用数据表',
@@ -91,6 +83,36 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    page: true
 	  });
 	
+  
+  $.ajax({
+	  type: 'POST',
+	  url: orgNo?url1:url2,
+	  data: JSON.stringify(par),
+	  contentType:'application/json',
+	  success: function(res){
+	      console.log(res)
+	      testData=res.page
+
+	      table.render({
+	  	    elem: '#userTable',
+	  	    //url:'custom.json',
+	  	    height:'260',
+	  	    width:"690",
+		    title: '用户数据表',
+		    cols: [[
+		      {type: 'radio' },
+		      {field:'usrId', title:'用户编号', sort: true},
+		      {field:'usrName', title:'用户名'}
+		    ]],
+	  	    data:testData,
+	  	    page: true
+	  	  });
+	      
+	      
+	      
+	      ;},
+	  dataType: "json"
+	})
 	
 	// 保存 事件
 

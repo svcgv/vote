@@ -6,6 +6,7 @@ import com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity;
 import com.indihx.PmProjectGroupInfo.service.PmProjectGroupInfoService;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectInfo.service.impl.PmProjectInfoServiceImpl;
+import com.indihx.PmProjectMilestoneInfo.service.PmProjectMilestoneInfoService;
 import com.indihx.comm.util.BasicParameterInfo;
 import com.indihx.system.entity.CodeData;
 import com.indihx.system.service.impl.ParamsInfoServiceimpl;
@@ -37,6 +38,9 @@ public class ProjectController extends AbstractBaseController {
     
     @Autowired
     private PmProjectGroupInfoService pmProjectGroupInfoService;
+    
+	@Autowired
+	PmProjectMilestoneInfoService pmProjectMilestoneInfoService;
 
 
     @RequestMapping("/project/index")
@@ -83,9 +87,9 @@ public class ProjectController extends AbstractBaseController {
     @RequestMapping(value = "/project/edit", method = RequestMethod.GET)
     public ModelAndView editFormView(@RequestParam("act") String act, @RequestParam("id") String id) {
         ModelAndView view = new ModelAndView();
-
+			
         PmProjectInfoEntity entity = pmProjectInfoServiceImpl.queryObject(Long.parseLong(id));
-        
+        pmProjectMilestoneInfoService.queryListInfo(entity, entity.getProjectId());
         view.addObject("projectStatus", infoservice.qryInfoByCode("PROJECT_STATUS",entity.getProjectStatus()));
         view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE",entity.getProjectType()));
         view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT",entity.getIsImportant()));
@@ -123,7 +127,7 @@ public class ProjectController extends AbstractBaseController {
         ModelAndView view = new ModelAndView();
 
         PmProjectInfoEntity entity = pmProjectInfoServiceImpl.queryObject(Long.parseLong(id));
-        
+        pmProjectMilestoneInfoService.queryListInfo(entity, entity.getProjectId());
         view.addObject("projectStatus", infoservice.qryInfoByCode("PROJECT_STATUS",entity.getProjectStatus()));
         view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE",entity.getProjectType()));
         view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT",entity.getIsImportant()));

@@ -27,6 +27,8 @@ import com.indihx.PmProjectGroupRelationInfo.entity.PmProjectGroupRelationInfoEn
 import com.indihx.PmProjectGroupRelationInfo.service.PmProjectGroupRelationInfoService;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectInfo.service.PmProjectInfoService;
+import com.indihx.PmProjectMilestoneInfo.entity.PmProjectMilestoneInfoEntity;
+import com.indihx.PmProjectMilestoneInfo.service.PmProjectMilestoneInfoService;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.service.ICostInfoService;
@@ -56,6 +58,9 @@ public class PmProjectInfoController {
     
     @Autowired
     private PmConfirmBidService pmConfirmBidService;
+    
+    @Autowired
+    private PmProjectMilestoneInfoService pmProjectMilestoneInfoService;
 
     /**
      * 列表
@@ -145,6 +150,9 @@ public class PmProjectInfoController {
         		pmProjectGroupRelationInfoService.insert(pmProjectGroupRelationInfoEntity);
         	}
         }
+        
+        pmProjectMilestoneInfoService.insertList(pmProjectInfo,projectId);
+        
         return R.ok();
     }
 
@@ -173,9 +181,40 @@ public class PmProjectInfoController {
     	pmProjectInfo.setModifier(usesr.getUsrId());
     	pmProjectInfo.setModifyTime(DateUtil.getDateTime());
         pmProjectInfoService.update(pmProjectInfo);//全部更新
+        
+        
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("projectId", pmProjectInfo.getProjectId());
+    	List<PmProjectMilestoneInfoEntity>  PmProjectMilestoneInfo = pmProjectMilestoneInfoService.queryList(map);
+    	for(PmProjectMilestoneInfoEntity pmProjectMilestoneInfoEntity:PmProjectMilestoneInfo) {
+    		pmProjectMilestoneInfoService.delete(pmProjectMilestoneInfoEntity.getMilestoneId());
+    	}
+    	
+        pmProjectMilestoneInfoService.insertList(pmProjectInfo,pmProjectInfo.getProjectId());
+        
         return R.ok();
     }
-
+    
+    
+    @RequestMapping(value="/updateDelete",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> updateDelete(@RequestBody PmProjectInfoEntity pmProjectInfo,HttpSession session){
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	pmProjectInfo.setModifier(usesr.getUsrId());
+    	pmProjectInfo.setModifyTime(DateUtil.getDateTime());
+        pmProjectInfoService.update(pmProjectInfo);//全部更新
+        
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("projectId", pmProjectInfo.getProjectId());
+    	List<PmProjectMilestoneInfoEntity>  PmProjectMilestoneInfo = pmProjectMilestoneInfoService.queryList(map);
+    	for(PmProjectMilestoneInfoEntity pmProjectMilestoneInfoEntity:PmProjectMilestoneInfo) {
+    		pmProjectMilestoneInfoEntity.setIsDelete("01");
+    		pmProjectMilestoneInfoEntity.setModifier(usesr.getUsrId());
+    		pmProjectMilestoneInfoEntity.setModifyTime(DateUtil.getDateTime());
+    		pmProjectMilestoneInfoService.update(pmProjectMilestoneInfoEntity);
+    	}
+        
+        return R.ok();
+    }
     /**
      * 删除
      */
