@@ -17,58 +17,93 @@
 	    		<div class="layui-input-inline">
 				    <label>${custName }</label>
 				    <input type="hidden" name="custId" value="${custId }"/>
-				    <input type="hidden" name="custName" value="${custId }"/>
+				    <input type="hidden" name="custName" value="${custName }"/>
 			    </div>
 			</c:if>
     	</div>
     	<div>
     		<button type="button"  class="layui-btn layui-btn-sm addProjectQuery-hook" style="vertical-align: top;;margin-top:10px;"><i class="layui-icon"></i>新增项目</button>
-    		<button type="button"  class="layui-btn layui-btn-sm deleteCustomer-hook" style="vertical-align: top;;margin-top:10px;;background-color: #FF5722;"><i class="layui-icon layui-icon-close"></i>删除客户</button>
+    		<button type="button" custId="${custId }" class="layui-btn layui-btn-sm deleteCustomer-hook" style="vertical-align: top;;margin-top:10px;;background-color: #FF5722;"><i class="layui-icon layui-icon-close"></i>删除客户</button>
     	</div>
     </td>
     <td>
     	<div class="project-list">
-	     	<div class="layui-input-inline item" style="margin:5px 0;">
-	     		<div class="layui-input-inline"></div>
-	     	</div>
-     	<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
-     		<div class="layui-input-inline">
+	     	<c:if test="${custId =='' }">
+	    		<div class="layui-input-inline item j-item"  style="margin:5px 0;">
+	    			<input type="hidden" name="wbsCode" value=""/>
+	    		</div>
+			</c:if>
+	     	<c:if test="${custId !='' }">
+	    		<div class="layui-input-inline item j-item"  style="margin:5px 0;">
+				    <div class="layui-input-inline">
+			      		<input type="text" name="wbsCode" readonly="readonly"  class="layui-input form-control disabledColor" />
+	      			</div>
+	      			<button type="button"  class="layui-btn layui-btn-sm WBSQuery-hook"  style="margin-right:15px;"><i class="layui-icon layui-icon-search "></i></button>
+			    </div>
+			</c:if>
+     		<c:if test="${custId =='' }">
+    		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+    			<input type="hidden" name="wbsCode" value=""/>
     		</div>
-     	</div>
+			</c:if>
+	     	<c:if test="${custId !='' }">
+	    		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+				   <div class="layui-input-inline">
+			      		<input type="text" name="wbsCode" readonly="readonly"  class="layui-input form-control disabledColor" />
+	      			</div>
+	      			<button type="button"  class="layui-btn layui-btn-sm WBSQuery-hook"  style="margin-right:15px;"><i class="layui-icon layui-icon-search "></i></button>
+			    </div>
+			</c:if>
     	</div>
     </td>
     <td>
     	<div class="project-list">
     		<div class="layui-input-inline item" style="margin:5px 0;">
-    			<div class="layui-input-inline">
-    				<input type="text" name="projectName"  class="layui-input form-control" />
-    			</div>
-    		</div>
-    		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
-    			<div class="layui-input-inline">
-    				<input type="text" name="projectName" class="layui-input form-control" />
-    			</div>
-    		</div>
+	      		<c:if test="${custId !='' }">
+      			<div class="layui-input-inline">
+      				<input type="text" name="projectName" readonly="readonly" class="layui-input form-control disabledColor"/>
+      			</div>
+	      			<button type="button"  class="layui-btn layui-btn-sm projectNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search "></i></button>
+	      		</c:if>
+	      		<c:if test="${custId =='' }">
+	      		<div class="layui-input-inline">
+      				<input type="text" name="projectName"  class="layui-input form-control"/>
+      			</div>
+	      		</c:if>
+      		</div>
+      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+      			<c:if test="${custId !='' }">
+      			<div class="layui-input-inline">
+      				<input type="text" name="projectName" readonly="readonly" class="layui-input form-control disabledColor"/>
+      			</div>
+	      			<button type="button"  class="layui-btn layui-btn-sm projectNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search "></i></button>
+	      		</c:if>
+	      		<c:if test="${custId =='' }">
+	      		<div class="layui-input-inline">
+      				<input type="text" name="projectName"  class="layui-input form-control"/>
+      			</div>
+	      		</c:if>
+      		</div>
     	</div>
     </td>
     <td>
     	<div class="project-list">
     		<div class="layui-input-inline item" style="margin:5px 0;">
     			 <div class="layui-input-inline">
-			          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
+			          <select name="projectType" lay-verify="required" lay-filter="projectType-filter" class="form-control">
 			        	<option value="">请选择</option>
-			        	<option value="01" selected>项目</option>
-			        	<option value="02">产品</option>
+			        	<option value="01" >项目</option>
+			        	<option value="02" selected>产品</option>
 			        	<option value="03" >人力</option>
 					  </select>
       			</div>
     		</div>
     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
     			 <div class="layui-input-inline">
-		          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
+		          <select name="projectType" lay-verify="required" lay-filter="projectType-filter" class="form-control">
 		        	<option value="">请选择</option>
-		        	<option value="01" selected>项目</option>
-		        	<option value="02">产品</option>
+		        	<option value="01">项目</option>
+		        	<option value="02" selected>产品</option>
 		        	<option value="03" >人力</option>
 				  </select>
       			</div>
@@ -78,16 +113,32 @@
     <td>
     	<div class="project-list">
     		<div class="layui-input-inline productItem">
-    			<div class="layui-input-inline">
-     			<input name="productList" type="text" class="layui-input form-control">
-    			</div>
-    			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook"  style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
+    			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
+      			<c:if test="${projectType == '02' }">
+	      			<div class="layui-input-inline">
+		      			<input name="productList" type="text" class="layui-input form-control">
+	      			</div>
+      			</c:if>
+      			
+      			<c:if test="${projectType != '02' }">
+      				<div class="layui-input-inline"  style="display:none;">
+	      				<input name="productList" type="text" class="layui-input form-control">
+	      			</div>
+     			   </c:if>
     		</div>
     		<div class="layui-input-inline productItem copyAddItem">
-    			<div class="layui-input-inline">
-     			<input name="productList" type="text" class="layui-input form-control">
-    			</div>
-    			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook"  style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
+	      			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
+	      			<c:if test="${projectType == '02' }">
+		      			<div class="layui-input-inline">
+			      			<input name="productList" type="text" class="layui-input form-control">
+		      			</div>
+	      			</c:if>
+	      			
+	      			<c:if test="${projectType != '02' }">
+	      				<div class="layui-input-inline"  style="display:none;">
+		      				<input name="productList" type="text" class="layui-input form-control">
+		      			</div>
+	      			</c:if>
     		</div>
     	</div>
     </td>
@@ -95,12 +146,12 @@
       	<div class="project-list">
       		<div class="layui-input-inline item" style="margin:5px 0;">
       			 <div class="layui-input-inline">
-			          <span class="form-control j-budgetYear"></span>
+			          <span class="form-control j-budgetYear">${budgetYear}</span>
 		      	</div>
       		</div>
       		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
       			 <div class="layui-input-inline">
-			          <span class="form-control j-budgetYear"></span>
+			          <span class="form-control j-budgetYear">${budgetYear}</span>
 		      	</div>
       		</div>
       	</div>
