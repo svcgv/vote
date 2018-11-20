@@ -270,14 +270,14 @@
 			</div>
 		   	
 		   	 <div class="layui-inline"  style="margin-right:64px;">
-			      <label class="layui-form-label">计提-人力：</label>
+			      <label class="layui-form-label">计提-外购人力(元)：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="accruedChargesWorkers" readonly='true' autocomplete="off" class="layui-input form-control">
 			     </div>
 			   </div>
 			    
 	   		<div class="layui-inline"  style="margin-right:64px;">
-			      <label class="layui-form-label">计提-产品及服务：</label>
+			      <label class="layui-form-label">计提-外购产品及服务(元)：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="accruedChargesProducts" readonly='true' autocomplete="off" class="layui-input form-control">
 			      </div>
