@@ -3,8 +3,12 @@ package com.indihx.PmProjectInfo.entity;
 
 
 import com.indihx.BaseEntity;
+import com.indihx.PmContractInfo.entity.PmContractInfoEntity;
+import com.indihx.PmProductInfo.entity.PmProductInfoEntity;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -464,6 +468,10 @@ private String checkRemarks;
 private String production;
 
 private String productionRemarks;
+
+private List<PmProductInfoEntity> pmProductInfo;
+
+private List<PmContractInfoEntity> pmContractInfo;
 	/**
 	 * 设置：
 	 */
@@ -1555,5 +1563,17 @@ private String productionRemarks;
 	}
 	public void setProductionRemarks(String productionRemarks) {
 		this.productionRemarks = productionRemarks;
+	}
+	public List<PmProductInfoEntity> getPmProductInfo() {
+		return pmProductInfo;
+	}
+	public void setPmProductInfo(List<PmProductInfoEntity> pmProductInfo) {
+		this.pmProductInfo = pmProductInfo;
+	}
+	public List<PmContractInfoEntity> getPmContractInfo() {
+		return pmContractInfo;
+	}
+	public void setPmContractInfo(List<PmContractInfoEntity> pmContractInfo) {
+		this.pmContractInfo = pmContractInfo;
 	}
 }
