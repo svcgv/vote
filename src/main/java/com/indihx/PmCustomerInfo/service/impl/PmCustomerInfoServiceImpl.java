@@ -88,17 +88,14 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
 		if(pageNum != null && pageSize != null) {
 			PageHelper.startPage(pageNum, pageSize);
 		}
-   		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
-   			entity.put("isDelete", "00");
-   		}
+//   		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
+//   			entity.put("isDelete", "00");
+//   		}
    		return pmCustomerInfoMapper.queryList(entity);
    	}
 	public List<PmCustomerInfoEntity> queryListAll(Map<String, Object> entity,Integer pageNum, Integer pageSize){
 		if(pageNum != null && pageSize != null) {
 			PageHelper.startPage(pageNum, pageSize);
-		}
-		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
-			entity.put("isDelete", "00");
 		}
 		return pmCustomerInfoMapper.queryListAll(entity);
 	}

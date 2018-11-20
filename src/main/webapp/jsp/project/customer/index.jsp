@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/resources/admincp/layouts/main.jsp"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <body>
+<script src="${ctx }/common/queryCode?area=AREA&isDelete=IS_USEFUL&custType=CUST_TYPE&tradeCode=TRADE_CODE
+&regionalMarket=REGIONAL_MARKET&custTrade=CUST_TRADE&payCycle=PAY_CYCLE&bgVisiable=BG_VISIABLE&country=COUNTRY" type="text/javascript"></script>
 <div class="custom-info-wrapper">
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 	  <legend>客户管理</legend>
@@ -78,9 +81,6 @@
 	     <div class="layui-inline">
 	      <label class="layui-form-label">是否有效：</label>
 	      <div class="layui-input-inline">
-	        <%--<select name="isUseful" lay-verify="required" lay-filter="" class="form-control">--%>
-	        	 <%--${isUseful.ewTypeHtml }--%>
-	        <%--</select>--%>
 			  <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
 				  ${isUseful.ewTypeHtml }
 			  </select>
@@ -123,9 +123,8 @@
   <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="view">查看</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
-
 <script type="text/javascript">
-var test_button = document.getElementById('test9')
+var test_button = document.getElementById('test9');
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table','upload'], function(){
   var layer = layui.layer ,
@@ -286,24 +285,42 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
             {field:'custGroupId', title:'客户群编号'},
             {field:'custGroupName', title:'客户群名称'},
 //            {field:'isUseful', title:'是否有效'},
-            {field:'isDelete', title:'是否有效'},
-            {field:'area', title:'地区'},
+            {field:'isDelete', title:'是否有效',templet:function(d){
+                return getCodeValue(d.isDelete,isDelete);
+            }},
+            {field:'area', title:'地区',templet:function(d){
+                return getCodeValue(d.area,area);
+            }},
             {field:'createTime', title:'创建日期'},
             {field:'companyCode', title:'公司代码'},
   	      {field:'custPatTaxesCode', title:'客户纳税识别码'},
-  	      {field:'custType', title:'客户类型'},
+            {field:'custType', title:'客户类型',templet:function(d){
+                return getCodeValue(d.custType,custType);
+            }},
   	      {field:'address', title:'地址'},
   	      {field:'cashManagementGroup', title:'现金管理组'},
   	      {field:'payCondition', title:'付款条件'},
-  	      {field:'tradeCode', title:'行业代码'},
-  	      {field:'regionalMarket', title:'地区市场'},
+  	      {field:'tradeCode', title:'行业代码',templet:function(d){
+              return getCodeValue(d.tradeCode,tradeCode);
+          }},
+  	      {field:'regionalMarket', title:'地区市场',templet:function(d){
+              return getCodeValue(d.regionalMarket,regionalMarket);
+          }},
   	      {field:'mainBusiness', title:'主营业务'},
-  	      {field:'custTrade', title:'客户行业'},
-  	      {field:'payCycle', title:'结算周期'},
+  	      {field:'custTrade', title:'客户行业',templet:function(d){
+              return getCodeValue(d.custTrade,custTrade);
+          }},
+  	      {field:'payCycle', title:'结算周期',templet:function(d){
+              return getCodeValue(d.payCycle,payCycle);
+          }},
   	      {field:'groupCompany', title:'集团公司'},
-  	      {field:'bgVisiable', title:'BG隐藏'},
+  	      {field:'bgVisiable', title:'BG隐藏',templet:function(d){
+              return getCodeValue(d.bgVisiable,bgVisiable);
+          }},
   	      {field:'companyFuncCode', title:'公司代码（职能）'},
-  	      {field:'country', title:'国家/地区', width:90},
+  	      {field:'country', title:'国家/地区', width:90,templet:function(d){
+              return getCodeValue(d.country,country);
+          }},
   	      {field:'enName', title:'英文名称',width:100},
   	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],

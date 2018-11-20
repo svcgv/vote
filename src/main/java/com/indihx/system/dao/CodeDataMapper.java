@@ -22,6 +22,7 @@ public interface CodeDataMapper {
     List<CodeData>  qryCodeDataAll(CodeData record);
     //初始化分组查询数据字段项
     List<String>  qryCodeNo();
-    
+    List<CodeData>  getByCodeNo(String codeNo);
+
     
 }

@@ -113,7 +113,10 @@
 	   <div class="layui-inline">
 		  <label class="layui-form-label">地区：</label>
 	     <div class="layui-input-inline">
-	         <input type="text" name="area"  value="${Custom.area}"  <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">
+			 <select name="area" lay-verify="required"   <c:if test="${act =='view'}">disabled=true</c:if> lay-filter="" class="form-control">
+				 ${area.ewTypeHtml }
+			 </select>
+	         <%--<input type="text" name="area"  value="${Custom.area}"  <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">--%>
 	      </div>
 	   </div>
 	   <div class="layui-inline">
@@ -137,7 +140,7 @@
 	     <div class="layui-inline">
 	      <label class="layui-form-label">是否有效：</label>
 	      <div class="layui-input-inline">
-	        <select name="isUseful" lay-verify="required"  disabled=true  lay-filter="" class="form-control">
+	        <select name="isDelete" lay-verify="required"  disabled=true  lay-filter="" class="form-control">
 	        	 ${isUseful.ewTypeHtml }
 	        </select>
 	      </div>
@@ -182,9 +185,11 @@
 		    <label class="layui-form-label">所属客户群：</label>
 	       <div class="layui-input-inline">
 	          <select name="custGroupId" lay-verify="required"  <c:if test="${act =='view'}">disabled=true</c:if> lay-search="">
-	          <option value="${customerGroupValue}">${customerGroupName}</option>
+	          <option value="">请选择</option>
 	          <c:forEach items="${customerGroup}" var="app">
-		          <option value="${app.custGroupId}">${app.custGroupName}</option>
+					  <option value="${app.custGroupId}"
+				  <c:if test="${customerGroupValue == app.custGroupId}"> selected </c:if>>${app.custGroupName}</option>
+
 		          </c:forEach>
 	          </select>
 	       </div>

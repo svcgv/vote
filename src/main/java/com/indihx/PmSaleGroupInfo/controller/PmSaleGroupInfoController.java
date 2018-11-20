@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import com.indihx.comm.util.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,12 +54,11 @@ public class PmSaleGroupInfoController {
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
+    public @ResponseBody
+	ResponseData list(@RequestBody Map<String, Object> params, HttpSession session){
     	
     	Map<String, Object> param = (Map<String, Object>)JSON.parse((String) params.get("queryStr"));
-    	params.putAll(param);
-		List<PmSaleGroupInfoEntity> pmSaleGroupInfo = pmSaleGroupInfoService.queryList(params);
-        return R.ok().put("page", pmSaleGroupInfo);
+        return new ResponseData(pmSaleGroupInfoService.queryList(param,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
     }
 
 

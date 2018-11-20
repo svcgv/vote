@@ -132,7 +132,7 @@ public class PmYearBudgetController {
     @RequestMapping(value="/exportExcel",method=RequestMethod.POST)
     public @ResponseBody void exportExcel(@RequestBody Map<String,Object> map, HttpSession session, HttpServletResponse response) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException, IOException{
     	UsrInfo usesr = UserUtil.getUser(session);
-    	List<PmYearBudgetEntity> list = pmYearBudgetService.queryList(new HashMap<String,Object>());
+    	List<Map<String,Object>> list = pmYearBudgetService.queryListByMap(map);
     	 XSSFWorkbook wb = excelFileService.getExcelByListBeanAndExcelCode(list, "yearBudget","年度预算");
     	 ByteArrayOutputStream os = new ByteArrayOutputStream();
     	 wb.write(os);

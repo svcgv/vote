@@ -28,6 +28,14 @@
                        value="${ctnGroup.custGroupId}" id='custGroupId' autocomplete="off" enabled='false'
                        class="layui-input form-control">
             </div>
+            <div class="layui-inline" style="vertical-align: top;">
+                    <label class="layui-form-label">是否有效：</label>
+                    <div class="layui-input-inline">
+                        <select name="isDelete" lay-verify="required"  disabled=true  lay-filter="" class="form-control">
+                            ${isUseful.ewTypeHtml }
+                        </select>
+                    </div>
+            </div>
             <%--<div class="layui-inline">--%>
                 <%--<label class="layui-form-label">客户列表：</label>--%>
                 <%--<div class="layui-input-inline" id="chosed-customer-hook"--%>
@@ -55,6 +63,8 @@
             var layer = layui.layer,
                 form = layui.form,
                 table = layui.table;
+
+            form.render();
             var param = {"custGroupId": custGroupId};
             $.ajax({
                 type: 'POST',
