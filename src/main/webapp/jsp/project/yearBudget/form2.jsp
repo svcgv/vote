@@ -42,12 +42,18 @@
     margin-right: 10px;
 }
 .project-list .item{
+text-align:left;
+height:32px;
+line-height:32px;
+display:block;
+min-width:90px;
+}
+.project-list2 .item{
 	text-align:left;
 	height:32px;
 	line-height:32px;
 	display:block;
 	min-width:90px;
-	
 }
 .project-list .productItem{
 	text-align:left;
@@ -62,6 +68,9 @@
 	margin-right:5px;
 }
 .project-list .copyAddItem{
+	display:none;
+}
+.project-list2 .copyAddItem{
 	display:none;
 }
 .layui-table tbody tr:hover{
@@ -133,10 +142,10 @@
 			    <tr>
 			      <td >
 			      	<div class="layui-inline" style="min-width:250px;">
-			      		<div class="layui-input-inline">
+			      		<div class="layui-input-inline item">
 				      		<label>上海农商</label>
-				      		 <input type="hidden" name="custId" value="123123"/>
 				    		 <input type="hidden" name="custName" value="上海农商"/>
+				    		 <input type="hidden" name="custId" value="123"/>
 			      		</div>
 			      	</div>
 			      	<div>
@@ -148,11 +157,11 @@
 			      	<div class="project-list">
 				      	<div class="layui-input-inline item" style="margin:5px 0;">
 				      		<span>WBS123223Y4872Y34</span>
-				      		<input type="hidden" name="wbsCode" value="WBS123223Y4872Y34"/>
+				      		<input type="hidden" name="wbsCode" value="AAAA"/>
 				      	</div>
 				      	<div class="layui-input-inline item" style="margin:5px 0;">
 				      		<span>WBS123223Y4872sssY34</span>
-				      		<input type="hidden" name="wbsCode" value="WBS123223Y4872sssY34" />
+				      		<input type="hidden" name="wbsCode" value="bbbb" />
 				      	</div>
 				      	<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 				      		<div class="layui-input-inline">
@@ -236,11 +245,11 @@
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px;">
 			      			<span>2019年</span>
-			      			<input type="hidden" name="budgetYear" value="${budgetYear }" />
+			      			<input type="hidden" name="budgetYear" value="2018" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px;">
 			      			<span>2019年</span>
-			      			<input type="hidden" name="budgetYear" value="${budgetYear }" />
+			      			<input type="hidden" name="budgetYear" value="2017" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px;">
 			      			 <div class="layui-input-inline">
@@ -752,7 +761,7 @@
 			      </td>
 			      
 			      <td>
-			      	<div class="project-list" style="width:90px;">
+			      	<div class="project-list2" style="width:90px;">
 			      		<div class="layui-input-inline item" style="margin:5px;">
 			      			 <div class="layui-input-inline"></div>
 			      		</div>
@@ -782,7 +791,6 @@
 </div>
 
 <script>
-console.log("${budgetYear}");
 	//年份
 $.fn.insertYearOption=function(){
 	var currentYear=(new Date()).getFullYear()+1;
@@ -976,31 +984,50 @@ layui.use(['layer', 'form','laydate'], function(){
 	// 保存
 	$("#budget-addForm-hook #customGroup-add-hook").click(function(){
 		var res=[];//结果集
+		var res2=[];
+		var res3=[];
 		var trs=$(".budget-wrapper tbody tr").each(function(i){
 			var tds=$(this).children("td");
-			var res[i]=[];
+			res[i]=res2;
+			var custId=$(this).children("td").eq(0).find("input[name='custId']").val();
+			var custName=$(this).children("td").eq(0).find("input[name='custName']").val();
 			tds.each(function(j){
-				var custName=$(this).eq(0).find("input[name='custName']").val();
-				var custId=$(this).eq(0).find("input[name='custId']").val();
-				
-				rowRes[0]={custName:custName,custId:custId};
 				var projectList=$(this).children(".project-list");
-					// 剔除 copy项
-					var ret=[];
-					
-					var obj={};
-					projectList.children(".item:not('.copyAddItem')").each(function(k){
-						var val=$(this).find("input").val();
-						var key=$(this).find("input").attr("name");
-						obj[key]=val;
-						console.log(obj,k)
-					});
-					//rowRes.push(obj)
+					// 产品列表
+					if(j == 4){
+						projectList.children(".productItem:not('.copyAddItem')").each(function(k){
+							res2[k]=res3;
+							var spans=$(this).find("span");
+							var names=[];
+							var ids=[];
+							spans.each(function(){
+								names.push($(this).text());
+								ids.push($(this).attr("productid"));
+							})
+							var key1="productNames";
+							var key2="productIds";
+							res[i][k][key1]=names.join(",");
+							res[i][k][key2]=ids.join(",");
+						});
+						
+					}else{
+						// 剔除 copy项
+						projectList.children(".item:not('.copyAddItem')").each(function(k){
+							res2[k]=res3;
+							var val=$(this).find("input").val();
+							var key=$(this).find("input,select").attr("name");
+//							res3[key]=val;
+							res[i][k][key]=val;
+							res[i][k]["custId"]=custId;
+							res[i][k]["custName"]=custName;
+							console.log(key,val,k,j);
+						});
+					}
 			});
 			
 			
 		});
-			console.log(rowRes,'res')
+		console.log(res,'res')
 		
 		
 		
