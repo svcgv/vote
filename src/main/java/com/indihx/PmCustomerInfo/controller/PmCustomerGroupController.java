@@ -113,15 +113,15 @@ public class PmCustomerGroupController {
     
     @RequestMapping(value="/changeRelation",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> changeRelation(@RequestBody  Map<String, Object> params,HttpSession session){
-    	String groupId= (String) params.get("custGroupId");
+        String groupId= (String) params.get("custGroupId");
     	String groupName= (String) params.get("name");
     	List<String> ctnCodes = (List<String>) params.get("ctnCodes");
     	PmCustomerGroupEntity pmCustomerGroup = new PmCustomerGroupEntity();
     	pmCustomerGroup.setCustGroupId(groupId);
     	pmCustomerGroup.setCustGroupName(groupName);
-    	
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
         pmCustomerGroup.setModifier(user.getUsrId());
+        pmCustomerGroup.setModifyTime(DateUtil.formatFromDB(DateUtil.getSysDate()));
         pmCustomerGroupService.update(pmCustomerGroup);//全部更新
         pmCustomerGroupRelationService.deleteByGroupId(groupId);
         if(!ctnCodes.isEmpty()) {

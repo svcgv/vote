@@ -131,9 +131,9 @@ public class SellTeamController extends AbstractBaseController{
 	
 	// 用户
 	@RequestMapping(value="/sellTeam/user",method=RequestMethod.GET)
-	public ModelAndView userFormView() {
+	public ModelAndView userFormView(@RequestParam("orgId") String orgId) {
 		ModelAndView view = new ModelAndView();
-		
+		view.addObject("orgId",orgId);
 		view.setViewName("/project/sellTeam/user");
 		return view;
 	}

@@ -127,7 +127,7 @@ public class CustomerGroupController extends AbstractBaseController{
 		public ModelAndView viewFormFormView(@RequestParam("id") String id) {
 			ModelAndView view = new ModelAndView();
 			PmCustomerGroupEntity model= pmCustomerGroupService.queryObject(id);
-			
+			view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL",model.getIsDelete()));
 			view.addObject("ctnGroup",model);
 			view.setViewName("/project/customerGroup/viewForm");
 			return view;

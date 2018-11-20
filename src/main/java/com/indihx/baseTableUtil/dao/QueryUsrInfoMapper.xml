@@ -87,8 +87,8 @@
 		LICENCE_CODE,
 		CERT_ID
 		from usr_info
-		<trim prefix="WHERE" prefixOverrides="AND|OR"
-			suffixOverrides="AND|OR">
+		<trim prefix="WHERE" prefixOverrides="AND"
+			suffixOverrides="AND">
 			<if test="usrId != null and usrId!=''">
 				USR_ID = #{usrId} AND
 			</if>

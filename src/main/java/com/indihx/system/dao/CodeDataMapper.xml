@@ -124,6 +124,10 @@
   		</if>
   		order by CODE_NO,code_key
   </select>
+
+  <select id="getByCodeNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from code_data where code_no=#{codeNo}
+  </select>
   
   <!-- 查询所有的字段类型 -->
   <select id="qryCodeNo" resultType="java.lang.String">

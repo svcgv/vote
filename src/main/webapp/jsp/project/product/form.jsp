@@ -83,7 +83,7 @@
 					<button type="button"   class="layui-btn " id="projectQuery-hook" style="margin-right:15px;padding:0 9px;height:32px;line-height:32px;"><i class="layui-icon"></i>项目引用</button>
 				</div>
 			</div>
-			<div style="float:left;width:900px;">
+			<div style="float:left;width:800px;">
 				<table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
 			</div>
 	    </div>

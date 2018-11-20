@@ -238,5 +238,20 @@ public class ProjectController extends AbstractBaseController {
         view.setViewName("/project/project/tender");
         return view;
     }
-
+    
+    //合同 
+    @RequestMapping(value = "/project/contract", method = RequestMethod.GET)
+    public ModelAndView contractFormView() {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/project/project/contract");
+        return view;
+    }
+    
+    //产品 
+    @RequestMapping(value = "/project/product", method = RequestMethod.GET)
+    public ModelAndView productFormView() {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/project/project/product");
+        return view;
+    }
 }
