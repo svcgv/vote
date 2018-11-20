@@ -18,4 +18,5 @@ public interface PmYearBudgetMapper{
 	public void delete(String yearBudgetCode);
 	public List<PmYearBudgetEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
+	public List<Map<String, Object>> queryListByMap(Map<String, Object> entity);
 }

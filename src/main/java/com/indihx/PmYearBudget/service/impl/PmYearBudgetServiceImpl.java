@@ -64,4 +64,10 @@ public class PmYearBudgetServiceImpl implements PmYearBudgetService {
 			}
 		}
 	}
+	
+
+   	public List<Map<String, Object>> queryListByMap(Map<String, Object> entity){
+   		
+   		return pmYearBudgetMapper.queryListByMap(entity);
+   	}
 }

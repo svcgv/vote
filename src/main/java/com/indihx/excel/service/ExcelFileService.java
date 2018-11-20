@@ -19,6 +19,6 @@ public interface ExcelFileService {
 
 	public long insert(ExcelFileEntity entity);
 	public ExcelFileEntity queryFileInfoByFileCode(String code);
-	public <T> XSSFWorkbook getExcelByListBeanAndExcelCode(List<T> list,String code,String sheetName);
+	public XSSFWorkbook getExcelByListBeanAndExcelCode(List<Map<String,Object>> list,String code,String sheetName);
 }
 
