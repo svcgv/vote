@@ -437,7 +437,7 @@
 		)
 		values
 		(
-		#{YEAR_BUDGET_CODE}
+		#{yearBudgetCode}
 		<if test="isNewCust != null and isNewCust!=''">
 			,#{isNewCust}
 		</if>
@@ -656,6 +656,9 @@
 	</delete>
 
 
+	<delete id="deleteByCreatorId">
+		delete from PM_YEAR_BUDGET where CREATOR_ID = #{value}
+	</delete>
 
 <select id="queryListByMap" resultMap="pmYearBudgetHashMap">
 		select

@@ -157,15 +157,15 @@ min-width:90px;
 			      	<div class="project-list">
 				      	<div class="layui-input-inline item" style="margin:5px 0;">
 				      		<span>WBS123223Y4872Y34</span>
-				      		<input type="hidden" name="wbsCode" value="AAAA"/>
+				      		<input type="hidden" name="wbs" value="AAAA"/>
 				      	</div>
 				      	<div class="layui-input-inline item" style="margin:5px 0;">
 				      		<span>WBS123223Y4872sssY34</span>
-				      		<input type="hidden" name="wbsCode" value="bbbb" />
+				      		<input type="hidden" name="wbs" value="bbbb" />
 				      	</div>
 				      	<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 				      		<div class="layui-input-inline">
-					      		<input type="text" name="wbsCode" readonly="readonly"  class="layui-input form-control disabledColor" />
+					      		<input type="text" name="wbs" readonly="readonly"  class="layui-input form-control disabledColor" />
 			      			</div>
 			      			<button type="button"  class="layui-btn layui-btn-sm WBSQuery-hook"  style="margin-right:15px;"><i class="layui-icon layui-icon-search "></i></button>
 				      	</div>
@@ -559,15 +559,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="jan" value="1" />
+			      			<input type="hidden"  name="budgetJan" value="1" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="jan" value="12" />
+			      			<input type="hidden"  name="budgetJan" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="jan" class="layui-input form-control" />
+						     	<input type="text" name="budgetJan" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -576,15 +576,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="feb" value="12" />
+			      			<input type="hidden"  name="budgetFeb" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="feb" value="2" />
+			      			<input type="hidden"  name="budgetFeb" value="2" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="feb" class="layui-input form-control" />
+						     	<input type="text" name="budgetFeb" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -593,15 +593,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="mar" value="12" />
+			      			<input type="hidden"  name="budgetMar" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="mar" value="12" />
+			      			<input type="hidden"  name="budgetMar" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="mar" class="layui-input form-control" />
+						     	<input type="text" name="budgetMar" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -610,15 +610,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="apr" value="12" />
+			      			<input type="hidden"  name="budgetApr" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="apr" value="12" />
+			      			<input type="hidden"  name="budgetApr" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="apr" class="layui-input form-control" />
+						     	<input type="text" name="budgetApr" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -627,15 +627,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="may" value="12" />
+			      			<input type="hidden"  name="budgetMay" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="may" value="112" />
+			      			<input type="hidden"  name="budgetMay" value="112" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="may" class="layui-input form-control" />
+						     	<input type="text" name="budgetMay" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -644,15 +644,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="jun" value="12" />
+			      			<input type="hidden"  name="budgetJun" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="jun" value="12" />
+			      			<input type="hidden"  name="budgetJun" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="jun" class="layui-input form-control" />
+						     	<input type="text" name="budgetJun" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -661,15 +661,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="jul" value="12" />
+			      			<input type="hidden"  name="budgetJul" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="jul" value="12" />
+			      			<input type="hidden"  name="budgetJul" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="jul" class="layui-input form-control" />
+						     	<input type="text" name="budgetJul" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -678,15 +678,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="aug" value="12" />
+			      			<input type="hidden"  name="budgetAug" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="aug" value="12" />
+			      			<input type="hidden"  name="budgetAug" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="aug" class="layui-input form-control" />
+						     	<input type="text" name="budgetAug" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -695,15 +695,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="sep" value="12" />
+			      			<input type="hidden"  name="budgetSep" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="sep" value="12" />
+			      			<input type="hidden"  name="budgetSep" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="sep" class="layui-input form-control" />
+						     	<input type="text" name="budgetSep" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -712,15 +712,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="oct" value="12" />
+			      			<input type="hidden"  name="budgetOct" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="oct" value="12" />
+			      			<input type="hidden"  name="budgetOct" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="oct" class="layui-input form-control" />
+						     	<input type="text" name="budgetOct" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -729,15 +729,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="nov" value="12" />
+			      			<input type="hidden"  name="budgetNov" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="nov" value="12" />
+			      			<input type="hidden"  name="budgetNov" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="nov" class="layui-input form-control" />
+						     	<input type="text" name="budgetNov" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -746,15 +746,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>798865651</span>
-			      			<input type="hidden"  name="dec" value="12" />
+			      			<input type="hidden"  name="budgetDec" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			<span>12</span>
-			      			<input type="hidden"  name="dec" value="12" />
+			      			<input type="hidden"  name="budgetDec" value="12" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="dec" class="layui-input form-control" />
+						     	<input type="text" name="budgetDec" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -791,6 +791,26 @@ min-width:90px;
 </div>
 
 <script>
+var queryAllListForUser = '/vote/pmyearbudget/queryAllListForUser'
+
+	function queryList(){
+	 var queryParams=getParam()
+	 console.log(queryParams)
+	 
+	 $.ajax({
+		  type: 'POST',
+		  url: queryAllListForUser,
+		  data: JSON.stringify({}),
+		  contentType:'application/json',
+		  success: function(res){
+			 var  testData = res.page
+		      console.log(res)
+		      testData=res.page
+		      },
+		  dataType: "json"
+		});
+}
+queryList()
 	//年份
 $.fn.insertYearOption=function(){
 	var currentYear=(new Date()).getFullYear()+1;
@@ -979,24 +999,40 @@ layui.use(['layer', 'form','laydate'], function(){
 	 result.push(obj);
  })
   
-	  
+	function getArr(x){
+	  var a = []
+	  for(var i=0;i<x;i++){
+		  a[i]={}
+	  }
+	  return a
+  }
+ 
 	var win=$("#budget-addForm-hook").getWindow();
 	// 保存
 	$("#budget-addForm-hook #customGroup-add-hook").click(function(){
 		var res=[];//结果集
-		var res2=[];
 		var res3=[];
+		var res2=[];
+		
 		var trs=$(".budget-wrapper tbody tr").each(function(i){
+			
 			var tds=$(this).children("td");
-			res[i]=res2;
+			var res2=[];
 			var custId=$(this).children("td").eq(0).find("input[name='custId']").val();
 			var custName=$(this).children("td").eq(0).find("input[name='custName']").val();
+			
+			var rows = $(this).children("td").eq(2).find(".item:not('.copyAddItem')").length;
+			
+			var arr1 = getArr(rows)
+			console.log(rows)
 			tds.each(function(j){
+				//获取每个td中有多少个值
+				
 				var projectList=$(this).children(".project-list");
 					// 产品列表
 					if(j == 4){
 						projectList.children(".productItem:not('.copyAddItem')").each(function(k){
-							res2[k]=res3;
+							//res2[k]=res3;
 							var spans=$(this).find("span");
 							var names=[];
 							var ids=[];
@@ -1006,55 +1042,60 @@ layui.use(['layer', 'form','laydate'], function(){
 							})
 							var key1="productNames";
 							var key2="productIds";
-							res[i][k][key1]=names.join(",");
-							res[i][k][key2]=ids.join(",");
+							
+							arr1[k][key1]=names.join(",");
+							arr1[k][key2]=ids.join(",");
 						});
 						
 					}else{
 						// 剔除 copy项
 						projectList.children(".item:not('.copyAddItem')").each(function(k){
-							res2[k]=res3;
+							//res2[k]=res3;
 							var val=$(this).find("input").val();
 							var key=$(this).find("input,select").attr("name");
 //							res3[key]=val;
-							res[i][k][key]=val;
-							res[i][k]["custId"]=custId;
-							res[i][k]["custName"]=custName;
 							console.log(key,val,k,j);
+							arr1[k][key]=val;
+							arr1[k]["custId"]=custId;
+							arr1[k]["custName"]=custName;
+							
 						});
 					}
 			});
 			
-			
+			res.push(arr1)
 		});
 		console.log(res,'res')
 		
+		var fullList = []
+		for(var i=0;i<res.length;i++){
+			res[i].map(function(data){fullList.push(data)})
+		}
+		//console.log(fullList)
 		
-		
-			return;
+		//	return;
 		// 保存数据 revenue 月账单
-		for(var i in result){
+		/* for(var i in result){
 			var obj=result[i];
 			formDatas=$.extend({},true,formDatas,obj);
-		}
+		} */
 		
-		console.log(formDatas,'save data');
-		return;
-		$.ajax({
-			type:'POST',
-			url:'save',
-			data:{
-				queryParams:formDatas
-			},
-			success:function(res){
-				layer.msg("新增成功",{icon:1});
-				win.close();
-			},
-			error:function(){
-				layer.msg("新增失败",{icon:5});
-				win.close();
-			}
-		})
+		//console.log(formDatas,'save data');
+		//return;
+		var budgetList = {}
+		budgetList.budgetList=fullList
+		
+		
+		 $.ajax({
+			  type: 'POST',
+			  url: '/vote/pmyearbudget/saveList',
+			  data: JSON.stringify(budgetList),
+			  contentType:'application/json',
+			  success: function(res){
+				  
+			  },
+			  dataType: "json"
+			})
 		return false;
 	})
 	
