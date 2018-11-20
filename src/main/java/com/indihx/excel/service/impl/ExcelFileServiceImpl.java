@@ -1,6 +1,7 @@
 package com.indihx.excel.service.impl;
 
 import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -57,12 +58,18 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 		List<ExcelCellEntity> cellList = getExcelByFileCode(fileCode,"00");
 		
 		
-		Map<String, Object> map = new HashMap<String, Object>();
 			XSSFWorkbook xwb = new XSSFWorkbook();
 			XSSFSheet sheet = xwb.createSheet(sheetName);
 			
+			if(fixedList!=null&!fixedList.isEmpty()) {
+				for(int i=0;i<fixedList.size();i++) {
+					ExcelCellEntity cellEnt = fixedList.get(i);
+					XSSFRow row = getRomBySheet(sheet,cellEnt.getExcelCellRowNum());
+					XSSFCell cell = getRomBySheet(row,cellEnt.getExcelCellColNum());
+					cell.setCellValue(cellEnt.getExcelDefaultValue());
+				}
+			}
 			
-			xwb.getSheetAt(0);
 		return xwb;
 	}
 	
@@ -73,6 +80,15 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 		}
 		return sheet.createRow(i);
 	}
+	
+	public XSSFCell getRomBySheet(XSSFRow row,int i){
+		XSSFCell xr = row.getCell(i);
+		if(xr!=null) {
+			return xr;
+		}
+		return row.createCell(i);
+	}
+	
 	public List<ExcelCellEntity> getExcelByFileCode(String code) {
 		ExcelFileEntity file = queryFileInfoByFileCode(code);
 		List<ExcelSheetEntity> sheetList = excelSheetService.querySheetListByFileId(file.getExcelFileId());

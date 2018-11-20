@@ -2,9 +2,15 @@ package com.indihx.PmYearBudget.controller;
 
 
 import java.util.Map;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +28,7 @@ import com.indihx.comm.util.RandomUtil;
 import com.indihx.excel.service.ExcelFileService;
 import com.indihx.excel.service.ExcelSheetService;
 import com.indihx.comm.util.DateUtil;
+import com.alibaba.fastjson.JSON;
 import com.indihx.PmYearBudget.entity.PmYearBudgetEntity;
 import com.indihx.PmYearBudget.service.PmYearBudgetService;
 import com.indihx.comm.InitSysConstants;
@@ -120,13 +127,22 @@ public class PmYearBudgetController {
      * @throws IllegalAccessException
      * @throws NoSuchFieldException
      * @throws SecurityException
+     * @throws IOException 
      */
-    @RequestMapping(value="/exportExcel",method=RequestMethod.GET)
-    public @ResponseBody Map<String,Object> exportExcel(@RequestBody Map<String,Object> exportParam,HttpSession session) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException{
+    @RequestMapping(value="/exportExcel",method=RequestMethod.POST)
+    public @ResponseBody void exportExcel(@RequestBody Map<String,Object> map, HttpSession session, HttpServletResponse response) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException, IOException{
     	UsrInfo usesr = UserUtil.getUser(session);
-    	List<PmYearBudgetEntity> list = pmYearBudgetService.queryList(exportParam);
+    	List<PmYearBudgetEntity> list = pmYearBudgetService.queryList(new HashMap<String,Object>());
     	 XSSFWorkbook wb = excelFileService.getExcelByListBeanAndExcelCode(list, "yearBudget","年度预算");
-        return R.ok();
+    	 ByteArrayOutputStream os = new ByteArrayOutputStream();
+    	 wb.write(os);
+    	 byte[] data = os.toByteArray();
+    	 os.close();
+    	 response.reset();  
+ 		 response.setHeader("Content-Disposition", "attachment;filename="+"年度预算");
+         response.addHeader("Content-Length", "" + data.length);  
+         response.setContentType("application/octet-stream; charset=UTF-8"); 
+         IOUtils.write(data, response.getOutputStream());  
     }
     
     
