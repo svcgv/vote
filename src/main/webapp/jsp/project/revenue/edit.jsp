@@ -8,12 +8,12 @@
 }
 </style>
 <div id="revenue-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
-	<form class="layui-form" action="" lay-filter="form-detail">
+	<form class="layui-form" action="">
 		  <div class="layui-form-item">
 		    <div class="layui-inline">
-		      <label class="layui-form-label">收入编号：</label>
+		      <label class="layui-form-label"><span class="required">*</span>收入编号：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="revenueCode"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="revenueCode"  lay-verify="required"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		       <span class="f-placeholder"></span>
 		    </div>
@@ -21,16 +21,16 @@
 		   <div class="layui-inline">
 			   <label class="layui-form-label">项目编号：</label>
 			   <div class="layui-input-inline">
-				   <input type="text" name="projectId" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+				  <input type="text" name="projectId" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 				  <input type="hidden" name="projectName" >
 			   </div>
 			   <button type="button"  class="layui-btn layui-btn-sm" id="projectNameQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		   </div>
 
 		    <div class="layui-inline">
-		      <label class="layui-form-label">收款金额(元)：</label>
+		       <label class="layui-form-label">收款金额(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="number" name="collectionAmount"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="collectionAmount" lay-verify="money"   autocomplete="off" class="layui-input form-control">
 		      </div>
 		      <span class="f-placeholder"></span>
 		    </div>
@@ -38,7 +38,7 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">外购人力金额(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="number" name="externalManpowerAmount"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="externalManpowerAmount" lay-verify="money"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		      <span class="f-placeholder"></span>
 		    </div>
@@ -46,7 +46,7 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">外购服务金额(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="number" name="outsourcingServiceAmount"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="outsourcingServiceAmount" lay-verify="money"   autocomplete="off" class="layui-input form-control">
 		      </div>
 		      <span class="f-placeholder"></span>
 		    </div>
@@ -67,11 +67,11 @@
 		      <span class="f-placeholder"></span>
 		    </div>
 		  </div>
+		<div class="layui-layer-btn layui-layer-btn-c">
+	    	<button class="layui-btn" lay-submit lay-filter="formSubmit" style="height:30px;line-height:30px;margin: 5px 5px 0;">保存</button>
+	    	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
+	    </div>
 	</form>
-	<div class="layui-layer-btn layui-layer-btn-c">
-    	<a class="layui-layer-btn0" id="customGroup-add-hook" style="background:#009688;border-color:#009688;">保存</a>
-    	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
-    </div>
 </div>
 <script>
 $(function(){
@@ -90,33 +90,28 @@ $(function(){
 			    theme: 'molv'
 		 });
 		
-	// form 表单手动渲染
-	  form.render();
+	
     	//选择项目
-    	  $("#revenue-addForm-hook #projectNameQuery-hook").click(function(){
-    		  $.openWindow({
-    		  		url:'project?act=form',
-    		  		title:"选择项目编号",
-    		  		width:"700"
-    		 });
-    		  
-    	  });
+   	  $("#revenue-addForm-hook #projectNameQuery-hook").click(function(){
+   		  $.openWindow({
+   		  		url:'project?act=form',
+   		  		title:"选择项目编号",
+   		  		width:"700"
+   		 });
+   		  
+   	  });
 		var win=$("#revenue-addForm-hook").getWindow();
-		// 保存
-		$("#revenue-addForm-hook #customGroup-add-hook").click(function(){
-			var customerGroupName=$("#revenue-addForm-hook input[name='revenueCode']").val();
-			if($.trim(customerGroupName) ==''){
-				layer.msg("请输入收入编号");
-				return false;
-			}
-
-			var formDatas=$("#revenue-addForm-hook form").serializeObject();
-			$.ajax({
+	  form.render();
+	 //保存和验证
+	  form.on('submit(formSubmit)', function(data){
+		  var data=JSON.stringify(data.field);
+		  console.log(data,'form data')
+		  $.ajax({
 				type:'POST',
-				 contentType:'application/json',
-				 dataType: "json",
+			    contentType:'application/json',
+			    dataType: "json",
 				url:'/vote/pmproductinfo/save',
-				data: JSON.stringify(newparam),
+				data: data,
 				success:function(res){
 					layer.msg("新增成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
 						location.reload();
@@ -128,14 +123,13 @@ $(function(){
 					win.close();
 				}
 			})
-			return false;
-		})
-		
-		// 关闭
-		$("#revenue-addForm-hook #customerGroup-close-hook").click(function(){
-			win.close();
-			return false;
-		})
+	    return false;
+	  });
+	// 关闭
+	$("#revenue-addForm-hook #customerGroup-close-hook").click(function(){
+		win.close();
+		return false;
+	})
 	
 	})
 });

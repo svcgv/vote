@@ -19,7 +19,7 @@
 		    </div>
 
 		   <div class="layui-inline">
-			   <label class="layui-form-label"><span class="required">*</span>项目编号：</label>
+			   <label class="layui-form-label">项目编号：</label>
 			   <div class="layui-input-inline">
 				  <input type="text" name="projectId" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 				  <input type="hidden" name="projectName" >
