@@ -37,6 +37,15 @@
 			       </div>
 		    </div>
 		    
+		    	<div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">是否有效：</label>
+		       <div class="layui-input-inline">
+		          <select name="isDelete" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		        	 ${isUseful.ewTypeHtml}
+		          </select>
+		      </div>
+		    </div>
+		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
 			   <div class="layui-btn-container" style="margin-left:30px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="projectGroupIndexQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
@@ -103,8 +112,15 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	  {type: 'checkbox', fixed: 'left'},
 	  	      {field:'groupManagerCode', title:'项目群编号', width:130},
 	  	      {field:'projectGroupName', title:'项目群名称', width:130},
-	  	      {field:'groupCreatorName', title:'项目群创建人' },
-	  	      {field:'groupCreateTime', title:'项目群创建日期' },
+	  	      {field:'groupCreatorName', title:'创建人' },
+	  	      {field:'groupCreateTime', title:'创建日期' },
+	  	    	{field:'isDelete', title:'是否有效',templet:function(d){
+	              	if(d.isDelete == "00"){
+	            		return "有效";
+	            	}else if(d.isDelete == "01"){
+	            		return "无效";
+	            	}
+	            }},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'120',

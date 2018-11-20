@@ -145,7 +145,12 @@ input.disabledColor{
     display:inline-block;
     float:left;
 }
-
+/*必填项*/
+.required{
+	display:inline;
+	color:red;
+	margin-right: 3px;
+}
 
 
 

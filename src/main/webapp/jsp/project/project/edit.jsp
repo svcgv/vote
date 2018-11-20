@@ -140,7 +140,7 @@
 			      <label class="layui-form-label">销售部门：</label>
 			      <div class="layui-input-inline">
 				       <input type="text" name="sellDeptName"  readonly='true' autocomplete="off" class="layui-input form-control">
-				       <inpu type="text" style='display:none' name="sellDeptId" />
+				       <input type="text" style='display:none' name="sellDeptId" />
 			      </div>
 			      <button type="button"  class="layui-btn layui-btn-sm" id="sellDeptNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
@@ -186,14 +186,14 @@
 		   	  <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">利润中心编号：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="profitCode"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="profitCode"  readonly="true"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		 
 	     	<div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">成本中心编号：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="costCode"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="costCode"  readonly="true"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		      
 		        <button type="button"  class="layui-btn layui-btn-sm" id="costCodeQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
@@ -237,7 +237,7 @@
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估工作量(人月)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="predictWorkload"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="predictWorkload"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
@@ -278,15 +278,15 @@
 				    </div>
 		   	
 		   	 <div class="layui-inline"  style="margin-right:64px;">
-			      <label class="layui-form-label">计提-人力：</label>
+			      <label class="layui-form-label">计提-外购人力(元)：</label>
 			       <div class="layui-input-inline">
-			         <input type="text" name="accruedChargesWorkers"  autocomplete="off" class="layui-input form-control">
+			         <input type="number" name="accruedChargesWorkers"  autocomplete="off" class="layui-input form-control">
 			      </div>
 			    </div>
 	   			<div class="layui-inline"  style="margin-right:64px;">
-			      <label class="layui-form-label">计提-产品及服务：</label>
+			      <label class="layui-form-label">计提-外购产品及服务(元)：</label>
 			       <div class="layui-input-inline">
-			         <input type="text" name="accruedChargesProducts"  autocomplete="off" class="layui-input form-control">
+			         <input type="number" name="accruedChargesProducts"  autocomplete="off" class="layui-input form-control">
 			      </div>
 			    </div>
 				    
@@ -310,7 +310,7 @@
 		 	 <legend style="font-weight:bold;">合同信息</legend>
 		  </fieldset>
 		   	
-		   <div class="milepost-list-wrapper" <c:if test="${projectType != '00' }"> style="display:none;"</c:if>>
+		   <div class="milepost-list-wrapper" >
 		    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 		 	 <legend style="font-weight:bold;">里程碑</legend>
 		     </fieldset>
@@ -360,7 +360,7 @@
 				   	 <div class="layui-timeline-content layui-text">
 					      <h3 class="layui-timeline-title">测试</h3>
 					      <div class="layui-input-inline">
-					      	<input type="text" name="text" id="test-datepick-hook" class="layui-input form-control hasDatepicker" />
+					      	<input type="text" name="test" id="test-datepick-hook" class="layui-input form-control hasDatepicker" />
 					      </div>
 					      <div class="layui-input-inline">
 					      	<input type="text" name="testRemarks" class="layui-input form-control" />
@@ -517,8 +517,16 @@ $(function(){
 	  });
 	  // 选择实施负责人
 	  $("#project-edit-hook #buildManagerNameQuery-hook").click(function(){
+		  
+		   var buildDeptId = $("#project-edit-hook input[name='buildDeptId']").val();
+		   
+			if($.trim(buildDeptId) ==''){
+				layer.msg("请选择实施部门");
+				return false;
+			}
+		  
 		  $.openWindow({
-		  		url:'user?act=buildManagerEdit',
+		  		url:'user?act=buildManagerEdit&orgNo='+buildDeptId+'&roleCode=BUILD_DEPT_NAME',
 		  		title:"选择实施负责人",
 		  		width:"700"
 		 });
@@ -527,8 +535,16 @@ $(function(){
 	  
 	  // 选择项目经理
 	  $("#project-edit-hook #projectManagerNameQuery-hook").click(function(){
+		  
+		   var buildDeptId = $("#project-edit-hook input[name='buildDeptId']").val();
+		   
+			if($.trim(buildDeptId) ==''){
+				layer.msg("请选择实施部门");
+				return false;
+			}
+		  
 		  $.openWindow({
-		  		url:'user?act=projectManagerEdit',
+		  		url:'user?act=projectManagerEdit&orgNo='+buildDeptId+'&roleCode=PROJECT_MANGER',
 		  		title:"项目经理",
 		  		width:"700"
 		 });
@@ -545,8 +561,17 @@ $(function(){
 	  
 	  // 选择销售负责人
 	  $("#project-edit-hook #sellManagerNameQuery-hook").on("click",function(){
+		  
+		  var sellDeptId = $("#project-edit-hook input[name='sellDeptId']").val();
+		   
+			if($.trim(sellDeptId) ==''){
+				layer.msg("请选择销售部门");
+				return false;
+			}
+		  
+		  
 		  	$.openWindow({
-		  		url:'user?act=sellManagerEdit',
+		  		url:'user?act=sellManagerEdit&orgNo='+sellDeptId+'&roleCode=SELL_DEPT_MANAGER',
 		  		title:"选择销售负责人",
 		  		width:"700"
 		 	 });
@@ -554,8 +579,17 @@ $(function(){
 	  
 	  // 选择客户经理
 	  $("#project-edit-hook #custManagerNameQuery-hook").on("click",function(){
+		  
+		  var sellDeptId = $("#project-edit-hook input[name='sellDeptId']").val();
+		   
+			if($.trim(sellDeptId) ==''){
+				layer.msg("请选择销售部门");
+				return false;
+			}
+		  
+		  
 		  	$.openWindow({
-		  		url:'user?act=custManagerEdit',
+		  		url:'user?act=custManagerEdit&orgNo='+sellDeptId+'&roleCode=',
 		  		title:"选择客户经理",
 		  		width:"700"
 		 	 });
@@ -606,17 +640,11 @@ $(function(){
 		}
 		
 		var formDatas=$("#project-edit-hook form").serializeObject();
-		 var newparam = {}
-		 for(var o in formDatas){
-			 if(formDatas[o]){
-				 newparam[o] = formDatas[o]
-			 }
-		 }
 		 
 		$.ajax({
 			type:'POST',
 			url: '/vote/pmprojectinfo/update',
-			 data: JSON.stringify(newparam),
+			 data: JSON.stringify(formDatas),
 			 contentType:'application/json',
 			success:function(res){
 				  location.reload();

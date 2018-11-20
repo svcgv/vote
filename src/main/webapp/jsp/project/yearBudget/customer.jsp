@@ -100,6 +100,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 						success:function(html){
 							var win2=$(".budget-wrapper").getWindow();
 							$(".budget-wrapper tbody").append(html);
+							budgetForm.render();
 							win2.resize();
 						}
 					})

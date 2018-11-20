@@ -2,6 +2,7 @@ package com.indihx.PmProjectInfo.controller;
 
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -20,10 +21,14 @@ import com.indihx.system.entity.CostInfo;
 import com.indihx.system.entity.ProfitInfo;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.UserUtil;
+import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
+import com.indihx.PmConfirmBid.service.PmConfirmBidService;
 import com.indihx.PmProjectGroupRelationInfo.entity.PmProjectGroupRelationInfoEntity;
 import com.indihx.PmProjectGroupRelationInfo.service.PmProjectGroupRelationInfoService;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectInfo.service.PmProjectInfoService;
+import com.indihx.PmProjectMilestoneInfo.entity.PmProjectMilestoneInfoEntity;
+import com.indihx.PmProjectMilestoneInfo.service.PmProjectMilestoneInfoService;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.service.ICostInfoService;
@@ -50,6 +55,12 @@ public class PmProjectInfoController {
     
     @Autowired
     private ICostInfoService costInfoService;
+    
+    @Autowired
+    private PmConfirmBidService pmConfirmBidService;
+    
+    @Autowired
+    private PmProjectMilestoneInfoService pmProjectMilestoneInfoService;
 
     /**
      * 列表
@@ -62,6 +73,36 @@ public class PmProjectInfoController {
         return new ResponseData(pmProjectInfoService.queryList(maps,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
     }
 
+    
+    @RequestMapping(value="/listTender",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> listTender(@RequestBody Map<String, Object> params,HttpSession session){
+    	String str = (String) params.get("queryStr");
+    	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
+    	maps.put("status", "04");
+    	maps.put("isDelete", "00");
+		List<PmConfirmBidEntity> confirmList = pmConfirmBidService.queryList(maps);
+		
+		Map<String,Object> entity = new HashMap<String,Object>();
+		entity.put("isDelete", "00");
+		List<PmProjectInfoEntity> projectList = pmProjectInfoService.queryList(entity);
+		
+		List<PmConfirmBidEntity> isRef = new ArrayList<PmConfirmBidEntity>();
+		
+		boolean notexsit = true;
+		
+		for(PmConfirmBidEntity confirm:confirmList) {
+			for(PmProjectInfoEntity project:projectList) {
+				if(confirm.getBidId() == project.getBidId()) {
+					notexsit = false;
+				}
+			}
+			
+			if(notexsit) {
+				isRef.add(confirm);
+			}
+		}
+        return R.ok().put("page", isRef);
+    }
 
     /**
      * 信息
@@ -109,6 +150,9 @@ public class PmProjectInfoController {
         		pmProjectGroupRelationInfoService.insert(pmProjectGroupRelationInfoEntity);
         	}
         }
+        
+        pmProjectMilestoneInfoService.insertList(pmProjectInfo,projectId);
+        
         return R.ok();
     }
 
@@ -137,9 +181,40 @@ public class PmProjectInfoController {
     	pmProjectInfo.setModifier(usesr.getUsrId());
     	pmProjectInfo.setModifyTime(DateUtil.getDateTime());
         pmProjectInfoService.update(pmProjectInfo);//全部更新
+        
+        
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("projectId", pmProjectInfo.getProjectId());
+    	List<PmProjectMilestoneInfoEntity>  PmProjectMilestoneInfo = pmProjectMilestoneInfoService.queryList(map);
+    	for(PmProjectMilestoneInfoEntity pmProjectMilestoneInfoEntity:PmProjectMilestoneInfo) {
+    		pmProjectMilestoneInfoService.delete(pmProjectMilestoneInfoEntity.getMilestoneId());
+    	}
+    	
+        pmProjectMilestoneInfoService.insertList(pmProjectInfo,pmProjectInfo.getProjectId());
+        
         return R.ok();
     }
-
+    
+    
+    @RequestMapping(value="/updateDelete",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> updateDelete(@RequestBody PmProjectInfoEntity pmProjectInfo,HttpSession session){
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	pmProjectInfo.setModifier(usesr.getUsrId());
+    	pmProjectInfo.setModifyTime(DateUtil.getDateTime());
+        pmProjectInfoService.update(pmProjectInfo);//全部更新
+        
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("projectId", pmProjectInfo.getProjectId());
+    	List<PmProjectMilestoneInfoEntity>  PmProjectMilestoneInfo = pmProjectMilestoneInfoService.queryList(map);
+    	for(PmProjectMilestoneInfoEntity pmProjectMilestoneInfoEntity:PmProjectMilestoneInfo) {
+    		pmProjectMilestoneInfoEntity.setIsDelete("01");
+    		pmProjectMilestoneInfoEntity.setModifier(usesr.getUsrId());
+    		pmProjectMilestoneInfoEntity.setModifyTime(DateUtil.getDateTime());
+    		pmProjectMilestoneInfoService.update(pmProjectMilestoneInfoEntity);
+    	}
+        
+        return R.ok();
+    }
     /**
      * 删除
      */

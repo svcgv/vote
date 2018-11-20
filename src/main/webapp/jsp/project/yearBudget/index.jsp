@@ -84,6 +84,8 @@
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="exportYearBudger"  style="margin-right:15px;"><i class="layui-icon"></i>导出</button>
+			    
 			  </div>
 		   </div>
 		   
@@ -102,6 +104,17 @@
 </script>
 
 <script type="text/javascript">
+function getParam(){
+	var par = $("#tender-index-form").serializeObject();
+	var newParam = {}
+	for(var key in par){
+		if(par[key]){
+			newParam[key] = par[key]
+		}
+	}
+	return newParam
+}
+var exportUrl = '/vote/pmyearbudget/exportExcel'
 var testData=[{
 'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contract':'ss','poSow':'','owner':'aaa','taxes':'12%','jan':'一月收入1千万','feb':'一月收入3千万'
 	
@@ -216,7 +229,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	* 查询按钮
 	*/
 	 $("#customQuery").click(function(){
-		 var queryParams=$("#tender-index-form").serialize();
+		 var queryParams=getParam()
 		 $.ajax({
 			  type: 'POST',
 			  url: '/vote/pmcompanyinfo/list',
@@ -283,6 +296,55 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  		width:"95%"
 	  	})
 	});
+	
+	
+	$("#exportYearBudger").click(function(){
+		var query = getParam()
+		
+		var xhr = new XMLHttpRequest();
+		
+		xhr.open('POST', exportUrl, true); // 也可以使用POST方式，根据接口
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.responseType = "blob"; // 返回类型blob
+		
+		xhr.onload = function () {
+
+			   // 请求完成
+
+			   if (this.status === 200) {
+
+			       // 返回200
+
+			       var blob = this.response;
+
+			       var reader = new FileReader();
+
+			       reader.readAsDataURL(blob);    // 转换为base64，可以直接放入a表情href
+
+			       reader.onload = function (e) {
+
+			           // 转换完成，创建一个a标签用于下载
+
+			           var a = document.createElement('a');
+
+			           a.download = 'data.xlsx';
+
+			           a.href = e.target.result;
+
+			           $("body").append(a);    // 修复firefox中无法触发click
+
+			           a.click();
+
+			           $(a).remove();
+
+			       }
+
+			   }
+			};
+			xhr.send(JSON.stringify(query));
+
+	});
+	
 	/*
 	* 查看和修改 form 表单
 	*/
