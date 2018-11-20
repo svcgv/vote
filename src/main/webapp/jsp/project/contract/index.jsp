@@ -87,6 +87,14 @@
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 			  </div>
 		   </div>
+				<div class="layui-inline">
+					<label class="layui-form-label">是否有效：</label>
+					<div class="layui-input-inline">
+						<select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
+							${isUseful.ewTypeHtml }
+						</select>
+					</div>
+				</div>
 	   </div>
 	</form>
 	<table class="layui-hide" id="contractTable" lay-filter="contract"></table>

@@ -1,5 +1,6 @@
 package com.indihx.system.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.indihx.system.entity.CodeData;
@@ -34,20 +35,26 @@ public interface ICodeDataService  {
 	 
 	 /***
 		 * 根据id查询字典信息
-		 * 
+		 *
 		 * @param  dataVo
 		 * @return
 		 */
 	public CodeData qryCodeDataById(CodeDataVo dataVo);
-	 
+
+	/**
+	 * 根据NO查出数据字典字段
+	 * @return
+	 */
+	public List<CodeData> getByCodeNo(String codeNo	);
+
 	 /***
 		 * 修改字典信息
-		 * 
+		 *
 		 * @param  dataVo
 		 * @return
 		 */
 	 boolean updCodeDataById(CodeDataVo dataVo);
-	 
+
 	 /***
 		 * 删除字典信息
 		 * 

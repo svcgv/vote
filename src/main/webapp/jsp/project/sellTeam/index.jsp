@@ -93,13 +93,11 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   //日期
 	  laydate.render({
 		    elem: "#startTime",
-		    theme: 'molv',
-		    type: 'datetime'
+		    theme: 'molv'
 	 });
 	 laydate.render({
 		    elem: "#endTime",
-		    theme: 'molv',
-		    type: 'datetime'
+		    theme: 'molv'
 	 });
 
   // table render
@@ -117,7 +115,13 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'ownerOrgId', title:'所属机构编号', width:230},
 	  	      {field:'ownerOrgName', title:'所属机构名称', width:230},
 	  	      {field:'createTime', title:'创建日期'},
-            {field:'isDelete', title:'是否有效'},
+            {field: 'isDelete', title: '是否有效',templet:function(d){
+                if(d.isDelete == "00"){
+                    return "有效";
+                }else{
+                    return "无效";
+                }
+            }},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'90',

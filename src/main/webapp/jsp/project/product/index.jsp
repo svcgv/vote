@@ -36,13 +36,13 @@
 		      </div>
 		      <span class="f-placeholder"></span>
 		    </div>
-		    <div class="layui-inline">
-		      <label class="layui-form-label">指导销售价(元)：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="productSuggestPrice"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		      <span class="f-placeholder"></span>
-		    </div>
+		    <%--<div class="layui-inline">--%>
+		      <%--<label class="layui-form-label">指导销售价(元)：</label>--%>
+		       <%--<div class="layui-input-inline">--%>
+		         <%--<input type="text" name="productSuggestPrice"  autocomplete="off" class="layui-input form-control">--%>
+		      <%--</div>--%>
+		      <%--<span class="f-placeholder"></span>--%>
+		    <%--</div>--%>
 		   
 		     <%--<div class="layui-inline">--%>
 		      <%--<label class="layui-form-label">开始销售日期：</label>--%>
@@ -168,7 +168,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	  {type: 'checkbox', fixed: 'left'},
 	  	      {field:'productCode', title:'产品代码',fixed: 'left', width:110, sort: true},
 	  	      {field:'productName', title:'产品名称', width:230},
-	  	      {field:'productSuggestPrice', title:'指导销售价', width:230,templet:function (d) {
+	  	      {field:'productSuggestPrice', title:'指导销售价（元）', width:230,templet:function (d) {
                   var value=typeof d.productSuggestPrice =="undefined" ? '':d.productSuggestPrice;
                   value=(parseInt(value*100)/100).toFixed(2);
 				  return value

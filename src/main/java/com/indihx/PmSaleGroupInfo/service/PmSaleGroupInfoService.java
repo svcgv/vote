@@ -16,6 +16,7 @@ public interface PmSaleGroupInfoService {
 	public void update(PmSaleGroupInfoEntity entity);
 	public void delete(long groupId);
 	public List<PmSaleGroupInfoEntity> queryList(Map<String, Object> entity);
+	public List<PmSaleGroupInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize);
 	public int queryTotal();
    
 }

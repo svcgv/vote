@@ -38,9 +38,12 @@
 </div>
 
 <script type="text/javascript">
+	var orgNo="${orgId}";
+	console.log(orgNo);
 $(function(){
 	function getParam(){
-		var queryParams=$("#customer-query-form").serializeObject();
+		var queryParams=$("#user-query-form").serializeObject();
+        queryParams=$.extend({},true,queryParams,{orgNo:orgNo});
 		 var newParam = {}
 		  for(var i in queryParams){
 			  if(queryParams[i]){
@@ -129,61 +132,40 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	*/
 	$("#user-query-form #userQuery").click(function(){
 		
-		var queryParams=$("#user-query-form").serializeObject();
-		
-		var newparam = {}
-		 for(var o in queryParams){
-			 if(queryParams[o]){
-				 newparam[o] = queryParams[o]
-			 }
-		}
-		$.ajax({
-			  type: 'POST',
-			  url: '/vote/queryusrinfo/list',
-			  data: JSON.stringify(newparam),
-			  contentType:'application/json',
-			  success: function(res){
-			      console.log(res)
-			      testData=res.page
+        table.reload('user-table',{
+            url:'/vote/queryusrinfo/list',
+            page:{
+                curr:1 //从第一页开始
+            },
+            method:'post',
+            where:{
+                queryStr:JSON.stringify(getParam())
+            },
+            contentType: 'application/json',
+            response: {
+                dataName: 'page'
+            },
+            done:function(res){
+                console.log(res)
+            }
 
-			      table.render({
-			  	    elem: '#userTable',
-			  	    //url:'custom.json',
-			  	    height:'260',
-			  	    width:"690",
-			  	    title: '用户数据表',
-			  	    cols: [[
-			  	    	{type: 'checkbox' },
-			  	      {field:'usrId', title:'用户账号', sort: true},
-			  	      {field:'usrNo', title:'用户编号(博彦)'},
-			  	      {field:'usrName', title:'用户名'}
-			  	    ]],
-			  	    data:testData,
-			  	    page: true
-			  	  });
-			      
-			      
-			      
-			      ;},
-			  dataType: "json"
-			})
-			
-			
-		console.log(queryParams)
-		/*table.reload('customerGroup-table',{
-			url:'form',
-			page:{
-				curr:1 //从第一页开始
-			},
-			method:'post',
-			where:{
-				queryStr:queryParams
-			},
-			done:function(res){
-				console.log(res)
-			}
-			
-		})*/
+        })
+
+
+        /*table.reload('customerGroup-table',{
+            url:'form',
+            page:{
+                curr:1 //从第一页开始
+            },
+            method:'post',
+            where:{
+                queryStr:queryParams
+            },
+            done:function(res){
+                console.log(res)
+            }
+
+        })*/
 		 /*table.reload('user-table',{
 				url:'/vote/queryusrinfo/list',
 				page:{

@@ -92,6 +92,12 @@ public class CodeDataServiceImpl extends AbstractBaseService  implements ICodeDa
 		key.setCodeNo(dataVo.getCodeNoBy().replaceAll(",", "").trim());
 		return dataMapper.selectByPrimaryKey(key);
 	}
+
+	//通过主键查询字典
+	@Override
+	public List<CodeData> getByCodeNo(String codeNo) {
+		return dataMapper.getByCodeNo(codeNo);
+	}
 	
 	//通过主键修改字典信息
 	@Transactional(propagation = Propagation.REQUIRED)
