@@ -51,7 +51,7 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 	}
 	
 	@Override
-	public <T> XSSFWorkbook getExcelByListBeanAndExcelCode(List<T> list, String fileCode,String sheetName) {
+	public  XSSFWorkbook getExcelByListBeanAndExcelCode(List<Map<String,Object>> list, String fileCode,String sheetName) {
 		// TODO Auto-generated method stub
 		
 		List<ExcelCellEntity> fixedList = getExcelByFileCode(fileCode,"01");
@@ -69,6 +69,27 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 					cell.setCellValue(cellEnt.getExcelDefaultValue());
 				}
 			}
+			
+			if(list==null||list.isEmpty()) {
+				return xwb;
+			}
+			
+			if(cellList!=null&!cellList.isEmpty()) {
+				int baseRow = cellList.get(0).getExcelCellRowNum();
+				for(int j=0;j<list.size();j++) {
+					Map<String,Object> item = list.get(j);
+					for(int k=0;k<fixedList.size();k++) {
+						ExcelCellEntity ent = fixedList.get(k);
+						if(item.get(ent.getExcelCellEnName())!=null) {
+							XSSFRow row = getRomBySheet(sheet,baseRow);
+							XSSFCell cell = getRomBySheet(row,ent.getExcelCellColNum());
+							cell.setCellValue(item.get(ent.getExcelCellEnName()).toString());
+						}
+					}
+					baseRow++;
+				}
+			}
+			
 			
 		return xwb;
 	}
