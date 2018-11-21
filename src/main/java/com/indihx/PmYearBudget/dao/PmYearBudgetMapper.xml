@@ -22,7 +22,7 @@
 		<result property="taxType" column="TAX_TYPE" />
 		<result property="incommingType" column="INCOMMING_TYPE" />
 		<result property="region" column="REGION" />
-		<result property="curency" column="CURENCY" />
+		<result property="currency" column="CURRENCY" />
 		<result property="grossProfitRate" column="GROSS_PROFIT_RATE" />
 		<result property="budgetJan" column="BUDGET_JAN" />
 		<result property="budgetFeb" column="BUDGET_FEB" />
@@ -79,7 +79,7 @@
 		<result property="taxType" column="TAX_TYPE" />
 		<result property="incommingType" column="INCOMMING_TYPE" />
 		<result property="region" column="REGION" />
-		<result property="curency" column="CURENCY" />
+		<result property="currency" column="CURRENCY" />
 		<result property="grossProfitRate" column="GROSS_PROFIT_RATE" />
 		<result property="budgetJan" column="BUDGET_JAN" />
 		<result property="budgetFeb" column="BUDGET_FEB" />
@@ -163,7 +163,7 @@
 			</if>
 			<if test="region != null and region!=''"> REGION = #{region} AND
 			</if>
-			<if test="curency != null and curency!=''"> CURENCY = #{curency} AND
+			<if test="currency != null and currency!=''"> CURRENCY = #{currency} AND
 			</if>
 			<if test="grossProfitRate != null and grossProfitRate!=''"> GROSS_PROFIT_RATE = #{grossProfitRate} AND
 			</if>
@@ -267,7 +267,7 @@
 		</if>
 		<if test="region != null and region!=''"> ,REGION
 		</if>
-		<if test="curency != null and curency!=''"> ,CURENCY
+		<if test="currency != null and currency!=''"> ,CURRENCY
 		</if>
 		<if test="grossProfitRate != null and grossProfitRate!=''"> ,GROSS_PROFIT_RATE
 		</if>
@@ -366,7 +366,7 @@
 		</if>
 		<if test="region != null and region!=''"> ,#{region}
 		</if>
-		<if test="curency != null and curency!=''"> ,#{curency}
+		<if test="currency != null and currency!=''"> ,#{currency}
 		</if>
 		<if test="grossProfitRate != null and grossProfitRate!=''"> ,#{grossProfitRate}
 		</if>
@@ -451,7 +451,7 @@
 			<if test="taxType != null and taxType!=''">TAX_TYPE = #{taxType},</if>
 			<if test="incommingType != null and incommingType!=''">INCOMMING_TYPE = #{incommingType},</if>
 			<if test="region != null and region!=''">REGION = #{region},</if>
-			<if test="curency != null and curency!=''">CURENCY = #{curency},</if>
+			<if test="currency != null and currency!=''">CURRENCY = #{currency},</if>
 			<if test="grossProfitRate != null and grossProfitRate!=''">GROSS_PROFIT_RATE = #{grossProfitRate},</if>
 			<if test="budgetJan != null and budgetJan!=''">BUDGET_JAN = #{budgetJan},</if>
 			<if test="budgetFeb != null and budgetFeb!=''">BUDGET_FEB = #{budgetFeb},</if>
@@ -530,7 +530,7 @@
 			</if>
 			<if test="region != null and region!=''"> REGION = #{region} AND
 			</if>
-			<if test="curency != null and curency!=''"> CURENCY = #{curency} AND
+			<if test="currency != null and currency!=''"> CURRENCY = #{currency} AND
 			</if>
 			<if test="grossProfitRate != null and grossProfitRate!=''"> GROSS_PROFIT_RATE = #{grossProfitRate} AND
 			</if>

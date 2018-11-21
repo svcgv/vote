@@ -97,18 +97,21 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	private BigDecimal	curYearRev;
 	private BigDecimal	lastRev;
 	private BigDecimal	afterTax;
-
+	private String revRecognitionMethod;
 	private String	revenueSource;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long	custManagerId;
+
 	/**
 	 * $column.comments
 	 */
 
 	private String	custManagerName;
+
 	/**
 	 * $column.comments
 	 */
@@ -128,7 +131,7 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	 * $column.comments
 	 */
 
-	private String	curency;
+	private String	currency;
 	/**
 	 * $column.comments
 	 */
@@ -174,13 +177,11 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	 */
 
 	private long	budgetAug;
-
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetSep;
-
 	/**
 	 * $column.comments
 	 */
@@ -192,11 +193,13 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	 */
 
 	private long	budgetNov;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long	budgetDec;
+
 	/**
 	 * $column.comments
 	 */
@@ -232,11 +235,9 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	 */
 
 	private String	remark;
-
 	public BigDecimal getAfterTax() {
 		return this.afterTax;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -391,7 +392,7 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	 * 获取：${column.comments}
 	 */
 	public String getCurency() {
-		return this.curency;
+		return this.currency;
 	}
 
 	public BigDecimal getCurYearRev() {
@@ -523,6 +524,10 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 
 	public String getReviewStatus() {
 		return this.reviewStatus;
+	}
+
+	public String getRevRecognitionMethod() {
+		return this.revRecognitionMethod;
 	}
 
 	/**
@@ -718,8 +723,8 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	/**
 	 * 设置：${column.comments}
 	 */
-	public void setCurency(String curency) {
-		this.curency = curency;
+	public void setCurency(String currency) {
+		this.currency = currency;
 	}
 
 	public void setCurYearRev(BigDecimal curYearRev) {
@@ -852,6 +857,10 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 
 	public void setReviewStatus(String reviewStatus) {
 		this.reviewStatus = reviewStatus;
+	}
+
+	public void setRevRecognitionMethod(String revRecognitionMethod) {
+		this.revRecognitionMethod = revRecognitionMethod;
 	}
 
 	/**

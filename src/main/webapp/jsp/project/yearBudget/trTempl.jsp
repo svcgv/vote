@@ -186,12 +186,12 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="contract" class="layui-input form-control" />
+		     		<input type="text" name="contractCode" class="layui-input form-control" />
 	      		 </div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="contract" class="layui-input form-control" />
+		     		<input type="text" name="contractCode" class="layui-input form-control" />
 	      		 </div>
      		</div>
      	</div>

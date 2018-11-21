@@ -84,7 +84,7 @@
 			      <td>产品列表</td>
 			      <td>收入来源(Revenue source)</td>
 			      <td>公司实体(Entity)</td>
-			      <td>合同编码(Contract)</td>
+			      <td>合同编码(contractCode)</td>
 			      <td>PO#/SOW#</td>
 			      <td>客户经理(Owner)</td>
 			      <td>税种</td>
@@ -260,7 +260,7 @@
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="contract" class="layui-input form-control" />
+						     	<input type="text" name="contractCode" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -603,12 +603,12 @@
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="contract" class="layui-input form-control" />
+						     	<input type="text" name="contractCode" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="contract" class="layui-input form-control" />
+						     	<input type="text" name="contractCode" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -842,7 +842,7 @@
 </script>
 <script>
 //客户收入汇总 初始化值 全局变量
-var customerData=[{'custCode':'','custName':'','totalRev':'0'}];
+var customerData=[{'custCode':'','custName':'','budgetSum':'0'}];
 var table2=null;
 	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
@@ -948,7 +948,7 @@ var table2=null;
 		            {field: 'custName', title: '客户（Clients）', width: 180, rowspan: 2,templet: function(d){
 		            	return '<div><span custCode='+ d.custCode +'>'+d.custName+'</span></div>'
 		            }} 
-		           ,{field: 'totalRev', title: 'Total Rev', width: 100, rowspan: 2}
+		           ,{field: 'budgetSum', title: 'Total Rev', width: 100, rowspan: 2}
 		           ,{align: 'center', title: 'Revenue', colspan: 12} //colspan即横跨的单元格数，这种情况下不用设置field和width
 		         ], [
 		            	{field: 'jan', title: 'Jan',templet:function(d){ var num=typeof d.jan =="undefined" ? '':d.jan;  return '<input value="'+num+'" class="layui-input layui-table-iptMoney"/>'}}
@@ -984,7 +984,7 @@ var table2=null;
 			 var _val=$.trim($(this).val()) == "" ? 0 :parseFloat($(this).val());
 			 _total+=_val;
 		 });
-		 $(this).parents("tr").find("td[data-field='totalRev']").children("div").text(_total);
+		 $(this).parents("tr").find("td[data-field='budgetSum']").children("div").text(_total);
 		 // save data
 		 var field=$(this).parents("td").attr("data-field");
 		 var obj={}

@@ -103,7 +103,7 @@ min-width:90px;
 			      <td rowspan="2">年度</td>
 			      <td rowspan="2">收入来源(Revenue source)</td>
 			      <td rowspan="2">公司实体(Entity)</td>
-			      <td rowspan="2">合同编码(Contract)</td>
+			      <td rowspan="2">合同编码(contractCode)</td>
 			      <td rowspan="2">PO#/SOW#</td>
 			      <td rowspan="2">客户经理(Owner)</td>
 			      <td rowspan="2">税种</td>
@@ -976,7 +976,7 @@ layui.use(['layer', 'form','laydate'], function(){
 		 var _val=$.trim($(this).val()) == "" ? 0 :parseFloat($(this).val());
 		 _total+=_val;
 	 });
-	 $(this).parents("tr").find("td[data-field='totalRev']").children("div").text(_total);
+	 $(this).parents("tr").find("td[data-field='budgetSum']").children("div").text(_total);
 	 // save data
 	 var field=$(this).parents("td").attr("data-field");
 	 var obj={}

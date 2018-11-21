@@ -125,9 +125,9 @@
 		    </div>
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">合同编码(Contract)：</label>
+		      <label class="layui-form-label">合同编码(contractCode)：</label>
 		      <div class="layui-input-inline">
-		       <input type="text" name="contract"  autocomplete="off" class="layui-input form-control">
+		       <input type="text" name="contractCode"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
@@ -235,7 +235,7 @@
 </script>
 <script>
 //客户收入汇总 初始化值 全局变量
-var customerData=[{'custCode':'','custName':'','totalRev':'0'}];
+var customerData=[{'custCode':'','custName':'','budgetSum':'0'}];
 var table2=null;
 	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
@@ -293,7 +293,7 @@ var table2=null;
 	  }
 	  // 客户收入汇总（Clients Summary）table重绘
 	  table2.reload('custRevSummaryTableID',{
-					data:[{'custCode':'','custName':'','totalRev':'0'}]
+					data:[{'custCode':'','custName':'','budgetSum':'0'}]
 			})
   
   });
@@ -321,7 +321,7 @@ var table2=null;
 		var _custName=$.trim($(this).val())
 		if(_custName != ""){
 			table2.reload('custRevSummaryTableID',{
-				data:[{'custCode':'','custName':_custName,'totalRev':'0'}]
+				data:[{'custCode':'','custName':_custName,'budgetSum':'0'}]
 			})
 		}
 	})
@@ -367,7 +367,7 @@ var table2=null;
 		            {field: 'custName', title: '客户（Clients）', width: 180, rowspan: 2,templet: function(d){
 		            	return '<div><span custCode='+ d.custCode +'>'+d.custName+'</span></div>'
 		            }} 
-		           ,{field: 'totalRev', title: 'Total Rev', width: 100, rowspan: 2}
+		           ,{field: 'budgetSum', title: 'Total Rev', width: 100, rowspan: 2}
 		           ,{align: 'center', title: 'Revenue', colspan: 12} //colspan即横跨的单元格数，这种情况下不用设置field和width
 		         ], [
 		            	{field: 'jan', title: 'Jan',templet:function(d){ var num=typeof d.jan =="undefined" ? '':d.jan;  return '<input value="'+num+'" class="layui-input layui-table-iptMoney"/>'}}
@@ -403,7 +403,7 @@ var table2=null;
 			 var _val=$.trim($(this).val()) == "" ? 0 :parseFloat($(this).val());
 			 _total+=_val;
 		 });
-		 $(this).parents("tr").find("td[data-field='totalRev']").children("div").text(_total);
+		 $(this).parents("tr").find("td[data-field='budgetSum']").children("div").text(_total);
 		 // save data
 		 var field=$(this).parents("td").attr("data-field");
 		 var obj={}

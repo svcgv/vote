@@ -103,7 +103,7 @@
 
 <script type="text/javascript">
 var testData=[{
-	'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contract':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'一月收入1千万','feb':'一月收入3千万'
+	'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contractCode':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'一月收入1千万','feb':'一月收入3千万'
 		
 	}]
 var cols = [
@@ -138,16 +138,16 @@ var cols = [
 	      {field:'productList', title:'产品列表', width:120,rowspan: 2},
 	      {field:'revenueSource', title:'收入来源(Revenue source)',rowspan: 2},
 	      {field:'entity', title:'实体(Entity)',rowspan: 2},
-	      {field:'contract', title:'合同编码(Contract)',rowspan: 2},
+	      {field:'contractCode', title:'合同编码(contractCode)',rowspan: 2},
 	      {field:'poSow', title:'PO#/SOW#',rowspan: 2},
-	      {field:'owner', title:'客户经理(Owner)',rowspan: 2},
+	      {field:'custManagerName', title:'客户经理(Owner)',rowspan: 2},
 	      {field:'taxType', title:'税种',rowspan: 2},
 	      {field:'revRecognitionMethod', title:'Rev Recognition Method',rowspan: 2},
 	      {field:'region', title:'区域(Region)',rowspan: 2},
 	      {field:'currency', title:'结算币种(Currency)',rowspan: 2},
 	      {field:'taxRate', title:'税率(%)',rowspan: 2},
 	      {field:'grossProfitRate', title:'毛利率(%)',rowspan: 2},
-	      {field:'totalRev', title:'Total Rev',rowspan: 2},
+	      {field:'budgetSum', title:'Total Rev',rowspan: 2},
 	      {field:'afterTax',title:"税后合计",rowspan: 2},
 	      {align: 'center', title: 'Revenue', colspan: 12},
      	  {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
@@ -245,8 +245,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    cols: cols,
 	    cellMinWidth:'90',
 	    data:[
-			{'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contract':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'1111','feb':'2222'},
-			{'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contract':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'111','feb':'222'}
+			{'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contractCode':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'1111','feb':'2222'},
+			{'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contractCode':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'111','feb':'222'}
 	    ],
 	    page: true
 	  });
