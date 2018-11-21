@@ -26,12 +26,16 @@
  */
 function getCodeValue(key,a)
 {
+    var flag = 0;
     $.each(a, function(index,value) {
         if (key==value.codeKey) {
-            key=value.codeVal;
-            return key;
+        	key=value.codeVal;
+            flag=1
         }
     });
-    key = '';
-    return key;
+    if(flag==1){
+    	return key
+    }else{
+    	return '';
+    }
 };

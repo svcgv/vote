@@ -37,7 +37,9 @@
 			       <div class="layui-input-inline" id="chosed-customer-hook" style="border:#e6e6e6 solid 1px;height:32px;overflow-y:auto;width:460px;">
 			     	 <span class="customer-list">
 			    		<span class="customerItem" orgId="${group.ownerOrgId}" orgName="${group.ownerOrgName}">${group.ownerOrgName}</span>
+<c:if test="${group.ownerOrgName !=null}">
 			    		<span onclick="$(this).parent().remove()" style="line-height:16px;"><i class="layui-icon layui-icon-close-fill"></i></span>
+</c:if>
 			    	</span>
 			       </div>
 		     </div>
@@ -72,13 +74,18 @@ $(function(){
 		  		width:"400"
 		 	 });
 		});
-		$("#addUser-hook").on("click",function(){
-		  	$.openWindow({
-		  		url:'user',
-		  		title:"选择团队成员",
-		  		width:"700"
-		 	 });
-		});
+        $("#addUser-hook").on("click",function(){
+            var orgId=$("#form-customer-hook #chosed-customer-hook").children(".customer-list").children(".customerItem").attr("orgId");
+            if($.trim(orgId) ==''){
+                layer.msg("请先选择机构");
+                return false;
+            }
+            $.openWindow({
+                url:'user?orgId='+orgId,
+                title:"选择团队成员",
+                width:"700"
+            });
+        });
 		var win=$("#form-customer-hook").getWindow();
 		// 保存
 		$("#form-customer-hook #customGroup-add-hook").click(function(){
@@ -90,7 +97,11 @@ $(function(){
 				layer.msg("请输入团队名称");
 				return false;
 			}
-			
+            var orgId=$("#form-customer-hook #chosed-customer-hook").children(".customer-list").children(".customerItem").attr("orgId");
+            if($.trim(orgId) ==''){
+                layer.msg("请先选择机构");
+                return false;
+            }
 			var getChosedCustomer=$("#form-customer-hook #chosed-customer-hook");
 			var ret=[];
 			getChosedCustomer.children(".customer-list").each(function(){
@@ -118,8 +129,10 @@ $(function(){
 			param.groupId=customerGroupID
 			param.groupCode=customerGroupCode
 			param.users=ret2
-			param.orgNo=ret[0].orgId
-			param.orgName=ret[0].orgName
+            if(ret.length>0){
+                param.orgNo=ret[0].orgId
+                param.orgName=ret[0].orgName
+            }
 			
 			$.ajax({
 				type:'POST',
@@ -127,12 +140,13 @@ $(function(){
 				data:JSON.stringify(param),
 				contentType:'application/json',
 				success:function(res){
-					location.reload();
-					layer.msg("新增成功",{icon:1});
-					win.close();
+                    layer.msg("修改成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
+                        win.close();
+                        location.reload();
+                    });
 				},
 				error:function(){
-					layer.msg("新增失败",{icon:5});
+					layer.msg("修改失败",{icon:5});
 					win.close();
 				}
 				

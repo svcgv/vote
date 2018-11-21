@@ -65,9 +65,6 @@ public class PmProductInfoServiceImpl implements PmProductInfoService {
    	}
 
    	public List<PmProductInfoEntity> queryList(Map<String, Object> entity){
-   		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
-   			entity.put("isDelete", "00");
-   		}
    		return pmProductInfoMapper.queryList(entity);
    	}
 }

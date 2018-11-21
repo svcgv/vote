@@ -77,12 +77,16 @@ public class PmSaleGroupInfoController {
     @RequestMapping(value="/save",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> save(@RequestBody Map<String,Object> map ,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
-    	long orgNo = Long.parseLong(map.get("orgNo").toString());
-    	String orgName = map.get("orgName").toString();
-    	PmSaleGroupInfoEntity pmSaleGroupInfo = new PmSaleGroupInfoEntity();
-    	pmSaleGroupInfo.setGroupName((String)map.get("groupName"));
-    	pmSaleGroupInfo.setOwnerOrgId(orgNo);
-    	pmSaleGroupInfo.setOwnerOrgName(orgName);
+		PmSaleGroupInfoEntity pmSaleGroupInfo = new PmSaleGroupInfoEntity();
+		if(map.get("orgNo")!=null){
+			long orgNo = Long.parseLong(map.get("orgNo").toString());
+			pmSaleGroupInfo.setOwnerOrgId(orgNo);
+		}
+		if(map.get("orgName")!=null){
+			String orgName = map.get("orgName").toString();
+			pmSaleGroupInfo.setOwnerOrgName(orgName);
+		}
+		pmSaleGroupInfo.setGroupName((String)map.get("groupName"));
     	pmSaleGroupInfo.setCreatorId(user.getUsrId());
     	pmSaleGroupInfo.setCreateTime(DateUtil.formatFromDB(DateUtil.getSysDate()));
     	String code = "XS"+DateUtil.getSysDate()+RandomUtil.generateString(4);
@@ -151,18 +155,22 @@ public class PmSaleGroupInfoController {
     @RequestMapping(value="/update",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> update(@RequestBody Map<String,Object> param,HttpSession session){
     	UsrInfo	user= (UsrInfo)session.getAttribute(InitSysConstants.USER_SESSION);
-    	//组装团队信息参数
-    	long groupId = Long.parseLong(param.get("groupId").toString());
-    	String groupCode = param.get("groupCode").toString();
-    	long orgNo = Long.parseLong(param.get("orgNo").toString());
-    	String orgName = param.get("orgName").toString();
-    	PmSaleGroupInfoEntity pmSaleGroupInfo = new PmSaleGroupInfoEntity();
+		PmSaleGroupInfoEntity pmSaleGroupInfo = new PmSaleGroupInfoEntity();
+		//组装团队信息参数
+		long groupId = Long.parseLong(param.get("groupId").toString());
+		String groupCode = param.get("groupCode").toString();
+		if(param.get("orgNo")!=null){
+			long orgNo = Long.parseLong(param.get("orgNo").toString());
+			pmSaleGroupInfo.setOwnerOrgId(orgNo);
+		}
+		if(param.get("orgName")!=null){
+			String orgName = param.get("orgName").toString();
+			pmSaleGroupInfo.setOwnerOrgName(orgName);
+		}
     	pmSaleGroupInfo.setGroupCode(groupCode);
     	pmSaleGroupInfo.setGroupId(groupId);
     	pmSaleGroupInfo.setModifier(user.getUsrId());
     	pmSaleGroupInfo.setModifyTime(DateUtil.getCurrentTimeMill());
-    	pmSaleGroupInfo.setOwnerOrgId(orgNo);
-    	pmSaleGroupInfo.setOwnerOrgName(orgName);
     	pmSaleGroupInfo.setGroupName(param.get("groupName").toString());
         pmSaleGroupInfoService.update(pmSaleGroupInfo);//全部更新
         //通过groupCode删掉团队成员信息

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/resources/admincp/layouts/main.jsp"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <body>
+<script src="${ctx }/common/queryCode?productType=PRODUCT_TYPE" type="text/javascript"></script>
 <style>
 .layui-form-label{width:110px!important;padding:8px 5px;}
 </style>
@@ -176,7 +178,9 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'developmentDeptName', title:'研发部门名称', width:230},
 	  	      {field:'developmentManagerName', title:'研发负责人名称'},
 	  	      {field:'startSaleDate', title:'开始销售日期'},
-	  	      {field:'productType', title:'产品类型'},
+	  	      {field:'productType', title:'产品类型',templet:function(d){
+                  return getCodeValue(d.productType,productType);
+              }},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'90',

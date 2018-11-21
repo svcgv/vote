@@ -112,7 +112,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	  {type: 'checkbox', fixed: 'left'},
 	  	      {field:'groupCode', title:'团队编号',fixed: 'left', width:110, sort: true},
 	  	      {field:'groupName', title:'团队名称', width:230},
-	  	      {field:'ownerOrgId', title:'所属机构编号', width:230},
 	  	      {field:'ownerOrgName', title:'所属机构名称', width:230},
 	  	      {field:'createTime', title:'创建日期'},
             {field: 'isDelete', title: '是否有效',templet:function(d){

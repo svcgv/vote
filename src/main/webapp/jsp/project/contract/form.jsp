@@ -117,9 +117,9 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">公司代码：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="companyCode"  autocomplete="off" class="layui-input form-control">
+		          <input type="text" name="companyCode" readonly="readonly" autocomplete="off" class="layui-input form-control">
 		      </div>
-		       <span class="f-placeholder"></span>
+				<button type="button"  class="layui-btn layui-btn-sm" id="companyQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		  </div>
 	     <div class="layui-form-item" style="margin-bottom:0px;">
@@ -389,6 +389,14 @@ $(function(){
 		 });
 		  
 	  });
+        $("#contract-addForm-hook #companyQuery-form").click(function(){
+            $.openWindow({
+                url:'company?act=form',
+                title:"选择公司代码",
+                width:"750"
+            });
+
+        });
 
         // 选择项目
         $("#contract-addForm-hook #projectQuery-hook").on("click",function(){
