@@ -91,7 +91,7 @@ public class YearBudgetController extends AbstractBaseController {
 				List<PmYearBudgetEntity> pmYearBudgetTempList = new ArrayList<PmYearBudgetEntity>();
 
 				for (PmYearBudgetEntity yearBudgetEntity : pmYearBudget2) {
-					if (sapCode.equalsIgnoreCase(yearBudgetEntity.getSapCode())) {
+					if (sapCode!=null && sapCode.equalsIgnoreCase(yearBudgetEntity.getSapCode())) {
 						pmYearBudgetTempList.add(yearBudgetEntity);
 					}
 				}

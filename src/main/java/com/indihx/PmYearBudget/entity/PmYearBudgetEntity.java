@@ -1,6 +1,7 @@
 package com.indihx.PmYearBudget.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import com.indihx.BaseEntity;
 
@@ -12,20 +13,19 @@ import com.indihx.BaseEntity;
  * @date 2018-11-18 10:35:36
  */
 public class PmYearBudgetEntity extends BaseEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * $column.comments
 	 */
 	private String budgetYear;
 
-	private String yearBudgetCode;
-	private String reviewStatus;
+	private String	yearBudgetCode;
+	private String	reviewStatus;
 	/**
 	 * $column.comments
 	 */
 
-	private String isNewCust;
+	private String	isNewCust;
 
 	/**
 	 * $column.comments
@@ -43,182 +43,199 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	 * $column.comments
 	 */
 
-	private String projectName;
+	private String	projectName;
 	/**
 	 * $column.comments
 	 */
 
-	private String wbs;
+	private String	wbs;
 	/**
 	 * $column.comments
 	 */
 
-	private String projectType;
+	private String	projectType;
 	/**
 	 * $column.comments
 	 */
 
-	private String revebueSource;
+	private String	revebueSource;
 	/**
 	 * $column.comments
 	 */
 
-	private String companyEntityName;
+	private String	companyEntityName;
 	/**
 	 * $column.comments
 	 */
 
-	private String companyCode;
+	private String	companyCode;
 	/**
 	 * $column.comments
 	 */
 
-	private long contractId;
+	private long	contractId;
 	/**
 	 * $column.comments
 	 */
 
-	private String contractCode;
+	private String	contractCode;
 	/**
 	 * $column.comments
 	 */
 
-	private String contractName;
+	private String	contractName;
+	/**
+	 * $column.comments
+	 */
+	private String	poSow;
+
+	private String		productList;
+	private BigDecimal	taxes;
+	private BigDecimal	taxRate;
+	private BigDecimal	contractMoney;
+	private BigDecimal	manyYearRev;
+	private BigDecimal	curYearRev;
+	private BigDecimal	lastRev;
+	private BigDecimal	afterTax;
+
+	private String	revenueSource;
 	/**
 	 * $column.comments
 	 */
 
-	private String revenueSource;
+	private long	custManagerId;
 	/**
 	 * $column.comments
 	 */
 
-	private long custManagerId;
+	private String	custManagerName;
 	/**
 	 * $column.comments
 	 */
 
-	private String custManagerName;
+	private String	taxType;
 	/**
 	 * $column.comments
 	 */
 
-	private String taxType;
+	private String	incommingType;
 	/**
 	 * $column.comments
 	 */
 
-	private String incommingType;
+	private String	region;
 	/**
 	 * $column.comments
 	 */
 
-	private String region;
+	private String	curency;
 	/**
 	 * $column.comments
 	 */
 
-	private String curency;
+	private long	grossProfitRate;
 	/**
 	 * $column.comments
 	 */
 
-	private long grossProfitRate;
+	private long	budgetJan;
 	/**
 	 * $column.comments
 	 */
 
-	private long budgetJan;
+	private long	budgetFeb;
 	/**
 	 * $column.comments
 	 */
 
-	private long budgetFeb;
+	private long	budgetMar;
 	/**
 	 * $column.comments
 	 */
 
-	private long budgetMar;
+	private long	budgetApr;
 	/**
 	 * $column.comments
 	 */
 
-	private long budgetApr;
+	private long	budgetMay;
 	/**
 	 * $column.comments
 	 */
 
-	private long budgetMay;
+	private long	budgetJun;
 	/**
 	 * $column.comments
 	 */
 
-	private long budgetJun;
+	private long	budgetJul;
 	/**
 	 * $column.comments
 	 */
 
-	private long budgetJul;
-	/**
-	 * $column.comments
-	 */
+	private long	budgetAug;
 
-	private long budgetAug;
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetSep;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetOct;
+
 	/**
 	 * $column.comments
 	 */
 
-	private long budgetNov;
+	private long	budgetNov;
 	/**
 	 * $column.comments
 	 */
 
-	private long budgetDec;
+	private long	budgetDec;
 	/**
 	 * $column.comments
 	 */
 
-	private long budgetSum;
+	private long	budgetSum;
 	/**
 	 * $column.comments
 	 */
 
-	private long creatorId;
+	private long	creatorId;
 	/**
 	 * $column.comments
 	 */
 
-	private String createTime;
+	private String	createTime;
 	/**
 	 * $column.comments
 	 */
 
-	private long modifier;
+	private long	modifier;
 	/**
 	 * $column.comments
 	 */
 
-	private String modifyTime;
+	private String	modifyTime;
 	/**
 	 * $column.comments
 	 */
 
-	private String isDelete;
+	private String	isDelete;
 	/**
 	 * $column.comments
 	 */
 
-	private String remark;
+	private String	remark;
+
+	public BigDecimal getAfterTax() {
+		return this.afterTax;
+	}
 
 	/**
 	 * 获取：${column.comments}
@@ -343,6 +360,10 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 		return this.contractId;
 	}
 
+	public BigDecimal getContractMoney() {
+		return this.contractMoney;
+	}
+
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -371,6 +392,10 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	 */
 	public String getCurency() {
 		return this.curency;
+	}
+
+	public BigDecimal getCurYearRev() {
+		return this.curYearRev;
 	}
 
 	/**
@@ -422,6 +447,14 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 		return this.isNewCust;
 	}
 
+	public BigDecimal getLastRev() {
+		return this.lastRev;
+	}
+
+	public BigDecimal getManyYearRev() {
+		return this.manyYearRev;
+	}
+
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -436,6 +469,14 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	@Override
 	public String getModifyTime() {
 		return this.modifyTime;
+	}
+
+	public String getPoSow() {
+		return this.poSow;
+	}
+
+	public String getProductList() {
+		return this.productList;
 	}
 
 	/**
@@ -491,6 +532,14 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 		return this.sapCode;
 	}
 
+	public BigDecimal getTaxes() {
+		return this.taxes;
+	}
+
+	public BigDecimal getTaxRate() {
+		return this.taxRate;
+	}
+
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -510,6 +559,10 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	 */
 	public String getYearBudgetCode() {
 		return this.yearBudgetCode;
+	}
+
+	public void setAfterTax(BigDecimal afterTax) {
+		this.afterTax = afterTax;
 	}
 
 	/**
@@ -635,6 +688,10 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 		this.contractId = contractId;
 	}
 
+	public void setContractMoney(BigDecimal contractMoney) {
+		this.contractMoney = contractMoney;
+	}
+
 	/**
 	 * 设置：${column.comments}
 	 */
@@ -663,6 +720,10 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	 */
 	public void setCurency(String curency) {
 		this.curency = curency;
+	}
+
+	public void setCurYearRev(BigDecimal curYearRev) {
+		this.curYearRev = curYearRev;
 	}
 
 	/**
@@ -715,6 +776,14 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 		this.isNewCust = isNewCust;
 	}
 
+	public void setLastRev(BigDecimal lastRev) {
+		this.lastRev = lastRev;
+	}
+
+	public void setManyYearRev(BigDecimal manyYearRev) {
+		this.manyYearRev = manyYearRev;
+	}
+
 	/**
 	 * 设置：${column.comments}
 	 */
@@ -729,6 +798,14 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	@Override
 	public void setModifyTime(String modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public void setPoSow(String poSow) {
+		this.poSow = poSow;
+	}
+
+	public void setProductList(String productList) {
+		this.productList = productList;
 	}
 
 	/**
@@ -782,6 +859,14 @@ public class PmYearBudgetEntity extends BaseEntity implements Serializable {
 	 */
 	public void setSapCode(String sapCode) {
 		this.sapCode = sapCode;
+	}
+
+	public void setTaxes(BigDecimal taxes) {
+		this.taxes = taxes;
+	}
+
+	public void setTaxRate(BigDecimal taxRate) {
+		this.taxRate = taxRate;
 	}
 
 	/**

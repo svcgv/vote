@@ -302,7 +302,7 @@ min-width:90px;
 	<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
 			      		<div class="layui-input-inline item" style="margin:5px;">
 			      			<%--<span>${app2.poSow}</span>--%>
-			      			<span>。。。</span>
+			      			<span>${app2.poSow}</span>
 			      			<input type="hidden" name="poSow" value="" />
 			      		</div>
 	</c:forEach>
@@ -332,15 +332,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px;">
 			      			<span>A</span>
-			      			<input type="hidden" name="taxes" value="A" />
+			      			<input type="hidden" name="taxType" value="A" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px;">
 			      			<span>B</span>
-			      			<input type="hidden"  name="taxes" value="B" />
+			      			<input type="hidden"  name="taxType" value="B" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<select name="taxes" lay-verify="required" lay-filter="" class="form-control">
+						     	<select name="taxType" lay-verify="required" lay-filter="" class="form-control">
 						        	<option value="">请选择</option>
 						        	<option value="01" selected>A</option>
 						        	<option value="02">B</option>
@@ -440,15 +440,15 @@ min-width:90px;
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px;">
 			      			<span>12%</span>
-			      			<input type="hidden"  name="grossRate" value="12%" />
+			      			<input type="hidden"  name="grossProfitRate" value="12%" />
 			      		</div>
 			      		<div class="layui-input-inline item" style="margin:5px;">
 			      			<span>13%</span>
-			      			<input type="hidden"  name="grossRate" value="13%" />
+			      			<input type="hidden"  name="grossProfitRate" value="13%" />
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="grossRate" class="layui-input form-control" />
+						     	<input type="text" name="grossProfitRate" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -1027,8 +1027,11 @@ layui.use(['layer', 'form','laydate'], function(){
 							})
 							var key1="productNames";
 							var key2="productIds";
-							
+							if(!arr1[k])
+								arr1[k]={}
 							arr1[k][key1]=names.join(",");
+							
+							
 							arr1[k][key2]=ids.join(",");
 						});
 						
@@ -1040,6 +1043,8 @@ layui.use(['layer', 'form','laydate'], function(){
 							var key=$(this).find("input,select").attr("name");
 //							res3[key]=val;
 							console.log(key,val,k,j);
+							if(!arr1[k])
+								arr1[k]={}
 							arr1[k][key]=val;
 							arr1[k]["custId"]=custId;
 							arr1[k]["custName"]=custName;

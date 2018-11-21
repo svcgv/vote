@@ -16,7 +16,7 @@
 		<result property="contractId" column="CONTRACT_ID" />
 		<result property="contractCode" column="CONTRACT_CODE" />
 		<result property="contractName" column="CONTRACT_NAME" />
-		<result property="revenueSource" column="REVENUE_SOURCE" />
+		<result property="poSow" column="PO_SOW" />
 		<result property="custManagerId" column="CUST_MANAGER_ID" />
 		<result property="custManagerName" column="CUST_MANAGER_NAME" />
 		<result property="taxType" column="TAX_TYPE" />
@@ -44,6 +44,15 @@
 		<result property="isDelete" column="IS_DELETE" />
 		<result property="remark" column="REMARK" />
 		<result property="reviewStatus" column="REVIEW_STATUS" />
+		<result property="budgetYear" column="BUDGET_YEAR" />
+		<result property="revRecognitionMethod" column="REV_RECOGNITION_METHOD" />
+		<result property="productList" column="PRODUCT_LIST" />
+		<result property="taxRate" column="TAX_RATE" />
+		<result property="contractMoney" column="CONTRACT_MONEY" />
+		<result property="manyYearRev" column="MANY_YEAR_REV" />
+		<result property="curYearRev" column="CUR_YEAR_REV" />
+		<result property="lastRev" column="LAST_REV" />
+		<result property="afterTax" column="AFTER_TAX" />
 	</resultMap>
 	<resultMap type="java.util.Map" id="pmYearBudgetGroupHashMap">
 		<result property="sapCode" column="SAP_CODE" />
@@ -64,7 +73,7 @@
 		<result property="contractId" column="CONTRACT_ID" />
 		<result property="contractCode" column="CONTRACT_CODE" />
 		<result property="contractName" column="CONTRACT_NAME" />
-		<result property="revenueSource" column="REVENUE_SOURCE" />
+		<result property="poSow" column="PO_SOW" />
 		<result property="custManagerId" column="CUST_MANAGER_ID" />
 		<result property="custManagerName" column="CUST_MANAGER_NAME" />
 		<result property="taxType" column="TAX_TYPE" />
@@ -92,6 +101,15 @@
 		<result property="isDelete" column="IS_DELETE" />
 		<result property="remark" column="REMARK" />
 		<result property="reviewStatus" column="REVIEW_STATUS" />
+		<result property="budgetYear" column="BUDGET_YEAR" />
+		<result property="revRecognitionMethod" column="REV_RECOGNITION_METHOD" />
+		<result property="productList" column="PRODUCT_LIST" />
+		<result property="taxRate" column="TAX_RATE" />
+		<result property="contractMoney" column="CONTRACT_MONEY" />
+		<result property="manyYearRev" column="MANY_YEAR_REV" />
+		<result property="curYearRev" column="CUR_YEAR_REV" />
+		<result property="lastRev" column="LAST_REV" />
+		<result property="afterTax" column="AFTER_TAX" />
 	</resultMap>
 	<select id="queryObject" resultMap="pmYearBudgetMap"> select * from PM_YEAR_BUDGET where YEAR_BUDGET_CODE = #{value}
 	</select>
@@ -99,8 +117,10 @@
 	<select id="querySapCodeCount" resultMap="pmYearBudgetGroupHashMap"> SELECT SAP_CODE, CUST_NAME, "COUNT" (SAP_CODE) AS CUST_COUNT FROM
 		PM_YEAR_BUDGET WHERE CREATOR_ID = #{value} GROUP BY SAP_CODE,CUST_NAME
 	</select>
-	<select id="queryProjectSapCodeCount" resultMap="pmYearBudgetGroupHashMap"> SELECT CUST_SAP_CODE SAP_CODE, CUST_NAME, "COUNT" (CUST_SAP_CODE) AS CUST_COUNT FROM
-		PM_PROJECT_INFO WHERE CUST_MANAGER_ID = #{userId} AND IS_DELETE='00' AND FINISH_PROJECT_TIME  <![CDATA[<=]]>  #{finishProjectEndTime}  GROUP BY CUST_SAP_CODE,CUST_NAME
+	<select id="queryProjectSapCodeCount" resultMap="pmYearBudgetGroupHashMap">
+		SELECT CUST_SAP_CODE SAP_CODE, CUST_NAME, "COUNT" (CUST_SAP_CODE) AS CUST_COUNT FROM PM_PROJECT_INFO WHERE
+		CUST_MANAGER_ID = #{userId} AND IS_DELETE='00' AND CUST_SAP_CODE is NOT null AND FINISH_PROJECT_TIME <![CDATA[<=]]>
+		#{finishProjectEndTime} GROUP BY CUST_SAP_CODE,CUST_NAME 
 	</select>
 	<select id="queryList" resultMap="pmYearBudgetMap">
 		select * from PM_YEAR_BUDGET
@@ -131,7 +151,7 @@
 			</if>
 			<if test="contractName != null and contractName!=''"> CONTRACT_NAME = #{contractName} AND
 			</if>
-			<if test="revenueSource != null and revenueSource!=''"> REVENUE_SOURCE = #{revenueSource} AND
+			<if test="poSow != null and poSow!=''"> PO_SOW = #{poSow} AND
 			</if>
 			<if test="custManagerId != null and custManagerId!=''"> CUST_MANAGER_ID = #{custManagerId} AND
 			</if>
@@ -183,9 +203,27 @@
 			</if>
 			<if test="isDelete != null and isDelete!=''"> IS_DELETE = #{isDelete} AND
 			</if>
-			<if test="reviewStatus != null and reviewStatus !=''"> REVIEW_STATUS = #{reviewStatus} AND
+			<if test="remark != null and remark!=''"> REMARK = #{remark} AND
 			</if>
-			<if test="remark != null and remark!=''"> REMARK = #{remark}
+			<if test="reviewStatus != null and reviewStatus!=''"> REVIEW_STATUS = #{reviewStatus} AND
+			</if>
+			<if test="budgetYear != null and budgetYear!=''"> BUDGET_YEAR = #{budgetYear} AND
+			</if>
+			<if test="revRecognitionMethod != null and revRecognitionMethod!=''"> REV_RECOGNITION_METHOD = #{revRecognitionMethod} AND
+			</if>
+			<if test="productList != null and productList!=''"> PRODUCT_LIST = #{productList} AND
+			</if>
+			<if test="taxRate != null and taxRate!=''"> TAX_RATE = #{taxRate} AND
+			</if>
+			<if test="contractMoney != null and contractMoney!=''"> CONTRACT_MONEY = #{contractMoney} AND
+			</if>
+			<if test="manyYearRev != null and manyYearRev!=''"> MANY_YEAR_REV = #{manyYearRev} AND
+			</if>
+			<if test="curYearRev != null and curYearRev!=''"> CUR_YEAR_REV = #{curYearRev} AND
+			</if>
+			<if test="lastRev != null and lastRev!=''"> LAST_REV = #{lastRev} AND
+			</if>
+			<if test="afterTax != null and afterTax!=''"> AFTER_TAX = #{afterTax}
 			</if>
 		</trim>
 	</select>
@@ -217,7 +255,7 @@
 		</if>
 		<if test="contractName != null and contractName!=''"> ,CONTRACT_NAME
 		</if>
-		<if test="revenueSource != null and revenueSource!=''"> ,REVENUE_SOURCE
+		<if test="poSow != null and poSow!=''"> ,PO_SOW
 		</if>
 		<if test="custManagerId != null and custManagerId!=''"> ,CUST_MANAGER_ID
 		</if>
@@ -271,7 +309,25 @@
 		</if>
 		<if test="remark != null and remark!=''"> ,REMARK
 		</if>
-		<if test="reviewStatus != null and reviewStatus !=''"> ,REVIEW_STATUS
+		<if test="reviewStatus != null and reviewStatus!=''"> ,REVIEW_STATUS
+		</if>
+		<if test="budgetYear != null and budgetYear!=''"> ,BUDGET_YEAR
+		</if>
+		<if test="revRecognitionMethod != null and revRecognitionMethod!=''"> ,REV_RECOGNITION_METHOD
+		</if>
+		<if test="productList != null and productList!=''"> ,PRODUCT_LIST
+		</if>
+		<if test="taxRate != null and taxRate!=''"> ,TAX_RATE
+		</if>
+		<if test="contractMoney != null and contractMoney!=''"> ,CONTRACT_MONEY
+		</if>
+		<if test="manyYearRev != null and manyYearRev!=''"> ,MANY_YEAR_REV
+		</if>
+		<if test="curYearRev != null and curYearRev!=''"> ,CUR_YEAR_REV
+		</if>
+		<if test="lastRev != null and lastRev!=''"> ,LAST_REV
+		</if>
+		<if test="afterTax != null and afterTax!=''"> ,AFTER_TAX
 		</if>
 		) values ( #{yearBudgetCode}
 		<if test="isNewCust != null and isNewCust!=''"> ,#{isNewCust}
@@ -298,7 +354,7 @@
 		</if>
 		<if test="contractName != null and contractName!=''"> ,#{contractName}
 		</if>
-		<if test="revenueSource != null and revenueSource!=''"> ,#{revenueSource}
+		<if test="poSow != null and poSow!=''"> ,#{poSow}
 		</if>
 		<if test="custManagerId != null and custManagerId!=''"> ,#{custManagerId}
 		</if>
@@ -352,7 +408,25 @@
 		</if>
 		<if test="remark != null and remark!=''"> ,#{remark}
 		</if>
-		<if test="reviewStatus != null and reviewStatus !=''"> ,#{reviewStatus}
+		<if test="reviewStatus != null and reviewStatus!=''"> ,#{reviewStatus}
+		</if>
+		<if test="budgetYear != null and budgetYear!=''"> ,#{budgetYear}
+		</if>
+		<if test="revRecognitionMethod != null and revRecognitionMethod!=''"> ,#{revRecognitionMethod}
+		</if>
+		<if test="productList != null and productList!=''"> ,#{productList}
+		</if>
+		<if test="taxRate != null and taxRate!=''"> ,#{taxRate}
+		</if>
+		<if test="contractMoney != null and contractMoney!=''"> ,#{contractMoney}
+		</if>
+		<if test="manyYearRev != null and manyYearRev!=''"> ,#{manyYearRev}
+		</if>
+		<if test="curYearRev != null and curYearRev!=''"> ,#{curYearRev}
+		</if>
+		<if test="lastRev != null and lastRev!=''"> ,#{lastRev}
+		</if>
+		<if test="afterTax != null and afterTax!=''"> ,#{afterTax}
 		</if>
 		)
 	</insert>
@@ -371,7 +445,7 @@
 			<if test="contractId != null and contractId!=''">CONTRACT_ID = #{contractId},</if>
 			<if test="contractCode != null and contractCode!=''">CONTRACT_CODE = #{contractCode},</if>
 			<if test="contractName != null and contractName!=''">CONTRACT_NAME = #{contractName},</if>
-			<if test="revenueSource != null and revenueSource!=''">REVENUE_SOURCE = #{revenueSource},</if>
+			<if test="poSow != null and poSow!=''">PO_SOW = #{poSow},</if>
 			<if test="custManagerId != null and custManagerId!=''">CUST_MANAGER_ID = #{custManagerId},</if>
 			<if test="custManagerName != null and custManagerName!=''">CUST_MANAGER_NAME = #{custManagerName},</if>
 			<if test="taxType != null and taxType!=''">TAX_TYPE = #{taxType},</if>
@@ -398,8 +472,16 @@
 			<if test="modifyTime != null and modifyTime!=''">MODIFY_TIME = #{modifyTime},</if>
 			<if test="isDelete != null and isDelete!=''">IS_DELETE = #{isDelete},</if>
 			<if test="remark != null and remark!=''">REMARK = #{remark},</if>
-			<if test="reviewStatus != null and reviewStatus !=''"> REVIEW_STATUS = #{reviewStatus}
-			</if>
+			<if test="reviewStatus != null and reviewStatus!=''">REVIEW_STATUS = #{reviewStatus},</if>
+			<if test="budgetYear != null and budgetYear!=''">BUDGET_YEAR = #{budgetYear},</if>
+			<if test="revRecognitionMethod != null and revRecognitionMethod!=''">REV_RECOGNITION_METHOD = #{revRecognitionMethod},</if>
+			<if test="productList != null and productList!=''">PRODUCT_LIST = #{productList},</if>
+			<if test="taxRate != null and taxRate!=''">TAX_RATE = #{taxRate},</if>
+			<if test="contractMoney != null and contractMoney!=''">CONTRACT_MONEY = #{contractMoney},</if>
+			<if test="manyYearRev != null and manyYearRev!=''">MANY_YEAR_REV = #{manyYearRev},</if>
+			<if test="curYearRev != null and curYearRev!=''">CUR_YEAR_REV = #{curYearRev},</if>
+			<if test="lastRev != null and lastRev!=''">LAST_REV = #{lastRev},</if>
+			<if test="afterTax != null and afterTax!=''">AFTER_TAX = #{afterTax}</if>
 		</set>
 		where YEAR_BUDGET_CODE = #{yearBudgetCode}
 	</update>
@@ -436,7 +518,7 @@
 			</if>
 			<if test="contractName != null and contractName!=''"> CONTRACT_NAME = #{contractName} AND
 			</if>
-			<if test="revenueSource != null and revenueSource!=''"> REVENUE_SOURCE = #{revenueSource} AND
+			<if test="poSow != null and poSow!=''"> PO_SOW = #{poSow} AND
 			</if>
 			<if test="custManagerId != null and custManagerId!=''"> CUST_MANAGER_ID = #{custManagerId} AND
 			</if>
@@ -488,9 +570,27 @@
 			</if>
 			<if test="isDelete != null and isDelete!=''"> IS_DELETE = #{isDelete} AND
 			</if>
-			<if test="reviewStatus != null and reviewStatus !=''"> REVIEW_STATUS = #{reviewStatus} AND
+			<if test="remark != null and remark!=''"> REMARK = #{remark} AND
 			</if>
-			<if test="remark != null and remark!=''"> REMARK = #{remark}
+			<if test="reviewStatus != null and reviewStatus!=''"> REVIEW_STATUS = #{reviewStatus} AND
+			</if>
+			<if test="budgetYear != null and budgetYear!=''"> BUDGET_YEAR = #{budgetYear} AND
+			</if>
+			<if test="revRecognitionMethod != null and revRecognitionMethod!=''"> REV_RECOGNITION_METHOD = #{revRecognitionMethod} AND
+			</if>
+			<if test="productList != null and productList!=''"> PRODUCT_LIST = #{productList} AND
+			</if>
+			<if test="taxRate != null and taxRate!=''"> TAX_RATE = #{taxRate} AND
+			</if>
+			<if test="contractMoney != null and contractMoney!=''"> CONTRACT_MONEY = #{contractMoney} AND
+			</if>
+			<if test="manyYearRev != null and manyYearRev!=''"> MANY_YEAR_REV = #{manyYearRev} AND
+			</if>
+			<if test="curYearRev != null and curYearRev!=''"> CUR_YEAR_REV = #{curYearRev} AND
+			</if>
+			<if test="lastRev != null and lastRev!=''"> LAST_REV = #{lastRev} AND
+			</if>
+			<if test="afterTax != null and afterTax!=''"> AFTER_TAX = #{afterTax}
 			</if>
 		</trim>
 	</select>

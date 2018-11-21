@@ -275,7 +275,7 @@
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<select name="taxes" lay-verify="required" lay-filter="" class="form-control">
+						     	<select name="taxType" lay-verify="required" lay-filter="" class="form-control">
 						        	<option value="">请选择</option>
 						        	<option value="01" selected>A</option>
 						        	<option value="02">B</option>
@@ -617,7 +617,7 @@
 			      	<div class="project-list">
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<select name="taxes" lay-verify="required" lay-filter="" class="form-control">
+						     	<select name="taxType" lay-verify="required" lay-filter="" class="form-control">
 						        	<option value="">请选择</option>
 						        	<option value="01" selected>A</option>
 						        	<option value="02">B</option>
@@ -633,7 +633,7 @@
 			      		</div>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<select name="taxes" lay-verify="required" lay-filter="" class="form-control">
+						     	<select name="taxType" lay-verify="required" lay-filter="" class="form-control">
 						        	<option value="">请选择</option>
 						        	<option value="01" selected>A</option>
 						        	<option value="02">B</option>

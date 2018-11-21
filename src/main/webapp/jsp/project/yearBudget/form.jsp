@@ -147,7 +147,7 @@
 		     <div class="layui-inline">
 		      	<label class="layui-form-label">税种：</label>
 		        <div class="layui-input-inline">
-		          <select name="taxes" lay-verify="required" lay-filter="" class="form-control">
+		          <select name="taxType" lay-verify="required" lay-filter="" class="form-control">
 			        	<option value="">请选择</option>
 			        	<option value="01" selected>A</option>
 			        	<option value="02">B</option>
@@ -198,7 +198,7 @@
 		     <div class="layui-inline">
 			      <label class="layui-form-label">毛利率（%）：</label>
 			       <div class="layui-input-inline">
-			         <input type="text" name="grossRate"  autocomplete="off" class="layui-input form-control">
+			         <input type="text" name="grossProfitRate"  autocomplete="off" class="layui-input form-control">
 			      </div>
 		    </div>
 		    <div class="layui-inline">
