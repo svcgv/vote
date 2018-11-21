@@ -61,7 +61,7 @@
 		     <div class="layui-inline" style="margin-right:64px;">
 		       <label class="layui-form-label">项目类型：</label>
 		       <div class="layui-input-inline">
-		          <select  style="width: 200px; background-color: #EEEEEE;" disabled="disabled" name="projectType" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		          <select  style="width: 200px; background-color: #EEEEEE;" disabled="disabled" name="projectType" lay-verify="required" lay-filter="" class="form-control">
 		         		${projectType.ewTypeHtml}
 		          </select>
 		      </div>
@@ -101,7 +101,7 @@
 		   <div class="layui-inline" style="margin-right:64px;">
 		       <label class="layui-form-label">是否重点项目：</label>
 		       <div class="layui-input-inline">
-		          <select disabled="disabled"  name="isImportant" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		          <select disabled="disabled"  name="isImportant" lay-verify="required" lay-filter="" class="form-control">
 		        	 ${isImportant.ewTypeHtml}
 		          </select>
 		      </div>
@@ -160,7 +160,7 @@
 		    <div class="layui-inline" style="margin-right:64px;">
 		       <label class="layui-form-label">所属项目群：</label>
 		       <div class="layui-input-inline">
-		          <select  disabled="disabled"   name="belongProjectGroupId" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		          <select  disabled="disabled"   name="belongProjectGroupId" lay-verify="required" lay-filter="" class="form-control">
 		        	   ${projectGroup.ewTypeHtml}
 		          </select>
 		      </div>
@@ -318,7 +318,7 @@
 			</div>
 	    </div>
 		   	
-		   <div class="milepost-list-wrapper"  <c:if test="${projectType != '00' }"> style="display:none;"</c:if>>
+		   <div class="milepost-list-wrapper"  <c:if test="${projectTypeSelected != '00' }"> style="display:none;"</c:if>>
 		    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 		 	 <legend style="font-weight:bold;">里程碑</legend>
 		     </fieldset>
@@ -557,64 +557,6 @@ $(function(){
       dataType: "json"
        });
 
-	  //选择投标
-	  $("#project-view-hook #bidNameQuery-hook").click(function(){
-		  $.openWindow({
-		  		url:'tender?act=tenderForm',
-		  		title:"选择投标",
-		  		width:"700"
-		 });
-		  
-	  });
-	// 项目类型切换 类型为整包项目 显示里程碑
-	 form.on('select(projectTypeFilter)', function(data){
-	  if(data.value == "00"){
-		  var select= 'dd[lay-value=00]'; // 里程碑
-		  $('.project-form-wrapper input[name="projectType"]').siblings("div.layui-form-select").find('dl').find(select).click();
-		  $("#project-view-hook .milepost-list-wrapper").show();
-	  }else{
-		  $("#project-view-hook .milepost-list-wrapper").hide();
-	  }
-  
-   });
-	
-	
-	
-	var win=$("#project-view-hook").getWindow();
-	// 保存
-	$("#project-view-hook #customGroup-edit-hook").click(function(){
-		
-		var projectName=$("#project-view-hook input[name='projectName']").val();
-		if($.trim(projectName) ==''){
-			layer.msg("请输入项目名称");
-			return false;
-		}
-		
-		var formDatas=$("#project-view-hook form").serializeObject();
-		 var newparam = {}
-		 for(var o in formDatas){
-			 if(formDatas[o]){
-				 newparam[o] = formDatas[o]
-			 }
-		 }
-		 
-		$.ajax({
-			type:'POST',
-			url: '/vote/pmprojectinfo/update',
-			 data: JSON.stringify(newparam),
-			 contentType:'application/json',
-			success:function(res){
-				layer.msg("修改成功",{icon:1});
-				win.close();
-			},
-			error:function(){
-				layer.msg("修改失败",{icon:5});
-				win.close();
-			},
-			 dataType: "json"
-		});
-		return false;
-	});
 	
 	// 关闭
 	$("#project-view-hook #customerGroup-close-hook").click(function(){

@@ -219,7 +219,7 @@ var col=[
 	    	  {field:'predictProfitMount', title:'预估利润'},
 	    	  {field:'predictWorkload', title:'预估工作量'},
 	    	  {field:'yearSalary', title:'预估当年收入'},
-	    	  {field:'allIncomming', title:'收入合计'},
+	    	  {field:'allIncomming', title:'收入合计'}
 	    	  
 	    ]
   ]
@@ -336,28 +336,12 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		}
 	  
 	  	$.openWindow({
-	  		url:'user?act=custManager&orgNo='+sellDeptId+'&roleCode=',
+	  		url:'user?act=custManager&orgNo='+sellDeptId+'&roleCode=CUST_MANAGER',
 	  		title:"选择客户经理",
 	  		width:"700"
 	 	 });
 	});
   
-  // 选择WBS编号
-  $(".project-info-wrapper #wbsQuery-hook").on("click",function(){
-	  	$.openWindow({
-	  		url:'project?act=wbs',
-	  		title:"选择WBS编号",
-	  		width:"700"
-	 	 });
-	});
-  // 选择项目名称
-  $(".project-info-wrapper #projectNameQuery-hook").on("click",function(){
-	  	$.openWindow({
-	  		url:'project?act=wbs',
-	  		title:"选择项目名称",
-	  		width:"700"
-	 	 });
-	});
   // 选择客户名称
   $(".project-info-wrapper #custNameQuery-hook").on("click",function(){
 	  	$.openWindow({

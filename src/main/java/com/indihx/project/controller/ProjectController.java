@@ -62,6 +62,7 @@ public class ProjectController extends AbstractBaseController {
     	
         view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE","00"));
         view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT","00"));
+        view.addObject("projectTypeSelected","00");
         
     	Map<String,Object> maps = new HashMap<String, Object>();
 		maps.put("isDelete", "00");
@@ -94,7 +95,7 @@ public class ProjectController extends AbstractBaseController {
         view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE",entity.getProjectType()));
         view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT",entity.getIsImportant()));
         view.addObject("approveStatus", infoservice.qryInfoByCode("APPROVE_STATUS",entity.getApproveStatus()));
-        
+        view.addObject("projectTypeSelected",entity.getProjectType());
         Map<String,Object> maps = new HashMap<String, Object>();
 		maps.put("isDelete", "00");
 		List<PmProjectGroupInfoEntity> pmProjectGroupInfo = pmProjectGroupInfoService.queryList(maps);
@@ -132,7 +133,7 @@ public class ProjectController extends AbstractBaseController {
         view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE",entity.getProjectType()));
         view.addObject("isImportant", infoservice.qryInfoByCode("IS_IMPORTANT",entity.getIsImportant()));
         view.addObject("approveStatus", infoservice.qryInfoByCode("APPROVE_STATUS",entity.getApproveStatus()));
-        
+        view.addObject("projectTypeSelected",entity.getProjectType());
         
         Map<String,Object> maps = new HashMap<String, Object>();
 		maps.put("isDelete", "00");

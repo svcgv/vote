@@ -85,7 +85,7 @@
 		   	<div class="layui-inline" style="margin-right:64px;">
 		       <label class="layui-form-label">是否重点项目：</label>
 		       <div class="layui-input-inline">
-		          <select name="isImportant" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		          <select name="isImportant" lay-verify="required" lay-filter="" class="form-control">
 		        	 ${isImportant.ewTypeHtml}
 		          </select>
 		      </div>
@@ -149,7 +149,7 @@
 		    <div class="layui-inline" style="margin-right:64px;">
 		       <label class="layui-form-label">所属项目群：</label>
 		       <div class="layui-input-inline">
-		          <select name="belongProjectGroupId" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
+		          <select name="belongProjectGroupId" lay-verify="required" lay-filter="" class="form-control">
 		        	      ${projectGroup.ewTypeHtml}
 		          </select>
 		      </div>
@@ -313,7 +313,7 @@
 			</div>
 	    </div>
 		   	
-		   <div class="milepost-list-wrapper"  <c:if test="${projectType != '00' }"> style="display:none;"</c:if>>
+		   <div class="milepost-list-wrapper"  <c:if test="${projectTypeSelected != '00' }"> style="display:none;"</c:if>>
 		    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 		 	 <legend style="font-weight:bold;">里程碑</legend>
 		     </fieldset>
@@ -676,7 +676,7 @@ $(function(){
 			}
 		  
 		  	$.openWindow({
-		  		url:'user?act=custManagerForm&orgNo='+sellDeptId+'&roleCode=',
+		  		url:'user?act=custManagerForm&orgNo='+sellDeptId+'&roleCode=CUST_MANAGER',
 		  		title:"选择客户经理",
 		  		width:"700"
 		 	 });

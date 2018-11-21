@@ -67,23 +67,22 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	if(roleCode){
 		par.roleCode=roleCode
 	}
-  // table render
-  table.render({
-	    elem: '#userTable',
-	    id:'user-table',
 	
-	    height:'260',
-	    width:"690",
-	    title: '用数据表',
-	    cols: [[
-	      {type: 'radio' },
-	      {field:'usrId', title:'用户ID', sort: true},
-	      {field:'usrName', title:'用户名'}
-	    ]],
-	    page: true
-	  });
-	
-  
+	 table.render({
+		    elem: '#userTable',
+		    id:'user-table',
+		
+		    height:'260',
+		    width:"690",
+		    title: '用数据表',
+		    cols: [[
+		      {type: 'radio' },
+		      {field:'usrId', title:'用户ID', sort: true},
+		      {field:'usrName', title:'用户名'}
+		    ]],
+		    page: true
+		  });
+	 
   $.ajax({
 	  type: 'POST',
 	  url: orgNo?url1:url2,
@@ -106,11 +105,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 		    ]],
 	  	    data:testData,
 	  	    page: true
-	  	  });
-	      
-	      
-	      
-	      ;},
+	  	  });},
 	  dataType: "json"
 	})
 	
@@ -141,12 +136,6 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			 		// form
 			 		$("#project-form-hook input[name='sellManagerName']").val(userName);
 					$("#project-form-hook input[name='sellManagerId']").val(userId);
-			 	}else if(act =="reviewPay"){ // 投标 评审
-			 		//$("#review-query-form input[name='payDeptName']").val(userName);
-					//$("#review-query-form input[name='payDeptId']").val(userId);
-			 	}else if(act =="reviewSell"){// 投标 评审
-			 		//$("#review-query-form input[name='sellDeptName']").val(userName);
-					//$("#review-query-form input[name='sellDeptId']").val(userId);
 			 	}else if(act == "projectManager"){
 					// index
 					$("#project-index-form input[name='projectManagerName']").val(userName);
