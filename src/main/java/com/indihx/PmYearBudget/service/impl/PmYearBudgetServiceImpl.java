@@ -40,6 +40,10 @@ public class PmYearBudgetServiceImpl implements PmYearBudgetService {
 		return pmYearBudgetMapper.queryTotal();
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED)
+	public List<Map<String, Object>> querySapCodeCount(long userId){
+		return pmYearBudgetMapper.querySapCodeCount(userId);
+	}
 	public List<PmYearBudgetEntity> queryList(Map<String, Object> entity) {
 		if (entity.get("isDelete") == null || "".equals(entity.get("isDelete"))) {
 			entity.put("isDelete", "00");

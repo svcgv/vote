@@ -164,6 +164,14 @@ public class ContractController extends AbstractBaseController{
 		view.setViewName("/project/contract/project");
 		return view;
 	}
+	// 用户
+	@RequestMapping(value="/contract/company",method=RequestMethod.GET)
+	public ModelAndView companyFormView(@RequestParam("act") String act) {
+		ModelAndView view = new ModelAndView();
+		view.addObject("act",act);
+		view.setViewName("/project/contract/company");
+		return view;
+	}
 	
 	
 }

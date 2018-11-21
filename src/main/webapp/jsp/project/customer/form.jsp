@@ -17,8 +17,8 @@
 }
 </style>
 
-<div class="custom-form-wrapper  <c:if test="${act =='view'}">custom-form-view</c:if>" style="margin-top:10px;">
-	<form class="layui-form" action="" lay-filter="customer-form">
+<div id="custom-Form-hook" class="custom-form-wrapper  <c:if test="${act =='view'}">custom-form-view</c:if>" style="margin-top:10px;">
+	<form id="custom-form" class="layui-form" action="" lay-filter="customer-form">
 	  <div class="layui-form-item">
 	  	
 	  	<div class="layui-inline">
@@ -163,8 +163,11 @@
 	  <div class="layui-inline">
 		  <label class="layui-form-label">公司代码：</label>
 	     <div class="layui-input-inline">
-	         <input type="text" name="companyCode"  value="${Custom.companyCode}"  <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">
+	         <input type="text" name="companyCode" readonly="readonly" value="${Custom.companyCode}"  <c:if test="${act =='view'}">disabled=true</c:if>  autocomplete="off" class="layui-input form-control">
 	      </div>
+		  <c:if test="${act !='view'}">
+		  <button type="button"  class="layui-btn layui-btn-sm" id="companyQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
+		  </c:if>
 	   </div>
 	   <div class="layui-inline">
 		  <label class="layui-form-label">公司代码（职能）：</label>
@@ -213,9 +216,17 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
   
   	  laydate.render({
 	    elem: '#createTime',
-	    theme: 'molv',
-	    type: 'datetime'
+	    theme: 'molv'
 	  });
+
+    $("#custom-Form-hook #companyQuery-form").click(function(){
+        $.openWindow({
+            url:'company?act=form',
+            title:"选择公司代码",
+            width:"750"
+        });
+
+    });
   	 
   	 
   	

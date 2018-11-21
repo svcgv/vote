@@ -168,7 +168,13 @@ public class CustomerController extends AbstractBaseController{
     	
 		return list;
 	}
-	
-	
+
+	@RequestMapping(value="/customer/company",method=RequestMethod.GET)
+	public ModelAndView companyFormView(@RequestParam("act") String act) {
+		ModelAndView view = new ModelAndView();
+		view.addObject("act",act);
+		view.setViewName("/project/customer/company");
+		return view;
+	}
 	
 }

@@ -139,13 +139,14 @@ min-width:90px;
 			  <!-- 
 			  copyAddItem DOM 结构不能删除
 			   -->
+<c:forEach items="${list}" var="app" varStatus="status" >
 			    <tr>
-			      <td >
+			      <td>
 			      	<div class="layui-inline" style="min-width:250px;">
 			      		<div class="layui-input-inline item">
-				      		<label>上海农商</label>
-				    		 <input type="hidden" name="custName" value="上海农商"/>
-				    		 <input type="hidden" name="custId" value="123"/>
+				      		<label>${app.custName}</label>
+				    		 <input type="hidden" name="custName" value="${app.custName}"/>
+				    		 <input type="hidden" name="custId" value="${app.sapCode}"/>
 			      		</div>
 			      	</div>
 			      	<div>
@@ -155,14 +156,12 @@ min-width:90px;
 			      </td>
 			      <td>
 			      	<div class="project-list">
+	<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
 				      	<div class="layui-input-inline item" style="margin:5px 0;">
-				      		<span>WBS123223Y4872Y34</span>
-				      		<input type="hidden" name="wbs" value="AAAA"/>
+				      		<span>${app2.wbs}</span>
+				      		<input type="hidden" name="wbs" value="${app2.wbs}"/>
 				      	</div>
-				      	<div class="layui-input-inline item" style="margin:5px 0;">
-				      		<span>WBS123223Y4872sssY34</span>
-				      		<input type="hidden" name="wbs" value="bbbb" />
-				      	</div>
+	</c:forEach>
 				      	<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 				      		<div class="layui-input-inline">
 					      		<input type="text" name="wbs" readonly="readonly"  class="layui-input form-control disabledColor" />
@@ -173,14 +172,12 @@ min-width:90px;
 			      </td>
 			      <td>
 			      	<div class="project-list">
+	<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
 			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span class="layui-badge-dot layui-bg-green"></span><span>项目名称一</span>
-			      			<input type="hidden" name="projectName" value="111" />
+			      			<span class="layui-badge-dot layui-bg-green"></span><span>${app2.projectName}</span>
+			      			<input type="hidden" name="projectName" value="${app2.projectName}" />
 			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span class="layui-badge-dot layui-bg-green"></span><span>项目名称一</span>
-			      			<input type="hidden" name="projectName" value="222" />
-			      		</div>
+	</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			<div class="layui-input-inline">
 			      				<input type="text" name="projectName" readonly="readonly" class="layui-input form-control disabledColor"/>
@@ -191,14 +188,12 @@ min-width:90px;
 			      </td>
 			      <td>
 			      	<div class="project-list">
+	<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
 			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>项目</span>
-			      			<input type="hidden" name="projectType" value="项目" />
+			      			<span>${app2.projectType}</span>
+			      			<input type="hidden" name="projectType" value="${app2.projectType}" />
 			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>产品</span>
-			      			<input type="hidden" name="projectType" value="产品" />
-			      		</div>
+	</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
 						          <select name="projectType" lay-verify="required" lay-filter="projectType-filter" class="form-control">
@@ -215,15 +210,15 @@ min-width:90px;
 			      <td>
 			      	<div class="project-list">
 			      		<div class="layui-input-inline productItem ">
-			      			<span class="layui-badge layui-bg-gray" productid="0">列表1</span>
-			      			<span class="layui-badge layui-bg-gray" productid="01">列表1</span>
-			      			<span class="layui-badge layui-bg-gray" productid="02">列表1</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="0">列表1</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="01">列表1</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="02">列表1</span>
 			      		</div>
 			      		<div class="layui-input-inline productItem">
-			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
-			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
-			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
-			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
 			      		</div>
 			      		<div class="layui-input-inline productItem copyAddItem">
 			      			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
@@ -243,14 +238,12 @@ min-width:90px;
 			      </td>
 			       <td>
 			      	<div class="project-list">
+	<%--<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >--%>
 			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>2019年</span>
-			      			<input type="hidden" name="budgetYear" value="2018" />
+			      			<%--<span>${app2.budgetYear}</span>--%>
+			      			<input type="hidden" name="budgetYear" value="" />
 			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>2019年</span>
-			      			<input type="hidden" name="budgetYear" value="2017" />
-			      		</div>
+	<%--</c:forEach>--%>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px;">
 			      			 <div class="layui-input-inline">
 						          <span class="j-budgetYear">${budgetYear }</span>
@@ -261,14 +254,12 @@ min-width:90px;
 			      </td>
 			      <td>
 			      	<div class="project-list">
+	<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
 			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>收入来源1</span>
-			      			 <input type="hidden" name="revenueSource" value="23123" />
+			      			<span>${app2.revenueSource}</span>
+			      			 <input type="hidden" name="revenueSource" value="${app2.revenueSource}" />
 			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>收入来源2</span>
-			      			<input type="hidden" name="revenueSource" value="23123" />
-			      		</div>
+	</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
 						     	<input type="text" name="revenueSource" class="layui-input form-control" />
@@ -278,48 +269,43 @@ min-width:90px;
 			      </td>
 			      <td>
 			      	<div class="project-list">
+	<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
 			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>公司实体1</span>
-			      			<input type="hidden" name="entity" value="实体" />
+			      			<span>${app2.companyEntityName}</span>
+			      			<input type="hidden" name="companyEntityName" value="${app2.companyEntityName}" />
 			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>公司实体2</span>
-			      			<input type="hidden" name="entity" value="实体2" />
-			      		</div>
+	</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="entity" class="layui-input form-control" />
+						     	<input type="text" name="companyEntityName" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
+	<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
 			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>合同编号KSASASQW123123JKSD</span>
-			      			<input type="hidden" name="contract" value="KSASASQW123123JKSD" />
+			      			<span>${app2.contractCode}</span>
+			      			<input type="hidden" name="contractCode" value="${app2.contractCode}" />
 			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>合同编号123123</span>
-			      			<input type="hidden" name="contract" value="KSASASQW123123JKSD" />
-			      		</div>
+	</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="contract" class="layui-input form-control" />
+						     	<input type="text" name="contractCode" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
+	<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
 			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>sow</span>
-			      			<input type="hidden" name="poSow" value="poSow" />
+			      			<%--<span>${app2.poSow}</span>--%>
+			      			<span>。。。</span>
+			      			<input type="hidden" name="poSow" value="" />
 			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>sow</span>
-			      			<input type="hidden" name="poSow" value="poSow2" />
-			      		</div>
+	</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
 						     	<input type="text" name="poSow" class="layui-input form-control" />
@@ -329,17 +315,15 @@ min-width:90px;
 			      </td>
 			       <td>
 			      	<div class="project-list">
+	<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
 			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>custManager</span>
-			      			<input type="hidden" name="custManager" value="custManager1" />
+			      			<span>${app2.custManagerName}</span>
+			      			<input type="hidden" name="custManagerName" value="${app2.custManagerName}" />
 			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>custManage</span>
-			      			<input type="hidden" name="custManager" value="custManager2" />
-			      		</div>
+	</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="custManager" class="layui-input form-control" />
+						     	<input type="text" name="custManagerName" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -774,6 +758,7 @@ min-width:90px;
 			      	</div>
 			      </td>
 			    </tr>
+</c:forEach>
 			   
 			   <!-- 新增客户  -->
 			  
@@ -1038,7 +1023,7 @@ layui.use(['layer', 'form','laydate'], function(){
 							var ids=[];
 							spans.each(function(){
 								names.push($(this).text());
-								ids.push($(this).attr("productid"));
+								ids.push($(this).attr("productCode"));
 							})
 							var key1="productNames";
 							var key2="productIds";

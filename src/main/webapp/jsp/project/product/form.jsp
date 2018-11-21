@@ -29,7 +29,7 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">产品名称：</label>
 		      <div class="layui-input-inline">
-		         <input type="number" name="productName" autocomplete="off" class="layui-input form-control">
+				  <input type="text" name="productName"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		     <div class="layui-inline">

@@ -7,16 +7,16 @@
     <td>
     	<div class="layui-inline" style="min-width:250px;">
     		
-    		<c:if test="${custId =='' }">
+    		<c:if test="${sapCode =='' }">
 	    		<div class="layui-input-inline">
 	     			<input type="text" name="custName" placeholder="请输入新客户"  value="${custName }" class="layui-input form-control" />
-    			    <input type="hidden" name="custId" value=""/>
+    			    <input type="hidden" name="sapCode" value=""/>
 	    		</div>
 			</c:if>
-			<c:if test="${custId !='' }">
+			<c:if test="${sapCode !='' }">
 	    		<div class="layui-input-inline">
 				    <label>${custName }</label>
-				    <input type="hidden" name="custId" value="${custId }"/>
+				    <input type="hidden" name="sapCode" value="${sapCode }"/>
 				    <input type="hidden" name="custName" value="${custName }"/>
 			    </div>
 			</c:if>
@@ -30,22 +30,22 @@
     	<div class="project-list">
 	     	<c:if test="${custId =='' }">
 	    		<div class="layui-input-inline item"  style="margin:5px 0;">
-	    			<input type="hidden" name="wbsCode" value=""/>
+	    			<input type="hidden" name="wbs" value=""/>
 	    		</div>
 	    		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
-	    			<input type="hidden" name="wbsCode" value=""/>
+	    			<input type="hidden" name="wbs" value=""/>
 	    		</div>
 			</c:if>
 	     	<c:if test="${custId !='' }">
 	    		<div class="layui-input-inline item"  style="margin:5px 0;">
 				    <div class="layui-input-inline">
-			      		<input type="text" name="wbsCode" readonly="readonly"  class="layui-input form-control disabledColor" />
+			      		<input type="text" name="wbs" readonly="readonly"  class="layui-input form-control disabledColor" />
 	      			</div>
 	      			<button type="button"  class="layui-btn layui-btn-sm WBSQuery-hook"  style="margin-right:15px;"><i class="layui-icon layui-icon-search "></i></button>
 			    </div>
 	    		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 				   <div class="layui-input-inline">
-			      		<input type="text" name="wbsCode" readonly="readonly"  class="layui-input form-control disabledColor" />
+			      		<input type="text" name="wbs" readonly="readonly"  class="layui-input form-control disabledColor" />
 	      			</div>
 	      			<button type="button"  class="layui-btn layui-btn-sm WBSQuery-hook"  style="margin-right:15px;"><i class="layui-icon layui-icon-search "></i></button>
 			    </div>

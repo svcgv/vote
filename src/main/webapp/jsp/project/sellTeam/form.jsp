@@ -100,9 +100,11 @@ $(function(){
 			param.groupName=customerGroupName
 			param.ownerOrgId=ret[0]
 			param.userCodes=ret2
-			param.orgNo=ret[0].orgId
-			param.orgName=ret[0].orgName
-			
+            if(ret.length>0){
+                param.orgNo=ret[0].orgId
+                param.orgName=ret[0].orgName
+			}
+
 			
 		
 				console.log(param)

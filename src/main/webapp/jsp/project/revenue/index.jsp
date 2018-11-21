@@ -10,46 +10,44 @@
 	</fieldset>
 	<form class="layui-form" id="revenue-info-wrapper" method="POST" action="">
 	   <div class="layui-form-item" style="margin-bottom:0px;">
-		  	<div class="layui-inline">
-		      <label class="layui-form-label">收入编号：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="revenueCode"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		       <span class="f-placeholder"></span>
-		    </div>
-
 		   <div class="layui-inline">
 			   <label class="layui-form-label">项目编号：</label>
 			   <div class="layui-input-inline">
-				  <input type="text" name="projectId" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
-				  <input type="hidden" name="projectName" >
+				   <input type="text" name="projectId" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+				   <input type="hidden" name="projectName" >
 			   </div>
 			   <button type="button"  class="layui-btn layui-btn-sm" id="projectNameQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		   </div>
+		   <div class="layui-inline">
+				<label class="layui-form-label">项目名称：</label>
+				<div class="layui-input-inline">
+				   <input type="text" name="revenueCode"  autocomplete="off" class="layui-input form-control">
+			   </div>
+				<span class="f-placeholder"></span>
+			</div>
 
-		    <div class="layui-inline">
-		      <label class="layui-form-label">收款金额(元)：</label>
-		       <div class="layui-input-inline">
-		         <input type="number" name="collectionAmount"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		      <span class="f-placeholder"></span>
-		    </div>
+		   <div class="layui-inline">
+			   <label class="layui-form-label">成本中心编号：</label>
+			   <div class="layui-input-inline">
+				   <input type="text" name="projectId" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
+				   <input type="hidden" name="projectName" >
+			   </div>
+			   <button type="button"  class="layui-btn layui-btn-sm" id="projectNameQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
+		   </div>
+		   <div class="layui-inline">
+			   <label class="layui-form-label">成本中心：</label>
+			   <div class="layui-input-inline">
+				   <input type="text" name="revenueCode"  autocomplete="off" class="layui-input form-control">
+			   </div>
+			   <span class="f-placeholder"></span>
+		   </div>
+
+
+
 		    
-		    <div class="layui-inline">
-		      <label class="layui-form-label">外购人力金额(元)：</label>
-		       <div class="layui-input-inline">
-		         <input type="number" name="externalManpowerAmount"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		      <span class="f-placeholder"></span>
-		    </div>
+
 		    
-		    <div class="layui-inline">
-		      <label class="layui-form-label">外购服务金额(元)：</label>
-		       <div class="layui-input-inline">
-		         <input type="number" name="outsourcingServiceAmount"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		      <span class="f-placeholder"></span>
-		    </div>
+
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">是否有效：</label>
