@@ -30,11 +30,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.indihx.AbstractBaseController;
+import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
+import com.indihx.PmProjectInfo.service.PmProjectInfoService;
+import com.indihx.PmYearBudget.entity.PmYearBudgetEntity;
+import com.indihx.PmYearBudget.service.PmYearBudgetService;
 import com.indihx.comm.InitSysConstants;
+import com.indihx.comm.util.R;
 import com.indihx.elecvote.entity.VoteHouseInfo;
 import com.indihx.elecvote.service.HouseManageService;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.system.service.impl.ParamsInfoServiceimpl;
+import com.indihx.util.UserUtil;
 
 /**
  * 年度预算
@@ -46,6 +52,12 @@ public class YearBudgetController extends AbstractBaseController{
 	@Autowired
 	private ParamsInfoServiceimpl infoservice;
 	
+	 @Autowired
+	 private PmYearBudgetService pmYearBudgetService;
+	    
+	 @Autowired
+	 private PmProjectInfoService pmProjectInfoService;
+	    
 	@RequestMapping("/yearBudget/index")
 	public ModelAndView addCustomView() {
 		
@@ -59,7 +71,7 @@ public class YearBudgetController extends AbstractBaseController{
 	}
 	// 新form
 	@RequestMapping(value="/yearBudget/form2",method=RequestMethod.GET)
-	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
+	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") String id,HttpSession session) {
 		ModelAndView view = new ModelAndView();
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
@@ -69,6 +81,25 @@ public class YearBudgetController extends AbstractBaseController{
 		view.addObject("id",id);
 		view.addObject("budgetYear","2019年");// 当前年+1
 		view.addObject("projectType","01");//02  项目类型为产品 
+		List<PmProjectInfoEntity>  projectList = new ArrayList<PmProjectInfoEntity>();
+		List<PmYearBudgetEntity> pmYearBudget = new ArrayList<PmYearBudgetEntity>();
+		
+		UsrInfo usesr = UserUtil.getUser(session);
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("creatorId", usesr.getUsrId());
+    	List<PmYearBudgetEntity> pmYearBudget2 =  pmYearBudgetService.queryList(map);
+		if(pmYearBudget2!=null&&!pmYearBudget2.isEmpty()){
+			pmYearBudget = pmYearBudget2;
+			view.addObject("list",pmYearBudget);
+		}
+		else{
+			Map<String,Object> entity = new HashMap<String,Object>();
+			//ToDo 状态为未完结的项目 且客户经理为当前用户的
+			entity.put("isDelete", "00");
+			entity.put("custManagerId", usesr.getUsrId());
+			projectList = pmProjectInfoService.queryList(entity);
+			view.addObject("list",projectList);
+		}
 		
 		view.setViewName("/project/yearBudget/form2");
 		return view;

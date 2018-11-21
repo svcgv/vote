@@ -132,7 +132,7 @@ public class PmYearBudgetController {
     	Map<String,Object> map = new HashMap<String,Object>();
     	map.put("creatorId", usesr.getUsrId());
 		List<PmYearBudgetEntity> pmYearBudget = pmYearBudgetService.queryList(map);
-		if(!(pmYearBudget==null||pmYearBudget.isEmpty())) {
+		if(pmYearBudget==null||pmYearBudget.isEmpty()) {
 			Map<String,Object> entity = new HashMap<String,Object>();
 			//ToDo 状态为未完结的项目 且客户经理为当前用户的
 			entity.put("isDelete", "00");

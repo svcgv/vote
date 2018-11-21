@@ -140,7 +140,7 @@ min-width:90px;
 			  copyAddItem DOM 结构不能删除
 			   -->
 			    <tr>
-			      <td >
+			      <td>
 			      	<div class="layui-inline" style="min-width:250px;">
 			      		<div class="layui-input-inline item">
 				      		<label>上海农商</label>
