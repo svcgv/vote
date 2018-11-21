@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.indihx.PmYearBudget.entity.PmYearBudgetResponseEntity;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -83,14 +84,34 @@ public class YearBudgetController extends AbstractBaseController{
 		view.addObject("projectType","01");//02  项目类型为产品 
 		List<PmProjectInfoEntity>  projectList = new ArrayList<PmProjectInfoEntity>();
 		List<PmYearBudgetEntity> pmYearBudget = new ArrayList<PmYearBudgetEntity>();
-		
 		UsrInfo usesr = UserUtil.getUser(session);
     	Map<String,Object> map = new HashMap<String,Object>();
     	map.put("creatorId", usesr.getUsrId());
     	List<PmYearBudgetEntity> pmYearBudget2 =  pmYearBudgetService.queryList(map);
 		if(pmYearBudget2!=null&&!pmYearBudget2.isEmpty()){
-			pmYearBudget = pmYearBudget2;
-			view.addObject("list",pmYearBudget);
+			//重新组装list，返回给前台
+			List<PmYearBudgetResponseEntity> responseEntities = new ArrayList<PmYearBudgetResponseEntity>();
+			List<Map<String, Object>> pmYearBudgetGroupList =  pmYearBudgetService.querySapCodeCount(usesr.getUsrId());
+			for(Map<String, Object> responseMap : pmYearBudgetGroupList){
+				PmYearBudgetResponseEntity responseEntity = new PmYearBudgetResponseEntity();
+				String sapCode = (String)responseMap.get("sapCode");
+				String custName = (String)responseMap.get("custName");
+				responseEntity.setSapCode(sapCode);
+				responseEntity.setCustName(custName);
+				List<PmYearBudgetEntity> pmYearBudgetTempList = new ArrayList<PmYearBudgetEntity>();
+				for (PmYearBudgetEntity yearBudgetEntity:pmYearBudget2){
+					if(sapCode.equalsIgnoreCase(yearBudgetEntity.getSapCode())){
+						pmYearBudgetTempList.add(yearBudgetEntity);
+					}
+				}
+				responseEntity.setPmYearBudgetEntity(pmYearBudgetTempList);
+				responseEntities.add(responseEntity);
+			}
+
+
+
+//			pmYearBudget = pmYearBudget2;
+			view.addObject("list",responseEntities);
 		}
 		else{
 			Map<String,Object> entity = new HashMap<String,Object>();
@@ -100,7 +121,7 @@ public class YearBudgetController extends AbstractBaseController{
 			projectList = pmProjectInfoService.queryList(entity);
 			view.addObject("list",projectList);
 		}
-		
+
 		view.setViewName("/project/yearBudget/form2");
 		return view;
 	}

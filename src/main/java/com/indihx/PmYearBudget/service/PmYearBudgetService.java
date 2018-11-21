@@ -12,6 +12,7 @@ import com.indihx.PmYearBudget.entity.PmYearBudgetEntity;
  */
 public interface PmYearBudgetService {
 	public PmYearBudgetEntity queryObject(String id);
+	public List<Map<String, Object>> querySapCodeCount(long userId);
 	public void insert(PmYearBudgetEntity entity);
 	public void update(PmYearBudgetEntity entity);
 	public void delete(String yearBudgetCode);

@@ -52,7 +52,14 @@
 		<result property="reviewStatus" column="REVIEW_STATUS" />
 
 	</resultMap>
-	
+
+	<resultMap
+			type="java.util.Map"
+			id="pmYearBudgetGroupHashMap">
+	<result property="sapCode" column="SAP_CODE" />
+		<result property="custName" column="CUST_NAME" />
+		<result property="custCount" column="CUST_COUNT" />
+	</resultMap>
 	<resultMap
 		type="java.util.Map"
 		id="pmYearBudgetHashMap">
@@ -104,6 +111,19 @@
 	<select id="queryObject" resultMap="pmYearBudgetMap">
 		select * from PM_YEAR_BUDGET
 		where YEAR_BUDGET_CODE = #{value}
+	</select>
+
+	<select id="querySapCodeCount" resultMap="pmYearBudgetGroupHashMap">
+SELECT
+	SAP_CODE,
+	CUST_NAME,
+	"COUNT" (SAP_CODE) AS CUST_COUNT
+FROM
+	PM_YEAR_BUDGET
+WHERE
+	CREATOR_ID = #{value}
+GROUP BY
+	SAP_CODE,CUST_NAME
 	</select>
 
 	<select id="queryList" resultMap="pmYearBudgetMap">
