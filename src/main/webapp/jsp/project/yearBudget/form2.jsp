@@ -1077,7 +1077,7 @@ layui.use(['layer', 'form','laydate'], function(){
 			  data: JSON.stringify(budgetList),
 			  contentType:'application/json',
 			  success: function(res){
-				  
+					win.close();
 			  },
 			  dataType: "json"
 			})
