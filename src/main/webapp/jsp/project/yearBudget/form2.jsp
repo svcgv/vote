@@ -215,15 +215,15 @@ min-width:90px;
 			      <td>
 			      	<div class="project-list">
 			      		<div class="layui-input-inline productItem ">
-			      			<span class="layui-badge layui-bg-gray" productid="0">列表1</span>
-			      			<span class="layui-badge layui-bg-gray" productid="01">列表1</span>
-			      			<span class="layui-badge layui-bg-gray" productid="02">列表1</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="0">列表1</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="01">列表1</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="02">列表1</span>
 			      		</div>
 			      		<div class="layui-input-inline productItem">
-			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
-			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
-			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
-			      			<span class="layui-badge layui-bg-gray" productid="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
+			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
 			      		</div>
 			      		<div class="layui-input-inline productItem copyAddItem">
 			      			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
@@ -1038,7 +1038,7 @@ layui.use(['layer', 'form','laydate'], function(){
 							var ids=[];
 							spans.each(function(){
 								names.push($(this).text());
-								ids.push($(this).attr("productid"));
+								ids.push($(this).attr("productCode"));
 							})
 							var key1="productNames";
 							var key2="productIds";
