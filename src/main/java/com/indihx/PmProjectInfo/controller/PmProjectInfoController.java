@@ -23,6 +23,14 @@ import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.UserUtil;
 import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
+import com.indihx.PmContractInfo.entity.PmContractInfoEntity;
+import com.indihx.PmContractInfo.service.PmContractInfoService;
+import com.indihx.PmContractProjectRelation.entity.PmContractProjectRelationEntity;
+import com.indihx.PmContractProjectRelation.service.PmContractProjectRelationService;
+import com.indihx.PmProductInfo.entity.PmProductInfoEntity;
+import com.indihx.PmProductInfo.service.PmProductInfoService;
+import com.indihx.PmProductProjectRelation.entity.PmProductProjectRelationEntity;
+import com.indihx.PmProductProjectRelation.service.PmProductProjectRelationService;
 import com.indihx.PmProjectGroupRelationInfo.entity.PmProjectGroupRelationInfoEntity;
 import com.indihx.PmProjectGroupRelationInfo.service.PmProjectGroupRelationInfoService;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
@@ -61,6 +69,18 @@ public class PmProjectInfoController {
     
     @Autowired
     private PmProjectMilestoneInfoService pmProjectMilestoneInfoService;
+    
+    @Autowired
+    private PmContractProjectRelationService pmContractProjectRelationService;
+    
+    @Autowired
+    private PmProductProjectRelationService pmProductProjectRelationService;
+    
+    @Autowired
+    private PmContractInfoService pmContractInfoService;
+    
+    @Autowired
+    private PmProductInfoService pmProductInfoService;
 
     /**
      * 列表
@@ -73,6 +93,29 @@ public class PmProjectInfoController {
         return new ResponseData(pmProjectInfoService.queryList(maps,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
     }
 
+    @RequestMapping(value="/listContract",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> listContract(@RequestBody Map<String, Object> params,HttpSession session){
+    	List<PmContractProjectRelationEntity> list = pmContractProjectRelationService.queryList(params);
+    	List<PmContractInfoEntity> pmContractInfo = new ArrayList<PmContractInfoEntity>();
+    	for(PmContractProjectRelationEntity pmContractProjectRelationEntity:list) {
+    		pmContractInfo.add(pmContractInfoService.queryObject(pmContractProjectRelationEntity.getContractId()));
+    	}
+    	
+        return R.ok().put("page", pmContractInfo);
+    }
+
+    
+    @RequestMapping(value="/listProduct",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> listProduct(@RequestBody Map<String, Object> params,HttpSession session){
+    	List<PmProductProjectRelationEntity> list = pmProductProjectRelationService.queryList(params);
+    	List<PmProductInfoEntity> pmProductInfo = new ArrayList<PmProductInfoEntity>();
+    	for(PmProductProjectRelationEntity pmProductProjectRelationEntity:list) {
+    		pmProductInfo.add(pmProductInfoService.queryObject(pmProductProjectRelationEntity.getProductId()));
+    	}
+    	
+        return R.ok().put("page", pmProductInfo);
+    }
+    
     
     @RequestMapping(value="/listTender",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> listTender(@RequestBody Map<String, Object> params,HttpSession session){
@@ -153,6 +196,26 @@ public class PmProjectInfoController {
         
         pmProjectMilestoneInfoService.insertList(pmProjectInfo,projectId);
         
+        
+        for(PmContractInfoEntity pmContractInfoEntity:pmProjectInfo.getPmContractInfo()) {
+        	PmContractProjectRelationEntity pmContractProjectRelationEntity = new PmContractProjectRelationEntity();
+        	pmContractProjectRelationEntity.setContractId(pmContractInfoEntity.getContractId());
+        	pmContractProjectRelationEntity.setProjectId(projectId);
+        	pmContractProjectRelationEntity.setCreatorId(usesr.getUsrId());
+        	pmContractProjectRelationEntity.setCreateTime(DateUtil.getDateTime());
+        	pmContractProjectRelationService.insert(pmContractProjectRelationEntity);
+        	
+        }
+        
+        for(PmProductInfoEntity pmProductInfoEntity:pmProjectInfo.getPmProductInfo()) {
+        	PmProductProjectRelationEntity pmProductProjectRelationEntity =new PmProductProjectRelationEntity();
+        	pmProductProjectRelationEntity.setProductId(pmProductInfoEntity.getProductId());
+        	pmProductProjectRelationEntity.setProjectId(projectId);
+        	pmProductProjectRelationEntity.setCreatorId(usesr.getUsrId());
+        	pmProductProjectRelationEntity.setCreateTime(DateUtil.getDateTime());
+        	pmProductProjectRelationService.insert(pmProductProjectRelationEntity);
+        }
+        
         return R.ok();
     }
 
@@ -191,6 +254,34 @@ public class PmProjectInfoController {
     	}
     	
         pmProjectMilestoneInfoService.insertList(pmProjectInfo,pmProjectInfo.getProjectId());
+        
+        List<PmContractProjectRelationEntity> list1 = pmContractProjectRelationService.queryList(map);
+    	for(PmContractProjectRelationEntity pmContractProjectRelationEntity:list1) {
+    		pmContractProjectRelationService.delete(pmContractProjectRelationEntity.getContractProjectRelationId());
+    	}
+    	List<PmProductProjectRelationEntity> list2 = pmProductProjectRelationService.queryList(map);
+    	for(PmProductProjectRelationEntity pmProductProjectRelationEntity:list2) {
+    		pmProductProjectRelationService.delete(pmProductProjectRelationEntity.getProductRelationId());
+    	}
+    	
+    	  for(PmContractInfoEntity pmContractInfoEntity:pmProjectInfo.getPmContractInfo()) {
+          	PmContractProjectRelationEntity pmContractProjectRelationEntity = new PmContractProjectRelationEntity();
+          	pmContractProjectRelationEntity.setContractId(pmContractInfoEntity.getContractId());
+          	pmContractProjectRelationEntity.setProjectId(pmProjectInfo.getProjectId());
+          	pmContractProjectRelationEntity.setCreatorId(usesr.getUsrId());
+          	pmContractProjectRelationEntity.setCreateTime(DateUtil.getDateTime());
+          	pmContractProjectRelationService.insert(pmContractProjectRelationEntity);
+          	
+          }
+          
+          for(PmProductInfoEntity pmProductInfoEntity:pmProjectInfo.getPmProductInfo()) {
+          	PmProductProjectRelationEntity pmProductProjectRelationEntity =new PmProductProjectRelationEntity();
+          	pmProductProjectRelationEntity.setProductId(pmProductInfoEntity.getProductId());
+          	pmProductProjectRelationEntity.setProjectId(pmProjectInfo.getProjectId());
+          	pmProductProjectRelationEntity.setCreatorId(usesr.getUsrId());
+          	pmProductProjectRelationEntity.setCreateTime(DateUtil.getDateTime());
+          	pmProductProjectRelationService.insert(pmProductProjectRelationEntity);
+          }
         
         return R.ok();
     }

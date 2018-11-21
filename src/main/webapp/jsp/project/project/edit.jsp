@@ -306,11 +306,32 @@
 		   	</div>
 		   	
 		   			   	
-		  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-		 	 <legend style="font-weight:bold;">合同信息</legend>
-		  </fieldset>
+		 <div class="layui-form-item clearfix" style="margin-bottom:0px;margin-left:10px;">
+			<div style="float:left;width: 140px;">
+				<p class="layui-form-label">合同引用列表：</p>
+				<div>
+					<button type="button"   class="layui-btn " id="contractQuery-hook" style="margin-right:15px;padding:0 9px;height:32px;line-height:32px;"><i class="layui-icon"></i>合同引用</button>
+				</div>
+			</div>
+			<div style="float:left;width:900px;">
+				<table class="layui-hide" id="contractTable-chosed" lay-filter="tableFilter1" style="overflow:hidden;"></table>
+			</div>
+	    </div>
 		   	
-		   <div class="milepost-list-wrapper" >
+		   	
+		<div class="layui-form-item clearfix" style="margin-bottom:0px;margin-left:10px;">
+			<div style="float:left;width: 140px;">
+				<p class="layui-form-label">产品引用列表：</p>
+				<div>
+					<button type="button"   class="layui-btn " id="productQuery-hook" style="margin-right:15px;padding:0 9px;height:32px;line-height:32px;"><i class="layui-icon"></i>产品引用</button>
+				</div>
+			</div>
+			<div style="float:left;width:900px;">
+				<table class="layui-hide" id="productTable-chosed" lay-filter="tableFilter2" style="overflow:hidden;"></table>
+			</div>
+	    </div>
+		   	
+		   <div class="milepost-list-wrapper"  <c:if test="${projectType != '00' }"> style="display:none;"</c:if>>
 		    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 		 	 <legend style="font-weight:bold;">里程碑</legend>
 		     </fieldset>
@@ -415,13 +436,20 @@
     	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
     </div>
 </div>
+<script type="text/html" id="barFormDemo">
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 <script>
+var chosedContractProject=[];
+var chosedProductProject=[];
+var chosedLayTable=null;
 $(function(){
-	layui.use(['layer', 'form','laydate','upload'], function(){
+	layui.use(['layer', 'form','laydate','upload','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
 	  	  laydate=layui.laydate,
 	  	  upload=layui.upload;
+	     chosedLayTable=layui.table;
 		
 		//日期
 		   laydate.render({
@@ -485,6 +513,121 @@ $(function(){
 		 	}
 		 }
 	   form.render();
+	   var param = {"projectId": data.projectId};
+	   $.ajax({
+           type: 'POST',
+           url: '/vote/pmprojectinfo/listContract',
+           data: JSON.stringify(param),
+           contentType: 'application/json',
+           success: function (res) {
+        	 chosedContractProject=res.page;
+	      chosedLayTable.render({
+	          id:"table-chosedProject1",
+	          elem: '#contractTable-chosed',
+	          height:'250',
+	          title: '合同数据信息',
+	          cols: [[
+	              {field:'contractCode', title:'合同编号'},
+	              {field:'contractName', title:'合同名称'},
+	              {fixed: 'right', title:'操作', toolbar: '#barFormDemo', width:100}
+	          ]],
+	          cellMinWidth:'90',
+	          data:chosedContractProject,
+	          page: true
+	      });
+           },
+           dataType: "json"
+       });
+	   
+	   
+	      chosedLayTable.on('tool(tableFilter1)', function(obj){
+	          var data = obj.data;
+	          if(obj.event === 'del'){
+	              layer.confirm('确认删除行么', function(index){
+	                  obj.del();
+	                  // 删除
+	                  for(var k in chosedContractProject){
+	                      if(data.contractId == chosedContractProject[k].contractId ){
+	                    	  chosedContractProject.splice(k,1)
+	                      }
+	                  }
+	                  console.log(chosedContractProject,'exit');
+	                  chosedLayTable.reload('table-chosedProject1',{
+	                      data:chosedContractProject
+	                  })
+	                  layer.close(index);
+
+	              });
+	          }
+	      });
+		  
+	      $.ajax({
+	           type: 'POST',
+	           url: '/vote/pmprojectinfo/listProduct',
+	           data: JSON.stringify(param),
+	           contentType: 'application/json',
+	           success: function (res) {
+	        	  chosedProductProject=res.page;
+	      chosedLayTable.render({
+	          id:"table-chosedProject2",
+	          elem: '#productTable-chosed',
+	          height:'250',
+	          title: '产品数据信息',
+	          cols: [[
+	              {field:'productCode', title:'产品编号'},
+	              {field:'productName', title:'产品名称'},
+	              {fixed: 'right', title:'操作', toolbar: '#barFormDemo', width:100}
+	          ]],
+	          cellMinWidth:'90',
+	          data:chosedProductProject,
+	          page: true
+	      });   
+	      },
+          dataType: "json"
+	       });
+
+	      
+	      chosedLayTable.on('tool(tableFilter2)', function(obj){
+	          var data = obj.data;
+	          if(obj.event === 'del'){
+	              layer.confirm('确认删除行么', function(index){
+	                  obj.del();
+	                  // 删除
+	                  for(var k in chosedProductProject){
+	                      if(data.productId == chosedProductProject[k].productId ){
+	                    	  chosedProductProject.splice(k,1)
+	                      }
+	                  }
+	                  console.log(chosedProductProject,'exit');
+	                  chosedLayTable.reload('table-chosedProject2',{
+	                      data:chosedProductProject
+	                  })
+	                  layer.close(index);
+
+	              });
+	          }
+	      });
+	      
+	      
+	      // 选择合同
+	      $("#project-edit-hook #contractQuery-hook").on("click",function(){
+	    	  	$.openWindow({
+	    	  		url:'contract',
+	    	  		title:"选择合同",
+	    	  		width:"700"
+	    	 	 });
+	    	}); 
+	      
+	      // 选择产品
+	      $("#project-edit-hook #productQuery-hook").on("click",function(){
+	    	  	$.openWindow({
+	    	  		url:'product',
+	    	  		title:"选择产品",
+	    	  		width:"700"
+	    	 	 });
+	    	}); 
+
+	      
 	  //选择投标
 	  $("#project-edit-hook #bidNameQuery-hook").click(function(){
 		  $.openWindow({
@@ -640,6 +783,8 @@ $(function(){
 		}
 		
 		var formDatas=$("#project-edit-hook form").serializeObject();
+		
+		  formDatas=$.extend({},true,formDatas,{pmContractInfo:chosedContractProject},{pmProductInfo:chosedProductProject});
 		 
 		$.ajax({
 			type:'POST',

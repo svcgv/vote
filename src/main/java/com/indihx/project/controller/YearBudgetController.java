@@ -67,6 +67,8 @@ public class YearBudgetController extends AbstractBaseController{
 		
 		view.addObject("act",act);
 		view.addObject("id",id);
+		view.addObject("budgetYear","2019年");// 当前年+1
+		view.addObject("projectType","01");//02  项目类型为产品 
 		
 		view.setViewName("/project/yearBudget/form2");
 		return view;
@@ -148,7 +150,8 @@ public class YearBudgetController extends AbstractBaseController{
 		ModelAndView view = new ModelAndView();
 		view.addObject("custName",custName);
 		view.addObject("custId",custId);
-		
+		view.addObject("projectType","01");//02  项目类型为产品
+		view.addObject("budgetYear","2019年");// 当前年+1
 		view.setViewName("/project/yearBudget/trTempl");
 		return view;
 	}

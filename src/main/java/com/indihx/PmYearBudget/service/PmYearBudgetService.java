@@ -17,7 +17,7 @@ public interface PmYearBudgetService {
 	public void delete(String yearBudgetCode);
 	public List<PmYearBudgetEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
-	public void insertList(List<PmYearBudgetEntity> listBean);
+	public void insertList(List<PmYearBudgetEntity> listBean,long userId);
 	public List<Map<String, Object>> queryListByMap(Map<String, Object> entity);
 }
 

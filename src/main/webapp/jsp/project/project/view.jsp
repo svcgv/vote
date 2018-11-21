@@ -270,14 +270,14 @@
 			</div>
 		   	
 		   	 <div class="layui-inline"  style="margin-right:64px;">
-			      <label class="layui-form-label">计提-人力：</label>
+			      <label class="layui-form-label">计提-外购人力(元)：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="accruedChargesWorkers" readonly='true' autocomplete="off" class="layui-input form-control">
 			     </div>
 			   </div>
 			    
 	   		<div class="layui-inline"  style="margin-right:64px;">
-			      <label class="layui-form-label">计提-产品及服务：</label>
+			      <label class="layui-form-label">计提-外购产品及服务(元)：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="accruedChargesProducts" readonly='true' autocomplete="off" class="layui-input form-control">
 			      </div>
@@ -299,11 +299,26 @@
 		   </div>
 		   	
 		   			   	
-		  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-		 	 <legend style="font-weight:bold;">合同信息</legend>
-		  </fieldset>
+		 <div class="layui-form-item clearfix" style="margin-bottom:0px;margin-left:10px;">
+			<div style="float:left;width: 140px;">
+				<p class="layui-form-label">合同引用列表：</p>
+			</div>
+			<div style="float:left;width:900px;">
+				<table class="layui-hide" id="contractTable-chosed" lay-filter="tableFilter1" style="overflow:hidden;"></table>
+			</div>
+	    </div>
 		   	
-		   <div class="milepost-list-wrapper" >
+		   	
+		<div class="layui-form-item clearfix" style="margin-bottom:0px;margin-left:10px;">
+			<div style="float:left;width: 140px;">
+				<p class="layui-form-label">产品引用列表：</p>
+			</div>
+			<div style="float:left;width:900px;">
+				<table class="layui-hide" id="productTable-chosed" lay-filter="tableFilter2" style="overflow:hidden;"></table>
+			</div>
+	    </div>
+		   	
+		   <div class="milepost-list-wrapper"  <c:if test="${projectType != '00' }"> style="display:none;"</c:if>>
 		    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 		 	 <legend style="font-weight:bold;">里程碑</legend>
 		     </fieldset>
@@ -469,13 +484,16 @@
     </div>
 </div>
 <script>
+var chosedContractProject=[];
+var chosedProductProject=[];
+var chosedLayTable=null;
 $(function(){
-	layui.use(['layer', 'form','laydate','upload'], function(){
+	layui.use(['layer', 'form','laydate','upload','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
 	  	  laydate=layui.laydate,
 	  	  upload=layui.upload;
-		
+		  chosedLayTable=layui.table;
 		//日期
 		  
 	
@@ -489,6 +507,56 @@ $(function(){
 		 	}
 		 }
 	   form.render();
+	   
+	   var param = {"projectId": data.projectId};
+	   $.ajax({
+           type: 'POST',
+           url: '/vote/pmprojectinfo/listContract',
+           data: JSON.stringify(param),
+           contentType: 'application/json',
+           success: function (res) {
+        	 chosedContractProject=res.page;
+	      chosedLayTable.render({
+	          id:"table-chosedProject1",
+	          elem: '#contractTable-chosed',
+	          height:'250',
+	          title: '合同数据信息',
+	          cols: [[
+	              {field:'contractCode', title:'合同编号'},
+	              {field:'contractName', title:'合同名称'}
+	          ]],
+	          cellMinWidth:'90',
+	          data:chosedContractProject,
+	          page: true
+	      });
+           },
+           dataType: "json"
+       });
+	   
+	   $.ajax({
+           type: 'POST',
+           url: '/vote/pmprojectinfo/listProduct',
+           data: JSON.stringify(param),
+           contentType: 'application/json',
+           success: function (res) {
+        	  chosedProductProject=res.page;
+      chosedLayTable.render({
+          id:"table-chosedProject2",
+          elem: '#productTable-chosed',
+          height:'250',
+          title: '产品数据信息',
+          cols: [[
+              {field:'productCode', title:'产品编号'},
+              {field:'productName', title:'产品名称'}
+          ]],
+          cellMinWidth:'90',
+          data:chosedProductProject,
+          page: true
+      });   
+      },
+      dataType: "json"
+       });
+
 	  //选择投标
 	  $("#project-view-hook #bidNameQuery-hook").click(function(){
 		  $.openWindow({
