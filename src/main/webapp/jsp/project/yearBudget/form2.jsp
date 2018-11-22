@@ -197,10 +197,7 @@ min-width:90px;
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
 						          <select name="projectType" lay-verify="required" lay-filter="projectType-filter" class="form-control">
-						        	<option value="">请选择</option>
-						        	<option value="01">项目</option>
-						        	<option value="02" selected>产品</option>
-						        	<option value="03" >人力</option>
+						        	 ${projectType2.ewTypeHtml}
 								  </select>
 					      	</div>
 			      		</div>
@@ -209,17 +206,17 @@ min-width:90px;
 			     
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline productItem ">
-			      			<span class="layui-badge layui-bg-gray" productCode="0">列表1</span>
-			      			<span class="layui-badge layui-bg-gray" productCode="01">列表1</span>
-			      			<span class="layui-badge layui-bg-gray" productCode="02">列表1</span>
+			      	<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
+			      		<div class="layui-input-inline item" style="margin:5px;">
+				      		<c:forEach items="${app2.productNameArr}" var="app3"  >
+				      			<span class="layui-badge layui-bg-gray" >${app3}</span>
+				      		</c:forEach>
+				      		<c:forEach items="${app2.productIdArr}" var="app3"  >
+				      			<input type="hidden" productCode="app3" />
+				      		</c:forEach>
 			      		</div>
-			      		<div class="layui-input-inline productItem">
-			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
-			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
-			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
-			      			<span class="layui-badge layui-bg-gray" productCode="03">列表2</span>
-			      		</div>
+					</c:forEach>
+			      		
 			      		<div class="layui-input-inline productItem copyAddItem">
 			      			<button type="button"  class="layui-btn layui-btn-sm productQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
 				      			<c:if test="${projectType == '02' }">
@@ -330,27 +327,18 @@ min-width:90px;
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>A</span>
-			      			<input type="hidden" name="taxType" value="A" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>B</span>
-			      			<input type="hidden"  name="taxType" value="B" />
-			      		</div>
+			      		<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      		  <select name="taxType" lay-verify="required" value='${app2.taxType}' lay-filter="" class="form-control">
+						        	 ${taxType.ewTypeHtml}
+							  </select>
+				      			
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
 						     	<select name="taxType" lay-verify="required" lay-filter="" class="form-control">
-						        	<option value="">请选择</option>
-						        	<option value="01" selected>A</option>
-						        	<option value="02">B</option>
-						        	<option value="03" >C</option>
-						        	<option value="04" >D</option>
-						        	<option value="05" >E</option>
-						        	<option value="06" >F</option>
-						        	<option value="07" >G</option>
-						        	<option value="08" >H</option>
-						        	<option value="09" >I</option>
+						        	 ${taxType.ewTypeHtml}
 							  </select>
 					      	 </div>
 			      		</div>
@@ -358,21 +346,18 @@ min-width:90px;
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>T&M</span>
-			      			<input type="hidden"  name="revRecognitionMethod" value="T&M" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>FA</span>
-			      			<input type="hidden"  name="revRecognitionMethod" value="FA" />
-			      		</div>
+			      		<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      		  <select name="revRecognitionMethod" lay-verify="required" value='${app2.revRecognitionMethod}' lay-filter="" class="form-control">
+						        	 ${revRecognitionMethod.ewTypeHtml}
+							  </select>
+				      			
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
 						     	<select name="revRecognitionMethod" lay-verify="required" lay-filter="" class="form-control">
-						        	<option value="">请选择</option>
-						        	<option value="01" selected>T&M</option>
-						        	<option value="02">FA</option>
-						        	<option value="03" >Others</option>
+						        	 ${revRecognitionMethod.ewTypeHtml}
 							   </select>
 					      	 </div>
 			      		</div>
@@ -380,14 +365,13 @@ min-width:90px;
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>中国</span>
-			      			<input type="hidden"  name="region" value="中国" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>香港</span>
-			      			<input type="hidden"  name="region" value="香港" />
-			      		</div>
+			      		<c:forEach items="${app.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      		  <select name="region" lay-verify="required" value='${app2.region}' lay-filter="" class="form-control">
+						        	 ${region.ewTypeHtml}
+							  </select>
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
 						     	<input type="text" name="region" class="layui-input form-control" />
@@ -397,23 +381,17 @@ min-width:90px;
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>美元</span>
-			      			<input type="hidden"  name="currency" value="美元" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>人民币</span>
-			      			<input type="hidden"  name="currency" value="人民币" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      		  <select name="region" lay-verify="required" value='${app2.currency}' lay-filter="" class="form-control">
+						        	 ${currency.ewTypeHtml}
+							  </select>
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
 						     	<select name="currency" lay-verify="required" lay-filter="" class="form-control">
-						        	<option value="">请选择</option>
-						        	<option value="01" selected>人民币</option>
-						        	<option value="02">美元</option>
-						        	<option value="03">欧元</option>
-						        	<option value="04">英镑</option>
-						        	<option value="05">日元</option>
+						        	 ${currency.ewTypeHtml}
 							   </select>
 					      	 </div>
 			      		</div>
@@ -421,119 +399,98 @@ min-width:90px;
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>12%</span>
-			      			<input type="hidden"  name="taxRate" value="12%" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>13%</span>
-			      			<input type="hidden"  name="taxRate" value="122%" />
-			      		</div>
+				      	<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="taxRate" value="${app2.taxRate}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="taxRate" class="layui-input form-control" />
+						     	<input type="number" name="taxRate" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>12%</span>
-			      			<input type="hidden"  name="grossProfitRate" value="12%" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>13%</span>
-			      			<input type="hidden"  name="grossProfitRate" value="13%" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="grossProfitRate" value="${app2.grossProfitRate}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="grossProfitRate" class="layui-input form-control" />
+						     	<input type="number" name="grossProfitRate" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list contractMoney">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>123456</span>
-			      			<input type="hidden"  name="contractMoney" value="123456" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>46548151</span>
-			      			<input type="hidden"  name="contractMoney" value="46548151" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="contractMoney" value="${app2.contractMoney}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-			      			 <input type="hidden"  name="contractMoney" value="" />
+			      			 <input type="number"  name="contractMoney" value="" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list manyYearRev">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="manyYearRev" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="manyYearRev" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="manyYearRev" value="${app2.manyYearRev}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-			      			 	<input type="hidden"  name="manyYearRev" value="" />
+			      			 	<input type="number"  name="manyYearRev" value="" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list curYearRev">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="curYearRev" value="22" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="curYearRev" value="22" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="curYearRev" value="${app2.curYearRev}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-			      			 	<input type="hidden"  name="curYearRev" value="" />
+			      			 	<input type="number"  name="curYearRev" value="" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list lastRev">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="lastRev" value="122" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="lastRev" value=12312 />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="lastRev" value="${app2.lastRev}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-			      			 	<input type="hidden"  name="lastRev" value="" />
+			      			 	<input type="number"  name="lastRev" value="" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="afterTax" value="123123" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			<span>65651616</span>
-			      			<input type="hidden"  name="afterTax" value="123123" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="afterTax" value="${app2.afterTax}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="afterTax" class="layui-input form-control" />
+						     	<input type="number" name="afterTax" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -541,204 +498,168 @@ min-width:90px;
 			      <!-- 12 revenue -->
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetJan" value="1" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetJan" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetJan" value="${app2.budgetJan}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetJan" class="layui-input form-control" />
+						     	<input type="number" name="budgetJan" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetFeb" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetFeb" value="2" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetFeb" value="${app2.budgetFeb}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetFeb" class="layui-input form-control" />
+						     	<input type="number" name="budgetFeb" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetMar" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetMar" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetMar" value="${app2.budgetMar}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetMar" class="layui-input form-control" />
+						     	<input type="number" name="budgetMar" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetApr" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetApr" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetApr" value="${app2.budgetApr}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetApr" class="layui-input form-control" />
+						     	<input type="number" name="budgetApr" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetMay" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetMay" value="112" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetMay" value="${app2.budgetMay}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetMay" class="layui-input form-control" />
+						     	<input type="number" name="budgetMay" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetJun" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetJun" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetJun" value="${app2.budgetJun}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetJun" class="layui-input form-control" />
+						     	<input type="number" name="budgetJun" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetJul" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetJul" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetJul" value="${app2.budgetJul}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetJul" class="layui-input form-control" />
+						     	<input type="number" name="budgetJul" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetAug" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetAug" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetAug" value="${app2.budgetAug}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetAug" class="layui-input form-control" />
+						     	<input type="number" name="budgetAug" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetSep" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetSep" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetSep" value="${app2.budgetSep}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetSep" class="layui-input form-control" />
+						     	<input type="number" name="budgetSep" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetOct" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetOct" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetOct" value="${app2.budgetOct}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetOct" class="layui-input form-control" />
+						     	<input type="number" name="budgetOct" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetNov" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetNov" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetNov" value="${app2.budgetNov}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetNov" class="layui-input form-control" />
+						     	<input type="number" name="budgetNov" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
 			      </td>
 			      <td>
 			      	<div class="project-list">
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>798865651</span>
-			      			<input type="hidden"  name="budgetDec" value="12" />
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px 0;">
-			      			<span>12</span>
-			      			<input type="hidden"  name="budgetDec" value="12" />
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item" style="margin:5px;">
+				      			<input type="number"  name="budgetDec" value="${app2.budgetDec}" />
+				      		</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
 			      			 <div class="layui-input-inline">
-						     	<input type="text" name="budgetDec" class="layui-input form-control" />
+						     	<input type="number" name="budgetDec" class="layui-input form-control" />
 					      	 </div>
 			      		</div>
 			      	</div>
@@ -746,12 +667,11 @@ min-width:90px;
 			      
 			      <td>
 			      	<div class="project-list2" style="width:90px;">
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			 <div class="layui-input-inline"></div>
-			      		</div>
-			      		<div class="layui-input-inline item" style="margin:5px;">
-			      			 <div class="layui-input-inline"></div>
-			      		</div>
+			      		<c:forEach items="${currency.pmYearBudgetEntity}" var="app2"  >
+				      		<div class="layui-input-inline item copyAddItem" style="margin:5px;">
+						      <button type="button"  class="layui-btn layui-btn-sm newProjectDelete-hook" style="vertical-align: top;background-color: #FF5722;"><i class="layui-icon layui-icon-close"></i>删除</button>
+			      			</div>
+						</c:forEach>
 			      		<div class="layui-input-inline item copyAddItem" style="margin:5px;">
 						      <button type="button"  class="layui-btn layui-btn-sm newProjectDelete-hook" style="vertical-align: top;background-color: #FF5722;"><i class="layui-icon layui-icon-close"></i>删除</button>
 			      		</div>

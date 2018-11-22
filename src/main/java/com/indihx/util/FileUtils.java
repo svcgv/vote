@@ -18,7 +18,7 @@ import com.indihx.comm.util.RandomUtil;
 
 public class FileUtils {
 
-	public static final String FILE_ROOT_PATH="D://upload/";
+	public static final String FILE_ROOT_PATH="E://upload/";
 	
 	
 	/**

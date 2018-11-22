@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.indihx.PmYearBudget.dao.PmYearBudgetMapper">
+<mapper
+	namespace="com.indihx.PmYearBudget.dao.PmYearBudgetMapper">
 	<!-- 可根据自己的需求，是否要使用 -->
-	<resultMap type="com.indihx.PmYearBudget.entity.PmYearBudgetEntity" id="pmYearBudgetMap">
+	<resultMap
+		type="com.indihx.PmYearBudget.entity.PmYearBudgetEntity"
+		id="pmYearBudgetMap">
 		<result property="yearBudgetCode" column="YEAR_BUDGET_CODE" />
 		<result property="isNewCust" column="IS_NEW_CUST" />
 		<result property="custName" column="CUST_NAME" />
@@ -11,7 +14,8 @@
 		<result property="wbs" column="WBS" />
 		<result property="projectType" column="PROJECT_TYPE" />
 		<result property="revebueSource" column="REVEBUE_SOURCE" />
-		<result property="companyEntityName" column="COMPANY_ENTITY_NAME" />
+		<result property="companyEntityName"
+			column="COMPANY_ENTITY_NAME" />
 		<result property="companyCode" column="COMPANY_CODE" />
 		<result property="contractId" column="CONTRACT_ID" />
 		<result property="contractCode" column="CONTRACT_CODE" />
@@ -45,7 +49,8 @@
 		<result property="remark" column="REMARK" />
 		<result property="reviewStatus" column="REVIEW_STATUS" />
 		<result property="budgetYear" column="BUDGET_YEAR" />
-		<result property="revRecognitionMethod" column="REV_RECOGNITION_METHOD" />
+		<result property="revRecognitionMethod"
+			column="REV_RECOGNITION_METHOD" />
 		<result property="productList" column="PRODUCT_LIST" />
 		<result property="taxRate" column="TAX_RATE" />
 		<result property="contractMoney" column="CONTRACT_MONEY" />
@@ -68,7 +73,8 @@
 		<result property="wbs" column="WBS" />
 		<result property="projectType" column="PROJECT_TYPE" />
 		<result property="revebueSource" column="REVEBUE_SOURCE" />
-		<result property="companyEntityName" column="COMPANY_ENTITY_NAME" />
+		<result property="companyEntityName"
+			column="COMPANY_ENTITY_NAME" />
 		<result property="companyCode" column="COMPANY_CODE" />
 		<result property="contractId" column="CONTRACT_ID" />
 		<result property="contractCode" column="CONTRACT_CODE" />
@@ -102,7 +108,8 @@
 		<result property="remark" column="REMARK" />
 		<result property="reviewStatus" column="REVIEW_STATUS" />
 		<result property="budgetYear" column="BUDGET_YEAR" />
-		<result property="revRecognitionMethod" column="REV_RECOGNITION_METHOD" />
+		<result property="revRecognitionMethod"
+			column="REV_RECOGNITION_METHOD" />
 		<result property="productList" column="PRODUCT_LIST" />
 		<result property="taxRate" column="TAX_RATE" />
 		<result property="contractMoney" column="CONTRACT_MONEY" />
@@ -111,20 +118,28 @@
 		<result property="lastRev" column="LAST_REV" />
 		<result property="afterTax" column="AFTER_TAX" />
 	</resultMap>
-	<select id="queryObject" resultMap="pmYearBudgetMap"> select * from PM_YEAR_BUDGET where YEAR_BUDGET_CODE = #{value}
+	<select id="queryObject" resultMap="pmYearBudgetMap"> select * from PM_YEAR_BUDGET
+		where YEAR_BUDGET_CODE = #{value}
 	</select>
 	<!-- 查用户对应多少条客户 -->
-	<select id="querySapCodeCount" resultMap="pmYearBudgetGroupHashMap"> SELECT SAP_CODE, CUST_NAME, "COUNT" (SAP_CODE) AS CUST_COUNT FROM
-		PM_YEAR_BUDGET WHERE CREATOR_ID = #{value} GROUP BY SAP_CODE,CUST_NAME
+	<select id="querySapCodeCount"
+		resultMap="pmYearBudgetGroupHashMap"> SELECT SAP_CODE, CUST_NAME, "COUNT" (SAP_CODE) AS
+		CUST_COUNT FROM
+		PM_YEAR_BUDGET WHERE CREATOR_ID = #{value} GROUP BY
+		SAP_CODE,CUST_NAME
 	</select>
-	<select id="queryProjectSapCodeCount" resultMap="pmYearBudgetGroupHashMap">
-		SELECT CUST_SAP_CODE SAP_CODE, CUST_NAME, "COUNT" (CUST_SAP_CODE) AS CUST_COUNT FROM PM_PROJECT_INFO WHERE
-		CUST_MANAGER_ID = #{userId} AND IS_DELETE='00' AND CUST_SAP_CODE is NOT null AND FINISH_PROJECT_TIME <![CDATA[<=]]>
-		#{finishProjectEndTime} GROUP BY CUST_SAP_CODE,CUST_NAME 
+	<select id="queryProjectSapCodeCount"
+		resultMap="pmYearBudgetGroupHashMap">
+		SELECT CUST_SAP_CODE SAP_CODE, CUST_NAME, "COUNT" (CUST_SAP_CODE) AS
+		CUST_COUNT FROM PM_PROJECT_INFO WHERE
+		CUST_MANAGER_ID = #{userId} AND
+		IS_DELETE='00' AND CUST_SAP_CODE is NOT null AND FINISH_PROJECT_TIME <![CDATA[<=]]>
+		#{finishProjectEndTime} GROUP BY CUST_SAP_CODE,CUST_NAME
 	</select>
 	<select id="queryList" resultMap="pmYearBudgetMap">
 		select * from PM_YEAR_BUDGET
-		<trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+		<trim prefix="WHERE" prefixOverrides="AND|OR"
+			suffixOverrides="AND|OR">
 			<if test="yearBudgetCode != null and yearBudgetCode!=''"> YEAR_BUDGET_CODE = #{yearBudgetCode} AND
 			</if>
 			<if test="isNewCust != null and isNewCust!=''"> IS_NEW_CUST = #{isNewCust} AND
@@ -209,7 +224,8 @@
 			</if>
 			<if test="budgetYear != null and budgetYear!=''"> BUDGET_YEAR = #{budgetYear} AND
 			</if>
-			<if test="revRecognitionMethod != null and revRecognitionMethod!=''"> REV_RECOGNITION_METHOD = #{revRecognitionMethod} AND
+			<if
+				test="revRecognitionMethod != null and revRecognitionMethod!=''"> REV_RECOGNITION_METHOD = #{revRecognitionMethod} AND
 			</if>
 			<if test="productList != null and productList!=''"> PRODUCT_LIST = #{productList} AND
 			</if>
@@ -227,9 +243,11 @@
 			</if>
 		</trim>
 	</select>
-	<select id="queryTotal" resultType="int"> select count(*) from PM_YEAR_BUDGET
+	<select id="queryTotal" resultType="int"> select count(*) from
+		PM_YEAR_BUDGET
 	</select>
-	<insert id="insert" parameterType="com.indihx.PmYearBudget.entity.PmYearBudgetEntity">
+	<insert id="insert"
+		parameterType="com.indihx.PmYearBudget.entity.PmYearBudgetEntity">
 		insert into PM_YEAR_BUDGET ( YEAR_BUDGET_CODE
 		<if test="isNewCust != null and isNewCust!=''"> ,IS_NEW_CUST
 		</if>
@@ -313,7 +331,8 @@
 		</if>
 		<if test="budgetYear != null and budgetYear!=''"> ,BUDGET_YEAR
 		</if>
-		<if test="revRecognitionMethod != null and revRecognitionMethod!=''"> ,REV_RECOGNITION_METHOD
+		<if
+			test="revRecognitionMethod != null and revRecognitionMethod!=''"> ,REV_RECOGNITION_METHOD
 		</if>
 		<if test="productList != null and productList!=''"> ,PRODUCT_LIST
 		</if>
@@ -412,7 +431,8 @@
 		</if>
 		<if test="budgetYear != null and budgetYear!=''"> ,#{budgetYear}
 		</if>
-		<if test="revRecognitionMethod != null and revRecognitionMethod!=''"> ,#{revRecognitionMethod}
+		<if
+			test="revRecognitionMethod != null and revRecognitionMethod!=''"> ,#{revRecognitionMethod}
 		</if>
 		<if test="productList != null and productList!=''"> ,#{productList}
 		</if>
@@ -430,7 +450,8 @@
 		</if>
 		)
 	</insert>
-	<update id="update" parameterType="com.indihx.PmYearBudget.entity.PmYearBudgetEntity">
+	<update id="update"
+		parameterType="com.indihx.PmYearBudget.entity.PmYearBudgetEntity">
 		update PM_YEAR_BUDGET
 		<set>
 			<if test="isNewCust != null and isNewCust!=''">IS_NEW_CUST = #{isNewCust},</if>
@@ -474,7 +495,8 @@
 			<if test="remark != null and remark!=''">REMARK = #{remark},</if>
 			<if test="reviewStatus != null and reviewStatus!=''">REVIEW_STATUS = #{reviewStatus},</if>
 			<if test="budgetYear != null and budgetYear!=''">BUDGET_YEAR = #{budgetYear},</if>
-			<if test="revRecognitionMethod != null and revRecognitionMethod!=''">REV_RECOGNITION_METHOD = #{revRecognitionMethod},</if>
+			<if
+				test="revRecognitionMethod != null and revRecognitionMethod!=''">REV_RECOGNITION_METHOD = #{revRecognitionMethod},</if>
 			<if test="productList != null and productList!=''">PRODUCT_LIST = #{productList},</if>
 			<if test="taxRate != null and taxRate!=''">TAX_RATE = #{taxRate},</if>
 			<if test="contractMoney != null and contractMoney!=''">CONTRACT_MONEY = #{contractMoney},</if>
@@ -485,13 +507,16 @@
 		</set>
 		where YEAR_BUDGET_CODE = #{yearBudgetCode}
 	</update>
-	<delete id="delete"> delete from PM_YEAR_BUDGET where YEAR_BUDGET_CODE = #{value}
+	<delete id="delete"> delete from PM_YEAR_BUDGET where YEAR_BUDGET_CODE =
+		#{value}
 	</delete>
-	<delete id="deleteByCreatorId"> delete from PM_YEAR_BUDGET where CREATOR_ID = #{value}
+	<delete id="deleteByCreatorId"> delete from PM_YEAR_BUDGET where CREATOR_ID =
+		#{value}
 	</delete>
 	<select id="queryListByMap" resultMap="pmYearBudgetHashMap">
 		select * from PM_YEAR_BUDGET
-		<trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
+		<trim prefix="WHERE" prefixOverrides="AND|OR"
+			suffixOverrides="AND|OR">
 			<if test="yearBudgetCode != null and yearBudgetCode!=''"> YEAR_BUDGET_CODE = #{yearBudgetCode} AND
 			</if>
 			<if test="isNewCust != null and isNewCust!=''"> IS_NEW_CUST = #{isNewCust} AND
@@ -576,7 +601,8 @@
 			</if>
 			<if test="budgetYear != null and budgetYear!=''"> BUDGET_YEAR = #{budgetYear} AND
 			</if>
-			<if test="revRecognitionMethod != null and revRecognitionMethod!=''"> REV_RECOGNITION_METHOD = #{revRecognitionMethod} AND
+			<if
+				test="revRecognitionMethod != null and revRecognitionMethod!=''"> REV_RECOGNITION_METHOD = #{revRecognitionMethod} AND
 			</if>
 			<if test="productList != null and productList!=''"> PRODUCT_LIST = #{productList} AND
 			</if>
@@ -594,4 +620,208 @@
 			</if>
 		</trim>
 	</select>
+	<insert id="insertMap" parameterType="java.util.Map">
+		insert into PM_YEAR_BUDGET ( YEAR_BUDGET_CODE
+		<if test="isNewCust != null and isNewCust!=''"> ,IS_NEW_CUST
+		</if>
+		<if test="custName != null and custName!=''"> ,CUST_NAME
+		</if>
+		<if test="sapCode != null and sapCode!=''"> ,SAP_CODE
+		</if>
+		<if test="projectName != null and projectName!=''"> ,PROJECT_NAME
+		</if>
+		<if test="wbs != null and wbs!=''"> ,WBS
+		</if>
+		<if test="projectType != null and projectType!=''"> ,PROJECT_TYPE
+		</if>
+		<if test="revebueSource != null and revebueSource!=''"> ,REVEBUE_SOURCE
+		</if>
+		<if test="companyEntityName != null and companyEntityName!=''"> ,COMPANY_ENTITY_NAME
+		</if>
+		<if test="companyCode != null and companyCode!=''"> ,COMPANY_CODE
+		</if>
+		<if test="contractId != null and contractId!=''"> ,CONTRACT_ID
+		</if>
+		<if test="contractCode != null and contractCode!=''"> ,CONTRACT_CODE
+		</if>
+		<if test="contractName != null and contractName!=''"> ,CONTRACT_NAME
+		</if>
+		<if test="poSow != null and poSow!=''"> ,PO_SOW
+		</if>
+		<if test="custManagerId != null and custManagerId!=''"> ,CUST_MANAGER_ID
+		</if>
+		<if test="custManagerName != null and custManagerName!=''"> ,CUST_MANAGER_NAME
+		</if>
+		<if test="taxType != null and taxType!=''"> ,TAX_TYPE
+		</if>
+		<if test="incommingType != null and incommingType!=''"> ,INCOMMING_TYPE
+		</if>
+		<if test="region != null and region!=''"> ,REGION
+		</if>
+		<if test="currency != null and currency!=''"> ,CURRENCY
+		</if>
+		<if test="grossProfitRate != null and grossProfitRate!=''"> ,GROSS_PROFIT_RATE
+		</if>
+		<if test="budgetJan != null and budgetJan!=''"> ,BUDGET_JAN
+		</if>
+		<if test="budgetFeb != null and budgetFeb!=''"> ,BUDGET_FEB
+		</if>
+		<if test="budgetMar != null and budgetMar!=''"> ,BUDGET_MAR
+		</if>
+		<if test="budgetApr != null and budgetApr!=''"> ,BUDGET_APR
+		</if>
+		<if test="budgetMay != null and budgetMay!=''"> ,BUDGET_MAY
+		</if>
+		<if test="budgetJun != null and budgetJun!=''"> ,BUDGET_JUN
+		</if>
+		<if test="budgetJul != null and budgetJul!=''"> ,BUDGET_JUL
+		</if>
+		<if test="budgetAug != null and budgetAug!=''"> ,BUDGET_AUG
+		</if>
+		<if test="budgetSep != null and budgetSep!=''"> ,BUDGET_SEP
+		</if>
+		<if test="budgetOct != null and budgetOct!=''"> ,BUDGET_OCT
+		</if>
+		<if test="budgetNov != null and budgetNov!=''"> ,BUDGET_NOV
+		</if>
+		<if test="budgetDec != null and budgetDec!=''"> ,BUDGET_DEC
+		</if>
+		<if test="budgetSum != null and budgetSum!=''"> ,BUDGET_SUM
+		</if>
+		<if test="creatorId != null and creatorId!=''"> ,CREATOR_ID
+		</if>
+		<if test="createTime != null and createTime!=''"> ,CREATE_TIME
+		</if>
+		<if test="modifier != null and modifier!=''"> ,MODIFIER
+		</if>
+		<if test="modifyTime != null and modifyTime!=''"> ,MODIFY_TIME
+		</if>
+		<if test="isDelete != null and isDelete!=''"> ,IS_DELETE
+		</if>
+		<if test="remark != null and remark!=''"> ,REMARK
+		</if>
+		<if test="reviewStatus != null and reviewStatus!=''"> ,REVIEW_STATUS
+		</if>
+		<if test="budgetYear != null and budgetYear!=''"> ,BUDGET_YEAR
+		</if>
+		<if
+			test="revRecognitionMethod != null and revRecognitionMethod!=''"> ,REV_RECOGNITION_METHOD
+		</if>
+		<if test="productList != null and productList!=''"> ,PRODUCT_LIST
+		</if>
+		<if test="taxRate != null and taxRate!=''"> ,TAX_RATE
+		</if>
+		<if test="contractMoney != null and contractMoney!=''"> ,CONTRACT_MONEY
+		</if>
+		<if test="manyYearRev != null and manyYearRev!=''"> ,MANY_YEAR_REV
+		</if>
+		<if test="curYearRev != null and curYearRev!=''"> ,CUR_YEAR_REV
+		</if>
+		<if test="lastRev != null and lastRev!=''"> ,LAST_REV
+		</if>
+		<if test="afterTax != null and afterTax!=''"> ,AFTER_TAX
+		</if>
+		) values ( #{yearBudgetCode}
+		<if test="isNewCust != null and isNewCust!=''"> ,#{isNewCust}
+		</if>
+		<if test="custName != null and custName!=''"> ,#{custName}
+		</if>
+		<if test="sapCode != null and sapCode!=''"> ,#{sapCode}
+		</if>
+		<if test="projectName != null and projectName!=''"> ,#{projectName}
+		</if>
+		<if test="wbs != null and wbs!=''"> ,#{wbs}
+		</if>
+		<if test="projectType != null and projectType!=''"> ,#{projectType}
+		</if>
+		<if test="revebueSource != null and revebueSource!=''"> ,#{revebueSource}
+		</if>
+		<if test="companyEntityName != null and companyEntityName!=''"> ,#{companyEntityName}
+		</if>
+		<if test="companyCode != null and companyCode!=''"> ,#{companyCode}
+		</if>
+		<if test="contractId != null and contractId!=''"> ,#{contractId}
+		</if>
+		<if test="contractCode != null and contractCode!=''"> ,#{contractCode}
+		</if>
+		<if test="contractName != null and contractName!=''"> ,#{contractName}
+		</if>
+		<if test="poSow != null and poSow!=''"> ,#{poSow}
+		</if>
+		<if test="custManagerId != null and custManagerId!=''"> ,#{custManagerId}
+		</if>
+		<if test="custManagerName != null and custManagerName!=''"> ,#{custManagerName}
+		</if>
+		<if test="taxType != null and taxType!=''"> ,#{taxType}
+		</if>
+		<if test="incommingType != null and incommingType!=''"> ,#{incommingType}
+		</if>
+		<if test="region != null and region!=''"> ,#{region}
+		</if>
+		<if test="currency != null and currency!=''"> ,#{currency}
+		</if>
+		<if test="grossProfitRate != null and grossProfitRate!=''"> ,#{grossProfitRate}
+		</if>
+		<if test="budgetJan != null and budgetJan!=''"> ,#{budgetJan}
+		</if>
+		<if test="budgetFeb != null and budgetFeb!=''"> ,#{budgetFeb}
+		</if>
+		<if test="budgetMar != null and budgetMar!=''"> ,#{budgetMar}
+		</if>
+		<if test="budgetApr != null and budgetApr!=''"> ,#{budgetApr}
+		</if>
+		<if test="budgetMay != null and budgetMay!=''"> ,#{budgetMay}
+		</if>
+		<if test="budgetJun != null and budgetJun!=''"> ,#{budgetJun}
+		</if>
+		<if test="budgetJul != null and budgetJul!=''"> ,#{budgetJul}
+		</if>
+		<if test="budgetAug != null and budgetAug!=''"> ,#{budgetAug}
+		</if>
+		<if test="budgetSep != null and budgetSep!=''"> ,#{budgetSep}
+		</if>
+		<if test="budgetOct != null and budgetOct!=''"> ,#{budgetOct}
+		</if>
+		<if test="budgetNov != null and budgetNov!=''"> ,#{budgetNov}
+		</if>
+		<if test="budgetDec != null and budgetDec!=''"> ,#{budgetDec}
+		</if>
+		<if test="budgetSum != null and budgetSum!=''"> ,#{budgetSum}
+		</if>
+		<if test="creatorId != null and creatorId!=''"> ,#{creatorId}
+		</if>
+		<if test="createTime != null and createTime!=''"> ,#{createTime}
+		</if>
+		<if test="modifier != null and modifier!=''"> ,#{modifier}
+		</if>
+		<if test="modifyTime != null and modifyTime!=''"> ,#{modifyTime}
+		</if>
+		<if test="isDelete != null and isDelete!=''"> ,#{isDelete}
+		</if>
+		<if test="remark != null and remark!=''"> ,#{remark}
+		</if>
+		<if test="reviewStatus != null and reviewStatus!=''"> ,#{reviewStatus}
+		</if>
+		<if test="budgetYear != null and budgetYear!=''"> ,#{budgetYear}
+		</if>
+		<if
+			test="revRecognitionMethod != null and revRecognitionMethod!=''"> ,#{revRecognitionMethod}
+		</if>
+		<if test="productList != null and productList!=''"> ,#{productList}
+		</if>
+		<if test="taxRate != null and taxRate!=''"> ,#{taxRate}
+		</if>
+		<if test="contractMoney != null and contractMoney!=''"> ,#{contractMoney}
+		</if>
+		<if test="manyYearRev != null and manyYearRev!=''"> ,#{manyYearRev}
+		</if>
+		<if test="curYearRev != null and curYearRev!=''"> ,#{curYearRev}
+		</if>
+		<if test="lastRev != null and lastRev!=''"> ,#{lastRev}
+		</if>
+		<if test="afterTax != null and afterTax!=''"> ,#{afterTax}
+		</if>
+		)
+	</insert>
+
 </mapper>

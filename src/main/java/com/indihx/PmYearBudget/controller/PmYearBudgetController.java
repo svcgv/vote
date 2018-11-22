@@ -117,9 +117,9 @@ public class PmYearBudgetController {
     public @ResponseBody Map<String,Object> saveList(@RequestBody Map<String,Object> pmYearBudget,HttpSession session) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException{
     	UsrInfo usesr = UserUtil.getUser(session);
     	
-    	List<Map<String,Object>> listMap = (List<Map<String, Object>>) pmYearBudget.get("budgetList");
-    	List<PmYearBudgetEntity> listBean = BeanUtils.MapList2BeanList(listMap, PmYearBudgetEntity.class);
-        pmYearBudgetService.insertList(listBean,usesr.getUsrId());
+    	/*List<Map<String,Object>> listMap = (List<Map<String, Object>>) pmYearBudget.get("budgetList");
+    	List<PmYearBudgetEntity> listBean = BeanUtils.MapList2BeanList(listMap, PmYearBudgetEntity.class);*/
+        pmYearBudgetService.insertMapList((List<Map<String, Object>>) pmYearBudget.get("budgetList"),usesr.getUsrId());
         return R.ok();
     }
     

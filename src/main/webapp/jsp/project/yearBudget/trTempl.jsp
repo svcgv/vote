@@ -57,7 +57,7 @@
     		<div class="layui-input-inline item" style="margin:5px 0;">
 	      		<c:if test="${custId !='' }">
       			<div class="layui-input-inline">
-      				<input type="text" name="projectName" readonly="readonly" class="layui-input form-control disabledColor"/>
+      				<input type="text" name="projectName"  class="layui-input form-control disabledColor"/>
       			</div>
 	      			<button type="button"  class="layui-btn layui-btn-sm projectNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search "></i></button>
 	      		</c:if>
@@ -70,7 +70,7 @@
       		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
       			<c:if test="${custId !='' }">
       			<div class="layui-input-inline">
-      				<input type="text" name="projectName" readonly="readonly" class="layui-input form-control disabledColor"/>
+      				<input type="text" name="projectName" class="layui-input form-control disabledColor"/>
       			</div>
 	      			<button type="button"  class="layui-btn layui-btn-sm projectNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search "></i></button>
 	      		</c:if>
@@ -87,20 +87,14 @@
     		<div class="layui-input-inline item" style="margin:5px 0;">
     			 <div class="layui-input-inline">
 			          <select name="projectType"  lay-filter="projectType-filter" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01" >项目</option>
-			        	<option value="02" selected>产品</option>
-			        	<option value="03" >人力</option>
+			        	 ${projectType2.ewTypeHtml}
 					  </select>
       			</div>
     		</div>
     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
     			 <div class="layui-input-inline">
 		          <select name="projectType"  lay-filter="projectType-filter" class="form-control">
-		        	<option value="">请选择</option>
-		        	<option value="01">项目</option>
-		        	<option value="02" selected>产品</option>
-		        	<option value="03" >人力</option>
+		        	${projectType2.ewTypeHtml}
 				  </select>
       			</div>
     		</div>
@@ -172,12 +166,12 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="entity" class="layui-input form-control" />
+		     		<input type="text" name="companyCode" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="entity" class="layui-input form-control" />
+		     		<input type="text" name="companyCode" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      	</div>
@@ -229,32 +223,14 @@
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
 			     	<select name="taxType"  lay-filter="" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01" selected>A</option>
-			        	<option value="02">B</option>
-			        	<option value="03" >C</option>
-			        	<option value="04" >D</option>
-			        	<option value="05" >E</option>
-			        	<option value="06" >F</option>
-			        	<option value="07" >G</option>
-			        	<option value="08" >H</option>
-			        	<option value="09" >I</option>
+			        	${taxType.ewTypeHtml}
 				  </select>
 	      		 </div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
 			     	<select name="taxType"  lay-filter="" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01" selected>A</option>
-			        	<option value="02">B</option>
-			        	<option value="03" >C</option>
-			        	<option value="04" >D</option>
-			        	<option value="05" >E</option>
-			        	<option value="06" >F</option>
-			        	<option value="07" >G</option>
-			        	<option value="08" >H</option>
-			        	<option value="09" >I</option>
+			        	${taxType.ewTypeHtml}
 				  </select>
 	      		 </div>
      		</div>
@@ -265,20 +241,14 @@
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
 			     	<select name="revRecognitionMethod"  lay-filter="" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01" selected>T&M</option>
-			        	<option value="02">FA</option>
-			        	<option value="03" >Others</option>
+			        	${revRecognitionMethod.ewTypeHtml}
 				   </select>
 		      	 </div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
 			     	<select name="revRecognitionMethod"  lay-filter="" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01" selected>T&M</option>
-			        	<option value="02">FA</option>
-			        	<option value="03" >Others</option>
+			        	${revRecognitionMethod.ewTypeHtml}
 				   </select>
 		      	 </div>
      		</div>
@@ -288,12 +258,17 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="region" class="layui-input form-control" />
+     			 	<select name="region"  lay-filter="" class="form-control">
+			        	${region.ewTypeHtml}
+				   </select>
+		     		
 	      		 </div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="region" class="layui-input form-control" />
+		     		<select name="region"  lay-filter="" class="form-control">
+			        	${region.ewTypeHtml}
+				   </select>
 	      		 </div>
      		</div>
      	</div>
@@ -303,24 +278,14 @@
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
 			     	<select name="currency" lay-filter="" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01" selected>人民币</option>
-			        	<option value="02">美元</option>
-			        	<option value="03">欧元</option>
-			        	<option value="04">英镑</option>
-			        	<option value="05">日元</option>
+			        	${currency.ewTypeHtml}
 				   </select>
 		      	 </div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
 			     	<select name="currency"  lay-filter="" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01" selected>人民币</option>
-			        	<option value="02">美元</option>
-			        	<option value="03">欧元</option>
-			        	<option value="04">英镑</option>
-			        	<option value="05">日元</option>
+			        	${currency.ewTypeHtml}
 				   </select>
 		      	 </div>
      		</div>
@@ -330,12 +295,12 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="taxRate" class="layui-input form-control" />
+		     		<input type="number" name="taxRate" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="taxRate" class="layui-input form-control" />
+		     		<input type="number" name="taxRate" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      	</div>
@@ -344,12 +309,12 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="grossProfitRate" class="layui-input form-control" />
+		     		<input type="number" name="grossProfitRate" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="grossProfitRate" class="layui-input form-control" />
+		     		<input type="number" name="grossProfitRate" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      	</div>
@@ -358,12 +323,12 @@
      	<div class="project-list contractMoney">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-     			 	<input type="hidden"  name="contractMoney" value="" />
+     			 	<input type="number"  name="contractMoney" value="" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-     			 	<input type="hidden"  name="contractMoney" value="" />
+     			 	<input type="number"  name="contractMoney" value="" />
 	      	 	</div>
      		</div>
      	</div>
@@ -372,12 +337,12 @@
      	<div class="project-list manyYearRev">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-     			 	<input type="hidden"  name="manyYearRev" value="" />
+     			 	<input type="number"  name="manyYearRev" value="" />
 	      		 </div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-     			 	<input type="hidden"  name="manyYearRev" value="" />
+     			 	<input type="number"  name="manyYearRev" value="" />
 	      		 </div>
      		</div>
      	</div>
@@ -386,12 +351,12 @@
      	<div class="project-list curYearRev">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-     			 	<input type="hidden"  name="curYearRev" value="" />
+     			 	<input type="number"  name="curYearRev" value="" class="layui-input form-control"/>
 	      		 </div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-     			 	<input type="hidden"  name="curYearRev" value="" />
+     			 	<input type="number"  name="curYearRev" value="" class="layui-input form-control"/>
 	      		 </div>
      		</div>
      	</div>
@@ -400,12 +365,12 @@
      	<div class="project-list lastRev">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-     			 	<input type="hidden"  name="lastRev" value="" />
+     			 	<input type="number"  name="lastRev" value="" class="layui-input form-control"/>
 	      		 </div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-     			 	<input type="hidden"  name="lastRev" value="" />
+     			 	<input type="number"  name="lastRev" value="" class="layui-input form-control"/>
 	      		 </div>
      		</div>
      	</div>
@@ -414,12 +379,12 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="afterTax" class="layui-input form-control" />
+		     		<input type="number" name="afterTax" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="afterTax" class="layui-input form-control" />
+		     		<input type="number" name="afterTax" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      	</div>
@@ -429,12 +394,12 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="jan" class="layui-input form-control" />
+		     		<input type="number" name="budgetJan" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="jan" class="layui-input form-control" />
+		     		<input type="number" name="budgetJan" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      	</div>
@@ -443,12 +408,12 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="feb" class="layui-input form-control" />
+		     		<input type="number" name="budgetFeb" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="feb" class="layui-input form-control" />
+		     		<input type="number" name="budgetFeb" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      	</div>
@@ -457,12 +422,12 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="mar" class="layui-input form-control" />
+		     		<input type="number" name="budgetMar" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="mar" class="layui-input form-control" />
+		     		<input type="number" name="budgetMar" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      	</div>
@@ -471,82 +436,12 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="apr" class="layui-input form-control" />
+		     		<input type="number" name="budgetApr" class="layui-input form-control" />
 	      		 </div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="apr" class="layui-input form-control" />
-	      		 </div>
-     		</div>
-     	</div>
-     </td>
-     <td>
-     	<div class="project-list">
-     		<div class="layui-input-inline item" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="may" class="layui-input form-control" />
-	      	 	</div>
-     		</div>
-     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="may" class="layui-input form-control" />
-	      	 	</div>
-     		</div>
-     	</div>
-     </td>
-     <td>
-     	<div class="project-list">
-     		<div class="layui-input-inline item" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="jun" class="layui-input form-control" />
-	      	 	</div>
-     		</div>
-     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="jun" class="layui-input form-control" />
-	      	 	</div>
-     		</div>
-     	</div>
-     </td>
-     <td>
-     	<div class="project-list">
-     		<div class="layui-input-inline item" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="jul" class="layui-input form-control" />
-	      	 	</div>
-     		</div>
-     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="jul" class="layui-input form-control" />
-	      	 	</div>
-     		</div>
-     	</div>
-     </td>
-     <td>
-     	<div class="project-list">
-     		<div class="layui-input-inline item" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="aug" class="layui-input form-control" />
-	      	 	</div>
-     		</div>
-     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="aug" class="layui-input form-control" />
-	      	 	</div>
-     		</div>
-     	</div>
-     </td>
-     <td>
-     	<div class="project-list">
-     		<div class="layui-input-inline item" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="sep" class="layui-input form-control" />
-	      		 </div>
-     		</div>
-     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="sep" class="layui-input form-control" />
+		     		<input type="number" name="budgetApr" class="layui-input form-control" />
 	      		 </div>
      		</div>
      	</div>
@@ -555,26 +450,12 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="oct" class="layui-input form-control" />
-	      		 </div>
-     		</div>
-     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="oct" class="layui-input form-control" />
-	      		 </div>
-     		</div>
-     	</div>
-     </td>
-     <td>
-     	<div class="project-list">
-     		<div class="layui-input-inline item" style="margin:5px 0;">
-     			 <div class="layui-input-inline">
-		     		<input type="text" name="nov" class="layui-input form-control" />
+		     		<input type="number" name="budgetMay" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="nov" class="layui-input form-control" />
+		     		<input type="number" name="budgetMay" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      	</div>
@@ -583,12 +464,96 @@
      	<div class="project-list">
      		<div class="layui-input-inline item" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="dec" class="layui-input form-control" />
+		     		<input type="number" name="budgetJun" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
      			 <div class="layui-input-inline">
-		     		<input type="text" name="dec" class="layui-input form-control" />
+		     		<input type="number" name="budgetJun" class="layui-input form-control" />
+	      	 	</div>
+     		</div>
+     	</div>
+     </td>
+     <td>
+     	<div class="project-list">
+     		<div class="layui-input-inline item" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetJul" class="layui-input form-control" />
+	      	 	</div>
+     		</div>
+     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetJul" class="layui-input form-control" />
+	      	 	</div>
+     		</div>
+     	</div>
+     </td>
+     <td>
+     	<div class="project-list">
+     		<div class="layui-input-inline item" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetAug" class="layui-input form-control" />
+	      	 	</div>
+     		</div>
+     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetAug" class="layui-input form-control" />
+	      	 	</div>
+     		</div>
+     	</div>
+     </td>
+     <td>
+     	<div class="project-list">
+     		<div class="layui-input-inline item" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetSep" class="layui-input form-control" />
+	      		 </div>
+     		</div>
+     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetSep" class="layui-input form-control" />
+	      		 </div>
+     		</div>
+     	</div>
+     </td>
+     <td>
+     	<div class="project-list">
+     		<div class="layui-input-inline item" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetOct" class="layui-input form-control" />
+	      		 </div>
+     		</div>
+     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetOct" class="layui-input form-control" />
+	      		 </div>
+     		</div>
+     	</div>
+     </td>
+     <td>
+     	<div class="project-list">
+     		<div class="layui-input-inline item" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetNov" class="layui-input form-control" />
+	      	 	</div>
+     		</div>
+     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetNov" class="layui-input form-control" />
+	      	 	</div>
+     		</div>
+     	</div>
+     </td>
+     <td>
+     	<div class="project-list">
+     		<div class="layui-input-inline item" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetDec" class="layui-input form-control" />
+	      	 	</div>
+     		</div>
+     		<div class="layui-input-inline item copyAddItem" style="margin:5px 0;">
+     			 <div class="layui-input-inline">
+		     		<input type="number" name="budgetDec" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      	</div>

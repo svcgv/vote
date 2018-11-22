@@ -5,6 +5,7 @@ import com.indihx.PmContractInfo.entity.PmContractInfoEntity;
 import com.indihx.PmProductInfo.entity.PmProductInfoEntity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -436,17 +437,17 @@ public class PmProjectInfoEntity extends BaseEntity implements Serializable {
 	 * 
 	 */
 
-	private long taxRate;
+	private BigDecimal taxRate;
 	/**
 	 * 
 	 */
 
-	private long budgetWithTax;
+	private BigDecimal budgetWithTax;
 	/**
 	 * 
 	 */
 
-	private long budgetNoTax;
+	private BigDecimal budgetNoTax;
 
 	private String requirement;
 
@@ -1617,42 +1618,42 @@ public class PmProjectInfoEntity extends BaseEntity implements Serializable {
 	/**
 	 * 设置：
 	 */
-	public void setTaxRate(long taxRate) {
+	public void setTaxRate(BigDecimal taxRate) {
 		this.taxRate = taxRate;
 	}
 
 	/**
 	 * 获取：
 	 */
-	public long getTaxRate() {
+	public BigDecimal getTaxRate() {
 		return taxRate;
 	}
 
 	/**
 	 * 设置：
 	 */
-	public void setBudgetWithTax(long budgetWithTax) {
+	public void setBudgetWithTax(BigDecimal budgetWithTax) {
 		this.budgetWithTax = budgetWithTax;
 	}
 
 	/**
 	 * 获取：
 	 */
-	public long getBudgetWithTax() {
+	public BigDecimal getBudgetWithTax() {
 		return budgetWithTax;
 	}
 
 	/**
 	 * 设置：
 	 */
-	public void setBudgetNoTax(long budgetNoTax) {
+	public void setBudgetNoTax(BigDecimal budgetNoTax) {
 		this.budgetNoTax = budgetNoTax;
 	}
 
 	/**
 	 * 获取：
 	 */
-	public long getBudgetNoTax() {
+	public BigDecimal getBudgetNoTax() {
 		return budgetNoTax;
 	}
 

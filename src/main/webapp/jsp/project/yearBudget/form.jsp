@@ -285,9 +285,9 @@ var table2=null;
 		  $("#budget-addForm-hook input[name='custName']").val('').attr("readonly",true).addClass("disabledColor");
 		  // wbs
 		  $("#budget-addForm-hook .showWBS-hook").show();
-		  $("#budget-addForm-hook input[name='wbsCode']").attr("readonly",true).addClass("disabledColor");
+		  $("#budget-addForm-hook input[name='wbs']").attr("readonly",true).addClass("disabledColor");
 		  // 项目名称
-		  $("#budget-addForm-hook input[name='projectName']").attr("readonly",true).addClass("disabledColor");
+		  $("#budget-addForm-hook input[name='projectName']").attr("readonly",false).addClass("disabledColor");
 		  
 		  
 	  }

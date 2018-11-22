@@ -50,6 +50,25 @@ public class PmYearBudgetServiceImpl implements PmYearBudgetService {
 			}
 		}
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public void insertMapList(List<Map<String,Object>> listMap, long userId) {
+		this.pmYearBudgetMapper.deleteByCreatorId(userId);
+		if (listMap != null && !listMap.isEmpty()) {
+			for (int i = 0; i < listMap.size(); i++) {
+
+				Map<String,Object> pmYearBudget = listMap.get(i);
+				if (pmYearBudget.get("budgetYear") == null || "".equals(pmYearBudget.get("budgetYear"))) {
+					pmYearBudget.put("budgetYear",DateUtil.getNextYearStr());
+				}
+				pmYearBudget.put("isDelete","00");
+				pmYearBudget.put("creatorId",userId);
+				pmYearBudget.put("createTime",DateUtil.getDateTime());
+				pmYearBudget.put("yearBudgetCode",RandomUtil.getCodeByType("YS"));
+				this.pmYearBudgetMapper.insertMap(pmYearBudget);
+			}
+		}
+	}
 
 	@Override
 	public List<PmYearBudgetEntity> queryList(Map<String, Object> entity) {
