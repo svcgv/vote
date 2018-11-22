@@ -16,6 +16,7 @@ public interface PmContractInfoService {
 	public void update(PmContractInfoEntity entity);
 	public void delete(long contractId);
 	public List<PmContractInfoEntity> queryList(Map<String, Object> entity);
+	public List<PmContractInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize);
 	public int queryTotal();
    
 }

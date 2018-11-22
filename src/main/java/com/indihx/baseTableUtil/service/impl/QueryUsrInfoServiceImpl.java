@@ -1,5 +1,6 @@
 package com.indihx.baseTableUtil.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.math.BigDecimal;
@@ -25,6 +26,15 @@ public class QueryUsrInfoServiceImpl implements QueryUsrInfoService {
    	}
 
    	public List<QueryUsrInfoEntity> queryList(Map<String, Object> entity){
+   		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
+   			entity.put("isDelete", "00");
+   		}
+   		return queryUsrInfoMapper.queryList(entity);
+   	}
+   	public List<QueryUsrInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize){
+		if(pageNum != null && pageSize != null) {
+			PageHelper.startPage(pageNum, pageSize);
+		}
    		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
    			entity.put("isDelete", "00");
    		}

@@ -13,6 +13,7 @@ import com.indihx.PmProductProjectRelation.entity.PmProductProjectRelationEntity
 import com.indihx.PmProductProjectRelation.service.PmProductProjectRelationService;
 import com.indihx.PmProjectInfo.dao.PmProjectInfoMapper;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
+import com.indihx.comm.util.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,11 +54,10 @@ public class PmProductInfoController {
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
+    public @ResponseBody ResponseData list(@RequestBody Map<String, Object> params,HttpSession session){
     	String str = (String) params.get("queryStr");
     	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
-		List<PmProductInfoEntity> pmProductInfo = pmProductInfoService.queryList(maps);
-        return R.ok().put("page", pmProductInfo);
+        return new ResponseData(pmProductInfoService.queryList(maps,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
     }
 
 

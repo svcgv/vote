@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.indihx.comm.util.DateUtil;
+import com.indihx.comm.util.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,11 +45,10 @@ public class PmCompanyInfoController {
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list( @RequestBody Map<String, Object> params ,HttpSession session){
+    public @ResponseBody ResponseData list( @RequestBody Map<String, Object> params ,HttpSession session){
     	String str = (String) params.get("queryStr");
     	Map<String,Object> maps = (Map<String,Object>)JSON.parse(str);
-		List<PmCompanyInfoEntity> pmCompanyInfo = pmCompanyInfoService.queryList(maps);
-        return R.ok().put("page", pmCompanyInfo);
+        return new ResponseData(pmCompanyInfoService.queryList(maps,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
     }
 
 

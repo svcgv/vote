@@ -1,5 +1,6 @@
 package com.indihx.PmContractInfo.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.indihx.PmContractProjectRelation.dao.PmContractProjectRelationMapper;
 import com.indihx.PmContractProjectRelation.entity.PmContractProjectRelationEntity;
 import com.indihx.PmPaymentPoint.dao.PmPaymentPointMapper;
@@ -39,6 +40,7 @@ public class PmContractInfoServiceImpl implements PmContractInfoService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(PmContractInfoEntity entity){
    		pmContractInfoMapper.insert(entity);
+   		if(entity.getProjectIds()!=null) {
 		for(Long projectId:entity.getProjectIds()) {
 			PmContractProjectRelationEntity relationEntity = new PmContractProjectRelationEntity();
 			PmProjectInfoEntity projectEntity = pmProjectInfoMapper.queryObject(projectId);
@@ -47,6 +49,7 @@ public class PmContractInfoServiceImpl implements PmContractInfoService {
 			relationEntity.setProjectId(projectId);
 			pmContractProjectRelationMapper.insert(relationEntity);
 		}
+   		}
    		List<PmPaymentPointEntity> paymentPointEntityList= entity.getPaymentPoint();
    		if(paymentPointEntityList !=null) {
    	   		for (PmPaymentPointEntity paymentPointEntity :paymentPointEntityList){
@@ -64,6 +67,7 @@ public class PmContractInfoServiceImpl implements PmContractInfoService {
 	public void update(PmContractInfoEntity entity){
 		pmContractInfoMapper.update(entity);
 		pmContractProjectRelationMapper.deleteByContractId(entity.getContractId());
+		if(entity.getProjectIds()!=null) {
 		for(Long projectId:entity.getProjectIds()) {
 			PmContractProjectRelationEntity relationEntity = new PmContractProjectRelationEntity();
 			PmProjectInfoEntity projectEntity = pmProjectInfoMapper.queryObject(projectId);
@@ -71,6 +75,7 @@ public class PmContractInfoServiceImpl implements PmContractInfoService {
 			relationEntity.setContractId(entity.getContractId());
 			relationEntity.setProjectId(projectId);
 			pmContractProjectRelationMapper.insert(relationEntity);
+		}
 		}
 		pmPaymentPointMapper.deleteByForeignId(entity.getContractId());
 		List<PmPaymentPointEntity> paymentPointEntityList= entity.getPaymentPoint();
@@ -98,6 +103,15 @@ public class PmContractInfoServiceImpl implements PmContractInfoService {
    		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
    			entity.put("isDelete", "00");
    		}
+   		return pmContractInfoMapper.queryList(entity);
+   	}
+   	public List<PmContractInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize){
+		if(pageNum != null && pageSize != null) {
+			PageHelper.startPage(pageNum, pageSize);
+		}
+//   		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
+//   			entity.put("isDelete", "00");
+//   		}
    		return pmContractInfoMapper.queryList(entity);
    	}
 }

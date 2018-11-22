@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSON;
+import com.indihx.comm.util.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,11 +42,10 @@ public class PmContractInfoController {
      * 列表
      */
     @RequestMapping(value="/list",method=RequestMethod.POST)
-    public @ResponseBody Map<String,Object> list(@RequestBody Map<String, Object> params,HttpSession session){
+    public @ResponseBody ResponseData list(@RequestBody Map<String, Object> params,HttpSession session){
         String str = (String) params.get("queryStr");
         Map<String,Object> maps = (Map<String,Object>) JSON.parse(str);
-		List<PmContractInfoEntity> pmContractInfo = pmContractInfoService.queryList(maps);
-        return R.ok().put("page", pmContractInfo);
+        return new ResponseData(pmContractInfoService.queryList(maps,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
     }
 
 
@@ -67,7 +67,7 @@ public class PmContractInfoController {
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmContractInfo.setCreatorId(usesr.getUsrId());
         pmContractInfo.setYearNumer(DateUtil.getYear(DateUtil.getDateTime()));
-    	pmContractInfo.setCreateTime(DateUtil.getDateTime());
+    	pmContractInfo.setCreateTime(DateUtil.formatFromDB(DateUtil.getSysDate()));
     	BigDecimal bigNumber = BigDecimal.valueOf(1);
     	BigDecimal bigNumber100 = BigDecimal.valueOf(100);
     	BigDecimal afterTaxAmount = pmContractInfo.getContractAmount().multiply(bigNumber.subtract
@@ -84,12 +84,14 @@ public class PmContractInfoController {
     public @ResponseBody Map<String,Object> update(@RequestBody PmContractInfoEntity pmContractInfo,HttpSession session){
     	UsrInfo usesr = UserUtil.getUser(session);
     	pmContractInfo.setModifier(usesr.getUsrId());
-    	pmContractInfo.setModifyTime(DateUtil.getDateTime());
-        BigDecimal bigNumber = BigDecimal.valueOf(1);
-        BigDecimal bigNumber100 = BigDecimal.valueOf(100);
-        BigDecimal afterTaxAmount = pmContractInfo.getContractAmount().multiply(bigNumber.subtract
-                (pmContractInfo.getTaxRate().divide(bigNumber100,3,RoundingMode.FLOOR)));
-        pmContractInfo.setAfterTaxContractAmount(afterTaxAmount);
+    	pmContractInfo.setModifyTime(DateUtil.formatFromDB(DateUtil.getSysDate()));
+    	if(pmContractInfo.getIsDelete() == null){
+            BigDecimal bigNumber = BigDecimal.valueOf(1);
+            BigDecimal bigNumber100 = BigDecimal.valueOf(100);
+            BigDecimal afterTaxAmount = pmContractInfo.getContractAmount().multiply(bigNumber.subtract
+                    (pmContractInfo.getTaxRate().divide(bigNumber100,3,RoundingMode.FLOOR)));
+            pmContractInfo.setAfterTaxContractAmount(afterTaxAmount);
+        }
         pmContractInfoService.update(pmContractInfo);//全部更新
         return R.ok();
     }

@@ -1,5 +1,6 @@
 package com.indihx.PmProductInfo.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.indihx.PmProductProjectRelation.dao.PmProductProjectRelationMapper;
 import com.indihx.PmProductProjectRelation.entity.PmProductProjectRelationEntity;
 import com.indihx.PmProjectInfo.dao.PmProjectInfoMapper;
@@ -65,6 +66,12 @@ public class PmProductInfoServiceImpl implements PmProductInfoService {
    	}
 
    	public List<PmProductInfoEntity> queryList(Map<String, Object> entity){
+   		return pmProductInfoMapper.queryList(entity);
+   	}
+   	public List<PmProductInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize){
+		if(pageNum != null && pageSize != null) {
+			PageHelper.startPage(pageNum, pageSize);
+		}
    		return pmProductInfoMapper.queryList(entity);
    	}
 }

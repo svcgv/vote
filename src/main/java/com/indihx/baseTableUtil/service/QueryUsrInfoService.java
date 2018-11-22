@@ -16,6 +16,7 @@ public interface QueryUsrInfoService {
 	public QueryUsrInfoEntity queryObject(long id);
 	
 	public List<QueryUsrInfoEntity> queryList(Map<String, Object> entity);
+	public List<QueryUsrInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize);
 	public int queryTotal();
 
 	public List<QueryUsrInfoEntity> queryBySaleGroupCode(String code);

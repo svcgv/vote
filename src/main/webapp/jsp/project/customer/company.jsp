@@ -16,6 +16,7 @@
 	      <label class="layui-form-label" >公司实体名称：</label>
 	       <div class="layui-input-inline">
 	         <input type="text" name="companyName"  autocomplete="off" class="layui-input form-control" >
+			   <input type="text" style="display: none;" name="isDelete" value="00" autocomplete="off" class="layui-input form-control" >
 	      </div>
 	    </div>
 	    

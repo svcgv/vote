@@ -1,5 +1,6 @@
 package com.indihx.PmCompanyInfo.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,12 @@ public class PmCompanyInfoServiceImpl implements PmCompanyInfoService {
    	}
 
    	public List<PmCompanyInfoEntity> queryList(Map<String, Object> entity){
+   		return pmCompanyInfoMapper.queryList(entity);
+   	}
+   	public List<PmCompanyInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize){
+		if(pageNum != null && pageSize != null) {
+			PageHelper.startPage(pageNum, pageSize);
+		}
    		return pmCompanyInfoMapper.queryList(entity);
    	}
 }

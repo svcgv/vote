@@ -1,5 +1,6 @@
 package com.indihx.PmConfirmBid.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.List;
@@ -38,6 +39,15 @@ public class PmConfirmBidServiceImpl implements PmConfirmBidService {
    	}
 
    	public List<PmConfirmBidEntity> queryList(Map<String, Object> entity){
+   		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
+   			entity.put("isDelete", "00");
+   		}
+   		return pmConfirmBidMapper.queryList(entity);
+   	}
+   	public List<PmConfirmBidEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize){
+		if(pageNum != null && pageSize != null) {
+			PageHelper.startPage(pageNum, pageSize);
+		}
    		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
    			entity.put("isDelete", "00");
    		}

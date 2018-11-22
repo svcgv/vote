@@ -17,6 +17,7 @@ public interface PmCustomerGroupService {
 	public void update(PmCustomerGroupEntity entity);
 	public void delete(String custGroupId);
 	public List<PmCustomerGroupEntity> queryList(Map<String, Object> entity);
+	public List<PmCustomerGroupEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize);
 	public int queryTotal();
    
 }

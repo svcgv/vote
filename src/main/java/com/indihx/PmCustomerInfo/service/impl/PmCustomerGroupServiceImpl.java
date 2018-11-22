@@ -1,5 +1,6 @@
 package com.indihx.PmCustomerInfo.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -75,4 +76,13 @@ public class PmCustomerGroupServiceImpl implements PmCustomerGroupService {
    		}
    		return pmCustomerGroupMapper.queryList(entity);
    	}
+	public List<PmCustomerGroupEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize){
+		if(pageNum != null && pageSize != null) {
+			PageHelper.startPage(pageNum, pageSize);
+		}
+		if(entity.get("isDelete") == null) {
+			entity.put("isDelete", "00");
+		}
+		return pmCustomerGroupMapper.queryList(entity);
+	}
 }

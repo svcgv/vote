@@ -16,6 +16,7 @@ public interface PmConfirmBidService {
 	public void update(PmConfirmBidEntity entity);
 	public void delete(long bidId);
 	public List<PmConfirmBidEntity> queryList(Map<String, Object> entity);
+	public List<PmConfirmBidEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize);
 	public int queryTotal();
    
 }

@@ -199,7 +199,6 @@
                     if(flag){
                         chosedProject.push(tempArray[k]);
                     }
-
                 }
                 console.log(chosedProject);
                 chosedLayTable.reload('table-chosedProject',{
