@@ -20,4 +20,5 @@ public interface PmReviewInfoMapper{
 	public int queryTotal();
 	public void updateIsDelete(PmReviewInfoEntity entity);
 	public List<Map<String,Object>> selectBidReview(Map<String,Object> entity);
+	public List<Map<String, Object>> selectProjectReview(Map<String, Object> par);
 }

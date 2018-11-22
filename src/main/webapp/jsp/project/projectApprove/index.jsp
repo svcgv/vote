@@ -183,15 +183,15 @@ var cols=[
  	 	      {field:'wbs', title:'WBS编号', width:150},
  	  	      {field:'projectName', title:'项目名称'},
 	 	  	   {field:'approveStatus', title:'审批状态',templet:function(d){
-	            if(d.projectStatus == "00"){
+	            if(d.approveStatus == "00"){
 	          		return "待申请";
-	          	}else if(d.projectStatus == "01"){
+	          	}else if(d.approveStatus == "01"){
 	          		return "交付部门负责人审批";
-	          	}else if(d.projectStatus == "02"){
+	          	}else if(d.approveStatus == "02"){
 	          		return "销售部门负责人审批";
-	          	}else if(d.projectStatus == "03"){
+	          	}else if(d.approveStatus == "03"){
 	          		return "总经理审批";
-	          	}else if(d.projectStatus == "04"){
+	          	}else if(d.approveStatus == "04"){
 	          		return "审批通过";
 	          	}
 	          }},
@@ -369,13 +369,13 @@ layui.use(['layer', 'form','laydate','table'], function(){
   	 	 });
   	});
     
-    var queryParams=$("#project-index-form").serializeObject();
+    var queryParams=$("#projectApprove-index-form").serializeObject();
     
   // table render
   table.render({
 	  	id:"customer-table",
 	    elem: '#productTable',
-		  url: '/vote/pmprojectinfo/list',
+		  url: '/vote/pmreviewinfo/selectProjectReview',
 	    method:'post',
 		where:{
 	           queryStr: JSON.stringify(queryParams)
@@ -414,7 +414,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 		  par.queryStr=JSON.stringify(queryParams)
 		 $.ajax({
 			  type: 'POST',
-			  url: '/vote/pmprojectinfo/list',
+			  url: '/vote/pmreviewinfo/selectProjectReview',
 			  data: JSON.stringify(par),
 			  contentType:'application/json',
 			  success: function(res){

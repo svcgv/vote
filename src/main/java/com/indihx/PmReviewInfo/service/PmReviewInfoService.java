@@ -18,5 +18,6 @@ public interface PmReviewInfoService {
 	public List<PmReviewInfoEntity> queryList(Map<String, Object> entity);
 	public int queryTotal();
 	public List<Map<String,Object>> selectBidReview(Map<String,Object> entity);
+	public List<Map<String, Object>> selectProjectReview(Map<String, Object> par);
 }
 
