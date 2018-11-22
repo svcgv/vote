@@ -2,6 +2,8 @@ package com.indihx.system.entity;
 
 import java.io.Serializable;
 
+import com.indihx.system.vo.BaseVo;
+
 
 /***
  * 
@@ -10,13 +12,15 @@ import java.io.Serializable;
  * <p>创建时间: 2018年11月16日</p>
  * 
  */
-public class ProfitInfo implements Serializable{
+public class ProfitInfo extends BaseVo{
 
 	private Long orgId;
 	
 	private String profitId;
 	
 	private String orgName;
+	
+	private String isDelete;
 	
 	
 	public Long getOrgId() {
@@ -41,6 +45,14 @@ public class ProfitInfo implements Serializable{
 
 	public void setOrgName(String orgName) {
 		this.orgName = orgName;
+	}
+
+	public String getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	

@@ -2,6 +2,8 @@ package com.indihx.system.entity;
 
 import java.io.Serializable;
 
+import com.indihx.system.vo.BaseVo;
+
 /***
  * 
  * <p>描 述: 成本中心信息</p>
@@ -9,15 +11,30 @@ import java.io.Serializable;
  * <p>创建时间: 2018年11月16日</p>
  * 
  */
-public class CostInfo implements Serializable{
+public class CostInfo extends BaseVo{
 	
 	
+	
+
 	private Long orgId;
 	
 	private String costId;
 	
 	private String orgName;
+	
+	private String isDelete;
+	
 
+	
+	public String getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
+	}
+	
+	
 	public Long getOrgId() {
 		return orgId;
 	}

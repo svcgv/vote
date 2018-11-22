@@ -2,10 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.indihx.system.dao.CostInfoMapper">
   <!-- 支持缓存配置(必须配置否则缓存无效) -->
-  <cache type="com.indihx.cache.RedisCache" />
+<!--   <cache type="com.indihx.cache.RedisCache" /> -->
   <resultMap id="BaseResultMap" type="com.indihx.system.entity.CostInfo">
     <result column="COST_ID" property="costId" />
     <result column="ORG_ID" property="orgId" />
+    <result column="ORG_NAME" property="orgName" />
+     <result column="IS_DELETE" property="isDelete" />
   </resultMap>
 
   <select id="queryCostInfoListByOrgId" resultMap="BaseResultMap" >
@@ -16,9 +18,93 @@
   		<if test="orgId != null and orgId !=0 ">
   			 a.org_id = #{orgId}
   		</if>
+  		<if test="isDelete != null and isDelete !='' ">
+  			 a.IS_DELETE = #{isDelete}
+  		</if>
+  	</where> 
+  		
+  </select>
+  
+  
+   <select id="qryCostInfoByCostId" resultMap="BaseResultMap" >
+  	select a.*,b.org_name
+    from cost_info a 
+    left join org_info b on a.org_id =b.org_no
+  	 <where>
+  		<if test="costId != null and costId !='' ">
+  			 a.cost_id = #{costId}
+  		</if>
+  		<if test="isDelete != null and isDelete !='' ">
+  			 a.IS_DELETE = #{isDelete}
+  		</if>
   		
   	</where> 
   		
   </select>
+  
+  
+  <select id="qryCostInfoList" resultMap="BaseResultMap" >
+  	select a.*,b.org_name
+    from cost_info a 
+    left join org_info b on a.org_id =b.org_no
+  	 <where>
+  		<if test="orgId != null and orgId !=0 ">
+  			 a.org_id = #{orgId}
+  		</if>
+  		<if test="costId != null and costId !='' ">
+  			 a.cost_id = #{costId}
+  		</if>
+  		<if test="orgName != null and orgName !='' ">
+  			 b.org_name = #{orgName}
+  		</if>
+  		<if test="isDelete != null and isDelete !='' ">
+  			 a.IS_DELETE = #{isDelete}
+  		</if>
+  		
+  	</where> 
+  		
+  </select>
+  
+  <insert id="addCostInfo" parameterType="com.indihx.system.entity.CostInfo">
+		insert into cost_info
+		(
+		
+		<if test="costId != null and  costId !=''" >
+			COST_ID
+		</if>
+		<if test="orgId != null and orgId  !=''">
+			,ORG_ID	
+		</if>
+		,IS_DELETE	
+		
+		)
+		values
+		(
+		
+		<if test="costId != null and  costId !=''">
+			#{costId}		</if>
+		<if test="orgId != null and  orgId !=''">
+			,#{orgId}		</if>
+			,'0'
+		
+		)
+		
+	</insert>
+	
+	
+	<update id="updateCostInfo" parameterType="com.indihx.system.entity.CostInfo">
+		update cost_info 
+		<set>
+			<if test="costId != null and costId  !=''">COST_ID = #{costId}, </if>
+			<if test="orgId != null and orgId  !=''">ORG_ID = #{orgId} </if>
+			<if test="isDelete != null and isDelete  !=''">IS_DELETE = #{isDelete} </if>
+		</set>
+		where  COST_ID= #{costId}
+	</update>
+	
+	<delete id="delete">
+		delete from cost_info where COST_ID= #{costId}
+	</delete>
+  
  
 </mapper>
