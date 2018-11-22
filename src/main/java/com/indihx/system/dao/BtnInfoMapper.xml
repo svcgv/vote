@@ -104,13 +104,13 @@
   		order by info.btn_id,info.btn_name ASC
   </select>
   <select id="qryRoleBtnAll" resultMap="BaseResultMap" parameterType="com.indihx.system.entity.BtnInfo">
-  	select info.btn_id,info.btn_name, info.btn_rmk, info.btn_page, info.tm_smp,role.btn_id as roleBtnId
+  	select distinct info.btn_id,info.btn_name, info.btn_rmk, info.btn_page, info.tm_smp,role.btn_id as roleBtnId
     from btn_info info left join btn_role role on info.btn_id = role.btn_id 
     left join role_menu menu on info.menu_id = menu.menu_id
     
   	 <where>
   	 	<if test="roleId != null and roleId !=''">
-  			 menu.role_id  =#{roleId,jdbcType=VARCHAR}
+  			 role.role_id  =#{roleId,jdbcType=VARCHAR}
   		</if>
   	 
   		<if test="btnName != null and btnName !=''">

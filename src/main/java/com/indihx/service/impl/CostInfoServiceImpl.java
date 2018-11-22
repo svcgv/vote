@@ -21,14 +21,53 @@ public class CostInfoServiceImpl implements ICostInfoService{
 	private CostInfoMapper mapper;
 
 	@Override
-	public List<CostInfo> qryCostInfoListByOrgId(Long orgId) {
+	public List<CostInfo> qryCostInfoListByOrgId(long orgId) {
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("orgId", orgId);
+		param.put("isDelete", "0");
 		
 		List<CostInfo> costInfos = mapper.queryCostInfoListByOrgId(param); 
 	
 		return costInfos;
+	}
+
+	@Override
+	public List<CostInfo> qryCostInfoList(Map<String, Object> entity) {
+		
+		entity.put("isDelete", "0");
+		return mapper.qryCostInfoList(entity);
+	}
+	
+
+	@Override
+	public CostInfo quetyCostInfoByCostId(String costId) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("costId", costId);
+		param.put("isDelete", "0");
+		return mapper.qryCostInfoByCostId(param);
+	}
+
+	@Override
+	public void addCostInfo(CostInfo costInfo) {
+		
+		mapper.addCostInfo(costInfo);
+	}
+
+	@Override
+	public void updateCostInfo(CostInfo costInfo) {
+		
+		
+		mapper.updateCostInfo(costInfo);
+		
+	}
+
+	
+
+	@Override
+	public void delCostInfo(long costId) {
+		mapper.delete(costId);
 	}
 
 	
