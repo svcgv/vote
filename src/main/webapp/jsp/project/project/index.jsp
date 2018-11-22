@@ -152,7 +152,7 @@
  
 <script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="projectReview">项目审批</a>
+  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="projectReview">提交评审</a>
   <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="view">查看</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -408,8 +408,45 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	// 查看
 	    	showFromTable('view',data.projectId);
 	    }else if(obj.event == "projectReview"){
-	    	// 评审
-	    	showFromTable('projectReview',data.projectId);
+	    	if(data.approveStatus!=='00'){
+	    		layer.msg("当前已发起过评审，请勿重复发起",{icon:5});
+	    		return;
+	    	}
+	    	
+	    	 var queryParams=$("#project-index-form").serializeObject();
+	    	
+	    	 $.ajax({
+	                type:'POST',
+	                url:'/vote/pmprojectinfo/submit',
+	                contentType:'application/json',
+	                data: JSON.stringify(data),
+	                success:function(res){
+	                	if(res.code!=0){
+	                		 layer.msg(res.msg,{icon:3});
+	                		 return
+	                	}
+	                    layer.msg("发起评审成功",{icon:1});
+	                    table.reload('customer-table',{
+	        				url:'/vote/pmprojectinfo/list',
+	        				page:{
+	        					curr:1 //从第一页开始
+	        				},
+	        			    method:'post',
+	        				where:{
+	        					queryStr:JSON.stringify(queryParams)
+	        				},
+	        				contentType: 'application/json',
+	        			    response: {
+	        			    	dataName: 'page'
+	        			    }
+
+	        			})
+	                },
+	                error:function(){
+	                    layer.msg("发起评审失败",{icon:5});
+	                },
+	                dataType: "json"
+	            });
 	    }
 	  });
 	/*

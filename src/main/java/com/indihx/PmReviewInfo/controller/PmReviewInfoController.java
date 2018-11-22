@@ -2,6 +2,8 @@ package com.indihx.PmReviewInfo.controller;
 
 
 import java.util.Map;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -22,8 +24,13 @@ import com.indihx.util.UserUtil;
 import com.alibaba.fastjson.JSON;
 import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
+import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
+import com.indihx.PmProjectInfo.service.PmProjectInfoService;
 import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
 import com.indihx.PmReviewInfo.service.PmReviewInfoService;
+import com.indihx.baseTableUtil.entity.QueryUsrInfoEntity;
+import com.indihx.baseTableUtil.service.QueryUsrInfoService;
+import com.indihx.baseTableUtil.service.impl.QueryOrgInfoServiceImpl;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
@@ -42,6 +49,12 @@ public class PmReviewInfoController {
     private PmReviewInfoService pmReviewInfoService;
     @Autowired
     private PmConfirmBidService pmConfirmBidService;
+    @Autowired
+    private PmProjectInfoService pmProjectInfoService;
+    @Autowired
+    private QueryUsrInfoService usrInfoService;
+    @Autowired
+    private QueryOrgInfoServiceImpl queryOrgInfoServiceImpl;
     /**
      * 列表
      */
@@ -127,6 +140,17 @@ public class PmReviewInfoController {
 		List<Map<String, Object>> pmReviewInfo = pmReviewInfoService.selectBidReview(par);
         return R.ok().put("page", pmReviewInfo);
     }
+    
+    @RequestMapping(value="/selectProjectReview",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> selectProjectReview(@RequestBody Map<String, Object> params,HttpSession session){
+    	String str = (String) params.get("queryStr");
+    	Map<String,Object> par = (Map<String,Object>)JSON.parse(str);
+    	UsrInfo usesr = UserUtil.getUser(session);
+    	par.put("reviewUserCode", usesr.getUsrId());
+    	par.put("reviewType", "01");
+    	List<Map<String, Object>> pmReviewInfo = pmReviewInfoService.selectProjectReview(par);
+        return R.ok().put("page", pmReviewInfo);
+    }
 
     /**
      * 修改
@@ -175,6 +199,50 @@ public class PmReviewInfoController {
     			 base.setIsDelete("01");
     			 pmReviewInfoService.update(base);
     		 }
+    	 }
+    	 
+    	 
+    	 if("01".equals(pmReviewInfo.getReviewType())) {
+    		 PmProjectInfoEntity pmProjectInfoEntity = pmProjectInfoService.queryObject(base.getForeignId());
+    		 String approveStatus = ReviewUtils.getProjectNextState(pmProjectInfoEntity.getApproveStatus(),pmReviewInfo.getResult(),pmProjectInfoEntity);
+    		 pmProjectInfoEntity.setApproveStatus(approveStatus);
+    		 pmProjectInfoService.update(pmProjectInfoEntity);
+    		 
+    		 if(!("00".equals(approveStatus)||"04".equals(approveStatus))) {
+    			 if("02".equals(approveStatus)) {
+    				 reviewEntity.setReviewUserCode(pmProjectInfoEntity.getSellManagerId());
+    				 reviewEntity.setReviewUserName(pmProjectInfoEntity.getSellManagerName());
+    			 }
+    			 
+    			 
+    			 if("03".equals(approveStatus)) {
+    				BigDecimal bd =  new BigDecimal(1000);
+    			    List<Map<String,Object>> children = queryOrgInfoServiceImpl.queryAllChildrenOrgList(bd);
+    			    List<BigDecimal> list = new ArrayList<BigDecimal>();
+    			    list.add(bd);
+    			    if(children!=null && !children.isEmpty()) {
+    			    	for(int i = 0;i<children.size();i++) {
+    			    		Map<String,Object> map = children.get(i);
+    			    		list.add(new BigDecimal( Integer.parseInt(map.get("orgId").toString())));
+    			    	}
+    			    }
+    				 
+    				 Map<String,Object> queryParam = new HashMap<String,Object>();
+    			     queryParam.put("orgList", list);
+    				 queryParam.put("roleCode", "MAIN_MANAGER");
+    				 List<QueryUsrInfoEntity> list1= usrInfoService.queryUserByRoleCodeUnderOrgNo(queryParam);
+    				 if(list1.size()>0) {
+    					 reviewEntity.setReviewUserCode(list1.get(0).getUsrId());
+        				 reviewEntity.setReviewUserName(list1.get(0).getUsrName());
+    				 }
+    			 }
+    			 
+    			 pmReviewInfoService.insert(reviewEntity);
+    		 } else {
+    			 base.setIsDelete("01");
+    			 pmReviewInfoService.update(base);
+    		 }
+    		 
     	 }
          
          return R.ok();

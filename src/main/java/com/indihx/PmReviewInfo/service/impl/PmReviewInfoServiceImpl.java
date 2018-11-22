@@ -49,7 +49,10 @@ public class PmReviewInfoServiceImpl implements PmReviewInfoService {
    	}
 	@Override
 	public List<Map<String, Object>> selectBidReview(Map<String,Object> entity) {
-		// TODO Auto-generated method stub
 		return pmReviewInfoMapper.selectBidReview(entity);
+	}
+	@Override
+	public List<Map<String, Object>> selectProjectReview(Map<String, Object> par) {
+		return pmReviewInfoMapper.selectProjectReview(par);
 	}
 }
