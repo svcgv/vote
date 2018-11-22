@@ -16,13 +16,13 @@
     left join org_info b on a.org_id =b.org_no
   	 <where>
   		<if test="orgId != null and orgId !=0 ">
-  			 a.org_id = #{orgId}
+  			 a.org_id = #{orgId} and
   		</if>
   		<if test="profitId != null and profitId !=0 ">
-  			 a.profit_id = #{profitId}
+  			 a.profit_id = #{profitId} and
   		</if>
   		<if test="orgName != null and orgName !=0 ">
-  			 a.org_name = #{orgName}
+  			 a.org_name = #{orgName} and
   		</if>
   		<if test="isDelete != null and isDelete !='' ">
   			 a.IS_DELETE = #{isDelete}
@@ -37,7 +37,7 @@
     left join org_info b on a.org_id =b.org_no
   	 <where>
   		<if test="orgId != null and orgId !=0 ">
-  			 a.org_id =#{orgId}
+  			 a.org_id =#{orgId} and
   		</if>
   		<if test="isDelete != null and isDelete !='' ">
   			 a.IS_DELETE = #{isDelete}
@@ -52,7 +52,7 @@
     left join org_info b on a.org_id =b.org_no
   	 <where>
   		<if test="profitId != null and profitId !=0 ">
-  			 a.profit_id =#{profitId}
+  			 a.profit_id =#{profitId} and
   		</if>
   		<if test="isDelete != null and isDelete !='' ">
   			 a.IS_DELETE = #{isDelete}
@@ -97,7 +97,7 @@
 			<if test="orgId != null and orgId  !=''">ORG_ID = #{orgId} </if>
 			<if test="isDelete != null and isDelete  !=''">IS_DELETE = #{isDelete} </if>
 		</set>
-		where  COST_ID= #{costId}
+		where  PROFIT_ID= #{profitId}
 	</update>
   
   

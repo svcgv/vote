@@ -110,7 +110,7 @@
     
   	 <where>
   	 	<if test="roleId != null and roleId !=''">
-  			 role.role_id  =#{roleId,jdbcType=VARCHAR}
+  			 memu.role_id  =#{roleId,jdbcType=VARCHAR}
   		</if>
   	 
   		<if test="btnName != null and btnName !=''">

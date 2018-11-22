@@ -16,7 +16,7 @@
     left join org_info b on a.org_id =b.org_no
   	 <where>
   		<if test="orgId != null and orgId !=0 ">
-  			 a.org_id = #{orgId}
+  			 a.org_id = #{orgId} and
   		</if>
   		<if test="isDelete != null and isDelete !='' ">
   			 a.IS_DELETE = #{isDelete}
@@ -32,7 +32,7 @@
     left join org_info b on a.org_id =b.org_no
   	 <where>
   		<if test="costId != null and costId !='' ">
-  			 a.cost_id = #{costId}
+  			 a.cost_id = #{costId} and
   		</if>
   		<if test="isDelete != null and isDelete !='' ">
   			 a.IS_DELETE = #{isDelete}
@@ -49,13 +49,13 @@
     left join org_info b on a.org_id =b.org_no
   	 <where>
   		<if test="orgId != null and orgId !=0 ">
-  			 a.org_id = #{orgId}
+  			 a.org_id = #{orgId} and
   		</if>
   		<if test="costId != null and costId !='' ">
-  			 a.cost_id = #{costId}
+  			 a.cost_id = #{costId} and
   		</if>
   		<if test="orgName != null and orgName !='' ">
-  			 b.org_name = #{orgName}
+  			 b.org_name = #{orgName} and
   		</if>
   		<if test="isDelete != null and isDelete !='' ">
   			 a.IS_DELETE = #{isDelete}

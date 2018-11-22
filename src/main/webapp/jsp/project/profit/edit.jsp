@@ -177,7 +177,7 @@ $(function(){
 	});
 	
 	// 关闭
-	$("#project-edit-hook #customerGroup-close-hook").click(function(){
+	$("#profit-edit-hook #customerGroup-close-hook").click(function(){
 		win.close();
 		return false;
 	})

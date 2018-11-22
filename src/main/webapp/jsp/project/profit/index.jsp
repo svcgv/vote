@@ -155,7 +155,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	        obj.del();
 	        var param = {}
            param.isDelete = '1';
-            param.costId = data.costId;
+            param.profitId = data.profitId;
             console.log(param)
             
             

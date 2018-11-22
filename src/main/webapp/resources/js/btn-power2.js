@@ -3,8 +3,8 @@
  * *************初始化页面，调用后台查询当前页面按钮当前用户是否有操作权限**************
  * *************有操作权限，可以点击************** 无操作权限，不可以点击或隐藏不可见*************
  ******************************************************************************/
-$(function() {
-	var _btnList = $(':button');
+$.buttonAuthority=function(){
+	var _btnList = $(':button,a');
 	var initButton = function(btnList) {
 		for (var i = 0; i < _btnList.length; i++) {
 			var power = $(_btnList[i]).attr('power');
@@ -31,5 +31,8 @@ $(function() {
 			}
 		});
 	}
-
+}
+$(function() {
+	
+	$.buttonAuthority();
 })

@@ -16,47 +16,49 @@ public class ProfitInfoServiceImpl implements IProfitInfoService{
 
 	@Autowired
 	private ProfitInfoMapper mapper;
-	
+
+	@Override
+	public void addCostInfo(ProfitInfo profitInfo) {
+		this.mapper.addProfitInfo(profitInfo);
+	}
+
+
+
+
+	@Override
+	public List<ProfitInfo> qryListAll(Map<String, Object> entity) {
+
+		entity.put("isDelete", "0");
+		return this.mapper.queryListAll(entity);
+	}
+
 	@Override
 	public ProfitInfo queryProfitInfoByOrgId(Long orgId) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("orgId", orgId);
-		ProfitInfo info = mapper.queryProfitInfoByOrgId(param);
+		param.put("isDelete", "0");
+		ProfitInfo info = this.mapper.queryProfitInfoByOrgId(param);
 		return info;
 	}
-	
-	
-	
-
-	@Override
-	public List<ProfitInfo> qryListAll(Map<String, Object> entity) {
-		
-		return mapper.queryListAll(entity);
-	}
-
-	@Override
-	public void addCostInfo(ProfitInfo profitInfo) {
-		mapper.addProfitInfo(profitInfo);
-	}
-
-	@Override
-	public void updateCostInfo(ProfitInfo profitInfo) {
-		
-		mapper.updateProfitInfo(profitInfo);
-		
-	}
-
-
-
 
 	@Override
 	public ProfitInfo queryProfitInfoByProfitId(String profitId) {
-		
-		
+
+
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("profitId", profitId);
 		param.put("isDelete", "0");
-		return mapper.queryProfitInfoByProfitId(param);
+		return this.mapper.queryProfitInfoByProfitId(param);
+	}
+
+
+
+
+	@Override
+	public void updateCostInfo(ProfitInfo profitInfo) {
+
+		this.mapper.updateProfitInfo(profitInfo);
+
 	}
 
 }

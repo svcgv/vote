@@ -4,7 +4,7 @@
  * *************有操作权限，可以点击************** 无操作权限，不可以点击或隐藏不可见*************
  ******************************************************************************/
 $(function() {
-	var _btnList = $(':button');
+	var _btnList = $(':button,a');
 	var initButton = function(btnList) {
 		for (var i = 0; i < _btnList.length; i++) {
 			var power = $(_btnList[i]).attr('power');
