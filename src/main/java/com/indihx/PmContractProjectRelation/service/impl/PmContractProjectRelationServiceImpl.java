@@ -43,4 +43,10 @@ public class PmContractProjectRelationServiceImpl implements PmContractProjectRe
    		}
    		return pmContractProjectRelationMapper.queryList(entity);
    	}
+	public List<PmContractProjectRelationEntity> queryListProject(Map<String, Object> entity){
+		if(entity.get("isDelete")==null||"".equals(entity.get("isDelete"))) {
+			entity.put("isDelete", "00");
+		}
+		return pmContractProjectRelationMapper.queryListProject(entity);
+	}
 }

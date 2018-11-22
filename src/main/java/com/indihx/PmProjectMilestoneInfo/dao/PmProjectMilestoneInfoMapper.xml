@@ -11,6 +11,7 @@
         <result property="wbs" column="WBS"/>
         <result property="mileDate" column="MILE_DATE"/>
         <result property="mileDescript" column="MILE_DESCRIPT"/>
+        <result property="mileType" column="MILE_TYPE"/>
         <result property="finishStatus" column="FINISH_STATUS"/>
         <result property="creatorId" column="CREATOR_ID"/>
         <result property="createTime" column="CREATE_TIME"/>
@@ -38,6 +39,8 @@
 				MILE_DATE = #{mileDate} AND 			</if>
 						<if test="mileDescript != null and mileDescript!=''"  >
 				MILE_DESCRIPT = #{mileDescript} AND 			</if>
+							<if test="mileType != null and mileType!=''"  >
+				MILE_TYPE = #{mileType} AND 			</if>
 						<if test="finishStatus != null and finishStatus!=''"  >
 				FINISH_STATUS = #{finishStatus} AND 			</if>
 						<if test="creatorId != null and creatorId!=''"  >
@@ -82,6 +85,10 @@
 			<if test="mileDescript != null and mileDescript!=''">
 				,MILE_DESCRIPT	
 			</if>
+			
+				<if test="mileType != null and mileType!=''">
+				,MILE_TYPE
+			</if>
 		
 			<if test="finishStatus != null and finishStatus!=''">
 				,FINISH_STATUS	
@@ -116,6 +123,9 @@
 		<if test="mileDescript != null and mileDescript!=''">
 			,#{mileDescript}
 		</if>
+		<if test="mileType != null and mileType!=''">
+			,#{mileType}
+		</if>
 		<if test="finishStatus != null and finishStatus!=''">
 			,#{finishStatus}
 		</if>
@@ -141,6 +151,8 @@
 			<if test="mileDate != null and mileDate!=''">MILE_DATE = #{mileDate}, </if>
 
 			<if test="mileDescript != null and mileDescript!=''">MILE_DESCRIPT = #{mileDescript}, </if>
+			
+			<if test="mileType != null and mileType!=''">MILE_TYPE = #{mileType}, </if>
 
 			<if test="finishStatus != null and finishStatus!=''">FINISH_STATUS = #{finishStatus}, </if>
 

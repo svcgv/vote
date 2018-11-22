@@ -34,12 +34,76 @@
 		         <input readonly='true'type="text" style='display:none' name="bidId">
 		      </div>
 		    </div> 
-		  	
+		    
+		      <div class="layui-inline" style="padding-right:55px;">
+		      <label class="layui-form-label">WBS编号：</label>
+		       <div class="layui-input-inline">
+	         		<input readonly='true'type="text" name="wbs" autocomplete="off" class="layui-input form-control">
+		      </div>
+		    </div>
+		    
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
 		         <input readonly='true'type="text" name=projectName  autocomplete="off" class="layui-input form-control">
 		          <input readonly='true'type="text" style='display:none' name="projectId">
+		      </div>
+		    </div>
+		    
+		    <div class="layui-inline"style="margin-right:64px;">
+		      <label class="layui-form-label">客户名称：</label>
+		       <div class="layui-input-inline">
+		          <input readonly='true'type="text" name="custName"  readonly='true' autocomplete="off" class="layui-input form-control">
+		     	  <input readonly='true'type="text" style='display:none' name="custSapCode" />
+		      </div>
+	      	</div>
+		    
+		     <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">项目类型：</label>
+		       <div class="layui-input-inline">
+		          <select  style="width: 200px; background-color: #EEEEEE;" disabled="disabled" name="projectType" lay-verify="required" lay-filter="" class="form-control">
+		         		${projectType.ewTypeHtml}
+		          </select>
+		      </div>
+		    </div>
+		     <div class="layui-inline" style="padding-right:55px;">
+		       <label class="layui-form-label">项目状态：</label>
+		       <div class="layui-input-inline">
+		          <select disabled="disabled" name="projectStatus" lay-verify="required" lay-filter="" class="form-control">
+		        	 	${projectStatus.ewTypeHtml}
+		          </select>
+		      </div>
+		    </div>
+		  
+		      <div class="layui-inline" style="padding-right:55px;">
+		       <label class="layui-form-label">审批状态：</label>
+		       <div class="layui-input-inline">
+		          <select disabled="disabled" name="approveStatus" lay-verify="required" lay-filter="" class="form-control">
+		        	 ${approveStatus.ewTypeHtml}
+		        </select>
+		      </div>
+		    </div>
+		    
+		     <div class="layui-inline" style="padding-right:55px;">
+		       <label class="layui-form-label">立项时间：</label>
+		       <div class="layui-input-inline">
+		          <input readonly='true'type="text" name="createProjectTime" readonly='true' id="createProjectTime2-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
+		      </div>
+		    </div>
+		    
+		     <div class="layui-inline" style="padding-right:55px;">
+			      <label class="layui-form-label">结项时间：</label>
+			       <div class="layui-input-inline">
+			          <input readonly='true'type="text" name="finishProjectTime"  readonly='true' id="finishProjectTime2-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
+			      </div>
+		    </div>
+		    
+		   <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">是否重点项目：</label>
+		       <div class="layui-input-inline">
+		          <select disabled="disabled"  name="isImportant" lay-verify="required" lay-filter="" class="form-control">
+		        	 ${isImportant.ewTypeHtml}
+		          </select>
 		      </div>
 		    </div>
 		    
@@ -91,93 +155,13 @@
 		      </div>
 		    </div>
 		    
-		    <div class="layui-inline" style="padding-right:55px;">
-		      <label class="layui-form-label">WBS编号：</label>
-		       <div class="layui-input-inline">
-	         		<input readonly='true'type="text" name="wbs" autocomplete="off" class="layui-input form-control">
-		      </div>
-		    </div>
-		    
-		    <div class="layui-inline"style="margin-right:64px;">
-		      <label class="layui-form-label">客户名称：</label>
-		       <div class="layui-input-inline">
-		          <input readonly='true'type="text" name="custName"  readonly='true' autocomplete="off" class="layui-input form-control">
-		     	  <input readonly='true'type="text" style='display:none' name="custSapCode" />
-		      </div>
-	      	</div>
-		    
-		     <div class="layui-inline" style="margin-right:64px;">
-		       <label class="layui-form-label">项目类型：</label>
-		       <div class="layui-input-inline">
-		          <select  style="width: 200px; background-color: #EEEEEE;" disabled="disabled" name="projectType" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00" selected>整包项目</option>
-		        	 <option value="01">人力项目</option>
-		        	 <option value="02">订单项目</option>
-		        	 <option value="03">内部研发项目</option>
-		          </select>
-		      </div>
-		    </div>
-		     <div class="layui-inline" style="padding-right:55px;">
-		       <label class="layui-form-label">项目状态：</label>
-		       <div class="layui-input-inline">
-		          <select disabled="disabled" name="projectStatus" lay-verify="required" lay-filter="" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00" selected>进行中</option>
-		        	 <option value="02">待验收</option>
-		        	 <option value="01">结项</option>
-		        	 <option value="03">关闭</option>
-		          </select>
-		      </div>
-		    </div>
 		  
-		      <div class="layui-inline" style="padding-right:55px;">
-		       <label class="layui-form-label">审批状态：</label>
-		       <div class="layui-input-inline">
-		          <select disabled="disabled" name="approveStatus" lay-verify="required" lay-filter="" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00">待申请</option>
-		        	 <option value="01">待实施审批</option>
-		        	 <option value="02">实施审批退回</option>
-		        	 <option value="03">待销售审批</option>
-		        	 <option value="04">销售审批退回</option>
-		        	 <option value="05">待技术总监审批</option>
-		        	 <option value="06">技术总监退回</option>
-		        	 <option value="07">审批通过</option>
-		        </select>
-		      </div>
-		    </div>
-		    
-		     <div class="layui-inline" style="padding-right:55px;">
-		       <label class="layui-form-label">立项时间：</label>
-		       <div class="layui-input-inline">
-		          <input readonly='true'type="text" name="createProjectTime" readonly='true' id="createProjectTime2-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
-		      </div>
-		    </div>
-		    
-		     <div class="layui-inline" style="padding-right:55px;">
-			      <label class="layui-form-label">结项时间：</label>
-			       <div class="layui-input-inline">
-			          <input readonly='true'type="text" name="finishProjectTime"  readonly='true' id="finishProjectTime2-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
-			      </div>
-		    </div>
-		    
-		   <div class="layui-inline" style="margin-right:64px;">
-		       <label class="layui-form-label">是否重点项目：</label>
-		       <div class="layui-input-inline">
-		          <select disabled="disabled"  name="isImportant" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
-		        	 <option value="">请选择</option>
-		        	 <option value="00">是</option>
-		        	 <option value="01">否</option>
-		          </select>
-		      </div>
-		    </div>
 		    
 		    <div class="layui-inline" style="margin-right:64px;">
 		       <label class="layui-form-label">所属项目群：</label>
 		       <div class="layui-input-inline">
-		          <select  disabled="disabled"   name="belongProjectGroup" lay-verify="required" lay-filter="projectTypeFilter" class="form-control">
-		        	 <option value="">请选择</option>
+		          <select  disabled="disabled"   name="belongProjectGroupId" lay-verify="required" lay-filter="" class="form-control">
+		        	   ${projectGroup.ewTypeHtml}
 		          </select>
 		      </div>
 		    </div>
@@ -189,70 +173,70 @@
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估合同金额(元)：</label>
 		       <div class="layui-input-inline">
-		         <input readonly='true'type="number" name="predictContractAmount"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="predictContractAmount"  readonly='true' autocomplete="off" class="layui-input form-control">
 		      </div>
 		   	 </div>
 		   	 
 		   	 	 <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">利润中心编号：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="profitCode"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="profitCode"  readonly='true' autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		   	 
 	     	<div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">成本中心编号：</label>
 		       <div class="layui-input-inline">
-		         <input readonly='true'type="text" name="costCode"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="costCode"  readonly='true' autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">税率(%)：</label>
 		       <div class="layui-input-inline">
-		         <input readonly='true'type="number" name="taxRate"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="taxRate"  readonly='true' autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		      
 		 	    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估利润(不含税)(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="netSalary"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="netSalary" readonly='true'  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		       <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估当年收入(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="yearSalary"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="yearSalary"  readonly='true' autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		       <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估利润率(%)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="predictProfitRate"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="predictProfitRate" readonly='true'  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估利润(含税)(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="predictProfitMount"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="predictProfitMount" readonly='true'  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		     
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估工作量(人月)：</label>
 		       <div class="layui-input-inline">
-		         <input readonly='true'type="text" name="predictWorkload"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="predictWorkload"  readonly='true'  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		 	    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估人均收入(元/人月)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="predictCapitaSalary"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="predictCapitaSalary"  readonly='true' autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
@@ -260,66 +244,81 @@
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估人均成本(元/人月)：</label>
 		       <div class="layui-input-inline">
-		         <input readonly='true'type="text" name="predictCapitaCost"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="predictCapitaCost" readonly='true' autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline" style="margin-right:64px;">
-				 <label class="layui-form-label">人力费用(元)：</label>
-				    <div class="layui-input-inline">
-				      <input type="text" name="employeeCost"  autocomplete="off" class="layui-input form-control">
-				    </div>
+				<label class="layui-form-label">人力费用(元)：</label>
+				  <div class="layui-input-inline">
+				     <input type="number" name="employeeCost"  readonly='true'  autocomplete="off" class="layui-input form-control">
+				  </div>
 			</div>
 		    
-		 	    <div class="layui-inline" style="margin-right:64px;">
-				      <label class="layui-form-label">差旅费用(元)：</label>
-				       <div class="layui-input-inline">
-				         <input type="text" name="businessTripCost"  autocomplete="off" class="layui-input form-control">
-				      </div>
-				    </div>
+		 	 <div class="layui-inline" style="margin-right:64px;">
+			 	<label class="layui-form-label">差旅费用(元)：</label>
+				 <div class="layui-input-inline">
+				     <input type="number" name="businessTripCost" readonly='true' autocomplete="off" class="layui-input form-control">
+				 </div>
+			</div>
 		   
-		    
-		         <div class="layui-inline"  style="margin-right:64px;">
-				      <label class="layui-form-label">其他费用(元)：</label>
-				       <div class="layui-input-inline">
-				         <input type="text" name="otherCost"  autocomplete="off" class="layui-input form-control">
-				      </div>
+		     <div class="layui-inline"  style="margin-right:64px;">
+				  <label class="layui-form-label">其他费用(元)：</label>
+				    <div class="layui-input-inline">
+				       <input type="number" name="otherCost"  readonly='true' autocomplete="off" class="layui-input form-control">
 				    </div>
+			</div>
 		   	
 		   	 <div class="layui-inline"  style="margin-right:64px;">
-			      <label class="layui-form-label">计提-人力：</label>
+			      <label class="layui-form-label">计提-外购人力(元)：</label>
 			       <div class="layui-input-inline">
-			         <input type="text" name="accruedChargesWorkers"  autocomplete="off" class="layui-input form-control">
-			      </div>
-			    </div>
-	   			<div class="layui-inline"  style="margin-right:64px;">
-			      <label class="layui-form-label">计提-产品及服务：</label>
+			         <input type="text" name="accruedChargesWorkers" readonly='true' autocomplete="off" class="layui-input form-control">
+			     </div>
+			   </div>
+			    
+	   		<div class="layui-inline"  style="margin-right:64px;">
+			      <label class="layui-form-label">计提-外购产品及服务(元)：</label>
 			       <div class="layui-input-inline">
-			         <input type="text" name="accruedChargesProducts"  autocomplete="off" class="layui-input form-control">
+			         <input type="text" name="accruedChargesProducts" readonly='true' autocomplete="off" class="layui-input form-control">
 			      </div>
 			    </div>
 				    
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估总成本(含税)(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="budgetWithTax"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="budgetWithTax"  readonly='true' autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline" style="margin-right:64px;">
 		      <label class="layui-form-label">预估总成本(不含税)(元)：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="budgetNoTax"  autocomplete="off" class="layui-input form-control">
+		         <input type="number" name="budgetNoTax"  readonly='true' autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
-		   	</div>
+		   </div>
 		   	
 		   			   	
-		  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-		 	 <legend style="font-weight:bold;">合同信息</legend>
-		  </fieldset>
+		 <div class="layui-form-item clearfix" style="margin-bottom:0px;margin-left:10px;">
+			<div style="float:left;width: 140px;">
+				<p class="layui-form-label">合同引用列表：</p>
+			</div>
+			<div style="float:left;width:900px;">
+				<table class="layui-hide" id="contractTable-chosed" lay-filter="tableFilter1" style="overflow:hidden;"></table>
+			</div>
+	    </div>
 		   	
-		   <div class="milepost-list-wrapper" <c:if test="${projectType != '00' }"> style="display:none;"</c:if>>
+		   	
+		<div class="layui-form-item clearfix" style="margin-bottom:0px;margin-left:10px;">
+			<div style="float:left;width: 140px;">
+				<p class="layui-form-label">产品引用列表：</p>
+			</div>
+			<div style="float:left;width:900px;">
+				<table class="layui-hide" id="productTable-chosed" lay-filter="tableFilter2" style="overflow:hidden;"></table>
+			</div>
+	    </div>
+		   	
+		   <div class="milepost-list-wrapper"  <c:if test="${projectTypeSelected != '00' }"> style="display:none;"</c:if>>
 		    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 		 	 <legend style="font-weight:bold;">里程碑</legend>
 		     </fieldset>
@@ -369,7 +368,7 @@
 				   	 <div class="layui-timeline-content layui-text">
 					      <h3 class="layui-timeline-title">测试</h3>
 					      <div class="layui-input-inline">
-					      	<input readonly='true'type="text" name="text" id="test-datepick-hook" class="layui-input form-control hasDatepicker" />
+					      	<input readonly='true'type="text" name="test" id="test-datepick-hook" class="layui-input form-control hasDatepicker" />
 					      </div>
 					      <div class="layui-input-inline">
 					      	<input readonly='true'type="text" name="testRemarks" class="layui-input form-control" />
@@ -485,13 +484,16 @@
     </div>
 </div>
 <script>
+var chosedContractProject=[];
+var chosedProductProject=[];
+var chosedLayTable=null;
 $(function(){
-	layui.use(['layer', 'form','laydate','upload'], function(){
+	layui.use(['layer', 'form','laydate','upload','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
 	  	  laydate=layui.laydate,
 	  	  upload=layui.upload;
-		
+		  chosedLayTable=layui.table;
 		//日期
 		  
 	
@@ -505,64 +507,56 @@ $(function(){
 		 	}
 		 }
 	   form.render();
-	  //选择投标
-	  $("#project-view-hook #bidNameQuery-hook").click(function(){
-		  $.openWindow({
-		  		url:'tender?act=tenderForm',
-		  		title:"选择投标",
-		  		width:"700"
-		 });
-		  
-	  });
-	// 项目类型切换 类型为整包项目 显示里程碑
-	 form.on('select(projectTypeFilter)', function(data){
-	  if(data.value == "00"){
-		  var select= 'dd[lay-value=00]'; // 里程碑
-		  $('.project-form-wrapper input[name="projectType"]').siblings("div.layui-form-select").find('dl').find(select).click();
-		  $("#project-view-hook .milepost-list-wrapper").show();
-	  }else{
-		  $("#project-view-hook .milepost-list-wrapper").hide();
-	  }
-  
-   });
-	
-	
-	
-	var win=$("#project-view-hook").getWindow();
-	// 保存
-	$("#project-view-hook #customGroup-edit-hook").click(function(){
-		
-		var projectName=$("#project-view-hook input[name='projectName']").val();
-		if($.trim(projectName) ==''){
-			layer.msg("请输入项目名称");
-			return false;
-		}
-		
-		var formDatas=$("#project-view-hook form").serializeObject();
-		 var newparam = {}
-		 for(var o in formDatas){
-			 if(formDatas[o]){
-				 newparam[o] = formDatas[o]
-			 }
-		 }
-		 
-		$.ajax({
-			type:'POST',
-			url: '/vote/pmprojectinfo/update',
-			 data: JSON.stringify(newparam),
-			 contentType:'application/json',
-			success:function(res){
-				layer.msg("修改成功",{icon:1});
-				win.close();
-			},
-			error:function(){
-				layer.msg("修改失败",{icon:5});
-				win.close();
-			},
-			 dataType: "json"
-		});
-		return false;
-	});
+	   
+	   var param = {"projectId": data.projectId};
+	   $.ajax({
+           type: 'POST',
+           url: '/vote/pmprojectinfo/listContract',
+           data: JSON.stringify(param),
+           contentType: 'application/json',
+           success: function (res) {
+        	 chosedContractProject=res.page;
+	      chosedLayTable.render({
+	          id:"table-chosedProject1",
+	          elem: '#contractTable-chosed',
+	          height:'250',
+	          title: '合同数据信息',
+	          cols: [[
+	              {field:'contractCode', title:'合同编号'},
+	              {field:'contractName', title:'合同名称'}
+	          ]],
+	          cellMinWidth:'90',
+	          data:chosedContractProject,
+	          page: true
+	      });
+           },
+           dataType: "json"
+       });
+	   
+	   $.ajax({
+           type: 'POST',
+           url: '/vote/pmprojectinfo/listProduct',
+           data: JSON.stringify(param),
+           contentType: 'application/json',
+           success: function (res) {
+        	  chosedProductProject=res.page;
+      chosedLayTable.render({
+          id:"table-chosedProject2",
+          elem: '#productTable-chosed',
+          height:'250',
+          title: '产品数据信息',
+          cols: [[
+              {field:'productCode', title:'产品编号'},
+              {field:'productName', title:'产品名称'}
+          ]],
+          cellMinWidth:'90',
+          data:chosedProductProject,
+          page: true
+      });   
+      },
+      dataType: "json"
+       });
+
 	
 	// 关闭
 	$("#project-view-hook #customerGroup-close-hook").click(function(){

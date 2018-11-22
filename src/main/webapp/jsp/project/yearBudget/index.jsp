@@ -25,7 +25,7 @@
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="custName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-		         <input type="hidden" name="custId" />
+		         <input type="hidden" name="sapCode" />
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="customerNameQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
 		    </div>
@@ -44,7 +44,7 @@
 		      <label class="layui-form-label">项目名称：</label>
 		      <div class="layui-input-inline">
 		       	<input type="text" name="projectName" readonly="readonly"  autocomplete="off" class="layui-input form-control disabledColor">
-		       	 <input type="hidden" name="wbsCode" />
+		       	 <input type="hidden" name="wbs" />
 		      </div>
 		      <button type="button"  class="layui-btn layui-btn-sm" id="projectNameQuery-hook" style="vertical-align: top;"><i class="layui-icon layui-icon-search "></i></button>
 		    </div>
@@ -83,7 +83,9 @@
 			   <div class="layui-btn-container" style="margin-left:25px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>收入上报</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="exportYearBudger"  style="margin-right:15px;"><i class="layui-icon"></i>导出</button>
+			    
 			  </div>
 		   </div>
 		   
@@ -96,16 +98,86 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="view">查看</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
 <script type="text/javascript">
 var testData=[{
-'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contract':'ss','poSow':'','owner':'aaa','taxes':'12%','jan':'一月收入1千万','feb':'一月收入3千万'
-	
-}]
+	'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contractCode':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'一月收入1千万','feb':'一月收入3千万'
+		
+	}]
+var cols = [
+    [/* 
+  	  {type: 'checkbox', fixed: 'left',rowspan: 2}, */
+	      {field:'isNewCustomer', title: '是否新客户', width: 200
+      	      ,templet: function(d){
+      	    	if(d.sapCode){
+      	        	return "否"
+      	        }
+      	    	else{
+      	    		return '是'
+      	    	}
+      	    	
+      	      },rowspan: 2
+      	    },
+	      {field:'custName', title:'客户名称', width:130,rowspan: 2},
+	      {field:'isNewProject', title: '是否新项目', width: 120
+      	      ,templet: function(d){
+      	    	if(d.wbs){
+      	        	return "否"
+      	        }
+      	    	else{
+      	    		return '是'
+      	    	}
+      	    	
+      	      },rowspan: 2
+      	    },
+	      {field:'wbs', title:'WBS编号', width:150,rowspan: 2},
+	      {field:'projectName', title:'项目名称', width:130,rowspan: 2},
+	      {field:'projectType', title:'项目类型', width:150,rowspan: 2},
+	      {field:'productList', title:'产品列表', width:120,rowspan: 2},
+	      {field:'revenueSource', title:'收入来源(Revenue source)',rowspan: 2},
+	      {field:'entity', title:'实体(Entity)',rowspan: 2},
+	      {field:'contractCode', title:'合同编码(contractCode)',rowspan: 2},
+	      {field:'poSow', title:'PO#/SOW#',rowspan: 2},
+	      {field:'custManagerName', title:'客户经理(Owner)',rowspan: 2},
+	      {field:'taxType', title:'税种',rowspan: 2},
+	      {field:'revRecognitionMethod', title:'Rev Recognition Method',rowspan: 2},
+	      {field:'region', title:'区域(Region)',rowspan: 2},
+	      {field:'currency', title:'结算币种(Currency)',rowspan: 2},
+	      {field:'taxRate', title:'税率(%)',rowspan: 2},
+	      {field:'grossProfitRate', title:'毛利率(%)',rowspan: 2},
+	      {field:'budgetSum', title:'Total Rev',rowspan: 2},
+	      {field:'afterTax',title:"税后合计",rowspan: 2},
+	      {align: 'center', title: 'Revenue', colspan: 12},
+     	  {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+	 ],[
+		 {field: 'budgetJan', title: 'Jan'}
+		,{field: 'budgetFeb', title: 'Feb'}
+		,{field: 'budgetMar', title: 'Mar'}
+		,{field: 'budgetApr', title: 'Apr'}
+		,{field: 'budgetMay', title: 'May'}
+		,{field: 'budgetJun', title: 'Jun'}
+		,{field: 'budgetJul', title: 'Jul'}
+		,{field: 'budgetAug', title: 'Aug'}
+		,{field: 'budgetSep', title: 'Sep'}
+		,{field: 'budgetOct', title: 'Oct'}
+		,{field: 'budgetNov', title: 'Nov'}
+		,{field: 'budgetDec', title: 'Dec'}
+]
+]
+function getParam(){
+	var par = $("#tender-index-form").serializeObject();
+	var newParam = {}
+	for(var key in par){
+		if(par[key]){
+			newParam[key] = par[key]
+		}
+	}
+	return newParam
+}
+var exportUrl = '/vote/pmyearbudget/exportExcel'
+
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table','upload'], function(){
   var layer = layui.layer ,
@@ -128,10 +200,37 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		  var select= 'dd[lay-value=01]';
 		  $('.budget-info-wrapper #isNewProject-hook').siblings("div.layui-form-select").find('dl').find(select).click();
 	  }
-  
   });
   
   
+  function queryList(){
+		 var queryParams=getParam()
+		 console.log(queryParams)
+		 
+		 $.ajax({
+			  type: 'POST',
+			  url: '/vote/pmyearbudget/list',
+			  data: JSON.stringify(queryParams),
+			  contentType:'application/json',
+			  success: function(res){
+				  testData = res.page
+			      console.log(res)
+			      testData=res.page
+			      table.render({
+			  	  	id:"budget-tableID",
+			  	    elem: '#budgetTable',
+			  	    //url:'custom.json',
+			  	    toolbar: '#toolbarDemo',
+			  	    height:'full-200',
+			  	    title: '年度预算表',
+			  	    cols: cols,
+			  	    cellMinWidth:'100',
+			  	    data:testData,
+			  	    page: true
+			  	  	});},
+			  dataType: "json"
+			});
+	}
   
   
 
@@ -143,50 +242,11 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    toolbar: '#toolbarDemo',
 	    height:'full-220',
 	    title: '年度预算数据表',
-	    cols: [
-	           [
-		    	  {type: 'checkbox', fixed: 'left',rowspan: 2},
-		  	      {field:'isNewCustomer', title:'是否新客户', width:130,rowspan: 2},
-		  	      {field:'custName', title:'客户名称', width:130,rowspan: 2},
-		  	      {field:'isNewProject', title:'是否新项目', width:130,rowspan: 2},
-		  	      {field:'wbsCode', title:'WBS编号', width:150,rowspan: 2},
-		  	      {field:'projectName', title:'项目名称', width:130,rowspan: 2},
-		  	      {field:'projectType', title:'项目类型', width:150,rowspan: 2},
-		  	      {field:'productList', title:'产品列表', width:120,rowspan: 2},
-		  	      {field:'revenueSource', title:'收入来源(Revenue source)',rowspan: 2},
-		  	      {field:'entity', title:'实体(Entity)',rowspan: 2},
-		  	      {field:'contract', title:'合同编码(Contract)',rowspan: 2},
-		  	      {field:'poSow', title:'PO#/SOW#',rowspan: 2},
-		  	      {field:'owner', title:'客户经理(Owner)',rowspan: 2},
-		  	      {field:'taxes', title:'税种',rowspan: 2},
-		  	      {field:'revRecognitionMethod', title:'Rev Recognition Method',rowspan: 2},
-		  	      {field:'region', title:'区域(Region)',rowspan: 2},
-		  	      {field:'currency', title:'结算币种(Currency)',rowspan: 2},
-		  	      {field:'taxRate', title:'税率(%)',rowspan: 2},
-		  	      {field:'grossRate', title:'毛利率(%)',rowspan: 2},
-		  	      {field:'totalRev', title:'Total Rev',rowspan: 2},
-		  	      {field:'afterTax',title:"税后合计",rowspan: 2},
-		  	      {align: 'center', title: 'Revenue', colspan: 12},
-	  	     	  {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
-	     	 ],[
-				 {field: 'jan', title: 'Jan'}
-				,{field: 'feb', title: 'Feb'}
-				,{field: 'mar', title: 'Mar'}
-				,{field: 'apr', title: 'Apr'}
-				,{field: 'may', title: 'May'}
-				,{field: 'jun', title: 'Jun'}
-				,{field: 'jul', title: 'Jul'}
-				,{field: 'aug', title: 'Aug'}
-				,{field: 'sep', title: 'Sep'}
-				,{field: 'oct', title: 'Oct'}
-				,{field: 'Nov', title: 'Nov'}
-				,{field: 'dec', title: 'Dec'}
-	      ]
-	    ],
+	    cols: cols,
 	    cellMinWidth:'90',
 	    data:[
-			{'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contract':'ss','poSow':'','owner':'aaa','taxes':'12%','jan':'1111','feb':'2222'},
-			{'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contract':'ss','poSow':'','owner':'aaa','taxes':'12%','jan':'111','feb':'222'}
+			{'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contractCode':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'1111','feb':'2222'},
+			{'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contractCode':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'111','feb':'222'}
 	    ],
 	    page: true
 	  });
@@ -198,11 +258,19 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    if(obj.event === 'del'){
 	      layer.confirm('确认删除行么', function(index){
 	    	  console.log(obj,index,'index')
-	        obj.del();
+	         $.ajax({
+			  type: 'POST',
+			  url: '/vote/pmyearbudget/update',
+			  data: JSON.stringify({isDelete:'01',yearBudgetCode:data.yearBudgetCode}),
+			  contentType:'application/json',
+			  success: function(res){queryList()},
+			  dataType: "json"
+			});
+	    	  
 	        layer.close(index);
-	        table.reload('budget-tableID',{
+	        /* table.reload('budget-tableID',{
 	        	
-	        });
+	        }); */
 	      });
 	    } else if(obj.event === 'edit'){
 	    	// 编辑
@@ -215,47 +283,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	/*
 	* 查询按钮
 	*/
-	 $("#customQuery").click(function(){
-		 var queryParams=$("#tender-index-form").serialize();
-		 $.ajax({
-			  type: 'POST',
-			  url: '/vote/pmcompanyinfo/list',
-			  data: queryParams,
-			  contentType:'application/json',
-			  success: function(res){
-			      console.log(res)
-			      testData=res.page
-			      table.render({
-			  	  	id:"budget-tableID",
-			  	    elem: '#budgetTable',
-			  	    //url:'custom.json',
-			  	    toolbar: '#toolbarDemo',
-			  	    height:'full-200',
-			  	    title: '年度预算表',
-			  	    cols: [[
-						  {type: 'checkbox', fixed: 'left'},
-				  	      {field:'bidId', title:'投标编号',fixed: 'left', sort: true, width:130},
-				  	      {field:'bidName', title:'投标名称', width:130},
-				  	      {field:'status', title:'评审状态', width:130},
-				  	      {field:'bidFirstPrice', title:'首次报价（元）'},
-				  	      {field:'custName', title:'客户名称', width:230},
-				  	      {field:'predictAmount', title:'预估收入（元）'},
-				  	      {field:'predictCost', title:'预估成本（元）'},
-				  	      {field:'predictProfitRate', title:'预估利润率（%）'},
-				  	      {field:'predictPeriod', title:'预估期限'},
-				  	      {field:'payDeptName', title:'交付部门'},
-				  	      {field:'sellDeptName', title:'销售部门'},
-				  	      {field:'custManagerName', title:'客户经理'},
-				  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
-			  	    ]],
-			  	    cellMinWidth:'100',
-			  	    data:[],
-			  	    page: true
-			  	  	});},
-			  dataType: "json"
-			});
-		
-	}); 
+	 $("#customQuery").click(queryList); 
+	
 	$(".budget-info-wrapper #projectNameQuery-hook").click(function(){
 		// 共用 wbs controller
 		var _YIndex=0;
@@ -283,6 +312,55 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  		width:"95%"
 	  	})
 	});
+	
+	
+	$("#exportYearBudger").click(function(){
+		var query = getParam()
+		
+		var xhr = new XMLHttpRequest();
+		
+		xhr.open('POST', exportUrl, true); // 也可以使用POST方式，根据接口
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.responseType = "blob"; // 返回类型blob
+		
+		xhr.onload = function () {
+
+			   // 请求完成
+
+			   if (this.status === 200) {
+
+			       // 返回200
+
+			       var blob = this.response;
+
+			       var reader = new FileReader();
+
+			       reader.readAsDataURL(blob);    // 转换为base64，可以直接放入a表情href
+
+			       reader.onload = function (e) {
+
+			           // 转换完成，创建一个a标签用于下载
+
+			           var a = document.createElement('a');
+
+			           a.download = 'data.xlsx';
+
+			           a.href = e.target.result;
+
+			           $("body").append(a);    // 修复firefox中无法触发click
+
+			           a.click();
+
+			           $(a).remove();
+
+			       }
+
+			   }
+			};
+			xhr.send(JSON.stringify(query));
+
+	});
+	
 	/*
 	* 查看和修改 form 表单
 	*/
@@ -301,9 +379,9 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	})
 		
 	}
+	queryList()
 	
 });
-var testData=null;
 </script>
 </body>
 </html>

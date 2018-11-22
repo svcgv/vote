@@ -19,4 +19,23 @@
 	        }    
 	    });    
 	    return o;    
-	 };  
+	 };
+/**
+ * 通过枚举的key值获取
+ * @returns {{}}
+ */
+function getCodeValue(key,a)
+{
+    var flag = 0;
+    $.each(a, function(index,value) {
+        if (key==value.codeKey) {
+        	key=value.codeVal;
+            flag=1
+        }
+    });
+    if(flag==1){
+    	return key
+    }else{
+    	return '';
+    }
+};

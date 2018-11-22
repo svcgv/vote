@@ -13,15 +13,14 @@
 		  	<div class="layui-inline">
 		      <label class="layui-form-label">项目群编号：</label>
 		       <div class="layui-input-inline">
-		         <input type="text" name="projectGroupId"  autocomplete="off" class="layui-input form-control">
+		         <input type="text" name="groupManagerCode"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
 		    <div class="layui-inline">
-			      <label class="layui-form-label">项目群名称：</label>
-			       <div class="layui-input-inline">
-			         <input type="text" name="projectGroupName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
-			       </div>
-			       <button type="button"  class="layui-btn layui-btn-sm" id="projectGroupNameQuery-hook" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i></button>
+			   <label class="layui-form-label">项目群名称：</label>
+			   <div class="layui-input-inline">
+			       <input type="text" name="projectGroupName"  autocomplete="off" class="layui-input form-control">
+			    </div>
 		    </div>
 		 </div>
 		<div class="layui-form-item">
@@ -36,6 +35,15 @@
 			       <div class="layui-input-inline">
 			         <input type="text" name="groupCreateTimeEnd" id="groupCreateTimeEnd"  autocomplete="off" class="layui-input form-control hasDatepicker">
 			       </div>
+		    </div>
+		    
+		    	<div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">是否有效：</label>
+		       <div class="layui-input-inline">
+		          <select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
+		        	 ${isUseful.ewTypeHtml}
+		          </select>
+		      </div>
 		    </div>
 		    
 	 	   <div class="layui-inline" style="vertical-align: top;">
@@ -82,20 +90,37 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		    theme: 'molv'
 	 });
   
+	 var queryParams=$("#projectGroup-index-form").serializeObject();
+	
   // table render
   table.render({
 	  	id:"customer-table",
 	    elem: '#projectGroupIndexTable',
-	    //url:'custom.json',
+	    url: '/vote/pmprojectgroupinfo/list',
+	    method:'post',
+		where:{
+            queryStr: JSON.stringify(queryParams)
+        },
+        contentType: 'application/json',
+	    response: {
+	    	dataName: 'page'
+	    },
 	    toolbar: '#toolbarDemo',
 	    height:'full-200',
 	    title: '项目群数据表',
 	    cols: [[
 	    	  {type: 'checkbox', fixed: 'left'},
-	  	      {field:'projectGroupId', title:'项目群编号', width:130},
+	  	      {field:'groupManagerCode', title:'项目群编号', width:130},
 	  	      {field:'projectGroupName', title:'项目群名称', width:130},
-	  	      {field:'groupCreatorName', title:'项目群创建人' },
-	  	      {field:'groupCreateTime', title:'项目群创建日期' },
+	  	      {field:'groupCreatorName', title:'创建人' },
+	  	      {field:'groupCreateTime', title:'创建日期' },
+	  	    	{field:'isDelete', title:'是否有效',templet:function(d){
+	              	if(d.isDelete == "00"){
+	            		return "有效";
+	            	}else if(d.isDelete == "01"){
+	            		return "无效";
+	            	}
+	            }},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'120',
@@ -147,21 +172,16 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	*/
 	 $(".projectGroup-info-wrapper #projectGroupIndexQuery").click(function(){
 		 var queryParams=$("#projectGroup-index-form").serializeObject();
-		 var newparam = {}
- 		 for(var o in queryParams){
- 			 if(queryParams[o]){
- 				 newparam[o] = queryParams[o]
- 			 }
- 		 }
-		 
-		 
+	
 			table.reload('customer-table',{
 				 url: '/vote/pmprojectgroupinfo/list',
 				page:{
 					curr:1 //从第一页开始
 				},
 				 method:'post',
-					where:JSON.stringify(newparam),
+					where:{
+	                    queryStr: JSON.stringify(queryParams)
+	                },
 					contentType: 'application/json',
 				    response: {
 				    	dataName: 'page'

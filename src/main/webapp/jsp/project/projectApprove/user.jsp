@@ -38,6 +38,13 @@
 </div>
 
 <script type="text/javascript">
+
+var url1='/vote/queryusrinfo/queryUserByRoleCodeUnderOrgNo'
+var url2='/vote/queryusrinfo/list'
+var act="${act}";// 区分是index页 form页 赋值问题
+var orgNo="${orgNo}";
+var roleCode="${roleCode}"
+
 $(function(){
 	function getParam(){
 		var queryParams=$("#user-query-form").serializeObject();
@@ -54,34 +61,55 @@ layui.use(['layer', 'form','laydate','table'], function(){
   var layer = layui.layer ,
   	  form = layui.form,
   	  table=layui.table;
-	  
-  // table render
-  table.render({
-	    elem: '#userTable',
-	    id:'user-table',
-	    url:'/vote/queryusrinfo/list',
-	    method:'post',
-		where:{
-			queryStr:JSON.stringify(getParam())
-		},
-		contentType: 'application/json',
-	    response: {
-	    	dataName: 'page'
-	    },
-	    height:'260',
-	    width:"690",
-	    title: '用数据表',
-	    cols: [[
-	      {type: 'radio' },
-	      {field:'usrId', title:'用户ID', sort: true},
-	      {field:'usrName', title:'用户名'}
-	    ]],
-	    page: true
-	  });
+  var par = getParam()
+  if(orgNo){
+		par.orgNo=orgNo
+	}
+	if(roleCode){
+		par.roleCode=roleCode
+	} 
+	 table.render({
+		    elem: '#userTable',
+		    id:'user-table',
+		
+		    height:'260',
+		    width:"690",
+		    title: '用数据表',
+		    cols: [[
+		      {type: 'radio' },
+		      {field:'usrId', title:'用户ID', sort: true},
+		      {field:'usrName', title:'用户名'}
+		    ]],
+		    page: true
+		  });
 	
+  $.ajax({
+	  type: 'POST',
+	  url: orgNo?url1:url2,
+	  data: JSON.stringify(par),
+	  contentType:'application/json',
+	  success: function(res){
+	      console.log(res)
+	      testData=res.page
+
+	      table.render({
+	  	    elem: '#userTable',
+	  	    //url:'custom.json',
+	  	    height:'260',
+	  	    width:"690",
+		    title: '用户数据表',
+		    cols: [[
+		      {type: 'radio' },
+		      {field:'usrId', title:'用户编号', sort: true},
+		      {field:'usrName', title:'用户名'}
+		    ]],
+	  	    data:testData,
+	  	    page: true
+	  	  });},
+	  dataType: "json"
+	})
 	
-	// 保存 事件
-	var act="${act}";// 区分是index页 form页 赋值问题
+
 	var win=$(".project-user-wrapper").getWindow();
 	$(".project-user-wrapper").on("click","#save-hook",function(){
 		// 遍历选中的radio
@@ -100,9 +128,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			 		$("#projectApprove-index-form input[name='custManagerName']").val(userName);
 					$("#projectApprove-index-form input[name='custManagerId']").val(userId);
 			 	}
-				
-				
-				
+
 			}
 		});
 		
@@ -119,10 +145,20 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	* 客户查询按钮
 	*/
 	$("#user-query-form #userQuery").click(function(){
+		
+		var par = getParam()
+		
+		if(orgNo){
+			par.orgNo=orgNo
+		}
+		if(roleCode){
+			par.roleCode=roleCode
+		}
+		
 		$.ajax({
 			  type: 'POST',
-			  url: '/vote/queryusrinfo/list',
-			  data: JSON.stringify(getParam()),
+			  url: orgNo?url1:url2,
+			  data: JSON.stringify(par),
 			  contentType:'application/json',
 			  success: function(res){
 			      console.log(res)

@@ -39,12 +39,12 @@ private String contractName;
 	 * $column.comments
 	 */
 
-private String contractAmount;
+private BigDecimal contractAmount;
 	/**
 	 * $column.comments
 	 */
 
-private long taxRate;
+private BigDecimal taxRate;
 	/**
 	 * $column.comments
 	 */
@@ -155,19 +155,19 @@ private String isDelete;
 		this.contractName = contractName;
 	}
 
-	public String getContractAmount() {
+	public BigDecimal getContractAmount() {
 		return contractAmount;
 	}
 
-	public void setContractAmount(String contractAmount) {
+	public void setContractAmount(BigDecimal contractAmount) {
 		this.contractAmount = contractAmount;
 	}
 
-	public long getTaxRate() {
+	public BigDecimal getTaxRate() {
 		return taxRate;
 	}
 
-	public void setTaxRate(long taxRate) {
+	public void setTaxRate(BigDecimal taxRate) {
 		this.taxRate = taxRate;
 	}
 

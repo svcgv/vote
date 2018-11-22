@@ -1,20 +1,36 @@
 package com.indihx.excel.service.impl;
 
+import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import com.indihx.excel.dao.ExcelFileMapper;
+import com.indihx.excel.entity.ExcelCellEntity;
 import com.indihx.excel.entity.ExcelFileEntity;
+import com.indihx.excel.entity.ExcelSheetEntity;
+import com.indihx.excel.service.ExcelCellService;
 import com.indihx.excel.service.ExcelFileService;
+import com.indihx.excel.service.ExcelSheetService;
 
 
 @Service("execelFileService")
 public class ExcelFileServiceImpl implements ExcelFileService {
-
+	@Resource
+	ExcelCellService excelCellService;
+	@Resource
+	ExcelSheetService excelSheetService;
 	@Resource
 	ExcelFileMapper excelFileMapper;
 
@@ -34,6 +50,117 @@ public class ExcelFileServiceImpl implements ExcelFileService {
 		return list.get(0);
 	}
 	
+	@Override
+	public  XSSFWorkbook getExcelByListBeanAndExcelCode(List<Map<String,Object>> list, String fileCode,String sheetName) {
+		// TODO Auto-generated method stub
+		
+		List<ExcelCellEntity> fixedList = getExcelByFileCode(fileCode,"01");
+		List<ExcelCellEntity> cellList = getExcelByFileCode(fileCode,"00");
+		
+		
+			XSSFWorkbook xwb = new XSSFWorkbook();
+			XSSFSheet sheet = xwb.createSheet(sheetName);
+			
+			if(fixedList!=null&!fixedList.isEmpty()) {
+				for(int i=0;i<fixedList.size();i++) {
+					ExcelCellEntity cellEnt = fixedList.get(i);
+					XSSFRow row = getRomBySheet(sheet,cellEnt.getExcelCellRowNum());
+					XSSFCell cell = getRomBySheet(row,cellEnt.getExcelCellColNum());
+					cell.setCellValue(cellEnt.getExcelDefaultValue());
+				}
+			}
+			
+			if(list==null||list.isEmpty()) {
+				return xwb;
+			}
+			
+			if(cellList!=null&!cellList.isEmpty()) {
+				int baseRow = cellList.get(0).getExcelCellRowNum();
+				for(int j=0;j<list.size();j++) {
+					Map<String,Object> item = list.get(j);
+					for(int k=0;k<fixedList.size();k++) {
+						ExcelCellEntity ent = fixedList.get(k);
+						if(item.get(ent.getExcelCellEnName())!=null) {
+							XSSFRow row = getRomBySheet(sheet,baseRow);
+							XSSFCell cell = getRomBySheet(row,ent.getExcelCellColNum());
+							cell.setCellValue(item.get(ent.getExcelCellEnName()).toString());
+						}
+					}
+					baseRow++;
+				}
+			}
+			
+			
+		return xwb;
+	}
 	
+	public XSSFRow getRomBySheet(XSSFSheet sheet,int i){
+		XSSFRow xr = sheet.getRow(i);
+		if(xr!=null) {
+			return xr;
+		}
+		return sheet.createRow(i);
+	}
+	
+	public XSSFCell getRomBySheet(XSSFRow row,int i){
+		XSSFCell xr = row.getCell(i);
+		if(xr!=null) {
+			return xr;
+		}
+		return row.createCell(i);
+	}
+	
+	public List<ExcelCellEntity> getExcelByFileCode(String code) {
+		ExcelFileEntity file = queryFileInfoByFileCode(code);
+		List<ExcelSheetEntity> sheetList = excelSheetService.querySheetListByFileId(file.getExcelFileId());
+		Map<String, Object> tableData = new HashMap<String, Object>();
+		List<ExcelCellEntity> cellListRes = null;
+		if (sheetList.isEmpty()) {
+			return null;
+		} else {
+			int len = sheetList.size();
+			for (int i = 0; i < len; i++) {
+				ExcelSheetEntity sheet = sheetList.get(i);
+				List<ExcelCellEntity> cellList = excelCellService.queryCellListBySheetId(sheet.getExcelSheetId());
+				cellListRes = cellList;
+				tableData.put(sheet.getExcelSheetEnName(), cellList);
+			}
+		}
+		return cellListRes;
+	}
+	
+	public List<ExcelCellEntity> getExcelByFileCode(String code,String type) {
+		ExcelFileEntity file = queryFileInfoByFileCode(code);
+		List<ExcelSheetEntity> sheetList = excelSheetService.querySheetListByFileId(file.getExcelFileId());
+		Map<String, Object> tableData = new HashMap<String, Object>();
+		List<ExcelCellEntity> cellListRes = null;
+		if (sheetList.isEmpty()) {
+			return null;
+		} else {
+			int len = sheetList.size();
+			for (int i = 0; i < len; i++) {
+				ExcelSheetEntity sheet = sheetList.get(i);
+				List<ExcelCellEntity> cellList = excelCellService.queryCellListBySheetId(sheet.getExcelSheetId());
+				cellListRes = cellList;
+				tableData.put(sheet.getExcelSheetEnName(), cellList);
+			}
+		}
+		return cellListRes;
+	}
 
+	/**
+	 * 获取表格类型 00-列表，01固定字段
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public String getExcelType(List<ExcelCellEntity> list) {
+		ExcelCellEntity cell = list.get(0);
+		if ("00".equals(cell.getExcelCellType())) {
+			return "00";
+		}
+		return "01";
+	}
+	
+	
 }

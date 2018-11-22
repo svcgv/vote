@@ -49,6 +49,7 @@ $(function(){
 	layui.use(['layer', 'form'], function(){
 		// 选择
 		$("#addOrg-hook").on("click",function(){
+
 		  	$.openWindow({
 		  		url:'org',
 		  		title:"选择机构",
@@ -57,8 +58,13 @@ $(function(){
 		});
 		
 		$("#addUser-hook").on("click",function(){
+            var orgId=$("#form-customer-hook #chosed-customer-hook").children(".customer-list").children(".customerItem").attr("orgId");
+            if($.trim(orgId) ==''){
+                layer.msg("请先选择机构");
+                return false;
+            }
 		  	$.openWindow({
-		  		url:'user',
+		  		url:'user?orgId='+orgId,
 		  		title:"选择团队成员",
 		  		width:"700"
 		 	 });
@@ -67,12 +73,11 @@ $(function(){
 		// 保存
 		$("#form-customer-hook #customGroup-add-hook").click(function(){
 			var customerGroupName=$("#form-customer-hook input[name='groupName']").val();
-			console.log(customerGroupName)
 			if($.trim(customerGroupName) ==''){
 				layer.msg("请输入团队名称");
 				return false;
 			}
-			
+
 			var getChosedCustomer=$("#form-customer-hook #chosed-customer-hook");
 			var ret=[];
 			getChosedCustomer.children(".customer-list").each(function(){
@@ -95,9 +100,11 @@ $(function(){
 			param.groupName=customerGroupName
 			param.ownerOrgId=ret[0]
 			param.userCodes=ret2
-			param.orgNo=ret[0].orgId
-			param.orgName=ret[0].orgName
-			
+            if(ret.length>0){
+                param.orgNo=ret[0].orgId
+                param.orgName=ret[0].orgName
+			}
+
 			
 		
 				console.log(param)
@@ -110,9 +117,10 @@ $(function(){
 			  data: JSON.stringify(param),
 			  contentType:'application/json',
 			  success:function(res){
-					layer.msg("新增成功",{icon:1});
-					location.reload();
-					win.close();
+                  layer.msg("新增成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
+                      win.close();
+                      location.reload();
+                  });
 				},
 				error:function(){
 					layer.msg("新增失败",{icon:5});

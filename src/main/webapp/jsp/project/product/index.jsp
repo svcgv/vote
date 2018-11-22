@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/resources/admincp/layouts/main.jsp"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <body>
+<script src="${ctx }/common/queryCode?productType=PRODUCT_TYPE" type="text/javascript"></script>
 <style>
 .layui-form-label{width:110px!important;padding:8px 5px;}
 </style>
@@ -36,13 +38,13 @@
 		      </div>
 		      <span class="f-placeholder"></span>
 		    </div>
-		    <div class="layui-inline">
-		      <label class="layui-form-label">指导销售价(元)：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="productSuggestPrice"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		      <span class="f-placeholder"></span>
-		    </div>
+		    <%--<div class="layui-inline">--%>
+		      <%--<label class="layui-form-label">指导销售价(元)：</label>--%>
+		       <%--<div class="layui-input-inline">--%>
+		         <%--<input type="text" name="productSuggestPrice"  autocomplete="off" class="layui-input form-control">--%>
+		      <%--</div>--%>
+		      <%--<span class="f-placeholder"></span>--%>
+		    <%--</div>--%>
 		   
 		     <%--<div class="layui-inline">--%>
 		      <%--<label class="layui-form-label">开始销售日期：</label>--%>
@@ -168,7 +170,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    	  {type: 'checkbox', fixed: 'left'},
 	  	      {field:'productCode', title:'产品代码',fixed: 'left', width:110, sort: true},
 	  	      {field:'productName', title:'产品名称', width:230},
-	  	      {field:'productSuggestPrice', title:'指导销售价', width:230,templet:function (d) {
+	  	      {field:'productSuggestPrice', title:'指导销售价（元）', width:230,templet:function (d) {
                   var value=typeof d.productSuggestPrice =="undefined" ? '':d.productSuggestPrice;
                   value=(parseInt(value*100)/100).toFixed(2);
 				  return value
@@ -176,7 +178,9 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  	      {field:'developmentDeptName', title:'研发部门名称', width:230},
 	  	      {field:'developmentManagerName', title:'研发负责人名称'},
 	  	      {field:'startSaleDate', title:'开始销售日期'},
-	  	      {field:'productType', title:'产品类型'},
+	  	      {field:'productType', title:'产品类型',templet:function(d){
+                  return getCodeValue(d.productType,productType);
+              }},
 	  	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:180}
 	    ]],
 	    cellMinWidth:'90',

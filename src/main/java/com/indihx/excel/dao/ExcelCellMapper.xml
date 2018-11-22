@@ -3,73 +3,80 @@
 
 <mapper namespace="com.indihx.excel.dao.ExcelCellMapper">
 
-	   <resultMap type="com.indihx.excel.entity.ExcelCellEntity" id="excelCellMap">
-        <result property="excelCellId" column="EXCEL_CELL_ID"/>
-        <result property="excelSheetId" column="EXCEL_SHEET_ID"/>
-        <result property="excelCellCnName" column="EXCEL_CELL_CN_NAME"/>
-        <result property="excelCellEnName" column="EXCEL_CELL_EN_NAME"/>
-        <result property="excelCellColNum" column="EXCEL_CELL_COL_NUM"/>
-        <result property="excelCellRowNum" column="EXCEL_CELL_ROW_NUM"/>
-        <result property="excelCellType" column="EXCEL_CELL_TYPE"/>
-        <result property="excelDataType" column="EXCEL_DATA_TYPE"/>
-        <result property="excelDefaultValue" column="EXCEL_DEFAULT_VALUE"/>
-        <result property="isDelete" column="IS_DELETE"/>
-    </resultMap>
+	<resultMap type="com.indihx.excel.entity.ExcelCellEntity"
+		id="excelCellMap">
+		<result property="excelCellId" column="EXCEL_CELL_ID" />
+		<result property="excelSheetId" column="EXCEL_SHEET_ID" />
+		<result property="excelCellCnName" column="EXCEL_CELL_CN_NAME" />
+		<result property="excelCellEnName" column="EXCEL_CELL_EN_NAME" />
+		<result property="excelCellColNum" column="EXCEL_CELL_COL_NUM" />
+		<result property="excelCellRowNum" column="EXCEL_CELL_ROW_NUM" />
+		<result property="excelCellType" column="EXCEL_CELL_TYPE" />
+		<result property="excelDataType" column="EXCEL_DATA_TYPE" />
+		<result property="excelDefaultValue"
+			column="EXCEL_DEFAULT_VALUE" />
+		<result property="isDelete" column="IS_DELETE" />
+	</resultMap>
 
-	<select id="queryObject" resultType="com.indihx.excel.entity.ExcelCellEntity">
+	<select id="queryObject"
+		resultType="com.indihx.excel.entity.ExcelCellEntity">
 		select * from EXCEL_CELL where EXCEL_CELL_ID = #{value}
 	</select>
 
-	<select id="queryList" resultType="com.indihx.excel.entity.ExcelCellEntity">
+	<select id="queryList"
+		resultType="com.indihx.excel.entity.ExcelCellEntity">
 		select * from EXCEL_CELL
-        <choose>
-            <when test="sidx != null and sidx.trim() != ''">
-                order by ${sidx} ${order}
-            </when>
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by ${sidx} ${order}
+			</when>
 			<otherwise>
-                order by EXCEL_CELL_ID desc
+				order by EXCEL_CELL_ID desc
 			</otherwise>
-        </choose>
+		</choose>
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from EXCEL_CELL 
+
+	<select id="queryTotal" resultType="int">
+		select count(*) from
+		EXCEL_CELL
 	</select>
-	 
-	<insert id="insert" parameterType="com.indihx.excel.entity.ExcelCellEntity">
+
+	<insert id="insert"
+		parameterType="com.indihx.excel.entity.ExcelCellEntity">
 		insert into EXCEL_CELL
 		(
-			EXCEL_CELL_ID, 
-			<if test="excelSheetId != null">EXCEL_SHEET_ID , </if>
-			<if test="excelCellCnName != null">EXCEL_CELL_CN_NAME , </if>
-			<if test="excelCellEnName != null">EXCEL_CELL_EN_NAME , </if>
-			<if test="excelCellColNum != null">EXCEL_CELL_COL_NUM , </if>
-			<if test="excelCellRowNum != null">EXCEL_CELL_ROW_NUM , </if>
-			<if test="excelCellType != null">EXCEL_CELL_TYPE , </if>
-			<if test="excelDataType != null">EXCEL_DATA_TYPE , </if>
-			<if test="excelDefaultValue != null">EXCEL_DEFAULT_VALUE , </if>
-			IS_DELETE
+		EXCEL_CELL_ID,
+		<if test="excelSheetId != null">EXCEL_SHEET_ID , </if>
+		<if test="excelCellCnName != null">EXCEL_CELL_CN_NAME , </if>
+		<if test="excelCellEnName != null">EXCEL_CELL_EN_NAME , </if>
+		<if test="excelCellColNum != null">EXCEL_CELL_COL_NUM , </if>
+		<if test="excelCellRowNum != null">EXCEL_CELL_ROW_NUM , </if>
+		<if test="excelCellType != null">EXCEL_CELL_TYPE , </if>
+		<if test="excelDataType != null">EXCEL_DATA_TYPE , </if>
+		<if test="excelDefaultValue != null">EXCEL_DEFAULT_VALUE , </if>
+		IS_DELETE
 		)
 		values
 		(
-			excel_id .nextval, 
-			<if test="excelSheetId != null">#{excelSheetId}, </if>
-			<if test="excelCellCnName != null">#{excelCellCnName}, </if>
-			<if test="excelCellEnName != null">#{excelCellEnName}, </if>
-			<if test="excelCellColNum != null">#{excelCellColNum}, </if>
-			<if test="excelCellRowNum != null">#{excelCellRowNum}, </if>
-			<if test="excelCellType != null">#{excelCellType}, </if>
-			<if test="excelDataType != null">#{excelDataType}, </if>
-			<if test="excelDefaultValue != null">#{excelDefaultValue}, </if>
-			'00'
+		excel_id .nextval,
+		<if test="excelSheetId != null">#{excelSheetId}, </if>
+		<if test="excelCellCnName != null">#{excelCellCnName}, </if>
+		<if test="excelCellEnName != null">#{excelCellEnName}, </if>
+		<if test="excelCellColNum != null">#{excelCellColNum}, </if>
+		<if test="excelCellRowNum != null">#{excelCellRowNum}, </if>
+		<if test="excelCellType != null">#{excelCellType}, </if>
+		<if test="excelDataType != null">#{excelDataType}, </if>
+		<if test="excelDefaultValue != null">#{excelDefaultValue}, </if>
+		'00'
 		)
 	</insert>
-	 
-	<update id="update" parameterType="com.indihx.excel.entity.ExcelCellEntity">
-		update EXCEL_CELL 
+
+	<update id="update"
+		parameterType="com.indihx.excel.entity.ExcelCellEntity">
+		update EXCEL_CELL
 		<set>
 			<if test="excelSheetId != null">EXCEL_SHEET_ID = #{excelSheetId}, </if>
 			<if test="excelCellCnName != null">EXCEL_CELL_CN_NAME = #{excelCellCnName}, </if>
@@ -83,31 +90,50 @@
 		</set>
 		where EXCEL_CELL_ID = #{excelCellId}
 	</update>
-	
+
 	<delete id="delete">
 		delete from EXCEL_CELL where EXCEL_CELL_ID = #{value}
 	</delete>
-	
+
 	<delete id="deleteBatch">
-		delete from EXCEL_CELL where EXCEL_CELL_ID in 
-		<foreach item="excelCellId" collection="array" open="(" separator="," close=")">
+		delete from EXCEL_CELL where EXCEL_CELL_ID in
+		<foreach item="excelCellId" collection="array" open="("
+			separator="," close=")">
 			#{excelCellId}
 		</foreach>
 	</delete>
 
-	<select id="queryCellListBySheetId" resultType="com.indihx.excel.entity.ExcelCellEntity" parameterType="long">
-		SELECT EXCEL_CELL_ID	excelCellId,
-				EXCEL_SHEET_ID	excelSheetId,
-				EXCEL_CELL_CN_NAME	excelCellCnName,
-				EXCEL_CELL_EN_NAME	excelCellEnName,
-				EXCEL_CELL_COL_NUM	excelCellColNum,
-				EXCEL_CELL_ROW_NUM	excelCellRowNum,
-				EXCEL_CELL_TYPE	excelCellType,
-				EXCEL_DATA_TYPE	excelDataType,
-				EXCEL_DEFAULT_VALUE	excelDefaultValue,
-				IS_DELETE	isDelete
- 		from EXCEL_CELL 
- 		WHERE EXCEL_SHEET_ID=#{id}
+	<select id="queryCellListBySheetId"
+		resultType="com.indihx.excel.entity.ExcelCellEntity"
+		parameterType="long">
+		SELECT EXCEL_CELL_ID excelCellId,
+		EXCEL_SHEET_ID excelSheetId,
+		EXCEL_CELL_CN_NAME excelCellCnName,
+		EXCEL_CELL_EN_NAME excelCellEnName,
+		EXCEL_CELL_COL_NUM excelCellColNum,
+		EXCEL_CELL_ROW_NUM excelCellRowNum,
+		EXCEL_CELL_TYPE excelCellType,
+		EXCEL_DATA_TYPE excelDataType,
+		EXCEL_DEFAULT_VALUE excelDefaultValue,
+		IS_DELETE isDelete
+		from EXCEL_CELL
+		WHERE EXCEL_SHEET_ID=#{id}
 	</select>
 
+	<select id="queryCellListBySheetIdAndFixType" resultType="com.indihx.excel.entity.ExcelCellEntity" >
+		SELECT EXCEL_CELL_ID excelCellId,
+		EXCEL_SHEET_ID excelSheetId,
+		EXCEL_CELL_CN_NAME excelCellCnName,
+		EXCEL_CELL_EN_NAME excelCellEnName,
+		EXCEL_CELL_COL_NUM excelCellColNum,
+		EXCEL_CELL_ROW_NUM excelCellRowNum,
+		EXCEL_CELL_TYPE excelCellType,
+		EXCEL_DATA_TYPE excelDataType,
+		EXCEL_DEFAULT_VALUE excelDefaultValue,
+		IS_DELETE isDelete
+		from EXCEL_CELL
+		WHERE EXCEL_SHEET_ID=#{id}
+		and EXCEL_CELL_TYPE = #{fixType}
+	</select>
+	
 </mapper>

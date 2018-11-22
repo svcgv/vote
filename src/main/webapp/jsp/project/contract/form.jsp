@@ -117,9 +117,9 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">公司代码：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="companyCode"  autocomplete="off" class="layui-input form-control">
+		          <input type="text" name="companyCode" readonly="readonly" autocomplete="off" class="layui-input form-control">
 		      </div>
-		       <span class="f-placeholder"></span>
+				<button type="button"  class="layui-btn layui-btn-sm" id="companyQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		  </div>
 	     <div class="layui-form-item" style="margin-bottom:0px;">
@@ -195,7 +195,7 @@
 								  </th>
 						         <th>
 						        	<div class="layui-input-inline">
-						        		<input type="text" name="paymentDate" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
+						        		<input type="text" name="paymentDate" style="width:120px;" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
 							      	</div>
 							     </th>
 						        <th>
@@ -234,7 +234,6 @@
 </script>
 <script>
     var chosedProject=[];
-    console.log(chosedProject);
     var chosedLayTable=null;
 $(function(){
 	layui.use(['layer', 'form','laydate','table'], function(){
@@ -340,7 +339,7 @@ $(function(){
              var _account=$(this).val();
              console.log(_account)
              if(_account !=''){
-       	  			 var rate=_account/max;
+                 var rate=_account/max*100;
        	  			$(this).parents("th").next("th").find("input[name='paymentRate']").val(rate.toFixed(2));
        	  		}
          });
@@ -352,7 +351,7 @@ $(function(){
              }
        	  		var rate=$(this).val();
        	  		if(rate !=''){
-       	  			 var account=rate * max;
+                    var account=rate /100 * max;
        	  			$(this).parents("th").prev("th").find("input[name='paymentAmount']").val(account.toFixed(2));
        	  		}
          });
@@ -390,6 +389,14 @@ $(function(){
 		 });
 		  
 	  });
+        $("#contract-addForm-hook #companyQuery-form").click(function(){
+            $.openWindow({
+                url:'company?act=form',
+                title:"选择公司代码",
+                width:"750"
+            });
+
+        });
 
         // 选择项目
         $("#contract-addForm-hook #projectQuery-hook").on("click",function(){
@@ -449,7 +456,6 @@ $(function(){
 					  newParam[i] = queryParams[i]
 				  }
 			  }
-			  console.log(newParam);
 			  return newParam
 		}
 		var win=$("#contract-addForm-hook").getWindow();
@@ -469,10 +475,10 @@ $(function(){
 				contentType:'application/json',
 				data: JSON.stringify(getParam()),
 				success:function(res){
-					layer.msg("新增成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
-						win.close();
-						location.reload();
-					});
+                    layer.msg("新增成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
+                        win.close();
+                        location.reload();
+                    });
 				},
 				error:function(){
 					layer.msg("新增失败",{icon:5});

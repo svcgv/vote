@@ -30,7 +30,7 @@
 		      </div>
 		    </div>
 		     <div class="layui-inline">
-		      <label class="layui-form-label">指导销售价：</label>
+		      <label class="layui-form-label">指导销售价（元）：</label>
 		       <div class="layui-input-inline">
 		          <label id="productSuggestPrice" class="layui-form-label">${product.productSuggestPrice}</label>
 		      </div>
@@ -63,7 +63,12 @@
 		      </div>
 		       
 		    </div>
-		    
+			  <div class="layui-inline">
+				  <label class="layui-form-label" style="width:80px!important;">备注：</label>
+				  <div class="layui-input-block" style="margin-left:90px;width:410px;">
+					  <textarea name="remark" readonly="readonly" class="layui-textarea form-control">${product.remark}</textarea>
+				  </div>
+			  </div>
 		     <div class="layui-inline">
 		      <label class="layui-form-label">项目引用列表：</label>
 	           <%--<div class="layui-input-inline" id="chosed-project-hook" style="border:#e6e6e6 solid 1px;height:60px;overflow-y:auto;width:320px;">--%>
@@ -73,12 +78,7 @@
 		       <%--</div>--%>
 		    </div>
 			  <table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
-	       <div class="layui-inline">
-	       		 <label class="layui-form-label" style="width:80px!important;">备注：</label>
-	       		 <div class="layui-input-block" style="margin-left:90px;width:410px;">
-			      <textarea name="remark" readonly="readonly" class="layui-textarea form-control">${product.remark}</textarea>
-			    </div>
-	       </div>
+
 		     
 		     
 		  </div>

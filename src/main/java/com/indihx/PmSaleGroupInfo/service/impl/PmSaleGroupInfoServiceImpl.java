@@ -1,5 +1,6 @@
 package com.indihx.PmSaleGroupInfo.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,4 +45,10 @@ public class PmSaleGroupInfoServiceImpl implements PmSaleGroupInfoService {
    	public List<PmSaleGroupInfoEntity> queryList(Map<String, Object> entity){
    		return pmSaleGroupInfoMapper.queryList(entity);
    	}
+	public List<PmSaleGroupInfoEntity> queryList(Map<String, Object> entity,Integer pageNum, Integer pageSize){
+		if(pageNum != null && pageSize != null) {
+			PageHelper.startPage(pageNum, pageSize);
+		}
+		return pmSaleGroupInfoMapper.queryList(entity);
+	}
 }

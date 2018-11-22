@@ -33,7 +33,7 @@
 		      <label class="layui-form-label">合同编号：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="contractCode"  autocomplete="off" class="layui-input form-control">
-				   <input type="text" style='display:none' name="contractId" autocomplete="off" value="1" class="layui-input form-control">
+				   <input type="text" style='display:none' id="contractId" name="contractId" autocomplete="off"  class="layui-input form-control">
 		      </div>
 		       <span class="f-placeholder"></span>
 		    </div>
@@ -118,9 +118,9 @@
 		    <div class="layui-inline" style="">
 		      <label class="layui-form-label">公司代码：</label>
 		       <div class="layui-input-inline">
-		          <input type="text" name="companyCode"  autocomplete="off" class="layui-input form-control">
+		          <input type="text" name="companyCode" readonly="readonly" autocomplete="off" class="layui-input form-control">
 		      </div>
-			     <span class="f-placeholder"></span>
+				<button type="button"  class="layui-btn layui-btn-sm" id="companyQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
 		     </div>
 		  </div>
 	     <div class="layui-form-item" style="margin-bottom:0px;">
@@ -160,7 +160,7 @@
 					<button type="button"  class="layui-btn " id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon"></i>项目引用</button>
 				</div>
 			</div>
-			<div style="float:left;width:600px;">
+			<div style="float:left;width:900px;">
 				<table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
 			</div>
 	 	 </div>
@@ -185,37 +185,7 @@
 			      	</tr>
 			      </thead>
 				      <tbody class="payList">
-					<c:forEach items="${pmPaymentPoints}" var="app" varStatus="status" >
-				     	 <tr>
-				        	 <th class="paySortNum">${status.count}</th>
-							 <th>
-								 <div class="layui-input-inline">
-									 <input type="text" name="payWbsCode" value="${app.paymentId}" autocomplete="off" class="layui-input form-control">
-								 </div>
-							 </th>
-					         <th>
-					        	<div class="layui-input-inline">
-					        		<input type="text" name="paymentDate" value="${app.paymentDate}" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
-						      	</div>
-						     </th>
-					        <th>
-					        	<div class="layui-input-inline">
-							         <input type="number" name="paymentAmount" value="${app.paymentAmount}" autocomplete="off" class="layui-input form-control">
-						      	</div>
-						     </th>
-						     <th>
-					        	<div class="layui-input-inline">
-							         <input type="number" name="paymentRate" value="${app.paymentRate}" style="width:90px;" autocomplete="off" class="layui-input form-control">
-						      	</div>
-						     </th>
-						     <th>
-					        	<div class="layui-input-inline">
-							         <input type="text" name="payRequirement" value="${app.remark}" style="min-width:250px;" autocomplete="off" class="layui-input form-control">
-						      	</div>
-						     </th>
-				      	 </tr>
-					</c:forEach>
-				     	  <tr class="listTmpl" style="display:none;">
+				       <tr class="listTmpl" style="display:none;">
 				        	 <th class="paySortNum">1</th>
 							  <th>
 								  <div class="layui-input-inline">
@@ -224,7 +194,7 @@
 							  </th>
 							  <th>
 					        	<div class="layui-input-inline">
-					        		<input type="text" name="paymentDate" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
+					        		<input type="text" name="paymentDate"  style="width:120px;" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
 						      	</div>
 						     </th>
 							  <th>
@@ -239,7 +209,7 @@
 						     </th>
 							  <th>
 					        	<div class="layui-input-inline">
-							         <input type="text" name="payRequirement" style="min-width:250px;" autocomplete="off" class="layui-input form-control">
+							         <input type="text" name="payRequirement" style="" autocomplete="off" class="layui-input form-control">
 						      	</div>
 						     </th>
 						     <th>
@@ -248,6 +218,42 @@
 						      	</div>
 						     </th>
 				      	 </tr>
+					<c:forEach items="${pmPaymentPoints}" var="app" varStatus="status" >
+				     	 <tr>
+				        	 <th class="paySortNum">${status.count}</th>
+							 <th>
+								 <div class="layui-input-inline">
+									 <input type="text" name="payWbsCode" value="${app.paymentCode}" autocomplete="off" class="layui-input form-control">
+								 </div>
+							 </th>
+					         <th>
+					        	<div class="layui-input-inline">
+					        		<input type="text" name="paymentDate" style="width:120px;" value="${app.paymentDate}" autocomplete="off" class="layui-input form-control paymentDate-hook hasDatepicker">
+						      	</div>
+						     </th>
+					        <th>
+					        	<div class="layui-input-inline">
+							         <input type="number" name="paymentAmount" value="${app.paymentAmount}" autocomplete="off" class="layui-input form-control">
+						      	</div>
+						     </th>
+						     <th>
+					        	<div class="layui-input-inline">
+							         <input type="number" name="paymentRate" value="${app.paymentRate}" style="width:90px;" autocomplete="off" class="layui-input form-control">
+						      	</div>
+						     </th>
+						     <th>
+					        	<div class="layui-input-inline">
+							         <input type="text" name="payRequirement" value="${app.remark}" style="" autocomplete="off" class="layui-input form-control">
+						      	</div>
+						     </th>
+						     <th>
+					        	<div class="layui-input-inline" style="width:70px;">
+							         <a class="layui-btn layui-btn-danger layui-btn-xs delete-row-hook">删除</a>
+						      	</div>
+						     </th>
+				      	 </tr>
+					</c:forEach>
+				     	 
 		
 				      </tbody>
 				</table>
@@ -262,12 +268,21 @@
     	<a class="layui-layer-btn1" id="contract-close-hook">关闭</a>
     </div>
 </div>
+<script type="text/html" id="barFormDemo">
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
 <script>
+    var chosedProject=[];
+    var contractId = '';
+    console.log(chosedProject);
+    var chosedLayTable=null;
 $(function(){
-	layui.use(['layer', 'form','laydate'], function(){
+	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
 	  	  laydate=layui.laydate;
+
+        chosedLayTable=layui.table;
 		 //日期
 		  laydate.render({
 			    elem: "#contractStartTime-form",
@@ -289,7 +304,66 @@ $(function(){
                  theme: 'molv',
                  type: 'month'
              });
-        })
+        });
+        var pmContract = JSON.parse('${pmContract}');
+        for (var property in pmContract) {
+            $("#contract-addForm-hook input[name='"+property+"']").val(pmContract[property]);
+            if(property=='remark'){
+                $("#contract-addForm-hook textarea[name='"+property+"']").val(pmContract[property]);
+            }
+        }
+        contractId = $('#contractId')[0].value;
+        var param = {"contractId": contractId};
+        $.ajax({
+            type: 'POST',
+            url: '/vote/pmcontractprojectrelation/listProject',
+            data: JSON.stringify(param),
+            contentType: 'application/json',
+            success: function (res) {
+                chosedProject=res.page;
+                chosedLayTable.render({
+                    id:"table-chosedProject",
+                    elem: '#projectTable-chosed',
+                    height:'350',
+                    width:"700",
+                    title: '项目群数据信息',
+                    cols: [[
+                        {field:'wbs', title:'项目编号', templet:function(d){
+                            var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
+                            return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
+                        } },
+                        {field:'projectName', title:'项目名称'},
+                        {fixed: 'right', title:'操作', toolbar: '#barFormDemo', width:100}
+                    ]],
+                    cellMinWidth:'90',
+                    data:chosedProject,
+                    page: true
+                });
+            },
+            dataType: "json"
+        });
+
+        chosedLayTable.on('tool(tableFilter)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('确认删除行么', function(index){
+                    obj.del();
+                    console.log(data,chosedProject)
+                    // 删除
+                    for(var k in chosedProject){
+                        if(data.projectId == chosedProject[k].projectId ){
+                            chosedProject.splice(k,1)
+                        }
+                    }
+                    console.log(chosedProject,'exit');
+                    chosedLayTable.reload('table-chosedProject',{
+                        data:chosedProject
+                    })
+                    layer.close(index);
+
+                });
+            }
+        });
 		// 新增付款点
         $("#contract-addForm-hook #addPayList-form").click(function(){
         	var tmpl=$(".palyListTable .listTmpl").clone(true);
@@ -322,9 +396,8 @@ $(function(){
                  return false;
              }
        	  		var _account=$(this).val();
-       	  		console.log(_account)
        	  		if(_account !=''){
-       	  			 var rate=_account/max;
+       	  			 var rate=_account/max*100;
        	  			$(this).parents("th").next("th").find("input[name='paymentRate']").val(rate.toFixed(2));
        	  		}
          });
@@ -336,38 +409,57 @@ $(function(){
              }
        	  		var rate=$(this).val();
        	  		if(rate !=''){
-       	  			 var account=rate * max;
+       	  			 var account=rate /100 * max;
        	  			$(this).parents("th").prev("th").find("input[name='paymentAmount']").val(account.toFixed(2));
        	  		}
          });
 
-        var pmContract = JSON.parse('${pmContract}');
-        for (var property in pmContract) {
-            $("#contract-addForm-hook input[name='"+property+"']").val(pmContract[property]);
-            if(property=='remark'){
-                $("#contract-addForm-hook textarea[name='"+property+"']").val(pmContract[property]);
-            }
-        }
 
-		function getParam(){
-			var queryParams=$("#contract-addForm-hook form").serializeObject();
-			 var newParam = {}
-			  for(var i in queryParams){
-				  if(queryParams[i]){
-					  newParam[i] = queryParams[i]
-				  }
-			  }
-			 if(fileIds){
-				 newParam.fileIds=fileIds.join(',')
-			 }
-			 if(queryParams.open=='on'){
-				 newParam.isWorkAreaExplicit='00'
-			 }
-			 else{
-				 newParam.isWorkAreaExplicit='01'
-			 }
-			  return newParam
-		}
+
+        function getParam(){
+            var queryParams=$("#contract-addForm-hook form").serializeObject();
+            if(queryParams.payWbsCode){
+                var rets=[];
+                if(!$.isArray(queryParams.payWbsCode)){
+                    var ret={}
+                    ret.paymentCode=queryParams.payWbsCode;
+                    ret.paymentAmount=queryParams.paymentAmount;
+                    ret.paymentDate=queryParams.paymentDate;
+                    ret.remark=queryParams.payRequirement;
+                    ret.paymentRate=queryParams.paymentRate;
+                    rets.push(ret);
+                }else{
+                    for(var j=0;j<queryParams.payWbsCode.length;j++){
+                        var ret={}
+                        ret.paymentCode=queryParams.payWbsCode[j];
+                        ret.paymentAmount=queryParams.paymentAmount[j];
+                        ret.paymentDate=queryParams.paymentDate[j];
+                        ret.remark=queryParams.payRequirement[j];
+                        ret.paymentRate=queryParams.paymentRate[j];
+                        rets.push(ret);
+                    }
+                }
+
+                delete queryParams.payWbsCode
+                delete queryParams.paymentAmount
+                delete queryParams.paymentDate
+                delete queryParams.payRequirement
+                delete queryParams.paymentRate
+                queryParams=$.extend({},true,queryParams,{paymentPoint:rets});
+            }
+            var projects=[];
+            for(var i=0;i<chosedProject.length;i++ ){
+                projects.push(chosedProject[i].projectId)
+            }
+            queryParams=$.extend({},true,queryParams,{projectIds:projects});
+            var newParam = {}
+            for(var i in queryParams){
+                if(queryParams[i]){
+                    newParam[i] = queryParams[i]
+                }
+            }
+            return newParam
+        }
 
 	// form 表单手动渲染
 	  form.render();
@@ -402,6 +494,24 @@ $(function(){
 		 });
 		  
 	  });
+
+        $("#contract-addForm-hook #companyQuery-form").click(function(){
+            $.openWindow({
+                url:'company?act=form',
+                title:"选择公司代码",
+                width:"750"
+            });
+
+        });
+
+        // 选择项目
+        $("#contract-addForm-hook #projectQuery-hook").on("click",function(){
+            $.openWindow({
+                url:'project',
+                title:"选择项目",
+                width:"700"
+            });
+        });
 	  
 	  $("#contract-addForm-hook #custNameQuery-form").on("click",function(){
 		  	$.openWindow({
@@ -428,12 +538,13 @@ $(function(){
 				contentType:'application/json',
 				data: JSON.stringify(getParam()),
 				success:function(res){
-                    location.reload();
-					layer.msg("新增成功",{icon:1});
-					win.close();
+                    layer.msg("修改成功",{icon:1,shade:0.3,time:1000,shadeClose:true},function(){
+                        win.close();
+                        location.reload();
+                    });
 				},
 				error:function(){
-					layer.msg("新增失败",{icon:5});
+					layer.msg("修改失败",{icon:5});
 					win.close();
 				}
 			})

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="cm" uri="http://www.custom.com/01"%>
 <%@ include file="/resources/admincp/layouts/main.jsp"%>
 <body>
 <style>
@@ -13,15 +16,7 @@
 		  	<div class="layui-inline">
 		      <label class="layui-form-label">年份：</label>
 		       <div class="layui-input-inline">
-		         <select name="year">
-		         	<option>请选择</option>
-		         	<option value="2018" selected>2018年</option>
-		         	<option value="2017">2017年</option>
-		         	<option value="2016">2016年</option>
-		         	<option value="2015">2015年</option>
-		         	<option value="2014">2014年</option>
-		         	<option value="2013">2013年</option>
-		         </select>
+		         <select name="year" id="getYearRange"></select>
 		      </div>
 		      <span class="f-placeholder"></span>
 		    </div>
@@ -61,7 +56,7 @@
 		      <span class="f-placeholder"></span>
 		    </div>
 		    
-		     <div class="layui-inline" style="margin-right:0px;">
+		     <div class="layui-inline">
 		      <label class="layui-form-label">客户名称：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="custName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
@@ -71,7 +66,7 @@
 		    </div>
 		    </div>
 		    <div class="layui-form-item" style="margin-bottom:0px;">
-			     <div class="layui-inline" style="margin-right:48px;">
+			     <div class="layui-inline" >
 			      <label class="layui-form-label">创建日期(开始)：</label>
 			       <div class="layui-input-inline">
 			         <input type="text" name="startTime" id="startTime" autocomplete="off" class="layui-input form-control hasDatepicker">
@@ -92,6 +87,14 @@
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
 			  </div>
 		   </div>
+				<div class="layui-inline">
+					<label class="layui-form-label">是否有效：</label>
+					<div class="layui-input-inline">
+						<select name="isDelete" lay-verify="required" lay-filter="" class="form-control">
+							${isUseful.ewTypeHtml }
+						</select>
+					</div>
+				</div>
 	   </div>
 	</form>
 	<table class="layui-hide" id="contractTable" lay-filter="contract"></table>
@@ -108,7 +111,19 @@
 </script>
 
 <script type="text/javascript">
-
+$(function(){
+	//年份
+	var currentYear=(new Date()).getFullYear();
+    var _optionsHtml="<option value=''>请选择</option>";
+	for(var i=currentYear;i>=2010;i--){
+		if(i == currentYear){
+		_optionsHtml+="<option selected='true' value='"+i+"'>"+i+("年")+"</option>";
+		}else{
+		_optionsHtml+="<option value='"+i+"'>"+i+("年")+"</option>";
+		}
+	}
+  $(".contract-info-wrapper #getYearRange").html(_optionsHtml);
+})
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table','upload'], function(){
   var layer = layui.layer ,
@@ -126,7 +141,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    elem: "#endTime",
 	    theme: 'molv'
 	 });
-  
+	 //form.render();
+	 
 	  function getParam(){
 			var queryParams=$("#contract-index-form").serializeObject();
 			 var newParam = {}
@@ -155,7 +171,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  
   });
   
-  
+
   // 选择人员
   $(".contract-info-wrapper #custNameQuery-hook").on("click",function(){
 	  	$.openWindow({

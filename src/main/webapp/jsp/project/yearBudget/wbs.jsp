@@ -11,7 +11,7 @@
 	  	<div class="layui-inline">
 	       <label class="layui-form-label">WBS编号：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="wbsCode"  autocomplete="off" class="layui-input form-control">
+	         <input type="text" name="wbs"  autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
 	  	
@@ -41,6 +41,7 @@
 </div>
 
 <script type="text/javascript">
+var testData = []
 $(function(){
 //一般直接写在一个js文件中
 layui.use(['layer', 'form','laydate','table'], function(){
@@ -57,32 +58,10 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    title: '客户数据表',
 	    cols: [[
 	      {type: 'radio' },
-	      {field:'wbsCode', title:'wbs编号', sort: true},
+	      {field:'wbs', title:'wbs编号', sort: true},
 	      {field:'projectName', title:'项目名称'}
 	    ]],
-	    data:[
-		  		{
-		  			"wbsCode":"1000",
-					"projectName":"交行项目"
-					
-				},
-				{
-		  			"wbsCode":"1001",
-					"projectName":"内网项目"
-					
-				},
-				{
-		  			"wbsCode":"1002",
-					"projectName":"方维项目"
-					
-				},
-				{
-		  			"wbsCode":"1003",
-					"projectName":"兴业银行项目"
-					
-				}
-				
-			],
+	    data:testData,
 	    page: true
 	  });
 	
@@ -98,15 +77,15 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			var chk=$(this).find(".laytable-cell-radio");
 			var isChecked=chk.find(".layui-form-radio").hasClass("layui-form-radioed");
 			if(isChecked){
-				var wbsCode=$(this).children("td").eq(1).text();
+				var wbs=$(this).children("td").eq(1).text();
 				var projectName=$(this).children("td").eq(2).text();
 				if(act == "indexSearch"){
 					$(".budget-info-wrapper input[name='projectName']").val(projectName);
-					$(".budget-info-wrapper input[name='wbsCode']").val(wbsCode);
+					$(".budget-info-wrapper input[name='wbs']").val(wbs);
 				}else if(act == "addWBS" || act == "addProjectName"){
 			 		// form 2 
 			 		console.log(index,YIndex,'index')
-			 		$(".budget-wrapper").find("tbody tr").eq(YIndex).find(".project-list").eq(0).children(".item").eq(index).find("input[name='wbsCode']").val(wbsCode);
+			 		$(".budget-wrapper").find("tbody tr").eq(YIndex).find(".project-list").eq(0).children(".item").eq(index).find("input[name='wbs']").val(wbs);
 			 		$(".budget-wrapper").find("tbody tr").eq(YIndex).find(".project-list").eq(1).children(".item").eq(index).find("input[name='projectName']").val(projectName);
 			 	}
 			}
@@ -126,22 +105,26 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	*/
 	$("#customer-query-form #wbsQuery").click(function(){
 		
-		var queryParams=$("#customer-query-form").serialize();
-		console.log(queryParams)
+		
+		var queryParams=$("#customer-query-form").serializeObject();
 		table.reload('customerGroup-table',{
-			url:'form',
-			page:{
-				curr:1 //从第一页开始
-			},
-			method:'post',
-			where:{
-				queryStr:queryParams
-			},
-			done:function(res){
-				console.log(res)
-			}
-			
-		})
+				 url: '/vote/pmprojectinfo/list',
+				page:{
+					curr:1 //从第一页开始
+				},
+				 method:'post',
+					where:{
+						queryStr:JSON.stringify(queryParams)
+					},
+					contentType: 'application/json',
+				    response: {
+				    	dataName: 'page'
+				    },
+					done:function(res){
+						console.log(res)
+						testData = res.page
+					}
+			})
 	});
 	
 });

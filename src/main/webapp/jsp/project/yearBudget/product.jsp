@@ -12,7 +12,7 @@
 	  	<div class="layui-inline">
 	       <label class="layui-form-label">产品编号：</label>
 	       <div class="layui-input-inline">
-	         <input type="text" name="productId"  autocomplete="off" class="layui-input form-control">
+	         <input type="text" name="productCode"  autocomplete="off" class="layui-input form-control">
 	       </div>
  	 	</div>
 	  	
@@ -50,44 +50,42 @@
 $(function(){
 //一般直接写在一个js文件中
 var act="${act}";// 区分 选择 和查看
-var getData=[
-		  		{
-		  			"productId":"1000",
-					"productName":"交行产品"
-					
-				},
-				{
-		  			"productId":"1001",
-					"productName":"内网产品"
-					
-				},
-				{
-		  			"productId":"1002",
-					"productName":"方维产品"
-					
-				},
-				{
-		  			"productId":"1003",
-					"productName":"兴业银行产品"
-					
-				}
-				
-			];
-
-if(act == "viewProduct"){ // 查看按钮
-	getData=[];
-	getExitProducts.children(".customer-list").each(function(){
-		var productId=$(this).children(".customerItem").attr("productId");
-		var productName=$(this).children(".customerItem").text();
-		getData.push({
-			"productId":productId,
-			"productName":productName
-		});
-	});
-	
+var cols= [[
+	  {type: 'checkbox', fixed: 'left'},
+	  {field:'productCode', title:'产品代码',fixed: 'left', width:110, sort: true},
+	  {field:'productName', title:'产品名称',fixed: 'left', width:190},
+	  {field:'productType', title:'产品类型',fixed: 'left', width:150},
+  ]]
+  
+  function query(){
+	var queryParams=$("#customer-query-form").serializeObject();
+	$.ajax({
+		  type: 'POST',
+		  url: '/vote/pmproductinfo/list',
+		  data: JSON.stringify(queryParams),
+		  contentType:'application/json',
+		  success: function(res){
+		      console.log(res)
+		      getData=res.page
+		     
+		      a.table.render({
+		    	elem: '#productTable',
+		  	    id:"productCode",
+		  	    height:'full-250',
+		  	    width:"520",
+		  	    title: '',
+		  	    cols: cols,
+		  	    cellMinWidth:'90',
+		  	    data:getData,
+		  	    page: false
+		  	  	});},
+		  dataType: "json"
+		})
 }
+var getData=[];
+
 console.log(getData,'初始化数据')
-layui.use(['layer', 'form','laydate','table'], function(){
+var a = layui.use(['layer', 'form','laydate','table'], function(){
   var layer = layui.layer ,
   	  form = layui.form,
   	  table=layui.table;
@@ -95,33 +93,15 @@ layui.use(['layer', 'form','laydate','table'], function(){
   // table render
   table.render({
 	    elem: '#productTable',
-	    id:"productID",
+	    id:"productCode",
 	    //url:'custom.json',
 	    height:'260',
-	    width:"680",
+	    width:"500",
 	    title: '产品数据表',
-	    cols: [[
-	      {type: 'checkbox' },
-	      {field:'productId', title:'wbs编号', sort: true},
-	      {field:'productName', title:'产品名称'},
-	      {align: 'center', title:'操作', toolbar: '#bar-product',width:90}
-	    ]],
+	    cols: cols,
 	    data:getData,
-	    page: true
+	    page: false
 	  });
-  if(act == "viewProduct"){
-	  // 删除事件
-	  table.on('tool(product)', function(obj){
-		    var data = obj.data;
-		    if(obj.event === 'del'){
-		      layer.confirm('确认删除么', function(index){
-		    	  console.log(obj,index,'product')
-		          obj.del();
-		          layer.close(index);
-		      });
-		    }
-	  });
-  }
 	// 保存 事件
 	var index ="${index}";
 	var YIndex ="${YIndex}";
@@ -131,7 +111,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 		var oldProducts= target.find("button.productQuery-hook").nextAll(".layui-badge");
 		var oldRet=[];
 		for(var i=0;i<oldProducts.length;i++){
-			var pid=oldProducts.eq(i).attr("productid");
+			var pid=oldProducts.eq(i).attr("productCode");
 			oldRet.push(pid)
 		}
 	$(".budget-cust-wrapper").on("click","#save-hook",function(){
@@ -141,11 +121,13 @@ layui.use(['layer', 'form','laydate','table'], function(){
 					var chk=$(this).find(".laytable-cell-checkbox");
 					var isChecked=chk.find(".layui-form-checkbox").hasClass("layui-form-checked");
 					if(isChecked){
-						var productId=$(this).children("td").eq(1).text();
+						var productCode=$(this).children("td").eq(1).text();
 						var productName=$(this).children("td").eq(2).text();
-							console.log(productId,productName)
-							if($.inArray(productId,oldRet) == -1){
-								_html += '<span class="layui-badge layui-bg-gray" productId="'+productId+'" style="margin-right:5px;">'+productName+'</span>';
+						
+							console.log('productCode',productCode)
+								console.log('productName',$(this).children("td").eq(0).text())
+							if($.inArray(productCode,oldRet) == -1){
+								_html += '<span class="layui-badge layui-bg-gray" productCode="'+productCode+'" style="margin-right:5px;">'+productName+'</span>';
 							}
 					}
 				});
@@ -168,24 +150,9 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	*/
 	$("#customer-query-form #wbsQuery").click(function(){
 		
-		var queryParams=$("#customer-query-form").serialize();
-		console.log(queryParams)
-		table.reload('customerGroup-table',{
-			url:'form',
-			page:{
-				curr:1 //从第一页开始
-			},
-			method:'post',
-			where:{
-				queryStr:queryParams
-			},
-			done:function(res){
-				console.log(res)
-			}
-			
-		})
+		query()
 	});
-	
+	query()
 });
 	
 });

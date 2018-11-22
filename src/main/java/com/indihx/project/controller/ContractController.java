@@ -65,8 +65,6 @@ public class ContractController extends AbstractBaseController{
 		ModelAndView view = new ModelAndView();
 		
 		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
-		view.addObject("status",infoservice.qryInfoByCode("BID_STATUS"));
 		view.setViewName("/project/contract/index");
 		return view;
 	}
@@ -164,6 +162,14 @@ public class ContractController extends AbstractBaseController{
 		ModelAndView view = new ModelAndView();
 
 		view.setViewName("/project/contract/project");
+		return view;
+	}
+	// 用户
+	@RequestMapping(value="/contract/company",method=RequestMethod.GET)
+	public ModelAndView companyFormView(@RequestParam("act") String act) {
+		ModelAndView view = new ModelAndView();
+		view.addObject("act",act);
+		view.setViewName("/project/contract/company");
 		return view;
 	}
 	

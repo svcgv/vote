@@ -223,7 +223,7 @@ public class ExcelController extends AbstractBaseController {
 		return view;
 	}
 
-	//@RequestMapping(value = "/detailList", method = RequestMethod.GET)
+
 	@RequestMapping(value="/detailList.do",method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> detailList(@RequestBody Map<String, Object> param,
 			HttpServletRequest request) {
@@ -238,5 +238,6 @@ public class ExcelController extends AbstractBaseController {
 		a.put("param", param);
 		return a;
 	}
+
 
 }

@@ -2,6 +2,7 @@ package com.indihx.excel.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,4 +28,13 @@ public List<ExcelCellEntity> queryCellListBySheetId(long id) {
 	// TODO Auto-generated method stub
 	return excelCellMapper.queryCellListBySheetId(id);
 }
+
+public List<ExcelCellEntity> queryCellListBySheetId(long id,String fixType) {
+	// TODO Auto-generated method stub
+	Map<String,Object> map = new HashMap<String,Object>();
+	map.put("id", id);
+	map.put("fixType", fixType);
+	return excelCellMapper.queryCellListBySheetIdAndFixType(map);
+}
+
 }

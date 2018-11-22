@@ -113,15 +113,17 @@ public class CustomerController extends AbstractBaseController{
 				view.addObject("customerGroupName","选择客户群");
 			}
 			view.addObject("Custom",custom);
+			view.addObject("area",infoservice.qryInfoByCode("AREA",custom.getArea()));
 			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE",custom.getCustType()));
 			view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE",custom.getCustTrade()));
 			view.addObject("tradeCode",infoservice.qryInfoByCode("TRADE_CODE",custom.getTradeCode()));
 			view.addObject("regionalMarket",infoservice.qryInfoByCode("REGIONAL_MARKET",custom.getRegionalMarket()));
 			view.addObject("payCycle",infoservice.qryInfoByCode("PAY_CYCLE",custom.getPayCycle()));
-			view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL",custom.getIsUseful()));
+			view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL",custom.getIsDelete()));
 			view.addObject("bgVisiable",infoservice.qryInfoByCode("BG_VISIABLE",custom.getBgVisiable()));
 			view.addObject("country",infoservice.qryInfoByCode("COUNTRY",custom.getCountry()));
 		}else {
+			view.addObject("area",infoservice.qryInfoByCode("AREA"));
 			view.addObject("custType",infoservice.qryInfoByCode("CUST_TYPE"));
 			view.addObject("custTrade",infoservice.qryInfoByCode("CUST_TRADE","01"));
 			view.addObject("tradeCode",infoservice.qryInfoByCode("TRADE_CODE","01"));
@@ -166,7 +168,13 @@ public class CustomerController extends AbstractBaseController{
     	
 		return list;
 	}
-	
-	
+
+	@RequestMapping(value="/customer/company",method=RequestMethod.GET)
+	public ModelAndView companyFormView(@RequestParam("act") String act) {
+		ModelAndView view = new ModelAndView();
+		view.addObject("act",act);
+		view.setViewName("/project/customer/company");
+		return view;
+	}
 	
 }
