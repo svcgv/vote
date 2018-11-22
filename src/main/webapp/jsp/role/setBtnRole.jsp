@@ -13,7 +13,7 @@ $(document).ready(function() {
 	function qryBtnList() {
 		 $("#btnId").val("");
 		$.indi.loadTableByQry({
-			url : "${ctx }/btnRole/ajaxQryBtnInfo.do"
+			url : "${ctx }/btn/ajaxQryBtnInfo.do"
 		});
 	}
 
