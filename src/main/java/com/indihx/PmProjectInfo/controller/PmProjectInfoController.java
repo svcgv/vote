@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 
 import com.indihx.system.entity.CostInfo;
 import com.indihx.system.entity.ProfitInfo;
 import com.indihx.system.entity.UsrInfo;
+import com.indihx.util.ReviewUtils;
 import com.indihx.util.UserUtil;
 import com.indihx.PmConfirmBid.entity.PmConfirmBidEntity;
 import com.indihx.PmConfirmBid.service.PmConfirmBidService;
@@ -37,6 +39,8 @@ import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectInfo.service.PmProjectInfoService;
 import com.indihx.PmProjectMilestoneInfo.entity.PmProjectMilestoneInfoEntity;
 import com.indihx.PmProjectMilestoneInfo.service.PmProjectMilestoneInfoService;
+import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
+import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.service.ICostInfoService;
@@ -81,6 +85,9 @@ public class PmProjectInfoController {
     
     @Autowired
     private PmProductInfoService pmProductInfoService;
+    
+    @Autowired
+    private PmReviewInfoService pmReviewInfoService;
 
     /**
      * 列表
@@ -116,6 +123,31 @@ public class PmProjectInfoController {
         return R.ok().put("page", pmProductInfo);
     }
     
+    /**
+     * 确认审批
+     */
+    @RequestMapping(value="/submit",method=RequestMethod.POST)
+    public @ResponseBody Map<String,Object> submit(@RequestBody PmProjectInfoEntity pmProjectInfoEntity,HttpSession session){
+        UsrInfo usesr = UserUtil.getUser(session);
+        pmProjectInfoEntity.setModifier(usesr.getUsrId());
+        pmProjectInfoEntity.setModifyTime(DateUtil.getDateTime());
+        PmProjectInfoEntity entity = pmProjectInfoService.queryObject(pmProjectInfoEntity.getProjectId());
+        pmProjectInfoEntity.setApproveStatus( ReviewUtils.getProjectNextState(entity.getApproveStatus(),"00",entity));
+ 
+        //插入投标审批记录
+        PmReviewInfoEntity reviewEntity = new PmReviewInfoEntity();
+        if(!(StringUtils.hasLength(pmProjectInfoEntity.getBuildManagerName())&&StringUtils.hasLength(pmProjectInfoEntity.getSellManagerName()))) {
+        	return R.error("请选择评审人");
+        }
+       
+        reviewEntity.setForeignId(pmProjectInfoEntity.getProjectId());
+        reviewEntity.setReviewType("01");
+        reviewEntity.setReviewUserCode(pmProjectInfoEntity.getBuildManagerId());
+        reviewEntity.setReviewUserName(pmProjectInfoEntity.getBuildManagerName());
+        pmReviewInfoService.insert(reviewEntity);
+        pmProjectInfoService.update(pmProjectInfoEntity);//全部更新
+        return R.ok();
+    }
     
     @RequestMapping(value="/listTender",method=RequestMethod.POST)
     public @ResponseBody Map<String,Object> listTender(@RequestBody Map<String, Object> params,HttpSession session){
