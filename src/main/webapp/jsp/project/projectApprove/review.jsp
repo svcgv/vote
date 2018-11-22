@@ -21,7 +21,7 @@
 }
 </style>
 <div id="project-view-hook"  style="margin-top:10px;" class="projectApprove-review-wrapper">
-	<form class="layui-form" action="" lay-filter="form-detail">
+
 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 		  <legend style="font-weight:bold;">项目信息</legend>
 		</fieldset>
@@ -474,7 +474,7 @@
 			      </div>
 			    </div>
 		  </div>  
-		</form>  
+
 		
 		
 		<div class="layui-form-item clearfix" style="margin-bottom:0px;margin-left:10px;">
@@ -551,13 +551,13 @@
 	    </div>
 		  
 	  	<div class="layui-form-item">
-	  		<div class="layui-inline">
-	      	<div class="layui-input-inline">
-	         <input type="text" style='display:none' name="reviewId" name="selfName" readonly="readonly" value="${userName }"  autocomplete="off" class="layui-input form-control disabledColor">
+	  		  	<div class="layui-inline">
+	      <div class="layui-input-inline">
+	         <input type="text" style='display:none' name="selfName" readonly="readonly" value="${userName }"  autocomplete="off" class="layui-input form-control disabledColor">
 	         <input type="text" style='display:none' name="reviewId" value="${reviewId }">
 	         <input type="text" style='display:none' name="reviewType" value="01">
-	        </div>
- 	 		</div>
+	       </div>
+ 	 	</div>
  	 	 </div>
 		</form></div>
 	<div class="layui-layer-btn layui-layer-btn-c">
@@ -703,23 +703,21 @@ $(function(){
 	  	  	
 	  	  	var win=$(".tender-review-wrapper").getWindow();
 			$(".projectApprove-review-wrapper").on("click","#tender-accessReview",function(){
-				if(pmConfirmBid.status=='01'){
+				if(data.approveStatus=='01'){
 					  if(!getChecked()){
 						  layer.msg("请确认所有检查项通过后再次点击通过按钮",{icon:3});
 						  return
 					  }
 				  }
 				submit('00')
-				showFromTable()
 			})
 			$(".projectApprove-review-wrapper").on("click","#tender_returnReview",function(){
 				submit('01')
-				showFromTable()
 			})
 			
 			
 			function submit(result){
-				
+		
 				var formDatas=$(".tender-review-wrapper form").serializeObject();
 				formDatas.result=result
 				$.ajax({
@@ -739,6 +737,13 @@ $(function(){
 					}
 				})
 			}
+			
+			
+			// 关闭
+			$("#project-view-hook #customerGroup-close-hook").click(function(){
+				$(this).getWindow().close();
+				return false;
+			})
 	})
 	
 });
