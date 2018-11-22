@@ -30,6 +30,7 @@ import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
 import com.indihx.PmReviewInfo.service.PmReviewInfoService;
 import com.indihx.baseTableUtil.entity.QueryUsrInfoEntity;
 import com.indihx.baseTableUtil.service.QueryUsrInfoService;
+import com.indihx.baseTableUtil.service.impl.QueryOrgInfoServiceImpl;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.PageUtils;
@@ -52,6 +53,8 @@ public class PmReviewInfoController {
     private PmProjectInfoService pmProjectInfoService;
     @Autowired
     private QueryUsrInfoService usrInfoService;
+    @Autowired
+    private QueryOrgInfoServiceImpl queryOrgInfoServiceImpl;
     /**
      * 列表
      */
@@ -213,8 +216,17 @@ public class PmReviewInfoController {
     			 
     			 
     			 if("03".equals(approveStatus)) {
-    				 List<BigDecimal> list = new ArrayList<BigDecimal>();
-    				 list.add(new BigDecimal(1000));
+    				BigDecimal bd =  new BigDecimal(1000);
+    			    List<Map<String,Object>> children = queryOrgInfoServiceImpl.queryAllChildrenOrgList(bd);
+    			    List<BigDecimal> list = new ArrayList<BigDecimal>();
+    			    list.add(bd);
+    			    if(children!=null && !children.isEmpty()) {
+    			    	for(int i = 0;i<children.size();i++) {
+    			    		Map<String,Object> map = children.get(i);
+    			    		list.add(new BigDecimal( Integer.parseInt(map.get("orgId").toString())));
+    			    	}
+    			    }
+    				 
     				 Map<String,Object> queryParam = new HashMap<String,Object>();
     			     queryParam.put("orgList", list);
     				 queryParam.put("roleCode", "MAIN_MANAGER");
