@@ -48,7 +48,7 @@ public class QueryUsrInfoController {
     @RequestMapping(value="/list",method=RequestMethod.POST)
     public @ResponseBody ResponseData list(@RequestBody Map<String, Object> params,HttpSession session){
 		String str = (String) params.get("queryStr");
-		Map<String,Object> maps = (Map<String,Object>) JSON.parse(str);
+		Map<String,Object> maps = str==null?params:(Map<String,Object>) JSON.parse(str);
 		return new ResponseData(usrInfoService.queryList(maps,params.get("page")==null?null:(int)params.get("page"),params.get("limit")==null?null:(int)params.get("limit")));
     }
 
