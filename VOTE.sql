@@ -5824,3 +5824,4 @@ Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (1
 Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108403,'查看','公司实体查看','公司实体管理','20181118',1084);
 Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108404,'删除','公司实体删除','公司实体管理','20181118',1084);
 
+alter table BTN_INFO add column MENU_ID NUMBER(16);
