@@ -1,10 +1,8 @@
 package com.indihx.PmYearBudget.entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import com.indihx.BaseEntity;
-import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 
 /**
  * ${comments}
@@ -59,7 +57,7 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 * $column.comments
 	 */
 
-	private String revebueSource;
+	private String revenueSource;
 	/**
 	 * $column.comments
 	 */
@@ -94,64 +92,25 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	private String[] productIdArr;
 	private String[] productNameArr;
 
-	
 
-	public String[] getProductIdArr() {
-		return productIdArr;
-	}
-
-	public void setProductIdArr(String[] productIdArr) {
-		this.productIdArr = productIdArr;
-	}
-
-	public String[] getProductNameArr() {
-		return productNameArr;
-	}
-
-	public void setProductNameArr(String[] productNameArr) {
-		this.productNameArr = productNameArr;
-	}
-
-	public String getProductNames() {
-		return productNames;
-	}
-
-	public void setProductNames(String productNames) {
-		if (productNames != null) {
-			this.productNameArr=productNames.split(","); 
-		}
-		this.productNames = productNames;
-	}
-
-	public String getProductIds() {
-		return productIds;
-	}
-
-	public void setProductIds(String productIds) {
-		if (productIds != null) {
-			this.productIdArr=productIds.split(",");
-		}
-		this.productIds = productIds;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
 
 	private String productList;
+
 	private BigDecimal taxes;
+
 	private BigDecimal taxRate;
+
 	private BigDecimal contractMoney;
+
 	private BigDecimal manyYearRev;
+
 	private BigDecimal curYearRev;
+
 	private BigDecimal lastRev;
+
 	private BigDecimal afterTax;
+
 	private String revRecognitionMethod;
-	private String revenueSource;
 
 	/**
 	 * $column.comments
@@ -164,6 +123,7 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private String custManagerName;
+
 
 	/**
 	 * $column.comments
@@ -215,16 +175,19 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private long budgetMay;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetJun;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetJul;
+
 	/**
 	 * $column.comments
 	 */
@@ -240,19 +203,16 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private long budgetOct;
-
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetNov;
-
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetDec;
-
 	/**
 	 * $column.comments
 	 */
@@ -288,18 +248,15 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private String remark;
-
 	public BigDecimal getAfterTax() {
 		return this.afterTax;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetApr() {
 		return this.budgetApr;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -327,42 +284,36 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	public long getBudgetJan() {
 		return this.budgetJan;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetJul() {
 		return this.budgetJul;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetJun() {
 		return this.budgetJun;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetMar() {
 		return this.budgetMar;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetMay() {
 		return this.budgetMay;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetNov() {
 		return this.budgetNov;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -450,6 +401,10 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		return this.currency;
 	}
 
+	public String getCurrency() {
+		return this.currency;
+	}
+
 	public BigDecimal getCurYearRev() {
 		return this.curYearRev;
 	}
@@ -531,8 +486,24 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		return this.poSow;
 	}
 
+	public String[] getProductIdArr() {
+		return this.productIdArr;
+	}
+
+	public String getProductIds() {
+		return this.productIds;
+	}
+
 	public String getProductList() {
 		return this.productList;
+	}
+
+	public String[] getProductNameArr() {
+		return this.productNameArr;
+	}
+
+	public String getProductNames() {
+		return this.productNames;
 	}
 
 	/**
@@ -563,23 +534,21 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		return this.remark;
 	}
 
-	/**
-	 * 获取：${column.comments}
-	 */
-	public String getRevebueSource() {
-		return this.revebueSource;
-	}
-
-	/**
-	 * 获取：${column.comments}
-	 */
 	public String getRevenueSource() {
 		return this.revenueSource;
 	}
 
+	/**
+	 * 获取：${column.comments}
+	 */
+
 	public String getReviewStatus() {
 		return this.reviewStatus;
 	}
+
+	/**
+	 * 获取：${column.comments}
+	 */
 
 	public String getRevRecognitionMethod() {
 		return this.revRecognitionMethod;
@@ -782,6 +751,10 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		this.currency = currency;
 	}
 
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
 	public void setCurYearRev(BigDecimal curYearRev) {
 		this.curYearRev = curYearRev;
 	}
@@ -864,8 +837,30 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		this.poSow = poSow;
 	}
 
+	public void setProductIdArr(String[] productIdArr) {
+		this.productIdArr = productIdArr;
+	}
+
+	public void setProductIds(String productIds) {
+		if (productIds != null) {
+			this.productIdArr=productIds.split(",");
+		}
+		this.productIds = productIds;
+	}
+
 	public void setProductList(String productList) {
 		this.productList = productList;
+	}
+
+	public void setProductNameArr(String[] productNameArr) {
+		this.productNameArr = productNameArr;
+	}
+
+	public void setProductNames(String productNames) {
+		if (productNames != null) {
+			this.productNameArr=productNames.split(",");
+		}
+		this.productNames = productNames;
 	}
 
 	/**
@@ -896,19 +891,14 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		this.remark = remark;
 	}
 
-	/**
-	 * 设置：${column.comments}
-	 */
-	public void setRevebueSource(String revebueSource) {
-		this.revebueSource = revebueSource;
+	public void setRevenueSource(String revenueSource) {
+		this.revenueSource = revenueSource;
 	}
 
 	/**
 	 * 设置：${column.comments}
 	 */
-	public void setRevenueSource(String revenueSource) {
-		this.revenueSource = revenueSource;
-	}
+
 
 	public void setReviewStatus(String reviewStatus) {
 		this.reviewStatus = reviewStatus;
