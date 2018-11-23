@@ -5746,4 +5746,81 @@ Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (1
 
 
 
+--1184预算管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (118401,'收入上报','预算管理收入上报','预算管理','20181118',1184);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (118402,'导出','预算管理导出','预算管理','20181118',1184);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (118403,'删除','预算管理删除','预算管理','20181118',1184);
+
+--1028投标管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (102801,'新增','投标新增','投标管理','20181118',1028);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (102802,'编辑','投标编辑','投标管理','20181118',1028);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (102803,'提交评审','投标提交评审','投标管理','20181118',1028);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (102804,'查看','投标查看','投标管理','20181118',1028);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (102805,'删除','投标删除','投标管理','20181118',1028);
+
+
+--1124提交评审
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (112401,'评审','评审','投标评审','20181118',1124);
+
+--1164项目管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (116401,'新增','项目新增','项目管理','20181118',1164);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (116402,'编辑','项目编辑','项目管理','20181118',1164);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (116403,'提交评审','项目提交评审','项目管理','20181118',1164);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (116404,'查看','项目查看','项目管理','20181118',1164);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (116405,'删除','项目删除','项目管理','20181118',1164);
+
+
+
+--1165项目群管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (116501,'新增','项目群新增','项目群管理','20181118',1165);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (116502,'编辑','项目群编辑','项目群管理','20181118',1165);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (116503,'查看','项目群查看','项目群管理','20181118',1165);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (116504,'删除','项目群删除','项目群管理','20181118',1165);
+
+
+
+--1204成本中心管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (120401,'新增','成本中心新增','成本中心管理','20181118',1204);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (120402,'编辑','成本中心编辑','成本中心管理','20181118',1204);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (120403,'查看','成本中心查看','成本中心管理','20181118',1204);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (120404,'删除','成本中心删除','成本中心管理','20181118',1204);
+
+
+--1205利润中心管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (120501,'新增','利润中心新增','利润中心管理','20181118',1205);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (120502,'编辑','利润中心编辑','利润中心管理','20181118',1205);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (120503,'查看','利润中心查看','利润中心管理','20181118',1205);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (120504,'删除','利润中心删除','利润中心管理','20181118',1205);
+
+--1087产品管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108701,'新增','产品新增','产品管理','20181118',1087);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108702,'编辑','产品编辑','产品管理','20181118',1087);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108703,'查看','产品查看','产品管理','20181118',1087);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108704,'删除','产品删除','产品管理','20181118',1087);
+
+
+--1044客户管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (104401,'新增','客户新增','客户管理','20181118',1044);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (104402,'编辑','客户编辑','客户管理','20181118',1044);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (104403,'查看','客户查看','客户管理','20181118',1044);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (104404,'删除','客户删除','客户管理','20181118',1044);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (104405,'导入','客户导入','客户管理','20181118',1044);
+
+--1066客户群管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (106601,'新增','客户群新增','客户群管理','20181118',1066);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (106602,'编辑','客户群编辑','客户群管理','20181118',1066);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (106603,'查看','客户群查看','客户群管理','20181118',1066);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (106604,'删除','客户群删除','客户群管理','20181118',1066);
+
+--1085销售团队管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108501,'新增','销售团队新增','销售团队管理','20181118',1085);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108502,'编辑','销售团队编辑','销售团队管理','20181118',1085);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108503,'查看','销售团队查看','销售团队管理','20181118',1085);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108504,'删除','销售团队删除','销售团队管理','20181118',1085);
+
+--1084公司实体管理
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108401,'新增','公司实体新增','公司实体管理','20181118',1084);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108402,'编辑','公司实体编辑','公司实体管理','20181118',1084);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108403,'查看','公司实体查看','公司实体管理','20181118',1084);
+Insert into BTN_INFO (BTN_ID,BTN_NAME,BTN_RMK,BTN_PAGE,TM_SMP,MENU_ID) values (108404,'删除','公司实体删除','公司实体管理','20181118',1084);
 
