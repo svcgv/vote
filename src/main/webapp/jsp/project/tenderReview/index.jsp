@@ -102,7 +102,7 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="view">评审</a>
+  <a class="layui-btn layui-btn-xs layui-btn-xs" power ="112401"  lay-event="view">评审</a>
 </script>
 
 <script type="text/javascript">
@@ -185,7 +185,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    cols: cols,
 	    cellMinWidth:'90',
 	    
-	    page: true
+	    page: true,
+	    done:function(){
+	    	$.buttonAuthority();
+	    }
 	  });
 
 	/*

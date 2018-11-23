@@ -83,8 +83,8 @@
 			   <div class="layui-btn-container" style="margin-left:25px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>收入上报</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="exportYearBudger"  style="margin-right:15px;"><i class="layui-icon"></i>导出</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook" power="118401" style="margin-right:15px;"><i class="layui-icon"></i>收入上报</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="exportYearBudger" power="118402" style="margin-right:15px;"><i class="layui-icon"></i>导出</button>
 			    
 			  </div>
 		   </div>
@@ -98,7 +98,7 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  <a class="layui-btn layui-btn-danger power="118403" layui-btn-xs" lay-event="del">删除</a>
 </script>
 
 <script type="text/javascript">
@@ -226,7 +226,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	    cols: cols,
 			  	    cellMinWidth:'100',
 			  	    data:testData,
-			  	    page: true
+			  	    page: true,
+				    done:function(){
+				    	$.buttonAuthority();
+				    }
 			  	  	});},
 			  dataType: "json"
 			});

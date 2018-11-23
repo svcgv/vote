@@ -153,20 +153,20 @@
 					</div>
 				</form>
 				<div class="col-md-12">
-					<button type="button" class="btn btn-primary" onclick="openAdd()"> 
+					<button type="button" class="btn btn-primary" power="10000801" onclick="openAdd()"> 
 						<i class="icon-plus-sign"></i> 新增
 					</button>
-					<button type="button" class="btn btn-primary" onclick="updPara()">
+					<button type="button" class="btn btn-primary" power="10000802" onclick="updPara()">
 						<i class="icon-edit"></i> 修改
 					</button>
-					<button type="button" class="btn btn-primary" onclick="deleUsr()">
+					<button type="button" class="btn btn-primary" power="10000803" onclick="deleUsr()">
 						<i class="icon-trash"></i> 删除
 					</button>
-					<button type="button" class="btn btn-primary"
+					<button type="button" class="btn btn-primary" power="10000804"
 						onclick="assignment()">
 						<i class="icon-plus-sign"></i> 权限分配
 					</button>
-					<button type="button" class="btn btn-primary" onclick="btnassign()">
+					<button type="button" class="btn btn-primary" power="10000805" onclick="btnassign()">
 						<i class="icon-plus-sign"></i> 按钮分配
 					</button>
 				</div>

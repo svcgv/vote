@@ -50,7 +50,7 @@
 			   <div class="layui-btn-container" style="margin-left:30px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="projectGroupIndexQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook" power="11650" style="margin-right:15px;"><i class="layui-icon"></i>新增</button>
 			  </div>
 		   </div>
 	   </div>
@@ -64,9 +64,9 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="view">查看</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  <a class="layui-btn layui-btn-xs" power="116502" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-xs layui-btn-xs" power="116503" lay-event="view">查看</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" power="116504" lay-event="del">删除</a>
 </script>
 
 <script type="text/javascript">
@@ -125,7 +125,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    ]],
 	    cellMinWidth:'120',
 	    data:testData,
-	    page: true
+	    page: true    ,
+        done:function(){
+            $.buttonAuthority();
+        }
 	  });
 
 	/*
