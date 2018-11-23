@@ -383,6 +383,12 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	  table.on('tool(custom)', function(obj){
 	    var data = obj.data;
 	    if(obj.event === 'del'){
+	    	
+	      	if(data.approveStatus != '00'){
+	    		layer.msg("当前已发起过评审，不可删除",{icon:5});
+	    		return
+	    	}
+	    	
 	      layer.confirm('确认删除行么', function(index){
 	        obj.del();
 	        var param = {}
