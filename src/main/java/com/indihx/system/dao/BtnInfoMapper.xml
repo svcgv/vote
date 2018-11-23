@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.indihx.system.dao.BtnInfoMapper">
   <!-- 支持缓存配置(必须配置否则缓存无效) -->
-  <cache type="com.indihx.cache.RedisCache" />
+<!--   <cache type="com.indihx.cache.RedisCache" /> -->
   <resultMap id="BaseResultMap" type="com.indihx.system.entity.BtnInfo">
     <id column="BTN_ID" jdbcType="VARCHAR" property="btnId" />
     <result column="BTN_NAME" jdbcType="VARCHAR" property="btnName" />
@@ -115,7 +115,7 @@
     
   	 <where>
   	 	<if test="roleId != null and roleId !=''">
-  			 role.role_id  =#{roleId,jdbcType=VARCHAR}
+  			 menu.role_id  =#{roleId,jdbcType=VARCHAR}
   		</if>
   	 
   		<if test="btnName != null and btnName !=''">
