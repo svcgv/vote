@@ -75,12 +75,12 @@ $(".org-wrapper #org-add-hook").click(function(){
 		var getCheckedOrg =$.fn.zTree.getZTreeObj("treeOrg").getSelectedNodes()[0];
 		 // 保存到已选机构中
 		 	if(act == "index"){
-		 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"MAIN_MANAGER")
+//		 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"MAIN_MANAGER")
 				$("#product-index-form input[name='developmentDeptName']").val(getCheckedOrg.name);
 				$("#product-index-form input[name='developmentDeptId']").val(getCheckedOrg.orgId);
 		 		
 		 	}else if(act =="add"){
-		 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"MAIN_MANAGER")
+//		 		queryUserByRoleCodeOrgNo(getCheckedOrg.orgId,"MAIN_MANAGER")
 		 		$("#product-addForm-hook input[name='developmentDeptName']").val(getCheckedOrg.name);
 				$("#product-addForm-hook input[name='developmentDeptId']").val(getCheckedOrg.orgId);
 		 	}

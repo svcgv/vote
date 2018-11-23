@@ -16,6 +16,10 @@
 		select * from pm_customer_group_relation where CUST_GROUP_RELATION_ID = #{value}
 	</select>
 
+	<select id="queryByCustId"  resultMap="pmCustomerGroupRelationMap">
+		select * from pm_customer_group_relation where CUST_ID = #{value}
+	</select>
+
 	<select id="queryList" resultMap="pmCustomerGroupRelationMap">
 		select 
 		*

@@ -116,9 +116,10 @@ public class ProductController extends AbstractBaseController{
 		
 		// 用户
 		@RequestMapping(value="/product/user",method=RequestMethod.GET)
-		public ModelAndView userFormView(@RequestParam("act") String act) {
+		public ModelAndView userFormView(@RequestParam("act") String act,@RequestParam("orgId") String orgId) {
 			ModelAndView view = new ModelAndView();
 			view.addObject("act",act);
+			view.addObject("orgId",orgId);
 			view.setViewName("/project/product/user");
 			return view;
 		}
