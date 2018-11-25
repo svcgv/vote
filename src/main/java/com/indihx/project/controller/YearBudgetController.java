@@ -43,6 +43,9 @@ public class YearBudgetController extends AbstractBaseController {
 	public ModelAndView addCustomView() {
 
 		ModelAndView view = new ModelAndView();
+		view.addObject("isNew", this.infoservice.qryInfoByCode("IS_IMPORTANT", "00"));
+		view.addObject("taxType", this.infoservice.qryInfoByCode("taxType","00"));
+		view.addObject("projectType2", this.infoservice.qryInfoByCode("PROJECT_TYPE","00"));
 
 		view.addObject("isUseful", this.infoservice.qryInfoByCode("IS_USEFUL", "01"));
 		view.addObject("productType", this.infoservice.qryInfoByCode("PRODUCT_TYPE"));

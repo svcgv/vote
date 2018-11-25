@@ -56,7 +56,8 @@
 		<result property="productIds" column="PRODUCT_IDS" />
 		<result property="productNames" column="PRODUCT_NAMES" />
 		<result property="isChoseProduct" column="IS_CHOSE_PRODUCT" />
-		
+		<result property="isNewProject" column="IS_NEW_PROJECT" />
+		<result property="isNewCustomer" column="IS_NEW_CUSTOMER" />
 	</resultMap>
 	<resultMap type="java.util.Map" id="pmYearBudgetGroupHashMap">
 		<result property="sapCode" column="SAP_CODE" />
@@ -117,21 +118,34 @@
 		<result property="productIds" column="PRODUCT_IDS" />
 		<result property="productNames" column="PRODUCT_NAMES" />
 		<result property="isChoseProduct" column="IS_CHOSE_PRODUCT" />
-		
+		<result property="isNewProject" column="IS_NEW_PROJECT" />
+		<result property="isNewCustomer" column="IS_NEW_CUSTOMER" />
 	</resultMap>
 	<select id="queryObject" resultMap="pmYearBudgetMap"> select * from PM_YEAR_BUDGET where YEAR_BUDGET_CODE = #{value}
 	</select>
 	<!-- 查用户对应多少条客户 -->
-	<select id="querySapCodeCount" resultMap="pmYearBudgetGroupHashMap"> SELECT SAP_CODE, CUST_NAME, "COUNT" (SAP_CODE) AS CUST_COUNT FROM
+	<select id="querySapCodeCount" resultMap="pmYearBudgetGroupHashMap"> 
+	SELECT SAP_CODE,
+	 CUST_NAME, "COUNT" (CUST_NAME) AS CUST_COUNT FROM
 		PM_YEAR_BUDGET WHERE CREATOR_ID = #{value} GROUP BY SAP_CODE,CUST_NAME
 	</select>
 	<select id="queryProjectSapCodeCount" resultMap="pmYearBudgetGroupHashMap">
-		SELECT CUST_SAP_CODE SAP_CODE, CUST_NAME, "COUNT" (CUST_SAP_CODE) AS CUST_COUNT FROM PM_PROJECT_INFO WHERE
+		SELECT CUST_SAP_CODE SAP_CODE, CUST_NAME, "COUNT" (CUST_NAME) AS CUST_COUNT FROM PM_PROJECT_INFO WHERE
 		CUST_MANAGER_ID = #{userId} AND IS_DELETE='00' AND CUST_SAP_CODE is NOT null AND FINISH_PROJECT_TIME <![CDATA[<=]]>
 		#{finishProjectEndTime} GROUP BY CUST_SAP_CODE,CUST_NAME 
 	</select>
 	<select id="queryList" resultMap="pmYearBudgetMap">
-		select * from PM_YEAR_BUDGET
+		select 
+			YEAR_BUDGET_CODE, IS_NEW_CUST, CUST_NAME, SAP_CODE, PROJECT_NAME, WBS, PROJECT_TYPE, REVENUE_SOURCE,
+			COMPANY_ENTITY_NAME, COMPANY_CODE, CONTRACT_ID, CONTRACT_CODE, CONTRACT_NAME, PO_SOW, CUST_MANAGER_ID,
+			CUST_MANAGER_NAME, TAX_TYPE, INCOMMING_TYPE, REGION, CURRENCY, GROSS_PROFIT_RATE, BUDGET_JAN, BUDGET_FEB, BUDGET_MAR,
+			BUDGET_APR, BUDGET_MAY, BUDGET_JUN, BUDGET_JUL, BUDGET_AUG, BUDGET_SEP, BUDGET_OCT, BUDGET_NOV, BUDGET_DEC,
+			BUDGET_SUM, CREATOR_ID, CREATE_TIME, MODIFIER, MODIFY_TIME, IS_DELETE, REMARK, REVIEW_STATUS, BUDGET_YEAR,
+			REV_RECOGNITION_METHOD, PRODUCT_LIST, TAX_RATE, CONTRACT_MONEY, MANY_YEAR_REV, CUR_YEAR_REV, LAST_REV, AFTER_TAX,
+			PRODUCT_IDS, PRODUCT_NAMES, IS_CHOSE_PRODUCT, HAD_REPORTED, 
+			( CASE WHEN SAP_CODE is NULL THEN '00' ELSE '01' END ) IS_NEW_PROJECT, 
+			( CASE WHEN WBS is NULL THEN '00' ELSE '01' END ) IS_NEW_CUSTOMER 
+		from PM_YEAR_BUDGET
 		<trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
 			<if test="yearBudgetCode != null and yearBudgetCode!=''"> YEAR_BUDGET_CODE = #{yearBudgetCode} AND
 			</if>
@@ -231,7 +245,15 @@
 			</if>
 			<if test="lastRev != null and lastRev!=''"> LAST_REV = #{lastRev} AND
 			</if>
-			<if test="afterTax != null and afterTax!=''"> AFTER_TAX = #{afterTax}
+			<if test="afterTax != null and afterTax!=''"> AFTER_TAX = #{afterTax} AND
+			</if>
+			<if test="isNewCustomer != null and isNewCustomer == '00'"> SAP_CODE is NULL AND
+			</if>
+			<if test="isNewCustomer != null and isNewCustomer == '01'"> SAP_CODE is NOT NULL AND
+			</if>
+			<if test="isNewProject != null and isNewProject == '00'"> WBS is NULL AND
+			</if>
+			<if test="isNewProject != null and isNewProject == '01'"> WBS is NOT NULL AND
 			</if>
 		</trim>
 	</select>
@@ -343,8 +365,6 @@
 		</if>
 		<if test="isChoseProduct != null and isChoseProduct !=''"> ,IS_CHOSE_PRODUCT
 		</if>
-		
-		
 		) values ( #{yearBudgetCode}
 		<if test="isNewCust != null and isNewCust!=''"> ,#{isNewCust}
 		</if>
@@ -447,7 +467,7 @@
 		<if test="productIds != null and productIds !=''"> ,#{productIds}
 		</if>
 		<if test="productNames != null and productNames !=''"> ,#{productIds}
-		</if>	
+		</if>
 		<if test="isChoseProduct != null and isChoseProduct !=''">,#{isChoseProduct}
 		</if>
 		)
@@ -506,7 +526,6 @@
 			<if test="afterTax != null and afterTax!=''">AFTER_TAX = #{afterTax},</if>
 			<if test="productIds != null and productIds !=''">PRODUCT_IDS= #{productIds},</if>
 			<if test="productNames != null and productNames !=''"> PRODUCT_NAMES = #{productNames}</if>
-			
 		</set>
 		where YEAR_BUDGET_CODE = #{yearBudgetCode}
 	</update>

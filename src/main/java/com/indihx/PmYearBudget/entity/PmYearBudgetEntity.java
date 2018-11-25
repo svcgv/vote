@@ -18,11 +18,14 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 	private String budgetYear;
 
+	private String isNewProject;
+	private String isNewCustomer;
 	private String yearBudgetCode;
 	private String reviewStatus;
 	/**
 	 * $column.comments
 	 */
+
 
 	private String isNewCust;
 
@@ -31,13 +34,11 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private String custName;
-
 	/**
 	 * $column.comments
 	 */
 
 	private String sapCode;
-
 	/**
 	 * $column.comments
 	 */
@@ -48,16 +49,19 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private String wbs;
+
 	/**
 	 * $column.comments
 	 */
 
 	private String projectType;
+
 	/**
 	 * $column.comments
 	 */
 
 	private String revenueSource;
+
 	/**
 	 * $column.comments
 	 */
@@ -91,16 +95,12 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	private String productIds;
 	private String[] productIdArr;
 	private String[] productNameArr;
-
-
-
 	private String productList;
-
 	private BigDecimal taxes;
-
 	private BigDecimal taxRate;
-
 	private BigDecimal contractMoney;
+
+
 
 	private BigDecimal manyYearRev;
 
@@ -114,12 +114,12 @@ public class PmYearBudgetEntity extends BaseEntity  {
 
 	private String isChoseProduct;
 
-
 	/**
 	 * $column.comments
 	 */
 
 	private long custManagerId;
+
 	/**
 	 * $column.comments
 	 */
@@ -149,16 +149,20 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private String currency;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long grossProfitRate;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetJan;
+
+
 	/**
 	 * $column.comments
 	 */
@@ -189,19 +193,16 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private long budgetJul;
-
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetAug;
-
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetSep;
-
 	/**
 	 * $column.comments
 	 */
@@ -212,16 +213,19 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private long budgetNov;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetDec;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetSum;
+
 	/**
 	 * $column.comments
 	 */
@@ -279,21 +283,18 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	public long getBudgetFeb() {
 		return this.budgetFeb;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetJan() {
 		return this.budgetJan;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetJul() {
 		return this.budgetJul;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -306,18 +307,21 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	public long getBudgetMar() {
 		return this.budgetMar;
 	}
+
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetMay() {
 		return this.budgetMay;
 	}
+
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetNov() {
 		return this.budgetNov;
 	}
+
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -336,25 +340,21 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	public long getBudgetSum() {
 		return this.budgetSum;
 	}
-
 	public String getBudgetYear() {
 		return this.budgetYear;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public String getCompanyCode() {
 		return this.companyCode;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public String getCompanyEntityName() {
 		return this.companyEntityName;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -462,6 +462,14 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 	public String getIsNewCust() {
 		return this.isNewCust;
+	}
+
+	public String getIsNewCustomer() {
+		return this.isNewCustomer;
+	}
+
+	public String getIsNewProject() {
+		return this.isNewProject;
 	}
 
 	public BigDecimal getLastRev() {
@@ -817,6 +825,14 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 	public void setIsNewCust(String isNewCust) {
 		this.isNewCust = isNewCust;
+	}
+
+	public void setIsNewCustomer(String isNewCustomer) {
+		this.isNewCustomer = isNewCustomer;
+	}
+
+	public void setIsNewProject(String isNewProject) {
+		this.isNewProject = isNewProject;
 	}
 
 	public void setLastRev(BigDecimal lastRev) {
