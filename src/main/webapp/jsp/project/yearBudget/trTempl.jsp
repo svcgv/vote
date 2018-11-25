@@ -343,12 +343,12 @@
      	<div class="project-list contractMoney">
      		<div class="layui-input-inline item" >
      			 <div class="layui-input-inline">
-     			 	<input type="number"  name="contractMoney" value="" />
+     			 	<input type="number"  name="contractMoney" value="" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      		<div class="layui-input-inline item copyAddItem" >
      			 <div class="layui-input-inline">
-     			 	<input type="number"  name="contractMoney" value="" />
+     			 	<input type="number"  name="contractMoney" value="" class="layui-input form-control" />
 	      	 	</div>
      		</div>
      	</div>
