@@ -106,28 +106,28 @@
 		    </div>
 		    
 		    <div class="layui-inline" style="padding-right:55px;">
-		       <label class="layui-form-label">立项时间(开始时间)：</label>
+		       <label class="layui-form-label">立项时间(开始)：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="createProjectStartTime" readonly="true" id="createProjectStartTime-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 		    
 		        <div class="layui-inline" style="padding-right:55px;">
-		       <label class="layui-form-label">立项时间(结束时间)：</label>
+		       <label class="layui-form-label">立项时间(结束)：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="createProjectEndTime" readonly="true" id="createProjectEndTime-hook" autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		    </div>
 		    
 		    <div class="layui-inline" style="padding-right:55px;">
-			      <label class="layui-form-label">结项时间(开始时间)：</label>
+			      <label class="layui-form-label">结项时间(开始)：</label>
 			       <div class="layui-input-inline">
 			          <input type="text" name="finishProjectStartTime" readonly="true" id="finishProjectStartTime-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
 			      </div>
 		    </div>
 		    
 		    <div class="layui-inline" style="padding-right:55px;">
-			      <label class="layui-form-label">结项时间(结束时间)：</label>
+			      <label class="layui-form-label">结项时间(结束)：</label>
 			       <div class="layui-input-inline">
 			          <input type="text" name="finishProjectEndTime" readonly="true" id="finishProjectEndTime-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
 			      </div>

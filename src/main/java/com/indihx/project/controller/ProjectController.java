@@ -2,6 +2,7 @@ package com.indihx.project.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.indihx.AbstractBaseController;
+import com.indihx.PmFile.service.PmFileService;
 import com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity;
 import com.indihx.PmProjectGroupInfo.service.PmProjectGroupInfoService;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
@@ -41,6 +42,9 @@ public class ProjectController extends AbstractBaseController {
     
 	@Autowired
 	PmProjectMilestoneInfoService pmProjectMilestoneInfoService;
+	
+	@Autowired
+	private PmFileService pmFileService;
 
 
     @RequestMapping("/project/index")
@@ -118,6 +122,11 @@ public class ProjectController extends AbstractBaseController {
         view.addObject("act", act);
         view.addObject("id", id);
         view.addObject("formObj", JSON.toJSONString(entity));
+        
+    	Map<String,Object> filemaps = new HashMap<String,Object>();
+    	filemaps.put("foreignId", id);
+    	filemaps.put("isDelete", "00");
+		view.addObject("file",pmFileService.queryList(filemaps));
 
         view.setViewName("/project/project/edit");
         return view;
@@ -157,6 +166,11 @@ public class ProjectController extends AbstractBaseController {
         view.addObject("act", act);
         view.addObject("id", id);
         view.addObject("formObj", JSON.toJSONString(entity));
+        
+    	Map<String,Object> filemaps = new HashMap<String,Object>();
+    	filemaps.put("foreignId", id);
+    	filemaps.put("isDelete", "00");
+		view.addObject("file",pmFileService.queryList(filemaps));
         
         view.setViewName("/project/project/view");
         return view;

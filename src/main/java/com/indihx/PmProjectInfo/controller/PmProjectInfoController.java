@@ -29,6 +29,8 @@ import com.indihx.PmContractInfo.entity.PmContractInfoEntity;
 import com.indihx.PmContractInfo.service.PmContractInfoService;
 import com.indihx.PmContractProjectRelation.entity.PmContractProjectRelationEntity;
 import com.indihx.PmContractProjectRelation.service.PmContractProjectRelationService;
+import com.indihx.PmFile.entity.PmFileEntity;
+import com.indihx.PmFile.service.PmFileService;
 import com.indihx.PmProductInfo.entity.PmProductInfoEntity;
 import com.indihx.PmProductInfo.service.PmProductInfoService;
 import com.indihx.PmProductProjectRelation.entity.PmProductProjectRelationEntity;
@@ -88,6 +90,9 @@ public class PmProjectInfoController {
     
     @Autowired
     private PmReviewInfoService pmReviewInfoService;
+    
+    @Autowired
+    private PmFileService pmFileService;
 
     /**
      * 列表
@@ -248,6 +253,13 @@ public class PmProjectInfoController {
         	pmProductProjectRelationService.insert(pmProductProjectRelationEntity);
         }
         
+        for(Long id :pmProjectInfo.getFileIds()) {
+        	PmFileEntity pm = new PmFileEntity();
+        	pm.setForeignId(projectId);
+       		pm.setFileId(id);
+       		pmFileService.update(pm);
+        }
+        
         return R.ok();
     }
 
@@ -313,6 +325,13 @@ public class PmProjectInfoController {
           	pmProductProjectRelationEntity.setCreatorId(usesr.getUsrId());
           	pmProductProjectRelationEntity.setCreateTime(DateUtil.getDateTime());
           	pmProductProjectRelationService.insert(pmProductProjectRelationEntity);
+          }
+          
+          for(Long id :pmProjectInfo.getFileIds()) {
+          	PmFileEntity pm = new PmFileEntity();
+          	pm.setForeignId(pmProjectInfo.getProjectId());
+         	pm.setFileId(id);
+         	pmFileService.update(pm);
           }
         
         return R.ok();
