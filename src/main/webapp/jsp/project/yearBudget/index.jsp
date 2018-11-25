@@ -64,7 +64,7 @@
 		     <div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">税种：</label>
 		       <div class="layui-input-inline">
-		          <select name="isNewProject" lay-verify="required" lay-filter="" class="form-control">
+		          <select name="taxType" lay-verify="required" lay-filter="" class="form-control">
 			        	<option value="">请选择</option>
 			        	<option value="01" selected>A</option>
 			        	<option value="02">B</option>
@@ -102,10 +102,7 @@
 </script>
 
 <script type="text/javascript">
-var testData=[{
-	'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contractCode':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'一月收入1千万','feb':'一月收入3千万'
-		
-	}]
+var testData=[]
 var cols = [
     [/* 
   	  {type: 'checkbox', fixed: 'left',rowspan: 2}, */

@@ -55,6 +55,8 @@
 		<result property="afterTax" column="AFTER_TAX" />
 		<result property="productIds" column="PRODUCT_IDS" />
 		<result property="productNames" column="PRODUCT_NAMES" />
+		<result property="isChoseProduct" column="IS_CHOSE_PRODUCT" />
+		
 	</resultMap>
 	<resultMap type="java.util.Map" id="pmYearBudgetGroupHashMap">
 		<result property="sapCode" column="SAP_CODE" />
@@ -114,6 +116,8 @@
 		<result property="afterTax" column="AFTER_TAX" />
 		<result property="productIds" column="PRODUCT_IDS" />
 		<result property="productNames" column="PRODUCT_NAMES" />
+		<result property="isChoseProduct" column="IS_CHOSE_PRODUCT" />
+		
 	</resultMap>
 	<select id="queryObject" resultMap="pmYearBudgetMap"> select * from PM_YEAR_BUDGET where YEAR_BUDGET_CODE = #{value}
 	</select>
@@ -337,6 +341,10 @@
 		</if>
 		<if test="productNames != null and productNames !=''"> ,PRODUCT_NAMES
 		</if>
+		<if test="isChoseProduct != null and isChoseProduct !=''"> ,IS_CHOSE_PRODUCT
+		</if>
+		
+		
 		) values ( #{yearBudgetCode}
 		<if test="isNewCust != null and isNewCust!=''"> ,#{isNewCust}
 		</if>
@@ -439,6 +447,8 @@
 		<if test="productIds != null and productIds !=''"> ,#{productIds}
 		</if>
 		<if test="productNames != null and productNames !=''"> ,#{productIds}
+		</if>	
+		<if test="isChoseProduct != null and isChoseProduct !=''">,#{isChoseProduct}
 		</if>
 		)
 	</insert>
@@ -496,6 +506,7 @@
 			<if test="afterTax != null and afterTax!=''">AFTER_TAX = #{afterTax},</if>
 			<if test="productIds != null and productIds !=''">PRODUCT_IDS= #{productIds},</if>
 			<if test="productNames != null and productNames !=''"> PRODUCT_NAMES = #{productNames}</if>
+			
 		</set>
 		where YEAR_BUDGET_CODE = #{yearBudgetCode}
 	</update>

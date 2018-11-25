@@ -112,29 +112,33 @@ public class PmYearBudgetEntity extends BaseEntity  {
 
 	private String revRecognitionMethod;
 
+	private String isChoseProduct;
+
+
 	/**
 	 * $column.comments
 	 */
 
 	private long custManagerId;
-
 	/**
 	 * $column.comments
 	 */
 
 	private String custManagerName;
 
-
 	/**
 	 * $column.comments
 	 */
 
 	private String taxType;
+
 	/**
 	 * $column.comments
 	 */
 
 	private String incommingType;
+
+
 	/**
 	 * $column.comments
 	 */
@@ -175,13 +179,11 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private long budgetMay;
-
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetJun;
-
 	/**
 	 * $column.comments
 	 */
@@ -193,11 +195,13 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private long budgetAug;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetSep;
+
 	/**
 	 * $column.comments
 	 */
@@ -263,14 +267,12 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	public long getBudgetAug() {
 		return this.budgetAug;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetDec() {
 		return this.budgetDec;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -284,12 +286,14 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	public long getBudgetJan() {
 		return this.budgetJan;
 	}
+
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetJul() {
 		return this.budgetJul;
 	}
+
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -320,14 +324,12 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	public long getBudgetOct() {
 		return this.budgetOct;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetSep() {
 		return this.budgetSep;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -442,6 +444,10 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 	public String getIncommingType() {
 		return this.incommingType;
+	}
+
+	public String getIsChoseProduct() {
+		return this.isChoseProduct;
 	}
 
 	/**
@@ -793,6 +799,10 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 	public void setIncommingType(String incommingType) {
 		this.incommingType = incommingType;
+	}
+
+	public void setIsChoseProduct(String isChoseProduct) {
+		this.isChoseProduct = isChoseProduct;
 	}
 
 	/**
