@@ -106,13 +106,24 @@ background-color: #009688!important;
 .window-wrap{position:fixed;_position:absolute;left:0px;top:0px;z-index:7000;overflow:hidden;background-color: #fff;-webkit-background-clip: content;border-radius: 2px;box-shadow: 1px 1px 50px rgba(0,0,0,.3);}
 
 .window-header{height:30px;overflow:hidden;padding:10px 15px;background:#f2f2f2;font-weight:800;font-size:14px;cursor:move;color:#369;line-height:30px;}
+.window-header .layui-layer-max {
+    background-position: -32px -40px;
+    float:right;
+    width: 16px;
+    height: 16px;
+    margin: 8px 0 0 10px;
+    font-size: 12px;
+    cursor:pointer;
+}
+.window-header .layui-layer-maxmin {
+    background-position: -65px -40px;
+}
 .window-title{float:left;height:30px;line-height:30px;overflow:hidden;padding-left:25px;background:url(../images/window-icons.gif) left 30px no-repeat;}
 .window-refresh,.window-close{float:right;width:22px;height:22px;overflow:hidden;margin:4px 0 0 10px;background-image:url(../images/window-icons.gif);background-repeat:no-repeat;text-align:center;cursor:pointer;text-indent:4em;}
 .window-refresh{display:none;background-position:left -25px;}
 .window-refresh.hover{background-position:left top;}
 .window-close{background-position:-53px -25px;}
 .window-close.hover{background-position:-53px top;}
-
 .window-content{position:relative;overflow:hidden;overflow-x:hidden;overflow-y:auto;}
 
 .layui-form-select dl dd.layui-this{

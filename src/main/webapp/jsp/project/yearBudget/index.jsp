@@ -83,7 +83,7 @@
 			   <div class="layui-btn-container" style="margin-left:25px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook" power="118401" style="margin-right:15px;"><i class="layui-icon"></i>收入上报</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>预算上报power="118401"</button>
 			    <button type="button" class="layui-btn layui-btn-sm" id="exportYearBudger" power="118402" style="margin-right:15px;"><i class="layui-icon"></i>导出</button>
 			    
 			  </div>
@@ -147,8 +147,8 @@ var cols = [
 	      {field:'currency', title:'结算币种(Currency)',rowspan: 2},
 	      {field:'taxRate', title:'税率(%)',rowspan: 2},
 	      {field:'grossProfitRate', title:'毛利率(%)',rowspan: 2},
-	      {field:'budgetSum', title:'Total Rev',rowspan: 2},
 	      {field:'afterTax',title:"税后合计",rowspan: 2},
+	      {field:'budgetSum', title:'Total Rev',rowspan: 2},
 	      {align: 'center', title: 'Revenue', colspan: 12},
      	  {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
 	 ],[
@@ -312,7 +312,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:'form2?act=add&id=',
 	  		title:"新增预算",
-	  		width:"95%"
+	  		width:"90%",
+	  		fullScreen:true // 全屏展示
 	  	})
 	});
 	
