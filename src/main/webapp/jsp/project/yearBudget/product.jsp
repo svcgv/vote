@@ -51,10 +51,10 @@ $(function(){
 //一般直接写在一个js文件中
 var act="${act}";// 区分 选择 和查看
 var cols= [[
-	  {type: 'checkbox', fixed: 'left'},
-	  {field:'productCode', title:'产品代码',fixed: 'left', width:110, sort: true},
-	  {field:'productName', title:'产品名称',fixed: 'left', width:190},
-	  {field:'productType', title:'产品类型',fixed: 'left', width:150},
+	  {type: 'checkbox'},
+	  {field:'productCode', title:'产品代码', width:110, sort: true},
+	  {field:'productName', title:'产品名称', width:190},
+	  {field:'productType', title:'产品类型', width:150},
   ]]
   
   function query(){
@@ -107,7 +107,7 @@ var a = layui.use(['layer', 'form','laydate','table'], function(){
 	var YIndex ="${YIndex}";
 	var win=$(".budget-cust-wrapper").getWindow();
 	// 获取 form页 当前所有已选的产品
-		var target=$(".budget-wrapper").find("tbody tr").eq(YIndex).find(".project-list").eq(3).children(".productItem").eq(index);
+		var target=$(".budget-wrapper").find("tbody tr").eq(YIndex).find(".project-list").eq(4).children(".productItem").eq(index);
 		var oldProducts= target.find("button.productQuery-hook").nextAll(".layui-badge");
 		var oldRet=[];
 		for(var i=0;i<oldProducts.length;i++){

@@ -48,7 +48,9 @@ $.window.prototype={
 	windowTitle:null,//窗口标题
 	windowClose:null,//窗口关闭按钮
 	windowRefresh:null,//窗口刷新按钮
+	windowFullScreen:null,// 窗口全屏
 	windowContent:null,//窗口内容
+	windowWrapHeight:0,
 	options:{},
 	isOpened:false,
 	init:function(){//初始化窗口
@@ -58,6 +60,7 @@ $.window.prototype={
 		this.windowHeader=$('<div class="window-header"></div>').appendTo(this.windowWrap);
 		this.windowTitle=$('<div class="window-title"></div>').appendTo(this.windowHeader);
 		this.windowClose=$('<div class="window-close" title="关闭">关闭</div>').insertBefore(this.windowTitle);
+		this.windowFullScreen=$('<div class="layui-layer-ico layui-layer-max" title="全屏"></div>').insertBefore(this.windowTitle);
 		this.windowRefresh=$('<div class="window-refresh" title="刷新">刷新</div>').insertBefore(this.windowTitle);
 		this.windowContent=$('<div class="window-content"></div>').appendTo(this.windowWrap);
 		this.scrollWindow = this.windowContent;
@@ -84,7 +87,18 @@ $.window.prototype={
 		if(this.options.scrollWindow) {
 			this.scrollWindow = $(this.options.scrollWindow);
 		}
-
+		
+		this.windowFullScreen.click(function(){
+			
+			if($(this).hasClass("layui-layer-maxmin")){
+				$(this).removeClass('layui-layer-maxmin');
+			}else{
+				$(this).addClass('layui-layer-maxmin');
+			}
+			$this.fullScreen();
+		})
+		
+		
 		this.windowMask.hide();
 		return this;
 	},open:function(){//打开窗口
@@ -93,7 +107,12 @@ $.window.prototype={
 			return this;
 		}
 		this.isOpened=true;
-		this.windowWrap.width(this.options.width);
+		if(this.options.fullScreen){
+			this.windowFullScreen.addClass('layui-layer-maxmin');
+		}else{
+			this.windowWrap.width(this.options.width);
+			this.windowFullScreen.removeClass('layui-layer-maxmin');
+		}
 		this.windowTitle.html(this.options.title);
 		this.windowContent.html(this.options.content);
 
@@ -103,7 +122,8 @@ $.window.prototype={
 			$this.windowWrap.show();
 			$this.resize();
 		},100);
-
+		this.maxmin();
+		this.windowWrapHeight=this.windowWrap.css("height");
 		this.options.callback.call(this);
 		return this;
 	},refresh:function(){
@@ -117,6 +137,8 @@ $.window.prototype={
 			$this.isOpened=false;
 			$this.open();
 		});
+		this.windowWrapHeight=this.windowWrap.css("height");
+		this.maxmin();
 		return this;
 	},resize:function(){//调整窗口
 		var scrollTop = this.scrollWindow.scrollTop();
@@ -145,8 +167,9 @@ $.window.prototype={
 		this.windowWrap.float('center');
 		
 		this.scrollWindow.scrollTop(scrollTop);
-		
 		this.options.resize.call(this);
+		this.windowWrapHeight=this.windowWrap.css("height");
+		this.maxmin();
 		return this;
 	},close:function(callback){//关闭窗口
 		var $this=this;
@@ -174,10 +197,34 @@ $.window.prototype={
 		this.options=$.extend(true,{},this.options,options);
 		this.open();
 		return this;
+	},
+	fullScreen:function(){
+		this.maxmin();
+		return this;
+	},
+	maxmin:function(){
+		var width=$(window).width();
+		var height=$(window).height();
+		if(this.windowFullScreen.hasClass("layui-layer-maxmin")){
+			this.windowWrap.width(width);
+			this.windowWrap.height(height);
+			this.windowWrap.css({
+				left:0,
+				top:0	
+			})
+			//this.windowWrap.draggable("disable")
+			//this.windowHeader.css("cursor","default");
+		}else{
+			this.windowWrap.width(this.options.width);
+			this.windowWrap.height("auto");
+			this.windowWrap.float('center');
+			//this.windowWrap.draggable("enable");
+			//this.windowHeader.css("cursor","move");
+		}
 	}
 };
-
-$.window.defaultSetting={width:600,callback:function(){},resize:function(){},close:function(){}};
+// 新增 是否全屏功能默认false
+$.window.defaultSetting={width:600,callback:function(){},resize:function(){},close:function(){},fullScreen:false};
 $.window.count=0;
 $.window.openeds={};
 
