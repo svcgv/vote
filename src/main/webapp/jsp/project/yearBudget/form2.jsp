@@ -312,7 +312,7 @@
 								<div class="project-list">
 									<c:forEach items="${app.pmYearBudgetEntity}" var="app2">
 										<div class="layui-input-inline item" >
-											<span>${app2.budgetYear}</span>
+											<span>${app2.budgetYear}年</span>
 											<input type="hidden" name="budgetYear" value="${app2.budgetYear}" />
 										</div>
 									</c:forEach>
