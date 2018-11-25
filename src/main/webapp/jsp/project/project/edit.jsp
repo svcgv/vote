@@ -429,7 +429,49 @@
 				  </li>
 				</ul> 
 		   </div>	   
-		   
+		         <div class="layui-form-item clearfix" style="width:95%;margin:10px 10px;">
+	      <div class="layui-upload">
+		      <div style="display:inline-block;width:100%;">
+			  	<button type="button" class="layui-btn" id="wosUploads"><i class="layui-icon"></i>选择文件</button> 
+				<button type="button" class="layui-btn" id="wosListAction">开始上传</button>
+			  </div>
+			  
+		  	  <div class="layui-upload-list">
+				    <table class="layui-table">
+				      <thead>
+				        <tr><th>文件名</th>
+				        <th>大小</th>
+				        <th>文件类型</th>
+				        <th>状态</th>
+				        <th>操作</th>
+				      </tr></thead>
+				      <tbody id="wosFileList">
+				      <!-- 反写已上传的数据 -->
+				      	<c:forEach items="${file}" var="fileInfo" >
+				      	<tr class="edit-wosUploaded">
+					      	<td>${fileInfo.fileUploadName}</td>
+					      	<td>${fileInfo.fileSize}</td>
+					      	<td>已上传</td>
+					      	
+					      	<td>
+					      		<c:if test="${fileInfo.fileBusinessType=='00' }">
+									招标文件
+								</c:if>
+								<c:if test="${fileInfo.fileBusinessType=='01' }">
+									客户需求文件
+								</c:if>
+								<c:if test="${fileInfo.fileBusinessType=='02' }">
+									内部评审文件
+								</c:if>
+							</td>
+							<td><a href='/vote/pmfile/download?id=${app.fileId}'>下载</a></td>
+				      	</tr>
+				      	</c:forEach>
+				      </tbody>
+				    </table>
+				  </div>
+			   </div> 
+		  </div>
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
     	<a class="layui-layer-btn0" id="customGroup-edit-hook" style="background:#009688;border-color:#009688;">保存</a>
@@ -443,6 +485,7 @@
 var chosedContractProject=[];
 var chosedProductProject=[];
 var chosedLayTable=null;
+var fileIds = [];
 $(function(){
 	layui.use(['layer', 'form','laydate','upload','table'], function(){
 		var layer = layui.layer ,
@@ -513,6 +556,99 @@ $(function(){
 		 	}
 		 }
 	   form.render();
+	   
+
+	   function getFileTableParams(){
+			  var files=[]
+			  var tbody = document.getElementById('wosFileList')
+			  if(tbody.children){
+				  for(var i = 0;i<tbody.children.length;i++){
+					  var item={}
+					  item.fileName = tbody.children[i].children[0].innerText
+					  if(tbody.children[i].children[2].children.length>0){
+						  item.fileType = tbody.children[i].children[2].children[0].children[0].value
+					  }
+					  else{
+						  item.fileType='oldFile'
+					  }
+					  files.push(item)
+				  }
+			  }
+			  return files;
+		  }
+		  
+		//多文件上传
+		 var demoListView = $('#wosFileList')
+		  ,uploadListIns = upload.render({
+			  before:function(obj){
+			    	this.data={uploadType:'00',fileTypes:JSON.stringify(getFileTableParams())}
+			    },
+		    elem: '#wosUploads'
+		    ,url: '/vote/pmfile/upload'
+		    ,accept: 'file'
+		    ,multiple: true
+		    ,auto: false
+		    ,bindAction: '#wosListAction'
+		    ,choose: function(obj){   
+		      var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+		      //读取本地文件
+		      obj.preview(function(index, file, result){
+		    	  var tr = $(['<tr id="upload-'+ index +'">'
+		              ,'<td>'+ file.name +'</td>'
+		              ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+		              ,'<td>'
+		              ,' <div class="layui-input-inline">'
+		             	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+		  	          ,'<option value="">请选择</option>'
+		  	        	,'<option value="00" selected>招标文件</option>'
+		  	        	,'<option value="01">客户需求文件</option>'
+		  	        	,'<option value="02" >内部评审文件</option>'
+		  	        	,'</select>'
+		    				,'</div>'
+		            ,'</td>'
+		              ,'<td>等待上传</td>'
+		              ,'<td>'
+		                ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+		                ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+		              ,'</td>'
+		             
+		            ,'</tr>'].join(''));
+		        
+		        //单个重传
+		        tr.find('.demo-reload').on('click', function(){
+		          obj.upload(index, file);
+		        });
+		        
+		        //删除
+		        tr.find('.demo-delete').on('click', function(){
+		          delete files[index]; //删除对应的文件
+		          tr.remove();
+		          uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+		        });
+		        
+		        demoListView.append(tr);
+		        form.render();
+		      });
+		    }
+		    ,done: function(res, index, upload){
+		      if(res.code == 0){ //上传成功
+		    	  fileIds.push(res.fileIds)
+		        var tr = demoListView.find('tr#upload-'+ index)
+		        ,tds = tr.children();
+		        tds.eq(3).html('<span style="color: #5FB878;">上传成功</span>');
+		        tds.eq(4).html(''); //清空操作
+		        return delete this.files[index]; //删除文件队列已经上传成功的文件
+		      }
+		      this.error(index, upload);
+		    }
+		    ,error: function(index, upload){
+		      var tr = demoListView.find('tr#upload-'+ index)
+		      ,tds = tr.children();
+		      tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+		      tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+		    }
+		  })
+	   
 	   var param = {"projectId": data.projectId};
 	   $.ajax({
            type: 'POST',
@@ -784,7 +920,7 @@ $(function(){
 		
 		var formDatas=$("#project-edit-hook form").serializeObject();
 		
-		  formDatas=$.extend({},true,formDatas,{pmContractInfo:chosedContractProject},{pmProductInfo:chosedProductProject});
+		  formDatas=$.extend({},true,formDatas,{pmContractInfo:chosedContractProject},{pmProductInfo:chosedProductProject},{fileIds:fileIds});
 		 
 		$.ajax({
 			type:'POST',
