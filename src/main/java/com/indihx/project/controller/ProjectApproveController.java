@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.indihx.AbstractBaseController;
+import com.indihx.PmFile.service.PmFileService;
 import com.indihx.PmProjectGroupInfo.entity.PmProjectGroupInfoEntity;
 import com.indihx.PmProjectGroupInfo.service.PmProjectGroupInfoService;
 import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
@@ -49,6 +50,9 @@ public class ProjectApproveController extends AbstractBaseController{
 		
 		@Autowired
 	    private PmReviewInfoService pmReviewInfoService;
+		
+		@Autowired
+	    private PmFileService pmFileService;
 
 	@RequestMapping("/projectApprove/index")
 	public ModelAndView addCustomView() {
@@ -177,6 +181,12 @@ public class ProjectApproveController extends AbstractBaseController{
 				
 				view.addObject("reviewHis",JSON.toJSONString(list2));
 				view.addObject("userName",usesr.getUsrName());
+				
+				
+				Map<String,Object> filemaps = new HashMap<String,Object>();
+		    	filemaps.put("foreignId", id);
+		    	filemaps.put("isDelete", "00");
+				view.addObject("file",pmFileService.queryList(filemaps));
 			
 			view.setViewName("/project/projectApprove/review");
 			return view;
