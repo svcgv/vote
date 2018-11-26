@@ -7,14 +7,14 @@
 <html lang="zh">
 	<head>
 		<meta charset="GBK" />
-		<title>电子投票表决系统</title>
+		<title>项目实施管理系统</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=GBK">
 		<meta http-equiv="Cache-Control" content="no-store" />
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
-		<meta name="keywords" content="电子投票表决系统" />
-		<meta name="description" content="电子投票表决系统-Main页面-Author:zhengwei" />
+		<meta name="keywords" content="项目实施管理系统" />
+		<meta name="description" content="项目实施管理系统-Main页面-Author:zhengwei" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
 		<link href="${ctx }/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -53,7 +53,7 @@
 					<a href="${ctx }/login/index" class="navbar-brand">
 						<small>
 							<i class="icon-cogs"></i>
-							电子投票表决系统
+							项目实施管理系统
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
