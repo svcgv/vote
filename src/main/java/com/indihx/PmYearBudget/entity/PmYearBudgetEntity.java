@@ -1,10 +1,8 @@
 package com.indihx.PmYearBudget.entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import com.indihx.BaseEntity;
-import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 
 /**
  * ${comments}
@@ -20,11 +18,14 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 	private String budgetYear;
 
+	private String isNewProject;
+	private String isNewCustomer;
 	private String yearBudgetCode;
 	private String reviewStatus;
 	/**
 	 * $column.comments
 	 */
+
 
 	private String isNewCust;
 
@@ -33,13 +34,11 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private String custName;
-
 	/**
 	 * $column.comments
 	 */
 
 	private String sapCode;
-
 	/**
 	 * $column.comments
 	 */
@@ -50,16 +49,19 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private String wbs;
+
 	/**
 	 * $column.comments
 	 */
 
 	private String projectType;
+
 	/**
 	 * $column.comments
 	 */
 
-	private String revebueSource;
+	private String revenueSource;
+
 	/**
 	 * $column.comments
 	 */
@@ -93,65 +95,24 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	private String productIds;
 	private String[] productIdArr;
 	private String[] productNameArr;
-
-	
-
-	public String[] getProductIdArr() {
-		return productIdArr;
-	}
-
-	public void setProductIdArr(String[] productIdArr) {
-		this.productIdArr = productIdArr;
-	}
-
-	public String[] getProductNameArr() {
-		return productNameArr;
-	}
-
-	public void setProductNameArr(String[] productNameArr) {
-		this.productNameArr = productNameArr;
-	}
-
-	public String getProductNames() {
-		return productNames;
-	}
-
-	public void setProductNames(String productNames) {
-		if (productNames != null) {
-			this.productNameArr=productNames.split(","); 
-		}
-		this.productNames = productNames;
-	}
-
-	public String getProductIds() {
-		return productIds;
-	}
-
-	public void setProductIds(String productIds) {
-		if (productIds != null) {
-			this.productIdArr=productIds.split(",");
-		}
-		this.productIds = productIds;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
 	private String productList;
 	private BigDecimal taxes;
 	private BigDecimal taxRate;
 	private BigDecimal contractMoney;
+
+
+
 	private BigDecimal manyYearRev;
+
 	private BigDecimal curYearRev;
+
 	private BigDecimal lastRev;
+
 	private BigDecimal afterTax;
+
 	private String revRecognitionMethod;
-	private String revenueSource;
+
+	private String isChoseProduct;
 
 	/**
 	 * $column.comments
@@ -170,11 +131,14 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private String taxType;
+
 	/**
 	 * $column.comments
 	 */
 
 	private String incommingType;
+
+
 	/**
 	 * $column.comments
 	 */
@@ -185,16 +149,20 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private String currency;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long grossProfitRate;
+
 	/**
 	 * $column.comments
 	 */
 
 	private long budgetJan;
+
+
 	/**
 	 * $column.comments
 	 */
@@ -240,7 +208,6 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private long budgetOct;
-
 	/**
 	 * $column.comments
 	 */
@@ -258,6 +225,7 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private long budgetSum;
+
 	/**
 	 * $column.comments
 	 */
@@ -288,60 +256,51 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 
 	private String remark;
-
 	public BigDecimal getAfterTax() {
 		return this.afterTax;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetApr() {
 		return this.budgetApr;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetAug() {
 		return this.budgetAug;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetDec() {
 		return this.budgetDec;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetFeb() {
 		return this.budgetFeb;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetJan() {
 		return this.budgetJan;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetJul() {
 		return this.budgetJul;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetJun() {
 		return this.budgetJun;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -369,39 +328,33 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	public long getBudgetOct() {
 		return this.budgetOct;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetSep() {
 		return this.budgetSep;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public long getBudgetSum() {
 		return this.budgetSum;
 	}
-
 	public String getBudgetYear() {
 		return this.budgetYear;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public String getCompanyCode() {
 		return this.companyCode;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
 	public String getCompanyEntityName() {
 		return this.companyEntityName;
 	}
-
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -450,6 +403,10 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		return this.currency;
 	}
 
+	public String getCurrency() {
+		return this.currency;
+	}
+
 	public BigDecimal getCurYearRev() {
 		return this.curYearRev;
 	}
@@ -489,6 +446,10 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		return this.incommingType;
 	}
 
+	public String getIsChoseProduct() {
+		return this.isChoseProduct;
+	}
+
 	/**
 	 * 获取：${column.comments}
 	 */
@@ -501,6 +462,14 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 	public String getIsNewCust() {
 		return this.isNewCust;
+	}
+
+	public String getIsNewCustomer() {
+		return this.isNewCustomer;
+	}
+
+	public String getIsNewProject() {
+		return this.isNewProject;
 	}
 
 	public BigDecimal getLastRev() {
@@ -531,8 +500,24 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		return this.poSow;
 	}
 
+	public String[] getProductIdArr() {
+		return this.productIdArr;
+	}
+
+	public String getProductIds() {
+		return this.productIds;
+	}
+
 	public String getProductList() {
 		return this.productList;
+	}
+
+	public String[] getProductNameArr() {
+		return this.productNameArr;
+	}
+
+	public String getProductNames() {
+		return this.productNames;
 	}
 
 	/**
@@ -563,23 +548,21 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		return this.remark;
 	}
 
-	/**
-	 * 获取：${column.comments}
-	 */
-	public String getRevebueSource() {
-		return this.revebueSource;
-	}
-
-	/**
-	 * 获取：${column.comments}
-	 */
 	public String getRevenueSource() {
 		return this.revenueSource;
 	}
 
+	/**
+	 * 获取：${column.comments}
+	 */
+
 	public String getReviewStatus() {
 		return this.reviewStatus;
 	}
+
+	/**
+	 * 获取：${column.comments}
+	 */
 
 	public String getRevRecognitionMethod() {
 		return this.revRecognitionMethod;
@@ -782,6 +765,10 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		this.currency = currency;
 	}
 
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
 	public void setCurYearRev(BigDecimal curYearRev) {
 		this.curYearRev = curYearRev;
 	}
@@ -822,6 +809,10 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		this.incommingType = incommingType;
 	}
 
+	public void setIsChoseProduct(String isChoseProduct) {
+		this.isChoseProduct = isChoseProduct;
+	}
+
 	/**
 	 * 设置：${column.comments}
 	 */
@@ -834,6 +825,14 @@ public class PmYearBudgetEntity extends BaseEntity  {
 	 */
 	public void setIsNewCust(String isNewCust) {
 		this.isNewCust = isNewCust;
+	}
+
+	public void setIsNewCustomer(String isNewCustomer) {
+		this.isNewCustomer = isNewCustomer;
+	}
+
+	public void setIsNewProject(String isNewProject) {
+		this.isNewProject = isNewProject;
 	}
 
 	public void setLastRev(BigDecimal lastRev) {
@@ -864,8 +863,30 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		this.poSow = poSow;
 	}
 
+	public void setProductIdArr(String[] productIdArr) {
+		this.productIdArr = productIdArr;
+	}
+
+	public void setProductIds(String productIds) {
+		if (productIds != null) {
+			this.productIdArr=productIds.split(",");
+		}
+		this.productIds = productIds;
+	}
+
 	public void setProductList(String productList) {
 		this.productList = productList;
+	}
+
+	public void setProductNameArr(String[] productNameArr) {
+		this.productNameArr = productNameArr;
+	}
+
+	public void setProductNames(String productNames) {
+		if (productNames != null) {
+			this.productNameArr=productNames.split(",");
+		}
+		this.productNames = productNames;
 	}
 
 	/**
@@ -896,19 +917,14 @@ public class PmYearBudgetEntity extends BaseEntity  {
 		this.remark = remark;
 	}
 
-	/**
-	 * 设置：${column.comments}
-	 */
-	public void setRevebueSource(String revebueSource) {
-		this.revebueSource = revebueSource;
+	public void setRevenueSource(String revenueSource) {
+		this.revenueSource = revenueSource;
 	}
 
 	/**
 	 * 设置：${column.comments}
 	 */
-	public void setRevenueSource(String revenueSource) {
-		this.revenueSource = revenueSource;
-	}
+
 
 	public void setReviewStatus(String reviewStatus) {
 		this.reviewStatus = reviewStatus;

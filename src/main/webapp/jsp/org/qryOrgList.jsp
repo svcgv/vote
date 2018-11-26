@@ -187,19 +187,19 @@
 				<div class="col-md-12">
 					
 					
-					<button type="button" class="btn btn-primary"   onclick="openAdd()"> 
+					<button type="button" class="btn btn-primary" power = "10000701"   onclick="openAdd()"> 
 						<i class="icon-plus-sign"></i> 新增
 					</button>
-					<button type="button" class="btn btn-primary"  onclick="updUsr()">
+					<button type="button" class="btn btn-primary" power = "10000702" onclick="updUsr()">
 						<i class="icon-edit"></i> 修改
 					</button>
-					<button type="button" class="btn btn-primary"  onclick="deleUsr()">
+					<button type="button" class="btn btn-primary" power = "10000703" onclick="deleUsr()">
 						<i class="icon ion-close-circled"></i> 注销
 					</button>
-					<button type="button" class="btn btn-primary"  onclick="openSta()">
+					<button type="button" class="btn btn-primary" power = "10000704" onclick="openSta()">
 						<i class="icon-unlock"></i> 启用
 					</button>
-					<button type="button" class="btn btn-primary"  onclick="closeSta()">
+					<button type="button" class="btn btn-primary" power = "10000705" onclick="closeSta()">
 						<i class="icon-lock"></i> 禁用
 					</button>
 				</div>

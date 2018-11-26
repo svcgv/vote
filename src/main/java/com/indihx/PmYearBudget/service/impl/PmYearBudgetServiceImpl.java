@@ -14,6 +14,7 @@ import com.indihx.PmYearBudget.entity.PmYearBudgetEntity;
 import com.indihx.PmYearBudget.service.PmYearBudgetService;
 import com.indihx.comm.util.DateUtil;
 import com.indihx.comm.util.RandomUtil;
+import com.indihx.util.BeanUtils;
 
 @Service("pmYearBudgetService")
 public class PmYearBudgetServiceImpl implements PmYearBudgetService {
@@ -50,22 +51,25 @@ public class PmYearBudgetServiceImpl implements PmYearBudgetService {
 			}
 		}
 	}
-	
+
+	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void insertMapList(List<Map<String,Object>> listMap, long userId) {
+	public void insertMapList(List<Map<String,Object>> listMap, long userId) throws InstantiationException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		this.pmYearBudgetMapper.deleteByCreatorId(userId);
 		if (listMap != null && !listMap.isEmpty()) {
 			for (int i = 0; i < listMap.size(); i++) {
 
 				Map<String,Object> pmYearBudget = listMap.get(i);
-				if (pmYearBudget.get("budgetYear") == null || "".equals(pmYearBudget.get("budgetYear"))) {
-					pmYearBudget.put("budgetYear",DateUtil.getNextYearStr());
+
+				PmYearBudgetEntity pmYearBudgetEntity = BeanUtils.Map2BeanNoChangeFieldName(pmYearBudget, PmYearBudgetEntity.class);
+				if (pmYearBudgetEntity.getBudgetYear() == null || "".equals(pmYearBudgetEntity.getBudgetYear())) {
+					pmYearBudgetEntity.setBudgetYear(DateUtil.getNextYearStr());
 				}
-				pmYearBudget.put("isDelete","00");
-				pmYearBudget.put("creatorId",userId);
-				pmYearBudget.put("createTime",DateUtil.getDateTime());
-				pmYearBudget.put("yearBudgetCode",RandomUtil.getCodeByType("YS"));
-				this.pmYearBudgetMapper.insertMap(pmYearBudget);
+				pmYearBudgetEntity.setIsDelete("00");
+				pmYearBudgetEntity.setCreatorId(userId);
+				pmYearBudgetEntity.setCreateTime(DateUtil.getDateTime());
+				pmYearBudgetEntity.setYearBudgetCode(RandomUtil.getCodeByType("YS"));
+				this.pmYearBudgetMapper.insert(pmYearBudgetEntity);
 			}
 		}
 	}

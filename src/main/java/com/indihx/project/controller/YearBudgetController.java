@@ -43,6 +43,9 @@ public class YearBudgetController extends AbstractBaseController {
 	public ModelAndView addCustomView() {
 
 		ModelAndView view = new ModelAndView();
+		view.addObject("isNew", this.infoservice.qryInfoByCode("IS_IMPORTANT", "00"));
+		view.addObject("taxType", this.infoservice.qryInfoByCode("taxType","00"));
+		view.addObject("projectType2", this.infoservice.qryInfoByCode("PROJECT_TYPE","00"));
 
 		view.addObject("isUseful", this.infoservice.qryInfoByCode("IS_USEFUL", "01"));
 		view.addObject("productType", this.infoservice.qryInfoByCode("PRODUCT_TYPE"));
@@ -65,13 +68,13 @@ public class YearBudgetController extends AbstractBaseController {
 	public ModelAndView customFormView(@RequestParam("act") String act, @RequestParam("id") String id, HttpSession session) throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoSuchFieldException, SecurityException {
 		ModelAndView view = new ModelAndView();
 
-		view.addObject("taxType", infoservice.qryInfoByCode("taxType","00"));
-		view.addObject("projectType2", infoservice.qryInfoByCode("projectType","00"));
-		view.addObject("currency", infoservice.qryInfoByCode("currency","00"));
-		view.addObject("revRecognitionMethod", infoservice.qryInfoByCode("revRecognitionMethod","00"));
-		view.addObject("region", infoservice.qryInfoByCode("COUNTRY","00"));
-		
-		
+		view.addObject("taxType", this.infoservice.qryInfoByCode("taxType","00"));
+		view.addObject("projectType2", this.infoservice.qryInfoByCode("PROJECT_TYPE","00"));
+		view.addObject("currency", this.infoservice.qryInfoByCode("currency","00"));
+		view.addObject("revRecognitionMethod", this.infoservice.qryInfoByCode("revRecognitionMethod","00"));
+		view.addObject("region", this.infoservice.qryInfoByCode("COUNTRY","00"));
+
+
 		view.addObject("isUseful", this.infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType", this.infoservice.qryInfoByCode("PRODUCT_TYPE"));
 
@@ -79,7 +82,7 @@ public class YearBudgetController extends AbstractBaseController {
 		view.addObject("id", id);
 		view.addObject("budgetYear", DateUtil.getNextYearStr());// 当前年+1
 		view.addObject("projectType", "01");// 02 项目类型为产品
-		
+
 		UsrInfo usesr = UserUtil.getUser(session);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("creatorId", usesr.getUsrId());
@@ -94,11 +97,11 @@ public class YearBudgetController extends AbstractBaseController {
 				String custName = (String) responseMap.get("custName");
 				responseEntity.setSapCode(sapCode);
 				responseEntity.setCustName(custName);
-				
+
 				List<PmYearBudgetEntity> pmYearBudgetTempList = new ArrayList<PmYearBudgetEntity>();
 
 				for (PmYearBudgetEntity yearBudgetEntity : pmYearBudget2) {
-					if (sapCode!=null && sapCode.equalsIgnoreCase(yearBudgetEntity.getSapCode())) {
+					if (custName!=null && custName.equalsIgnoreCase(yearBudgetEntity.getCustName())) {
 						yearBudgetEntity.setProductIds(yearBudgetEntity.getProductIds());
 						yearBudgetEntity.setProductNames(yearBudgetEntity.getProductNames());
 						pmYearBudgetTempList.add(yearBudgetEntity);
@@ -175,11 +178,11 @@ public class YearBudgetController extends AbstractBaseController {
 	@RequestMapping(value = "/yearBudget/form", method = RequestMethod.GET)
 	public ModelAndView formFormView(@RequestParam("act") String act, @RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
-		view.addObject("taxType", infoservice.qryInfoByCode("taxType","00"));
-		view.addObject("projectType2", infoservice.qryInfoByCode("projectType","00"));
-		view.addObject("currency", infoservice.qryInfoByCode("currency","00"));
-		view.addObject("revRecognitionMethod", infoservice.qryInfoByCode("revRecognitionMethod","00"));
-		view.addObject("region", infoservice.qryInfoByCode("COUNTRY","00"));
+		view.addObject("taxType", this.infoservice.qryInfoByCode("taxType","00"));
+		view.addObject("projectType2", this.infoservice.qryInfoByCode("projectType","00"));
+		view.addObject("currency", this.infoservice.qryInfoByCode("currency","00"));
+		view.addObject("revRecognitionMethod", this.infoservice.qryInfoByCode("revRecognitionMethod","00"));
+		view.addObject("region", this.infoservice.qryInfoByCode("COUNTRY","00"));
 		view.addObject("isUseful", this.infoservice.qryInfoByCode("IS_USEFUL"));
 		view.addObject("productType", this.infoservice.qryInfoByCode("PRODUCT_TYPE"));
 
@@ -208,9 +211,14 @@ public class YearBudgetController extends AbstractBaseController {
 		ModelAndView view = new ModelAndView();
 		view.addObject("custName", custName);
 		view.addObject("custId", custId);
-		view.addObject("projectType2", infoservice.qryInfoByCode("projectType","00"));
+		view.addObject("projectType2", this.infoservice.qryInfoByCode("PROJECT_TYPE","00"));
 		view.addObject("projectType", "01");// 02 项目类型为产品
 		view.addObject("budgetYear", DateUtil.getNextYearStr());// 当前年+1
+		view.addObject("taxType", this.infoservice.qryInfoByCode("taxType","00"));
+		view.addObject("currency", this.infoservice.qryInfoByCode("currency","00"));
+		view.addObject("revRecognitionMethod", this.infoservice.qryInfoByCode("revRecognitionMethod","00"));
+		view.addObject("region", this.infoservice.qryInfoByCode("COUNTRY","00"));
+
 		view.setViewName("/project/yearBudget/trTempl");
 		return view;
 	}

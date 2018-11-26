@@ -15,9 +15,7 @@
 		      <label class="layui-form-label">是否新客户：</label>
 		       <div class="layui-input-inline">
 		          <select name="isNewCustomer" lay-verify="required" lay-filter="isNewCustomer" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01">是</option>
-			        	<option value="02" selected>否</option>
+			        	${isNew.ewTypeHtml}
 				  </select>
 		      </div>
 		    </div>
@@ -33,9 +31,7 @@
 		      <label class="layui-form-label">是否新项目：</label>
 		       <div class="layui-input-inline">
 		          <select name="isNewProject" lay-verify="required" id="isNewProject-hook" lay-filter="" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01">是</option>
-			        	<option value="02" selected>否</option>
+			        	${isNew.ewTypeHtml}
 				  </select>
 		      </div>
 		    </div>
@@ -53,10 +49,7 @@
 		      <label class="layui-form-label">项目类型：</label>
 		       <div class="layui-input-inline">
 		          <select name="projectType" lay-verify="required" lay-filter="" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01" selected>项目</option>
-			        	<option value="02">产品</option>
-			        	<option value="03" >人力</option>
+			        	${projectType2.ewTypeHtml}
 				  </select>
 		      </div>
 		    </div>
@@ -64,17 +57,8 @@
 		     <div class="layui-inline" style="margin-right: 49px;">
 		      <label class="layui-form-label">税种：</label>
 		       <div class="layui-input-inline">
-		          <select name="isNewProject" lay-verify="required" lay-filter="" class="form-control">
-			        	<option value="">请选择</option>
-			        	<option value="01" selected>A</option>
-			        	<option value="02">B</option>
-			        	<option value="03" >C</option>
-			        	<option value="04" >D</option>
-			        	<option value="05" >E</option>
-			        	<option value="06" >F</option>
-			        	<option value="07" >G</option>
-			        	<option value="08" >H</option>
-			        	<option value="09" >I</option>
+		          <select name="taxType" lay-verify="required" lay-filter="" class="form-control">
+			        	${taxType.ewTypeHtml}
 				  </select>
 		      </div>
 		    </div>
@@ -83,8 +67,8 @@
 			   <div class="layui-btn-container" style="margin-left:25px;">
 			    <button type="button"  class="layui-btn layui-btn-sm" id="customQuery" style="margin-right:15px;"><i class="layui-icon layui-icon-search"></i>查询</button>
 			    <button type="reset" class="layui-btn layui-btn-sm" style="margin-right:15px;"><i class="layui-icon layui-icon-refresh"></i>重置</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;"><i class="layui-icon"></i>收入上报</button>
-			    <button type="button" class="layui-btn layui-btn-sm" id="exportYearBudger"  style="margin-right:15px;"><i class="layui-icon"></i>导出</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="add-hook"  style="margin-right:15px;" power="118401"><i class="layui-icon"></i>预算上报</button>
+			    <button type="button" class="layui-btn layui-btn-sm" id="exportYearBudger" power="118402" style="margin-right:15px;"><i class="layui-icon"></i>导出</button>
 			    
 			  </div>
 		   </div>
@@ -98,14 +82,11 @@
 </script>
  
 <script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  <a class="layui-btn layui-btn-danger power="118403" layui-btn-xs" lay-event="del">删除</a>
 </script>
 
 <script type="text/javascript">
-var testData=[{
-	'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contractCode':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'一月收入1千万','feb':'一月收入3千万'
-		
-	}]
+var testData=[]
 var cols = [
     [/* 
   	  {type: 'checkbox', fixed: 'left',rowspan: 2}, */
@@ -135,7 +116,7 @@ var cols = [
 	      {field:'wbs', title:'WBS编号', width:150,rowspan: 2},
 	      {field:'projectName', title:'项目名称', width:130,rowspan: 2},
 	      {field:'projectType', title:'项目类型', width:150,rowspan: 2},
-	      {field:'productList', title:'产品列表', width:120,rowspan: 2},
+	      {field:'productNames', title:'产品列表', width:120,rowspan: 2},
 	      {field:'revenueSource', title:'收入来源(Revenue source)',rowspan: 2},
 	      {field:'entity', title:'实体(Entity)',rowspan: 2},
 	      {field:'contractCode', title:'合同编码(contractCode)',rowspan: 2},
@@ -147,8 +128,8 @@ var cols = [
 	      {field:'currency', title:'结算币种(Currency)',rowspan: 2},
 	      {field:'taxRate', title:'税率(%)',rowspan: 2},
 	      {field:'grossProfitRate', title:'毛利率(%)',rowspan: 2},
-	      {field:'budgetSum', title:'Total Rev',rowspan: 2},
 	      {field:'afterTax',title:"税后合计",rowspan: 2},
+	      {field:'budgetSum', title:'Total Rev',rowspan: 2},
 	      {align: 'center', title: 'Revenue', colspan: 12},
      	  {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
 	 ],[
@@ -226,7 +207,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	    cols: cols,
 			  	    cellMinWidth:'100',
 			  	    data:testData,
-			  	    page: true
+			  	    page: true,
+				    done:function(){
+				    	$.buttonAuthority();
+				    }
 			  	  	});},
 			  dataType: "json"
 			});
@@ -244,10 +228,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    title: '年度预算数据表',
 	    cols: cols,
 	    cellMinWidth:'90',
-	    data:[
-			{'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contractCode':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'1111','feb':'2222'},
-			{'isNewCustomer':'是','custName':'交通银行','isNewProject':'是','projectName':'','projectType':'123','productList':'sss','revenueSource':'a','entity':'','contractCode':'ss','poSow':'','owner':'aaa','taxType':'12%','jan':'111','feb':'222'}
-	    ],
+	    data:[],
 	    page: true
 	  });
 	/*
@@ -309,7 +290,8 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		$.openWindow({
 	  		url:'form2?act=add&id=',
 	  		title:"新增预算",
-	  		width:"95%"
+	  		width:"90%",
+	  		fullScreen:true // 全屏展示
 	  	})
 	});
 	

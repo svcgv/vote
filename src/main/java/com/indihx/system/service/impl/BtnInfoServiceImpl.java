@@ -24,7 +24,7 @@ import com.indihx.system.vo.BtnInfoVo;
 import com.indihx.util.EntityVoConverter;
 
 /**
- * 
+ *
  * <p>
  * 描 述: 按键信息管理
  * </p>
@@ -34,7 +34,7 @@ import com.indihx.util.EntityVoConverter;
  * <p>
  * 创建时间: 2017年7月25日
  * </p>
- * 
+ *
  * @author 严蒙蒙
  */
 @Service
@@ -43,93 +43,21 @@ public class BtnInfoServiceImpl extends AbstractBaseService  implements IBtnInfo
 
 	@Autowired
 	private BtnInfoMapper btnInfoMapper;
-	
-    
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	public Map<String, Object> qryBtnInfoList(BtnInfoVo btnInfoVo) {
-		BtnInfo record = new BtnInfo();
-	    EntityVoConverter.Convert(btnInfoVo, record);
-		Map<String, Object> map = new HashMap<String, Object>();
-		// 第几页、每页显示条数，是否汇总
-		PageHelper.startPage(btnInfoVo.getPages(), btnInfoVo.getRows(), true);
-		List<BtnInfo> listInfo = btnInfoMapper.qryBtnInfoAll(record);
-		PageInfo pageInfo = new PageInfo(listInfo);
-		map.put("listInfo", listInfo);
-		map.put("pageInfo", pageInfo);
-		return map;
-	}
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Override
-	public Map<String, Object> qryRoleBtnInfoList(BtnInfoVo btnInfoVo) {
-		BtnInfo record = new BtnInfo();
-	    EntityVoConverter.Convert(btnInfoVo, record);
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<BtnInfo> btnArrInfo = btnInfoMapper.qryRoleBtnAll(record);
-		// 第几页、每页显示条数，是否汇总
-		PageHelper.startPage(btnInfoVo.getPages(), btnInfoVo.getRows(), true);
-		List<BtnInfo> listInfo = btnInfoMapper.qryRoleBtnAll(record);
-		String btnArr = "";
-		for (BtnInfo btnInfo : btnArrInfo) {
-			if(btnInfo.getBtnId().equals(btnInfo.getRoleBtnId())) {
-				btnArr = btnArr+btnInfo.getBtnId()+",";
-			}
-		}
-		if(btnArr.length() >0) {
-			
-			btnArr= btnArr.substring(0, btnArr.length()-1);
-		}
-		
-		
-		PageInfo pageInfo = new PageInfo(listInfo);
-		map.put("btnArr", btnArr);
-		map.put("listInfo", listInfo);
-		map.put("pageInfo", pageInfo);
-		return map;
-	}
-	
+
+
 	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public boolean addBtnInfo(BtnInfoVo btnInfoVo) {
 		BtnInfo record = new BtnInfo();
 		EntityVoConverter.Convert(btnInfoVo, record);
 		record.setTmSmp(DateUtil.getSysDate());
-		int num = btnInfoMapper.insertSelective(record);
+		int num = this.btnInfoMapper.insertSelective(record);
 		if (num > 0) {
 			return true;
 		}
 		return false;
 	}
-	
-	
-	@Override
-	public BtnInfo qryBtnInfoById(BtnInfoVo btnInfoVo) {
-		return btnInfoMapper.selectByPrimaryKey(btnInfoVo.getBtnId());
-	}
-	
-	//通过主键修改字典信息
-	@Transactional(propagation = Propagation.REQUIRED)
-	@Override
-	public boolean updBtnInfoById(BtnInfoVo btnInfoVo) {
-		try {
-			BtnInfo record = new BtnInfo();
-			EntityVoConverter.Convert(btnInfoVo, record);
-			record.setTmSmp(DateUtil.getSysDate());
-			int cnt = btnInfoMapper.updateByPrimaryKeySelective(record);
-			if (cnt < 1) {
-				return false;
-			}
-		} catch (Exception e) {
-			logger.info("系统异常！！");
-			e.printStackTrace();
-			//使用trycatch时，必须手动加上事务回滚，spring默认只会回滚runtimeException异常才回回滚
-			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();      
-		}
-		
-		return true;
-	}
-	
+
 	//删除
 	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
@@ -138,21 +66,96 @@ public class BtnInfoServiceImpl extends AbstractBaseService  implements IBtnInfo
 		String []btnIds = btnInfoVo.getBtnId().split(",");
 		for(int i=0;i<btnIds.length;i++){
 			if (!StringUtils.isEmpty(btnIds[i])) {
-				num=btnInfoMapper.deleteByPrimaryKey(btnIds[i]);
+				num=this.btnInfoMapper.deleteByPrimaryKey(btnIds[i]);
 			}
 		}
 		return (num>0);
 	}
 
+	@Override
+	public BtnInfo qryBtnInfoById(BtnInfoVo btnInfoVo) {
+		return this.btnInfoMapper.selectByPrimaryKey(btnInfoVo.getBtnId());
+	}
+
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public Map<String, Object> qryBtnInfoList(BtnInfoVo btnInfoVo) {
+		BtnInfo record = new BtnInfo();
+	    EntityVoConverter.Convert(btnInfoVo, record);
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 第几页、每页显示条数，是否汇总
+		PageHelper.startPage(btnInfoVo.getPages(), btnInfoVo.getRows(), true);
+		List<BtnInfo> listInfo = this.btnInfoMapper.qryBtnInfoAll(record);
+		PageInfo pageInfo = new PageInfo(listInfo);
+		map.put("listInfo", listInfo);
+		map.put("pageInfo", pageInfo);
+		return map;
+	}
 
 	@Override
 	public String qryBtnPrimary(String btnId) {
-		List<BtnInfo> listInfo = btnInfoMapper.qryBtnInfoAll(new BtnInfo());
+		List<BtnInfo> listInfo = this.btnInfoMapper.qryBtnInfoAll(new BtnInfo());
 		for(BtnInfo btnInfo:listInfo){
 			if (btnInfo.getBtnId().equals(btnId)){
 				return "1";
 			}
 		}
 		return "0";
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public Map<String, Object> qryRoleBtnInfoList(BtnInfoVo btnInfoVo) {
+		BtnInfo record = new BtnInfo();
+	    EntityVoConverter.Convert(btnInfoVo, record);
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<BtnInfo> btnArrInfo = this.btnInfoMapper.qryRoleBtnAll(record);
+		// 第几页、每页显示条数，是否汇总
+		PageHelper.startPage(btnInfoVo.getPages(), btnInfoVo.getRows(), true);
+		List<BtnInfo> listInfo = this.btnInfoMapper.qryRoleBtnAll(record);
+		String btnArr = "";
+		for (BtnInfo btnInfo : btnArrInfo) {
+			if(btnInfo !=null) {
+
+				if(btnInfo.getBtnId().equals(btnInfo.getRoleBtnId())) {
+					btnArr = btnArr+btnInfo.getBtnId()+",";
+				}
+			}
+		}
+		if(btnArr.length() >0) {
+
+			btnArr= btnArr.substring(0, btnArr.length()-1);
+		}
+
+
+		PageInfo pageInfo = new PageInfo(listInfo);
+		map.put("btnArr", btnArr);
+		map.put("listInfo", listInfo);
+		map.put("pageInfo", pageInfo);
+		return map;
+	}
+
+
+	//通过主键修改字典信息
+	@Transactional(propagation = Propagation.REQUIRED)
+	@Override
+	public boolean updBtnInfoById(BtnInfoVo btnInfoVo) {
+		try {
+			BtnInfo record = new BtnInfo();
+			EntityVoConverter.Convert(btnInfoVo, record);
+			record.setTmSmp(DateUtil.getSysDate());
+			int cnt = this.btnInfoMapper.updateByPrimaryKeySelective(record);
+			if (cnt < 1) {
+				return false;
+			}
+		} catch (Exception e) {
+			BtnInfoServiceImpl.logger.info("系统异常！！");
+			e.printStackTrace();
+			//使用trycatch时，必须手动加上事务回滚，spring默认只会回滚runtimeException异常才回回滚
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+
+		return true;
 	}
 }

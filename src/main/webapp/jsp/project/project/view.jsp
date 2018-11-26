@@ -417,6 +417,47 @@
 				</ul> 
 		   </div>	
 		   
+		      <div class="file-hook" style="width:95%;margin:0 auto;">
+	          <!-- 反写已上传的数据 -->
+		      <div class="layui-upload-list">
+				    <table class="layui-table">
+				      <thead>
+				        <tr><th>文件名</th>
+				        <th>大小</th>
+				        <th>文件类型</th>
+				       
+				        <th>状态</th>
+				        <th> 上传人</th>
+				        <th>上传时间</th>
+				        <th>操作</th>
+				      </tr></thead>
+				      <tbody id="wosFileList">
+				      <c:forEach items="${file}" var="fileInfo" >
+				      	<tr class="edit-wosUploaded">
+					      	<td>${fileInfo.fileUploadName}</td>
+					      	<td>${fileInfo.fileSize}</td>
+					      	<td>
+					      		<c:if test="${fileInfo.fileBusinessType=='00' }">
+									招标文件
+								</c:if>
+								<c:if test="${fileInfo.fileBusinessType=='01' }">
+									客户需求文件
+								</c:if>
+								<c:if test="${fileInfo.fileBusinessType=='02' }">
+									内部评审文件
+								</c:if>
+							</td>
+					      	<td>已上传</td>
+					      	 <td>${fileInfo.usrName}</td>
+						      <td>${fileInfo.createTime}</td>
+					      	<td><a href="/vote/pmfile/download?id=${fileInfo.fileId}">下载</a></td>
+					      	
+				      	</tr>
+				      	</c:forEach>
+				      </tbody>
+				    </table>
+				  </div>
+		  	 </div>
 		   	
 		   <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
 		 	 <legend style="font-weight:bold;">上报收入</legend>
