@@ -157,7 +157,6 @@
             var win=$(".projectGroup-project-wrapper").getWindow();
             $(".projectGroup-project-wrapper").on("click","#save-hook",function(){
                 // 遍历选中的CheckBox
-                console.log("999999999999999999999999999999");
                 var tempArray=[];
                 for(var i=0;i<ids.length;i++){
                     for(var j=0;j<testData.length;j++){
@@ -166,7 +165,7 @@
                         }
                     }
                 }
-                console.log("8888888888888888888888888888888888");
+
                 for(var k=0;k<tempArray.length;k++){
                     var flag= true;
                     for(var j in chosedProductProject){
@@ -181,7 +180,7 @@
                     }
 
                 }
-                console.log("7777777777777777777777777777777777");
+                
                 console.log(chosedProductProject)
                 chosedLayTable.reload('table-chosedProject2',{
                     data:chosedProductProject

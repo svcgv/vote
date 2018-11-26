@@ -180,6 +180,8 @@ public class PmProjectInfoController {
 			if(notexsit) {
 				isRef.add(confirm);
 			}
+			
+			notexsit = true;
 		}
         return R.ok().put("page", isRef);
     }
@@ -253,11 +255,16 @@ public class PmProjectInfoController {
         	pmProductProjectRelationService.insert(pmProductProjectRelationEntity);
         }
         
-        for(Long id :pmProjectInfo.getFileIds()) {
+        if(pmProjectInfo.getFileIds()!=null&&!"".equals(pmProjectInfo.getFileIds())) {
+        	String fileIds = pmProjectInfo.getFileIds();
+        	String[] ids = fileIds.split(",");
         	PmFileEntity pm = new PmFileEntity();
         	pm.setForeignId(projectId);
-       		pm.setFileId(id);
-       		pmFileService.update(pm);
+        	for(int i=0;i<ids.length;i++) {
+        		pm.setFileId(Long.parseLong(ids[i]));
+        		pmFileService.update(pm);
+        		
+        	}
         }
         
         return R.ok();
@@ -327,13 +334,16 @@ public class PmProjectInfoController {
           	pmProductProjectRelationService.insert(pmProductProjectRelationEntity);
           }
           
-          for(Long id :pmProjectInfo.getFileIds()) {
+          if(pmProjectInfo.getFileIds()!=null&&!"".equals(pmProjectInfo.getFileIds())) {
+          	String[] ids = pmProjectInfo.getFileIds().split(",");
           	PmFileEntity pm = new PmFileEntity();
           	pm.setForeignId(pmProjectInfo.getProjectId());
-         	pm.setFileId(id);
-         	pmFileService.update(pm);
+          	for(int i=0;i<ids.length;i++) {
+          		pm.setFileId(Long.parseLong(ids[i]));
+          		pmFileService.update(pm);
+          	}
           }
-        
+          
         return R.ok();
     }
     

@@ -918,14 +918,34 @@ $(function(){
 			return false;
 		}
 		
-		var formDatas=$("#project-edit-hook form").serializeObject();
+		var queryParams=$("#project-edit-hook form").serializeObject();
 		
-		  formDatas=$.extend({},true,formDatas,{pmContractInfo:chosedContractProject},{pmProductInfo:chosedProductProject},{fileIds:fileIds});
-		 
+		 var newParam = {}
+		  for(var i in queryParams){
+			  if(queryParams[i]){
+				  newParam[i] = queryParams[i]
+			  }
+		  }
+		 if(fileIds){
+			 newParam.fileIds=fileIds.join(',')
+		 }
+	
+		 if(chosedContractProject){
+			 newParam.pmContractInfo = chosedContractProject
+		 }
+		
+		 if(chosedProductProject){
+			 newParam.pmProductInfo = chosedProductProject
+			 
+		 }
+
+	      console.log(newParam)
+		
+	
 		$.ajax({
 			type:'POST',
 			url: '/vote/pmprojectinfo/update',
-			 data: JSON.stringify(formDatas),
+			 data: JSON.stringify(newParam),
 			 contentType:'application/json',
 			success:function(res){
 				  location.reload();

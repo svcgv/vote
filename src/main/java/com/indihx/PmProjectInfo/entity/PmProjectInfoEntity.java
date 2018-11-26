@@ -481,7 +481,7 @@ public class PmProjectInfoEntity extends BaseEntity implements Serializable {
 
 	private List<PmContractInfoEntity> pmContractInfo;
 	
-	private List<Long> fileIds;
+	private String fileIds;
 
 	/**
 	 * 设置：
@@ -1787,11 +1787,11 @@ public class PmProjectInfoEntity extends BaseEntity implements Serializable {
 		this.pmContractInfo = pmContractInfo;
 	}
 
-	public List<Long> getFileIds() {
+	public String getFileIds() {
 		return fileIds;
 	}
 
-	public void setFileIds(List<Long> fileIds) {
+	public void setFileIds(String fileIds) {
 		this.fileIds = fileIds;
 	}
 }
