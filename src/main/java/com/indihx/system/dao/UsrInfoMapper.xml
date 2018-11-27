@@ -6,6 +6,7 @@
     <result column="USR_NO" jdbcType="VARCHAR" property="usrNo" />
     <result column="USR_NAME" jdbcType="VARCHAR" property="usrName" />
     <result column="SEX" jdbcType="CHAR" property="sex" />
+    <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
     <result column="PASS_WORD" jdbcType="VARCHAR" property="passWord" />
     <result column="BIRTH_DATE" jdbcType="CHAR" property="birthDate" />
     <result column="ORG_NO" jdbcType="DECIMAL" property="orgNo" />
@@ -35,7 +36,7 @@
 	<result column="ORG_NAME" jdbcType="VARCHAR" property="orgName"/>
 	</resultMap>
   <sql id="Base_Column_List">
-    USR_ID, USR_NO, USR_NAME, SEX, PASS_WORD, BIRTH_DATE, ORG_NO, MBL_NO, EMAIL, OPER_USR,ORG_TYPE,
+    USR_ID, USR_NO, USR_NAME, SEX, LOGIN_NAME, PASS_WORD, BIRTH_DATE, ORG_NO, MBL_NO, EMAIL, OPER_USR,ORG_TYPE,
     USR_STA, TM_SMP,LICENCE_CODE,CERT_ID,STR_REMARK
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -72,6 +73,9 @@
       </if>
       <if test="sex != null">
         SEX,
+      </if>
+      <if test="loginName != null">
+        LOGIN_NAME,
       </if>
       <if test="passWord != null">
         PASS_WORD,
@@ -122,6 +126,9 @@
       </if>
       <if test="sex != null">
         #{sex,jdbcType=CHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
       </if>
       <if test="passWord != null">
         #{passWord,jdbcType=VARCHAR},
@@ -175,6 +182,9 @@
       </if>
       <if test="sex != null">
         SEX = #{sex,jdbcType=CHAR},
+      </if>
+       <if test="loginName != null">
+        LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
       </if>
       <if test="passWord != null">
         PASS_WORD = #{passWord,jdbcType=VARCHAR},
@@ -253,6 +263,9 @@
 	<if test="usrId != null and usrId !=''">
     	 	and u.usr_id like CONCAT(CONCAT('%',#{usrId}),'%')
    	</if>
+   	<if test="loginName != null and loginName !=''">
+    	 	and u.login_name = #{loginName,jdbcType=VARCHAR}
+   	</if>
    	<if test="passWord != null and passWord !=''">
     	 	and u.PASS_WORD = #{passWord,jdbcType=VARCHAR}
    	</if>
@@ -262,6 +275,21 @@
 	ORDER BY U .USR_ID DESC ) AA
 	GROUP BY AA.USR_ID, AA.USR_NAME, AA.ORG_TYPE, AA.USR_STA,AA.PASS_WORD,AA.LICENCE_CODE,AA.CERT_ID,AA.TM_SMP,AA.MBL_NO,AA.EMAIL,AA.BIRTH_DATE,AA.SEX,AA.SESSION_ID,AA.ORG_NO,AA.ORG_NAME,AA.USR_NO
   	ORDER BY AA.ORG_TYPE,AA.USR_ID DESC
+  </select>
+  
+  
+   <select id="qryUsrInfoByLoginName" resultMap="BaseResultMap">
+  	SELECT U.*
+	
+	FROM  USR_INFO U
+    WHERE 1=1
+	<if test="loginName != null and loginName !=''">
+		and u.login_name=#{loginName,jdbcType=VARCHAR}
+	</if>
+	<if test="oldLoginName != null and oldLoginName !=''">
+		and u.login_name !=#{oldLoginName,jdbcType=VARCHAR}
+	</if>
+	
   </select>
   
   <select id="qryUsrInfoByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">

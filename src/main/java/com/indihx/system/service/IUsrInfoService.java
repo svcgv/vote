@@ -111,4 +111,6 @@ public interface IUsrInfoService {
 	public String getUserSession(Long usrId);
 
 	public void modifyAcitveTime(Long usrId);
+	//查询登录名是否已存在
+	public UsrInfo checkUsrInfo(UserInfoVo infovo);
 }

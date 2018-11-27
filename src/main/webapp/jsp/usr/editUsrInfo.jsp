@@ -14,6 +14,10 @@ $(document).ready(function(){
 
 });
 	function save() {
+		if(checkFlg ==1){
+			alert("登录名重复！");
+			return ;
+		}
 		formValidate();
 	}
 	
@@ -84,6 +88,33 @@ $(document).ready(function(){
 		var type ="user";
 		$.indi.openPopup({title: '    ',area : ['520px' , '500px'],isDate:false,url: '${ctx }/usr/queryAddPara?type='+type});
 	}
+	
+	var checkFlg = 0;
+	function check(){
+		var loginName = $("#loginName").val();
+		
+		//console.log(loginName)
+		if(loginName != "" || loginName !=null ){
+			$.indi.ajaxSubmit({url: "${ctx }/usr/checkUsrInfo.do",isCheck:false,success:function(data){
+				var loginName1="";
+				if(data.usrInfo != null){
+					loginName1=data.usrInfo.loginName
+				}
+				var leth = $.trim(loginName1).length;
+				console.log(leth)
+				if(leth >0){
+					$("#check").show();
+					checkFlg = 1;
+				}else{
+					$("#check").hide();
+					checkFlg = 0;
+				}
+			}});
+		
+		}
+		
+	} 
+	
 </script>
 </head>
 <body>
@@ -106,6 +137,18 @@ $(document).ready(function(){
 								id="usrName" name="usrName" required value="${usrInfo.usrName }" />
 						</div>
 					</div>
+					
+					<div class="form-group">
+						<label class="col-md-4 control-label text-right">登录名</label>
+						<div class=" col-md-5">
+							<input type="text" class="form-control" placeholder="登录名" onblur="check();"
+								id="loginName" name="loginName" value="${usrInfo.loginName }" required />
+								
+								<input type="hidden" id="oldLoginName" name="oldLoginName" value="${usrInfo.loginName }">
+						</div>
+						<span id="check" style="display: none;"><font color='red'>登录名重复</font></span>
+					</div>
+					
 					<div class="form-group">
 						<label class=" col-md-4 control-label text-right">性别</label>
 						<div class=" col-md-6">

@@ -72,7 +72,8 @@ public class LoginServiceImpl  extends AbstractBaseService implements ILoginServ
 			String userId = EncryptionUtil.decryptByPrivateKey(infoVo.getUsrId());
 			String password = EncryptionUtil.decryptByPrivateKey(infoVo.getPassWord());
 			UsrInfo usrInfo = new UsrInfo();
-			usrInfo.setUsrId(userId);
+			//usrInfo.setUsrId(userId);
+			usrInfo.setLoginName(userId);
 			usrInfo.setPassWord(password);
 			//检查登录用户信息
 			List<UsrInfo> list = null;

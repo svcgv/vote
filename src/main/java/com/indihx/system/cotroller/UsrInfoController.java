@@ -22,6 +22,7 @@ import com.indihx.datamng.vo.HpbInfoVo;
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.system.service.impl.UsrInfoServiceImpl;
 import com.indihx.system.vo.OrgInfoVo;
+import com.indihx.system.vo.ParamsInfoVo;
 import com.indihx.system.vo.UserInfoVo;
 import com.indihx.system.vo.RoleInfoVo;
 import com.indihx.util.MapToEntryConvertUtils;
@@ -108,6 +109,7 @@ public class UsrInfoController extends AbstractBaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		boolean isSuccess = IUsrInfoService.addUsrInfo(infoVo);
 		map.put("status", isSuccess);
+		
 		return map;
 	}
 	
@@ -377,4 +379,17 @@ public class UsrInfoController extends AbstractBaseController {
 		String roleId = String.valueOf(reqMap.get("roleId"));
 		return IUsrInfoService.qryUsrByRoleId(roleId);
 	}
+	
+	/***
+	 * 检查登录名是否已存在
+	 * @param infoVo
+	 * @return
+	 */
+	@RequestMapping(value="/checkUsrInfo",method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> checkUsrInfo(@RequestBody UserInfoVo infovo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("usrInfo", IUsrInfoService.checkUsrInfo(infovo));
+		return map;
+	}
+	
 }
