@@ -122,6 +122,21 @@
 		      </div>
 				<button type="button"  class="layui-btn layui-btn-sm" id="companyQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
+				 <div class="layui-inline">
+					 <label class="layui-form-label">项目名称：</label>
+					 <div class="layui-input-inline">
+						 <input type="text" name="projectName" readonly="readonly" autocomplete="off" class="layui-input form-control">
+						 <input type="text" style='display:none' name="projectId">
+						 <input type="text" style='display:none' name="wbs">
+					 </div>
+					 <button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
+				 </div>
+				 <div class="layui-inline">
+					 <label class="layui-form-label">项目类型：</label>
+					 <div class="layui-input-inline">
+						 <input type="text" name="projectType" readonly="readonly" autocomplete="off" class="layui-input form-control">
+					 </div>
+				 </div>
 		  </div>
 	     <div class="layui-form-item" style="margin-bottom:0px;">
 	     	<div class="layui-inline">
@@ -155,17 +170,6 @@
 			 </div>
 	     </div>
 		
-		<div class="layui-form-item clearfix" style="margin-bottom:0px;margin-left:10px;">
-			<div style="float:left;width: 140px;">
-				<p class="layui-form-label">项目引用列表：</p>
-				<div>
-					<button type="button"  class="layui-btn " id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon"></i>项目引用</button>
-				</div>
-			</div>
-			<div style="float:left;width:900px;">
-				<table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
-			</div>
-	  </div>
       <div class="clearfix" style="margin-bottom:0px;;margin-left:10px;">
 	     	   <div style="float:left;width: 140px;">
 					<p class="layui-form-label">收款点信息：</p>
@@ -234,15 +238,12 @@
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
-    var chosedProject=[];
-    var chosedLayTable=null;
 $(function(){
 	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
 	  	  laydate=layui.laydate;
 
-        chosedLayTable=layui.table;
 		 //日期
 		  laydate.render({
 			    elem: "#contractStartTime-form",
@@ -265,45 +266,6 @@ $(function(){
                  type: 'month'
              });
         })
-        //table render
-        chosedLayTable.render({
-            id:"table-chosedProject",
-            elem: '#projectTable-chosed',
-            height:'250',
-            title: '项目群数据信息',
-            cols: [[
-                {field:'wbs', title:'项目编号', templet:function(d){
-                    var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
-                    return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
-                } },
-                {field:'projectName', title:'项目名称'},
-                {fixed: 'right', title:'操作', toolbar: '#barFormDemo'}
-            ]],
-            cellMinWidth:'90',
-            data:chosedProject,
-            page: true
-        });
-        chosedLayTable.on('tool(tableFilter)', function(obj){
-            var data = obj.data;
-            if(obj.event === 'del'){
-                layer.confirm('确认删除行么', function(index){
-                    obj.del();
-                    console.log(data,chosedProject)
-                    // 删除
-                    for(var k in chosedProject){
-                        if(data.projectId == chosedProject[k].projectId ){
-                            chosedProject.splice(k,1)
-                        }
-                    }
-                    console.log(chosedProject,'exit');
-                    chosedLayTable.reload('table-chosedProject',{
-                        data:chosedProject
-                    })
-                    layer.close(index);
-
-                });
-            }
-        });
 
 
 		// 新增付款点
@@ -447,10 +409,10 @@ $(function(){
               queryParams=$.extend({},true,queryParams,{paymentPoint:rets});
           }
           var projects=[];
-          for(var i=0;i<chosedProject.length;i++ ){
-              projects.push(chosedProject[i].projectId)
+          if(queryParams.projectId){
+              projects.push(queryParams.projectId);
+              queryParams=$.extend({},true,queryParams,{projectIds:projects});
           }
-          queryParams=$.extend({},true,queryParams,{projectIds:projects});
           var newParam = {}
 			  for(var i in queryParams){
 				  if(queryParams[i]){

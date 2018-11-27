@@ -25,6 +25,9 @@
         <result property="custId" column="CUST_ID"/>
         <result property="custSapCode" column="CUST_SAP_CODE"/>
         <result property="custName" column="CUST_NAME"/>
+        <result property="wbs" column="WBS"/>
+        <result property="projectName" column="PROJECT_NAME"/>
+        <result property="projectType" column="PROJECT_TYPE"/>
         <result property="remark" column="REMARK"/>
         <result property="isDelete" column="IS_DELETE"/>
         <result property="createTime" column="CREATE_TIME"/>
@@ -34,96 +37,104 @@
     </resultMap>
 
     <select id="queryObject" resultMap="pmContractInfoMap">
-		select * from PM_CONTRACT_INFO where CONTRACT_ID = #{value}
+		select
+        A.*,C.project_name,C.wbs,C.project_id,C.project_type
+        FROM
+        PM_CONTRACT_INFO A
+        LEFT JOIN PM_CONTRACT_PROJECT_RELATION B ON A.CONTRACT_ID=B.CONTRACT_ID
+        LEFT JOIN PM_PROJECT_INFO C ON B.project_id=C.project_id where A.CONTRACT_ID = #{value}
 	</select>
 
     <select id="queryList" resultMap="pmContractInfoMap">
         select
-        *
-        from PM_CONTRACT_INFO
+        A.*,C.project_name,C.wbs,C.project_type
+        FROM
+        PM_CONTRACT_INFO A
+        LEFT JOIN PM_CONTRACT_PROJECT_RELATION B ON A.CONTRACT_ID=B.CONTRACT_ID
+        LEFT JOIN PM_PROJECT_INFO C ON B.project_id=C.project_id
         <trim prefix="WHERE" prefixOverrides="AND|OR" suffixOverrides="AND|OR">
             <if test="contractId != null and contractId!=''">
-                CONTRACT_ID = #{contractId} AND
+                A.CONTRACT_ID = #{contractId} AND
             </if>
             <if test="contractCode != null and contractCode!=''">
-                CONTRACT_CODE = #{contractCode} AND
+                A.CONTRACT_CODE = #{contractCode} AND
             </if>
             <if test="contractName != null and contractName!=''">
-                CONTRACT_NAME like concat(concat('%',#{contractName}),'%') AND
+                A.CONTRACT_NAME like concat(concat('%',#{contractName}),'%') AND
             </if>
             <if test="contractAmount != null and contractAmount!=''">
-                CONTRACT_AMOUNT = #{contractAmount} AND
+                A.CONTRACT_AMOUNT = #{contractAmount} AND
             </if>
             <if test="taxRate != null and taxRate!=''">
-                TAX_RATE = #{taxRate} AND
+                A.TAX_RATE = #{taxRate} AND
             </if>
             <if test="afterTaxContractAmount != null and afterTaxContractAmount!=''">
-                AFTER_TAX_CONTRACT_AMOUNT = #{afterTaxContractAmount} AND
+                A.AFTER_TAX_CONTRACT_AMOUNT = #{afterTaxContractAmount} AND
             </if>
             <if test="contractStartTime != null and contractStartTime!=''">
-                CONTRACT_START_TIME = #{contractStartTime} AND
+                A.CONTRACT_START_TIME = #{contractStartTime} AND
             </if>
             <if test="contractEndTime != null and contractEndTime!=''">
-                CONTRACT_END_TIME = #{contractEndTime} AND
+                A.CONTRACT_END_TIME = #{contractEndTime} AND
             </if>
             <if test="signContractDate != null and signContractDate!=''">
-                SIGN_CONTRACT_DATE = #{signContractDate} AND
+                A.SIGN_CONTRACT_DATE = #{signContractDate} AND
             </if>
             <if test="isAgree != null and isAgree!=''">
-                IS_AGREE = #{isAgree} AND
+                A.IS_AGREE = #{isAgree} AND
             </if>
             <if test="sellDeptId != null and sellDeptId!=''">
-                SELL_DEPT_ID =
+                A.SELL_DEPT_ID =
                 #{sellDeptId} AND
             </if>
             <if test="custManagerId != null and custManagerId!=''">
-                CUST_MANAGER_ID = #{custManagerId} AND
+                A.CUST_MANAGER_ID = #{custManagerId} AND
             </if>
             <if test="yearNumer != null and yearNumer!=''">
-                YEAR_NUMER = #{yearNumer} AND
+                A.YEAR_NUMER = #{yearNumer} AND
             </if>
             <if test="sellDeptName != null and sellDeptName!=''">
-                SELL_DEPT_NAME = #{sellDeptName} AND
+                A.SELL_DEPT_NAME = #{sellDeptName} AND
             </if>
             <if test="custManagerName != null and custManagerName!=''">
-                CUST_MANAGER_NAME = #{custManagerName} AND
+                A.CUST_MANAGER_NAME = #{custManagerName} AND
             </if>
             <if test="oaFlowCode != null and oaFlowCode!=''">
-                OA_FLOW_CODE like concat(concat('%',#{oaFlowCode}),'%') AND
+                A.OA_FLOW_CODE like concat(concat('%',#{oaFlowCode}),'%') AND
             </if>
             <if test="companyCode != null and companyCode!=''">
-                COMPANY_CODE = #{companyCode} AND
+                A.COMPANY_CODE = #{companyCode} AND
             </if>
             <if test="custId != null and custId!=''">
-                CUST_ID = #{custId} AND
+                A.CUST_ID = #{custId} AND
             </if>
             <if test="custSapCode != null and custSapCode!=''">
-                CUST_SAP_CODE = #{custSapCode} AND
+                A.CUST_SAP_CODE = #{custSapCode} AND
             </if>
             <if test="custName != null and custName!=''">
-                CUST_NAME = #{custName} AND
+                A.CUST_NAME = #{custName} AND
             </if>
             <if test="remark != null and remark!=''">
-                REMARK = #{remark} AND
+                A.REMARK = #{remark} AND
             </if>
             <if test="isDelete != null and isDelete!=''">
-                IS_DELETE = #{isDelete} AND
+                A.IS_DELETE = #{isDelete} AND
             </if>
             <if test="createTimeStart != null and  createTimeStart !=''">
-                CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
+                A.CREATE_TIME <![CDATA[>=]]> #{createTimeStart} AND
             </if>
             <!-- 结束时间 -->
             <if test="createTimeEnd != null  and  createTimeEnd !=''">
-                CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
+                A.CREATE_TIME <![CDATA[<=]]> #{createTimeEnd} AND
             </if>
             <if test="creatorId != null and creatorId!=''">
-                CREATOR_ID = #{creatorId} AND
+                A.CREATOR_ID = #{creatorId} AND
             </if>
             <if test="modifyTime != null and modifyTime!=''">
-                MODIFY_TIME = #{modifyTime} AND
+                A.MODIFY_TIME = #{modifyTime} AND
             </if>
             <if test="modifier != null and modifier!=''">
-                MODIFIER = #{modifier}
+                A.MODIFIER = #{modifier}
             </if>
         </trim>
     </select>

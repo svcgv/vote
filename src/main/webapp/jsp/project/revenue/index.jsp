@@ -176,7 +176,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    height:'full-250',
 	    title: '收入上报数据表',
 	    cols: [[
-	    	  {type: 'checkbox', fixed: 'left'},
+	    	  {type: 'checkbox',rowspan: 2, fixed: 'left'},
 	  	      {field:'year', title:'年份', width:130,rowspan: 2},
             {field:'isDelete', title:'是否有效', width:130,rowspan: 2},
 	  	      {field:'contractAmount', title:'合同金额', width:130,rowspan: 2},
@@ -191,6 +191,10 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			//需要加校验，校验规则为:历年加当年的不能超过合同金额
 	  	      {field:'currentAmount', title:'当年上报收入合计', width:130,rowspan: 2},
             {align: 'center', title: 'Revenue', colspan: 12},
+            {field:'currentAmount', title:'当年计提人力金额合计', width:130,rowspan: 2},
+            {align: 'center', title: '计提人力', colspan: 12},
+            {field:'currentAmount', title:'当年计提服务金额合计', width:130,rowspan: 2},
+            {align: 'center', title: '计提服务', colspan: 12},
             {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
         ],[
             {field: 'budgetJan', title: 'Jan'}
@@ -205,9 +209,33 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
             ,{field: 'budgetOct', title: 'Oct'}
             ,{field: 'budgetNov', title: 'Nov'}
             ,{field: 'budgetDec', title: 'Dec'}
+            ,{field: 'budgetJan1', title: 'Jan1'}
+            ,{field: 'budgetFeb1', title: 'Feb1'}
+            ,{field: 'budgetMar1', title: 'Mar1'}
+            ,{field: 'budgetApr1', title: 'Apr1'}
+            ,{field: 'budgetMay1', title: 'May1'}
+            ,{field: 'budgetJun1', title: 'Jun1'}
+            ,{field: 'budgetJul1', title: 'Jul1'}
+            ,{field: 'budgetAug1', title: 'Aug1'}
+            ,{field: 'budgetSep1', title: 'Sep1'}
+            ,{field: 'budgetOct1', title: 'Oct1'}
+            ,{field: 'budgetNov1', title: 'Nov1'}
+            ,{field: 'budgetDec1', title: 'Dec1'}
+            ,{field: 'budgetJan1', title: 'Jan2'}
+            ,{field: 'budgetFeb1', title: 'Feb2'}
+            ,{field: 'budgetMar1', title: 'Mar2'}
+            ,{field: 'budgetApr1', title: 'Apr2'}
+            ,{field: 'budgetMay1', title: 'May2'}
+            ,{field: 'budgetJun1', title: 'Jun2'}
+            ,{field: 'budgetJul1', title: 'Jul2'}
+            ,{field: 'budgetAug1', title: 'Aug2'}
+            ,{field: 'budgetSep1', title: 'Sep2'}
+            ,{field: 'budgetOct1', title: 'Oct2'}
+            ,{field: 'budgetNov1', title: 'Nov2'}
+            ,{field: 'budgetDec1', title: 'Dec2'}
 	    ]
             ],
-	    cellMinWidth:'90',
+	    cellMinWidth:'70',
 	    page: true
 	    ,data:[{year:"2018",
           isDelete:"有效",

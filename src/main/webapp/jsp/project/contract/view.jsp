@@ -95,6 +95,18 @@
 				   <label name="companyCode"  class="layui-form-label"></label>
 		      </div>
 		    </div>
+			  <div class="layui-inline" style="">
+				  <label class="layui-form-label" style="width:80px!important;">项目名称：</label>
+				  <div class="layui-input-inline">
+					  <label name="projectName"  class="layui-form-label"></label>
+				  </div>
+			  </div>
+			  <div class="layui-inline" style="">
+				  <label class="layui-form-label" style="width:80px!important;">项目类型：</label>
+				  <div class="layui-input-inline">
+					  <label name="projectType"  class="layui-form-label"></label>
+				  </div>
+			  </div>
 		    
 		  </div>
 	     <div class="layui-form-item" style="margin-bottom:0px;">
@@ -124,14 +136,6 @@
 				 </div>
 			 </div>
 	     </div>
-		<div class="layui-form-item" style="margin-bottom:0px;margin-left:10px;">
-			<div style="float:left;width: 140px;">
-				<p class="layui-form-label">项目引用列表：</p>
-			</div>
-			<div style="float:left;width:900px;">
-				<table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
-			</div>
-		</div>
 		<div class="layui-form-item" style="margin-bottom:0px;">
 			<div class="layui-inline" style="width:98%;">
 				<label class="layui-form-label">收款点信息：</label>
@@ -189,42 +193,14 @@ $(function(){
 	layui.use(['layer', 'form','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form;
-        table = layui.table;
         var pmContract = JSON.parse('${pmContract}');
         for (var property in pmContract) {
             $("#contract-addForm-hook label[name='"+property+"']").text(pmContract[property]);
-
+            if(property=='projectType'){
+                $("#contract-addForm-hook label[name='"+property+"']").text(getCodeValue(pmContract[property],projectType));
+            }
         }
 
-        var contractId = ${id};
-        console.log(contractId);
-        var param = {"contractId": contractId};
-        $.ajax({
-            type: 'POST',
-            url: '/vote/pmcontractprojectrelation/listProject',
-            data: JSON.stringify(param),
-            contentType: 'application/json',
-            success: function (res) {
-                table.render({
-                    id:"table-chosedProject",
-                    elem: '#projectTable-chosed',
-                    height:'350',
-                    width:"700",
-                    title: '项目群数据信息',
-                    cols: [[
-                        {field:'wbs', title:'项目编号', templet:function(d){
-                            var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
-                            return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
-                        } },
-                        {field:'projectName', title:'项目名称'}
-                    ]],
-                    cellMinWidth:'90',
-                    data:res.page,
-                    page: true
-                });
-            },
-            dataType: "json"
-        });
 	 	  form.render();
         $("#contract-addForm-hook #contract-close-hook").click(function(){
             $(this).getWindow().close();
