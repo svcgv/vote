@@ -5,9 +5,7 @@
 .layui-form-label{width:100px!important;}
 </style>
 <div class="project-info-wrapper">
-	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-	  <legend>项目管理</legend>
-	</fieldset>
+
 	<form class="layui-form" id="project-index-form" method="POST" action="">
 	   <div class="layui-form-item">
 	   
@@ -217,7 +215,7 @@ var col=[
 	    	  {field:'predictContractAmount', title:'合同金额'},
 	    	  {field:'predictProfitRate', title:'预估利润率'},
 	    	  {field:'predictProfitMount', title:'预估利润'},
-	    	  {field:'predictWorkload', title:'预估工作量'},
+	    	  {field:'predictWorkload', title:'预估工作量（人/月）'},
 	    	  {field:'yearSalary', title:'预估当年收入'},
 	    	  {field:'allIncomming', title:'收入合计'}
 	    	  

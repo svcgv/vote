@@ -58,6 +58,7 @@
 		
 		<result property="projectManagerId" column="PROJECT_MANAGER_ID" />
 		<result property="projectManagerName" column="PROJECT_MANAGER_NAME" />
+		<result property="projectType" column="PROJECT_TYPE" />
 		
 		<result property="predictWorkLoad" column="PREDICT_WORK_LOAD" />
 		<result property="predictProfit" column="PREDICT_PROFIT" />
@@ -86,6 +87,10 @@
 			<if test="firstBidAmount != null and firstBidAmount!=''">
 				FIRST_BID_AMOUNT = #{firstBidAmount} AND
 			</if>
+			<if test="projectType != null and projectType!=''">
+				PROJECT_TYPE = #{projectType} AND
+			</if>
+			
 			<if test="predictAmount != null  and predictAmount!=''">
 				PREDICT_AMOUNT like
 				concat(concat('%',#{predictAmount}),'%') AND        </if>
@@ -221,7 +226,9 @@
 		<if test="bidName != null and bidName!=''">
 			,BID_NAME
 		</if>
-
+		<if test="projectType != null and projectType!=''">
+			,PROJECT_TYPE
+		</if>
 		<if test="firstBidAmount != null and firstBidAmount!=''">
 			,FIRST_BID_AMOUNT
 		</if>
@@ -373,9 +380,15 @@
 		<if test="bidName != null and bidName!=''">
 			,#{bidName}
 		</if>
+		
+		<if test="projectType != null and projectType!=''">
+			,#{projectType}
+		</if>
+		
 		<if test="firstBidAmount != null and firstBidAmount!=''">
 			,#{firstBidAmount}
 		</if>
+		
 		<if test="predictAmount != null and predictAmount!=''">
 			,#{predictAmount}
 		</if>
@@ -490,6 +503,8 @@
 		update pm_confirm_bid
 		<set>
 			<if test="bidName != null and bidName!=''">BID_NAME = #{bidName}, </if>
+			
+			<if test="projectType != null and projectType!=''"> PROJECT_TYPE = #{projectType}, </if>
 
 			<if test="bidCode != null and bidCode!=''">BID_CODE = #{bidCode}, </if>
 

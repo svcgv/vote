@@ -53,6 +53,26 @@ public class PmConfirmBidEntity extends BaseEntity implements Serializable {
 	/**
 	 * 
 	 */
+	
+	/**
+	 * 
+	 */
+
+	private String projectType;
+	
+	/**
+	 * 设置：
+	 */
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
+	}
+
+	/**
+	 * 获取：
+	 */
+	public String getProjectType() {
+		return projectType;
+	}
 
 	
 	private String predictPeriodStart;

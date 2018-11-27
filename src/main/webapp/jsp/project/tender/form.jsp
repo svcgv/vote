@@ -28,6 +28,15 @@
 		      <span class="f-placeholder"></span>
 		    </div>
 		    
+		    <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">项目类型：</label>
+		       <div class="layui-input-inline">
+		          <select name="projectType" lay-verify="required"  class="form-control">
+		        	    ${projectType.ewTypeHtml}
+		          </select>
+		      </div>
+		    </div>
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">首次报价（元）：</label>
 		       <div class="layui-input-inline">
@@ -52,7 +61,7 @@
 		      <span class="f-placeholder"></span>
 		    </div>
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估工作量：</label>
+		      <label class="layui-form-label">预估工作量（人/月）：</label>
 		      <div class="layui-input-inline">
 		       <input type="number" name="predictWorkLoad"  autocomplete="off" class="layui-input form-control">
 		      </div>
@@ -140,14 +149,14 @@
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-projectManager" ><i class="layui-icon layui-icon-search"></i></button>
 		     </div> 
 		     
-		      <div class="layui-inline">
+		       <!--   <div class="layui-inline">
 			      <label class="layui-form-label">技术总监：</label>
 			       <div class="layui-input-inline">
 			          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 			          <input type="text" style='display:none' name="technicalDirectorId">
 			      </div>
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
-		    </div>
+		    </div>   -->
 		    
 		     <div class="layui-inline">
 			      <label class="layui-form-label">客户名称：</label>
@@ -171,7 +180,7 @@
 		    <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
 		       <div class="layui-input-inline" style="width:230px;">
-				   <textarea name="paymentPoint" rows="2"  placeholder="3/3/3/1,月/季/年" class="layui-textarea form-control"></textarea>
+				   <textarea name="paymentPoint" rows="2"  placeholder="示例:3/3/3/1 首款 XX年XX月,第2次XX年XX月,第3次.... 季付 每季结束 半年付 每半年结......" class="layui-textarea form-control"></textarea>
 		      </div>
 		    </div>
 		    
@@ -292,7 +301,7 @@ $(function(){
           ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
           ,'<td>'
           ,' <div class="layui-input-inline">'
-         	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+         	 ,'<select name="fileBusinessType" lay-verify="required" lay-filter="" class="form-control">'
 	          ,'<option value="">请选择</option>'
 	        	,'<option value="00" selected>招标文件</option>'
 	        	,'<option value="01">客户需求文件</option>'

@@ -63,9 +63,7 @@ public class TenderController extends AbstractBaseController{
 		
 		ModelAndView view = new ModelAndView();
 		
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL","00"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
-		view.addObject("status",infoservice.qryInfoByCode("BID_STATUS"));
+		view.addObject("status",infoservice.qryInfoByCode("BID_STATUS","00"));
 		view.setViewName("/project/tender/index");
 		return view;
 	}
@@ -73,8 +71,7 @@ public class TenderController extends AbstractBaseController{
 	public ModelAndView customFormView(@RequestParam("act") String act,@RequestParam("id") String id) {
 		ModelAndView view = new ModelAndView();
 		
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE"));
+        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE","00"));
 		
 		view.addObject("act",act);
 		view.addObject("id",id);
@@ -92,8 +89,7 @@ public class TenderController extends AbstractBaseController{
 		maps.put("isDelete", "00");
 		view.addObject("file",pmFileService.queryList(maps));
 		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
+        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE",entity.getProjectType()));
 		
 		view.addObject("act",act);
 		view.addObject("id",id);
@@ -112,8 +108,7 @@ public class TenderController extends AbstractBaseController{
 		List<PmFileEntity> pmFiles = pmFileService.queryList(maps);
 		view.addObject("file",pmFiles);
 		view.addObject("pmConfirmBid",JSON.toJSONString(entity));
-		view.addObject("isUseful",infoservice.qryInfoByCode("IS_USEFUL"));
-		view.addObject("productType",infoservice.qryInfoByCode("PRODUCT_TYPE","01"));
+        view.addObject("projectType", infoservice.qryInfoByCode("PROJECT_TYPE",entity.getProjectType()));
 		
 		Map<String ,Object> map = new HashMap<String,Object>();
 		map.put("reviewType", "00");

@@ -137,7 +137,7 @@ public class PmProjectInfoController {
         pmProjectInfoEntity.setModifier(usesr.getUsrId());
         pmProjectInfoEntity.setModifyTime(DateUtil.getDateTime());
         PmProjectInfoEntity entity = pmProjectInfoService.queryObject(pmProjectInfoEntity.getProjectId());
-        pmProjectInfoEntity.setApproveStatus( ReviewUtils.getProjectNextState(entity.getApproveStatus(),"00",entity));
+        pmProjectInfoEntity.setApproveStatus( ReviewUtils.getNextState(entity.getApproveStatus(),"00"));
  
         //插入投标审批记录
         PmReviewInfoEntity reviewEntity = new PmReviewInfoEntity();

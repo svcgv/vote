@@ -5,9 +5,7 @@
 .layui-form-label{width:80px!important;}
 </style>
 <div class="tender-info-wrapper">
-	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-	  <legend>投标管理</legend>
-	</fieldset>
+
 	<form class="layui-form" id="tender-index-form" method="POST" action="">
 	   <div class="layui-form-item" style="margin-bottom:0px;">
 		  	<div class="layui-inline" style="margin-right:40px;">
@@ -230,7 +228,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
             {field:'predictAmount', title:'预估合同金额（元）', width:150},
             {field:'predictCost', title:'预估成本（元）', width:120},
             {field:'predictProfit', title:'预估利润（元）', width:120},
-            {field:'predictWorkLoad', title:'预估工作量（元）', width:120},
+            {field:'predictWorkLoad', title:'预估工作量（人/月）', width:120},
             
             {field:'predictProfitRate', title:'预估利润率（%）'},
             {field:'taxRate', title:'税率（%）'},

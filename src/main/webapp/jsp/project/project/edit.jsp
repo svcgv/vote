@@ -235,7 +235,7 @@
 		    </div>
 		     
 		    <div class="layui-inline" style="margin-right:64px;">
-		      <label class="layui-form-label">预估工作量(人月)：</label>
+		      <label class="layui-form-label">预估工作量(人/月)：</label>
 		       <div class="layui-input-inline">
 		         <input type="number" name="predictWorkload"  autocomplete="off" class="layui-input form-control">
 		      </div>

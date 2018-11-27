@@ -173,7 +173,7 @@ public class PmConfirmBidController {
         long id = pmConfirmBid.getBidId();
         //插入投标审批记录
         PmReviewInfoEntity reviewEntity = new PmReviewInfoEntity();
-        if(!(StringUtils.hasLength(pmConfirmBid.getTechnicalDirectorName())&&StringUtils.hasLength(pmConfirmBid.getConstructionDeptManagerName())&& StringUtils.hasLength(pmConfirmBid.getSellDeptManagerName()))) {
+        if(!(StringUtils.hasLength(pmConfirmBid.getConstructionDeptManagerName())&& StringUtils.hasLength(pmConfirmBid.getSellDeptManagerName()))) {
         	return R.error("请选择评审人");
         }
        

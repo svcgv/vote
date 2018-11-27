@@ -27,6 +27,15 @@
 		      </div>
 		    </div>
 		    
+		     <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">项目类型：</label>
+		       <div class="layui-input-inline">
+		          <select  style="width: 200px; background-color: #EEEEEE;" disabled="disabled" name="projectType" lay-verify="required" lay-filter="" class="form-control">
+		         		${projectType.ewTypeHtml}
+		          </select>
+		      </div>
+		    </div>
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">首次报价（元）：</label>
 		       <div class="layui-input-inline">
@@ -102,12 +111,12 @@
 		           <label name="custManagerName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
-		    <!-- <div class="layui-inline">
+		   <!--  <div class="layui-inline">
 		      <label class="layui-form-label">技术总监：</label>
 		       <div class="layui-input-inline">
 		           <label name="technicalDirectorName"  class="layui-form-label"></label>
 		      </div>
-		    </div> -->
+		    </div>--> 
 		    <div class="layui-inline">
 		      <label class="layui-form-label">付款点：</label>
 		       <div class="layui-input-inline">
@@ -218,9 +227,9 @@
 		<div class='tender-review-wrapper'>
 		 <form class="layui-form" action="" lay-filter="form-detail"> 
 		 <div class="layui-inline">
-	      <label class="layui-form-label" >评审理由：</label>
+	      <label class="layui-form-label" >评审意见：</label>
 	       <div class="layui-input-inline">
-	        	<textarea name="commentDetail" placeholder="请输入评审理由" class="layui-textarea"></textarea>
+	        	<textarea name="commentDetail" placeholder="请输入评审意见" class="layui-textarea"></textarea>
 	      </div>
 	    </div>
 		  
@@ -249,8 +258,8 @@
 	  </div>
 	</form></div>
 	<div class="layui-layer-btn layui-layer-btn-c">
-		<a class="layui-layer-btn1" id="tender-accessReview">通过</a>
-		<a class="layui-layer-btn1" id="tender_returnReview">退回</a>
+		<a class="layui-layer-btn1" id="tender-accessReview">同意</a>
+		<a class="layui-layer-btn1" id="tender_returnReview">不同意</a>
     	<a class="layui-layer-btn1" id="customerGroup-close-hook">关闭</a>
     </div>
 </div>

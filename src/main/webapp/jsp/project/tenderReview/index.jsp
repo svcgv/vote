@@ -5,9 +5,7 @@
 .tender-info-wrapper .layui-form-label{width:130px!important;}
 </style>
 <div class="tender-info-wrapper">
-	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-	  <legend>投标评审管理</legend>
-	</fieldset>
+
 	<form class="layui-form" id="tender-index-form" method="POST" action="">
 	   <div class="layui-form-item">
 	   
@@ -97,13 +95,6 @@
 	<table class="layui-hide" id="productTable" lay-filter="custom"></table>
 	
  </div>
-<script type="text/html" id="toolbarDemo">
-  <div class="layui-btn-container"></div>
-</script>
- 
-<script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs layui-btn-xs" power ="112401"  lay-event="view">评审</a>
-</script>
 
 <script type="text/javascript">
 
@@ -181,7 +172,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    },
 	    toolbar: '#toolbarDemo',
 	    height:'full-250',
-	    title: '投标数据表',
+	    title: '投标查看数据表',
 	    cols: cols,
 	    cellMinWidth:'90',
 	    
@@ -191,20 +182,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    }
 	  });
 
-	/*
-	*监听每行编辑删除事件
-	*/
-	  table.on('tool(custom)', function(obj){
-	    var data = obj.data;
-	   
-	    if(obj.event === "view"){
-	    	// 查看
-	    	showFromTable('view',data.bidId);
-	    }else if(obj.event == "tenderReview"){
-	    	// 评审
-	    	showFromTable('review',data.bidId);
-	    }
-	  });
 	/*
 	* 查询按钮
 	*/
@@ -233,7 +210,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 			  	    //url:'custom.json',
 			  	    toolbar: '#toolbarDemo',
 			  	    height:'full-250',
-			  	    title: '投标据表',
+			  	    title: '投标查看数据表',
 			  	    cols: cols,
 			  	    cellMinWidth:'100',
 			  	    data:testData,
@@ -244,27 +221,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 		
 	}); 
 	
-	
-	/*
-	* 查看和修改 form 表单
-	*/
-	function showFromTable(isEdit,id){
-		var _width=800;
-	  if(isEdit == "view"){
-			var url='view?act=view&id='+id;
-	    	var	title="查看投标信息";
-		}else if(isEdit == "review"){
-			var url='review?act=review&id='+id;
-	    	var	title="投标评审";
-	    	_width=600;
-		}
-		$.openWindow({
-	  		url:url,
-	  		title:title,
-	  		width:_width
-	  	})
-		
-	}
 	
 });
 var testData=[];
@@ -304,8 +260,7 @@ var cols=[[
 	      {field:'constructionDeptName', title:'交付部门'},
 	      {field:'sellDeptName', title:'销售部门'},
 	      {field:'projectManagerName', title:'项目经理'},
-	      {field:'custManagerName', title:'客户经理'},
-	      {fixed: 'right', title:'操作', toolbar: '#barDemo', width:130}
+	      {field:'custManagerName', title:'客户经理'}
 ]]
 </script>
 </body>

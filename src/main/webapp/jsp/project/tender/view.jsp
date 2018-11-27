@@ -33,6 +33,15 @@
 		      </div>
 		    </div>
 		    
+		      <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">项目类型：</label>
+		       <div class="layui-input-inline">
+		          <select  style="width: 200px; background-color: #EEEEEE;" disabled="disabled" name="projectType" lay-verify="required" lay-filter="" class="form-control">
+		         		${projectType.ewTypeHtml}
+		          </select>
+		      </div>
+		    </div>
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">首次报价（元）：</label>
 		       <div class="layui-input-inline">
@@ -61,7 +70,7 @@
 		    
 		    
 		     <div class="layui-inline">
-		      <label class="layui-form-label">预估工作量：</label>
+		      <label class="layui-form-label">预估工作量（人/月）：</label>
 		      <div class="layui-input-inline">
 		     	 <label name="predictWorkLoad"  class="layui-form-label"></label>
 		      </div>
@@ -124,12 +133,12 @@
 		           <label name="custManagerName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
-		    <div class="layui-inline">
+		    <!-- <div class="layui-inline">
 		      <label class="layui-form-label">技术总监：</label>
 		       <div class="layui-input-inline">
 		           <label name="technicalDirectorName"  class="layui-form-label"></label>
 		      </div>
-		    </div>
+		    </div>-->
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">项目经理：</label>

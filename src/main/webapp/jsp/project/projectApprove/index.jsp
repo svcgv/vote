@@ -5,9 +5,6 @@
 .projectApprove-info-wrapper .layui-form-label{width:100px!important;}
 </style>
 <div class="projectApprove-info-wrapper">
-	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-	  <legend>立项审批</legend>
-	</fieldset>
 	<form class="layui-form" id="projectApprove-index-form" method="POST" action="">
 	   <div class="layui-form-item" style="margin-bottom:0px;">
 	   		<div class="layui-inline" style="padding-right:55px;">
@@ -154,15 +151,8 @@
 		   </div>
 	   </div>
 	</form>
-	<table class="layui-hide" id="productTable" lay-filter="custom"></table>
+	<table class="layui-hide" id="productTable" lay-filter=""></table>
  </div>
-<script type="text/html" id="toolbarDemo">
-  <div class="layui-btn-container"></div>
-</script>
- 
-<script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-xs layui-btn-xs" lay-event="review">评审</a>
-</script>
 
 <script type="text/javascript">
 var testData=[];
@@ -174,9 +164,7 @@ var cols=[
  	      {align: 'center',field: 'lastYearRevenue', title: '历年收入', rowspan: 2},
  	      {align: 'center',field: 'signContractDate', title: '合同签订日期', rowspan: 2},
  	      {align: 'center',field: 'isSignedContract', title: '是否签订', rowspan: 2},
- 	      {align: 'center',field: 'workLoadConfirm', title: '工作量确认', rowspan: 2},
-
- 	     {align: 'center',fixed: 'right', title:'操作', toolbar: '#barDemo', width:230}
+ 	      {align: 'center',field: 'workLoadConfirm', title: '工作量确认', rowspan: 2}
   		],
  	    [
  	    	  {type: 'checkbox', fixed: 'left'},
@@ -237,7 +225,7 @@ var cols=[
  	    	  
  	    	  {field:'predictProfitRate', title:'预估利润率'},
  	    	  {field:'predictProfitMount', title:'预估利润'},
- 	    	  {field:'predictWorkload', title:'预估工作量'},
+ 	    	  {field:'predictWorkload', title:'预估工作量（人/月）'},
  	    	  {field:'yearSalary', title:'预估当年收入'},
  	    	 {field:'allIncomming', title:'收入合计'}
  	    ]
@@ -384,27 +372,14 @@ layui.use(['layer', 'form','laydate','table'], function(){
 	    response: {
 	    	dataName: 'page'
 	    },
-	    toolbar: '#toolbarDemo',
 	    height:'full-250',
-	    title: '立项审批数据表',
+	    title: '项目查看数据表',
 	    cols: cols,
 		   cellMinWidth:'120',
 		   data:testData,
 	    page: true
 	  });
 
-	/*
-	*监听每行编辑删除事件
-	*/
-	  table.on('tool(custom)', function(obj){
-	    var data = obj.data;
-	    if(obj.event == "review"){
-	    	// 评审
-	    	showFromTable('review',data.projectId);
-	    }else if(obj.event == "view"){
-	    	showFromTable('view',data.projectId);
-	    }
-	  });
 	/*
 	* 查询按钮
 	*/
@@ -423,9 +398,8 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			      table.render({
 			  	  	id:"customer-table",
 			  	    elem: '#productTable',
-			  	    toolbar: '#toolbarDemo',
 			  	    height:'full-250',
-			  	    title: '立项审批数据表',
+			  	    title: '项目查看数据表',
 			  	    cols: cols,
 			  	    cellMinWidth:'100',
 			  	    data:testData,
@@ -433,30 +407,7 @@ layui.use(['layer', 'form','laydate','table'], function(){
 			  	  	});},
 			  dataType: "json"
 			});
-		
 	}); 
-	
-	
-	/*
-	* 查看和修改 form 表单
-	*/
-	function showFromTable(isEdit,id){
-		var _width='90%';
-	   if(isEdit == "review"){
-			var url='review?act=review&id='+id;
-	    	var	title="立项评审";
-		}else if(isEdit == "view"){
-			var url='view?act=view&id='+id;
-	    	var	title="查看";
-		}
-		$.openWindow({
-	  		url:url,
-	  		title:title,
-	  		width:_width
-	  	})
-		
-	}
-	
 });
 </script>
 </body>

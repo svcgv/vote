@@ -740,7 +740,6 @@ $(function(){
 	  	    data:reviewHis,
 	  	    page: false
 	  	  	})
-	   
 	  	  	
 	  	  	var win=$(".tender-review-wrapper").getWindow();
 			$(".projectApprove-review-wrapper").on("click","#tender-accessReview",function(){
@@ -752,13 +751,13 @@ $(function(){
 				  }
 				submit('00')
 			})
+			
 			$(".projectApprove-review-wrapper").on("click","#tender_returnReview",function(){
 				submit('01')
 			})
 			
 			
 			function submit(result){
-		
 				var formDatas=$(".tender-review-wrapper form").serializeObject();
 				formDatas.result=result
 				$.ajax({
@@ -779,14 +778,11 @@ $(function(){
 				})
 			}
 			
-			
 			// 关闭
 			$("#project-view-hook #customerGroup-close-hook").click(function(){
 				$(this).getWindow().close();
 				return false;
 			})
 	})
-	
 });
-
 </script>

@@ -20,6 +20,7 @@
 <div id="tender-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item" >
+		  
 		    <div class="layui-inline" style='margin-right:225px'>
 		      <label class="layui-form-label">项目名称：</label>
 		       <div class="layui-input-inline">
@@ -27,6 +28,15 @@
 		         <input type="text" style='display:none' name="bidId" autocomplete="off" value="1" class="layui-input form-control">
 		      </div>
 		      <span class="f-placeholder"></span>
+		    </div>
+		    
+		       <div class="layui-inline" style="margin-right:64px;">
+		       <label class="layui-form-label">项目类型：</label>
+		       <div class="layui-input-inline">
+		          <select name="projectType" lay-verify="required"  class="form-control">
+		        	    ${projectType.ewTypeHtml}
+		          </select>
+		      </div>
 		    </div>
 		    
 		    <div class="layui-inline">
@@ -62,18 +72,21 @@
 		      </div>
 		      <span class="f-placeholder"></span>
 		    </div>
+		    
 		    <div class="layui-inline">
-		      <label class="layui-form-label">预估工作量：</label>
+		      <label class="layui-form-label">预估工作量（人/月）：</label>
 		      <div class="layui-input-inline">
 		       <input type="number" name="predictWorkLoad"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
+		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">预估利润（元）：</label>
 		      <div class="layui-input-inline">
 		       <input type="number" name="predictProfit"  autocomplete="off" class="layui-input form-control">
 		      </div>
 		    </div>
+		    
 		     <div class="layui-inline">
 		      <label class="layui-form-label">预估利润率（%）：</label>
 		       <div class="layui-input-inline">
@@ -106,6 +119,7 @@
 		      </div>
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="payOrgQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
+		    
 		    <div  class="layui-inline">
 		   		 <label class="layui-form-label">交付部门负责人：</label>
 			       <div class="layui-input-inline">
@@ -132,6 +146,7 @@
 		      </div>
 		      <span class="f-placeholder"></span>
 		     </div> 
+		     
 		     <div  class="layui-inline">
 		    <label class="layui-form-label">项目经理：</label>
 		       <div class="layui-input-inline">
@@ -150,19 +165,19 @@
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 		    
-		    <div class="layui-inline">
+		   <!-- <div class="layui-inline">
 		      <label class="layui-form-label">技术总监：</label>
 		       <div class="layui-input-inline">
 		          <input type="text" name="technicalDirectorName" readonly="readonly" autocomplete="off" class="layui-input form-control disabledColor">
 		          <input type="text" style='display:none' name="technicalDirectorId">
 		      </div>
 		      	 <button type="button"  class="layui-btn layui-btn-sm" id="techQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
-		    </div>
+		    </div> --> 
 		    
 		     <div class="layui-inline">
 			      <label class="layui-form-label">付款点：</label>
 			       <div class="layui-input-inline" style="width:230px;">
-					   <textarea name="paymentPoint" rows="2"  placeholder="3/3/3/1,月/季/年" class="layui-textarea form-control"></textarea>
+					   <textarea name="paymentPoint" rows="2"  placeholder="示例:3/3/3/1 首款 XX年XX月,第2次XX年XX月,第3次.... 季付 每季结束 半年付 每半年结......" class="layui-textarea form-control"></textarea>
 			      </div>
 		    </div>
 		     <div class="layui-inline">
@@ -195,7 +210,6 @@
 				      	<tr class="edit-wosUploaded">
 					      	<td>${fileInfo.fileUploadName}</td>
 					      	<td>${fileInfo.fileSize}</td>
-					      	<td>已上传</td>
 					      	
 					      	<td>
 					      		<c:if test="${fileInfo.fileBusinessType=='00' }">
@@ -208,6 +222,7 @@
 									内部评审文件
 								</c:if>
 							</td>
+							<td>已上传</td>
 							<td><a href='/vote/pmfile/download?id=${app.fileId}'>下载</a></td>
 				      	</tr>
 				      	</c:forEach>
@@ -215,11 +230,7 @@
 				    </table>
 				  </div>
 			   </div> 
-		  </div>
-	       
-		     
-		     
-		  </div>
+		 </div> 
 	</form>
 	<div class="layui-layer-btn layui-layer-btn-c">
     	<a class="layui-layer-btn0" id="customGroup-add-hook" style="background:#009688;border-color:#009688;">保存</a>
@@ -334,7 +345,7 @@ $(function(){
               ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
               ,'<td>'
               ,' <div class="layui-input-inline">'
-             	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+             	 ,'<select name="fileBusinessType" lay-verify="required" lay-filter="" class="form-control">'
   	          ,'<option value="">请选择</option>'
   	        	,'<option value="00" selected>招标文件</option>'
   	        	,'<option value="01">客户需求文件</option>'

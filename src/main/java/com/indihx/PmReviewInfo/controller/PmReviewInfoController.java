@@ -2,20 +2,15 @@ package com.indihx.PmReviewInfo.controller;
 
 
 import java.util.Map;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 
 import com.indihx.system.entity.UsrInfo;
 import com.indihx.util.BeanUtils;
@@ -28,13 +23,8 @@ import com.indihx.PmProjectInfo.entity.PmProjectInfoEntity;
 import com.indihx.PmProjectInfo.service.PmProjectInfoService;
 import com.indihx.PmReviewInfo.entity.PmReviewInfoEntity;
 import com.indihx.PmReviewInfo.service.PmReviewInfoService;
-import com.indihx.baseTableUtil.entity.QueryUsrInfoEntity;
-import com.indihx.baseTableUtil.service.QueryUsrInfoService;
-import com.indihx.baseTableUtil.service.impl.QueryOrgInfoServiceImpl;
 import com.indihx.comm.util.R;
 import com.indihx.comm.util.DateUtil;
-import com.indihx.comm.util.PageUtils;
-import com.indihx.comm.InitSysConstants;
 
 /**
  * 
@@ -51,10 +41,7 @@ public class PmReviewInfoController {
     private PmConfirmBidService pmConfirmBidService;
     @Autowired
     private PmProjectInfoService pmProjectInfoService;
-    @Autowired
-    private QueryUsrInfoService usrInfoService;
-    @Autowired
-    private QueryOrgInfoServiceImpl queryOrgInfoServiceImpl;
+
     /**
      * 列表
      */
@@ -189,10 +176,7 @@ public class PmReviewInfoController {
     				 reviewEntity.setReviewUserCode(pmConfirmBid.getSellDeptManagerId());
     				 reviewEntity.setReviewUserName(pmConfirmBid.getSellDeptManagerName());
     			 }
-    			 else {
-    				 reviewEntity.setReviewUserCode(pmConfirmBid.getTechnicalDirectorId());
-    				 reviewEntity.setReviewUserName(pmConfirmBid.getTechnicalDirectorName());
-    			 }
+    			
     			 pmReviewInfoService.insert(reviewEntity);
     		 }
     		 else {
@@ -204,7 +188,7 @@ public class PmReviewInfoController {
     	 
     	 if("01".equals(pmReviewInfo.getReviewType())) {
     		 PmProjectInfoEntity pmProjectInfoEntity = pmProjectInfoService.queryObject(base.getForeignId());
-    		 String approveStatus = ReviewUtils.getProjectNextState(pmProjectInfoEntity.getApproveStatus(),pmReviewInfo.getResult(),pmProjectInfoEntity);
+    		 String approveStatus = ReviewUtils.getNextState(pmProjectInfoEntity.getApproveStatus(),pmReviewInfo.getResult());
     		 pmProjectInfoEntity.setApproveStatus(approveStatus);
     		 pmProjectInfoService.update(pmProjectInfoEntity);
     		 
@@ -212,29 +196,6 @@ public class PmReviewInfoController {
     			 if("02".equals(approveStatus)) {
     				 reviewEntity.setReviewUserCode(pmProjectInfoEntity.getSellManagerId());
     				 reviewEntity.setReviewUserName(pmProjectInfoEntity.getSellManagerName());
-    			 }
-    			 
-    			 
-    			 if("03".equals(approveStatus)) {
-    				BigDecimal bd =  new BigDecimal(1000);
-    			    List<Map<String,Object>> children = queryOrgInfoServiceImpl.queryAllChildrenOrgList(bd);
-    			    List<BigDecimal> list = new ArrayList<BigDecimal>();
-    			    list.add(bd);
-    			    if(children!=null && !children.isEmpty()) {
-    			    	for(int i = 0;i<children.size();i++) {
-    			    		Map<String,Object> map = children.get(i);
-    			    		list.add(new BigDecimal( Integer.parseInt(map.get("orgId").toString())));
-    			    	}
-    			    }
-    				 
-    				 Map<String,Object> queryParam = new HashMap<String,Object>();
-    			     queryParam.put("orgList", list);
-    				 queryParam.put("roleCode", "MAIN_MANAGER");
-    				 List<QueryUsrInfoEntity> list1= usrInfoService.queryUserByRoleCodeUnderOrgNo(queryParam);
-    				 if(list1.size()>0) {
-    					 reviewEntity.setReviewUserCode(list1.get(0).getUsrId());
-        				 reviewEntity.setReviewUserName(list1.get(0).getUsrName());
-    				 }
     			 }
     			 
     			 pmReviewInfoService.insert(reviewEntity);
