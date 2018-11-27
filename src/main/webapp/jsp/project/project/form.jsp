@@ -542,7 +542,7 @@ $(function(){
 	          ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
 	          ,'<td>'
 	          ,' <div class="layui-input-inline">'
-	         	 ,'<select name="projectType" lay-verify="required" lay-filter="" class="form-control">'
+	         	 ,'<select name="fileBusinessType" lay-verify="required" lay-filter="" class="form-control">'
 		          ,'<option value="">请选择</option>'
 		        	,'<option value="00" selected>招标文件</option>'
 		        	,'<option value="01">客户需求文件</option>'
