@@ -12,6 +12,8 @@ public class UserInfoVo extends BaseVo {
 	private String mblNo;   //手机号码
 	private String usrId;  //用户ID
 	private String userId;  //删除存储用户ID
+	private String loginName;  //登录名
+	private String oldLoginName;  //登录名
 	private String passWord;  //密码
 	private String usrNo;   //用户编号
 	private String email;    //邮箱
@@ -227,6 +229,22 @@ public class UserInfoVo extends BaseVo {
 	}
 	public void setMblNo(String mblNo) {
 		this.mblNo = mblNo;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	public String getOldLoginName() {
+		return oldLoginName;
+	}
+
+	public void setOldLoginName(String oldLoginName) {
+		this.oldLoginName = oldLoginName;
 	}
 	
 	

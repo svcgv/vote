@@ -1,6 +1,7 @@
 package com.indihx.system.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
@@ -16,6 +17,8 @@ public interface UsrInfoMapper {
     int insert(UsrInfo record);
 
     int insertSelective(UsrInfo record);
+    //查询该登录名的用户，验证登录名是否已存在
+    UsrInfo qryUsrInfoByLoginName(Map<String, Object> map); 
 
     UsrInfo selectByPrimaryKey(Long usrId);
 

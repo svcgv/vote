@@ -118,6 +118,8 @@ public class UsrInfoServiceImpl  extends AbstractBaseService implements IUsrInfo
 		
 		final OrgInfoVo info = orgInfoService.qryOrginfoList(infoVo.getOrgNo());
 		
+		
+		
 		UsrInfo usrInfo = new UsrInfo();
 		EntityVoConverter.Convert(infoVo, usrInfo);
 		String usrId = mapper.getUserId();
@@ -607,5 +609,17 @@ public class UsrInfoServiceImpl  extends AbstractBaseService implements IUsrInfo
 			} catch (Exception e) {
 				throw new BusinessException("清理用户session失败："+ExceptionUtil.getErrorMsg(e));
 			}
+		}
+		@Override
+		public UsrInfo checkUsrInfo(UserInfoVo infovo) {
+			
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("loginName", infovo.getLoginName());
+			param.put("oldLoginName", infovo.getOldLoginName());
+			final UsrInfo loginUsrInfo = infoMapper.qryUsrInfoByLoginName(param);
+			
+			
+			
+			return loginUsrInfo;
 		}	
 }
