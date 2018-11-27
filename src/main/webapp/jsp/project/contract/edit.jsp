@@ -29,14 +29,21 @@
 <div id="contract-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item" style="margin-bottom:0px;">
-		    <div class="layui-inline">
-		      <label class="layui-form-label">合同编号：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="contractCode"  autocomplete="off" class="layui-input form-control">
-				   <input type="text" style='display:none' id="contractId" name="contractId" autocomplete="off"  class="layui-input form-control">
-		      </div>
-		       <span class="f-placeholder"></span>
-		    </div>
+		    <%--<div class="layui-inline">--%>
+		      <%--<label class="layui-form-label">合同编号：</label>--%>
+		       <%--<div class="layui-input-inline">--%>
+		         <%--<input type="text" name="contractCode"  autocomplete="off" class="layui-input form-control">--%>
+		      <%--</div>--%>
+		       <%--<span class="f-placeholder"></span>--%>
+		    <%--</div>--%>
+			  <div class="layui-inline" >
+				  <label class="layui-form-label">OA流程编号：</label>
+				  <div class="layui-input-inline">
+					  <input type="text" name="oaFlowCode"  autocomplete="off" class="layui-input form-control">
+					  <input type="text" style='display:none' id="contractId" name="contractId" autocomplete="off"  class="layui-input form-control">
+				  </div>
+				  <span class="f-placeholder"></span>
+			  </div>
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">合同名称：</label>
@@ -108,13 +115,7 @@
 		      </div>
 	      	  <button type="button"  class="layui-btn layui-btn-sm" id="customerQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
-		    <div class="layui-inline" >
-		       <label class="layui-form-label">OA流程编号：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="oaFlowCode"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		      <span class="f-placeholder"></span>
-		    </div>
+
 		    <div class="layui-inline" style="">
 		      <label class="layui-form-label">公司代码：</label>
 		       <div class="layui-input-inline">

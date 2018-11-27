@@ -69,14 +69,14 @@
 	    
 	    <div class="layui-form-item" style="margin-bottom:0px;">
 		    <div class="layui-inline">
-		      <label class="layui-form-label">收入上报(开始月份)：</label>
+		      <label class="layui-form-label">收入上报月份(开始)：</label>
 		       <div class="layui-input-inline">
 		         <input type="text" name="collectionStartDate" id="collectionStartDate-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
 		      </div>
 		      <span class="f-placeholder"></span>
 		    </div>
 			<div class="layui-inline">
-				<label class="layui-form-label">收入上报(结束月份)：</label>
+				<label class="layui-form-label">收入上报月份(结束)：</label>
 				<div class="layui-input-inline">
 					<input type="text" name="collectionEndDate" id="collectionEndDate-hook"  autocomplete="off" class="layui-input form-control hasDatepicker">
 				</div>

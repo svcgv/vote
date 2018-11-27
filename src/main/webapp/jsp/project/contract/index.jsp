@@ -200,7 +200,7 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
 	    title: '合同数据表',
 	    cols: [[
 	    	{type: 'checkbox', fixed: 'left'},
-	  	    {field:'contractCode', title:'合同编号',fixed: 'left', sort: true, width:130},
+	  	    {field:'oaFlowCode', title:'OA流程编号',fixed: 'left', sort: true, width:130},
             {field:'contractName', title: '合同名称', width: 200},
             {field:'contractAmount', title:'合同金额', width:130},
             {field:'yearNumer', title:'年份', width:120},
@@ -212,7 +212,6 @@ layui.use(['layer', 'form','laydate','table','upload'], function(){
             {field:'isAgree', title:'是否科委认定', width:150},
             {field:'sellDeptName', title:'销售部门'},
             {field:'custManagerName', title:'客户经理'},
-            {field:'oaFlowCode', title:'OA流程编号'},
             {field:'companyCode', title:'公司代码'},
             {field:'custSapCode', title:'客户SAP编号'},
             {field:'custName', title:'客户名称'},

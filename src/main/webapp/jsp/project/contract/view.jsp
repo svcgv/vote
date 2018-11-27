@@ -23,12 +23,12 @@
 <div id="contract-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item" style="margin-bottom:0px;">
-		    <div class="layui-inline">
-		      <label class="layui-form-label">合同编号：</label>
-		       <div class="layui-input-inline">
-				   <label name="contractCode"  class="layui-form-label"></label>
-		      </div>
-		    </div>
+			  <div class="layui-inline" style="margin-right: 0px;">
+				  <label class="layui-form-label" style="width:110px!important;">OA流程编号：</label>
+				  <div class="layui-input-inline">
+					  <label name="oaFlowCode"  class="layui-form-label"></label>
+				  </div>
+			  </div>
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">合同名称：</label>
@@ -88,12 +88,7 @@
 				   <label name="custName"  class="layui-form-label"></label>
 		      </div>
 		    </div>
-		    <div class="layui-inline" style="margin-right: 0px;">
-		      <label class="layui-form-label" style="width:110px!important;">OA流程编号：</label>
-		       <div class="layui-input-inline">
-				   <label name="oaFlowCode"  class="layui-form-label"></label>
-		      </div>
-		    </div>
+
 		    <div class="layui-inline" style="">
 		      <label class="layui-form-label" style="width:80px!important;">公司代码：</label>
 		       <div class="layui-input-inline">
