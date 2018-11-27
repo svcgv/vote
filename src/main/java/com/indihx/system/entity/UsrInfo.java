@@ -15,6 +15,7 @@ public class UsrInfo implements Serializable{
 	private Long usrId;  //用户ID
     private String usrNo;//用户代码
     private String usrName;//用户姓名
+    private String loginName;//登录名
     private String passWord;//登录密码
     private String sex;//性别
     private String birthDate;//出生年月
@@ -274,5 +275,13 @@ public class UsrInfo implements Serializable{
 	 */
 	public void setCommitteeBaseId(String committeeBaseId) {
 		this.committeeBaseId = committeeBaseId;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 }

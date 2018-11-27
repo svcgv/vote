@@ -38,9 +38,11 @@
 </div>
 
 <script type="text/javascript">
+    var orgNo="${orgId}";
 $(function(){
 	function getParam(){
 		var queryParams=$("#user-query-form").serializeObject();
+        queryParams=$.extend({},true,queryParams,{orgNo:orgNo});
 		 var newParam = {}
 		  for(var i in queryParams){
 			  if(queryParams[i]){

@@ -55,9 +55,11 @@ public class PmContractInfoServiceImpl implements PmContractInfoService {
    	   		for (PmPaymentPointEntity paymentPointEntity :paymentPointEntityList){
    				paymentPointEntity.setPaymentForeignId(entity.getContractId());
    				paymentPointEntity.setPaymentType("00");
-				BigDecimal bigNumber100 = BigDecimal.valueOf(100);
-				BigDecimal taxRate = paymentPointEntity.getPaymentAmount().divide(entity.getContractAmount(),3, RoundingMode.FLOOR).multiply(bigNumber100);
-				paymentPointEntity.setPaymentRate(taxRate);
+				if(paymentPointEntity.getPaymentAmount()!=null){
+					BigDecimal bigNumber100 = BigDecimal.valueOf(100);
+					BigDecimal taxRate = paymentPointEntity.getPaymentAmount().divide(entity.getContractAmount(),3, RoundingMode.FLOOR).multiply(bigNumber100);
+					paymentPointEntity.setPaymentRate(taxRate);
+				}
    				pmPaymentPointMapper.insert(paymentPointEntity);
    			}
    		}
@@ -83,9 +85,11 @@ public class PmContractInfoServiceImpl implements PmContractInfoService {
 			for (PmPaymentPointEntity paymentPointEntity :paymentPointEntityList){
 				paymentPointEntity.setPaymentForeignId(entity.getContractId());
 				paymentPointEntity.setPaymentType("00");
-				BigDecimal bigNumber100 = BigDecimal.valueOf(100);
-				BigDecimal taxRate = paymentPointEntity.getPaymentAmount().divide(entity.getContractAmount(),3, RoundingMode.FLOOR).multiply(bigNumber100);
-				paymentPointEntity.setPaymentRate(taxRate);
+				if(paymentPointEntity.getPaymentAmount()!=null){
+					BigDecimal bigNumber100 = BigDecimal.valueOf(100);
+					BigDecimal taxRate = paymentPointEntity.getPaymentAmount().divide(entity.getContractAmount(),3, RoundingMode.FLOOR).multiply(bigNumber100);
+					paymentPointEntity.setPaymentRate(taxRate);
+				}
 				pmPaymentPointMapper.insert(paymentPointEntity);
 			}
 		}

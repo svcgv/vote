@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="cm" uri="http://www.custom.com/01"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<script src="${ctx }/common/queryCode?projectType=PROJECT_TYPE" type="text/javascript"></script>
 <style>
 .formDetail-wrapper .customer-list{
 	word-wrap:normal;
@@ -29,14 +31,21 @@
 <div id="contract-addForm-hook" class="formDetail-wrapper" style="margin-top:10px;">
 	<form class="layui-form" action="" lay-filter="form-detail">
 		  <div class="layui-form-item" style="margin-bottom:0px;">
-		    <div class="layui-inline">
-		      <label class="layui-form-label">合同编号：</label>
-		       <div class="layui-input-inline">
-		         <input type="text" name="contractCode"  autocomplete="off" class="layui-input form-control">
-				   <input type="text" style='display:none' id="contractId" name="contractId" autocomplete="off"  class="layui-input form-control">
-		      </div>
-		       <span class="f-placeholder"></span>
-		    </div>
+		    <%--<div class="layui-inline">--%>
+		      <%--<label class="layui-form-label">合同编号：</label>--%>
+		       <%--<div class="layui-input-inline">--%>
+		         <%--<input type="text" name="contractCode"  autocomplete="off" class="layui-input form-control">--%>
+		      <%--</div>--%>
+		       <%--<span class="f-placeholder"></span>--%>
+		    <%--</div>--%>
+			  <div class="layui-inline" >
+				  <label class="layui-form-label">OA流程编号：</label>
+				  <div class="layui-input-inline">
+					  <input type="text" name="oaFlowCode"  autocomplete="off" class="layui-input form-control">
+					  <input type="text" style='display:none' id="contractId" name="contractId" autocomplete="off"  class="layui-input form-control">
+				  </div>
+				  <span class="f-placeholder"></span>
+			  </div>
 		    
 		    <div class="layui-inline">
 		      <label class="layui-form-label">合同名称：</label>
@@ -108,13 +117,7 @@
 		      </div>
 	      	  <button type="button"  class="layui-btn layui-btn-sm" id="customerQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
-		    <div class="layui-inline" >
-		       <label class="layui-form-label">OA流程编号：</label>
-		       <div class="layui-input-inline">
-		          <input type="text" name="oaFlowCode"  autocomplete="off" class="layui-input form-control">
-		      </div>
-		      <span class="f-placeholder"></span>
-		    </div>
+
 		    <div class="layui-inline" style="">
 		      <label class="layui-form-label">公司代码：</label>
 		       <div class="layui-input-inline">
@@ -122,6 +125,21 @@
 		      </div>
 				<button type="button"  class="layui-btn layui-btn-sm" id="companyQuery-form" ><i class="layui-icon layui-icon-search"></i></button>
 		     </div>
+				<div class="layui-inline">
+					<label class="layui-form-label">项目名称：</label>
+					<div class="layui-input-inline">
+						<input type="text" name="projectName" readonly="readonly" autocomplete="off" class="layui-input form-control">
+						<input type="text" style='display:none' name="projectId">
+						<input type="text" style='display:none' name="wbs">
+					</div>
+					<button type="button"  class="layui-btn layui-btn-sm" id="projectQuery-hook" ><i class="layui-icon layui-icon-search"></i></button>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">项目类型：</label>
+					<div class="layui-input-inline">
+						<input type="text" name="projectType" readonly="readonly" autocomplete="off" class="layui-input form-control">
+					</div>
+				</div>
 		  </div>
 	     <div class="layui-form-item" style="margin-bottom:0px;">
 	     	<div class="layui-inline">
@@ -153,17 +171,6 @@
 				 </div>
 			 </div>
 	     </div>
-	     <div class="layui-form-item" style="margin-bottom:0px;margin-left:10px;">
-			<div style="float:left;width: 140px;">
-				<p class="layui-form-label">项目引用列表：</p>
-				<div>
-					<button type="button"  class="layui-btn " id="projectQuery-hook" style="margin-right:15px;"><i class="layui-icon"></i>项目引用</button>
-				</div>
-			</div>
-			<div style="float:left;width:900px;">
-				<table class="layui-hide" id="projectTable-chosed" lay-filter="tableFilter" style="overflow:hidden;"></table>
-			</div>
-	 	 </div>
         <div class="clearfix" style="margin-bottom:0px;;margin-left:10px;">
 	     	   <div style="float:left;width: 140px;">
 					<p class="layui-form-label">收款点信息：</p>
@@ -272,17 +279,12 @@
 	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script>
-    var chosedProject=[];
-    var contractId = '';
-    console.log(chosedProject);
-    var chosedLayTable=null;
 $(function(){
 	layui.use(['layer', 'form','laydate','table'], function(){
 		var layer = layui.layer ,
 	  	  form = layui.form,
 	  	  laydate=layui.laydate;
 
-        chosedLayTable=layui.table;
 		 //日期
 		  laydate.render({
 			    elem: "#contractStartTime-form",
@@ -311,59 +313,10 @@ $(function(){
             if(property=='remark'){
                 $("#contract-addForm-hook textarea[name='"+property+"']").val(pmContract[property]);
             }
-        }
-        contractId = $('#contractId')[0].value;
-        var param = {"contractId": contractId};
-        $.ajax({
-            type: 'POST',
-            url: '/vote/pmcontractprojectrelation/listProject',
-            data: JSON.stringify(param),
-            contentType: 'application/json',
-            success: function (res) {
-                chosedProject=res.page;
-                chosedLayTable.render({
-                    id:"table-chosedProject",
-                    elem: '#projectTable-chosed',
-                    height:'350',
-                    width:"700",
-                    title: '项目群数据信息',
-                    cols: [[
-                        {field:'wbs', title:'项目编号', templet:function(d){
-                            var jsonStr = JSON.stringify({"projectId":d.projectId,"wbs":d.wbs,"projectName":d.projectName});
-                            return '<div class="jsonData" dataStr='+jsonStr+'>'+d.wbs+'</div>'
-                        } },
-                        {field:'projectName', title:'项目名称'},
-                        {fixed: 'right', title:'操作', toolbar: '#barFormDemo', width:100}
-                    ]],
-                    cellMinWidth:'90',
-                    data:chosedProject,
-                    page: true
-                });
-            },
-            dataType: "json"
-        });
-
-        chosedLayTable.on('tool(tableFilter)', function(obj){
-            var data = obj.data;
-            if(obj.event === 'del'){
-                layer.confirm('确认删除行么', function(index){
-                    obj.del();
-                    console.log(data,chosedProject)
-                    // 删除
-                    for(var k in chosedProject){
-                        if(data.projectId == chosedProject[k].projectId ){
-                            chosedProject.splice(k,1)
-                        }
-                    }
-                    console.log(chosedProject,'exit');
-                    chosedLayTable.reload('table-chosedProject',{
-                        data:chosedProject
-                    })
-                    layer.close(index);
-
-                });
+            if(property=='projectType'){
+                $("#contract-addForm-hook input[name='"+property+"']").val(getCodeValue(pmContract[property],projectType));
             }
-        });
+        }
 		// 新增付款点
         $("#contract-addForm-hook #addPayList-form").click(function(){
         	var tmpl=$(".palyListTable .listTmpl").clone(true);
@@ -448,10 +401,10 @@ $(function(){
                 queryParams=$.extend({},true,queryParams,{paymentPoint:rets});
             }
             var projects=[];
-            for(var i=0;i<chosedProject.length;i++ ){
-                projects.push(chosedProject[i].projectId)
+            if(queryParams.projectId){
+                projects.push(queryParams.projectId);
+                queryParams=$.extend({},true,queryParams,{projectIds:projects});
             }
-            queryParams=$.extend({},true,queryParams,{projectIds:projects});
             var newParam = {}
             for(var i in queryParams){
                 if(queryParams[i]){

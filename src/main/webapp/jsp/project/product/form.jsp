@@ -67,6 +67,7 @@
 		          <input type="text" name="developmentManagerName" readonly="readonly" autocomplete="off" class="layui-input form-control">
 		          <input type="text" style='display:none' name="developmentManagerId">
 		      </div>
+				 <button type="button"  class="layui-btn layui-btn-sm" id="userQuery-hook"><i class="layui-icon layui-icon-search"></i></button>
 		    </div>
 			  <div class="layui-inline">
 	       		 <label class="layui-form-label" >备注：</label>
@@ -179,8 +180,13 @@ $(function(){
   
   // 选择人员
   $("#product-addForm-hook #userQuery-hook").off("click").on("click",function(){
+      var developmentDeptId=$("#product-addForm-hook input[name='developmentDeptId']").val();
+      if($.trim(developmentDeptId) ==''){
+          layer.msg("请输入请选择研发部门");
+          return false;
+      }
 	  	$.openWindow({
-	  		url:'user?act=add',
+	  		url:'user?act=add&orgId='+developmentDeptId,
 	  		title:"选择研发人员",
 	  		width:"700"
 	 	 });

@@ -124,6 +124,20 @@ private String remark;
 	 */
 
 private String isDelete;
+
+	/**
+	 * 1对1用的临时变量
+	 */
+	private String wbs;
+
+	/**
+	 * 1对1用的临时变量
+	 */
+	private String projectName;
+	/**
+	 * 1对1用的临时变量
+	 */
+	private String projectType;
 	/**
 	 * $column.comments
 	 */
@@ -321,5 +335,29 @@ private String isDelete;
 
 	public void setProjectIds(List<Long> projectIds) {
 		this.projectIds = projectIds;
+	}
+
+	public String getWbs() {
+		return wbs;
+	}
+
+	public void setWbs(String wbs) {
+		this.wbs = wbs;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getProjectType() {
+		return projectType;
+	}
+
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
 	}
 }

@@ -71,7 +71,11 @@ public class PmCustomerInfoServiceImpl implements PmCustomerInfoService {
 			RelationEntity.setCustGroupId(entity.getCustGroupId());
 			RelationEntity.setCustCnName(entity.getCustCnName());
 			RelationEntity.setCustId(entity.getCustId());
-			pmCustomerGroupRelationMapper.updateByCustId(RelationEntity);
+			if(pmCustomerGroupRelationMapper.queryByCustId(entity.getCustId())!=null){
+				pmCustomerGroupRelationMapper.updateByCustId(RelationEntity);
+			}else{
+				pmCustomerGroupRelationMapper.insert(RelationEntity);
+			}
 		}
    		pmCustomerInfoMapper.update(entity);
    	}

@@ -15,6 +15,7 @@ import java.util.List;
  */
 public interface PmCustomerGroupRelationMapper{
 	public PmCustomerGroupRelationEntity queryObject(long id);
+	public PmCustomerGroupRelationEntity queryByCustId(long id);
 	public void insert(PmCustomerGroupRelationEntity entity);
 	public void update(PmCustomerGroupRelationEntity entity);
 	public void updateByCustId(PmCustomerGroupRelationEntity entity);
